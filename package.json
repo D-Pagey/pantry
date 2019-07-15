@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.15",
-    "@types/node": "12.6.2",
+    "@types/node": "12.6.3",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
     "@types/styled-components": "4.1.18",
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "7.3.3",
-    "@commitlint/cli": "8.0.0",
-    "@commitlint/config-conventional": "8.0.0",
+    "@commitlint/cli": "8.1.0",
+    "@commitlint/config-conventional": "8.1.0",
     "commitizen": "3.1.1",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "3.0.0",
