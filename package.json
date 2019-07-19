@@ -3,32 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "4.0.0",
-    "@testing-library/react": "8.0.5",
-    "@types/history": "4.7.2",
-    "@types/jest": "24.0.15",
-    "@types/node": "12.6.8",
-    "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.4",
-    "@types/react-router-dom": "4.3.4",
-    "@types/styled-components": "4.1.18",
     "babel-plugin-jsx-remove-data-test-id": "2.0.0",
-    "babel-plugin-styled-components": "1.10.6",
-    "history": "4.9.0",
-    "jest-styled-components": "6.3.3",
+    "polished": "3.4.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-router-dom": "5.0.1",
     "react-scripts": "3.0.1",
-    "styled-components": "4.3.2",
-    "typescript": "3.5.3"
+    "styled-components": "4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose --coverage --no-cache --watchAll=false",
-    "lint": "eslint ./src/**/*.tsx && stylelint ./src/**/*.tsx",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom --verbose --coverage --no-cache --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src/**/*.js && stylelint ./src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,36 +33,25 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-typescript": "7.3.3",
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
-    "@typescript-eslint/eslint-plugin": "1.12.0",
-    "@typescript-eslint/parser": "1.12.0",
-    "commitizen": "3.1.1",
+    "babel-eslint": "10.0.2",
+    "babel-plugin-styled-components": "1.10.6",
     "cz-conventional-changelog": "2.1.0",
     "eslint": "6.0.1",
     "eslint-config-airbnb": "17.1.1",
     "eslint-config-prettier": "6.0.0",
-    "eslint-config-react-app": "4.0.1",
-    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-import": "2.18.1",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.2",
-    "eslint-plugin-react-hooks": "1.6.1",
-    "husky": "3.0.0",
+    "husky": "3.0.1",
+    "jest-styled-components": "6.3.3",
     "prettier": "1.18.2",
     "stylelint": "10.1.0",
-    "stylelint-config-prettier": "5.2.0",
     "stylelint-config-recommended": "2.2.0",
     "stylelint-config-styled-components": "0.1.1",
-    "stylelint-prettier": "1.1.1",
-    "stylelint-processor-styled-components": "1.8.0",
-    "typescript-plugin-styled-components": "1.4.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "stylelint-processor-styled-components": "1.8.0"
   },
   "husky": {
     "hooks": {
@@ -84,17 +60,18 @@
       "pre-push": "yarn test"
     }
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "babel": {
     "presets": [
-      "react-app",
-      "@babel/preset-typescript"
+      "react-app"
     ],
     "plugins": [
       [
-        "babel-plugin-styled-components",
-        {
-          "ssr": false
-        }
+        "babel-plugin-styled-components"
       ]
     ],
     "env": {
@@ -107,10 +84,11 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.tsx",
-      "!src/index.tsx",
-      "!src/**/index.stories.tsx",
-      "!src/setupTests.tsx"
+      "src/**/*.js",
+      "!src/serviceWorker.js",
+      "!src/index.js",
+      "!src/**/index.stories.js",
+      "!src/setupTests.js"
     ],
     "coverageThreshold": {
       "global": {

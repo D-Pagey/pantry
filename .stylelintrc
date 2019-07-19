@@ -4,12 +4,6 @@
   ],
   "extends": [
     "stylelint-config-recommended",
-    "stylelint-config-styled-components",
-    "stylelint-config-prettier",
-    "stylelint-prettier/recommended"
-  ],
-  "plugins": ["stylelint-prettier"],
-  "rules": {
-    "prettier/prettier": true
-  }
+    "stylelint-config-styled-components"
+  ]
 }
