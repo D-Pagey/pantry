@@ -9,7 +9,11 @@ module.exports = {
     },
     env: {
       browser: true,
-      node: true
+      node: true,
+      jest: true
+    },
+    globals: {
+      render: "readonly"
     },
     settings: {
       "import/resolver": {

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component should render 1`] = `
+.c0 {
+  text-align: center;
+}
+
+<div>
+  <header>
+    <h1
+      class="c0"
+    >
+      Pantry
+    </h1>
+  </header>
+</div>
+`;
