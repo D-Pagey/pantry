@@ -1,9 +1,9 @@
 import React from 'react';
-import App from '.';
+import Header from '.';
 
-describe('App component', () => {
+describe('Header component', () => {
     it('should render', () => {
-        const { container } = render(<App />);
+        const { container } = render(<Header />);
         expect(container.firstChild).toMatchSnapshot();
     });
 });

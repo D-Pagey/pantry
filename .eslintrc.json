@@ -16,6 +16,7 @@
     "render": "readonly"
   },
   "rules": {
+    "import/prefer-default-export": 0,
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "max-len": [
