@@ -1,26 +1,25 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { db } from '../../services';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ProviderFirebase from '../ProviderFirebase';
 import Header from '../Header';
+import PageHome from '../PageHome';
 import * as S from './styles';
 
 const App = () => {
-    db.collection('test')
-        .get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(`${doc.data().food}`);
-            });
-        });
-
     return (
-        <BrowserRouter>
-            <S.Wrapper>
-                <S.GlobalStyle />
+        <ProviderFirebase>
+            <BrowserRouter>
+                <S.Wrapper>
+                    <S.GlobalStyle />
 
-                <Header />
-            </S.Wrapper>
-        </BrowserRouter>
+                    <Header />
+
+                    <Switch>
+                        <Route exact path="/" component={PageHome} />
+                    </Switch>
+                </S.Wrapper>
+            </BrowserRouter>
+        </ProviderFirebase>
     );
 };
 
