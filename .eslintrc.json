@@ -5,6 +5,7 @@
     "plugin:prettier/recommended",
     "prettier/react"
   ],
+  "plugins": ["react-hooks", "prettier", "jest"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -16,6 +17,8 @@
     "render": "readonly"
   },
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn", 
     "import/prefer-default-export": 0,
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
