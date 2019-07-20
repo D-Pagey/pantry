@@ -1,9 +1,18 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { db } from '../../services';
 import Header from '../Header';
 import * as S from './styles';
 
-function App() {
+const App = () => {
+    db.collection('test')
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.data().food}`);
+            });
+        });
+
     return (
         <BrowserRouter>
             <S.Wrapper>
@@ -13,6 +22,6 @@ function App() {
             </S.Wrapper>
         </BrowserRouter>
     );
-}
+};
 
 export default App;
