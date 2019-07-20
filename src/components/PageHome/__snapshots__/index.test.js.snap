@@ -3,5 +3,18 @@
 exports[`PageHome component should render 1`] = `
 <div
   class=""
-/>
+>
+  <form>
+    <input
+      name="test"
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
 `;

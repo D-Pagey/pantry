@@ -10,11 +10,7 @@ const ProviderFirebase = ({ children }) => {
         snapshotListenOptions: { includeMetadataChanges: true }
     });
 
-    return (
-        <FirebaseContext.Provider value={{ value, loading, error }}>
-            {children}
-        </FirebaseContext.Provider>
-    );
+    return <FirebaseContext.Provider value={{ value, loading, error }}>{children}</FirebaseContext.Provider>;
 };
 
 ProviderFirebase.propTypes = {
