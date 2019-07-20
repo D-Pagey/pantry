@@ -47,6 +47,19 @@ exports[`App component should render 1`] = `
   </header>
   <div
     class=""
-  />
+  >
+    <form>
+      <input
+        name="test"
+        type="text"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
 </div>
 `;
