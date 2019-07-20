@@ -1,16 +1,17 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Header from '../Header';
 import * as S from './styles';
 
 function App() {
     return (
-        <S.Wrapper>
-            <S.GlobalStyle />
+        <BrowserRouter>
+            <S.Wrapper>
+                <S.GlobalStyle />
 
-            <Header />
-
-            <S.Title>Project Pantry</S.Title>
-        </S.Wrapper>
+                <Header />
+            </S.Wrapper>
+        </BrowserRouter>
     );
 }
 

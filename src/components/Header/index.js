@@ -2,9 +2,11 @@ import React from 'react';
 import * as S from './styles';
 
 const Header = () => (
-    <header>
-        <S.Title>TroubleMaker</S.Title>
-    </header>
+    <S.Header>
+        <S.Link to="/">
+            <S.Title>Pantry</S.Title>
+        </S.Link>
+    </S.Header>
 );
 
 export default Header;
