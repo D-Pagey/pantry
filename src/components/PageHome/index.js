@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 const PageHome = () => {
-    const [data, setData] = useState({});
-    const { value } = useContext(FirebaseContext);
+    const { addDoc, value } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
@@ -17,7 +16,7 @@ const PageHome = () => {
                 initialValues={{ test: '' }}
                 onSubmit={(values, actions) => {
                     actions.setSubmitting(false);
-                    setData(values);
+                    addDoc(values);
                     actions.resetForm();
                 }}
                 render={({ isSubmitting }) => (
@@ -28,8 +27,6 @@ const PageHome = () => {
                         <button type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
-
-                        {data.test && <p>Submitted: test = {data.test}</p>}
                     </Form>
                 )}
             />
