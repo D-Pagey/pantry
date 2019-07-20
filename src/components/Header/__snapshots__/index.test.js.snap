@@ -2,15 +2,33 @@
 
 exports[`Header component should render 1`] = `
 .c0 {
-  color: red;
+  padding: 2rem 2rem 0;
+}
+
+.c1 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: initial;
+}
+
+.c2 {
+  font-weight: 500;
   margin: 0;
 }
 
-<header>
-  <h4
-    class="c0"
+<header
+  class="c0"
+>
+  <a
+    aria-current="page"
+    class="c1 active"
+    href="/"
   >
-    TroubleMaker
-  </h4>
+    <h4
+      class="c2"
+    >
+      Pantry
+    </h4>
+  </a>
 </header>
 `;

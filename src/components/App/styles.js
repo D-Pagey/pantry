@@ -21,10 +21,6 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Wrapper = styled.div`
-    border: 1px solid red;
-    margin: 0;
-`;
-
-export const Title = styled.h1`
-    margin: 0;
+    margin: 0 auto;
+    max-width: 1250px;
 `;

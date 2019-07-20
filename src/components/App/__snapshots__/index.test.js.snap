@@ -2,33 +2,42 @@
 
 exports[`App component should render 1`] = `
 .c1 {
-  color: red;
+  padding: 2rem 2rem 0;
+}
+
+.c2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: initial;
+}
+
+.c3 {
+  font-weight: 500;
   margin: 0;
 }
 
 .c0 {
-  border: 1px solid red;
-  margin: 0;
-}
-
-.c2 {
-  margin: 0;
+  margin: 0 auto;
+  max-width: 1250px;
 }
 
 <div
   class="c0"
 >
-  <header>
-    <h4
-      class="c1"
-    >
-      TroubleMaker
-    </h4>
-  </header>
-  <h1
-    class="c2"
+  <header
+    class="c1"
   >
-    Project Pantry
-  </h1>
+    <a
+      aria-current="page"
+      class="c2 active"
+      href="/"
+    >
+      <h4
+        class="c3"
+      >
+        Pantry
+      </h4>
+    </a>
+  </header>
 </div>
 `;
