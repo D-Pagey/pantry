@@ -2,13 +2,18 @@
 
 exports[`Header component should render 1`] = `
 .c0 {
-  padding: 2rem 2rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 2rem;
+  padding: 2rem 0 0;
 }
 
 .c1 {
+  color: initial;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: initial;
 }
 
 .c2 {
