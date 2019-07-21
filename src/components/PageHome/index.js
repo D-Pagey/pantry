@@ -1,25 +1,17 @@
 import React, { useContext } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FirebaseContext } from '../ProviderFirebase';
+import Grid from '../Grid';
 import * as S from './styles';
 
 const PageHome = () => {
-    const { addDoc, deleteDoc, value } = useContext(FirebaseContext);
-
-    const dataIds = value && value.docs.map((doc) => doc.id);
-
-    const handleDelete = () => {
-        if (dataIds.length === 0) return;
-        deleteDoc(dataIds[0]);
-    };
+    const { value } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
-            {value &&
-                value.docs.map((doc) => (
-                    <React.Fragment key={doc.id}>{JSON.stringify(doc.data())}</React.Fragment>
-                ))}
-            <Formik
+            {value && <Grid data={value.fridge} />}
+
+            {/* <Formik
                 initialValues={{ test: '' }}
                 onSubmit={(values, actions) => {
                     actions.setSubmitting(false);
@@ -36,10 +28,7 @@ const PageHome = () => {
                         </button>
                     </Form>
                 )}
-            />
-            <button type="button" onClick={handleDelete}>
-                Delete first entry
-            </button>
+            /> */}
         </S.Wrapper>
     );
 };

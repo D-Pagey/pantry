@@ -1,19 +1,22 @@
 import React, { createContext } from 'react';
 import { node } from 'prop-types';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { db } from '../../services';
 
 export const FirebaseContext = createContext();
 
+const HOUSEHOLDS = 'households';
+const MY_HOUSEHOLD = 'jc1508HlXno2nr7MmKBP';
+
 const addDoc = (values) => {
-    db.collection('test')
+    db.collection(HOUSEHOLDS)
         .add(values)
         .then(() => console.log('Document successfully written!'))
         .catch((error) => console.error('Error writing document: ', error));
 };
 
 const deleteDoc = (id) => {
-    db.collection('test')
+    db.collection(HOUSEHOLDS)
         .doc(id)
         .delete()
         .then(() => console.log('Document successfully deleted!'))
@@ -21,7 +24,7 @@ const deleteDoc = (id) => {
 };
 
 const ProviderFirebase = ({ children }) => {
-    const [value, loading, error] = useCollection(db.collection('test'), {
+    const [value, loading, error] = useDocumentData(db.collection(HOUSEHOLDS).doc(MY_HOUSEHOLD), {
         snapshotListenOptions: { includeMetadataChanges: true }
     });
 

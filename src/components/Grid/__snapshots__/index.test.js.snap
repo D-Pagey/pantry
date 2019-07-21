@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid component should render 1`] = `
+.c0 {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: max-content max-content;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c1 {
+  font-size: 18px;
+  margin: 0 0 1rem;
+}
+
+<ul
+  class="c0"
+>
+  <h5
+    class="c1"
+  >
+    Name
+  </h5>
+  <h5
+    class="c1"
+  >
+    Servings
+  </h5>
+  <li>
+    chicken
+  </li>
+  <li />
+  <li>
+    salmon
+  </li>
+  <li />
+  <li>
+    carrots
+  </li>
+  <li />
+</ul>
+`;
