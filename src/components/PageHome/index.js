@@ -15,21 +15,11 @@ const categoryOptions = [
 ];
 
 const PageHome = () => {
-    const { addDoc, value } = useContext(FirebaseContext);
-
-    // need to tidy this up
-    const formattedData =
-        value &&
-        value.fridge &&
-        value.fridge.map((item) => ({
-            ...item,
-            expires: dateFns.format(item.expires.toDate(), 'MM/DD/YYYY')
-        }));
+    const { updateFridge, value, loading } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
-            {/* need to tidy this up */}
-            {formattedData && <Grid data={formattedData} />}
+            {loading ? <p>Loading...</p> : <Grid data={value.fridge} />}
 
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', servings: '' }}
@@ -47,14 +37,13 @@ const PageHome = () => {
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
-                    // need to tidy this up
-                    const fridge = [...value.fridge, values].map((item) => ({
-                        ...item,
-                        name: item.name.toLowerCase()
-                    }));
-                    const immutable = { ...value, fridge };
-
-                    addDoc(immutable);
+                    updateFridge(
+                        values.map((item) => ({
+                            ...item,
+                            expires: dateFns.format(item.expires, 'MM/DD/YYYY'),
+                            name: item.name.toLowerCase()
+                        }))
+                    );
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}

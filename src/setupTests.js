@@ -17,6 +17,7 @@ global.render = (ui, firebaseContextValue = {}) => {
                 value={{
                     error: '',
                     loading: false,
+                    updateFridge: () => {},
                     value: undefined,
                     ...firebaseContextValue
                 }}
