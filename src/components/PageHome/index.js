@@ -4,7 +4,14 @@ import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 const PageHome = () => {
-    const { addDoc, value } = useContext(FirebaseContext);
+    const { addDoc, deleteDoc, value } = useContext(FirebaseContext);
+
+    const dataIds = value && value.docs.map((doc) => doc.id);
+
+    const handleDelete = () => {
+        if (dataIds.length === 0) return;
+        deleteDoc(dataIds[0]);
+    };
 
     return (
         <S.Wrapper>
@@ -30,6 +37,9 @@ const PageHome = () => {
                     </Form>
                 )}
             />
+            <button type="button" onClick={handleDelete}>
+                Delete first entry
+            </button>
         </S.Wrapper>
     );
 };

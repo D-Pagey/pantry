@@ -60,6 +60,11 @@ exports[`App component should render 1`] = `
         Submit
       </button>
     </form>
+    <button
+      type="button"
+    >
+      Delete first entry
+    </button>
   </div>
 </div>
 `;
