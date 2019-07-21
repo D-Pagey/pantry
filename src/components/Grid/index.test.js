@@ -5,19 +5,19 @@ import Grid from '.';
 const props = {
     data: [
         {
-            category: 'meat',
+            category: { label: 'Meat', value: 'meat' },
             expires: dateFns.format(new Date(2019, 2, 14), 'MM/DD/YYYY'),
             name: 'chicken',
             servings: '2'
         },
         {
-            category: 'fish',
+            category: { label: 'Fish', value: 'fish' },
             expires: dateFns.format(new Date(2019, 3, 9), 'MM/DD/YYYY'),
             name: 'salmon',
             servings: '1'
         },
         {
-            category: 'vegetables',
+            category: { label: 'Vegetables', value: 'vegetables' },
             expires: dateFns.format(new Date(2014, 6, 11), 'MM/DD/YYYY'),
             name: 'carrots',
             servings: '3'
