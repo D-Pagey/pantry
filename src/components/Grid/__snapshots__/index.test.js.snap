@@ -34,7 +34,7 @@ exports[`Grid component should render 1`] = `
   <h5
     class="c1"
   >
-    Servings
+    Quantity
   </h5>
   <li>
     chicken
@@ -44,6 +44,7 @@ exports[`Grid component should render 1`] = `
   </li>
   <li>
     2
+     Servings
   </li>
   <li>
     salmon
@@ -53,6 +54,7 @@ exports[`Grid component should render 1`] = `
   </li>
   <li>
     1
+     Servings
   </li>
   <li>
     carrots
@@ -62,6 +64,7 @@ exports[`Grid component should render 1`] = `
   </li>
   <li>
     3
+     Servings
   </li>
 </ul>
 `;

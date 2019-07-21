@@ -6,13 +6,13 @@ const Grid = ({ data }) => (
     <S.Wrapper>
         <S.Heading>Name</S.Heading>
         <S.Heading>Expires</S.Heading>
-        <S.Heading>Servings</S.Heading>
+        <S.Heading>Quantity</S.Heading>
 
         {data.map((item) => (
             <Fragment key={item.name}>
                 <li>{item.name}</li>
                 <li>{item.expires}</li>
-                <li>{item.servings}</li>
+                <li>{item.servings} Servings</li>
             </Fragment>
         ))}
     </S.Wrapper>
@@ -21,7 +21,10 @@ const Grid = ({ data }) => (
 Grid.propTypes = {
     data: arrayOf(
         shape({
-            category: string.isRequired,
+            category: shape({
+                label: string.isRequired,
+                value: string.isRequired
+            }).isRequired,
             expires: string.isRequired,
             name: string.isRequired,
             servings: string.isRequired
