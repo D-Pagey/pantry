@@ -10,9 +10,10 @@ const MY_HOUSEHOLD = 'jc1508HlXno2nr7MmKBP';
 
 const addDoc = (values) => {
     db.collection(HOUSEHOLDS)
-        .add(values)
-        .then(() => console.log('Document successfully written!'))
-        .catch((error) => console.error('Error writing document: ', error));
+        .doc(MY_HOUSEHOLD)
+        .set(values)
+        .then(() => console.log('Successfully added to the fridge!'))
+        .catch((error) => console.error('Error adding to fridge: ', error));
 };
 
 const deleteDoc = (id) => {

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { arrayOf, number, shape, string } from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 import * as S from './styles';
 
 const Grid = ({ data }) => (
@@ -24,7 +24,7 @@ Grid.propTypes = {
             category: string.isRequired,
             expires: string.isRequired,
             name: string.isRequired,
-            servings: number.isRequired
+            servings: string.isRequired
         }).isRequired
     ).isRequired
 };
