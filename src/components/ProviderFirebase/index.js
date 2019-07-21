@@ -8,20 +8,12 @@ export const FirebaseContext = createContext();
 const HOUSEHOLDS = 'households';
 const MY_HOUSEHOLD = 'jc1508HlXno2nr7MmKBP';
 
-const addDoc = (values) => {
+const updateFridge = (values) => {
     db.collection(HOUSEHOLDS)
         .doc(MY_HOUSEHOLD)
-        .set(values)
-        .then(() => console.log('Successfully added to the fridge!'))
+        .update({ fridge: values })
+        .then(() => console.log('Successfully updated fridge!'))
         .catch((error) => console.error('Error adding to fridge: ', error));
-};
-
-const deleteDoc = (id) => {
-    db.collection(HOUSEHOLDS)
-        .doc(id)
-        .delete()
-        .then(() => console.log('Document successfully deleted!'))
-        .catch((error) => console.error('Error deleting document: ', error));
 };
 
 const ProviderFirebase = ({ children }) => {
@@ -30,7 +22,7 @@ const ProviderFirebase = ({ children }) => {
     });
 
     return (
-        <FirebaseContext.Provider value={{ value, loading, error, addDoc, deleteDoc }}>
+        <FirebaseContext.Provider value={{ value, loading, error, updateFridge }}>
             {children}
         </FirebaseContext.Provider>
     );

@@ -48,6 +48,9 @@ exports[`App component should render 1`] = `
   <div
     class=""
   >
+    <p>
+      Loading...
+    </p>
     <form>
       <div
         class=" css-2b097c-container"
