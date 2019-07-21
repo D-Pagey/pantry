@@ -4,7 +4,7 @@ exports[`Grid component should render 1`] = `
 .c0 {
   display: grid;
   grid-column-gap: 1rem;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: max-content max-content max-content;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -29,19 +29,39 @@ exports[`Grid component should render 1`] = `
   <h5
     class="c1"
   >
+    Expires
+  </h5>
+  <h5
+    class="c1"
+  >
     Servings
   </h5>
   <li>
     chicken
   </li>
-  <li />
+  <li>
+    03/14/2019
+  </li>
+  <li>
+    2
+  </li>
   <li>
     salmon
   </li>
-  <li />
+  <li>
+    04/09/2019
+  </li>
+  <li>
+    1
+  </li>
   <li>
     carrots
   </li>
-  <li />
+  <li>
+    07/11/2014
+  </li>
+  <li>
+    3
+  </li>
 </ul>
 `;
