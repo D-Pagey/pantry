@@ -37,13 +37,17 @@ const PageHome = () => {
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
-                    updateFridge(
-                        values.map((item) => ({
-                            ...item,
-                            expires: dateFns.format(item.expires, 'MM/DD/YYYY'),
-                            name: item.name.toLowerCase()
-                        }))
-                    );
+                    const formatted = [
+                        ...value.fridge,
+                        {
+                            ...values,
+                            expires: dateFns.format(values.expires, 'MM/DD/YYYY'),
+                            name: values.name.toLowerCase()
+                        }
+                    ];
+
+                    updateFridge(formatted);
+
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
