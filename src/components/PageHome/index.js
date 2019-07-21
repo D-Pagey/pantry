@@ -1,7 +1,9 @@
+import 'react-datepicker/dist/react-datepicker.css';
 import React, { useContext } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import dateFns from 'date-fns';
 import Select from 'react-select';
+import DatePicker from 'react-datepicker';
 import { FirebaseContext } from '../ProviderFirebase';
 import Grid from '../Grid';
 import * as S from './styles';
@@ -65,6 +67,13 @@ const PageHome = () => {
                             value={values.category}
                         />
                         <ErrorMessage name="category" component="div" />
+
+                        <DatePicker
+                            name="expires"
+                            onChange={(item) => setFieldValue('expires', item)}
+                            selected={values.expires}
+                        />
+                        <ErrorMessage name="expires" component="div" />
 
                         <Field type="text" name="name" placeholder="name" />
                         <ErrorMessage name="name" component="div" />

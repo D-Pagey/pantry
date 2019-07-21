@@ -119,6 +119,20 @@ exports[`App component should render 1`] = `
           value=""
         />
       </div>
+      <div
+        class="react-datepicker-wrapper"
+      >
+        <div
+          class="react-datepicker__input-container"
+        >
+          <input
+            class=""
+            name="expires"
+            type="text"
+            value="07/21/2019"
+          />
+        </div>
+      </div>
       <input
         name="name"
         placeholder="name"
