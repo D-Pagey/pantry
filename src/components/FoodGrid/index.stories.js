@@ -1,6 +1,7 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 import dateFns from 'date-fns';
-import Grid from '.';
+import FoodGrid from '.';
 
 const props = {
     data: [
@@ -25,9 +26,4 @@ const props = {
     ]
 };
 
-describe('Grid component', () => {
-    it('should render', () => {
-        const { container } = render(<Grid {...props} />);
-        expect(container.firstChild).toMatchSnapshot();
-    });
-});
+storiesOf('FoodGrid', module).add('default', () => <FoodGrid {...props} />);
