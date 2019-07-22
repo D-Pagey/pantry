@@ -38,11 +38,8 @@ describe('FoodGrid component', () => {
 
     it('should handle delete', () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<FoodGrid {...props} />, {
-            ...firebaseContext,
-            updateFridge
-        });
-        const deleteButton = getByTestId('deleteButton0');
+        const { getByTestId } = render(<FoodGrid {...props} />, { updateFridge });
+        const deleteButton = getByTestId('deleteButton0Meat');
 
         userEvent.click(deleteButton);
 

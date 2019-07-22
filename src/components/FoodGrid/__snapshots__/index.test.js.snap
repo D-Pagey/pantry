@@ -18,29 +18,40 @@ exports[`FoodGrid component should render 1`] = `
   margin: 0 0 1rem;
 }
 
+.c2 {
+  font-size: 16px;
+  margin: 0 0 1rem;
+  grid-column: 1 / 5;
+}
+
 <ul
   class="c0"
 >
-  <h5
+  <h2
     class="c1"
   >
     Name
-  </h5>
-  <h5
+  </h2>
+  <h2
     class="c1"
   >
     Expires
-  </h5>
-  <h5
+  </h2>
+  <h2
     class="c1"
   >
     Quantity
-  </h5>
-  <h5
+  </h2>
+  <h2
     class="c1"
   >
     Amend
-  </h5>
+  </h2>
+  <h3
+    class="c2"
+  >
+    Meat
+  </h3>
   <li>
     chicken
   </li>
@@ -52,13 +63,22 @@ exports[`FoodGrid component should render 1`] = `
      Servings
   </li>
   <li>
-    <img
-      alt="delete"
-      data-testid="deleteButton0"
-      src="delete.svg"
+    <button
+      data-testid="deleteButton0Meat"
       style="cursor: pointer;"
-    />
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
   </li>
+  <h3
+    class="c2"
+  >
+    Fish
+  </h3>
   <li>
     salmon
   </li>
@@ -70,13 +90,22 @@ exports[`FoodGrid component should render 1`] = `
      Servings
   </li>
   <li>
-    <img
-      alt="delete"
-      data-testid="deleteButton1"
-      src="delete.svg"
+    <button
+      data-testid="deleteButton0Fish"
       style="cursor: pointer;"
-    />
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
   </li>
+  <h3
+    class="c2"
+  >
+    Vegetables
+  </h3>
   <li>
     carrots
   </li>
@@ -88,12 +117,16 @@ exports[`FoodGrid component should render 1`] = `
      Servings
   </li>
   <li>
-    <img
-      alt="delete"
-      data-testid="deleteButton2"
-      src="delete.svg"
+    <button
+      data-testid="deleteButton0Vegetables"
       style="cursor: pointer;"
-    />
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
   </li>
 </ul>
 `;

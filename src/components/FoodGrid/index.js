@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import { arrayOf, shape, string } from 'prop-types';
 import { FirebaseContext } from '../ProviderFirebase';
-import deleteIcon from './assets/delete.svg';
+import GridRows from './GridRows';
 import * as S from './styles';
 
 const FoodGrid = ({ data }) => {
@@ -12,6 +12,9 @@ const FoodGrid = ({ data }) => {
         updateFridge(filteredItems);
     };
 
+    const categories = data.map((item) => item.category.label);
+    const uniques = categories.filter((item, index) => categories.indexOf(item) === index);
+
     return (
         <S.Wrapper>
             <S.Heading>Name</S.Heading>
@@ -19,21 +22,13 @@ const FoodGrid = ({ data }) => {
             <S.Heading>Quantity</S.Heading>
             <S.Heading>Amend</S.Heading>
 
-            {data.map((item, index) => (
-                <Fragment key={item.name}>
-                    <li>{item.name}</li>
-                    <li>{item.expires}</li>
-                    <li>{item.servings} Servings</li>
-                    <li>
-                        {/* eslint-disable */}
-                        <img
-                            src={deleteIcon}
-                            alt="delete"
-                            onClick={handleDelete(item.name)}
-                            style={{ cursor: 'pointer' }}
-                            data-testid={`deleteButton${index}`}
-                        />
-                    </li>
+            {uniques.map((item) => (
+                <Fragment key={item}>
+                    <S.Category>{item}</S.Category>
+                    <GridRows
+                        data={data.filter((i) => i.category.label === item)}
+                        handleDelete={handleDelete}
+                    />
                 </Fragment>
             ))}
         </S.Wrapper>
