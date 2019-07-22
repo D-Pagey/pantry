@@ -18,32 +18,43 @@ exports[`PageHome component should render 1`] = `
   margin: 0 0 1rem;
 }
 
+.c2 {
+  font-size: 16px;
+  margin: 0 0 1rem;
+  grid-column: 1 / 5;
+}
+
 <div
   class=""
 >
   <ul
     class="c0"
   >
-    <h5
+    <h2
       class="c1"
     >
       Name
-    </h5>
-    <h5
+    </h2>
+    <h2
       class="c1"
     >
       Expires
-    </h5>
-    <h5
+    </h2>
+    <h2
       class="c1"
     >
       Quantity
-    </h5>
-    <h5
+    </h2>
+    <h2
       class="c1"
     >
       Amend
-    </h5>
+    </h2>
+    <h3
+      class="c2"
+    >
+      Meat
+    </h3>
     <li>
       steak
     </li>
@@ -55,12 +66,16 @@ exports[`PageHome component should render 1`] = `
        Servings
     </li>
     <li>
-      <img
-        alt="delete"
-        data-testid="deleteButton0"
-        src="delete.svg"
+      <button
+        data-testid="deleteButton0Meat"
         style="cursor: pointer;"
-      />
+        type="button"
+      >
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
     </li>
   </ul>
   <form>
@@ -144,7 +159,7 @@ exports[`PageHome component should render 1`] = `
           class=""
           name="expires"
           type="text"
-          value="07/22/2019"
+          value="07/23/2019"
         />
       </div>
     </div>
