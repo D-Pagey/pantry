@@ -132,7 +132,7 @@ exports[`App component should render 1`] = `
             class=""
             name="expires"
             type="text"
-            value="07/21/2019"
+            value="07/22/2019"
           />
         </div>
       </div>

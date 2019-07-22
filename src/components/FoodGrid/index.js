@@ -4,7 +4,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 import deleteIcon from './assets/delete.svg';
 import * as S from './styles';
 
-const Grid = ({ data }) => {
+const FoodGrid = ({ data }) => {
     const { updateFridge } = useContext(FirebaseContext);
 
     const handleDelete = (name) => () => {
@@ -19,7 +19,7 @@ const Grid = ({ data }) => {
             <S.Heading>Quantity</S.Heading>
             <S.Heading>Amend</S.Heading>
 
-            {data.map((item) => (
+            {data.map((item, index) => (
                 <Fragment key={item.name}>
                     <li>{item.name}</li>
                     <li>{item.expires}</li>
@@ -31,6 +31,7 @@ const Grid = ({ data }) => {
                             alt="delete"
                             onClick={handleDelete(item.name)}
                             style={{ cursor: 'pointer' }}
+                            data-testid={`deleteButton${index}`}
                         />
                     </li>
                 </Fragment>
@@ -39,7 +40,7 @@ const Grid = ({ data }) => {
     );
 };
 
-Grid.propTypes = {
+FoodGrid.propTypes = {
     data: arrayOf(
         shape({
             category: shape({
@@ -53,4 +54,4 @@ Grid.propTypes = {
     ).isRequired
 };
 
-export default Grid;
+export default FoodGrid;

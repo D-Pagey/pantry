@@ -5,7 +5,7 @@ import dateFns from 'date-fns';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import { FirebaseContext } from '../ProviderFirebase';
-import Grid from '../Grid';
+import FoodGrid from '../FoodGrid';
 import * as S from './styles';
 
 const categoryOptions = [
@@ -19,7 +19,7 @@ const PageHome = () => {
 
     return (
         <S.Wrapper>
-            {loading ? <p>Loading...</p> : <Grid data={value.fridge} />}
+            {loading ? <p>Loading...</p> : <FoodGrid data={value.fridge} />}
 
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', servings: '' }}
