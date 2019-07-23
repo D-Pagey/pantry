@@ -12,8 +12,9 @@ const FoodGrid = ({ data }) => {
         updateFridge(filteredItems);
     };
 
+    // must be a cleaner way to do this
     const categories = data.map((item) => item.category.label);
-    const uniques = categories.filter((item, index) => categories.indexOf(item) === index);
+    const uniqueCategories = categories.filter((item, index) => categories.indexOf(item) === index);
 
     return (
         <S.Wrapper>
@@ -22,11 +23,11 @@ const FoodGrid = ({ data }) => {
             <S.Heading>Quantity</S.Heading>
             <S.Heading>Amend</S.Heading>
 
-            {uniques.map((item) => (
-                <Fragment key={item}>
-                    <S.Category>{item}</S.Category>
+            {uniqueCategories.map((category) => (
+                <Fragment key={category}>
+                    <S.Category>{category}</S.Category>
                     <GridRows
-                        data={data.filter((i) => i.category.label === item)}
+                        data={data.filter((item) => item.category.label === category)}
                         handleDelete={handleDelete}
                     />
                 </Fragment>
