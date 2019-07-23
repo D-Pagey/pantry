@@ -2,7 +2,9 @@
 
 exports[`Input component should render 1`] = `
 .c0 {
-  border: 1px solid red;
+  border: 1px solid grey;
+  border-radius: 2px;
+  padding: 5px;
 }
 
 <input

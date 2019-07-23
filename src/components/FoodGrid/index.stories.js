@@ -1,7 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import dateFns from 'date-fns';
+import { FirebaseContext } from '../ProviderFirebase';
 import FoodGrid from '.';
+
+const firebaseContext = {
+    updateFridge: () => {}
+};
 
 const props = {
     data: [
@@ -26,4 +31,8 @@ const props = {
     ]
 };
 
-storiesOf('FoodGrid', module).add('default', () => <FoodGrid {...props} />);
+storiesOf('FoodGrid', module).add('default', () => (
+    <FirebaseContext.Provider value={firebaseContext}>
+        <FoodGrid {...props} />
+    </FirebaseContext.Provider>
+));
