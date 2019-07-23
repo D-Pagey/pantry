@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component should render 1`] = `
+.c0 {
+  border: 1px solid red;
+}
+
+<input
+  class="c0"
+  data-testid="testInput"
+  type="text"
+/>
+`;
