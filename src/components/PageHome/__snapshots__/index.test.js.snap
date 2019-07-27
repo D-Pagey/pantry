@@ -159,7 +159,7 @@ exports[`PageHome component should render 1`] = `
           class=""
           name="expires"
           type="text"
-          value="07/24/2019"
+          value="07/27/2019"
         />
       </div>
     </div>
