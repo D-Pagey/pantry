@@ -2,14 +2,31 @@
 
 exports[`Input component should render 1`] = `
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
   border: 1px solid grey;
   border-radius: 2px;
   padding: 5px;
 }
 
-<input
+<div
   class="c0"
-  data-testid="testInput"
-  type="text"
-/>
+>
+  
+  <input
+    class="c1"
+    data-testid="testInput"
+    id="testInput"
+    type="text"
+  />
+  
+</div>
 `;

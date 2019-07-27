@@ -6,4 +6,7 @@ const props = {
     testId: 'storybookInput'
 };
 
-storiesOf('Input', module).add('default', () => <Input {...props} />);
+storiesOf('Input', module)
+    .add('with label', () => <Input {...props} label="Name" />)
+    .add('without label', () => <Input {...props} />)
+    .add('with error', () => <Input {...props} error="Required" />);
