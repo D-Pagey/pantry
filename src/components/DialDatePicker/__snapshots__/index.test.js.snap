@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DialDatePicker component should render 1`] = `
+.c4 {
+  background-color: #288efc;
+  border: 0;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 45px;
+  line-height: 1.2;
+  width: 200px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
+  display: grid;
+  grid-template-columns: repeat(3,max-content);
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.c3 {
+  color: blue;
+  grid-row: 2;
+}
+
+.c2 {
+  grid-row: 1;
+}
+
+<div
+  class="c0"
+>
+  
+  <div
+    class="c1"
+  >
+    <button
+      class="c2"
+      type="button"
+    >
+      Up
+    </button>
+    <span
+      class="c3"
+      data-testid="dialDatePickerDay"
+    >
+      28th
+    </span>
+    <button
+      type="button"
+    >
+      Down
+    </button>
+    <button
+      class="c2"
+      type="button"
+    >
+      Up
+    </button>
+    <span
+      class="c3"
+      data-testid="dialDatePickerMonth"
+    >
+      July
+    </span>
+    <button
+      type="button"
+    >
+      Down
+    </button>
+    <button
+      class="c2"
+      type="button"
+    >
+      Up
+    </button>
+    <span
+      class="c3"
+      data-testid="dialDatePickerYear"
+    >
+      2019
+    </span>
+    <button
+      type="button"
+    >
+      Down
+    </button>
+  </div>
+  <button
+    class="c4"
+    data-testid=""
+    type="button"
+    width=""
+  >
+    Add 1 week
+  </button>
+</div>
+`;
