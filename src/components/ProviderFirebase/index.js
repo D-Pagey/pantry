@@ -22,6 +22,7 @@ const ProviderFirebase = ({ children }) => {
     });
 
     return (
+        // rename from value to something useful
         <FirebaseContext.Provider value={{ value, loading, error, updateFridge }}>
             {children}
         </FirebaseContext.Provider>
