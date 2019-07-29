@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddFoodForm component should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
+  margin: 0 0 0.5rem;
+}
+
+<div
+  class=""
+>
+  <form>
+    <div
+      class="c0"
+    >
+      <label
+        class="c1"
+      >
+        What category of food?
+      </label>
+      <select
+        data-testid="select"
+      >
+        <option
+          value="meat"
+        >
+          Meat
+        </option>
+        <option
+          value="fish"
+        >
+          Fish
+        </option>
+        <option
+          value="vegetables"
+        >
+          Vegetables
+        </option>
+      </select>
+    </div>
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
