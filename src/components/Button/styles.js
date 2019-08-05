@@ -28,3 +28,7 @@ export const UnSelected = styled(Button)`
     color: black;
     flex-grow: 1;
 `;
+
+export const Submit = styled(Button).attrs({
+    type: 'submit'
+})``;

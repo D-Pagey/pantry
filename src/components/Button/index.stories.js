@@ -6,7 +6,8 @@ import Button from '.';
 const variants = {
     'Default button': '',
     'Selected (selected)': 'selected',
-    'UnSelected (unselected)': 'unselected'
+    'UnSelected (unselected)': 'unselected',
+    'Submit (submit)': 'submit'
 };
 
 storiesOf('Button', module)

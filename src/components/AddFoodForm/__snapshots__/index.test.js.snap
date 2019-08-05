@@ -9,10 +9,44 @@ exports[`AddFoodForm component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin: 0 0 1rem;
 }
 
 .c1 {
   margin: 0 0 0.5rem;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 0 1rem;
+}
+
+.c3 {
+  margin: 0 0 0.5rem;
+}
+
+.c4 {
+  border: 1px solid hsl(0,0%,80%);
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.c5 {
+  background-color: #288efc;
+  border: 0;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 45px;
+  line-height: 1.2;
+  width: 200px;
 }
 
 <div
@@ -47,8 +81,30 @@ exports[`AddFoodForm component should render 1`] = `
         </option>
       </select>
     </div>
+    <div
+      class="c2"
+    >
+      <label
+        class="c3"
+        for="addFoodFoodNameInput"
+      >
+        What is the name of the food?
+      </label>
+      <input
+        class="c4"
+        data-testid="addFoodFoodNameInput"
+        id="addFoodFoodNameInput"
+        name="name"
+        type="text"
+        value=""
+      />
+      
+    </div>
     <button
+      class="c5"
+      data-testid=""
       type="submit"
+      width=""
     >
       Submit
     </button>
