@@ -9,6 +9,7 @@ exports[`Dropdown component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin: 0 0 1rem;
 }
 
 <div

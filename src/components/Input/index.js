@@ -1,13 +1,21 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { func, string } from 'prop-types';
 import * as S from './styles';
 
-const Input = ({ error, label, testId }) => {
+const Input = ({ error, label, name, onBlur, onChange, testId, value }) => {
     return (
         <S.Wrapper>
             {label && <S.Label htmlFor={testId}>{label}</S.Label>}
 
-            <S.Input id={testId} data-testid={testId} type="text" />
+            <S.Input
+                id={testId}
+                data-testid={testId}
+                type="text"
+                name={name}
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+            />
 
             {error && <S.Error>{error}</S.Error>}
         </S.Wrapper>
@@ -17,12 +25,19 @@ const Input = ({ error, label, testId }) => {
 Input.propTypes = {
     error: string,
     label: string,
-    testId: string.isRequired
+    name: string,
+    onBlur: func,
+    onChange: func.isRequired,
+    testId: string,
+    value: string.isRequired
 };
 
 Input.defaultProps = {
     error: '',
-    label: ''
+    label: '',
+    name: '',
+    onBlur: () => {},
+    testId: ''
 };
 
 export default Input;

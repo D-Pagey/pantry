@@ -4,6 +4,13 @@ import * as S from './styles';
 
 const Button = ({ children, testId, variant, width, ...props }) => {
     switch (variant) {
+        case 'submit':
+            return (
+                <S.Submit data-testid={testId} width={width} {...props}>
+                    {children}
+                </S.Submit>
+            );
+
         case 'selected':
             return (
                 <S.Selected data-testid={testId} width={width} {...props}>
@@ -28,7 +35,7 @@ const Button = ({ children, testId, variant, width, ...props }) => {
 Button.propTypes = {
     children: string.isRequired,
     testId: string,
-    variant: oneOf(['', 'selected', 'unselected']),
+    variant: oneOf(['', 'selected', 'unselected', 'submit']),
     width: string
 };
 

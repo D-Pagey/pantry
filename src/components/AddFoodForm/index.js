@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Form, Formik, ErrorMessage } from 'formik';
-import dateFns from 'date-fns';
+// import dateFns from 'date-fns';
 import { FirebaseContext } from '../ProviderFirebase';
 import Dropdown from '../Dropdown';
+import Input from '../Input';
+import Button from '../Button';
 import * as S from './styles';
 
 const categoryOptions = [
@@ -12,12 +14,12 @@ const categoryOptions = [
 ];
 
 const AddFoodForm = () => {
-    const { updateFridge, value } = useContext(FirebaseContext);
+    const { updateFridge } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
             <Formik
-                initialValues={{ category: null }}
+                initialValues={{ category: null, name: '' }}
                 validate={(values) => {
                     const errors = {};
 
@@ -42,7 +44,7 @@ const AddFoodForm = () => {
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
-                render={({ setFieldValue, values }) => {
+                render={({ handleBlur, handleChange, setFieldValue, values }) => {
                     // console.log({ values });
 
                     return (
@@ -55,7 +57,16 @@ const AddFoodForm = () => {
                             />
                             <ErrorMessage name="category" component="div" />
 
-                            <button type="submit">Submit</button>
+                            <Input
+                                label="What is the name of the food?"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                name="name"
+                                testId="addFoodFoodNameInput"
+                                value={values.name}
+                            />
+
+                            <Button variant="submit">Submit</Button>
                         </Form>
                     );
                 }}
