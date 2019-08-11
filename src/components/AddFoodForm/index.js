@@ -3,6 +3,7 @@ import { Form, Formik, ErrorMessage } from 'formik';
 // import dateFns from 'date-fns';
 import { FirebaseContext } from '../ProviderFirebase';
 import Dropdown from '../Dropdown';
+import DialDatePicker from '../DialDatePicker';
 import Input from '../Input';
 import Button from '../Button';
 import * as S from './styles';
@@ -19,7 +20,7 @@ const AddFoodForm = () => {
     return (
         <S.Wrapper>
             <Formik
-                initialValues={{ category: null, name: '' }}
+                initialValues={{ category: null, date: new Date(), name: '' }}
                 validate={(values) => {
                     const errors = {};
 
@@ -45,7 +46,7 @@ const AddFoodForm = () => {
                     actions.resetForm();
                 }}
                 render={({ handleBlur, handleChange, setFieldValue, values }) => {
-                    // console.log({ values });
+                    console.log({ values });
 
                     return (
                         <Form>
@@ -62,8 +63,15 @@ const AddFoodForm = () => {
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 name="name"
+                                placeholder="Name..."
                                 testId="addFoodFoodNameInput"
                                 value={values.name}
+                            />
+
+                            <DialDatePicker
+                                date={values.date}
+                                label="When does it expire?"
+                                setDate={(date) => setFieldValue('date', date)}
                             />
 
                             <Button variant="submit">Submit</Button>

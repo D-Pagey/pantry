@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { instanceOf, string } from 'prop-types';
+import React from 'react';
+import { func, instanceOf, string } from 'prop-types';
 import dateFns from 'date-fns';
 import Button from '../Button';
 import * as S from './styles';
 
-const DialDatePicker = ({ initialDate, label }) => {
-    const [date, setDate] = useState();
-
-    useEffect(() => {
-        setDate(initialDate);
-    }, [initialDate]);
-
+const DialDatePicker = ({ date, setDate, label }) => {
     /**
      * @param {string} direction either 'sub' or 'add'
      * @param {string} unit one of 'Days', 'Months', or 'Years'
@@ -55,8 +49,9 @@ const DialDatePicker = ({ initialDate, label }) => {
 };
 
 DialDatePicker.propTypes = {
-    initialDate: instanceOf(Date).isRequired,
-    label: string
+    date: instanceOf(Date).isRequired,
+    label: string,
+    setDate: func.isRequired
 };
 
 DialDatePicker.defaultProps = {

@@ -4,7 +4,8 @@ import dateFns from 'date-fns';
 import DialDatePicker from '.';
 
 const props = {
-    initialDate: new Date()
+    date: new Date(),
+    setDate: () => {}
 };
 
 describe('DialDatePicker component', () => {
@@ -20,41 +21,33 @@ describe('DialDatePicker component', () => {
     });
 
     it.each`
-        direction     | unit        | buttonIndex | dateFormat | testId
-        ${'increase'} | ${'Days'}   | ${'0'}      | ${'Do'}    | ${'dialDatePickerDay'}
-        ${'increase'} | ${'Months'} | ${'1'}      | ${'MMMM'}  | ${'dialDatePickerMonth'}
-        ${'increase'} | ${'Years'}  | ${'2'}      | ${'YYYY'}  | ${'dialDatePickerYear'}
-        ${'decrease'} | ${'Days'}   | ${'0'}      | ${'Do'}    | ${'dialDatePickerDay'}
-        ${'decrease'} | ${'Months'} | ${'1'}      | ${'MMMM'}  | ${'dialDatePickerMonth'}
-        ${'decrease'} | ${'Years'}  | ${'2'}      | ${'YYYY'}  | ${'dialDatePickerYear'}
-    `(
-        'should handle $direction in $unit ',
-        ({ direction, unit, buttonIndex, dateFormat, testId }) => {
-            const { queryAllByText, getByTestId } = render(<DialDatePicker {...props} />);
-            const buttons = queryAllByText(direction === 'increase' ? 'Up' : 'Down');
-            const addOrSub = direction === 'increase' ? 'add' : 'sub';
-            const futureDate = dateFns[`${addOrSub}${unit}`](props.initialDate, 1);
+        direction     | unit        | buttonIndex
+        ${'increase'} | ${'Days'}   | ${'0'}
+        ${'increase'} | ${'Months'} | ${'1'}
+        ${'increase'} | ${'Years'}  | ${'2'}
+        ${'decrease'} | ${'Days'}   | ${'0'}
+        ${'decrease'} | ${'Months'} | ${'1'}
+        ${'decrease'} | ${'Years'}  | ${'2'}
+    `('should handle $direction in $unit ', ({ direction, unit, buttonIndex }) => {
+        const setDate = jest.fn();
+        const { queryAllByText } = render(<DialDatePicker {...props} setDate={setDate} />);
+        const isIncreaseButton = direction === 'increase';
+        const buttons = queryAllByText(isIncreaseButton ? 'Up' : 'Down');
+        const addOrSub = isIncreaseButton ? 'add' : 'sub';
+        const futureDate = dateFns[`${addOrSub}${unit}`](props.date, 1);
 
-            userEvent.click(buttons[buttonIndex]);
+        userEvent.click(buttons[buttonIndex]);
 
-            expect(getByTestId(testId)).toHaveTextContent(dateFns.format(futureDate, dateFormat));
-        }
-    );
+        expect(setDate).toHaveBeenCalledWith(futureDate);
+    });
 
     it('should handle week increment', () => {
-        const { getByText, getByTestId } = render(<DialDatePicker {...props} />);
-        const oneWeeksTime = dateFns.addWeeks(props.initialDate, 1);
+        const setDate = jest.fn();
+        const { getByText } = render(<DialDatePicker {...props} setDate={setDate} />);
+        const oneWeeksTime = dateFns.addWeeks(props.date, 1);
 
         userEvent.click(getByText('Add 1 week'));
 
-        expect(getByTestId('dialDatePickerDay')).toHaveTextContent(
-            dateFns.format(oneWeeksTime, 'Do')
-        );
-        expect(getByTestId('dialDatePickerMonth')).toHaveTextContent(
-            dateFns.format(oneWeeksTime, 'MMMM')
-        );
-        expect(getByTestId('dialDatePickerYear')).toHaveTextContent(
-            dateFns.format(oneWeeksTime, 'YYYY')
-        );
+        expect(setDate).toHaveBeenCalledWith(oneWeeksTime);
     });
 });

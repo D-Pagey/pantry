@@ -21,6 +21,7 @@ exports[`DialDatePicker component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin: 0 0 1rem;
 }
 
 .c1 {
@@ -57,7 +58,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerDay"
     >
-      5th
+      11th
     </span>
     <button
       type="button"
