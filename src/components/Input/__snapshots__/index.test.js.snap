@@ -27,6 +27,7 @@ exports[`Input component should render 1`] = `
     data-testid="testInput"
     id="testInput"
     name="test"
+    placeholder=""
     type="text"
     value=""
   />

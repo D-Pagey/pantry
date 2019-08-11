@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import Input from '.';
 
 const props = {
-    testId: 'storybookInput'
+    testId: 'storybookInput',
+    placeholder: 'test'
 };
 
 storiesOf('Input', module)

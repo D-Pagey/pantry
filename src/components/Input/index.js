@@ -2,7 +2,7 @@ import React from 'react';
 import { func, string } from 'prop-types';
 import * as S from './styles';
 
-const Input = ({ error, label, name, onBlur, onChange, testId, value }) => {
+const Input = ({ error, label, name, onBlur, onChange, placeholder, testId, value }) => {
     return (
         <S.Wrapper>
             {label && <S.Label htmlFor={testId}>{label}</S.Label>}
@@ -14,6 +14,7 @@ const Input = ({ error, label, name, onBlur, onChange, testId, value }) => {
                 name={name}
                 onBlur={onBlur}
                 onChange={onChange}
+                placeholder={placeholder}
                 value={value}
             />
 
@@ -28,6 +29,7 @@ Input.propTypes = {
     name: string,
     onBlur: func,
     onChange: func.isRequired,
+    placeholder: string,
     testId: string,
     value: string.isRequired
 };
@@ -37,6 +39,7 @@ Input.defaultProps = {
     label: '',
     name: '',
     onBlur: () => {},
+    placeholder: '',
     testId: ''
 };
 
