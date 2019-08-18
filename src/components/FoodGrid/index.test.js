@@ -11,21 +11,21 @@ const props = {
     data: [
         {
             category: { label: 'Meat', value: 'meat' },
-            expires: dateFns.format(new Date(2019, 2, 14), 'MM/DD/YYYY'),
+            expires: new Date(2019, 2, 14),
             name: 'chicken',
-            servings: '2'
+            servings: { label: '2', value: '2' }
         },
         {
             category: { label: 'Fish', value: 'fish' },
-            expires: dateFns.format(new Date(2019, 3, 9), 'MM/DD/YYYY'),
+            expires: new Date(2019, 3, 9),
             name: 'salmon',
-            servings: '1'
+            servings: { label: '1', value: '1' }
         },
         {
             category: { label: 'Vegetables', value: 'vegetables' },
-            expires: dateFns.format(new Date(2019, 6, 11), 'MM/DD/YYYY'),
+            expires: new Date(2019, 6, 11),
             name: 'carrots',
-            servings: '3'
+            servings: { label: '3', value: '3' }
         }
     ]
 };
@@ -46,15 +46,15 @@ describe('FoodGrid component', () => {
         expect(updateFridge).toHaveBeenCalledWith([
             {
                 category: { label: 'Fish', value: 'fish' },
-                expires: '04/09/2019',
+                expires: new Date(2019, 3, 9),
                 name: 'salmon',
-                servings: '1'
+                servings: { label: '1', value: '1' }
             },
             {
                 category: { label: 'Vegetables', value: 'vegetables' },
-                expires: '07/11/2019',
+                expires: new Date(2019, 6, 11),
                 name: 'carrots',
-                servings: '3'
+                servings: { label: '3', value: '3' }
             }
         ]);
     });

@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
-import { arrayOf, func, string, shape } from 'prop-types';
+import { arrayOf, func, instanceOf, string, shape } from 'prop-types';
+import { format } from 'date-fns';
 import deleteIcon from '../../../assets/delete.svg';
 
 const GridRows = ({ data, handleDelete }) =>
     data.map((item, index) => (
         <Fragment key={item.name}>
             <li>{item.name}</li>
-            <li>{item.expires}</li>
-            <li>{item.servings} Servings</li>
+            <li>{format(item.expires, 'dd/MM/yyyy')}</li>
+            <li>{item.servings.label} Servings</li>
             <li>
                 <button
                     type="button"
@@ -24,9 +25,12 @@ const GridRows = ({ data, handleDelete }) =>
 GridRows.propTypes = {
     data: arrayOf(
         shape({
+            expires: instanceOf(Date).isRequired,
             name: string.isRequired,
-            expires: string.isRequired,
-            servings: string.isRequired
+            servings: shape({
+                label: string.isRequired,
+                value: string.isRequired
+            }).isRequired
         })
     ),
     handleDelete: func.isRequired

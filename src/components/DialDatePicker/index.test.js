@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import dateFns from 'date-fns';
+import { addWeeks, addDays, addMonths, addYears, subDays, subMonths, subYears } from 'date-fns';
 import DialDatePicker from '.';
 
 const props = {
@@ -21,22 +21,20 @@ describe('DialDatePicker component', () => {
     });
 
     it.each`
-        direction     | unit        | buttonIndex
-        ${'increase'} | ${'Days'}   | ${'0'}
-        ${'increase'} | ${'Months'} | ${'1'}
-        ${'increase'} | ${'Years'}  | ${'2'}
-        ${'decrease'} | ${'Days'}   | ${'0'}
-        ${'decrease'} | ${'Months'} | ${'1'}
-        ${'decrease'} | ${'Years'}  | ${'2'}
-    `('should handle $direction in $unit ', ({ direction, unit, buttonIndex }) => {
+        name           | handler      | direction | index
+        ${'addDays'}   | ${addDays}   | ${'Up'}   | ${0}
+        ${'addMonths'} | ${addMonths} | ${'Up'}   | ${1}
+        ${'addYears'}  | ${addYears}  | ${'Up'}   | ${2}
+        ${'subDays'}   | ${subDays}   | ${'Down'} | ${0}
+        ${'subMonths'} | ${subMonths} | ${'Down'} | ${1}
+        ${'subYears'}  | ${subYears}  | ${'Down'} | ${2}
+    `('should call $handler with right value', ({ handler, direction, index }) => {
         const setDate = jest.fn();
         const { queryAllByText } = render(<DialDatePicker {...props} setDate={setDate} />);
-        const isIncreaseButton = direction === 'increase';
-        const buttons = queryAllByText(isIncreaseButton ? 'Up' : 'Down');
-        const addOrSub = isIncreaseButton ? 'add' : 'sub';
-        const futureDate = dateFns[`${addOrSub}${unit}`](props.date, 1);
+        const button = queryAllByText(direction)[index];
+        const futureDate = handler(props.date, 1);
 
-        userEvent.click(buttons[buttonIndex]);
+        userEvent.click(button);
 
         expect(setDate).toHaveBeenCalledWith(futureDate);
     });
@@ -44,7 +42,7 @@ describe('DialDatePicker component', () => {
     it('should handle week increment', () => {
         const setDate = jest.fn();
         const { getByText } = render(<DialDatePicker {...props} setDate={setDate} />);
-        const oneWeeksTime = dateFns.addWeeks(props.date, 1);
+        const oneWeeksTime = addWeeks(props.date, 1);
 
         userEvent.click(getByText('Add 1 week'));
 
