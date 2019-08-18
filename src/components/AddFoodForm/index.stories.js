@@ -1,12 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AddFoodForm from '.';
 import { FirebaseContext } from '../ProviderFirebase';
-
-const props = {};
+import AddFoodForm from '.';
 
 storiesOf('AddFoodForm', module).add('default', () => (
     <FirebaseContext.Provider value={{ updateFridge: () => {} }}>
-        <AddFoodForm {...props} />
+        <AddFoodForm />
     </FirebaseContext.Provider>
 ));

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, instanceOf, shape, string } from 'prop-types';
 import { FirebaseContext } from '../ProviderFirebase';
 import GridRows from './GridRows';
 import * as S from './styles';
@@ -43,9 +43,12 @@ FoodGrid.propTypes = {
                 label: string.isRequired,
                 value: string.isRequired
             }).isRequired,
-            expires: string.isRequired,
+            expires: instanceOf(Date).isRequired,
             name: string.isRequired,
-            servings: string.isRequired
+            servings: shape({
+                label: string.isRequired,
+                value: string.isRequired
+            }).isRequired
         }).isRequired
     ).isRequired
 };

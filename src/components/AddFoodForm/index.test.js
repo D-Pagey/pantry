@@ -21,29 +21,43 @@ jest.mock('react-select', () => ({ options, value, onChange }) => {
     );
 });
 
+const context = {
+    fridge: []
+};
+
 const props = {};
 
 describe('AddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<AddFoodForm {...props} />);
+        const { container } = render(<AddFoodForm {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should handle form submit', async () => {
         const updateFridge = jest.fn();
-        const { getByTestId, getByText } = render(<AddFoodForm {...props} />, { updateFridge });
+        const { getByTestId, getByText } = render(<AddFoodForm {...props} />, {
+            ...context,
+            updateFridge
+        });
 
         fireEvent.change(getByTestId('select'), { target: { value: 'vegetables' } });
 
         userEvent.click(getByText('Submit'));
 
         await wait(() =>
-            expect(updateFridge).toHaveBeenCalledWith({ label: 'Vegetables', value: 'vegetables' })
+            expect(updateFridge).toHaveBeenCalledWith([
+                expect.objectContaining({
+                    category: { label: 'Vegetables', value: 'vegetables' },
+                    expires: expect.any(Date),
+                    name: '',
+                    servings: { label: '', value: '' }
+                })
+            ])
         );
     });
 
     it('should show errors for required fields if no value', async () => {
-        const { getByText } = render(<AddFoodForm {...props} />);
+        const { getByText } = render(<AddFoodForm {...props} />, context);
 
         userEvent.click(getByText('Submit'));
 

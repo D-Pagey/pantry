@@ -5,9 +5,9 @@ const props = {
     data: [
         {
             category: { label: 'Meat', value: 'meat' },
-            expires: '01/01/2000',
+            expires: new Date(2019, 3, 9),
             name: 'carrots',
-            servings: '2'
+            servings: { label: '2', value: '2' }
         }
     ],
     handleDelete: () => {}

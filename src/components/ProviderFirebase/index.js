@@ -17,13 +17,22 @@ const updateFridge = (values) => {
 };
 
 const ProviderFirebase = ({ children }) => {
-    const [value, loading, error] = useDocumentData(db.collection(HOUSEHOLDS).doc(MY_HOUSEHOLD), {
-        snapshotListenOptions: { includeMetadataChanges: true }
-    });
+    const [householdData, loading, error] = useDocumentData(
+        db.collection(HOUSEHOLDS).doc(MY_HOUSEHOLD),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true }
+        }
+    );
+
+    const fridgeData =
+        householdData &&
+        householdData.fridge.map((item) => ({
+            ...item,
+            expires: item.expires.toDate()
+        }));
 
     return (
-        // rename from value to something useful
-        <FirebaseContext.Provider value={{ value, loading, error, updateFridge }}>
+        <FirebaseContext.Provider value={{ fridge: fridgeData, loading, error, updateFridge }}>
             {children}
         </FirebaseContext.Provider>
     );

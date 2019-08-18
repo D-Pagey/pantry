@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Form, Formik, ErrorMessage } from 'formik';
-// import dateFns from 'date-fns';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
 import SingleSelect from '../SingleSelect';
@@ -22,21 +21,23 @@ const servingsOptions = [
     { label: '4+', value: '4+' }
 ];
 
+const initialValues = {
+    category: null,
+    expires: new Date(),
+    name: '',
+    servings: {
+        label: '',
+        value: ''
+    }
+};
+
 const AddFoodForm = () => {
-    const { updateFridge } = useContext(FirebaseContext);
+    const { fridge, updateFridge } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
             <Formik
-                initialValues={{
-                    category: null,
-                    date: new Date(),
-                    name: '',
-                    servings: {
-                        label: '',
-                        value: ''
-                    }
-                }}
+                initialValues={initialValues}
                 validate={(values) => {
                     const errors = {};
 
@@ -47,23 +48,20 @@ const AddFoodForm = () => {
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
-                    // const formatted = [
-                    //     ...value.fridge,
-                    //     {
-                    //         ...values,
-                    //         expires: dateFns.format(values.expires, 'MM/DD/YYYY'),
-                    //         name: values.name.toLowerCase()
-                    //     }
-                    // ];
+                    const formatted = [
+                        ...fridge,
+                        {
+                            ...values,
+                            name: values.name.toLowerCase()
+                        }
+                    ];
 
-                    updateFridge(values.category);
+                    updateFridge(formatted);
 
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
                 render={({ handleBlur, handleChange, setFieldValue, values }) => {
-                    console.log({ values });
-
                     return (
                         <Form>
                             <Dropdown
@@ -85,9 +83,9 @@ const AddFoodForm = () => {
                             />
 
                             <DialDatePicker
-                                date={values.date}
+                                date={values.expires}
                                 label="When does it expire?"
-                                setDate={(date) => setFieldValue('date', date)}
+                                setDate={(date) => setFieldValue('expires', date)}
                             />
 
                             <SingleSelect
