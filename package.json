@@ -74,6 +74,7 @@
     "eslint-plugin-react": "7.14.3",
     "eslint-plugin-react-hooks": "2.0.1",
     "husky": "3.0.4",
+    "lint-staged": ">=8",
     "prettier": "1.18.2",
     "require-context.macro": "1.1.1",
     "stylelint": "10.1.0",
@@ -84,7 +85,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint",
+      "pre-commit": "lint-staged",
       "pre-push": "yarn test"
     }
   },
@@ -131,5 +132,16 @@
         "lines": 5
       }
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,yml,md,html}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
