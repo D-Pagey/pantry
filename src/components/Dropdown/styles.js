@@ -9,3 +9,9 @@ export const Wrapper = styled.div`
 export const Label = styled.label`
     margin: 0 0 0.5rem;
 `;
+
+export const Error = styled.p`
+    color: red;
+    font-size: 14px;
+    margin: 0.5rem 0;
+`;

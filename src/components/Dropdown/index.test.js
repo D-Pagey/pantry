@@ -60,4 +60,10 @@ describe('Dropdown component', () => {
             expect(setSelected).toHaveBeenCalledWith({ label: 'Vegetables', value: 'vegetables' })
         );
     });
+
+    it('should render an error', () => {
+        const error = 'What food category is it?';
+        const { getByText } = render(<Dropdown {...props} error={error} />);
+        getByText(error);
+    });
 });

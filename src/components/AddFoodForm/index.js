@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Form, Formik, ErrorMessage } from 'formik';
+import { Form, Formik } from 'formik';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
 import SingleSelect from '../SingleSelect';
@@ -25,10 +25,7 @@ const initialValues = {
     category: null,
     expires: new Date(),
     name: '',
-    servings: {
-        label: '',
-        value: ''
-    }
+    servings: servingsOptions[1]
 };
 
 const AddFoodForm = () => {
@@ -40,6 +37,10 @@ const AddFoodForm = () => {
                 initialValues={initialValues}
                 validate={(values) => {
                     const errors = {};
+
+                    if (!values.name) {
+                        errors.name = 'Required';
+                    }
 
                     if (!values.category) {
                         errors.category = 'Required';
@@ -61,18 +62,19 @@ const AddFoodForm = () => {
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
-                render={({ handleBlur, handleChange, setFieldValue, values }) => {
+                render={({ errors, handleBlur, handleChange, setFieldValue, values }) => {
                     return (
                         <Form>
                             <Dropdown
+                                error={errors.category}
                                 label="What category of food?"
                                 options={categoryOptions}
                                 selected={values.category}
                                 setSelected={(category) => setFieldValue('category', category)}
                             />
-                            <ErrorMessage name="category" component="div" />
 
                             <Input
+                                error={errors.name}
                                 label="What is the name of the food?"
                                 onBlur={handleBlur}
                                 onChange={handleChange}

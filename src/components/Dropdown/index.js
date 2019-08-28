@@ -3,7 +3,7 @@ import { arrayOf, func, shape, string } from 'prop-types';
 import Select from 'react-select';
 import * as S from './styles';
 
-const Dropdown = ({ label, options, selected, setSelected }) => {
+const Dropdown = ({ error, label, options, selected, setSelected }) => {
     const handleChange = (value) => setSelected(value);
 
     return (
@@ -17,11 +17,14 @@ const Dropdown = ({ label, options, selected, setSelected }) => {
                 isClearable
                 isSearchable
             />
+
+            {error && <S.Error>{error}</S.Error>}
         </S.Wrapper>
     );
 };
 
 Dropdown.propTypes = {
+    error: string,
     label: string,
     options: arrayOf(
         shape({
@@ -37,8 +40,9 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
+    error: '',
     label: '',
-    selected: {}
+    selected: undefined
 };
 
 export default Dropdown;

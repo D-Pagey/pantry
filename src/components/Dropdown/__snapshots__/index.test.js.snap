@@ -35,5 +35,6 @@ exports[`Dropdown component should render 1`] = `
       Fish
     </option>
   </select>
+  
 </div>
 `;

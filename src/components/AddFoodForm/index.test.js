@@ -35,13 +35,14 @@ describe('AddFoodForm component', () => {
 
     it('should handle form submit', async () => {
         const updateFridge = jest.fn();
+        const name = 'Chicken';
         const { getByTestId, getByText } = render(<AddFoodForm {...props} />, {
             ...context,
             updateFridge
         });
 
         fireEvent.change(getByTestId('select'), { target: { value: 'vegetables' } });
-
+        userEvent.type(getByTestId('addFoodFoodNameInput'), name);
         userEvent.click(getByText('Submit'));
 
         await wait(() =>
@@ -49,18 +50,18 @@ describe('AddFoodForm component', () => {
                 expect.objectContaining({
                     category: { label: 'Vegetables', value: 'vegetables' },
                     expires: expect.any(Date),
-                    name: '',
-                    servings: { label: '', value: '' }
+                    name: name.toLowerCase(),
+                    servings: { label: '2', value: '2' }
                 })
             ])
         );
     });
 
     it('should show errors for required fields if no value', async () => {
-        const { getByText } = render(<AddFoodForm {...props} />, context);
+        const { getByText, findAllByText } = render(<AddFoodForm {...props} />, context);
 
         userEvent.click(getByText('Submit'));
 
-        await wait(() => getByText('Required'));
+        await wait(() => findAllByText('Required'));
     });
 });
