@@ -36,13 +36,15 @@ describe('AddFoodForm component', () => {
     it('should handle form submit', async () => {
         const updateFridge = jest.fn();
         const name = 'Chicken';
-        const { getByTestId, getByText } = render(<AddFoodForm {...props} />, {
+        const { getByTestId, getByText, queryAllByText } = render(<AddFoodForm {...props} />, {
             ...context,
             updateFridge
         });
 
         fireEvent.change(getByTestId('select'), { target: { value: 'vegetables' } });
         userEvent.type(getByTestId('addFoodFoodNameInput'), name);
+        userEvent.click(queryAllByText('Up')[0]);
+        userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Submit'));
 
         await wait(() =>
@@ -51,7 +53,7 @@ describe('AddFoodForm component', () => {
                     category: { label: 'Vegetables', value: 'vegetables' },
                     expires: expect.any(Date),
                     name: name.toLowerCase(),
-                    servings: { label: '2', value: '2' }
+                    servings: { label: '1', value: '1' }
                 })
             ])
         );

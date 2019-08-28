@@ -10,11 +10,11 @@ const Input = ({ error, label, name, onBlur, onChange, placeholder, testId, valu
             <S.Input
                 id={testId}
                 data-testid={testId}
-                type="text"
                 name={name}
                 onBlur={onBlur}
                 onChange={onChange}
                 placeholder={placeholder}
+                type="text"
                 value={value}
             />
 
