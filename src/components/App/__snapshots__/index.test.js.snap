@@ -21,6 +21,26 @@ exports[`App component should render 1`] = `
   margin: 0;
 }
 
+.c4 {
+  border: 1px solid red;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  padding: 1rem 0;
+  margin: 0;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  max-width: 425px;
+}
+
+.c5 {
+  color: blue;
+}
+
 .c0 {
   margin: 0 auto;
   max-width: 1250px;
@@ -52,5 +72,29 @@ exports[`App component should render 1`] = `
       Loading...
     </p>
   </div>
+  <ul
+    class="c4"
+  >
+    <li
+      class="c5"
+    >
+      <a
+        aria-current="page"
+        class="active"
+        href="/"
+      >
+        Check Fridge
+      </a>
+    </li>
+    <li
+      class="c5"
+    >
+      <a
+        href="/add"
+      >
+        Add Food
+      </a>
+    </li>
+  </ul>
 </div>
 `;

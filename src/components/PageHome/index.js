@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../ProviderFirebase';
 import FoodGrid from '../FoodGrid';
-import AddFoodForm from '../AddFoodForm';
 import * as S from './styles';
 
 const PageHome = () => {
@@ -14,7 +13,6 @@ const PageHome = () => {
             ) : (
                 <div>
                     <FoodGrid data={fridge} />
-                    <AddFoodForm />
                 </div>
             )}
         </S.Wrapper>
