@@ -44,7 +44,7 @@ exports[`PageHome component should render 1`] = `
       <h2
         class="c1"
       >
-        Quantity
+        Servings
       </h2>
       <h2
         class="c1"
@@ -60,11 +60,10 @@ exports[`PageHome component should render 1`] = `
         steak
       </li>
       <li>
-        05/02/2010
+        2nd Feb
       </li>
       <li>
         2
-         Servings
       </li>
       <li>
         <button

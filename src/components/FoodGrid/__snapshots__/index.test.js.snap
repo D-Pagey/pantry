@@ -40,7 +40,7 @@ exports[`FoodGrid component should render 1`] = `
   <h2
     class="c1"
   >
-    Quantity
+    Servings
   </h2>
   <h2
     class="c1"
@@ -56,11 +56,10 @@ exports[`FoodGrid component should render 1`] = `
     chicken
   </li>
   <li>
-    14/03/2019
+    3rd Mar
   </li>
   <li>
     2
-     Servings
   </li>
   <li>
     <button
@@ -83,11 +82,10 @@ exports[`FoodGrid component should render 1`] = `
     salmon
   </li>
   <li>
-    09/04/2019
+    4th Apr
   </li>
   <li>
     1
-     Servings
   </li>
   <li>
     <button
@@ -110,11 +108,10 @@ exports[`FoodGrid component should render 1`] = `
     carrots
   </li>
   <li>
-    11/07/2019
+    7th Jul
   </li>
   <li>
     3
-     Servings
   </li>
   <li>
     <button

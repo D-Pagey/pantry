@@ -20,7 +20,7 @@ const FoodGrid = ({ data }) => {
         <S.Wrapper>
             <S.Heading>Name</S.Heading>
             <S.Heading>Expires</S.Heading>
-            <S.Heading>Quantity</S.Heading>
+            <S.Heading>Servings</S.Heading>
             <S.Heading>Amend</S.Heading>
 
             {uniqueCategories.map((category) => (
