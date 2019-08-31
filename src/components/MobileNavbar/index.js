@@ -1,14 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import * as S from './styles';
 
 const MobileNavbar = () => (
     <S.List>
         <S.Item>
-            <NavLink to="/">Check Fridge</NavLink>
+            <S.StyledNavLink to="/" exact>
+                Check Fridge
+            </S.StyledNavLink>
         </S.Item>
         <S.Item>
-            <NavLink to="/add">Add Food</NavLink>
+            <S.StyledNavLink to="/add">Add Food</S.StyledNavLink>
         </S.Item>
     </S.List>
 );

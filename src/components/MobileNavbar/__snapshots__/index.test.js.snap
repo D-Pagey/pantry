@@ -2,23 +2,41 @@
 
 exports[`MobileNavbar should render 1`] = `
 .c0 {
-  border: 1px solid red;
+  background-color: grey;
+  bottom: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  list-style: none;
-  padding: 1rem 0;
-  margin: 0;
   -webkit-box-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
+  list-style: none;
+  padding: 0;
+  left: 0;
+  margin: 0;
   max-width: 425px;
+  position: fixed;
+  right: 0;
 }
 
 .c1 {
-  color: blue;
+  width: 50%;
+}
+
+.c2 {
+  color: black;
+  display: inline-block;
+  padding: 1rem 0;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  width: 100%;
+}
+
+.c2.active {
+  background-color: white;
 }
 
 <ul
@@ -29,7 +47,7 @@ exports[`MobileNavbar should render 1`] = `
   >
     <a
       aria-current="page"
-      class="active"
+      class="c2 active"
       href="/"
     >
       Check Fridge
@@ -39,6 +57,7 @@ exports[`MobileNavbar should render 1`] = `
     class="c1"
   >
     <a
+      class="c2"
       href="/add"
     >
       Add Food
