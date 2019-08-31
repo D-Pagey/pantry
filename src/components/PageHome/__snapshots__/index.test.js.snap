@@ -4,13 +4,10 @@ exports[`PageHome component should render 1`] = `
 .c0 {
   display: grid;
   grid-column-gap: 1rem;
-  grid-template-columns: repeat(4,max-content);
+  grid-template-columns: repeat(4,1fr);
   list-style: none;
   margin: 0;
   padding: 0;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .c1 {

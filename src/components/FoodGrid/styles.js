@@ -3,11 +3,10 @@ import styled from 'styled-components/macro';
 export const Wrapper = styled.ul`
     display: grid;
     grid-column-gap: 1rem;
-    grid-template-columns: repeat(4, max-content);
+    grid-template-columns: repeat(4, 1fr);
     list-style: none;
     margin: 0;
     padding: 0;
-    width: max-content;
 `;
 
 export const Heading = styled.h2`
