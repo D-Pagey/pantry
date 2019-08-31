@@ -36,7 +36,6 @@ exports[`App component should render 1`] = `
   padding: 0;
   left: 0;
   margin: 0;
-  max-width: 425px;
   position: fixed;
   right: 0;
 }
@@ -92,6 +91,7 @@ exports[`App component should render 1`] = `
   </div>
   <ul
     class="c4"
+    data-testid="mobileNavbar"
   >
     <li
       class="c5"

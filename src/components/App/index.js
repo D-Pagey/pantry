@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Media from 'react-media';
 import ProviderFirebase from '../ProviderFirebase';
 import Header from '../Header';
 import PageHome from '../PageHome';
@@ -21,7 +22,7 @@ const App = () => {
                         <Route path="/add" component={AddFoodForm} />
                     </Switch>
 
-                    <MobileNavbar />
+                    <Media query="(max-width: 475px)" render={() => <MobileNavbar />} />
                 </S.Wrapper>
             </BrowserRouter>
         </ProviderFirebase>
