@@ -53,7 +53,7 @@ exports[`FoodGrid component should render 1`] = `
     chicken
   </li>
   <li>
-    3rd Mar
+    14th Mar
   </li>
   <li>
     2
@@ -79,7 +79,7 @@ exports[`FoodGrid component should render 1`] = `
     salmon
   </li>
   <li>
-    4th Apr
+    9th Apr
   </li>
   <li>
     1
@@ -105,7 +105,7 @@ exports[`FoodGrid component should render 1`] = `
     carrots
   </li>
   <li>
-    7th Jul
+    11th Jul
   </li>
   <li>
     3

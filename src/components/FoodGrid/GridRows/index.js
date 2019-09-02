@@ -7,7 +7,7 @@ const GridRows = ({ data, handleDelete }) =>
     data.map((item, index) => (
         <Fragment key={item.name}>
             <li>{item.name}</li>
-            <li>{format(item.expires, 'Mo MMM')}</li>
+            <li>{format(item.expires, 'do MMM')}</li>
             <li>{item.servings.label}</li>
             <li>
                 <button
