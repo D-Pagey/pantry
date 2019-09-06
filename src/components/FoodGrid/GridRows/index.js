@@ -1,13 +1,23 @@
 import React, { Fragment } from 'react';
 import { arrayOf, func, instanceOf, string, shape } from 'prop-types';
-import { format } from 'date-fns';
+import { differenceInDays, format } from 'date-fns';
 import deleteIcon from '../../../assets/delete.svg';
+import * as S from './styles';
 
-const GridRows = ({ data, handleDelete }) =>
-    data.map((item, index) => (
+const GridRows = ({ data, handleDelete }) => {
+    const chooseColour = (date) => {
+        const difference = differenceInDays(date, new Date());
+
+        if (difference < 1) return 'red';
+        if (difference <= 2) return 'blue';
+
+        return 'black';
+    };
+
+    return data.map((item, index) => (
         <Fragment key={item.name}>
             <li>{item.name}</li>
-            <li>{format(item.expires, 'do MMM')}</li>
+            <S.Item colour={chooseColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
             <li>{item.servings.label}</li>
             <li>
                 <button
@@ -21,6 +31,7 @@ const GridRows = ({ data, handleDelete }) =>
             </li>
         </Fragment>
     ));
+};
 
 GridRows.propTypes = {
     data: arrayOf(
