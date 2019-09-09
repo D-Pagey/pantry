@@ -1,5 +1,4 @@
 import React from 'react';
-import dateFns from 'date-fns';
 import userEvent from '@testing-library/user-event';
 import FoodGrid from '.';
 
@@ -26,6 +25,12 @@ const props = {
             expires: new Date(2019, 6, 11),
             name: 'carrots',
             servings: { label: '3', value: '3' }
+        },
+        {
+            category: { label: 'Vegetables', value: 'vegetables' },
+            expires: new Date(2019, 6, 11),
+            name: 'broccoli',
+            servings: { label: '3', value: '3' }
         }
     ]
 };
@@ -43,19 +48,6 @@ describe('FoodGrid component', () => {
 
         userEvent.click(deleteButton);
 
-        expect(updateFridge).toHaveBeenCalledWith([
-            {
-                category: { label: 'Fish', value: 'fish' },
-                expires: new Date(2019, 3, 9),
-                name: 'salmon',
-                servings: { label: '1', value: '1' }
-            },
-            {
-                category: { label: 'Vegetables', value: 'vegetables' },
-                expires: new Date(2019, 6, 11),
-                name: 'carrots',
-                servings: { label: '3', value: '3' }
-            }
-        ]);
+        expect(updateFridge).toHaveBeenCalledWith(props.data.filter((item, index) => index !== 0));
     });
 });

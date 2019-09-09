@@ -132,5 +132,28 @@ exports[`FoodGrid component should render 1`] = `
       />
     </button>
   </li>
+  <li>
+    broccoli
+  </li>
+  <li
+    class="c3"
+  >
+    11th Jul
+  </li>
+  <li>
+    3
+  </li>
+  <li>
+    <button
+      data-testid="deleteButton1Vegetables"
+      style="cursor: pointer;"
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
+  </li>
 </ul>
 `;
