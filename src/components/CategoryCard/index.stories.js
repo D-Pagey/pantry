@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import CategoryCard from '.';
 
 const props = {
-    colour: 'red'
+    category: 'Meat',
+    quantity: 2
 };
 
 storiesOf('CategoryCard', module).add('default', () => <CategoryCard {...props} />);
