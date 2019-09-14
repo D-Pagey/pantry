@@ -1,7 +1,8 @@
 import React from 'react';
 import PageHome from '.';
 
-const firestore = {
+const firebaseContext = {
+    categories: ['Meat'],
     fridge: [
         {
             category: { label: 'Meat', value: 'meat' },
@@ -14,7 +15,7 @@ const firestore = {
 
 describe('PageHome component', () => {
     it('should render', () => {
-        const { container } = render(<PageHome />, firestore);
+        const { container } = render(<PageHome />, firebaseContext);
         expect(container.firstChild).toMatchSnapshot();
     });
 });

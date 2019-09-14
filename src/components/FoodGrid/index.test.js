@@ -3,11 +3,8 @@ import userEvent from '@testing-library/user-event';
 import FoodGrid from '.';
 
 const firebaseContext = {
-    updateFridge: () => {}
-};
-
-const props = {
-    data: [
+    categories: ['Meat', 'Fish', 'Vegetables'],
+    fridge: [
         {
             category: { label: 'Meat', value: 'meat' },
             expires: new Date(2019, 2, 14),
@@ -32,22 +29,25 @@ const props = {
             name: 'broccoli',
             servings: { label: '3', value: '3' }
         }
-    ]
+    ],
+    updateFridge: () => {}
 };
 
 describe('FoodGrid component', () => {
     it('should render', () => {
-        const { container } = render(<FoodGrid {...props} />, firebaseContext);
+        const { container } = render(<FoodGrid />, firebaseContext);
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should handle delete', () => {
+    it('should handle delete', async () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<FoodGrid {...props} />, { updateFridge });
+        const { getByTestId } = render(<FoodGrid />, { ...firebaseContext, updateFridge });
         const deleteButton = getByTestId('deleteButton0Meat');
 
         userEvent.click(deleteButton);
 
-        expect(updateFridge).toHaveBeenCalledWith(props.data.filter((item, index) => index !== 0));
+        expect(updateFridge).toHaveBeenCalledWith(
+            firebaseContext.fridge.filter((item, index) => index !== 0)
+        );
     });
 });

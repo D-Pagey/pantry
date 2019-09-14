@@ -31,8 +31,21 @@ const ProviderFirebase = ({ children }) => {
             expires: item.expires.toDate()
         }));
 
+    // change categories to have the count as well
+    // foodgrid just uses labels
+    // categoriy list uses both
+    const categories =
+        fridgeData &&
+        fridgeData.reduce((acc, item) => {
+            const { label } = item.category;
+            if (acc.indexOf(label) === -1) acc.push(label);
+            return acc;
+        }, []);
+
     return (
-        <FirebaseContext.Provider value={{ fridge: fridgeData, loading, error, updateFridge }}>
+        <FirebaseContext.Provider
+            value={{ categories, fridge: fridgeData, loading, error, updateFridge }}
+        >
             {children}
         </FirebaseContext.Provider>
     );

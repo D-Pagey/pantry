@@ -28,59 +28,57 @@ exports[`PageHome component should render 1`] = `
 <div
   class=""
 >
-  <div>
-    <ul
-      class="c0"
+  <ul
+    class="c0"
+  >
+    <h2
+      class="c1"
     >
-      <h2
-        class="c1"
+      Name
+    </h2>
+    <h2
+      class="c1"
+    >
+      Expires
+    </h2>
+    <h2
+      class="c1"
+    >
+      Servings
+    </h2>
+    <h2
+      class="c1"
+    >
+      Amend
+    </h2>
+    <h3
+      class="c2"
+    >
+      Meat
+    </h3>
+    <li>
+      steak
+    </li>
+    <li
+      class="c3"
+    >
+      5th Feb
+    </li>
+    <li>
+      2
+    </li>
+    <li>
+      <button
+        data-testid="deleteButton0Meat"
+        style="cursor: pointer;"
+        type="button"
       >
-        Name
-      </h2>
-      <h2
-        class="c1"
-      >
-        Expires
-      </h2>
-      <h2
-        class="c1"
-      >
-        Servings
-      </h2>
-      <h2
-        class="c1"
-      >
-        Amend
-      </h2>
-      <h3
-        class="c2"
-      >
-        Meat
-      </h3>
-      <li>
-        steak
-      </li>
-      <li
-        class="c3"
-      >
-        5th Feb
-      </li>
-      <li>
-        2
-      </li>
-      <li>
-        <button
-          data-testid="deleteButton0Meat"
-          style="cursor: pointer;"
-          type="button"
-        >
-          <img
-            alt="delete"
-            src="delete.svg"
-          />
-        </button>
-      </li>
-    </ul>
-  </div>
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
+    </li>
+  </ul>
 </div>
 `;
