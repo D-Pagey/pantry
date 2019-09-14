@@ -16,6 +16,36 @@ const updateFridge = (values) => {
         .catch((error) => console.error('Error adding to fridge: ', error));
 };
 
+/** checkIndex function
+ * @param {array} array an array of objects with category and count keys
+ * @param {string} label a string of what to check in the category key
+ */
+export const checkIndex = (array, label) => {
+    return array.reduce((acc, cur, index) => {
+        if (cur.category === label) return index;
+        return acc;
+    }, -1);
+};
+
+/** countCategories function
+ * @param {array} categories an array of category objects with label and value keys
+ */
+export const countCategories = (categories) => {
+    return categories.reduce((acc, curr) => {
+        const index = checkIndex(acc, curr.label);
+
+        if (index === -1) {
+            acc.push({ category: curr.label, count: 1 });
+        } else {
+            const newAcc = [...acc];
+            newAcc[index].count += 1;
+            return newAcc;
+        }
+
+        return acc;
+    }, []);
+};
+
 const ProviderFirebase = ({ children }) => {
     const [householdData, loading, error] = useDocumentData(
         db.collection(HOUSEHOLDS).doc(MY_HOUSEHOLD),
@@ -31,16 +61,7 @@ const ProviderFirebase = ({ children }) => {
             expires: item.expires.toDate()
         }));
 
-    // change categories to have the count as well
-    // foodgrid just uses labels
-    // categoriy list uses both
-    const categories =
-        fridgeData &&
-        fridgeData.reduce((acc, item) => {
-            const { label } = item.category;
-            if (acc.indexOf(label) === -1) acc.push(label);
-            return acc;
-        }, []);
+    const categories = fridgeData && countCategories(fridgeData.map((item) => item.category));
 
     return (
         <FirebaseContext.Provider

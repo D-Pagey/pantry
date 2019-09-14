@@ -18,11 +18,11 @@ const FoodGrid = () => {
             <S.Heading>Servings</S.Heading>
             <S.Heading>Amend</S.Heading>
 
-            {categories.map((category) => (
-                <Fragment key={category}>
-                    <S.Category>{category}</S.Category>
+            {categories.map((cat) => (
+                <Fragment key={cat.category}>
+                    <S.Category>{cat.category}</S.Category>
                     <GridRows
-                        data={fridge.filter((item) => item.category.label === category)}
+                        data={fridge.filter((item) => item.category.label === cat.category)}
                         handleDelete={handleDelete}
                     />
                 </Fragment>
