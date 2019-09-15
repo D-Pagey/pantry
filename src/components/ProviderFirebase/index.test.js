@@ -46,7 +46,7 @@ describe('countCategories function', () => {
                     value: 'meat'
                 }
             ]).length
-        ).toBe(2);
+        ).toBe(3);
 
         expect(
             countCategories([
@@ -63,7 +63,7 @@ describe('countCategories function', () => {
                     value: 'fish'
                 }
             ]).length
-        ).toBe(1);
+        ).toBe(2);
 
         expect(
             countCategories([
@@ -80,7 +80,7 @@ describe('countCategories function', () => {
                     value: 'vegetables'
                 }
             ]).length
-        ).toBe(3);
+        ).toBe(4);
     });
 
     it('should increment count if category already exists', () => {
@@ -99,7 +99,7 @@ describe('countCategories function', () => {
                     value: 'meat'
                 }
             ])
-        ).toStrictEqual([{ category: 'Meat', count: 3 }]);
+        ).toStrictEqual([{ category: 'Meat', count: 3 }, { category: 'All', count: 3 }]);
 
         expect(
             countCategories([
@@ -135,7 +135,8 @@ describe('countCategories function', () => {
         ).toStrictEqual([
             { category: 'Meat', count: 1 },
             { category: 'Fish', count: 2 },
-            { category: 'Vegetables', count: 4 }
+            { category: 'Vegetables', count: 4 },
+            { category: 'All', count: 7 }
         ]);
     });
 });

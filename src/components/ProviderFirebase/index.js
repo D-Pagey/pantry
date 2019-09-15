@@ -31,7 +31,7 @@ export const checkIndex = (array, label) => {
  * @param {array} categories an array of category objects with label and value keys
  */
 export const countCategories = (categories) => {
-    return categories.reduce((acc, curr) => {
+    const reducedCategories = categories.reduce((acc, curr) => {
         const index = checkIndex(acc, curr.label);
 
         if (index === -1) {
@@ -44,6 +44,10 @@ export const countCategories = (categories) => {
 
         return acc;
     }, []);
+
+    reducedCategories.push({ category: 'All', count: categories.length });
+
+    return reducedCategories;
 };
 
 const ProviderFirebase = ({ children }) => {

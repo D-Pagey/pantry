@@ -10,6 +10,7 @@ exports[`PageHome component should render 1`] = `
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -18,6 +19,8 @@ exports[`PageHome component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   padding: 1rem;
   width: 140px;
 }
@@ -45,9 +48,11 @@ exports[`PageHome component should render 1`] = `
   <div
     class="c0"
   >
-    <div
+    <a
       class="c1"
+      colour="red"
       data-testid="categoryCard"
+      href="/meat"
     >
       <h3
         class="c2"
@@ -59,7 +64,7 @@ exports[`PageHome component should render 1`] = `
       >
         1
       </p>
-    </div>
+    </a>
   </div>
 </div>
 `;

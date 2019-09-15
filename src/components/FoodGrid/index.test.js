@@ -37,7 +37,7 @@ const firebaseContext = {
     updateFridge: () => {}
 };
 
-describe.skip('FoodGrid component', () => {
+describe('FoodGrid component', () => {
     it('should render', () => {
         const { container } = render(<FoodGrid />, firebaseContext);
         expect(container.firstChild).toMatchSnapshot();

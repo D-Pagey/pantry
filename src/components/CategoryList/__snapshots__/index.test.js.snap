@@ -10,6 +10,7 @@ exports[`CategoryList component should render 1`] = `
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -18,6 +19,8 @@ exports[`CategoryList component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   padding: 1rem;
   width: 140px;
 }
@@ -31,6 +34,7 @@ exports[`CategoryList component should render 1`] = `
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -39,6 +43,8 @@ exports[`CategoryList component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   padding: 1rem;
   width: 140px;
 }
@@ -52,6 +58,7 @@ exports[`CategoryList component should render 1`] = `
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -60,6 +67,8 @@ exports[`CategoryList component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   padding: 1rem;
   width: 140px;
 }
@@ -84,9 +93,11 @@ exports[`CategoryList component should render 1`] = `
 <div
   class="c0"
 >
-  <div
+  <a
     class="c1"
+    colour="red"
     data-testid="categoryCard"
+    href="/meat"
   >
     <h3
       class="c2"
@@ -98,10 +109,12 @@ exports[`CategoryList component should render 1`] = `
     >
       2
     </p>
-  </div>
-  <div
+  </a>
+  <a
     class="c4"
+    colour="blue"
     data-testid="categoryCard"
+    href="/fish"
   >
     <h3
       class="c2"
@@ -113,10 +126,12 @@ exports[`CategoryList component should render 1`] = `
     >
       3
     </p>
-  </div>
-  <div
+  </a>
+  <a
     class="c5"
+    colour="green"
     data-testid="categoryCard"
+    href="/vegetables"
   >
     <h3
       class="c2"
@@ -128,6 +143,6 @@ exports[`CategoryList component should render 1`] = `
     >
       5
     </p>
-  </div>
+  </a>
 </div>
 `;

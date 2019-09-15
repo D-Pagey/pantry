@@ -18,6 +18,7 @@ describe('CategoryCard component', () => {
         ${'Fish'}       | ${'blue'}
         ${'Vegetables'} | ${'green'}
         ${'Other'}      | ${'purple'}
+        ${'All'}        | ${'orange'}
     `('should have a $colour border for $category', ({ category, colour }) => {
         const { getByTestId } = render(<CategoryCard {...props} category={category} />);
         expect(getByTestId('categoryCard')).toHaveStyleRule('border', `3px solid ${colour}`);

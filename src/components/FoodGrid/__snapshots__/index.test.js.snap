@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FoodGrid component should render 1`] = `
+.c3 {
+  color: red;
+}
+
 .c0 {
   display: grid;
   grid-column-gap: 1rem;
@@ -46,12 +50,110 @@ exports[`FoodGrid component should render 1`] = `
   </h2>
   <h3
     class="c2"
-  />
+  >
+    Meat
+  </h3>
+  <li>
+    chicken
+  </li>
+  <li
+    class="c3"
+  >
+    14th Mar
+  </li>
+  <li>
+    2
+  </li>
+  <li>
+    <button
+      data-testid="deleteButton0Meat"
+      style="cursor: pointer;"
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
+  </li>
   <h3
     class="c2"
-  />
+  >
+    Fish
+  </h3>
+  <li>
+    salmon
+  </li>
+  <li
+    class="c3"
+  >
+    9th Apr
+  </li>
+  <li>
+    1
+  </li>
+  <li>
+    <button
+      data-testid="deleteButton0Fish"
+      style="cursor: pointer;"
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
+  </li>
   <h3
     class="c2"
-  />
+  >
+    Vegetables
+  </h3>
+  <li>
+    carrots
+  </li>
+  <li
+    class="c3"
+  >
+    11th Jul
+  </li>
+  <li>
+    3
+  </li>
+  <li>
+    <button
+      data-testid="deleteButton0Vegetables"
+      style="cursor: pointer;"
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
+  </li>
+  <li>
+    broccoli
+  </li>
+  <li
+    class="c3"
+  >
+    11th Jul
+  </li>
+  <li>
+    3
+  </li>
+  <li>
+    <button
+      data-testid="deleteButton1Vegetables"
+      style="cursor: pointer;"
+      type="button"
+    >
+      <img
+        alt="delete"
+        src="delete.svg"
+      />
+    </button>
+  </li>
 </ul>
 `;

@@ -10,16 +10,22 @@ const getCategoryColour = (category) => {
             return 'green';
         case 'Fish':
             return 'blue';
+        case 'All':
+            return 'orange';
         default:
             return 'purple';
     }
 };
 
 const CategoryCard = ({ category, quantity }) => (
-    <S.Wrapper colour={getCategoryColour(category)} data-testid="categoryCard">
+    <S.Link
+        colour={getCategoryColour(category)}
+        to={`/${category.toLowerCase()}`}
+        data-testid="categoryCard"
+    >
         <S.Title>{category}</S.Title>
         <S.Text>{quantity}</S.Text>
-    </S.Wrapper>
+    </S.Link>
 );
 
 CategoryCard.propTypes = {
