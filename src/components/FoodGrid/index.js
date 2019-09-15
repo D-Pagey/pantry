@@ -18,7 +18,13 @@ const FoodGrid = ({ match }) => {
     const { fridge, updateFridge } = useContext(FirebaseContext);
 
     const filteredData = fridge
-        ? fridge.filter((item) => item.category.value === match.params.category)
+        ? fridge.filter((item) => {
+              const { category } = match.params;
+
+              if (category === 'all') return true;
+
+              return item.category.value === category;
+          })
         : [];
 
     const handleDelete = (name) => () => {
