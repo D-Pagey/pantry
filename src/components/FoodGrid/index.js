@@ -16,16 +16,14 @@ const chooseColour = (date) => {
 
 const FoodGrid = ({ match }) => {
     const { fridge, updateFridge } = useContext(FirebaseContext);
+    const { category } = match.params;
 
-    const filteredData = fridge
-        ? fridge.filter((item) => {
-              const { category } = match.params;
-
-              if (category === 'all') return true;
-
-              return item.category.value === category;
-          })
-        : [];
+    const filteredData =
+        category === 'all'
+            ? fridge
+            : fridge.filter((item) => {
+                  return item.category.value === category;
+              });
 
     const handleDelete = (name) => () => {
         const filteredItems = fridge.filter((item) => item.name !== name);

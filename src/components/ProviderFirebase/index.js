@@ -58,12 +58,12 @@ const ProviderFirebase = ({ children }) => {
         }
     );
 
-    const fridgeData =
-        householdData &&
-        householdData.fridge.map((item) => ({
-            ...item,
-            expires: item.expires.toDate()
-        }));
+    const fridgeData = householdData
+        ? householdData.fridge.map((item) => ({
+              ...item,
+              expires: item.expires.toDate()
+          }))
+        : [];
 
     const categories = fridgeData && countCategories(fridgeData.map((item) => item.category));
 

@@ -72,4 +72,19 @@ describe('FoodGrid component', () => {
 
         expect(expiryDate).toHaveStyleRule('color', colour);
     });
+
+    it('should handle the category: all', () => {
+        const updatedProps = {
+            ...props,
+            match: {
+                params: {
+                    category: 'all'
+                }
+            }
+        };
+        const { getByText } = render(<FoodGrid {...updatedProps} />, firebaseContext);
+
+        getByText(firebaseContext.fridge[0].name);
+        getByText(firebaseContext.fridge[1].name);
+    });
 });
