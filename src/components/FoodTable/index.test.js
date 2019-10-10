@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
-import FoodGrid from '.';
+import FoodTable from '.';
 
 const props = {
     match: {
@@ -15,7 +15,7 @@ const firebaseContext = {
     fridge: [
         {
             category: { label: 'Meat', value: 'meat' },
-            expires: new Date(2019, 2, 14),
+            expires: new Date(2019, 9, 12),
             name: 'chicken',
             servings: { label: '2', value: '2' }
         },
@@ -29,21 +29,21 @@ const firebaseContext = {
     updateFridge: () => {}
 };
 
-describe('FoodGrid component', () => {
+describe('FoodTable component', () => {
     it('should render', () => {
-        const { container } = render(<FoodGrid {...props} />, firebaseContext);
+        const { container } = render(<FoodTable {...props} />, firebaseContext);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should handle delete', async () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<FoodGrid {...props} />, {
+        const { queryAllByTestId } = render(<FoodTable {...props} />, {
             ...firebaseContext,
             updateFridge
         });
-        const deleteButton = getByTestId('deleteButton0');
+        const deleteButton = queryAllByTestId('deleteButton');
 
-        userEvent.click(deleteButton);
+        userEvent.click(deleteButton[0]);
 
         expect(updateFridge).toHaveBeenCalledWith(
             firebaseContext.fridge.filter((item, index) => index !== 0)
@@ -67,7 +67,7 @@ describe('FoodGrid component', () => {
             fridge: [item]
         };
 
-        const { getByText } = render(<FoodGrid {...props} />, updatedContext);
+        const { getByText } = render(<FoodTable {...props} />, updatedContext);
         const expiryDate = getByText(format(date, 'do MMM'));
 
         expect(expiryDate).toHaveStyleRule('color', colour);
@@ -82,7 +82,7 @@ describe('FoodGrid component', () => {
                 }
             }
         };
-        const { getByText } = render(<FoodGrid {...updatedProps} />, firebaseContext);
+        const { getByText } = render(<FoodTable {...updatedProps} />, firebaseContext);
 
         getByText(firebaseContext.fridge[0].name);
         getByText(firebaseContext.fridge[1].name);
