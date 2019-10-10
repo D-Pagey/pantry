@@ -22,7 +22,18 @@ jest.mock('react-select', () => ({ options, value, onChange }) => {
 });
 
 const context = {
-    fridge: []
+    fridge: [],
+    foodCategories: [
+        {
+            label: 'Meat',
+            value: 'meat'
+        },
+        {
+            label: 'Vegetables',
+            value: 'vegetables'
+        }
+    ],
+    updateFridge: () => {}
 };
 
 const props = {};

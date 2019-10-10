@@ -4,11 +4,11 @@ import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 const CategoryList = () => {
-    const { categories } = useContext(FirebaseContext);
+    const { categoryCounts } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
-            {categories.map((item) => (
+            {categoryCounts.map((item) => (
                 <CategoryCard category={item.category} quantity={item.count} key={item.category} />
             ))}
         </S.Wrapper>

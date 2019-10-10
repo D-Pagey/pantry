@@ -8,12 +8,6 @@ import Input from '../Input';
 import Button from '../Button';
 import * as S from './styles';
 
-const categoryOptions = [
-    { label: 'Meat', value: 'meat' },
-    { label: 'Fish', value: 'fish' },
-    { label: 'Vegetables', value: 'vegetables' }
-];
-
 const servingsOptions = [
     { label: '1', value: '1' },
     { label: '2', value: '2' },
@@ -29,7 +23,7 @@ const initialValues = {
 };
 
 const AddFoodForm = () => {
-    const { fridge, updateFridge } = useContext(FirebaseContext);
+    const { foodCategories, fridge, updateFridge } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper>
@@ -68,7 +62,7 @@ const AddFoodForm = () => {
                             <Dropdown
                                 error={errors.category}
                                 label="What category of food?"
-                                options={categoryOptions}
+                                options={foodCategories}
                                 selected={values.category}
                                 setSelected={(category) => setFieldValue('category', category)}
                             />

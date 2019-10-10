@@ -174,11 +174,6 @@ exports[`AddFoodForm component should render 1`] = `
           Meat
         </option>
         <option
-          value="fish"
-        >
-          Fish
-        </option>
-        <option
           value="vegetables"
         >
           Vegetables

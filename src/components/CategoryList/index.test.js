@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryList from '.';
 
 const firebaseContext = {
-    categories: [
+    categoryCounts: [
         { category: 'Meat', count: 2 },
         { category: 'Fish', count: 3 },
         { category: 'Vegetables', count: 5 }

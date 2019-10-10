@@ -2,7 +2,7 @@ import React from 'react';
 import PageHome from '.';
 
 const firebaseContext = {
-    categories: [{ category: 'Meat', count: 1 }],
+    categoryCounts: [{ category: 'Meat', count: 1 }],
     fridge: [
         {
             category: { label: 'Meat', value: 'meat' },

@@ -40,12 +40,13 @@ SingleSelect.propTypes = {
         value: oneOfType([string, bool]).isRequired
     }).isRequired,
     setSelected: func.isRequired,
-    testId: string.isRequired
+    testId: string
 };
 
 SingleSelect.defaultProps = {
     label: '',
-    margin: ''
+    margin: '',
+    testId: ''
 };
 
 export default SingleSelect;

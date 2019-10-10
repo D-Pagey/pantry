@@ -58,6 +58,8 @@ const ProviderFirebase = ({ children }) => {
         }
     );
 
+    const foodCategories = householdData ? householdData.categories : [];
+
     const fridgeData = householdData
         ? householdData.fridge.map((item) => ({
               ...item,
@@ -65,11 +67,18 @@ const ProviderFirebase = ({ children }) => {
           }))
         : [];
 
-    const categories = fridgeData && countCategories(fridgeData.map((item) => item.category));
+    const categoryCounts = fridgeData && countCategories(fridgeData.map((item) => item.category));
 
     return (
         <FirebaseContext.Provider
-            value={{ categories, fridge: fridgeData, loading, error, updateFridge }}
+            value={{
+                categoryCounts,
+                foodCategories,
+                fridge: fridgeData,
+                loading,
+                error,
+                updateFridge
+            }}
         >
             {children}
         </FirebaseContext.Provider>

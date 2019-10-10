@@ -3,8 +3,12 @@ import { storiesOf } from '@storybook/react';
 import Input from '.';
 
 const props = {
+    name: 'test',
+    onBlur: () => {},
+    onChange: () => {},
     testId: 'storybookInput',
-    placeholder: 'test'
+    placeholder: 'test',
+    value: ''
 };
 
 storiesOf('Input', module)
