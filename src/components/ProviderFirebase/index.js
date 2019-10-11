@@ -16,6 +16,14 @@ const updateFridge = (values) => {
         .catch((error) => console.error('Error adding to fridge: ', error));
 };
 
+const updateCategories = (categories) => {
+    db.collection(HOUSEHOLDS)
+        .doc(MY_HOUSEHOLD)
+        .update({ categories })
+        .then(() => console.log('Successfully updated categories!'))
+        .catch((error) => console.error('Error adding to categories: ', error));
+};
+
 /** checkIndex function
  * @param {array} array an array of objects with category and count keys
  * @param {string} label a string of what to check in the category key
@@ -73,10 +81,11 @@ const ProviderFirebase = ({ children }) => {
         <FirebaseContext.Provider
             value={{
                 categoryCounts,
+                error,
                 foodCategories,
                 fridge: fridgeData,
                 loading,
-                error,
+                updateCategories,
                 updateFridge
             }}
         >

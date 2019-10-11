@@ -9,7 +9,7 @@ const CreatableDropdown = ({ error, label, options, setSelected }) => {
             actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
 
         if (isSelected) {
-            const formatted = { ...newValue, value: newValue.value.toLowerCase() };
+            const formatted = { label: newValue.label, value: newValue.value.toLowerCase() };
 
             setSelected(formatted);
         }

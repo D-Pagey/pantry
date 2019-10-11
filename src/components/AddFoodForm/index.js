@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Form, Formik } from 'formik';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
+import CreatableDropdown from '../CreatableDropdown';
 import SingleSelect from '../SingleSelect';
-import Dropdown from '../Dropdown';
 import Input from '../Input';
 import Button from '../Button';
 import * as S from './styles';
@@ -22,8 +22,22 @@ const initialValues = {
     servings: servingsOptions[1]
 };
 
+const alreadyExists = (foodCategories, selectedCategory) => {
+    return foodCategories.reduce((acc, curr) => {
+        if (curr.value === selectedCategory.value) return true;
+
+        return acc;
+    }, false);
+};
+
 const AddFoodForm = () => {
-    const { foodCategories, fridge, updateFridge } = useContext(FirebaseContext);
+    const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirebaseContext);
+
+    const checkCategory = (selectedCategory) => {
+        if (alreadyExists(foodCategories, selectedCategory)) return;
+
+        updateCategories([...foodCategories, selectedCategory]);
+    };
 
     return (
         <S.Wrapper>
@@ -52,6 +66,7 @@ const AddFoodForm = () => {
                     ];
 
                     updateFridge(formatted);
+                    checkCategory(values.category);
 
                     actions.setSubmitting(false);
                     actions.resetForm();
@@ -59,11 +74,10 @@ const AddFoodForm = () => {
                 render={({ errors, handleBlur, handleChange, setFieldValue, values }) => {
                     return (
                         <Form>
-                            <Dropdown
+                            <CreatableDropdown
                                 error={errors.category}
                                 label="What category of food?"
                                 options={foodCategories}
-                                selected={values.category}
                                 setSelected={(category) => setFieldValue('category', category)}
                             />
 

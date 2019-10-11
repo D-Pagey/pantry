@@ -95,6 +95,21 @@ exports[`AddFoodForm component should render 1`] = `
   grid-row: 1;
 }
 
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 0 1rem;
+}
+
+.c1 {
+  margin: 0 0 0.5rem;
+}
+
 .c11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -115,21 +130,6 @@ exports[`AddFoodForm component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin: 0 0 1rem;
-}
-
-.c1 {
-  margin: 0 0 0.5rem;
 }
 
 .c2 {
@@ -222,7 +222,7 @@ exports[`AddFoodForm component should render 1`] = `
           class="c9"
           data-testid="dialDatePickerDay"
         >
-          11th
+          12th
         </span>
         <button
           type="button"
