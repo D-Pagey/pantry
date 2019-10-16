@@ -7,6 +7,10 @@ import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
 import { FirebaseContext } from './components/ProviderFirebase';
 
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
 global.render = (ui, firebaseContextValue = {}) => {
     let queries;
 
