@@ -64,7 +64,7 @@ describe('AddFoodForm component', () => {
                     category: { label: 'Vegetables', value: 'vegetables' },
                     expires: expect.any(Date),
                     name: name.toLowerCase(),
-                    servings: { label: '1', value: '1' }
+                    servings: 1
                 })
             ])
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, bool, func, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
 import Button from '../Button';
 import * as S from './styles';
 
@@ -16,7 +16,7 @@ const SingleSelect = ({ label, margin, options, selected, setSelected, testId })
                         key={option.value}
                         onClick={handleClick(option)}
                         testId={`singleSelectButton${index}`}
-                        variant={option.value === selected.value ? 'selected' : 'unselected'}
+                        variant={option.value === selected ? 'selected' : 'unselected'}
                     >
                         {option.label}
                     </Button>
@@ -32,13 +32,10 @@ SingleSelect.propTypes = {
     options: arrayOf(
         shape({
             label: string.isRequired,
-            value: oneOfType([string, bool]).isRequired
+            value: oneOfType([number]).isRequired
         }).isRequired
     ).isRequired,
-    selected: shape({
-        label: string.isRequired,
-        value: oneOfType([string, bool]).isRequired
-    }).isRequired,
+    selected: number,
     setSelected: func.isRequired,
     testId: string
 };
@@ -46,6 +43,7 @@ SingleSelect.propTypes = {
 SingleSelect.defaultProps = {
     label: '',
     margin: '',
+    selected: null,
     testId: ''
 };
 

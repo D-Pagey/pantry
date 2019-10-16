@@ -17,13 +17,13 @@ const firebaseContext = {
             category: { label: 'Meat', value: 'meat' },
             expires: new Date(2019, 9, 12),
             name: 'chicken',
-            servings: { label: '2', value: '2' }
+            servings: 2
         },
         {
             category: { label: 'Fish', value: 'fish' },
             expires: new Date(2019, 3, 9),
             name: 'salmon',
-            servings: { label: '1', value: '1' }
+            servings: 1
         }
     ],
     updateFridge: () => {}

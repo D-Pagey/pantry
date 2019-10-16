@@ -49,7 +49,7 @@ const FoodTable = ({ match }) => {
         {
             id: 'servings',
             Header: 'Servings',
-            accessor: (item) => item.servings.value
+            accessor: (item) => item.servings
         },
         {
             id: 'amend',

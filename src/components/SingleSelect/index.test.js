@@ -6,18 +6,15 @@ const props = {
     options: [
         {
             label: '20+',
-            value: '20'
+            value: 20
         },
         {
             label: '40+',
-            value: '40'
+            value: 40
         }
     ],
     label: '',
-    selected: {
-        label: '',
-        value: ''
-    },
+    selected: null,
     setSelected: () => {},
     testId: 'singleSelect'
 };
@@ -51,15 +48,7 @@ describe('SingleSelect component', () => {
     });
 
     it('should render correct selected/unselected buttons', () => {
-        const { getByTestId } = render(
-            <SingleSelect
-                {...props}
-                selected={{
-                    label: '20+',
-                    value: '20'
-                }}
-            />
-        );
+        const { getByTestId } = render(<SingleSelect {...props} selected={20} />);
 
         expect(getByTestId('singleSelectButton0')).toHaveStyleRule(
             'background-color',

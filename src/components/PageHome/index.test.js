@@ -8,7 +8,7 @@ const firebaseContext = {
             category: { label: 'Meat', value: 'meat' },
             expires: new Date(2010, 1, 5),
             name: 'steak',
-            servings: { label: '2', value: '2' }
+            servings: 2
         }
     ]
 };
