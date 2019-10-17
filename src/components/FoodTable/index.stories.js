@@ -14,13 +14,13 @@ const props = {
 const firebaseContext = {
     fridge: [
         {
-            category: { label: 'Meat', value: 'meat' },
+            category: 'meat',
             expires: new Date(2019, 9, 12),
             name: 'chicken',
             servings: 2
         },
         {
-            category: { label: 'Fish', value: 'fish' },
+            category: 'fish',
             expires: new Date(2019, 3, 9),
             name: 'salmon',
             servings: 1

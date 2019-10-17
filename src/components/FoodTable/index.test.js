@@ -14,13 +14,13 @@ const props = {
 const firebaseContext = {
     fridge: [
         {
-            category: { label: 'Meat', value: 'meat' },
+            category: 'meat',
             expires: new Date(2019, 9, 12),
             name: 'chicken',
             servings: 2
         },
         {
-            category: { label: 'Fish', value: 'fish' },
+            category: 'fish',
             expires: new Date(2019, 3, 9),
             name: 'salmon',
             servings: 1
@@ -57,7 +57,7 @@ describe('FoodTable component', () => {
         ${'black'} | ${addDays(new Date(), 4)}
     `('should have $colour for expiry date', ({ colour, date }) => {
         const item = {
-            category: { label: 'Meat', value: 'meat' },
+            category: 'meat',
             expires: date,
             name: 'chicken',
             servings: 2

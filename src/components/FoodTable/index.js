@@ -24,7 +24,7 @@ const FoodTable = ({ match }) => {
         category === 'all'
             ? fridge
             : fridge.filter((item) => {
-                  return item.category.value === category;
+                  return item.category === category;
               });
 
     const handleDelete = (name) => () => {

@@ -5,7 +5,7 @@ const firebaseContext = {
     categoryCounts: [{ category: 'Meat', count: 1 }],
     fridge: [
         {
-            category: { label: 'Meat', value: 'meat' },
+            category: 'meat',
             expires: new Date(2010, 1, 5),
             name: 'steak',
             servings: 2
