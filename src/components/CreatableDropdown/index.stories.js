@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import CreatableDropdown from '.';
 
-const options = [
-    { value: 'purple', label: 'Purple', color: '#5243AA' },
-    { value: 'orange', label: 'Orange', color: '#FF8B00' },
-    { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-    { value: 'green', label: 'Green', color: '#36B37E' }
-];
+const options = ['purple', 'orange', 'yellow', 'green'];
 
 // eslint-disable-next-line react/prop-types
 const FakeForm = ({ error, label, preSelected }) => {
@@ -22,8 +17,8 @@ const FakeForm = ({ error, label, preSelected }) => {
             error={error}
             options={options}
             label={label}
-            selected={selected}
             setSelected={setSelected}
+            value={selected}
         />
     );
 };

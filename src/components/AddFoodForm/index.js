@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Form, Formik } from 'formik';
-import { titleCase } from 'change-case';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
 import CreatableDropdown from '../CreatableDropdown';
@@ -17,14 +16,11 @@ const servingsOptions = [
 ];
 
 const initialValues = {
-    category: null,
+    category: '',
     expires: new Date(),
     name: '',
     servings: servingsOptions[1].value
 };
-
-const formatOptions = (valuesArray) =>
-    valuesArray.map((value) => ({ label: titleCase(value), value }));
 
 const AddFoodForm = () => {
     const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirebaseContext);
@@ -73,10 +69,11 @@ const AddFoodForm = () => {
                             <CreatableDropdown
                                 error={errors.category}
                                 label="What category of food?"
-                                options={formatOptions(foodCategories)}
+                                options={foodCategories}
                                 setSelected={(category) =>
                                     setFieldValue('category', category.value)
                                 }
+                                value={values.category}
                             />
 
                             <Input

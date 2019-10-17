@@ -1,9 +1,16 @@
 import React from 'react';
-import { arrayOf, func, shape, string } from 'prop-types';
+import { arrayOf, func, string } from 'prop-types';
+import { titleCase } from 'change-case';
 import CreatableSelect from 'react-select/creatable';
 import * as S from './styles';
 
-const CreatableDropdown = ({ error, label, options, setSelected }) => {
+const addLabel = (value) => {
+    if (Array.isArray(value)) return value.map((item) => ({ label: titleCase(item), value: item }));
+
+    return { label: titleCase(value), value };
+};
+
+const CreatableDropdown = ({ error, label, options, setSelected, value }) => {
     const handleChange = (newValue, actionMeta) => {
         const isSelected =
             actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
@@ -19,7 +26,12 @@ const CreatableDropdown = ({ error, label, options, setSelected }) => {
         <S.Wrapper>
             {label && <S.Label>{label}</S.Label>}
 
-            <CreatableSelect isClearable onChange={handleChange} options={options} />
+            <CreatableSelect
+                isClearable
+                onChange={handleChange}
+                options={addLabel(options)}
+                value={value && addLabel(value)}
+            />
 
             {error && <S.Error>{error}</S.Error>}
         </S.Wrapper>
@@ -29,14 +41,9 @@ const CreatableDropdown = ({ error, label, options, setSelected }) => {
 CreatableDropdown.propTypes = {
     error: string,
     label: string,
-    options: arrayOf(
-        shape({
-            color: string,
-            label: string.isRequired,
-            value: string.isRequired
-        }).isRequired
-    ).isRequired,
-    setSelected: func.isRequired
+    options: arrayOf(string).isRequired,
+    setSelected: func.isRequired,
+    value: string.isRequired
 };
 
 CreatableDropdown.defaultProps = {

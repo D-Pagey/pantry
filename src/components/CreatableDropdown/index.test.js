@@ -2,13 +2,9 @@ import React from 'react';
 import CreatableDropdown from '.';
 
 const props = {
-    options: [
-        { value: 'purple', label: 'Purple', color: '#5243AA' },
-        { value: 'orange', label: 'Orange', color: '#FF8B00' },
-        { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-        { value: 'green', label: 'Green', color: '#36B37E' }
-    ],
-    setSelected: () => {}
+    options: ['purple', 'orange', 'yellow', 'green'],
+    setSelected: () => {},
+    value: ''
 };
 
 describe('CreatableDropdown component', () => {
