@@ -6,55 +6,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid red;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 140px;
-}
-
-.c4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid blue;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 140px;
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid green;
+  border: 3px solid purple;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -95,7 +47,7 @@ exports[`CategoryList component should render 1`] = `
 >
   <a
     class="c1"
-    colour="red"
+    colour="purple"
     data-testid="categoryCard"
     href="/meat"
   >
@@ -111,8 +63,8 @@ exports[`CategoryList component should render 1`] = `
     </p>
   </a>
   <a
-    class="c4"
-    colour="blue"
+    class="c1"
+    colour="purple"
     data-testid="categoryCard"
     href="/fish"
   >
@@ -128,8 +80,8 @@ exports[`CategoryList component should render 1`] = `
     </p>
   </a>
   <a
-    class="c5"
-    colour="green"
+    class="c1"
+    colour="purple"
     data-testid="categoryCard"
     href="/vegetables"
   >

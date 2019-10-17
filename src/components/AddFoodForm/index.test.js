@@ -23,16 +23,7 @@ jest.mock('react-select/creatable', () => ({ options, value, onChange }) => {
 
 const context = {
     fridge: [],
-    foodCategories: [
-        {
-            label: 'Meat',
-            value: 'meat'
-        },
-        {
-            label: 'Vegetables',
-            value: 'vegetables'
-        }
-    ],
+    foodCategories: ['meat', 'vegetables'],
     updateFridge: () => {}
 };
 
@@ -61,7 +52,7 @@ describe('AddFoodForm component', () => {
         await wait(() =>
             expect(updateFridge).toHaveBeenCalledWith([
                 expect.objectContaining({
-                    category: { label: 'Vegetables', value: 'vegetables' },
+                    category: 'vegetables',
                     expires: expect.any(Date),
                     name: name.toLowerCase(),
                     servings: 1
