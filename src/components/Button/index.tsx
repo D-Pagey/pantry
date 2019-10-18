@@ -2,14 +2,14 @@ import React from 'react';
 import { oneOf, string } from 'prop-types';
 import * as S from './styles';
 
-type props = {
-    children: string,
-    testId: string,
-    variant: string,
-    width: string
-}
+type propTypes = {
+    children: string;
+    testId: string;
+    variant: string;
+    width: string;
+};
 
-const Button = ({ children, testId, variant, width, ...props }: props) => {
+const Button = ({ children, testId, variant, width, ...props }: propTypes) => {
     switch (variant) {
         case 'submit':
             return (

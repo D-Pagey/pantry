@@ -19,9 +19,9 @@ const getCategoryColour = (category: string) => {
 };
 
 type props = {
-    category: string,
-    quantity: number
-}
+    category: string;
+    quantity: number;
+};
 
 const CategoryCard = ({ category, quantity }: props) => (
     <S.Link
