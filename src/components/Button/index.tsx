@@ -1,14 +1,10 @@
 import React from 'react';
-import { oneOf, string } from 'prop-types';
+import { oneOf, string, InferProps } from 'prop-types';
 import * as S from './styles';
 
-const Button: React.FC<{ children: string;
-    testId: string;
-    variant: string;
-    width: string;
-}> = ({
+const Button = ({
     children, testId, variant, width, ...props
-}) => {
+}: InferProps<typeof Button.propTypes>): JSX.Element => {
     switch (variant) {
         case 'submit':
             return (
