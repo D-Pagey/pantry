@@ -8,7 +8,7 @@ const CategoryList = () => {
 
     return (
         <S.Wrapper>
-            {categoryCounts.map((item) => (
+            {categoryCounts.map((item: { category: string, count: number }) => (
                 <CategoryCard category={item.category} quantity={item.count} key={item.category} />
             ))}
         </S.Wrapper>
