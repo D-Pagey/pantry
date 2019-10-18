@@ -2,14 +2,13 @@ import React from 'react';
 import { oneOf, string } from 'prop-types';
 import * as S from './styles';
 
-type props = {
-    children: string,
-    testId: string,
-    variant: string,
-    width: string
-}
-
-const Button = ({ children, testId, variant, width, ...props }: props) => {
+const Button: React.FC<{ children: string;
+    testId: string;
+    variant: string;
+    width: string;
+}> = ({
+    children, testId, variant, width, ...props
+}) => {
     switch (variant) {
         case 'submit':
             return (
@@ -43,13 +42,13 @@ Button.propTypes = {
     children: string.isRequired,
     testId: string,
     variant: oneOf(['', 'selected', 'unselected', 'submit']),
-    width: string
+    width: string,
 };
 
 Button.defaultProps = {
     testId: '',
     variant: '',
-    width: ''
+    width: '',
 };
 
 export default Button;

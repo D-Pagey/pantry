@@ -3,7 +3,7 @@ import { number, string } from 'prop-types';
 import { titleCase } from 'change-case';
 import * as S from './styles';
 
-const getCategoryColour = (category: string) => {
+const getCategoryColour = (category: string): string => {
     switch (category) {
         case 'meat':
             return 'red';
@@ -18,12 +18,7 @@ const getCategoryColour = (category: string) => {
     }
 };
 
-type props = {
-    category: string,
-    quantity: number
-}
-
-const CategoryCard = ({ category, quantity }: props) => (
+const CategoryCard: React.FC<{ category: string; quantity: number }> = ({ category, quantity }) => (
     <S.Link
         colour={getCategoryColour(category)}
         to={`/${category.toLowerCase()}`}
@@ -36,7 +31,7 @@ const CategoryCard = ({ category, quantity }: props) => (
 
 CategoryCard.propTypes = {
     category: string.isRequired,
-    quantity: number.isRequired
+    quantity: number.isRequired,
 };
 
 export default CategoryCard;

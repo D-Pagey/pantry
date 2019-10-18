@@ -1,0 +1,32 @@
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Media from 'react-media';
+import ProviderFirebase from '../ProviderFirebase';
+import Header from '../Header';
+import PageHome from '../PageHome';
+import AddFoodForm from '../AddFoodForm';
+import MobileNavbar from '../MobileNavbar';
+import FoodTable from '../FoodTable';
+import * as S from './styles';
+
+const App: React.FC = () => (
+    <ProviderFirebase>
+        <BrowserRouter>
+            <S.Wrapper>
+                <S.GlobalStyle />
+
+                <Header />
+
+                <Switch>
+                    <Route exact path="/" component={PageHome} />
+                    <Route path="/add" component={AddFoodForm} />
+                    <Route path="/:category" component={FoodTable} />
+                </Switch>
+
+                <Media query="(max-width: 475px)" render={(): JSX.Element => <MobileNavbar />} />
+            </S.Wrapper>
+        </BrowserRouter>
+    </ProviderFirebase>
+);
+
+export default App;
