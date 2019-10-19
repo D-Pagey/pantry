@@ -9,7 +9,7 @@ import MobileNavbar from '../MobileNavbar';
 import FoodTable from '../FoodTable';
 import * as S from './styles';
 
-const App = () => {
+const App = (): JSX.Element => {
     return (
         <ProviderFirebase>
             <BrowserRouter>
@@ -24,7 +24,10 @@ const App = () => {
                         <Route path="/:category" component={FoodTable} />
                     </Switch>
 
-                    <Media query="(max-width: 475px)" render={() => <MobileNavbar />} />
+                    <Media
+                        query="(max-width: 475px)"
+                        render={(): JSX.Element => <MobileNavbar />}
+                    />
                 </S.Wrapper>
             </BrowserRouter>
         </ProviderFirebase>

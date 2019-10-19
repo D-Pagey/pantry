@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styles';
 
-const MobileNavbar = () => (
+const MobileNavbar = (): JSX.Element => (
     <S.List data-testid="mobileNavbar">
         <S.Item>
             <S.StyledNavLink to="/" exact>

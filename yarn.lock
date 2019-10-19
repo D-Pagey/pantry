@@ -3051,10 +3051,34 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-router-dom@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.0.tgz#8baa84a7fa8c8e7797fb3650ca51f93038cb4caf"
+  integrity sha512-YCh8r71pL5p8qDwQf59IU13hFy/41fDQG/GeOI3y+xmD4o0w3vEPxE8uBe+dvOgMoDl0W1WUZsWH0pxc1mcZyQ==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.2.tgz#41e5e6aa333a7b9a2bfdac753c04e1ca4b3e0d21"
+  integrity sha512-euC3SiwDg3NcjFdNmFL8uVuAFTpZJm0WMFUw+4eXMUnxa7M9RGFEG0szt0z+/Zgk4G2k9JBFhaEnY64RBiFmuw==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
 "@types/react-syntax-highlighter@10.1.0":
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-10.1.0.tgz#9c534e29bbe05dba9beae1234f3ae944836685d4"
   integrity sha512-dF49hC4FZp1dIKyzacOrHvqMUe8U2IXyQCQXOcT1e6n64gLBp+xM6qGtPsThIT9XjiIHSg2W5Jc2V5IqekBfnA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-table@6.8.5":
+  version "6.8.5"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-6.8.5.tgz#deb2bf2fcedcfb81e9020edbb7df0d8459ca348b"
+  integrity sha512-ueCsAadG1IwuuAZM+MWf2SoxbccSWweyQa9YG6xGN5cOVK3SayPOJW4MsUHGpY0V/Q+iZWgohpasliiao29O6g==
   dependencies:
     "@types/react" "*"
 
