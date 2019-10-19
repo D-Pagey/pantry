@@ -2,7 +2,7 @@ import React from 'react';
 import Media from 'react-media';
 import * as S from './styles';
 
-const Header = () => (
+const Header = (): JSX.Element => (
     <S.Header>
         <S.Link to="/">
             <S.Title>Pantry</S.Title>
@@ -10,7 +10,7 @@ const Header = () => (
 
         <Media
             query="(min-width: 476px)"
-            render={() => (
+            render={(): JSX.Element => (
                 <S.List data-testid="desktopNavList">
                     <S.Item>
                         <S.StyledNavLink to="/" exact>

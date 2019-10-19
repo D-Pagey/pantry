@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import 'react-table/react-table.css';
 import React, { useContext } from 'react';
 import { shape, string } from 'prop-types';

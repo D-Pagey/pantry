@@ -4,6 +4,7 @@ import * as S from './styles';
 
 type propTypes = {
     children: string;
+    onClick: Function;
     testId: string;
     variant: string;
     width: string;
