@@ -3,7 +3,7 @@ import { number, string } from 'prop-types';
 import { titleCase } from 'change-case';
 import * as S from './styles';
 
-const getCategoryColour = (category: string) => {
+const getCategoryColour = (category: string): string => {
     switch (category) {
         case 'meat':
             return 'red';
@@ -23,7 +23,7 @@ type props = {
     quantity: number;
 };
 
-const CategoryCard = ({ category, quantity }: props) => (
+const CategoryCard = ({ category, quantity }: props): JSX.Element => (
     <S.Link
         colour={getCategoryColour(category)}
         to={`/${category.toLowerCase()}`}

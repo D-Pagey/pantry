@@ -9,7 +9,7 @@ type propTypes = {
     width: string;
 };
 
-const Button = ({ children, testId, variant, width, ...props }: propTypes) => {
+const Button = ({ children, testId, variant, width, ...props }: propTypes): JSX.Element => {
     switch (variant) {
         case 'submit':
             return (
