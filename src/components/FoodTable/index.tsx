@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import 'react-table/react-table.css';
 import React, { useContext } from 'react';
 import { shape, string } from 'prop-types';
@@ -47,6 +46,21 @@ const FoodTable = ({ match }: props): JSX.Element => {
         updateFridge(filteredItems);
     };
 
+    const expiresColumn = (item: itemTypes): JSX.Element => (
+        <S.Item colour={chooseColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
+    );
+
+    const actionsColumn = (item: itemTypes): JSX.Element => (
+        <button
+            type="button"
+            onClick={handleDelete(item.name)}
+            style={{ cursor: 'pointer' }}
+            data-testid="deleteButton"
+        >
+            <img src={deleteIcon} alt="delete" />
+        </button>
+    );
+
     const columns = [
         {
             Header: 'Name',
@@ -55,11 +69,7 @@ const FoodTable = ({ match }: props): JSX.Element => {
         {
             id: 'expires',
             Header: 'Expires',
-            accessor: (item: itemTypes): JSX.Element => (
-                <S.Item colour={chooseColour(item.expires)}>
-                    {format(item.expires, 'do MMM')}
-                </S.Item>
-            )
+            accessor: expiresColumn
         },
         {
             id: 'servings',
@@ -69,16 +79,7 @@ const FoodTable = ({ match }: props): JSX.Element => {
         {
             id: 'amend',
             Header: 'Amend',
-            accessor: (item: itemTypes): JSX.Element => (
-                <button
-                    type="button"
-                    onClick={handleDelete(item.name)}
-                    style={{ cursor: 'pointer' }}
-                    data-testid="deleteButton"
-                >
-                    <img src={deleteIcon} alt="delete" />
-                </button>
-            )
+            accessor: actionsColumn
         }
     ];
 
