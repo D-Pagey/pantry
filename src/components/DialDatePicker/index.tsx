@@ -13,8 +13,14 @@ import {
 import Button from '../Button';
 import * as S from './styles';
 
-const DialDatePicker = ({ date, setDate, label }) => {
-    const handleChange = (handler) => () => setDate(handler(date, 1));
+type DialDatePickerProps = {
+    date: Date;
+    setDate: Function;
+    label: string;
+};
+
+const DialDatePicker: React.FC<DialDatePickerProps> = ({ date, setDate, label }) => {
+    const handleChange = (handler: Function) => (): Function => setDate(handler(date, 1));
 
     return (
         <S.Wrapper>
