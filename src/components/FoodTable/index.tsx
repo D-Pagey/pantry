@@ -7,6 +7,21 @@ import deleteIcon from '../../assets/delete.svg';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
+type FoodTableTypes = {
+    match: {
+        params: {
+            category: string;
+        };
+    };
+};
+
+type itemTypes = {
+    category: string;
+    expires: Date;
+    name: string;
+    servings: number;
+};
+
 const chooseColour = (date: Date): string => {
     const difference = differenceInDays(date, new Date());
 
@@ -16,21 +31,7 @@ const chooseColour = (date: Date): string => {
     return 'black';
 };
 
-type props = {
-    match: {
-        params: {
-            category: string;
-        };
-    };
-};
-
-type itemTypes = {
-    expires: Date;
-    name: string;
-    servings: number;
-};
-
-const FoodTable = ({ match }: props): JSX.Element => {
+const FoodTable = ({ match }: FoodTableTypes): JSX.Element => {
     const { category } = match.params;
     const { fridge, updateFridge } = useContext(FirebaseContext);
 
@@ -61,33 +62,50 @@ const FoodTable = ({ match }: props): JSX.Element => {
         </button>
     );
 
-    const columns = [
-        {
-            Header: 'Name',
-            accessor: 'name'
-        },
-        {
-            id: 'expires',
-            Header: 'Expires',
-            accessor: expiresColumn
-        },
-        {
-            id: 'servings',
-            Header: 'Servings',
-            accessor: (item: itemTypes): number => item.servings
-        },
-        {
-            id: 'amend',
-            Header: 'Amend',
-            accessor: actionsColumn
-        }
-    ];
+    const getColumns = (): { Header: string; id?: string }[] => {
+        const baseColumns = [
+            {
+                Header: 'Name',
+                accessor: 'name'
+            },
+            {
+                id: 'expires',
+                Header: 'Expires',
+                accessor: expiresColumn
+            },
+            {
+                id: 'servings',
+                Header: 'Servings',
+                accessor: (item: itemTypes): number => item.servings
+            },
+            {
+                id: 'amend',
+                Header: 'Amend',
+                accessor: actionsColumn
+            }
+        ];
+
+        const categoryColumn = {
+            id: 'category',
+            Header: 'Category',
+            accessor: (item: itemTypes): string => item.category,
+            getHeaderProps: (): { 'data-testid': string } => ({
+                'data-testid': 'foodTableCategoryColumn'
+            })
+        };
+
+        const [name, expires, ...rest] = baseColumns;
+
+        if (category === 'all') return [name, expires, categoryColumn, ...rest];
+
+        return baseColumns;
+    };
 
     return (
         <div>
             <h1>{match.params.category}</h1>
 
-            <ReactTable columns={columns} data={filteredData} defaultPageSize={10} />
+            <ReactTable columns={getColumns()} data={filteredData} defaultPageSize={10} />
         </div>
     );
 };

@@ -6,7 +6,7 @@ import FoodTable from '.';
 const props = {
     match: {
         params: {
-            category: 'all'
+            category: 'meat'
         }
     }
 };
@@ -29,8 +29,11 @@ const firebaseContext = {
     updateFridge: () => {}
 };
 
-storiesOf('FoodTable', module).add('default', () => (
-    <FirebaseContext.Provider value={firebaseContext}>
-        <FoodTable {...props} />
-    </FirebaseContext.Provider>
-));
+storiesOf('FoodTable', module)
+    .addDecorator((storyFn) => (
+        <FirebaseContext.Provider value={{ ...firebaseContext }}>
+            {storyFn()}
+        </FirebaseContext.Provider>
+    ))
+    .add('meat', () => <FoodTable {...props} />)
+    .add('all', () => <FoodTable {...props} match={{ params: { category: 'all' } }} />);

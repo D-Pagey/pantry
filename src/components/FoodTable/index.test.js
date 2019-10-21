@@ -82,9 +82,10 @@ describe('FoodTable component', () => {
                 }
             }
         };
-        const { getByText } = render(<FoodTable {...updatedProps} />, firebaseContext);
+        const { getByText, getByTestId } = render(<FoodTable {...updatedProps} />, firebaseContext);
 
         getByText(firebaseContext.fridge[0].name);
         getByText(firebaseContext.fridge[1].name);
+        getByTestId('foodTableCategoryColumn');
     });
 });
