@@ -129,16 +129,28 @@ exports[`FoodTable component should render 1`] = `
               role="gridcell"
               style="flex: 100 0 auto; width: 100px;"
             >
-              <button
-                data-testid="deleteButton"
-                style="cursor: pointer;"
-                type="button"
-              >
-                <img
-                  alt="delete"
-                  src="delete.svg"
-                />
-              </button>
+              <div>
+                <button
+                  data-testid="editButton"
+                  style="cursor: pointer; margin: 0px 1rem 0px 0px;"
+                  type="button"
+                >
+                  <img
+                    alt="edit"
+                    src="edit.svg"
+                  />
+                </button>
+                <button
+                  data-testid="deleteButton"
+                  style="cursor: pointer;"
+                  type="button"
+                >
+                  <img
+                    alt="delete"
+                    src="delete.svg"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </div>

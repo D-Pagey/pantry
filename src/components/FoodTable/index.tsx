@@ -1,19 +1,12 @@
 import 'react-table/react-table.css';
 import React, { useContext } from 'react';
-import { shape, string } from 'prop-types';
+import { useHistory, useParams } from 'react-router-dom';
 import { differenceInDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import deleteIcon from '../../assets/delete.svg';
+import editIcon from '../../assets/edit.svg';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
-
-type FoodTableTypes = {
-    match: {
-        params: {
-            category: string;
-        };
-    };
-};
 
 type itemTypes = {
     category: string;
@@ -31,8 +24,9 @@ const chooseColour = (date: Date): string => {
     return 'black';
 };
 
-const FoodTable = ({ match }: FoodTableTypes): JSX.Element => {
-    const { category } = match.params;
+const FoodTable = (): JSX.Element => {
+    const history = useHistory();
+    const { category } = useParams();
     const { fridge, updateFridge } = useContext(FirebaseContext);
 
     const filteredData =
@@ -47,19 +41,33 @@ const FoodTable = ({ match }: FoodTableTypes): JSX.Element => {
         updateFridge(filteredItems);
     };
 
+    const handleEdit = (params: itemTypes) => (): void => {
+        history.push('/add', params);
+    };
+
     const expiresColumn = (item: itemTypes): JSX.Element => (
         <S.Item colour={chooseColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
     );
 
     const actionsColumn = (item: itemTypes): JSX.Element => (
-        <button
-            type="button"
-            onClick={handleDelete(item.name)}
-            style={{ cursor: 'pointer' }}
-            data-testid="deleteButton"
-        >
-            <img src={deleteIcon} alt="delete" />
-        </button>
+        <div>
+            <button
+                type="button"
+                onClick={handleEdit(item)}
+                style={{ cursor: 'pointer', margin: '0 1rem 0 0' }}
+                data-testid="editButton"
+            >
+                <img src={editIcon} alt="edit" />
+            </button>
+            <button
+                type="button"
+                onClick={handleDelete(item.name)}
+                style={{ cursor: 'pointer' }}
+                data-testid="deleteButton"
+            >
+                <img src={deleteIcon} alt="delete" />
+            </button>
+        </div>
     );
 
     const getColumns = (): { Header: string; id?: string }[] => {
@@ -103,19 +111,11 @@ const FoodTable = ({ match }: FoodTableTypes): JSX.Element => {
 
     return (
         <div>
-            <h1>{match.params.category}</h1>
+            <h1>{category}</h1>
 
             <ReactTable columns={getColumns()} data={filteredData} defaultPageSize={10} />
         </div>
     );
-};
-
-FoodTable.propTypes = {
-    match: shape({
-        params: shape({
-            category: string.isRequired
-        }).isRequired
-    }).isRequired
 };
 
 export default FoodTable;

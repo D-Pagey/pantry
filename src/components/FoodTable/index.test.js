@@ -1,15 +1,20 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
 import FoodTable from '.';
 
-const props = {
-    match: {
-        params: {
-            category: 'meat'
-        }
-    }
-};
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
+    useHistory: () => ({
+        push: jest.fn()
+    }),
+    useParams: jest.fn(() => ({
+        category: 'meat'
+    }))
+}));
+
+const props = {};
 
 const firebaseContext = {
     fridge: [
@@ -35,7 +40,7 @@ describe('FoodTable component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should handle delete', async () => {
+    it('should handle delete', () => {
         const updateFridge = jest.fn();
         const { queryAllByTestId } = render(<FoodTable {...props} />, {
             ...firebaseContext,
@@ -48,6 +53,16 @@ describe('FoodTable component', () => {
         expect(updateFridge).toHaveBeenCalledWith(
             firebaseContext.fridge.filter((item, index) => index !== 0)
         );
+    });
+
+    it.skip('should handle edit', () => {
+        const history = useHistory();
+        const { queryAllByTestId } = render(<FoodTable {...props} />, {
+            ...firebaseContext
+        });
+        const editButton = queryAllByTestId('editButton');
+
+        userEvent.click(editButton[0]);
     });
 
     it.each`
@@ -74,15 +89,8 @@ describe('FoodTable component', () => {
     });
 
     it('should handle the category: all', () => {
-        const updatedProps = {
-            ...props,
-            match: {
-                params: {
-                    category: 'all'
-                }
-            }
-        };
-        const { getByText, getByTestId } = render(<FoodTable {...updatedProps} />, firebaseContext);
+        useParams.mockReturnValueOnce({ category: 'all' });
+        const { getByText, getByTestId } = render(<FoodTable {...props} />, firebaseContext);
 
         getByText(firebaseContext.fridge[0].name);
         getByText(firebaseContext.fridge[1].name);

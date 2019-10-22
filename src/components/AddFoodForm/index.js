@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
@@ -15,7 +16,7 @@ const servingsOptions = [
     { label: '4+', value: 4 }
 ];
 
-const initialValues = {
+const baseValues = {
     category: '',
     expires: new Date(),
     name: '',
@@ -23,7 +24,15 @@ const initialValues = {
 };
 
 const AddFoodForm = () => {
+    const [initialValues, setInitialValues] = useState(baseValues);
     const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirebaseContext);
+    const { state } = useLocation();
+
+    useEffect(() => {
+        if (state) {
+            setInitialValues({ ...state });
+        }
+    }, [state]);
 
     const checkCategory = (selectedCategory) => {
         if (foodCategories.includes(selectedCategory)) return;
@@ -34,6 +43,7 @@ const AddFoodForm = () => {
     return (
         <S.Wrapper>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validate={(values) => {
                     const errors = {};
