@@ -73,7 +73,8 @@ const AddFoodForm = () => {
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
-                render={({ errors, handleBlur, handleChange, setFieldValue, values }) => {
+            >
+                {({ errors, handleBlur, handleChange, setFieldValue, values }) => {
                     return (
                         <Form>
                             <CreatableDropdown
@@ -115,7 +116,7 @@ const AddFoodForm = () => {
                         </Form>
                     );
                 }}
-            />
+            </Formik>
         </S.Wrapper>
     );
 };
