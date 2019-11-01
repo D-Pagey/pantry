@@ -38,7 +38,7 @@ describe('AddFoodForm component', () => {
     it.skip('should handle form submit', async () => {
         const updateFridge = jest.fn();
         const name = 'Chicken';
-        const { getByTestId, getByText, queryAllByText } = render(<AddFoodForm {...props} />, {
+        const { getByTestId, queryAllByText } = render(<AddFoodForm {...props} />, {
             ...context,
             updateFridge
         });
@@ -47,7 +47,7 @@ describe('AddFoodForm component', () => {
         userEvent.type(getByTestId('addFoodFoodNameInput'), name);
         userEvent.click(queryAllByText('Up')[0]);
         userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Submit'));
+        userEvent.click(getByTestId('addFoodFormButton'));
 
         await wait(() =>
             expect(updateFridge).toHaveBeenCalledWith([

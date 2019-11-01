@@ -11,6 +11,7 @@ import * as S from './styles';
 type itemTypes = {
     category: string;
     expires: Date;
+    id: string;
     name: string;
     servings: number;
 };
@@ -36,8 +37,8 @@ const FoodTable = (): JSX.Element => {
                   return item.category === category;
               });
 
-    const handleDelete = (name: string) => (): void => {
-        const filteredItems = fridge.filter((item: { name: string }) => item.name !== name);
+    const handleDelete = (id: string) => (): void => {
+        const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
         updateFridge(filteredItems);
     };
 
@@ -61,7 +62,7 @@ const FoodTable = (): JSX.Element => {
             </button>
             <button
                 type="button"
-                onClick={handleDelete(item.name)}
+                onClick={handleDelete(item.id)}
                 style={{ cursor: 'pointer' }}
                 data-testid="deleteButton"
             >

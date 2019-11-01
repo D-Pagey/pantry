@@ -21,12 +21,14 @@ const firebaseContext = {
         {
             category: 'meat',
             expires: new Date(2019, 9, 12),
+            id: '1245',
             name: 'chicken',
             servings: 2
         },
         {
             category: 'fish',
             expires: new Date(2019, 3, 9),
+            id: '5678',
             name: 'salmon',
             servings: 1
         }
