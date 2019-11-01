@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
+import uuidv4 from 'uuid/v4';
+
+import { getIndexOfId } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
 import CreatableDropdown from '../CreatableDropdown';
@@ -23,13 +26,21 @@ const baseValues = {
     servings: servingsOptions[1].value
 };
 
+const addIdToFood = (food) => {
+    if (food.id) return food;
+
+    return { ...food, name: food.name.toLowerCase(), id: uuidv4() };
+};
+
 const AddFoodForm = () => {
     const [initialValues, setInitialValues] = useState(baseValues);
+    const [isEditMode, setIsEditMode] = useState(false);
     const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirebaseContext);
     const { state } = useLocation();
 
     useEffect(() => {
         if (state) {
+            setIsEditMode(true);
             setInitialValues({ ...state });
         }
     }, [state]);
@@ -44,7 +55,8 @@ const AddFoodForm = () => {
         <S.Wrapper>
             <Formik
                 enableReinitialize
-                initialValues={initialValues}
+                // handle how Formik resets forms - it uses the values it was initialised with
+                initialValues={isEditMode ? initialValues : baseValues}
                 validate={(values) => {
                     const errors = {};
 
@@ -59,17 +71,18 @@ const AddFoodForm = () => {
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
-                    const formatted = [
-                        ...fridge,
-                        {
-                            ...values,
-                            name: values.name.toLowerCase()
-                        }
-                    ];
+                    const indexOfFoodId = getIndexOfId(values.id, fridge);
 
-                    updateFridge(formatted);
+                    if (indexOfFoodId === -1) {
+                        updateFridge([...fridge, addIdToFood(values)]);
+                    } else {
+                        const fridgeCopy = [...fridge];
+                        fridgeCopy[indexOfFoodId] = { ...values, name: values.name.toLowerCase() };
+                        updateFridge(fridgeCopy);
+                    }
+
                     checkCategory(values.category);
-
+                    setIsEditMode(false);
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
@@ -112,7 +125,9 @@ const AddFoodForm = () => {
                                 testId="addFoodFormServings"
                             />
 
-                            <Button variant="submit">Submit</Button>
+                            <Button testId="addFoodFormButton" variant="submit">
+                                Submit
+                            </Button>
                         </Form>
                     );
                 }}

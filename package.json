@@ -40,7 +40,8 @@
     "react-select": "3.0.8",
     "react-table": "6.10.3",
     "styled-components": "4.4.1",
-    "typescript": "3.7.2"
+    "typescript": "3.7.2",
+    "uuid": "3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -136,8 +137,10 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "src/**/*.tsx",
+      "src/**/*.ts",
       "!src/serviceWorker.js",
       "!src/index.js",
+      "!src/react-app-env.d.ts",
       "!src/**/index.stories.js",
       "!src/setupTests.js"
     ],
