@@ -89,6 +89,9 @@ exports[`App component should render 1`] = `
   <div
     class=""
   >
+    <button>
+      Sign In
+    </button>
     <p>
       Loading...
     </p>

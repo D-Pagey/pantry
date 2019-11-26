@@ -1,12 +1,15 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { node } from 'prop-types';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { db } from '../../services';
+import { fb } from '../../services';
 
+const db = fb.firestore();
 export const FirebaseContext = createContext();
 
 const HOUSEHOLDS = 'households';
 const MY_HOUSEHOLD = 'jc1508HlXno2nr7MmKBP';
+
+const signIn = () => fb.auth().signInWithRedirect(new fb.auth.GoogleAuthProvider());
 
 const updateFridge = (values) => {
     db.collection(HOUSEHOLDS)
@@ -59,6 +62,7 @@ export const countCategories = (categories) => {
 };
 
 const ProviderFirebase = ({ children }) => {
+    const [user, setUser] = useState({});
     const [householdData, loading, error] = useDocumentData(
         db.collection(HOUSEHOLDS).doc(MY_HOUSEHOLD),
         {
@@ -77,6 +81,23 @@ const ProviderFirebase = ({ children }) => {
 
     const categoryCounts = fridgeData && countCategories(fridgeData.map((item) => item.category));
 
+    fb.auth()
+        .getRedirectResult()
+        .then((result) => {
+            setUser({ name: result.user.displayName, email: result.user.email });
+        })
+        .catch((error) => {
+            console.log({ error });
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            const credential = error.credential;
+            // ...
+        });
+
     return (
         <FirebaseContext.Provider
             value={{
@@ -86,7 +107,9 @@ const ProviderFirebase = ({ children }) => {
                 fridge: fridgeData,
                 loading,
                 updateCategories,
-                updateFridge
+                updateFridge,
+                signIn,
+                user
             }}
         >
             {children}
