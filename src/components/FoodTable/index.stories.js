@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { FirebaseContext } from '../ProviderFirebase';
+import { FirestoreContext } from '../ProviderFirestore';
 import FoodTable from '.';
 
 const props = {
@@ -31,9 +31,9 @@ const firebaseContext = {
 
 storiesOf('FoodTable', module)
     .addDecorator((storyFn) => (
-        <FirebaseContext.Provider value={{ ...firebaseContext }}>
+        <FirestoreContext.Provider value={{ ...firebaseContext }}>
             {storyFn()}
-        </FirebaseContext.Provider>
+        </FirestoreContext.Provider>
     ))
     .add('meat', () => <FoodTable {...props} />)
     .add('all', () => <FoodTable {...props} match={{ params: { category: 'all' } }} />);

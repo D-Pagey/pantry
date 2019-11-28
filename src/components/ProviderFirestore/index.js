@@ -1,9 +1,11 @@
 import React, { createContext } from 'react';
 import { node } from 'prop-types';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { db } from '../../services';
+import { firebase } from '../../services';
 
-export const FirebaseContext = createContext();
+const db = firebase.firestore();
+
+export const FirestoreContext = createContext();
 
 const HOUSEHOLDS = 'households';
 const MY_HOUSEHOLD = 'jc1508HlXno2nr7MmKBP';
@@ -78,7 +80,7 @@ const ProviderFirebase = ({ children }) => {
     const categoryCounts = fridgeData && countCategories(fridgeData.map((item) => item.category));
 
     return (
-        <FirebaseContext.Provider
+        <FirestoreContext.Provider
             value={{
                 categoryCounts,
                 error,
@@ -90,7 +92,7 @@ const ProviderFirebase = ({ children }) => {
             }}
         >
             {children}
-        </FirebaseContext.Provider>
+        </FirestoreContext.Provider>
     );
 };
 

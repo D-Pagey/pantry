@@ -4,7 +4,7 @@ import { Form, Formik } from 'formik';
 import uuidv4 from 'uuid/v4';
 
 import { getIndexOfId } from '../../utils';
-import { FirebaseContext } from '../ProviderFirebase';
+import { FirestoreContext } from '../ProviderFirestore';
 import DialDatePicker from '../DialDatePicker';
 import CreatableDropdown from '../CreatableDropdown';
 import SingleSelect from '../SingleSelect';
@@ -35,7 +35,7 @@ const addIdToFood = (food) => {
 const AddFoodForm = () => {
     const [initialValues, setInitialValues] = useState(baseValues);
     const [isEditMode, setIsEditMode] = useState(false);
-    const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirebaseContext);
+    const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirestoreContext);
     const { state } = useLocation();
 
     useEffect(() => {

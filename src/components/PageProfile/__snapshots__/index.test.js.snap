@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageProfile component should render 1`] = `
+<div>
+  <p>
+    Welcome 
+    Dan
+  </p>
+  <p>
+    Your email is: 
+    dan@gmail.com
+  </p>
+</div>
+`;

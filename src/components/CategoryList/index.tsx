@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import CategoryCard from '../CategoryCard';
-import { FirebaseContext } from '../ProviderFirebase';
+import { FirestoreContext } from '../ProviderFirestore';
 import * as S from './styles';
 
 const CategoryList = (): JSX.Element => {
-    const { categoryCounts } = useContext(FirebaseContext);
+    const { categoryCounts } = useContext(FirestoreContext);
 
     return (
         <S.Wrapper>
