@@ -1,8 +1,14 @@
 import React from 'react';
+import { bool, string } from 'prop-types';
 import Media from 'react-media';
 import * as S from './styles';
 
-const Header = (): JSX.Element => (
+type HeaderProps = {
+    isAuthed: boolean;
+    name: string;
+};
+
+const Header = ({ isAuthed, name }: HeaderProps): JSX.Element => (
     <S.Header>
         <S.Link to="/">
             <S.Title>Pantry</S.Title>
@@ -20,10 +26,24 @@ const Header = (): JSX.Element => (
                     <S.Item>
                         <S.StyledNavLink to="/add">Add Food</S.StyledNavLink>
                     </S.Item>
+                    {isAuthed ? (
+                        <S.Item>
+                            <S.StyledNavLink to="/profile">{name}</S.StyledNavLink>
+                        </S.Item>
+                    ) : (
+                        <S.Item>
+                            <S.StyledNavLink to="/sign-in">Sign In</S.StyledNavLink>
+                        </S.Item>
+                    )}
                 </S.List>
             )}
         />
     </S.Header>
 );
+
+Header.propTypes = {
+    isAuthed: bool.isRequired,
+    name: string.isRequired
+};
 
 export default Header;

@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import { FirebaseContext } from './components/ProviderFirebase';
+import { FirestoreContext } from './components/ProviderFirestore';
 
 afterEach(() => {
     jest.clearAllMocks();
@@ -16,7 +16,7 @@ global.render = (ui, firebaseContextValue = {}) => {
 
     act(() => {
         queries = render(
-            <FirebaseContext.Provider
+            <FirestoreContext.Provider
                 value={{
                     error: '',
                     loading: false,
@@ -26,7 +26,7 @@ global.render = (ui, firebaseContextValue = {}) => {
                 }}
             >
                 <Router history={createMemoryHistory()}>{ui}</Router>
-            </FirebaseContext.Provider>
+            </FirestoreContext.Provider>
         );
     });
 

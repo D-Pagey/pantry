@@ -5,7 +5,7 @@ import { differenceInDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
-import { FirebaseContext } from '../ProviderFirebase';
+import { FirestoreContext } from '../ProviderFirestore';
 import * as S from './styles';
 
 type itemTypes = {
@@ -28,7 +28,7 @@ const chooseColour = (date: Date): string => {
 const FoodTable = (): JSX.Element => {
     const history = useHistory();
     const { category } = useParams();
-    const { fridge, updateFridge } = useContext(FirebaseContext);
+    const { fridge, updateFridge } = useContext(FirestoreContext);
 
     const filteredData =
         category === 'all'

@@ -1,4 +1,5 @@
-import firebase from 'firebase/app';
+import fb from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
@@ -12,6 +13,6 @@ const firebaseConfig = {
 };
 
 // Initialize Cloud Firestore through Firebase
-firebase.initializeApp(firebaseConfig);
+fb.initializeApp(firebaseConfig);
 
-export const db = firebase.firestore();
+export const firebase = fb;
