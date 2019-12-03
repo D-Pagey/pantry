@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import '@testing-library/jest-dom/extend-expect';
 import 'jest-styled-components';
 import React from 'react';

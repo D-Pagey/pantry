@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';

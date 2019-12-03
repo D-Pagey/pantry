@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Media from 'react-media';
+import { firebase } from '../../services';
 import ProviderFirestore from '../ProviderFirestore';
 import Header from '../Header';
 import PageHome from '../PageHome';
@@ -8,20 +9,23 @@ import AddFoodForm from '../AddFoodForm';
 import MobileNavbar from '../MobileNavbar';
 import FoodTable from '../FoodTable';
 import PageSignIn from '../PageSignIn';
-import * as S from './styles';
 import PageProfile from '../PageProfile';
+import * as S from './styles';
 
-const App = (): JSX.Element => {
+const App = () => {
     const [user, setUser] = useState({ name: '', email: '' });
     const [isAuthed, setIsAuthed] = useState(false);
 
     useEffect(() => {
-        if (user.name) {
-            setIsAuthed(true);
-        } else {
-            setIsAuthed(false);
-        }
-    }, [user.name]);
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                setIsAuthed(true);
+                setUser({ name: user.displayName, email: user.email });
+            } else {
+                setIsAuthed(false);
+            }
+        });
+    }, []);
 
     return (
         <ProviderFirestore>
@@ -36,23 +40,25 @@ const App = (): JSX.Element => {
                         <Route path="/add" component={AddFoodForm} />
                         <Route
                             path="/sign-in"
-                            render={(props): JSX.Element => (
+                            render={(props) => (
                                 <PageSignIn {...props} isAuthed={isAuthed} setUser={setUser} />
                             )}
                         />
                         <Route
                             path="/profile"
-                            render={(props): JSX.Element => (
-                                <PageProfile {...props} name={user.name} email={user.email} />
+                            render={(props) => (
+                                <PageProfile
+                                    {...props}
+                                    isAuthed={isAuthed}
+                                    name={user.name}
+                                    email={user.email}
+                                />
                             )}
                         />
                         <Route path="/:category" component={FoodTable} />
                     </Switch>
 
-                    <Media
-                        query="(max-width: 475px)"
-                        render={(): JSX.Element => <MobileNavbar />}
-                    />
+                    <Media query="(max-width: 475px)" render={() => <MobileNavbar />} />
                 </S.Wrapper>
             </BrowserRouter>
         </ProviderFirestore>

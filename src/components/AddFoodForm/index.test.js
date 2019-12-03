@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { fireEvent, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
