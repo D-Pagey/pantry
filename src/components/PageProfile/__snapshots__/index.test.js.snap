@@ -10,5 +10,8 @@ exports[`PageProfile component should render 1`] = `
     Your email is: 
     dan@gmail.com
   </p>
+  <button>
+    Sign Out
+  </button>
 </div>
 `;

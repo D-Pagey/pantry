@@ -3,6 +3,7 @@ import PageProfile from '.';
 
 const props = {
     email: 'dan@gmail.com',
+    isAuthed: true,
     name: 'Dan'
 };
 
