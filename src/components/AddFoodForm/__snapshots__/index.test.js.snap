@@ -224,7 +224,7 @@ exports[`AddFoodForm component should render 1`] = `
           class="c9"
           data-testid="dialDatePickerDay"
         >
-          30th
+          3rd
         </span>
         <button
           type="button"
@@ -241,7 +241,7 @@ exports[`AddFoodForm component should render 1`] = `
           class="c9"
           data-testid="dialDatePickerMonth"
         >
-          November
+          December
         </span>
         <button
           type="button"
