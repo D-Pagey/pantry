@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, string } from 'prop-types';
-import { titleCase } from 'change-case';
+import { titleCase } from 'title-case';
 import * as S from './styles';
 
 const getCategoryColour = (category: string): string => {

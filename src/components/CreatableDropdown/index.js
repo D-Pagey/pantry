@@ -1,6 +1,6 @@
 import React from 'react';
 import { arrayOf, func, string } from 'prop-types';
-import { titleCase } from 'change-case';
+import { titleCase } from 'title-case';
 import CreatableSelect from 'react-select/creatable';
 import * as S from './styles';
 
