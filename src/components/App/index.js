@@ -13,14 +13,18 @@ import PageProfile from '../PageProfile';
 import * as S from './styles';
 
 const App = () => {
-    const [user, setUser] = useState({ name: '', email: '' });
+    const [user, setUser] = useState({ name: '', email: '', photo: '' });
     const [isAuthed, setIsAuthed] = useState(false);
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 setIsAuthed(true);
-                setUser({ name: user.displayName, email: user.email });
+                setUser({
+                    name: user.providerData[0].displayName,
+                    email: user.providerData[0].email,
+                    photo: user.providerData[0].photoURL
+                });
             } else {
                 setIsAuthed(false);
             }
