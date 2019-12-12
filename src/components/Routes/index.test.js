@@ -1,4 +1,6 @@
-import { checkIndex, countCategories } from '.';
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import Routes, { checkIndex, countCategories } from '.';
 
 describe('checkIndex function', () => {
     it('should return a number', () => {
@@ -61,5 +63,22 @@ describe('countCategories function', () => {
             { category: 'vegetables', count: 4 },
             { category: 'all', count: 7 }
         ]);
+    });
+});
+
+describe('Routes component', () => {
+    it.each`
+        pageTestId       | path          | isAuthed
+        ${'pageHome'}    | ${'/'}        | ${false}
+        ${'pageProfile'} | ${'/profile'} | ${true}
+    `('should render $pageTestId for $path', ({ pageTestId, path, isAuthed }) => {
+        const { getByTestId } = render(
+            <MemoryRouter initialEntries={[path]}>
+                <Routes />
+            </MemoryRouter>,
+            { isAuthed }
+        );
+
+        getByTestId(pageTestId);
     });
 });

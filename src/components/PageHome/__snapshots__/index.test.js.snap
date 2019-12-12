@@ -44,6 +44,7 @@ exports[`PageHome component should render 1`] = `
 
 <div
   class=""
+  data-testid="pageHome"
 >
   <div
     class="c0"

@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryList from '.';
 
-const firebaseContext = {
+const props = {
     categoryCounts: [
         { category: 'Meat', count: 2 },
         { category: 'Fish', count: 3 },
@@ -11,7 +11,7 @@ const firebaseContext = {
 
 describe('CategoryList component', () => {
     it('should render', () => {
-        const { container } = render(<CategoryList />, firebaseContext);
+        const { container } = render(<CategoryList {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 });

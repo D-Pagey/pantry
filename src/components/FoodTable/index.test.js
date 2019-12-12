@@ -17,9 +17,7 @@ jest.mock('react-router-dom', () => ({
     }))
 }));
 
-const props = {};
-
-const firebaseContext = {
+const props = {
     fridge: [
         {
             category: 'meat',
@@ -36,35 +34,33 @@ const firebaseContext = {
             servings: 1
         }
     ],
-    updateFridge: () => {}
+    updateHousehold: () => {}
 };
 
 describe('FoodTable component', () => {
     it('should render', () => {
-        const { container } = render(<FoodTable {...props} />, firebaseContext);
+        const { container } = render(<FoodTable {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should handle delete', () => {
-        const updateFridge = jest.fn();
-        const { queryAllByTestId } = render(<FoodTable {...props} />, {
-            ...firebaseContext,
-            updateFridge
-        });
+        const updateHousehold = jest.fn();
+        const { queryAllByTestId } = render(
+            <FoodTable {...props} updateHousehold={updateHousehold} />
+        );
         const deleteButton = queryAllByTestId('deleteButton');
 
         userEvent.click(deleteButton[0]);
 
-        expect(updateFridge).toHaveBeenCalledWith(
-            firebaseContext.fridge.filter((item, index) => index !== 0)
-        );
+        expect(updateHousehold).toHaveBeenCalledWith({
+            key: 'fridge',
+            values: props.fridge.filter((item, index) => index !== 0)
+        });
     });
 
     it.skip('should handle edit', () => {
         const history = useHistory();
-        const { queryAllByTestId } = render(<FoodTable {...props} />, {
-            ...firebaseContext
-        });
+        const { queryAllByTestId } = render(<FoodTable {...props} />);
         const editButton = queryAllByTestId('editButton');
 
         userEvent.click(editButton[0]);
@@ -82,12 +78,8 @@ describe('FoodTable component', () => {
             name: 'chicken',
             servings: 2
         };
-        const updatedContext = {
-            ...firebaseContext,
-            fridge: [item]
-        };
 
-        const { getByText } = render(<FoodTable {...props} />, updatedContext);
+        const { getByText } = render(<FoodTable {...props} fridge={[item]} />);
         const expiryDate = getByText(format(date, 'do MMM'));
 
         expect(expiryDate).toHaveStyleRule('color', colour);
@@ -95,10 +87,10 @@ describe('FoodTable component', () => {
 
     it('should handle the category: all', () => {
         useParams.mockReturnValueOnce({ category: 'all' });
-        const { getByText, getByTestId } = render(<FoodTable {...props} />, firebaseContext);
+        const { getByText, getByTestId } = render(<FoodTable {...props} />);
 
-        getByText(firebaseContext.fridge[0].name);
-        getByText(firebaseContext.fridge[1].name);
+        getByText(props.fridge[0].name);
+        getByText(props.fridge[1].name);
         getByTestId('foodTableCategoryColumn');
     });
 });
