@@ -1,11 +1,11 @@
 import 'react-table/react-table.css';
-import React, { useContext } from 'react';
+import React from 'react';
+import { arrayOf, func, any } from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 import { differenceInDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
-import { FirestoreContext } from '../ProviderFirestore';
 import * as S from './styles';
 
 type itemTypes = {
@@ -14,6 +14,11 @@ type itemTypes = {
     id: string;
     name: string;
     servings: number;
+};
+
+type FoodTableTypes = {
+    fridge: itemTypes[];
+    updateHousehold: Function;
 };
 
 const chooseColour = (date: Date): string => {
@@ -25,10 +30,9 @@ const chooseColour = (date: Date): string => {
     return 'black';
 };
 
-const FoodTable = (): JSX.Element => {
+const FoodTable = ({ fridge, updateHousehold }: FoodTableTypes): JSX.Element => {
     const history = useHistory();
     const { category } = useParams();
-    const { fridge, updateFridge } = useContext(FirestoreContext);
 
     const filteredData =
         category === 'all'
@@ -39,7 +43,7 @@ const FoodTable = (): JSX.Element => {
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
-        updateFridge(filteredItems);
+        updateHousehold({ key: 'fridge', values: filteredItems });
     };
 
     const handleEdit = (params: itemTypes) => (): void => {
@@ -117,6 +121,11 @@ const FoodTable = (): JSX.Element => {
             <ReactTable columns={getColumns()} data={filteredData} defaultPageSize={10} />
         </div>
     );
+};
+
+FoodTable.propTypes = {
+    fridge: arrayOf(any).isRequired,
+    updateHousehold: func.isRequired
 };
 
 export default FoodTable;

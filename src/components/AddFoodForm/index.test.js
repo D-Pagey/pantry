@@ -23,27 +23,22 @@ jest.mock('react-select/creatable', () => ({ options, value, onChange }) => {
     );
 });
 
-const context = {
+const props = {
     fridge: [],
-    foodCategories: ['meat', 'vegetables'],
-    updateFridge: () => {}
+    categories: ['meat', 'vegetables'],
+    updateHousehold: () => {}
 };
-
-const props = {};
 
 describe('AddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<AddFoodForm {...props} />, context);
+        const { container } = render(<AddFoodForm {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it.skip('should handle form submit', async () => {
         const updateFridge = jest.fn();
         const name = 'Chicken';
-        const { getByTestId, queryAllByText } = render(<AddFoodForm {...props} />, {
-            ...context,
-            updateFridge
-        });
+        const { getByTestId, queryAllByText } = render(<AddFoodForm {...props} />);
 
         fireEvent.change(getByTestId('select'), { target: { value: 'vegetables' } });
         userEvent.type(getByTestId('addFoodFoodNameInput'), name);
@@ -64,7 +59,7 @@ describe('AddFoodForm component', () => {
     });
 
     it.skip('should show errors for required fields if no value', async () => {
-        const { getByText, findAllByText } = render(<AddFoodForm {...props} />, context);
+        const { getByText, findAllByText } = render(<AddFoodForm {...props} />);
 
         userEvent.click(getByText('Submit'));
 

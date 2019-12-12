@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import CategoryCard from '../CategoryCard';
-import { FirestoreContext } from '../ProviderFirestore';
+import { arrayOf, string, shape, number } from 'prop-types';
 import * as S from './styles';
 
-const CategoryList = (): JSX.Element => {
-    const { categoryCounts } = useContext(FirestoreContext);
+type CategoryListTypes = {
+    categoryCounts: { category: string; count: number }[];
+};
 
+const CategoryList = ({ categoryCounts }: CategoryListTypes): JSX.Element => {
     return (
         <S.Wrapper>
             {categoryCounts.map((item: { category: string; count: number }) => (
@@ -13,6 +15,10 @@ const CategoryList = (): JSX.Element => {
             ))}
         </S.Wrapper>
     );
+};
+
+CategoryList.propTypes = {
+    categoryCounts: arrayOf(shape({ category: string, count: number }))
 };
 
 export default CategoryList;

@@ -1,21 +1,13 @@
 import React from 'react';
 import PageHome from '.';
 
-const firebaseContext = {
-    categoryCounts: [{ category: 'Meat', count: 1 }],
-    fridge: [
-        {
-            category: 'meat',
-            expires: new Date(2010, 1, 5),
-            name: 'steak',
-            servings: 2
-        }
-    ]
+const props = {
+    categoryCounts: [{ category: 'Meat', count: 1 }]
 };
 
 describe('PageHome component', () => {
     it('should render', () => {
-        const { container } = render(<PageHome />, firebaseContext);
+        const { container } = render(<PageHome {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 });

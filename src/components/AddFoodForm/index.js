@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { arrayOf, any, string, func } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import uuidv4 from 'uuid/v4';
 
 import { getIndexOfId } from '../../utils';
-import { FirestoreContext } from '../ProviderFirestore';
 import DialDatePicker from '../DialDatePicker';
 import CreatableDropdown from '../CreatableDropdown';
 import SingleSelect from '../SingleSelect';
@@ -32,10 +32,9 @@ const addIdToFood = (food) => {
     return { ...food, name: food.name.toLowerCase(), id: uuidv4() };
 };
 
-const AddFoodForm = () => {
+const AddFoodForm = ({ categories, fridge, updateHousehold }) => {
     const [initialValues, setInitialValues] = useState(baseValues);
     const [isEditMode, setIsEditMode] = useState(false);
-    const { foodCategories, fridge, updateCategories, updateFridge } = useContext(FirestoreContext);
     const { state } = useLocation();
 
     useEffect(() => {
@@ -46,9 +45,9 @@ const AddFoodForm = () => {
     }, [state]);
 
     const checkCategory = (selectedCategory) => {
-        if (foodCategories.includes(selectedCategory)) return;
+        if (categories.includes(selectedCategory)) return;
 
-        updateCategories([...foodCategories, selectedCategory]);
+        updateHousehold({ key: 'category', values: [...categories, selectedCategory] });
     };
 
     return (
@@ -74,11 +73,14 @@ const AddFoodForm = () => {
                     const indexOfFoodId = getIndexOfId(values.id, fridge);
 
                     if (indexOfFoodId === -1) {
-                        updateFridge([...fridge, addIdToFood(values)]);
+                        updateHousehold({
+                            key: 'fridge',
+                            values: [...fridge, addIdToFood(values)]
+                        });
                     } else {
                         const fridgeCopy = [...fridge];
                         fridgeCopy[indexOfFoodId] = { ...values, name: values.name.toLowerCase() };
-                        updateFridge(fridgeCopy);
+                        updateHousehold({ key: 'fridge', values: fridgeCopy });
                     }
 
                     checkCategory(values.category);
@@ -93,7 +95,7 @@ const AddFoodForm = () => {
                             <CreatableDropdown
                                 error={errors.category}
                                 label="What category of food?"
-                                options={foodCategories}
+                                options={categories}
                                 setSelected={(category) =>
                                     setFieldValue('category', category.value)
                                 }
@@ -134,6 +136,12 @@ const AddFoodForm = () => {
             </Formik>
         </S.Wrapper>
     );
+};
+
+AddFoodForm.propTypes = {
+    categories: arrayOf(string).isRequired,
+    fridge: arrayOf(any).isRequired,
+    updateHousehold: func.isRequired
 };
 
 export default AddFoodForm;

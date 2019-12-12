@@ -8,14 +8,21 @@ admin.initializeApp();
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
-exports.userCreated = functions.auth.user().onCreate(async (user) => {
-    console.log('Creating user: ', user.displayName)
+const defaultFridge = {
+    categories: ['meat', 'fish', 'vegetables', 'dairy', 'fruit'],
+    fridge: []
+}
 
+exports.userCreated = functions.auth.user().onCreate(async (user) => {
     try {
-        await admin.firestore().collection('users').doc(user.uid).set({ id: user.uid, email: user.email, name: user.displayName });
-        console.log('User created:', user.displayName)
+        await admin.firestore().collection('users').doc(user.uid).set({ uid: user.uid, email: user.email, name: user.displayName });
+    
+        // reference to the new household
+        const newHouseholdRef = admin.firestore().collection('households').doc();
+        await newHouseholdRef.set(defaultFridge)
+
+        await admin.firestore().collection('users').doc(user.uid).update({ household: newHouseholdRef.id })
     } catch (error) {
         console.log('Error creating user: ', error)
     }
-
   });

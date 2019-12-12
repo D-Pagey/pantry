@@ -7,28 +7,24 @@ import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import { FirestoreContext } from './components/ProviderFirestore';
-
-afterEach(() => {
-    jest.clearAllMocks();
-});
+import { AuthContext } from './components/ProviderAuth';
 
 global.render = (ui, firebaseContextValue = {}) => {
     let queries;
 
     act(() => {
         queries = render(
-            <FirestoreContext.Provider
+            <AuthContext.Provider
                 value={{
-                    error: '',
-                    loading: false,
-                    updateFridge: () => {},
-                    value: undefined,
+                    isAuthed: false,
+                    setUser: () => {},
+                    setIsAuthed: () => {},
+                    user: {},
                     ...firebaseContextValue
                 }}
             >
                 <Router history={createMemoryHistory()}>{ui}</Router>
-            </FirestoreContext.Provider>
+            </AuthContext.Provider>
         );
     });
 

@@ -1,10 +1,12 @@
-import React from 'react';
-import { bool, func } from 'prop-types';
+import React, { useContext } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { firebase } from '../../services';
+import { AuthContext } from '../ProviderAuth';
 
-const PageSignIn = ({ isAuthed, setUser }) => {
+const PageSignIn = () => {
+    const { setUser, isAuthed } = useContext(AuthContext);
+
     // Configure FirebaseUI.
     const uiConfig = {
         // Popup signin flow rather than redirect flow.
@@ -25,15 +27,10 @@ const PageSignIn = ({ isAuthed, setUser }) => {
     }
 
     return (
-        <div>
+        <div data-testid="pageSignIn">
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </div>
     );
-};
-
-PageSignIn.propTypes = {
-    isAuthed: bool.isRequired,
-    setUser: func.isRequired
 };
 
 export default PageSignIn;
