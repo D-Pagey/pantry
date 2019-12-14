@@ -16,7 +16,7 @@ import * as S from './styles';
 type DialDatePickerProps = {
     date: Date;
     setDate: Function;
-    label: string;
+    label?: string;
 };
 
 const DialDatePicker: React.FC<DialDatePickerProps> = ({ date, setDate, label }) => {
