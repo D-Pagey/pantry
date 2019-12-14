@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { func } from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../ProviderAuth';
 
 type PageProfileTypes = {
@@ -8,9 +7,7 @@ type PageProfileTypes = {
 };
 
 const PageProfile = ({ signOut }: PageProfileTypes): JSX.Element => {
-    const { isAuthed, user } = useContext(AuthContext);
-
-    if (!isAuthed) return <Redirect to="/" />;
+    const { user } = useContext(AuthContext);
 
     return (
         <div data-testid="pageProfile">

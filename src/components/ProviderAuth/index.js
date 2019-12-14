@@ -23,24 +23,24 @@ const ProviderAuth = ({ children }) => {
                     // doc.data() will be undefined in this case
                     console.log('No such document!');
                 }
+                setIsCheckingAuth(false);
             })
             .catch((error) => {
+                setIsAuthed(false);
+                setIsCheckingAuth(false);
                 console.log('Error getting document:', error);
             });
     }, []);
 
     // check current auth state and add firebase auth data to state
     useEffect(() => {
-        setIsCheckingAuth(true);
-
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 fetchUserData(user.uid);
             } else {
                 setIsAuthed(false);
+                setIsCheckingAuth(false);
             }
-
-            setIsCheckingAuth(false);
         });
     }, [fetchUserData]);
 

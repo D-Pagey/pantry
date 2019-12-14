@@ -7,7 +7,6 @@ const props = {
 };
 
 const context = {
-    isAuthed: true,
     user: {
         email: 'dan@gmail.com',
         name: 'Dan'
