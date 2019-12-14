@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../ProviderAuth';
 import CategoryList from '../CategoryList';
 import * as S from './styles';
 
@@ -7,9 +8,11 @@ type PageHomeTypes = {
 };
 
 const PageHome = ({ categoryCounts }: PageHomeTypes): JSX.Element => {
+    const { isAuthed } = useContext(AuthContext);
+
     return (
         <S.Wrapper data-testid="pageHome">
-            <CategoryList categoryCounts={categoryCounts} />
+            {isAuthed && <CategoryList categoryCounts={categoryCounts} />}
         </S.Wrapper>
     );
 };

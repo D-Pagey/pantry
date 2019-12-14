@@ -7,6 +7,7 @@ import FoodTable from '../FoodTable';
 import PageSignIn from '../PageSignIn';
 import PageProfile from '../PageProfile';
 import { AuthContext } from '../ProviderAuth';
+import RouteProtected from '../RouteProtected';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -99,11 +100,11 @@ const Routes = () => {
                 )}
             />
             <Route path="/sign-in" component={PageSignIn} />
-            <Route
+            <RouteProtected
                 path="/profile"
                 render={(props) => <PageProfile {...props} signOut={signOut} />}
             />
-            <Route
+            <RouteProtected
                 path="/add"
                 render={(props) => (
                     <AddFoodForm
@@ -114,7 +115,7 @@ const Routes = () => {
                     />
                 )}
             />
-            <Route
+            <RouteProtected
                 path="/:category"
                 render={(props) => (
                     <FoodTable {...props} fridge={fridge} updateHousehold={updateHousehold} />
