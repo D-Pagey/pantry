@@ -24,4 +24,9 @@ describe('RouteProtected component', () => {
         render(<RouteProtected {...props} />);
         expect(Redirect).toHaveBeenCalledWith({ to: '/sign-in' }, expect.any(Object));
     });
+
+    it('should render nothing whilst checking auth', () => {
+        const { getByTestId } = render(<RouteProtected {...props} />, { isCheckingAuth: true });
+        getByTestId('routeProtectedEmpty');
+    });
 });
