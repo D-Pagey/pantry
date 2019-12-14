@@ -1,71 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageHome component should render 1`] = `
-.c1 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid purple;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 140px;
-}
-
-.c2 {
-  margin: 0 0 0.5rem;
-}
-
-.c3 {
-  margin: 0;
-}
-
-.c0 {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  grid-gap: 1rem;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
 <div
   class=""
   data-testid="pageHome"
->
-  <div
-    class="c0"
-  >
-    <a
-      class="c1"
-      colour="purple"
-      data-testid="categoryCard"
-      href="/meat"
-    >
-      <h3
-        class="c2"
-      >
-        Meat
-      </h3>
-      <p
-        class="c3"
-      >
-        1
-      </p>
-    </a>
-  </div>
-</div>
+/>
 `;
