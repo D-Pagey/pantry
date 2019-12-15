@@ -3,13 +3,19 @@ import { slide as Menu } from 'react-burger-menu';
 import * as S from './styles';
 
 const BurgerMenu = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleStateChange = (state) => setIsOpen(state.isOpen);
     const closeMenu = () => setIsOpen(false);
 
     return (
-        <Menu isOpen={isOpen} onStateChange={handleStateChange} styles={S.MenuStyles} right>
+        <Menu
+            isOpen={isOpen}
+            onStateChange={handleStateChange}
+            styles={S.MenuStyles}
+            disableAutoFocus
+            right
+        >
             <S.NavLink to="/" onClick={closeMenu}>
                 Home
             </S.NavLink>

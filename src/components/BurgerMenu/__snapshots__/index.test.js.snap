@@ -14,12 +14,12 @@ exports[`BurgerMenu component should render 1`] = `
 <div>
   <div
     class="bm-overlay"
-    style="position: fixed; z-index: 1000; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 1; transition: opacity 0.3s;"
+    style="position: fixed; z-index: 1000; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 0; transform: translate3d(100%, 0, 0); transition: opacity 0.3s, transform 0s 0.3s;"
   />
   <div
     class="bm-menu-wrap"
     id=""
-    style="position: fixed; right: 0px; z-index: 1100; width: 300px; height: 100%; transition: all 0.5s;"
+    style="position: fixed; right: 0px; z-index: 1100; width: 300px; height: 100%; transform: translate3d(100%, 0, 0); transition: all 0.5s;"
   >
     <div
       class="bm-menu"
@@ -34,7 +34,7 @@ exports[`BurgerMenu component should render 1`] = `
           class="c0 bm-item active"
           href="/"
           style="display: block; margin: 0px 0px 1rem;"
-          tabindex="0"
+          tabindex="-1"
         >
           Home
         </a>
@@ -42,7 +42,7 @@ exports[`BurgerMenu component should render 1`] = `
           class="c0 bm-item"
           href="/add"
           style="display: block; margin: 0px 0px 1rem;"
-          tabindex="0"
+          tabindex="-1"
         >
           Add Food
         </a>
@@ -50,7 +50,7 @@ exports[`BurgerMenu component should render 1`] = `
           class="c0 bm-item"
           href="/profile"
           style="display: block; margin: 0px 0px 1rem;"
-          tabindex="0"
+          tabindex="-1"
         >
           Profile
         </a>
@@ -58,7 +58,7 @@ exports[`BurgerMenu component should render 1`] = `
           class="c0 bm-item"
           href="/sign-in"
           style="display: block; margin: 0px 0px 1rem;"
-          tabindex="0"
+          tabindex="-1"
         >
           Sign In
         </a>
@@ -83,7 +83,7 @@ exports[`BurgerMenu component should render 1`] = `
         </span>
         <button
           style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; font-size: 0; background: transparent; cursor: pointer;"
-          tabindex="0"
+          tabindex="-1"
         >
           Close Menu
         </button>
