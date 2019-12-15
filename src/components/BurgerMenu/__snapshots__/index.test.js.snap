@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component should render 1`] = `
+exports[`BurgerMenu component should render 1`] = `
 .c0 {
   color: white;
   -webkit-text-decoration: none;
