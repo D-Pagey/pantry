@@ -9,7 +9,7 @@ type CategoryListTypes = {
 
 const CategoryList = ({ categoryCounts }: CategoryListTypes): JSX.Element => {
     return (
-        <S.Wrapper>
+        <S.Wrapper data-testid="categoryList">
             {categoryCounts.map((item: { category: string; count: number }) => (
                 <CategoryCard category={item.category} quantity={item.count} key={item.category} />
             ))}
