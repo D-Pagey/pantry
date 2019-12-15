@@ -13,7 +13,9 @@ const PageProfile = ({ signOut }: PageProfileTypes): JSX.Element => {
         <div data-testid="pageProfile">
             <p>Welcome {user.name}</p>
             <p>Your email is: {user.email}</p>
-            <button onClick={() => signOut()}>Sign Out</button>
+            <button onClick={() => signOut()} data-testid="pageProfileButton">
+                Sign Out
+            </button>
         </div>
     );
 };
