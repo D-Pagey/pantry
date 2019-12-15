@@ -44,6 +44,7 @@ exports[`CategoryList component should render 1`] = `
 
 <div
   class="c0"
+  data-testid="categoryList"
 >
   <a
     class="c1"
