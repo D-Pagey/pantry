@@ -23,7 +23,9 @@ jest.mock('react-select/creatable', () => ({ options, value, onChange }) => {
     );
 });
 
-const props = {
+const props = {};
+
+const context = {
     fridge: [],
     categories: ['meat', 'vegetables'],
     updateHousehold: () => {}
@@ -31,7 +33,7 @@ const props = {
 
 describe('AddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<AddFoodForm {...props} />);
+        const { container } = render(<AddFoodForm {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 

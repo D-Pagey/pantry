@@ -1,14 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import { AuthContext } from '../ProviderAuth';
+import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 const BurgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { isAuthed } = useContext(AuthContext);
+    const { isAuthed, signOut } = useContext(FirebaseContext);
 
     const handleStateChange = (state) => setIsOpen(state.isOpen);
     const closeMenu = () => setIsOpen(false);
+    const menuSignOut = () => {
+        signOut();
+        closeMenu();
+    };
 
     return (
         <Menu
@@ -29,7 +33,7 @@ const BurgerMenu = () => {
                     <S.NavLink to="/profile" onClick={closeMenu}>
                         Profile
                     </S.NavLink>
-                    <S.Button onClick={closeMenu}>Sign Out</S.Button>
+                    <S.Button onClick={menuSignOut}>Sign Out</S.Button>
                 </>
             ) : (
                 <S.NavLink to="/sign-in" onClick={closeMenu}>

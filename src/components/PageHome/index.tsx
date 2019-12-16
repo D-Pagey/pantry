@@ -1,14 +1,10 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../ProviderAuth';
+import { FirebaseContext } from '../ProviderFirebase';
 import CategoryList from '../CategoryList';
 import * as S from './styles';
 
-type PageHomeTypes = {
-    categoryCounts: { category: string; count: number }[];
-};
-
-const PageHome = ({ categoryCounts }: PageHomeTypes): JSX.Element => {
-    const { isAuthed } = useContext(AuthContext);
+const PageHome = (): JSX.Element => {
+    const { categoryCounts, isAuthed } = useContext(FirebaseContext);
 
     return (
         <S.Wrapper data-testid="pageHome">

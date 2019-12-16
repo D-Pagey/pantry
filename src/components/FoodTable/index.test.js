@@ -17,7 +17,9 @@ jest.mock('react-router-dom', () => ({
     }))
 }));
 
-const props = {
+const props = {};
+
+const context = {
     fridge: [
         {
             category: 'meat',
@@ -39,22 +41,23 @@ const props = {
 
 describe('FoodTable component', () => {
     it('should render', () => {
-        const { container } = render(<FoodTable {...props} />);
+        const { container } = render(<FoodTable {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should handle delete', () => {
         const updateHousehold = jest.fn();
-        const { queryAllByTestId } = render(
-            <FoodTable {...props} updateHousehold={updateHousehold} />
-        );
+        const { queryAllByTestId } = render(<FoodTable {...props} />, {
+            ...context,
+            updateHousehold
+        });
         const deleteButton = queryAllByTestId('deleteButton');
 
         userEvent.click(deleteButton[0]);
 
         expect(updateHousehold).toHaveBeenCalledWith({
             key: 'fridge',
-            values: props.fridge.filter((item, index) => index !== 0)
+            values: context.fridge.filter((item, index) => index !== 0)
         });
     });
 
@@ -79,7 +82,7 @@ describe('FoodTable component', () => {
             servings: 2
         };
 
-        const { getByText } = render(<FoodTable {...props} fridge={[item]} />);
+        const { getByText } = render(<FoodTable {...props} />, { ...context, fridge: [item] });
         const expiryDate = getByText(format(date, 'do MMM'));
 
         expect(expiryDate).toHaveStyleRule('color', colour);
@@ -87,10 +90,10 @@ describe('FoodTable component', () => {
 
     it('should handle the category: all', () => {
         useParams.mockReturnValueOnce({ category: 'all' });
-        const { getByText, getByTestId } = render(<FoodTable {...props} />);
+        const { getByText, getByTestId } = render(<FoodTable {...props} />, context);
 
-        getByText(props.fridge[0].name);
-        getByText(props.fridge[1].name);
+        getByText(context.fridge[0].name);
+        getByText(context.fridge[1].name);
         getByTestId('foodTableCategoryColumn');
     });
 });

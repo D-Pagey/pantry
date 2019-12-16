@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { firebase } from '../../services';
-import { AuthContext } from '../ProviderAuth';
+import { FirebaseContext } from '../ProviderFirebase';
 
 const PageSignIn = () => {
-    const { setUser, isAuthed } = useContext(AuthContext);
+    const { setUser, isAuthed } = useContext(FirebaseContext);
 
     // Configure FirebaseUI.
     const uiConfig = {

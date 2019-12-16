@@ -7,14 +7,14 @@ import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import { AuthContext } from './components/ProviderAuth';
+import { FirebaseContext } from './components/ProviderFirebase';
 
 global.render = (ui, firebaseContextValue = {}) => {
     let queries;
 
     act(() => {
         queries = render(
-            <AuthContext.Provider
+            <FirebaseContext.Provider
                 value={{
                     isAuthed: false,
                     setUser: () => {},
@@ -24,7 +24,7 @@ global.render = (ui, firebaseContextValue = {}) => {
                 }}
             >
                 <Router history={createMemoryHistory()}>{ui}</Router>
-            </AuthContext.Provider>
+            </FirebaseContext.Provider>
         );
     });
 

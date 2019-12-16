@@ -1,12 +1,12 @@
 import 'react-table/react-table.css';
-import React from 'react';
-import { arrayOf, func, any } from 'prop-types';
+import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { differenceInDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
 import * as S from './styles';
+import { FirebaseContext } from '../ProviderFirebase';
 
 type itemTypes = {
     category: string;
@@ -14,11 +14,6 @@ type itemTypes = {
     id: string;
     name: string;
     servings: number;
-};
-
-type FoodTableTypes = {
-    fridge: itemTypes[];
-    updateHousehold: Function;
 };
 
 const chooseColour = (date: Date): string => {
@@ -30,9 +25,10 @@ const chooseColour = (date: Date): string => {
     return 'black';
 };
 
-const FoodTable = ({ fridge, updateHousehold }: FoodTableTypes): JSX.Element => {
+const FoodTable = (): JSX.Element => {
     const history = useHistory();
     const { category } = useParams();
+    const { fridge, updateHousehold } = useContext(FirebaseContext);
 
     const filteredData =
         category === 'all'
@@ -121,11 +117,6 @@ const FoodTable = ({ fridge, updateHousehold }: FoodTableTypes): JSX.Element => 
             <ReactTable columns={getColumns()} data={filteredData} defaultPageSize={10} />
         </div>
     );
-};
-
-FoodTable.propTypes = {
-    fridge: arrayOf(any).isRequired,
-    updateHousehold: func.isRequired
 };
 
 export default FoodTable;

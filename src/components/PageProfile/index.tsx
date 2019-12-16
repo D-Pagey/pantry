@@ -1,13 +1,8 @@
 import React, { useContext } from 'react';
-import { func } from 'prop-types';
-import { AuthContext } from '../ProviderAuth';
+import { FirebaseContext } from '../ProviderFirebase';
 
-type PageProfileTypes = {
-    signOut: Function;
-};
-
-const PageProfile = ({ signOut }: PageProfileTypes): JSX.Element => {
-    const { user } = useContext(AuthContext);
+const PageProfile = (): JSX.Element => {
+    const { signOut, user } = useContext(FirebaseContext);
 
     return (
         <div data-testid="pageProfile">
@@ -18,10 +13,6 @@ const PageProfile = ({ signOut }: PageProfileTypes): JSX.Element => {
             </button>
         </div>
     );
-};
-
-PageProfile.propTypes = {
-    signOut: func.isRequired
 };
 
 export default PageProfile;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import ProviderAuth from '../ProviderAuth';
+import ProviderFirebase from '../ProviderFirebase';
 import BurgerMenu from '../BurgerMenu';
 import Routes from '../Routes';
 import * as S from './styles';
 
 const App = (): JSX.Element => (
-    <ProviderAuth>
+    <ProviderFirebase>
         <BrowserRouter>
             <BurgerMenu />
 
@@ -20,7 +20,7 @@ const App = (): JSX.Element => (
                 <Routes />
             </S.Wrapper>
         </BrowserRouter>
-    </ProviderAuth>
+    </ProviderFirebase>
 );
 
 export default App;

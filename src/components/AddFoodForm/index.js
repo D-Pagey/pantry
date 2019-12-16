@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { arrayOf, any, string, func } from 'prop-types';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import uuidv4 from 'uuid/v4';
 
 import { getIndexOfId } from '../../utils';
+import { FirebaseContext } from '../ProviderFirebase';
 import DialDatePicker from '../DialDatePicker';
 import CreatableDropdown from '../CreatableDropdown';
 import SingleSelect from '../SingleSelect';
@@ -32,10 +32,11 @@ const addIdToFood = (food) => {
     return { ...food, name: food.name.toLowerCase(), id: uuidv4() };
 };
 
-const AddFoodForm = ({ categories, fridge, updateHousehold }) => {
+const AddFoodForm = () => {
     const [initialValues, setInitialValues] = useState(baseValues);
     const [isEditMode, setIsEditMode] = useState(false);
     const { state } = useLocation();
+    const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
 
     useEffect(() => {
         if (state) {
@@ -136,12 +137,6 @@ const AddFoodForm = ({ categories, fridge, updateHousehold }) => {
             </Formik>
         </S.Wrapper>
     );
-};
-
-AddFoodForm.propTypes = {
-    categories: arrayOf(string).isRequired,
-    fridge: arrayOf(any).isRequired,
-    updateHousehold: func.isRequired
 };
 
 export default AddFoodForm;

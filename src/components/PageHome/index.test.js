@@ -1,11 +1,10 @@
 import React from 'react';
 import PageHome from '.';
 
-const props = {
-    categoryCounts: [{ category: 'Meat', count: 1 }]
-};
+const props = {};
 
 const context = {
+    categoryCounts: [{ category: 'Meat', count: 1 }],
     isAuthed: false
 };
 
@@ -16,7 +15,7 @@ describe('PageHome component', () => {
     });
 
     it('should render category list if authed', () => {
-        const { getByTestId } = render(<PageHome {...props} />, { isAuthed: true });
+        const { getByTestId } = render(<PageHome {...props} />, { ...context, isAuthed: true });
         getByTestId('categoryList');
     });
 });
