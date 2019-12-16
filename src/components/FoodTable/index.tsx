@@ -5,8 +5,8 @@ import { differenceInDays, format } from 'date-fns';
 import ReactTable from 'react-table';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
-import * as S from './styles';
 import { FirebaseContext } from '../ProviderFirebase';
+import * as S from './styles';
 
 type itemTypes = {
     category: string;

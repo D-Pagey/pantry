@@ -5,7 +5,7 @@ import { firebase } from '../../services';
 import { FirebaseContext } from '../ProviderFirebase';
 
 const PageSignIn = () => {
-    const { setUser, isAuthed } = useContext(FirebaseContext);
+    const { isAuthed, setUser } = useContext(FirebaseContext);
 
     // Configure FirebaseUI.
     const uiConfig = {

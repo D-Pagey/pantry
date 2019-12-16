@@ -30,10 +30,16 @@ const BurgerMenu = () => {
                     <S.NavLink to="/add" onClick={closeMenu}>
                         Add Food
                     </S.NavLink>
-                    <S.NavLink to="/profile" onClick={closeMenu}>
+                    <S.NavLink
+                        to="/profile"
+                        onClick={closeMenu}
+                        data-testid="burgerMenuProfileLink"
+                    >
                         Profile
                     </S.NavLink>
-                    <S.Button onClick={menuSignOut}>Sign Out</S.Button>
+                    <S.Button onClick={menuSignOut} data-testid="burgerMenuSignOut">
+                        Sign Out
+                    </S.Button>
                 </>
             ) : (
                 <S.NavLink to="/sign-in" onClick={closeMenu}>

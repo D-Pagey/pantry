@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageSignIn component should render 1`] = `
+<div
+  data-testid="pageSignIn"
+/>
+`;
