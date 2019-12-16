@@ -5,6 +5,7 @@ exports[`BurgerMenu component should render 1`] = `
   color: white;
   -webkit-text-decoration: none;
   text-decoration: none;
+  margin: 0 0 1rem;
 }
 
 .c0:hover {
@@ -27,37 +28,21 @@ exports[`BurgerMenu component should render 1`] = `
     >
       <nav
         class="bm-item-list"
-        style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em;"
+        style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em; display: flex; flex-direction: column;"
       >
         <a
           aria-current="page"
           class="c0 bm-item active"
           href="/"
-          style="display: block; margin: 0px 0px 1rem;"
+          style="display: block;"
           tabindex="-1"
         >
           Home
         </a>
         <a
           class="c0 bm-item"
-          href="/add"
-          style="display: block; margin: 0px 0px 1rem;"
-          tabindex="-1"
-        >
-          Add Food
-        </a>
-        <a
-          class="c0 bm-item"
-          href="/profile"
-          style="display: block; margin: 0px 0px 1rem;"
-          tabindex="-1"
-        >
-          Profile
-        </a>
-        <a
-          class="c0 bm-item"
           href="/sign-in"
-          style="display: block; margin: 0px 0px 1rem;"
+          style="display: block;"
           tabindex="-1"
         >
           Sign In
