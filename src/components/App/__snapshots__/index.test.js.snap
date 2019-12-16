@@ -8,7 +8,7 @@ exports[`App component should render 1`] = `
 }
 
 .c0:hover {
-  color: red;
+  color: orange;
 }
 
 <div>

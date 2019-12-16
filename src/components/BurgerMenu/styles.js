@@ -6,7 +6,7 @@ export const NavLink = styled(Link)`
     text-decoration: none;
 
     &:hover {
-        color: red;
+        color: orange;
     }
 `;
 
