@@ -17,14 +17,14 @@
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.4.0",
     "@testing-library/user-event": "7.1.2",
-    "@types/jest": "24.0.23",
+    "@types/jest": "24.0.25",
     "@types/node": "12.12.18",
     "@types/prop-types": "15.7.3",
-    "@types/react": "16.9.16",
+    "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "babel-plugin-jsx-remove-data-test-id": "2.1.3",
     "date-fns": "2.8.1",
-    "firebase": "7.6.0",
+    "firebase": "7.6.1",
     "formik": "2.0.8",
     "history": "4.10.1",
     "jest-styled-components": "6.3.4",
@@ -41,7 +41,7 @@
     "react-table": "6.11.5",
     "styled-components": "4.4.1",
     "title-case": "3.0.2",
-    "typescript": "3.7.3",
+    "typescript": "3.7.4",
     "uuid": "3.3.3"
   },
   "scripts": {
@@ -70,7 +70,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.7.5",
+    "@babel/core": "7.7.7",
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@types/react-burger-menu": "2.6.0",
@@ -97,7 +97,7 @@
     "lint-staged": ">=9.5.0",
     "prettier": "1.19.1",
     "require-context.macro": "1.2.2",
-    "stylelint": "12.0.0",
+    "stylelint": "12.0.1",
     "stylelint-config-recommended": "3.0.0",
     "stylelint-config-styled-components": "0.1.1",
     "stylelint-processor-styled-components": "1.9.0"

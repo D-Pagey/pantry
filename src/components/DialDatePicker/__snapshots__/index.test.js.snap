@@ -58,7 +58,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerDay"
     >
-      16th
+      6th
     </span>
     <button
       type="button"
@@ -75,7 +75,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerMonth"
     >
-      December
+      January
     </span>
     <button
       type="button"
@@ -92,7 +92,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerYear"
     >
-      2019
+      2020
     </span>
     <button
       type="button"
