@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { FirestoreContext } from '../ProviderFirestore';
+import { FirebaseContext } from '../ProviderFirebase';
 import AddFoodForm from '.';
 
 const firebaseContext = {
@@ -21,7 +21,7 @@ const firebaseContext = {
 };
 
 storiesOf('AddFoodForm', module).add('default', () => (
-    <FirestoreContext.Provider value={{ ...firebaseContext }}>
+    <FirebaseContext.Provider value={{ ...firebaseContext }}>
         <AddFoodForm />
-    </FirestoreContext.Provider>
+    </FirebaseContext.Provider>
 ));

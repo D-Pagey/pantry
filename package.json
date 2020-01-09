@@ -38,6 +38,7 @@
     "react-router-dom": "5.1.2",
     "react-scripts": "3.3.0",
     "react-select": "3.0.8",
+    "react-spinners": "0.8.0",
     "react-table": "6.11.5",
     "styled-components": "4.4.1",
     "title-case": "3.0.2",
@@ -121,7 +122,8 @@
     "plugins": [
       [
         "babel-plugin-styled-components"
-      ]
+      ],
+      "emotion"
     ],
     "env": {
       "production": {

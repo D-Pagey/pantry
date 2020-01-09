@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { FirestoreContext } from '../ProviderFirestore';
+import { FirebaseContext } from '../ProviderFirebase';
 import FoodTable from '.';
 
 const props = {
@@ -33,9 +33,9 @@ const firebaseContext = {
 
 storiesOf('FoodTable', module)
     .addDecorator((storyFn) => (
-        <FirestoreContext.Provider value={{ ...firebaseContext }}>
+        <FirebaseContext.Provider value={{ ...firebaseContext }}>
             {storyFn()}
-        </FirestoreContext.Provider>
+        </FirebaseContext.Provider>
     ))
     .add('meat', () => <FoodTable {...props} />)
     .add('all', () => <FoodTable {...props} match={{ params: { category: 'all' } }} />);

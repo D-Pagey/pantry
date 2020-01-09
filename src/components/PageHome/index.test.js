@@ -5,7 +5,8 @@ const props = {};
 
 const context = {
     categoryCounts: [{ category: 'Meat', count: 1 }],
-    isAuthed: false
+    isAuthed: false,
+    isCheckingAuth: true
 };
 
 describe('PageHome component', () => {
@@ -14,8 +15,17 @@ describe('PageHome component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
+    it('should render loading spinner if checking auth', () => {
+        const { queryByTestId } = render(<PageHome {...props} />, context);
+        expect(queryByTestId('pageHome')).toBeNull();
+    });
+
     it('should render category list if authed', () => {
-        const { getByTestId } = render(<PageHome {...props} />, { ...context, isAuthed: true });
+        const { getByTestId } = render(<PageHome {...props} />, {
+            ...context,
+            isAuthed: true,
+            isCheckingAuth: false
+        });
         getByTestId('categoryList');
     });
 });
