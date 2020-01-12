@@ -3,9 +3,9 @@ import CategoryList from '.';
 
 const props = {
     categoryCounts: [
-        { category: 'Meat', count: 2 },
-        { category: 'Fish', count: 3 },
-        { category: 'Vegetables', count: 5 }
+        { label: 'Meat', colour: 'red', count: 2 },
+        { label: 'Fish', colour: 'red', count: 3 },
+        { label: 'Vegetables', colour: 'red', count: 5 }
     ]
 };
 

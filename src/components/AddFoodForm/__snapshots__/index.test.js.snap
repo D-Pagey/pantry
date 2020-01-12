@@ -171,14 +171,14 @@ exports[`AddFoodForm component should render 1`] = `
         data-testid="select"
       >
         <option
-          value="meat"
+          value="Meat"
         >
           Meat
         </option>
         <option
-          value="vegetables"
+          value="fish"
         >
-          Vegetables
+          Fish
         </option>
       </select>
       

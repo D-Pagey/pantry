@@ -43,12 +43,13 @@ CreatableDropdown.propTypes = {
     label: string,
     options: arrayOf(string).isRequired,
     setSelected: func.isRequired,
-    value: string.isRequired
+    value: string
 };
 
 CreatableDropdown.defaultProps = {
     error: '',
-    label: ''
+    label: '',
+    value: null
 };
 
 export default CreatableDropdown;
