@@ -5,12 +5,13 @@ import userEvent from '@testing-library/user-event';
 const props = {};
 
 const context = {
+    categories: [],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    signOut: () => {},
     user: {
         email: 'dan@gmail.com',
         name: 'Dan'
-    },
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    signOut: () => {}
+    }
 };
 
 describe('PageProfile component', () => {

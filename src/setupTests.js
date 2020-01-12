@@ -16,6 +16,7 @@ global.render = (ui, firebaseContextValue = {}) => {
         queries = render(
             <FirebaseContext.Provider
                 value={{
+                    categories: [],
                     isAuthed: false,
                     setUser: () => {},
                     setIsAuthed: () => {},

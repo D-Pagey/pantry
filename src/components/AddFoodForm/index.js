@@ -48,7 +48,7 @@ const AddFoodForm = () => {
     const checkCategory = (selectedCategory) => {
         if (categories.includes(selectedCategory)) return;
 
-        updateHousehold({ key: 'category', values: [...categories, selectedCategory] });
+        updateHousehold({ key: 'categories', values: [...categories, selectedCategory] });
     };
 
     return (

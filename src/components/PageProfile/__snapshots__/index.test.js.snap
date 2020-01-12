@@ -17,5 +17,9 @@ exports[`PageProfile component should render 1`] = `
   >
     Sign Out
   </button>
+  <h2>
+    Your Food Categories
+  </h2>
+  <ul />
 </div>
 `;
