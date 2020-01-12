@@ -1,30 +1,18 @@
-import { checkIndex, countCategories } from './utils';
+import { indexOfLabel, countCategories } from './utils';
 
-describe('checkIndex function', () => {
+describe('indexOfLabel function', () => {
     it('should return a number', () => {
-        expect(typeof checkIndex([{ category: 'fish', count: 2 }], 'fish')).toBe('number');
+        expect(typeof indexOfLabel(['fish', 'meat', 'chocolate'], 'fish')).toBe('number');
     });
 
     it('should return the index of a label', () => {
-        const array = [
-            {
-                category: 'fish',
-                count: 2
-            },
-            {
-                category: 'meat',
-                count: 3
-            },
-            {
-                category: 'vegetables',
-                count: 1
-            }
-        ];
+        const array = ['fish', 'meat', 'vegetables', 'chocolate'];
 
-        expect(checkIndex(array, 'fish')).toBe(0);
-        expect(checkIndex(array, 'meat')).toBe(1);
-        expect(checkIndex(array, 'vegetables')).toBe(2);
-        expect(checkIndex(array, 'dairy')).toBe(-1);
+        expect(indexOfLabel(array, 'fish')).toBe(0);
+        expect(indexOfLabel(array, 'meat')).toBe(1);
+        expect(indexOfLabel(array, 'vegetables')).toBe(2);
+        expect(indexOfLabel(array, 'dairy')).toBe(-1);
+        expect(indexOfLabel(array, 'chocolate')).toBe(3);
     });
 });
 
@@ -34,32 +22,57 @@ describe('countCategories function', () => {
     });
 
     it('should consolidate items', () => {
-        expect(countCategories(['meat', 'fish', 'meat', 'meat']).length).toBe(3);
-        expect(countCategories(['fish', 'fish', 'fish']).length).toBe(2);
-        expect(countCategories(['fish', 'meat', 'vegetables']).length).toBe(4);
+        expect(
+            countCategories([
+                { label: 'meat', colour: 'red' },
+                { label: 'fish', colour: 'pink' },
+                { label: 'meat', colour: 'red' },
+                { label: 'meat', colour: 'red' }
+            ]).length
+        ).toBe(3);
+        expect(
+            countCategories([
+                { label: 'vegetables', colour: 'green' },
+                { label: 'vegetables', colour: 'green' },
+                { label: 'vegetables', colour: 'green' }
+            ]).length
+        ).toBe(2);
+        expect(
+            countCategories([
+                { label: 'fish', colour: 'blue' },
+                { label: 'meat', colour: 'red' },
+                { label: 'vegetables', colour: 'green' }
+            ]).length
+        ).toBe(4);
     });
 
     it('should increment count if category already exists', () => {
-        expect(countCategories(['meat', 'meat', 'meat'])).toStrictEqual([
-            { category: 'meat', count: 3 },
-            { category: 'all', count: 3 }
+        expect(
+            countCategories([
+                { label: 'meat', colour: 'red' },
+                { label: 'meat', colour: 'red' },
+                { label: 'meat', colour: 'red' }
+            ])
+        ).toStrictEqual([
+            { label: 'meat', colour: 'red', count: 3 },
+            { label: 'all', colour: 'blue', count: 3 }
         ]);
 
         expect(
             countCategories([
-                'meat',
-                'fish',
-                'fish',
-                'vegetables',
-                'vegetables',
-                'vegetables',
-                'vegetables'
+                { label: 'meat', colour: 'red' },
+                { label: 'fish', colour: 'purple' },
+                { label: 'fish', colour: 'purple' },
+                { label: 'vegetables', colour: 'green' },
+                { label: 'vegetables', colour: 'green' },
+                { label: 'vegetables', colour: 'green' },
+                { label: 'vegetables', colour: 'green' }
             ])
         ).toStrictEqual([
-            { category: 'meat', count: 1 },
-            { category: 'fish', count: 2 },
-            { category: 'vegetables', count: 4 },
-            { category: 'all', count: 7 }
+            { label: 'meat', colour: 'red', count: 1 },
+            { label: 'fish', colour: 'purple', count: 2 },
+            { label: 'vegetables', colour: 'green', count: 4 },
+            { label: 'all', colour: 'blue', count: 7 }
         ]);
     });
 });

@@ -26,29 +26,47 @@ const baseValues = {
     servings: servingsOptions[1].value
 };
 
-const addIdToFood = (food) => {
-    if (food.id) return food;
+const addIdToFood = (values) => {
+    if (values.id) return values;
 
-    return { ...food, name: food.name.toLowerCase(), id: uuidv4() };
+    return { ...values, name: values.name.toLowerCase(), id: uuidv4() };
 };
 
 const AddFoodForm = () => {
     const [initialValues, setInitialValues] = useState(baseValues);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [categoryLabels, setCategoryLabels] = useState([]);
     const { state } = useLocation();
     const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
 
     useEffect(() => {
+        setCategoryLabels(categories.map((item) => item.label));
+    }, [categories]);
+
+    useEffect(() => {
         if (state) {
             setIsEditMode(true);
-            setInitialValues({ ...state });
+            setInitialValues({ ...state, category: state.category.label });
         }
     }, [state]);
 
-    const checkCategory = (selectedCategory) => {
-        if (categories.includes(selectedCategory)) return;
+    const addColourToCategory = (values) => {
+        const indexOfCategory = categoryLabels.indexOf(values.category);
 
-        updateHousehold({ key: 'categories', values: [...categories, selectedCategory] });
+        if (indexOfCategory !== -1)
+            return {
+                ...values,
+                category: { label: values.category, colour: categories[indexOfCategory].colour }
+            };
+
+        const newCategory = { label: values.category, colour: 'black' };
+
+        updateHousehold({
+            key: 'categories',
+            values: [...categories, newCategory]
+        });
+
+        return { ...values, category: newCategory };
     };
 
     return (
@@ -76,15 +94,17 @@ const AddFoodForm = () => {
                     if (indexOfFoodId === -1) {
                         updateHousehold({
                             key: 'fridge',
-                            values: [...fridge, addIdToFood(values)]
+                            values: [...fridge, addColourToCategory(addIdToFood(values))]
                         });
                     } else {
                         const fridgeCopy = [...fridge];
-                        fridgeCopy[indexOfFoodId] = { ...values, name: values.name.toLowerCase() };
+                        fridgeCopy[indexOfFoodId] = {
+                            ...addColourToCategory(values),
+                            name: values.name.toLowerCase()
+                        };
                         updateHousehold({ key: 'fridge', values: fridgeCopy });
                     }
 
-                    checkCategory(values.category);
                     setIsEditMode(false);
                     actions.setSubmitting(false);
                     actions.resetForm();
@@ -96,7 +116,7 @@ const AddFoodForm = () => {
                             <CreatableDropdown
                                 error={errors.category}
                                 label="What category of food?"
-                                options={categories}
+                                options={categoryLabels}
                                 setSelected={(category) =>
                                     setFieldValue('category', category.value)
                                 }

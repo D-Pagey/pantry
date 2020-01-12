@@ -27,7 +27,10 @@ const props = {};
 
 const context = {
     fridge: [],
-    categories: ['meat', 'vegetables'],
+    categories: [
+        { label: 'Meat', color: 'red' },
+        { label: 'fish', color: 'blue' }
+    ],
     updateHousehold: () => {}
 };
 

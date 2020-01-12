@@ -9,7 +9,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 type itemTypes = {
-    category: string;
+    category: { label: string; colour: string };
     expires: Date;
     id: string;
     name: string;
@@ -33,8 +33,8 @@ const FoodTable = (): JSX.Element => {
     const filteredData =
         category === 'all'
             ? fridge
-            : fridge.filter((item: { category: string }) => {
-                  return item.category === category;
+            : fridge.filter((item: { category: { label: string; colour: string } }) => {
+                  return item.category.label === category;
               });
 
     const handleDelete = (id: string) => (): void => {
@@ -97,7 +97,7 @@ const FoodTable = (): JSX.Element => {
         const categoryColumn = {
             id: 'category',
             Header: 'Category',
-            accessor: (item: itemTypes): string => item.category,
+            accessor: (item: itemTypes): string => item.category.label,
             getHeaderProps: (): { 'data-testid': string } => ({
                 'data-testid': 'foodTableCategoryColumn'
             })

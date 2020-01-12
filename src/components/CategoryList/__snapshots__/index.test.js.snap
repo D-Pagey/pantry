@@ -6,7 +6,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid purple;
+  border: 3px solid red;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -48,7 +48,7 @@ exports[`CategoryList component should render 1`] = `
 >
   <a
     class="c1"
-    colour="purple"
+    colour="red"
     data-testid="categoryCard"
     href="/meat"
   >
@@ -65,7 +65,7 @@ exports[`CategoryList component should render 1`] = `
   </a>
   <a
     class="c1"
-    colour="purple"
+    colour="red"
     data-testid="categoryCard"
     href="/fish"
   >
@@ -82,7 +82,7 @@ exports[`CategoryList component should render 1`] = `
   </a>
   <a
     class="c1"
-    colour="purple"
+    colour="red"
     data-testid="categoryCard"
     href="/vegetables"
   >

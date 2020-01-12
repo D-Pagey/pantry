@@ -3,22 +3,33 @@ import CategoryCard from '../CategoryCard';
 import { arrayOf, string, shape, number } from 'prop-types';
 import * as S from './styles';
 
+type ItemType = {
+    label: string;
+    colour: string;
+    count: number;
+};
+
 type CategoryListTypes = {
-    categoryCounts: { category: string; count: number }[];
+    categoryCounts: ItemType[];
 };
 
 const CategoryList = ({ categoryCounts }: CategoryListTypes): JSX.Element => {
     return (
         <S.Wrapper data-testid="categoryList">
-            {categoryCounts.map((item: { category: string; count: number }) => (
-                <CategoryCard category={item.category} quantity={item.count} key={item.category} />
+            {categoryCounts.map((item: ItemType) => (
+                <CategoryCard
+                    label={item.label}
+                    colour={item.colour}
+                    quantity={item.count}
+                    key={item.label}
+                />
             ))}
         </S.Wrapper>
     );
 };
 
 CategoryList.propTypes = {
-    categoryCounts: arrayOf(shape({ category: string, count: number }))
+    categoryCounts: arrayOf(shape({ category: string, colour: string, count: number })).isRequired
 };
 
 export default CategoryList;

@@ -9,7 +9,26 @@ admin.initializeApp();
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
 const defaultFridge = {
-    categories: ['meat', 'fish', 'vegetables', 'dairy', 'fruit'],
+    categories: [{
+        label: 'meat',
+        colour: 'red'
+    },
+    {
+        label: 'fish',
+        colour: 'blue'
+    },
+    {
+        label: 'vegetables',
+        colour: 'green'
+    },
+    {
+        label: 'dairy',
+        colour: 'yellow'
+    },
+    {
+        label: 'fruit',
+        colour: 'purple'
+    }],
     fridge: []
 }
 

@@ -3,39 +3,22 @@ import { number, string } from 'prop-types';
 import { titleCase } from 'title-case';
 import * as S from './styles';
 
-const getCategoryColour = (category: string): string => {
-    switch (category) {
-        case 'meat':
-            return 'red';
-        case 'vegetables':
-            return 'green';
-        case 'fish':
-            return 'blue';
-        case 'all':
-            return 'orange';
-        default:
-            return 'purple';
-    }
-};
-
-type props = {
-    category: string;
+type CategoryCardTypes = {
+    label: string;
+    colour: string;
     quantity: number;
 };
 
-const CategoryCard = ({ category, quantity }: props): JSX.Element => (
-    <S.Link
-        colour={getCategoryColour(category)}
-        to={`/${category.toLowerCase()}`}
-        data-testid="categoryCard"
-    >
-        <S.Title>{titleCase(category)}</S.Title>
+const CategoryCard = ({ colour, label, quantity }: CategoryCardTypes): JSX.Element => (
+    <S.Link colour={colour} to={`/${label.toLowerCase()}`} data-testid="categoryCard">
+        <S.Title>{titleCase(label)}</S.Title>
         <S.Text>{quantity}</S.Text>
     </S.Link>
 );
 
 CategoryCard.propTypes = {
-    category: string.isRequired,
+    label: string.isRequired,
+    colour: string.isRequired,
     quantity: number.isRequired
 };
 

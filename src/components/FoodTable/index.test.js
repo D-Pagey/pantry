@@ -22,14 +22,14 @@ const props = {};
 const context = {
     fridge: [
         {
-            category: 'meat',
+            category: { label: 'meat', color: 'red' },
             expires: new Date(2019, 9, 12),
             id: '1245',
             name: 'chicken',
             servings: 2
         },
         {
-            category: 'fish',
+            category: { label: 'fish', color: 'blue' },
             expires: new Date(2019, 3, 9),
             id: '5678',
             name: 'salmon',
@@ -76,7 +76,7 @@ describe('FoodTable component', () => {
         ${'black'} | ${addDays(new Date(), 4)}
     `('should have $colour for expiry date', ({ colour, date }) => {
         const item = {
-            category: 'meat',
+            category: { label: 'meat', color: 'red' },
             expires: date,
             name: 'chicken',
             servings: 2

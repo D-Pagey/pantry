@@ -6,7 +6,19 @@ import { countCategories } from './utils';
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
-export const FirebaseContext = createContext();
+export const FirebaseContext = createContext({
+    categories: [],
+    categoryCounts: [],
+    isAuthed: false,
+    isCheckingAuth: false,
+    fridge: [],
+    signOut: () => null,
+    updateHousehold: ({ key, values }) => null,
+    user: {
+        email: null,
+        name: null
+    }
+});
 
 const ProviderFirebase = ({ children }) => {
     const [user, setUser] = useState({});
