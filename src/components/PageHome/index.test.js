@@ -4,7 +4,7 @@ import PageHome from '.';
 const props = {};
 
 const context = {
-    categoryCounts: [{ label: 'Meat', color: 'red', count: 1 }],
+    categoryCounts: [{ label: 'Meat', colour: 'red', count: 1 }],
     isAuthed: false,
     isCheckingAuth: true
 };
