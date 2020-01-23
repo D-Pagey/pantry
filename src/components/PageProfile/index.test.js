@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 const props = {};
 
 const context = {
-    categories: [],
+    categories: [{ label: 'meat', colour: 'red' }],
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     signOut: () => {},
     user: {

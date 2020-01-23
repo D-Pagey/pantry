@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageProfile component should render 1`] = `
+.c0 {
+  background-color: red;
+  height: 20px;
+  width: 20px;
+}
+
 <div
   data-testid="pageProfile"
 >
@@ -76,7 +82,7 @@ exports[`PageProfile component should render 1`] = `
           role="rowgroup"
         >
           <div
-            class="rt-tr -padRow -odd"
+            class="rt-tr -odd"
             role="row"
           >
             <div
@@ -84,18 +90,16 @@ exports[`PageProfile component should render 1`] = `
               role="gridcell"
               style="flex: 100 0 auto; width: 100px;"
             >
-              <span>
-                 
-              </span>
+              meat
             </div>
             <div
               class="rt-td"
               role="gridcell"
               style="flex: 100 0 auto; width: 100px;"
             >
-              <span>
-                 
-              </span>
+              <div
+                class="c0"
+              />
             </div>
           </div>
         </div>
@@ -447,11 +451,6 @@ exports[`PageProfile component should render 1`] = `
           </button>
         </div>
       </div>
-    </div>
-    <div
-      class="rt-noData"
-    >
-      No rows found
     </div>
     <div
       class="-loading"
