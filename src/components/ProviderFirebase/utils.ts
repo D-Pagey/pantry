@@ -17,29 +17,20 @@ export const indexOfLabel = (arrayOfLabels: string[], label: string): number => 
 export const countCategories = (categories: CategoryType[]): CategoryWithCountType[] => {
   if (categories.length === 0) return [];
 
-  const reducedCategories = categories.reduce(
-    (acc, curr, idx) => {
-      const arrayOfLabels = acc.map((item) => item.label);
-      const index = indexOfLabel(arrayOfLabels, curr.label);
+  const reducedCategories = categories.reduce((acc, curr): CategoryWithCountType[] => {
+    const arrayOfLabels = acc.map((item) => item.label);
+    const index = indexOfLabel(arrayOfLabels, curr.label);
 
-      if (idx === 0) {
-        const initial = [...acc];
-        initial[0] = { ...curr, count: 1 };
-        return initial;
-      }
+    if (index === -1) {
+      acc.push({ ...curr, count: 1 });
+    } else {
+      const newAcc = [...acc];
+      newAcc[index].count += 1;
+      return newAcc;
+    }
 
-      if (index === -1) {
-        acc.push({ ...curr, count: 1 });
-      } else {
-        const newAcc = [...acc];
-        newAcc[index].count += 1;
-        return newAcc;
-      }
-
-      return acc;
-    },
-    [{ count: 0, label: '', colour: '' }]
-  );
+    return acc;
+  }, [] as CategoryWithCountType[]);
 
   reducedCategories.push({ label: 'all', colour: 'blue', count: categories.length });
 
