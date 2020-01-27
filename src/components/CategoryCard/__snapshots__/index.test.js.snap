@@ -37,7 +37,7 @@ exports[`CategoryCard component should render 1`] = `
   class="c0"
   colour="red"
   data-testid="categoryCard"
-  href="/meat"
+  href="/food/meat"
 >
   <h3
     class="c1"

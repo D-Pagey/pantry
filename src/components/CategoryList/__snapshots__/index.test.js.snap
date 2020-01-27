@@ -50,7 +50,7 @@ exports[`CategoryList component should render 1`] = `
     class="c1"
     colour="red"
     data-testid="categoryCard"
-    href="/meat"
+    href="/food/meat"
   >
     <h3
       class="c2"
@@ -67,7 +67,7 @@ exports[`CategoryList component should render 1`] = `
     class="c1"
     colour="red"
     data-testid="categoryCard"
-    href="/fish"
+    href="/food/fish"
   >
     <h3
       class="c2"
@@ -84,7 +84,7 @@ exports[`CategoryList component should render 1`] = `
     class="c1"
     colour="red"
     data-testid="categoryCard"
-    href="/vegetables"
+    href="/food/vegetables"
   >
     <h3
       class="c2"

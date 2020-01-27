@@ -6,6 +6,7 @@ import FoodTable from '../FoodTable';
 import PageSignIn from '../PageSignIn';
 import PageProfile from '../PageProfile';
 import RouteProtected from '../RouteProtected';
+import PageNotFound from '../PageNotFound';
 
 const Routes = (): JSX.Element => (
     <Switch>
@@ -13,7 +14,8 @@ const Routes = (): JSX.Element => (
         <Route path="/sign-in" component={PageSignIn} />
         <RouteProtected path="/profile" component={PageProfile} />
         <RouteProtected path="/add" component={AddFoodForm} />
-        <RouteProtected path="/:category" component={FoodTable} />
+        <RouteProtected path="/food/:category" component={FoodTable} />
+        <Route component={PageNotFound} />
     </Switch>
 );
 

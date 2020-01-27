@@ -1,8 +1,9 @@
 import 'react-table/react-table.css';
-import React, { useContext } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { differenceInDays, format } from 'date-fns';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useParams, Redirect } from 'react-router-dom';
+import { format } from 'date-fns';
 import ReactTable from 'react-table';
+import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
 import { FirebaseContext } from '../ProviderFirebase';
@@ -16,19 +17,17 @@ type itemTypes = {
     servings: number;
 };
 
-const chooseColour = (date: Date): string => {
-    const difference = differenceInDays(date, new Date());
-
-    if (difference < 1) return 'red';
-    if (difference <= 2) return 'blue';
-
-    return 'black';
-};
-
 const FoodTable = (): JSX.Element => {
+    const [isValidCategory, setIsValidCategory] = useState();
     const history = useHistory();
     const { category } = useParams();
-    const { fridge, updateHousehold } = useContext(FirebaseContext);
+    const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
+
+    useEffect(() => {
+        if (categories.length > 0 && category) {
+            setIsValidCategory(doesCategoryExist(categories, category));
+        }
+    }, [categories, category]);
 
     const filteredData =
         category === 'all'
@@ -47,7 +46,7 @@ const FoodTable = (): JSX.Element => {
     };
 
     const expiresColumn = (item: itemTypes): JSX.Element => (
-        <S.Item colour={chooseColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
+        <S.Item colour={chooseDateColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
     );
 
     const actionsColumn = (item: itemTypes): JSX.Element => (
@@ -109,6 +108,8 @@ const FoodTable = (): JSX.Element => {
 
         return baseColumns;
     };
+
+    if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
         <div>

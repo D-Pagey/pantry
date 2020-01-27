@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
 import FoodTable from '.';
@@ -14,7 +13,8 @@ jest.mock('react-router-dom', () => ({
     }),
     useParams: jest.fn(() => ({
         category: 'meat'
-    }))
+    })),
+    Redirect: jest.fn(() => null)
 }));
 
 const props = {};
@@ -35,6 +35,10 @@ const context = {
             name: 'salmon',
             servings: 1
         }
+    ],
+    categories: [
+        { label: 'meat', color: 'red' },
+        { label: 'fish', color: 'blue' }
     ],
     updateHousehold: () => {}
 };
@@ -88,8 +92,17 @@ describe('FoodTable component', () => {
         expect(expiryDate).toHaveStyleRule('color', colour);
     });
 
+    it('should redirect if category does not exist', () => {
+        useParams.mockReturnValueOnce({ category: 'chocolate' });
+
+        render(<FoodTable {...props} />, context);
+
+        expect(Redirect).toHaveBeenCalledWith({ to: '/not-found' }, expect.any(Object));
+    });
+
     it('should handle the category: all', () => {
-        useParams.mockReturnValueOnce({ category: 'all' });
+        useParams.mockReturnValue({ category: 'all' });
+
         const { getByText, getByTestId } = render(<FoodTable {...props} />, context);
 
         getByText(context.fridge[0].name);

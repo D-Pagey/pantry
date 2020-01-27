@@ -7,17 +7,17 @@ import AddFoodForm from '.';
 
 const firebaseContext = {
     fridge: [],
-    foodCategories: [
+    categories: [
         {
             label: 'Meat',
-            value: 'meat'
+            colour: 'red'
         },
         {
             label: 'Vegetables',
-            value: 'vegetables'
+            colour: 'green'
         }
     ],
-    updateFridge: () => {}
+    updateHousehold: () => {}
 };
 
 storiesOf('AddFoodForm', module).add('default', () => (

@@ -10,7 +10,7 @@ type CategoryCardTypes = {
 };
 
 const CategoryCard = ({ colour, label, quantity }: CategoryCardTypes): JSX.Element => (
-    <S.Link colour={colour} to={`/${label.toLowerCase()}`} data-testid="categoryCard">
+    <S.Link colour={colour} to={`/food/${label.toLowerCase()}`} data-testid="categoryCard">
         <S.Title>{titleCase(label)}</S.Title>
         <S.Text>{quantity}</S.Text>
     </S.Link>
