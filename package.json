@@ -47,10 +47,10 @@
     "uuid": "7.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --verbose --coverage --no-cache --watchAll=false",
-    "test:watch": "react-scripts test --env=jsdom --verbose",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom --verbose --coverage --no-cache --watchAll=false",
+    "test:watch": "react-app-rewired test --env=jsdom --verbose",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.js && eslint ./src/**/*.tsx && stylelint ./src/**/*.js",
     "storybook": "start-storybook -p 6006",
@@ -98,6 +98,7 @@
     "husky": "4.2.3",
     "lint-staged": ">=10.0.8",
     "prettier": "1.19.1",
+    "react-app-rewired": "^2.1.5",
     "require-context.macro": "1.2.2",
     "stylelint": "13.2.0",
     "stylelint-config-recommended": "3.0.0",
