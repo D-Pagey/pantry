@@ -18,7 +18,7 @@ type itemTypes = {
 };
 
 const FoodTable = (): JSX.Element => {
-    const [isValidCategory, setIsValidCategory] = useState();
+    const [isValidCategory, setIsValidCategory] = useState<boolean>();
     const history = useHistory();
     const { category } = useParams();
     const { categories, fridge, updateHousehold } = useContext(FirebaseContext);

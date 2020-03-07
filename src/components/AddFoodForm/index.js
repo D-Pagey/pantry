@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
-import uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import { getIndexOfId } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
