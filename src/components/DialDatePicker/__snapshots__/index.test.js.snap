@@ -58,7 +58,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerDay"
     >
-      3rd
+      7th
     </span>
     <button
       type="button"
@@ -75,7 +75,7 @@ exports[`DialDatePicker component should render 1`] = `
       class="c3"
       data-testid="dialDatePickerMonth"
     >
-      February
+      March
     </span>
     <button
       type="button"

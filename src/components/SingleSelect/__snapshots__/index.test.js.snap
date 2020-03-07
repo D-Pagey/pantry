@@ -47,7 +47,7 @@ exports[`SingleSelect component should render 1`] = `
     class="c1"
   >
     <button
-      class="sc-AykKC c2"
+      class="sc-AxjAm c2"
       data-testid="singleSelectButton0"
       type="button"
       width=""
@@ -55,7 +55,7 @@ exports[`SingleSelect component should render 1`] = `
       20+
     </button>
     <button
-      class="sc-AykKC c2"
+      class="sc-AxjAm c2"
       data-testid="singleSelectButton1"
       type="button"
       width=""
