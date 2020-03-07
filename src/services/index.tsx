@@ -42,7 +42,7 @@ messaging
         console.log('An error occurred while retrieving token. ', err);
     });
 
-messaging.onMessage((payload) => console.log({ onMessagePayload: payload }));
+messaging.onMessage((payload) => console.log({ config: payload }));
 
 // Callback fired if Instance ID token is updated.
 messaging.onTokenRefresh(() => {
