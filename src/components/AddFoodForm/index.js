@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 import { getIndexOfId } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
@@ -105,9 +106,12 @@ const AddFoodForm = () => {
                         updateHousehold({ key: 'fridge', values: fridgeCopy });
                     }
 
-                    setIsEditMode(false);
                     actions.setSubmitting(false);
                     actions.resetForm();
+                    toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                    setIsEditMode(false);
                 }}
             >
                 {({ errors, handleBlur, handleChange, setFieldValue, values }) => {
