@@ -66,11 +66,14 @@ describe('FoodTable component', () => {
     });
 
     it.skip('should handle edit', () => {
-        const history = useHistory();
-        const { queryAllByTestId } = render(<FoodTable {...props} />);
+        // think these mocks are conflicting with the setupTests config
+        const { push } = useHistory();
+        const { queryAllByTestId } = render(<FoodTable {...props} />, context);
         const editButton = queryAllByTestId('editButton');
 
         userEvent.click(editButton[0]);
+
+        expect(push).toHaveBeenCalledWith();
     });
 
     it.each`
@@ -83,7 +86,8 @@ describe('FoodTable component', () => {
             category: { label: 'meat', color: 'red' },
             expires: date,
             name: 'chicken',
-            servings: 2
+            servings: 2,
+            id: '666'
         };
 
         const { getByText } = render(<FoodTable {...props} />, { ...context, fridge: [item] });

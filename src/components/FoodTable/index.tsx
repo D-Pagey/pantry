@@ -1,8 +1,6 @@
-import 'react-table/react-table.css';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { format } from 'date-fns';
-import ReactTable from 'react-table';
 import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
@@ -49,73 +47,55 @@ const FoodTable = (): JSX.Element => {
         <S.Item colour={chooseDateColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
     );
 
-    const actionsColumn = (item: itemTypes): JSX.Element => (
-        <div>
-            <button
-                type="button"
-                onClick={handleEdit(item)}
-                style={{ cursor: 'pointer', margin: '0 1rem 0 0' }}
-                data-testid="editButton"
-            >
-                <img src={editIcon} alt="edit" />
-            </button>
-            <button
-                type="button"
-                onClick={handleDelete(item.id)}
-                style={{ cursor: 'pointer' }}
-                data-testid="deleteButton"
-            >
-                <img src={deleteIcon} alt="delete" />
-            </button>
-        </div>
-    );
-
-    const getColumns = (): { Header: string; id?: string }[] => {
-        const baseColumns = [
-            {
-                Header: 'Name',
-                accessor: 'name'
-            },
-            {
-                id: 'expires',
-                Header: 'Expires',
-                accessor: expiresColumn
-            },
-            {
-                id: 'servings',
-                Header: 'Servings',
-                accessor: (item: itemTypes): number => item.servings
-            },
-            {
-                id: 'amend',
-                Header: 'Amend',
-                accessor: actionsColumn
-            }
-        ];
-
-        const categoryColumn = {
-            id: 'category',
-            Header: 'Category',
-            accessor: (item: itemTypes): string => item.category.label,
-            getHeaderProps: (): { 'data-testid': string } => ({
-                'data-testid': 'foodTableCategoryColumn'
-            })
-        };
-
-        const [name, expires, ...rest] = baseColumns;
-
-        if (category === 'all') return [name, expires, categoryColumn, ...rest];
-
-        return baseColumns;
-    };
-
     if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
         <div>
             <h1>{category}</h1>
 
-            <ReactTable columns={getColumns()} data={filteredData} defaultPageSize={10} />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Expires</th>
+                        {category === 'all' && (
+                            <th data-testid="foodTableCategoryColumn">Category</th>
+                        )}
+                        <th>Servings</th>
+                        <th>Amend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredData.map((item: itemTypes) => {
+                        return (
+                            <tr key={item.id}>
+                                <td>{item.name}</td>
+                                <td>{expiresColumn(item)}</td>
+                                {category === 'all' && <td>{item.category.label}</td>}
+                                <td>{item.servings}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        onClick={handleEdit(item)}
+                                        style={{ cursor: 'pointer', margin: '0 1rem 0 0' }}
+                                        data-testid="editButton"
+                                    >
+                                        <img src={editIcon} alt="edit" />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleDelete(item.id)}
+                                        style={{ cursor: 'pointer' }}
+                                        data-testid="deleteButton"
+                                    >
+                                        <img src={deleteIcon} alt="delete" />
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 };

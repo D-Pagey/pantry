@@ -1,26 +1,9 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../ProviderFirebase';
-import ReactTable from 'react-table';
 import * as S from './styles';
 
 const PageProfile = (): JSX.Element => {
     const { categories, signOut, user } = useContext(FirebaseContext);
-
-    const getColumns = () => {
-        return [
-            {
-                Header: 'Category',
-                accessor: 'label'
-            },
-            {
-                Header: 'Colour',
-                id: 'colour',
-                accessor: (item: { colour: string }): JSX.Element => (
-                    <S.ColourSquare colour={item.colour} />
-                )
-            }
-        ];
-    };
 
     return (
         <div data-testid="pageProfile">
@@ -32,7 +15,26 @@ const PageProfile = (): JSX.Element => {
 
             <h2>Your Food Categories</h2>
 
-            <ReactTable columns={getColumns()} data={categories} defaultPageSize={10} />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Colour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {categories.map((category: { label: string; colour: string }) => {
+                        return (
+                            <tr key={category.label}>
+                                <td>{category.label}</td>
+                                <td>
+                                    <S.ColourSquare colour={category.colour} />
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 };
