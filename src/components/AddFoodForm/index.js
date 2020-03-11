@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
@@ -39,6 +39,7 @@ const AddFoodForm = () => {
     const [categoryLabels, setCategoryLabels] = useState([]);
     const { state } = useLocation();
     const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
+    const history = useHistory();
 
     useEffect(() => {
         setCategoryLabels(categories.map((item) => item.label));
@@ -112,6 +113,7 @@ const AddFoodForm = () => {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
                     setIsEditMode(false);
+                    history.goBack();
                 }}
             >
                 {({ errors, handleBlur, handleChange, setFieldValue, values }) => {
