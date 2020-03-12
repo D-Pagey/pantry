@@ -6,7 +6,7 @@ import { addWeeks, addDays, addMonths, addYears, subDays, subMonths, subYears } 
 import DialDatePicker from '.';
 
 const props = {
-    date: new Date(),
+    date: new Date('March 10, 2019 03:24:00'),
     setDate: () => {}
 };
 
