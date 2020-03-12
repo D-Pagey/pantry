@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams, Redirect } from 'react-router-dom';
+import { Link, useHistory, useParams, Redirect } from 'react-router-dom';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
 import { FirebaseContext } from '../ProviderFirebase';
+import Button from '../Button';
 import * as S from './styles';
 
 type itemTypes = {
@@ -101,6 +102,10 @@ const FoodTable = (): JSX.Element => {
                     })}
                 </tbody>
             </table>
+
+            <Link to="/add">
+                <Button>Add Item</Button>
+            </Link>
         </div>
     );
 };
