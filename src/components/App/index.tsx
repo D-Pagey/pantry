@@ -7,7 +7,9 @@ import BurgerMenu from '../BurgerMenu';
 import Routes from '../Routes';
 import * as S from './styles';
 
-toast.configure();
+toast.configure({
+    position: toast.POSITION.BOTTOM_RIGHT
+});
 
 const App = (): JSX.Element => (
     <ProviderFirebase>

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
+import { toast } from 'react-toastify';
 import { firebase } from '../../services';
 import { countCategories } from './utils';
 
@@ -90,12 +91,12 @@ const ProviderFirebase = ({ children }) => {
         setFridge([]);
     };
 
-    const updateHousehold = ({ key, values }) => {
+    const updateHousehold = ({ key, values, isEditMode }) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update({ [key]: values })
-            .then(() => console.log(`Successfully updated ${key}!`))
-            .catch((error) => console.error(`Error adding to ${key}: ${error}`));
+            .then(() => toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`))
+            .catch((error) => toast.error('Error with updating fridge'));
     };
 
     return (
