@@ -40,9 +40,7 @@ const FoodTable = (): JSX.Element => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
         updateHousehold({ key: 'fridge', values: filteredItems });
 
-        toast.info('Food item deleted.', {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
+        toast.info('Food item deleted.');
     };
 
     const handleEdit = (params: itemTypes) => (): void => {
@@ -77,7 +75,13 @@ const FoodTable = (): JSX.Element => {
                             <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{expiresColumn(item)}</td>
-                                {category === 'all' && <td>{item.category.label}</td>}
+                                {category === 'all' && (
+                                    <td>
+                                        <Link to={`/food/${item.category.label}`}>
+                                            {item.category.label}
+                                        </Link>
+                                    </td>
+                                )}
                                 <td>{item.servings}</td>
                                 <td>
                                     <button

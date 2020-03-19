@@ -20,7 +20,7 @@ exports[`FoodTable component should render 1`] = `
 
 <div>
   <h1>
-    meat
+    all
   </h1>
   <table>
     <thead>
@@ -30,6 +30,11 @@ exports[`FoodTable component should render 1`] = `
         </th>
         <th>
           Expires
+        </th>
+        <th
+          data-testid="foodTableCategoryColumn"
+        >
+          Category
         </th>
         <th>
           Servings
@@ -52,7 +57,58 @@ exports[`FoodTable component should render 1`] = `
           </li>
         </td>
         <td>
+          <a
+            href="/food/meat"
+          >
+            meat
+          </a>
+        </td>
+        <td>
           2
+        </td>
+        <td>
+          <button
+            data-testid="editButton"
+            style="cursor: pointer; margin: 0px 1rem 0px 0px;"
+            type="button"
+          >
+            <img
+              alt="edit"
+              src="edit.svg"
+            />
+          </button>
+          <button
+            data-testid="deleteButton"
+            style="cursor: pointer;"
+            type="button"
+          >
+            <img
+              alt="delete"
+              src="delete.svg"
+            />
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          salmon
+        </td>
+        <td>
+          <li
+            class="c0"
+          >
+            9th Apr
+          </li>
+        </td>
+        <td>
+          <a
+            href="/food/fish"
+          >
+            fish
+          </a>
+        </td>
+        <td>
+          1
         </td>
         <td>
           <button

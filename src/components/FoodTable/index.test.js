@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
@@ -12,7 +10,7 @@ jest.mock('react-router-dom', () => ({
         push: jest.fn()
     }),
     useParams: jest.fn(() => ({
-        category: 'meat'
+        category: 'all'
     })),
     Redirect: jest.fn(() => null)
 }));
@@ -40,7 +38,7 @@ const context = {
         { label: 'meat', color: 'red' },
         { label: 'fish', color: 'blue' }
     ],
-    updateHousehold: () => {}
+    updateHousehold: () => null
 };
 
 describe('FoodTable component', () => {
