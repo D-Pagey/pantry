@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useParams, Redirect } from 'react-router-dom';
 import { format } from 'date-fns';
-import { toast } from 'react-toastify';
 import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
@@ -38,9 +37,7 @@ const FoodTable = (): JSX.Element => {
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
-        updateHousehold({ key: 'fridge', values: filteredItems });
-
-        toast.info('Food item deleted.');
+        updateHousehold({ key: 'fridge', values: filteredItems, isDeleting: true });
     };
 
     const handleEdit = (params: itemTypes) => (): void => {

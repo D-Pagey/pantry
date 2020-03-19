@@ -14,7 +14,7 @@ export const FirebaseContext = createContext({
     isCheckingAuth: false,
     fridge: [],
     signOut: () => null,
-    updateHousehold: ({ key, values }) => null,
+    updateHousehold: ({ key, values, isDeleting }) => null,
     user: {
         email: null,
         name: null
@@ -91,11 +91,17 @@ const ProviderFirebase = ({ children }) => {
         setFridge([]);
     };
 
-    const updateHousehold = ({ key, values, isEditMode }) => {
+    const updateHousehold = ({ key, values, isEditMode, isDeleting }) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update({ [key]: values })
-            .then(() => toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`))
+            .then(() => {
+                if (isDeleting) {
+                    return toast.info('Food item deleted.');
+                }
+
+                return toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`);
+            })
             .catch((error) => toast.error('Error with updating fridge'));
     };
 

@@ -59,6 +59,7 @@ describe('FoodTable component', () => {
 
         expect(updateHousehold).toHaveBeenCalledWith({
             key: 'fridge',
+            isDeleting: true,
             values: context.fridge.filter((item, index) => index !== 0)
         });
     });
