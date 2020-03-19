@@ -1,5 +1,5 @@
 import React from 'react';
-import { element } from 'prop-types';
+import { node } from 'prop-types';
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class ErrorBoundary extends React.Component {
     }
 
     static propTypes = {
-        children: element
+        children: node.isRequired
     };
 
     static getDerivedStateFromError(error) {
