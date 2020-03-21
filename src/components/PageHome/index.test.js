@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import PageHome from '.';
 
 const props = {};
@@ -27,5 +28,22 @@ describe('PageHome component', () => {
             isCheckingAuth: false
         });
         getByTestId('categoryList');
+    });
+
+    it('should render a notification with the amount to expiring items', async () => {
+        const mockToast = jest.spyOn(toast, 'warn');
+
+        const updatedContext = {
+            ...context,
+            isAuthed: true,
+            isCheckingAuth: false,
+            expiringFood: ['fake A', 'fake B', 'fake C']
+        };
+
+        render(<PageHome {...props} />, updatedContext);
+
+        expect(mockToast).toHaveBeenCalledWith(
+            `You have ${updatedContext.expiringFood.length} items expiring in the next 2 days!`
+        );
     });
 });

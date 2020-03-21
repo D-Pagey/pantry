@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { countCategories } from './utils';
+import { countCategories, calculateExpiringSoon } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -10,6 +10,7 @@ const HOUSEHOLDS = 'households';
 export const FirebaseContext = createContext({
     categories: [],
     categoryCounts: [],
+    expiringFood: [],
     isAuthed: false,
     isCheckingAuth: false,
     fridge: [],
@@ -27,6 +28,7 @@ const ProviderFirebase = ({ children }) => {
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [fridge, setFridge] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [expiringFood, setExpiringFood] = useState([]);
 
     const fetchUserData = useCallback((uid) => {
         firebase
@@ -69,13 +71,15 @@ const ProviderFirebase = ({ children }) => {
                 db.collection('households')
                     .doc(user.household)
                     .onSnapshot((doc) => {
-                        setFridge(
-                            doc.data().fridge.map((item) => ({
-                                ...item,
-                                expires: item.expires.toDate()
-                            }))
-                        );
-                        setCategories(doc.data().categories);
+                        const data = doc.data();
+                        const formattedData = data.fridge.map((item) => ({
+                            ...item,
+                            expires: item.expires.toDate()
+                        }));
+
+                        setFridge(formattedData);
+                        setCategories(data.categories);
+                        setExpiringFood(calculateExpiringSoon(formattedData));
                     });
             };
 
@@ -108,11 +112,12 @@ const ProviderFirebase = ({ children }) => {
     return (
         <FirebaseContext.Provider
             value={{
-                isAuthed,
-                isCheckingAuth,
                 categories,
                 categoryCounts: countCategories(fridge.map((item) => item.category)),
+                expiringFood,
                 fridge,
+                isAuthed,
+                isCheckingAuth,
                 setIsAuthed,
                 setUser,
                 signOut,

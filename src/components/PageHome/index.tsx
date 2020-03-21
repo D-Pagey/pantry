@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { FirebaseContext } from '../ProviderFirebase';
 import CategoryList from '../CategoryList';
 import Loading from '../Loading';
@@ -7,7 +8,16 @@ import Button from '../Button';
 import * as S from './styles';
 
 const PageHome = (): JSX.Element => {
-    const { categoryCounts, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
+    const { categoryCounts, expiringFood, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
+
+    useEffect(() => {
+        if (expiringFood.length > 0) {
+            toast.warn(
+                `You have ${expiringFood.length} item${expiringFood.length > 1 &&
+                    's'} expiring in the next 2 days!`
+            );
+        }
+    }, [expiringFood]);
 
     if (isCheckingAuth) return <Loading isLoading />;
 

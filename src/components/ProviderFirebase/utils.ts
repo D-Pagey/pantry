@@ -1,3 +1,5 @@
+import { differenceInDays } from 'date-fns';
+
 interface CategoryType {
   label: string;
   colour: string;
@@ -5,6 +7,21 @@ interface CategoryType {
 
 interface CategoryWithCountType extends CategoryType {
   count: number;
+}
+
+interface FoodType {
+  category: {
+    label: string;
+    color: string;
+  };
+  expires: Date;
+  id: string;
+  name: string;
+  servings: number;
+}
+
+interface FoodWithExpiringType extends FoodType {
+  isExpiringSoon: boolean;
 }
 
 export const indexOfLabel = (arrayOfLabels: string[], label: string): number => {
@@ -35,4 +52,15 @@ export const countCategories = (categories: CategoryType[]): CategoryWithCountTy
   reducedCategories.push({ label: 'all', colour: 'blue', count: categories.length });
 
   return reducedCategories;
+};
+
+export const calculateExpiringSoon = (food: FoodType[]): FoodWithExpiringType[] => {
+  return food.map((item) => {
+    const difference = differenceInDays(item.expires, new Date());
+
+    return {
+      ...item,
+      isExpiringSoon: difference <= 2 ? true : false
+    };
+  });
 };
