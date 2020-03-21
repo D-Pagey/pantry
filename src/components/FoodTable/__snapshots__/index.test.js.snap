@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FoodTable component should render 1`] = `
-.c1 {
+.c2 {
   background-color: #288efc;
   border: 0;
   border-radius: 0.25rem;
@@ -13,9 +13,13 @@ exports[`FoodTable component should render 1`] = `
   width: 200px;
 }
 
-.c0 {
+.c1 {
   color: red;
   list-style: none;
+}
+
+.c0 {
+  cursor: pointer;
 }
 
 <div>
@@ -25,21 +29,30 @@ exports[`FoodTable component should render 1`] = `
   <table>
     <thead>
       <tr>
-        <th>
+        <th
+          class="c0"
+        >
           Name
         </th>
-        <th>
+        <th
+          class="c0"
+        >
           Expires
         </th>
         <th
+          class="c0"
           data-testid="foodTableCategoryColumn"
         >
           Category
         </th>
-        <th>
+        <th
+          class="c0"
+        >
           Servings
         </th>
-        <th>
+        <th
+          class="c0"
+        >
           Amend
         </th>
       </tr>
@@ -51,7 +64,7 @@ exports[`FoodTable component should render 1`] = `
         </td>
         <td>
           <li
-            class="c0"
+            class="c1"
           >
             12th Oct
           </li>
@@ -95,7 +108,7 @@ exports[`FoodTable component should render 1`] = `
         </td>
         <td>
           <li
-            class="c0"
+            class="c1"
           >
             9th Apr
           </li>
@@ -139,7 +152,7 @@ exports[`FoodTable component should render 1`] = `
     href="/add"
   >
     <button
-      class="c1"
+      class="c2"
       data-testid=""
       type="button"
       width=""

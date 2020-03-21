@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useParams, Redirect } from 'react-router-dom';
 import { format } from 'date-fns';
+import arraySort from 'array-sort';
+
 import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
@@ -18,7 +20,9 @@ type itemTypes = {
 
 const FoodTable = (): JSX.Element => {
     const [isValidCategory, setIsValidCategory] = useState<boolean>();
+    const [data, setData] = useState([]);
     const history = useHistory();
+    const [isDescendingOrder, setIsDescendingOrder] = useState(false);
     const { category } = useParams();
     const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
 
@@ -28,12 +32,18 @@ const FoodTable = (): JSX.Element => {
         }
     }, [categories, category]);
 
-    const filteredData =
-        category === 'all'
-            ? fridge
-            : fridge.filter((item: { category: { label: string; colour: string } }) => {
-                  return item.category.label === category;
-              });
+    useEffect(() => {
+        if (data.length === 0) {
+            const filteredData =
+                category === 'all'
+                    ? fridge
+                    : fridge.filter((item: { category: { label: string; colour: string } }) => {
+                          return item.category.label === category;
+                      });
+
+            setData(filteredData);
+        }
+    }, [data.length, category, fridge]);
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
@@ -48,6 +58,13 @@ const FoodTable = (): JSX.Element => {
         <S.Item colour={chooseDateColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
     );
 
+    const sortData = (property: string) => (): void => {
+        const sorted = arraySort([...data], property, { reverse: isDescendingOrder });
+
+        setIsDescendingOrder(!isDescendingOrder);
+        setData(sorted);
+    };
+
     if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
@@ -57,17 +74,22 @@ const FoodTable = (): JSX.Element => {
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Expires</th>
+                        <S.Header onClick={sortData('name')}>Name</S.Header>
+                        <S.Header onClick={sortData('expires')}>Expires</S.Header>
                         {category === 'all' && (
-                            <th data-testid="foodTableCategoryColumn">Category</th>
+                            <S.Header
+                                data-testid="foodTableCategoryColumn"
+                                onClick={sortData('category.label')}
+                            >
+                                Category
+                            </S.Header>
                         )}
-                        <th>Servings</th>
-                        <th>Amend</th>
+                        <S.Header onClick={sortData('servings')}>Servings</S.Header>
+                        <S.Header>Amend</S.Header>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredData.map((item: itemTypes) => {
+                    {data.map((item: itemTypes) => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.name}</td>
