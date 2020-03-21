@@ -35,11 +35,6 @@ const context = {
 };
 
 describe('AddFoodForm component', () => {
-    it('should render', () => {
-        const { container } = render(<AddFoodForm {...props} />, context);
-        expect(container.firstChild).toMatchSnapshot();
-    });
-
     it.skip('should handle form submit', async () => {
         const updateFridge = jest.fn();
         const name = 'Chicken';
