@@ -33,17 +33,15 @@ const FoodTable = (): JSX.Element => {
     }, [categories, category]);
 
     useEffect(() => {
-        if (data.length === 0) {
-            const filteredData =
-                category === 'all'
-                    ? fridge
-                    : fridge.filter((item: { category: { label: string; colour: string } }) => {
-                          return item.category.label === category;
-                      });
+        const filteredData =
+            category === 'all'
+                ? fridge
+                : fridge.filter((item: { category: { label: string; colour: string } }) => {
+                      return item.category.label === category;
+                  });
 
-            setData(filteredData);
-        }
-    }, [data.length, category, fridge]);
+        setData(filteredData);
+    }, [category, fridge]);
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
