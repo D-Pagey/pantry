@@ -76,10 +76,14 @@ const ProviderFirebase = ({ children }) => {
                             ...item,
                             expires: item.expires.toDate()
                         }));
-
-                        setFridge(formattedData);
+                        // TODO: this is shit need to refactor
+                        setFridge(calculateExpiringSoon(formattedData));
                         setCategories(data.categories);
-                        setExpiringFood(calculateExpiringSoon(formattedData));
+                        setExpiringFood(
+                            calculateExpiringSoon(formattedData).filter(
+                                (item) => item.isExpiringSoon
+                            )
+                        );
                     });
             };
 
