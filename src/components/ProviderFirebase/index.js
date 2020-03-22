@@ -30,6 +30,8 @@ const ProviderFirebase = ({ children }) => {
     const [categories, setCategories] = useState([]);
     const [expiringFood, setExpiringFood] = useState([]);
 
+    console.log({ categories });
+
     const fetchUserData = useCallback((uid) => {
         firebase
             .firestore()
@@ -78,7 +80,7 @@ const ProviderFirebase = ({ children }) => {
                         }));
                         // TODO: this is shit need to refactor
                         setFridge(calculateExpiringSoon(formattedData));
-                        setCategories(data.categories);
+                        setCategories([...data.categories, { label: 'expiring', colour: 'pink' }]);
                         setExpiringFood(
                             calculateExpiringSoon(formattedData).filter(
                                 (item) => item.isExpiringSoon
@@ -117,7 +119,10 @@ const ProviderFirebase = ({ children }) => {
         <FirebaseContext.Provider
             value={{
                 categories,
-                categoryCounts: countCategories(fridge.map((item) => item.category)),
+                categoryCounts: [
+                    ...countCategories(fridge.map((item) => item.category)),
+                    { label: 'expiring', colour: 'pink', count: expiringFood.length }
+                ],
                 expiringFood,
                 fridge,
                 isAuthed,

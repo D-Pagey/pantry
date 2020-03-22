@@ -24,7 +24,7 @@ const FoodTable = (): JSX.Element => {
     const history = useHistory();
     const [isDescendingOrder, setIsDescendingOrder] = useState(false);
     const { category } = useParams();
-    const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
+    const { expiringFood, categories, fridge, updateHousehold } = useContext(FirebaseContext);
 
     useEffect(() => {
         if (categories.length > 0 && category) {
@@ -33,15 +33,21 @@ const FoodTable = (): JSX.Element => {
     }, [categories, category]);
 
     useEffect(() => {
-        const filteredData =
-            category === 'all'
-                ? fridge
-                : fridge.filter((item: { category: { label: string; colour: string } }) => {
-                      return item.category.label === category;
-                  });
-
-        setData(filteredData);
-    }, [category, fridge]);
+        switch (category) {
+            case 'all':
+                setData(fridge);
+                break;
+            case 'expiring':
+                setData(expiringFood);
+                break;
+            default:
+                setData(
+                    fridge.filter((item: { category: { label: string; colour: string } }) => {
+                        return item.category.label === category;
+                    })
+                );
+        }
+    }, [category, fridge, expiringFood]);
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);

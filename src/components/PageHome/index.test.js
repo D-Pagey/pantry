@@ -42,8 +42,13 @@ describe('PageHome component', () => {
 
         render(<PageHome {...props} />, updatedContext);
 
-        expect(mockToast).toHaveBeenCalledWith(
-            `You have ${updatedContext.expiringFood.length} items expiring in the next 2 days!`
+        expect(
+            mockToast
+        ).toHaveBeenCalledWith(
+            `You have ${updatedContext.expiringFood.length} items expiring in the next 2 days!`,
+            { onClick: expect.any(Function) }
         );
     });
+
+    it.todo('should redirect to /expiring on click');
 });
