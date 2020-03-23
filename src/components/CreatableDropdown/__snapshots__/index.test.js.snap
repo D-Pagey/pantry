@@ -23,7 +23,7 @@ exports[`CreatableDropdown component should render 1`] = `
       class=" css-yk16xz-control"
     >
       <div
-        class=" css-1hwfws3"
+        class=" css-g1d714-ValueContainer"
       >
         <div
           class=" css-1wa3eu0-placeholder"

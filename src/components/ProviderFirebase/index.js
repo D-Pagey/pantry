@@ -30,8 +30,6 @@ const ProviderFirebase = ({ children }) => {
     const [categories, setCategories] = useState([]);
     const [expiringFood, setExpiringFood] = useState([]);
 
-    console.log({ categories });
-
     const fetchUserData = useCallback((uid) => {
         firebase
             .firestore()
