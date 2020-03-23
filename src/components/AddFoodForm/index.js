@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
+import arraySort from 'array-sort';
 
 import { getIndexOfId } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
@@ -41,7 +42,9 @@ const AddFoodForm = () => {
     const history = useHistory();
 
     useEffect(() => {
-        setCategoryLabels(categories.map((item) => item.label));
+        setCategoryLabels(
+            arraySort(categories.map((item) => item.label).filter((item) => item !== 'expiring'))
+        );
     }, [categories]);
 
     useEffect(() => {
