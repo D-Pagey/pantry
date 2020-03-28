@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
-import { calculateExpiringSoon, countCategories, indexOfLabel } from './utils';
+import { calculateExpiringSoon, indexOfLabel } from './utils';
 
-describe.only('calculateExpiringSoon function', () => {
+describe('calculateExpiringSoon function', () => {
     const food = [
         {
             category: { label: 'meat', color: 'red' },
@@ -46,67 +46,6 @@ describe.only('calculateExpiringSoon function', () => {
                 isExpiringSoon: false
             })
         );
-    });
-});
-
-describe('countCategories function', () => {
-    it('should return an array', () => {
-        expect(Array.isArray(countCategories(['meat']))).toBe(true);
-    });
-
-    it('should consolidate items', () => {
-        expect(
-            countCategories([
-                { label: 'meat', colour: 'red' },
-                { label: 'fish', colour: 'pink' },
-                { label: 'meat', colour: 'red' },
-                { label: 'meat', colour: 'red' }
-            ]).length
-        ).toBe(3);
-        expect(
-            countCategories([
-                { label: 'vegetables', colour: 'green' },
-                { label: 'vegetables', colour: 'green' },
-                { label: 'vegetables', colour: 'green' }
-            ]).length
-        ).toBe(2);
-        expect(
-            countCategories([
-                { label: 'fish', colour: 'blue' },
-                { label: 'meat', colour: 'red' },
-                { label: 'vegetables', colour: 'green' }
-            ]).length
-        ).toBe(4);
-    });
-
-    it('should increment count if category already exists', () => {
-        expect(
-            countCategories([
-                { label: 'meat', colour: 'red' },
-                { label: 'meat', colour: 'red' },
-                { label: 'meat', colour: 'red' }
-            ])
-        ).toStrictEqual([
-            { label: 'meat', colour: 'red', count: 3 },
-            { label: 'all', colour: 'blue', count: 3 }
-        ]);
-
-        expect(
-            countCategories([
-                { label: 'meat', colour: 'red' },
-                { label: 'fish', colour: 'purple' },
-                { label: 'fish', colour: 'purple' },
-                { label: 'vegetables', colour: 'green' },
-                { label: 'vegetables', colour: 'green' },
-                { label: 'vegetables', colour: 'green' },
-                { label: 'vegetables', colour: 'green' }
-            ])
-        ).toStrictEqual([
-            { label: 'meat', colour: 'red', count: 1 },
-            { label: 'fish', colour: 'purple', count: 2 },
-            { label: 'vegetables', colour: 'green', count: 4 },
-            { label: 'all', colour: 'blue', count: 7 }
-        ]);
     });
 });
 

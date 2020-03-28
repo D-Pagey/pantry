@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FirebaseContext } from '../ProviderFirebase';
 import CategoryCard from '../CategoryCard';
-import { arrayOf, string, shape, number } from 'prop-types';
 import * as S from './styles';
 
 type ItemType = {
@@ -9,14 +9,12 @@ type ItemType = {
     count: number;
 };
 
-type CategoryListTypes = {
-    categoryCounts: ItemType[];
-};
+const CategoryList = (): JSX.Element => {
+    const { categories } = useContext(FirebaseContext);
 
-const CategoryList = ({ categoryCounts }: CategoryListTypes): JSX.Element => {
     return (
         <S.Wrapper data-testid="categoryList">
-            {categoryCounts.map((item: ItemType) => (
+            {categories.map((item: ItemType) => (
                 <CategoryCard
                     label={item.label}
                     colour={item.colour}
@@ -26,10 +24,6 @@ const CategoryList = ({ categoryCounts }: CategoryListTypes): JSX.Element => {
             ))}
         </S.Wrapper>
     );
-};
-
-CategoryList.propTypes = {
-    categoryCounts: arrayOf(shape({ category: string, colour: string, count: number })).isRequired
 };
 
 export default CategoryList;

@@ -6,10 +6,10 @@ import CategoryList from '.';
 const props = {};
 
 const firebaseContext = {
-    categoryCounts: [
-        { category: 'Meat', count: 2 },
-        { category: 'Fish', count: 3 },
-        { category: 'Vegetables', count: 5 }
+    categories: [
+        { label: 'Meat', count: 2, colour: 'red' },
+        { label: 'Fish', count: 3, colour: 'blue' },
+        { label: 'Vegetables', count: 5, colour: 'green' }
     ]
 };
 

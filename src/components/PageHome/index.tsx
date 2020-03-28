@@ -8,14 +8,15 @@ import Button from '../Button';
 import * as S from './styles';
 
 const PageHome = (): JSX.Element => {
-    const { categoryCounts, expiringFood, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
+    const { expiringFood, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
     const history = useHistory();
 
     useEffect(() => {
         if (expiringFood.length > 0) {
             toast.warn(
-                `You have ${expiringFood.length} item${expiringFood.length > 1 &&
-                    's'} expiring in the next 2 days!`,
+                `You have ${expiringFood.length} item${
+                    expiringFood.length > 1 && 's'
+                } expiring in the next 2 days!`,
                 { onClick: () => history.push('/food/expiring') }
             );
         }
@@ -25,7 +26,7 @@ const PageHome = (): JSX.Element => {
 
     return (
         <S.Wrapper data-testid="pageHome">
-            {isAuthed && <CategoryList categoryCounts={categoryCounts} />}
+            {isAuthed && <CategoryList />}
 
             <Link to="/add">
                 <Button>Add Item</Button>

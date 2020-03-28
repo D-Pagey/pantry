@@ -5,7 +5,6 @@ import PageHome from '.';
 const props = {};
 
 const context = {
-    categoryCounts: [{ label: 'Meat', colour: 'red', count: 1 }],
     isAuthed: false,
     isCheckingAuth: true
 };

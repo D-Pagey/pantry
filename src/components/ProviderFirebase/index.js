@@ -2,14 +2,13 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { countCategories, calculateExpiringSoon } from './utils';
+import { calculateExpiringSoon } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
 export const FirebaseContext = createContext({
     categories: [],
-    categoryCounts: [],
     expiringFood: [],
     isAuthed: false,
     isCheckingAuth: false,
@@ -117,10 +116,6 @@ const ProviderFirebase = ({ children }) => {
         <FirebaseContext.Provider
             value={{
                 categories,
-                categoryCounts: [
-                    ...countCategories(fridge.map((item) => item.category)),
-                    { label: 'expiring', colour: 'pink', count: expiringFood.length }
-                ],
                 expiringFood,
                 fridge,
                 isAuthed,
