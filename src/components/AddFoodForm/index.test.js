@@ -4,7 +4,7 @@
 import React from 'react';
 import { fireEvent, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AddFoodForm from '.';
+import { AddFoodForm } from '.';
 
 jest.mock('react-select/creatable', () => ({ options, value, onChange }) => {
   const handleChange = (event) => {

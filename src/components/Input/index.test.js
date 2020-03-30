@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import Input from '.';
+import { Input } from '.';
 
 const props = {
   name: 'test',

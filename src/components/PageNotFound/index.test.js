@@ -1,5 +1,5 @@
 import React from 'react';
-import PageNotFound from '.';
+import { PageNotFound } from '.';
 
 describe('PageNotFound component', () => {
   it('should render', () => {

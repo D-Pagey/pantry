@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { firebase } from '../../services';
 import { FirebaseContext } from '../ProviderFirebase';
 
-const PageSignIn = () => {
+export const PageSignIn = () => {
   const { isAuthed, setUser } = useContext(FirebaseContext);
 
   // Configure FirebaseUI.
@@ -32,4 +32,3 @@ const PageSignIn = () => {
   );
 };
 
-export default PageSignIn;

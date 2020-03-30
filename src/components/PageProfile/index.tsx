@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
-const PageProfile = (): JSX.Element => {
+export const PageProfile = (): JSX.Element => {
     const { categories, signOut, user } = useContext(FirebaseContext);
 
     return (
@@ -42,5 +42,3 @@ const PageProfile = (): JSX.Element => {
         </div>
     );
 };
-
-export default PageProfile;

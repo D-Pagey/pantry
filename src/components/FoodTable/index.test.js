@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
-import FoodTable from '.';
+import { FoodTable } from '.';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts

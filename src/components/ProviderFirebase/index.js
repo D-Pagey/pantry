@@ -23,7 +23,7 @@ export const FirebaseContext = createContext({
   },
 });
 
-const ProviderFirebase = ({ children }) => {
+export const ProviderFirebase = ({ children }) => {
   const [user, setUser] = useState({});
   const [isAuthed, setIsAuthed] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -136,4 +136,4 @@ ProviderFirebase.propTypes = {
   children: node.isRequired,
 };
 
-export default ProviderFirebase;
+

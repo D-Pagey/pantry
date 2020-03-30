@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryCard from '.';
+import { CategoryCard } from '.';
 
 const props = {
   colour: 'red',

@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
-import CreatableDropdown from '.';
+import { CreatableDropdown } from '.';
 
 const props = {
   options: ['purple', 'orange', 'yellow', 'green'],

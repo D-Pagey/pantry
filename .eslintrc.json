@@ -1,62 +1,64 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest/globals": true
-  },
-  "extends": [
-    "airbnb-typescript",
-    "airbnb/hooks",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": ["jest"],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "render": "readonly"
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
-  },
-  "rules": {
-    "@typescript-eslint/indent": "off",
-    "react/jsx-indent": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "off",
-    "max-len": [
-      "warn",
-      {
-        "code": 120,
-        "tabWidth": 4,
-        "comments": 100,
-        "ignoreComments": false,
-        "ignoreTrailingComments": true,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
-      }
-    ]
-  },
-  "overrides": [
-    {
-      "files": ["*.js"],
-      "rules": {
-        "@typescript-eslint/explicit-function-return-type": "off"
-      }
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "extends": [
+        "airbnb-typescript",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "prettier",
+        "prettier/react"
+    ],
+    "plugins": ["jest"],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+        "render": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "@typescript-eslint/indent": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-filename-extension": "off",
+        "react/jsx-props-no-spreading": "off",
+        // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
+        "import/prefer-default-export": "off",
+        "import/no-default-export": "error",
+        "max-len": [
+            "warn",
+            {
+                "code": 120,
+                "tabWidth": 4,
+                "comments": 100,
+                "ignoreComments": false,
+                "ignoreTrailingComments": true,
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreRegExpLiterals": true
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["*.js"],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": "off"
+            }
+        }
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
-  ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
 }

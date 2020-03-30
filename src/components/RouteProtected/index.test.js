@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import RouteProtected from '.';
+import { RouteProtected } from '.';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

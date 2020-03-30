@@ -1,7 +1,5 @@
 import React from 'react';
-import App from '.';
-
-// TO DO: Test that mobile nav doesnt render on bigger viewports
+import { App } from '.';
 
 describe('App component', () => {
   it('should render', () => {

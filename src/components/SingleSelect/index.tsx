@@ -1,6 +1,6 @@
 import React from 'react';
 import { arrayOf, func, number, shape, string } from 'prop-types';
-import Button from '../Button';
+import { Button } from '../Button';
 import * as S from './styles';
 
 type propTypes = {
@@ -15,7 +15,7 @@ type propTypes = {
     testId: string;
 };
 
-const SingleSelect = ({ label, margin, options, selected, setSelected, testId }: propTypes): JSX.Element => {
+export const SingleSelect = ({ label, margin, options, selected, setSelected, testId }: propTypes): JSX.Element => {
     const handleClick = (option: { label: string; value: number }) => (): Function => setSelected(option);
 
     return (
@@ -60,5 +60,3 @@ SingleSelect.defaultProps = {
     selected: null,
     testId: ''
 };
-
-export default SingleSelect;

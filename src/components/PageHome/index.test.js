@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import PageHome from '.';
+import { PageHome } from '.';
 
 const props = {};
 

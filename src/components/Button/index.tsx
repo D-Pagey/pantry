@@ -10,7 +10,7 @@ type propTypes = {
     width: string;
 };
 
-const Button = ({ children, testId, variant, width, ...props }: propTypes): JSX.Element => {
+export const Button = ({ children, testId, variant, width, ...props }: propTypes): JSX.Element => {
     switch (variant) {
         case 'submit':
             return (
@@ -52,5 +52,3 @@ Button.defaultProps = {
     variant: '',
     width: ''
 };
-
-export default Button;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Routes from '.';
+import { Routes } from '.';
 
 describe('Routes component', () => {
   it.each`

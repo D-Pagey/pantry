@@ -10,7 +10,7 @@ const addLabel = (value) => {
   return { label: titleCase(value), value };
 };
 
-const CreatableDropdown = ({
+export const CreatableDropdown = ({
   error, label, options, setSelected, value,
 }) => {
   const handleChange = (newValue, actionMeta) => {
@@ -53,4 +53,3 @@ CreatableDropdown.defaultProps = {
   value: null,
 };
 
-export default CreatableDropdown;
