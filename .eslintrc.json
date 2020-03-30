@@ -26,6 +26,7 @@
         "project": "./tsconfig.json"
     },
     "rules": {
+        // TO DO: work out if I need these 2 linting rules
         "@typescript-eslint/indent": "off",
         "react/jsx-indent": "off",
         "react/jsx-filename-extension": "off",
