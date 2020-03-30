@@ -10,48 +10,25 @@ import { createMemoryHistory } from 'history';
 import { FirebaseContext } from './components/ProviderFirebase';
 
 global.render = (ui, firebaseContextValue = {}) => {
-    let queries;
+  let queries;
 
-    act(() => {
-        queries = render(
-            <FirebaseContext.Provider
-                value={{
-                    categories: [],
-                    expiringFood: [],
-                    isAuthed: false,
-                    setUser: () => {},
-                    setIsAuthed: () => {},
-                    user: {},
-                    ...firebaseContextValue
-                }}
-            >
-                <Router history={createMemoryHistory()}>{ui}</Router>
-            </FirebaseContext.Provider>
-        );
-    });
+  act(() => {
+    queries = render(
+      <FirebaseContext.Provider
+        value={{
+          categories: [],
+          expiringFood: [],
+          isAuthed: false,
+          setUser: () => {},
+          setIsAuthed: () => {},
+          user: {},
+          ...firebaseContextValue,
+        }}
+      >
+        <Router history={createMemoryHistory()}>{ui}</Router>
+      </FirebaseContext.Provider>,
+    );
+  });
 
-    return queries;
+  return queries;
 };
-
-global.setMatchMedia = (viewportWidth) => {
-    global.matchMedia = jest.fn().mockImplementation((query) => {
-        const isMinWidth = query.includes('min-width');
-        const isMaxWidth = query.includes('max-width');
-        const queryWidth = parseInt((/(\d+)px/.exec(query) || [])[0], 10);
-
-        let matches = false;
-
-        if (isMinWidth) matches = viewportWidth > queryWidth;
-        if (isMaxWidth) matches = viewportWidth < queryWidth;
-
-        return {
-            matches,
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn()
-        };
-    });
-};
-
-setMatchMedia(320);

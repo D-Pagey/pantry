@@ -5,10 +5,10 @@ import ErrorBoundary from './components/ErrorBoundary';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <ErrorBoundary>
-        <App />
-    </ErrorBoundary>,
-    document.getElementById('root')
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

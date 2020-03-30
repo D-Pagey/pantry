@@ -5,49 +5,49 @@ import PageHome from '.';
 const props = {};
 
 const context = {
-    isAuthed: false,
-    isCheckingAuth: true
+  isAuthed: false,
+  isCheckingAuth: true,
 };
 
 describe('PageHome component', () => {
-    it('should render', () => {
-        const { container } = render(<PageHome {...props} />, context);
-        expect(container.firstChild).toMatchSnapshot();
+  it('should render', () => {
+    const { container } = render(<PageHome {...props} />, context);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should render loading spinner if checking auth', () => {
+    const { queryByTestId } = render(<PageHome {...props} />, context);
+    expect(queryByTestId('pageHome')).toBeNull();
+  });
+
+  it('should render category list if authed', () => {
+    const { getByTestId } = render(<PageHome {...props} />, {
+      ...context,
+      isAuthed: true,
+      isCheckingAuth: false,
     });
+    getByTestId('categoryList');
+  });
 
-    it('should render loading spinner if checking auth', () => {
-        const { queryByTestId } = render(<PageHome {...props} />, context);
-        expect(queryByTestId('pageHome')).toBeNull();
-    });
+  it('should render a notification with the amount to expiring items', () => {
+    const mockToast = jest.spyOn(toast, 'warn');
 
-    it('should render category list if authed', () => {
-        const { getByTestId } = render(<PageHome {...props} />, {
-            ...context,
-            isAuthed: true,
-            isCheckingAuth: false
-        });
-        getByTestId('categoryList');
-    });
+    const updatedContext = {
+      ...context,
+      isAuthed: true,
+      isCheckingAuth: false,
+      expiringFood: ['fake A', 'fake B', 'fake C'],
+    };
 
-    it('should render a notification with the amount to expiring items', async () => {
-        const mockToast = jest.spyOn(toast, 'warn');
+    render(<PageHome {...props} />, updatedContext);
 
-        const updatedContext = {
-            ...context,
-            isAuthed: true,
-            isCheckingAuth: false,
-            expiringFood: ['fake A', 'fake B', 'fake C']
-        };
+    expect(mockToast).toHaveBeenCalledWith(
+      `You have ${updatedContext.expiringFood.length} items expiring in the next 2 days!`,
+      {
+        onClick: expect.any(Function),
+      },
+    );
+  });
 
-        render(<PageHome {...props} />, updatedContext);
-
-        expect(mockToast).toHaveBeenCalledWith(
-            `You have ${updatedContext.expiringFood.length} items expiring in the next 2 days!`,
-            {
-                onClick: expect.any(Function)
-            }
-        );
-    });
-
-    it.todo('should redirect to /expiring on click');
+  it.todo('should redirect to /expiring on click');
 });

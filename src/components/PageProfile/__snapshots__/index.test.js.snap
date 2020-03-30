@@ -11,15 +11,16 @@ exports[`PageProfile component should render 1`] = `
   data-testid="pageProfile"
 >
   <p>
-    Welcome 
+    Welcome
     Dan
   </p>
   <p>
-    Your email is: 
+    Your email is:
     dan@gmail.com
   </p>
   <button
     data-testid="pageProfileButton"
+    type="button"
   >
     Sign Out
   </button>

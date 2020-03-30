@@ -5,50 +5,52 @@ import CreatableSelect from 'react-select/creatable';
 import * as S from './styles';
 
 const addLabel = (value) => {
-    if (Array.isArray(value)) return value.map((item) => ({ label: titleCase(item), value: item }));
+  if (Array.isArray(value)) return value.map((item) => ({ label: titleCase(item), value: item }));
 
-    return { label: titleCase(value), value };
+  return { label: titleCase(value), value };
 };
 
-const CreatableDropdown = ({ error, label, options, setSelected, value }) => {
-    const handleChange = (newValue, actionMeta) => {
-        const isSelected = actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
+const CreatableDropdown = ({
+  error, label, options, setSelected, value,
+}) => {
+  const handleChange = (newValue, actionMeta) => {
+    const isSelected = actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
 
-        if (isSelected) {
-            const formatted = { label: newValue.label, value: newValue.value.toLowerCase() };
+    if (isSelected) {
+      const formatted = { label: newValue.label, value: newValue.value.toLowerCase() };
 
-            setSelected(formatted);
-        }
-    };
+      setSelected(formatted);
+    }
+  };
 
-    return (
-        <S.Wrapper>
-            {label && <S.Label>{label}</S.Label>}
+  return (
+    <S.Wrapper>
+      {label && <S.Label>{label}</S.Label>}
 
-            <CreatableSelect
-                isClearable
-                onChange={handleChange}
-                options={addLabel(options)}
-                value={value && addLabel(value)}
-            />
+      <CreatableSelect
+        isClearable
+        onChange={handleChange}
+        options={addLabel(options)}
+        value={value && addLabel(value)}
+      />
 
-            {error && <S.Error>{error}</S.Error>}
-        </S.Wrapper>
-    );
+      {error && <S.Error>{error}</S.Error>}
+    </S.Wrapper>
+  );
 };
 
 CreatableDropdown.propTypes = {
-    error: string,
-    label: string,
-    options: arrayOf(string).isRequired,
-    setSelected: func.isRequired,
-    value: string
+  error: string,
+  label: string,
+  options: arrayOf(string).isRequired,
+  setSelected: func.isRequired,
+  value: string,
 };
 
 CreatableDropdown.defaultProps = {
-    error: '',
-    label: '',
-    value: null
+  error: '',
+  label: '',
+  value: null,
 };
 
 export default CreatableDropdown;

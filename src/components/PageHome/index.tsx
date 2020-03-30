@@ -8,29 +8,29 @@ import Button from '../Button';
 import * as S from './styles';
 
 const PageHome = (): JSX.Element => {
-    const { expiringFood, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
-    const history = useHistory();
+  const { expiringFood, isAuthed, isCheckingAuth } = useContext(FirebaseContext);
+  const history = useHistory();
 
-    useEffect(() => {
-        if (expiringFood.length > 0) {
-            toast.warn(
-                `You have ${expiringFood.length} item${expiringFood.length > 1 && 's'} expiring in the next 2 days!`,
-                { onClick: () => history.push('/food/expiring') }
-            );
-        }
-    }, [expiringFood, history]);
+  useEffect(() => {
+    if (expiringFood.length > 0) {
+      toast.warn(
+        `You have ${expiringFood.length} item${expiringFood.length > 1 && 's'} expiring in the next 2 days!`,
+        { onClick: () => history.push('/food/expiring') },
+      );
+    }
+  }, [expiringFood, history]);
 
-    if (isCheckingAuth) return <Loading isLoading />;
+  if (isCheckingAuth) return <Loading isLoading />;
 
-    return (
-        <S.Wrapper data-testid="pageHome">
-            {isAuthed && <CategoryList />}
+  return (
+    <S.Wrapper data-testid="pageHome">
+      {isAuthed && <CategoryList />}
 
-            <Link to="/add">
-                <Button>Add Item</Button>
-            </Link>
-        </S.Wrapper>
-    );
+      <Link to="/add">
+        <Button>Add Item</Button>
+      </Link>
+    </S.Wrapper>
+  );
 };
 
 export default PageHome;

@@ -24,7 +24,7 @@ export const DateSpan = styled.span`
 `;
 
 export const UpButton = styled.button.attrs({
-    type: 'button'
+  type: 'button',
 })`
     grid-row: 1;
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button.attrs({
-    type: 'button'
+  type: 'button',
 })`
     background-color: #288efc;
     border: 0;
@@ -30,5 +30,5 @@ export const UnSelected = styled(Button)`
 `;
 
 export const Submit = styled(Button).attrs({
-    type: 'submit'
+  type: 'submit',
 })``;
