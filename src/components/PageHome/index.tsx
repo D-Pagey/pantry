@@ -14,9 +14,7 @@ const PageHome = (): JSX.Element => {
     useEffect(() => {
         if (expiringFood.length > 0) {
             toast.warn(
-                `You have ${expiringFood.length} item${
-                    expiringFood.length > 1 && 's'
-                } expiring in the next 2 days!`,
+                `You have ${expiringFood.length} item${expiringFood.length > 1 && 's'} expiring in the next 2 days!`,
                 { onClick: () => history.push('/food/expiring') }
             );
         }

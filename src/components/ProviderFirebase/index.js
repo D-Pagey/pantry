@@ -78,11 +78,7 @@ const ProviderFirebase = ({ children }) => {
                         // TODO: this is shit need to refactor
                         setFridge(calculateExpiringSoon(formattedData));
                         setCategories(data.categories);
-                        setExpiringFood(
-                            calculateExpiringSoon(formattedData).filter(
-                                (item) => item.isExpiringSoon
-                            )
-                        );
+                        setExpiringFood(calculateExpiringSoon(formattedData).filter((item) => item.isExpiringSoon));
                     });
             };
 

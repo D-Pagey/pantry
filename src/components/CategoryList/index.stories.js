@@ -15,8 +15,6 @@ const firebaseContext = {
 
 storiesOf('CategoryList', module)
     .addDecorator((storyFn) => (
-        <FirebaseContext.Provider value={{ ...firebaseContext }}>
-            {storyFn()}
-        </FirebaseContext.Provider>
+        <FirebaseContext.Provider value={{ ...firebaseContext }}>{storyFn()}</FirebaseContext.Provider>
     ))
     .add('default', () => <CategoryList {...props} />);

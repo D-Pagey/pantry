@@ -43,9 +43,7 @@ const AddFoodForm = () => {
 
     useEffect(() => {
         // TODO: This may be unneccessary once refactor categories to be tags
-        setCategoryLabels(
-            arraySort(categories.map((item) => item.label).filter((item) => item !== 'expiring'))
-        );
+        setCategoryLabels(arraySort(categories.map((item) => item.label).filter((item) => item !== 'expiring')));
     }, [categories]);
 
     useEffect(() => {
@@ -124,9 +122,7 @@ const AddFoodForm = () => {
                                 error={errors.category}
                                 label="What category of food?"
                                 options={categoryLabels}
-                                setSelected={(category) =>
-                                    setFieldValue('category', category.value)
-                                }
+                                setSelected={(category) => setFieldValue('category', category.value)}
                                 value={values.category}
                             />
 

@@ -81,10 +81,7 @@ const FoodTable = (): JSX.Element => {
                         <S.Header onClick={sortData('name')}>Name</S.Header>
                         <S.Header onClick={sortData('expires')}>Expires</S.Header>
                         {category === 'all' && (
-                            <S.Header
-                                data-testid="foodTableCategoryColumn"
-                                onClick={sortData('category.label')}
-                            >
+                            <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
                                 Category
                             </S.Header>
                         )}
@@ -100,9 +97,7 @@ const FoodTable = (): JSX.Element => {
                                 <td>{expiresColumn(item)}</td>
                                 {category === 'all' && (
                                     <td>
-                                        <Link to={`/food/${item.category.label}`}>
-                                            {item.category.label}
-                                        </Link>
+                                        <Link to={`/food/${item.category.label}`}>{item.category.label}</Link>
                                     </td>
                                 )}
                                 <td>{item.servings}</td>

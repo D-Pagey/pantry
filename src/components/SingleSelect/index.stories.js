@@ -39,7 +39,5 @@ const SingleSelectWrapper = ({ label, preSelected }) => {
 
 storiesOf('SingleSelect', module)
     .add('default', () => <SingleSelectWrapper label="What options would you like to select?" />)
-    .add('preselected', () => (
-        <SingleSelectWrapper label="What options would you like to select?" preSelected={3} />
-    ))
+    .add('preselected', () => <SingleSelectWrapper label="What options would you like to select?" preSelected={3} />)
     .add('no label', () => <SingleSelectWrapper />);

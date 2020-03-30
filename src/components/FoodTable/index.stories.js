@@ -33,9 +33,7 @@ const firebaseContext = {
 
 storiesOf('FoodTable', module)
     .addDecorator((storyFn) => (
-        <FirebaseContext.Provider value={{ ...firebaseContext }}>
-            {storyFn()}
-        </FirebaseContext.Provider>
+        <FirebaseContext.Provider value={{ ...firebaseContext }}>{storyFn()}</FirebaseContext.Provider>
     ))
     .add('meat', () => <FoodTable {...props} />)
     .add('all', () => <FoodTable {...props} match={{ params: { category: 'all' } }} />);

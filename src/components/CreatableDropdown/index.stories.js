@@ -13,13 +13,7 @@ const FakeForm = ({ error, label, preSelected }) => {
     }, [preSelected]);
 
     return (
-        <CreatableDropdown
-            error={error}
-            options={options}
-            label={label}
-            setSelected={setSelected}
-            value={selected}
-        />
+        <CreatableDropdown error={error} options={options} label={label} setSelected={setSelected} value={selected} />
     );
 };
 

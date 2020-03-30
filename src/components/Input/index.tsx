@@ -13,16 +13,7 @@ type props = {
     value: string;
 };
 
-const Input = ({
-    error,
-    label,
-    name,
-    onBlur,
-    onChange,
-    placeholder,
-    testId,
-    value
-}: props): JSX.Element => {
+const Input = ({ error, label, name, onBlur, onChange, placeholder, testId, value }: props): JSX.Element => {
     return (
         <S.Wrapper>
             {label && <S.Label htmlFor={testId}>{label}</S.Label>}

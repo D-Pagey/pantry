@@ -1,15 +1,6 @@
 import React from 'react';
 import { func, instanceOf, string } from 'prop-types';
-import {
-    format,
-    addDays,
-    addMonths,
-    addYears,
-    addWeeks,
-    subDays,
-    subMonths,
-    subYears
-} from 'date-fns';
+import { format, addDays, addMonths, addYears, addWeeks, subDays, subMonths, subYears } from 'date-fns';
 import Button from '../Button';
 import * as S from './styles';
 

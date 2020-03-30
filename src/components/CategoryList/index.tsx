@@ -15,12 +15,7 @@ const CategoryList = (): JSX.Element => {
     return (
         <S.Wrapper data-testid="categoryList">
             {categories.map((item: ItemType) => (
-                <CategoryCard
-                    label={item.label}
-                    colour={item.colour}
-                    quantity={item.count}
-                    key={item.label}
-                />
+                <CategoryCard label={item.label} colour={item.colour} quantity={item.count} key={item.label} />
             ))}
         </S.Wrapper>
     );

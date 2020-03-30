@@ -12,8 +12,7 @@ const addLabel = (value) => {
 
 const CreatableDropdown = ({ error, label, options, setSelected, value }) => {
     const handleChange = (newValue, actionMeta) => {
-        const isSelected =
-            actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
+        const isSelected = actionMeta.action === 'select-option' || actionMeta.action === 'create-option';
 
         if (isSelected) {
             const formatted = { label: newValue.label, value: newValue.value.toLowerCase() };

@@ -15,16 +15,8 @@ type propTypes = {
     testId: string;
 };
 
-const SingleSelect = ({
-    label,
-    margin,
-    options,
-    selected,
-    setSelected,
-    testId
-}: propTypes): JSX.Element => {
-    const handleClick = (option: { label: string; value: number }) => (): Function =>
-        setSelected(option);
+const SingleSelect = ({ label, margin, options, selected, setSelected, testId }: propTypes): JSX.Element => {
+    const handleClick = (option: { label: string; value: number }) => (): Function => setSelected(option);
 
     return (
         <S.Wrapper margin={margin} data-testid={testId}>

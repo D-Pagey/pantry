@@ -5,8 +5,6 @@ type LoadingTypes = {
     isLoading: boolean;
 };
 
-const Loading = ({ isLoading }: LoadingTypes): JSX.Element => (
-    <PropagateLoader color="blue" loading={isLoading} />
-);
+const Loading = ({ isLoading }: LoadingTypes): JSX.Element => <PropagateLoader color="blue" loading={isLoading} />;
 
 export default Loading;
