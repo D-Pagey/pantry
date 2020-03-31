@@ -62,7 +62,7 @@ export const AddFoodForm = () => {
             };
         }
 
-        const newCategory = { label: values.category, colour: 'black' };
+        const newCategory = { label: values.category, colour: 'black', count: 0 };
 
         updateHousehold({
             key: 'categories',
