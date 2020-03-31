@@ -31,6 +31,7 @@
         "react/jsx-indent": "off",
         "react/jsx-filename-extension": "off",
         "react/jsx-props-no-spreading": "off",
+        "react/prop-types": "off",
         // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
         "import/prefer-default-export": "off",
         "import/no-default-export": "error",
@@ -53,7 +54,15 @@
         {
             "files": ["*.js"],
             "rules": {
-                "@typescript-eslint/explicit-function-return-type": "off"
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "react/prop-types": 2
+            }
+        },
+        {
+            "files": ["*.stories.js"],
+            "rules": {
+                "react/prop-types": 0,
+                "import/no-default-export": "off"
             }
         }
     ],

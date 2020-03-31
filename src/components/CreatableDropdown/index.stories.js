@@ -4,7 +4,6 @@ import { CreatableDropdown } from '.';
 
 const options = ['purple', 'orange', 'yellow', 'green'];
 
-// eslint-disable-next-line react/prop-types
 const FakeForm = ({ error, label, preSelected }) => {
     const [selected, setSelected] = useState();
 
