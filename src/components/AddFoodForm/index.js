@@ -11,7 +11,6 @@ import { CreatableDropdown } from '../CreatableDropdown';
 import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
-import * as S from './styles';
 
 const servingsOptions = [
     { label: '1', value: 1 },
@@ -74,89 +73,87 @@ export const AddFoodForm = () => {
     };
 
     return (
-        <S.Wrapper>
-            <Formik
-                enableReinitialize
-                // handle how Formik resets forms - it uses the values it was initialised with
-                initialValues={isEditMode ? initialValues : baseValues}
-                validate={(values) => {
-                    const errors = {};
+        <Formik
+            enableReinitialize
+            // handle how Formik resets forms - it uses the values it was initialised with
+            initialValues={isEditMode ? initialValues : baseValues}
+            validate={(values) => {
+                const errors = {};
 
-                    if (!values.name) {
-                        errors.name = 'Required';
-                    }
+                if (!values.name) {
+                    errors.name = 'Required';
+                }
 
-                    if (!values.category) {
-                        errors.category = 'Required';
-                    }
+                if (!values.category) {
+                    errors.category = 'Required';
+                }
 
-                    return errors;
-                }}
-                onSubmit={(values, actions) => {
-                    const indexOfFoodId = getIndexOfId(values.id, fridge);
+                return errors;
+            }}
+            onSubmit={(values, actions) => {
+                const indexOfFoodId = getIndexOfId(values.id, fridge);
 
-                    if (indexOfFoodId === -1) {
-                        updateHousehold({
-                            isEditMode,
-                            key: 'fridge',
-                            values: [...fridge, addColourToCategory(addIdToFood(values))]
-                        });
-                    } else {
-                        const fridgeCopy = [...fridge];
-                        fridgeCopy[indexOfFoodId] = {
-                            ...addColourToCategory(values),
-                            name: values.name.toLowerCase()
-                        };
-                        updateHousehold({ isEditMode, key: 'fridge', values: fridgeCopy });
-                    }
+                if (indexOfFoodId === -1) {
+                    updateHousehold({
+                        isEditMode,
+                        key: 'fridge',
+                        values: [...fridge, addColourToCategory(addIdToFood(values))]
+                    });
+                } else {
+                    const fridgeCopy = [...fridge];
+                    fridgeCopy[indexOfFoodId] = {
+                        ...addColourToCategory(values),
+                        name: values.name.toLowerCase()
+                    };
+                    updateHousehold({ isEditMode, key: 'fridge', values: fridgeCopy });
+                }
 
-                    actions.setSubmitting(false);
-                    actions.resetForm();
-                    setIsEditMode(false);
-                    history.goBack();
-                }}
-            >
-                {({ errors, handleBlur, handleChange, setFieldValue, values }) => (
-                    <Form>
-                        <CreatableDropdown
-                            error={errors.category}
-                            label="What category of food?"
-                            options={categoryLabels}
-                            setSelected={(category) => setFieldValue('category', category.value)}
-                            value={values.category}
-                        />
+                actions.setSubmitting(false);
+                actions.resetForm();
+                setIsEditMode(false);
+                history.goBack();
+            }}
+        >
+            {({ errors, handleBlur, handleChange, setFieldValue, values }) => (
+                <Form>
+                    <CreatableDropdown
+                        error={errors.category}
+                        label="What category of food?"
+                        options={categoryLabels}
+                        setSelected={(category) => setFieldValue('category', category.value)}
+                        value={values.category}
+                    />
 
-                        <Input
-                            error={errors.name}
-                            label="What is the name of the food?"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            name="name"
-                            placeholder="Name..."
-                            testId="addFoodFoodNameInput"
-                            value={values.name}
-                        />
+                    <Input
+                        error={errors.name}
+                        label="What is the name of the food?"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        name="name"
+                        placeholder="Name..."
+                        testId="addFoodFoodNameInput"
+                        value={values.name}
+                    />
 
-                        <DialDatePicker
-                            date={values.expires}
-                            label="When does it expire?"
-                            setDate={(date) => setFieldValue('expires', date)}
-                        />
+                    <DialDatePicker
+                        date={values.expires}
+                        label="When does it expire?"
+                        setDate={(date) => setFieldValue('expires', date)}
+                    />
 
-                        <SingleSelect
-                            label="How many servings?"
-                            options={servingsOptions}
-                            selected={values.servings}
-                            setSelected={(option) => setFieldValue('servings', option.value)}
-                            testId="addFoodFormServings"
-                        />
+                    <SingleSelect
+                        label="How many servings?"
+                        options={servingsOptions}
+                        selected={values.servings}
+                        setSelected={(option) => setFieldValue('servings', option.value)}
+                        testId="addFoodFormServings"
+                    />
 
-                        <Button testId="addFoodFormButton" variant="submit">
-                            Submit
-                        </Button>
-                    </Form>
-                )}
-            </Formik>
-        </S.Wrapper>
+                    <Button testId="addFoodFormButton" variant="submit">
+                        Submit
+                    </Button>
+                </Form>
+            )}
+        </Formik>
     );
 };
