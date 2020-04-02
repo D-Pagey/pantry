@@ -12,4 +12,16 @@ describe('MultiSelectDropdown component', () => {
         const { container } = render(<MultiSelectDropdown {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
+
+    it('should render a label', () => {
+        const label = 'Which food categories is it?';
+        const { getByText } = render(<MultiSelectDropdown {...props} label={label} />);
+        getByText(label);
+      });
+    
+      it('should render an error', () => {
+        const error = 'Required';
+        const { getByText } = render(<MultiSelectDropdown {...props} error={error} />);
+        getByText(error);
+      });
 });

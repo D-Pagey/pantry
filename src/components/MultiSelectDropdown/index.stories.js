@@ -26,10 +26,14 @@ const options = [
     }
 ];
 
-const Wrapper = () => {
+const Wrapper = (props) => {
     const [values, setValues] = useState([options[0]]);
 
-    return <MultiSelectDropdown setValues={setValues} options={options} value={values}/>;
+    return <MultiSelectDropdown setValues={setValues} options={options} value={values} {...props} />;
 };
 
-storiesOf('MultiSelectDropdown', module).add('default', () => <Wrapper />);
+storiesOf('MultiSelectDropdown', module)
+    .add('default', () => <Wrapper />)
+    .add('with label', () => <Wrapper label="Food categories" />)
+    .add('with error', () => <Wrapper error="Required" />)
+    .add('with label & error', () => <Wrapper label="Food categories" error="Required" />);
