@@ -6,10 +6,6 @@ export const Wrapper = styled.div`
     margin: ${({ margin }) => margin || '0 0 1rem'};
 `;
 
-export const Label = styled.label`
-    margin: 0 0 0.5rem;
-`;
-
 export const ButtonWrapper = styled.div`
     display: flex;
 `;

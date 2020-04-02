@@ -3,6 +3,7 @@ import * as S from './styles';
 
 type LabelTypes = {
     children: React.ReactNode;
+    htmlFor?: string;
 };
 
-export const FormLabel = ({ children }: LabelTypes): JSX.Element => <S.Label>{children}</S.Label>;
+export const FormLabel = ({ children, ...props }: LabelTypes): JSX.Element => <S.Label {...props}>{children}</S.Label>;

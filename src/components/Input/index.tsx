@@ -1,5 +1,6 @@
 import React from 'react';
 import { func, string } from 'prop-types';
+import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
 type props = {
@@ -15,7 +16,7 @@ type props = {
 
 export const Input = ({ error, label, name, onBlur, onChange, placeholder, testId, value }: props): JSX.Element => (
     <S.Wrapper>
-        {label && <S.Label htmlFor={testId}>{label}</S.Label>}
+        {label && <FormLabel htmlFor={testId}>{label}</FormLabel>}
 
         <S.Input
             id={testId}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { arrayOf, func, number, shape, string } from 'prop-types';
 import { Button } from '../Button';
+import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
 type propTypes = {
@@ -20,7 +21,7 @@ export const SingleSelect = ({ label, margin, options, selected, setSelected, te
 
     return (
         <S.Wrapper margin={margin} data-testid={testId}>
-            {label && <S.Label>{label}</S.Label>}
+            {label && <FormLabel>{label}</FormLabel>}
 
             <S.ButtonWrapper>
                 {options.map(

@@ -2,6 +2,7 @@ import React from 'react';
 import { arrayOf, func, string } from 'prop-types';
 import { titleCase } from 'title-case';
 import CreatableSelect from 'react-select/creatable';
+import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
 const addLabel = (value) => {
@@ -25,7 +26,7 @@ export const CreatableDropdown = ({
 
   return (
     <S.Wrapper>
-      {label && <S.Label>{label}</S.Label>}
+      {label && <FormLabel>{label}</FormLabel>}
 
       <CreatableSelect
         isClearable

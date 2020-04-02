@@ -2,6 +2,7 @@ import React from 'react';
 import { func, instanceOf, string } from 'prop-types';
 import { format, addDays, addMonths, addYears, addWeeks, subDays, subMonths, subYears } from 'date-fns';
 import { Button } from '../Button';
+import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
 type DialDatePickerProps = {
@@ -15,7 +16,7 @@ export const DialDatePicker: React.FC<DialDatePickerProps> = ({ date, setDate, l
 
     return (
         <S.Wrapper>
-            {label && <S.Label>{label}</S.Label>}
+            {label && <FormLabel>{label}</FormLabel>}
 
             <S.Grid>
                 <S.UpButton onClick={handleChange(addDays)}>Up</S.UpButton>
