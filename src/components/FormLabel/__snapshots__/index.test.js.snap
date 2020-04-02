@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormLabel component should render 1`] = `
+.c0 {
+  padding: 0 0 0.5rem;
+}
+
+<label
+  class="c0"
+>
+  Label
+</label>
+`;
