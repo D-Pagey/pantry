@@ -11,9 +11,3 @@ export const Input = styled.input`
     border-radius: 2px;
     padding: 5px;
 `;
-
-export const Error = styled.p`
-    color: red;
-    font-size: 14px;
-    margin: 0.5rem 0 0;
-`;

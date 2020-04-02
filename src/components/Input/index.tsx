@@ -1,6 +1,7 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 import { FormLabel } from '../FormLabel';
+import { FormError } from '../FormError';
 import * as S from './styles';
 
 type props = {
@@ -29,7 +30,7 @@ export const Input = ({ error, label, name, onBlur, onChange, placeholder, testI
             value={value}
         />
 
-        {error && <S.Error>{error}</S.Error>}
+        {error && <FormError>{error}</FormError>}
     </S.Wrapper>
 );
 

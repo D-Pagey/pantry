@@ -3,6 +3,7 @@ import { arrayOf, func, string } from 'prop-types';
 import { titleCase } from 'title-case';
 import CreatableSelect from 'react-select/creatable';
 import { FormLabel } from '../FormLabel';
+import { FormError } from '../FormError';
 import * as S from './styles';
 
 const addLabel = (value) => {
@@ -35,7 +36,7 @@ export const CreatableDropdown = ({
         value={value && addLabel(value)}
       />
 
-      {error && <S.Error>{error}</S.Error>}
+      {error && <FormError>{error}</FormError>}
     </S.Wrapper>
   );
 };
