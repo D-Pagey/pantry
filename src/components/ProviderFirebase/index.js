@@ -12,6 +12,7 @@ const HOUSEHOLDS = 'households';
 export const FirebaseContext = createContext({
   categories: [],
   expiringFood: [],
+  editFridge: (values) => {},
   isAuthed: false,
   isCheckingAuth: false,
   fridge: [],
@@ -30,6 +31,8 @@ export const ProviderFirebase = ({ children }) => {
   const [fridge, setFridge] = useState([]);
   const [categories, setCategories] = useState([]);
   const [expiringFood, setExpiringFood] = useState([]);
+  
+  const editFridge = values => console.log({ values });
 
   const fetchUserData = useCallback((uid) => {
     firebase
@@ -116,6 +119,7 @@ export const ProviderFirebase = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         categories,
+        editFridge,
         expiringFood,
         fridge,
         isAuthed,
