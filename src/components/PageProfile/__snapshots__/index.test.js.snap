@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageProfile component should render 1`] = `
-.c0 {
-  background-color: red;
-  height: 20px;
-  width: 20px;
-}
-
 <div
   data-testid="pageProfile"
 >
@@ -38,18 +32,7 @@ exports[`PageProfile component should render 1`] = `
         </th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>
-          meat
-        </td>
-        <td>
-          <div
-            class="c0"
-          />
-        </td>
-      </tr>
-    </tbody>
+    <tbody />
   </table>
 </div>
 `;
