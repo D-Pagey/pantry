@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "engines": {
-        "node": ">=10.13.0",
+        "node": ">=10.14.2",
         "npm": ">=6.10.1",
         "yarn": ">=1.15.2"
     },
@@ -44,8 +44,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test --env=jsdom --verbose --coverage --no-cache --watchAll=false",
-        "test:watch": "react-scripts test --env=jsdom --verbose",
+        "test": "react-scripts test --env=jest-environment-jsdom-sixteen --verbose --coverage --no-cache --watchAll=false",
+        "test:watch": "react-scripts test --env=jest-environment-jsdom-sixteen --verbose",
         "eject": "react-scripts eject",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix && stylelint ./src/**/*.js",
         "storybook": "start-storybook -p 6006",
@@ -91,8 +91,10 @@
         "eslint-plugin-react": "7.19.0",
         "eslint-plugin-react-hooks": "3.0.0",
         "husky": "4.2.3",
+        "jest-environment-jsdom-sixteen": "1.0.3",
         "lint-staged": ">=10.1.1",
         "prettier": "2.0.2",
+        "react-select-event": "4.1.4",
         "require-context.macro": "1.2.2",
         "stylelint": "13.3.0",
         "stylelint-config-recommended": "3.0.0",

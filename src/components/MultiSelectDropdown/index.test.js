@@ -1,24 +1,10 @@
-/* eslint-disable no-shadow */
 import React from 'react';
-import userEvent from '@testing-library/user-event';
+import selectEvent from 'react-select-event';
 import { MultiSelectDropdown } from '.';
 
-jest.mock('react-select/creatable', () => ({ options, value, onChange }) => {
-    const handleChange = (event) => {
-        const option = options.find((option) => option.value === event.currentTarget.value);
-        onChange(option);
-    };
-
-    return (
-        <select data-testid="select" value={value} onChange={handleChange}>
-            {options.map(({ label, value }) => (
-                <option key={value} value={value}>
-                    {label}
-                </option>
-            ))}
-        </select>
-    );
-});
+jest.mock('uuid', () => ({
+    v4: () => '5'
+}));
 
 const props = {
     options: [
@@ -47,13 +33,30 @@ describe('MultiSelectDropdown component', () => {
         getByText(error);
     });
 
-    it('should call setValues when changed', () => {
+    it('should call setValues when changed', async () => {
+        const label = 'categories';
         const setValues = jest.fn();
-        const option = { label: 'Fish', value: 'fish' };
-        const { getByTestId } = render(<MultiSelectDropdown {...props} setValues={setValues} />);
+        const { getByLabelText } = render(<MultiSelectDropdown {...props} label={label} setValues={setValues} />);
 
-        userEvent.selectOptions(getByTestId('select'), option.value);
+        await selectEvent.select(getByLabelText(label), [props.options[0].label, props.options[1].label]);
 
-        expect(setValues).toHaveBeenCalledWith(option);
+        expect(setValues).toHaveBeenCalledWith([props.options[0], props.options[1]]);
+    });
+
+    it('should create new values with id and colour', async () => {
+        const label = 'categories';
+        const setValues = jest.fn();
+        const newItem = {
+            label: 'Vegetables',
+            value: 'Vegetables',
+            id: '5',
+            colour: 'black',
+            count: 0
+        };
+        const { getByLabelText } = render(<MultiSelectDropdown {...props} label={label} setValues={setValues} />);
+
+        await selectEvent.create(getByLabelText(label), newItem.label);
+
+        expect(setValues).toHaveBeenCalledWith([newItem]);
     });
 });
