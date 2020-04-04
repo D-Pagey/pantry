@@ -14,9 +14,15 @@ export const CategoryList = (): JSX.Element => {
 
     return (
         <S.Wrapper data-testid="categoryList">
-            {categories.map((item: ItemType) => (
-                <CategoryCard label={item.label} colour={item.colour} quantity={item.count} key={item.label} />
-            ))}
+            {categories.map((item: ItemType) => {
+                if (item.count > 0) {
+                    return (
+                        <CategoryCard label={item.label} colour={item.colour} quantity={item.count} key={item.label} />
+                    );
+                }
+
+                return null;
+            })}
         </S.Wrapper>
     );
 };

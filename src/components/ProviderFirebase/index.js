@@ -125,15 +125,24 @@ export const ProviderFirebase = ({ children }) => {
             return [...acc, { ...curr, count: incrementedCount }];
         }, []);
 
+        const notExistingCategories = categories.filter((category) => {
+            // does this category id exist in values.cat
+            return categoryIds.reduce((acc, curr) => {
+                if (curr === category.id) {
+                    return false;
+                }
+
+                return acc;
+            }, true);
+        });
+
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update({
-                categories: [...categories, ...newCategories],
+                categories: [...notExistingCategories, ...newCategories],
                 fridge: [...fridge, { ...values, categories: categoryIds }]
             })
-            .then((test) => {
-                console.log('updated');
-            })
+            .then(() => console.log('updated'))
             .catch(() => toast.error('Error with updating fridge'));
     };
 

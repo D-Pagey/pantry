@@ -3,7 +3,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 // import * as S from './styles';
 
 export const PageProfile = (): JSX.Element => {
-    const { categories, signOut, user } = useContext(FirebaseContext);
+    const { signOut, user } = useContext(FirebaseContext);
 
     return (
         <div data-testid="pageProfile">

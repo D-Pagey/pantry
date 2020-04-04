@@ -29,9 +29,9 @@ describe('getIndexOfId function', () => {
 });
 
 const categories = [
-  { label: 'meat', colour: 'red' },
-  { label: 'fish', colour: 'blue' },
-  { label: 'vegetables', colour: 'blue' },
+  { label: 'meat', value: 'meat', colour: 'red', id: '111', count: 0 },
+  { label: 'fish', colour: 'blue', value: 'fish', id: '222', count: 0 },
+  { label: 'vegetables', colour: 'blue', value: 'vegetables', count: 0, id: '333' },
 ];
 
 describe('doesCategoryExist function', () => {

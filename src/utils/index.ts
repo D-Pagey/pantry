@@ -24,15 +24,18 @@ export const chooseDateColour = (date: Date): string => {
 };
 
 type categoriesTypes = {
-  label: string;
   colour: string;
+  count: number;
+  id: string;
+  label: string;
+  value: string;
 }[];
 
 export const doesCategoryExist = (categories: categoriesTypes, category: string): boolean => {
   if (category === 'all') return true;
 
   return categories.reduce((acc, curr) => {
-    if (curr.label === category) return true;
+    if (curr.label.toLocaleLowerCase() === category.toLocaleLowerCase()) return true;
 
     return acc;
   }, false as boolean);
