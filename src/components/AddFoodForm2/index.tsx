@@ -23,13 +23,13 @@ const baseValues = {
 };
 
 export const AddFoodForm2 = (): JSX.Element => {
-    const { editFridge } = useContext(FirebaseContext);
+    const { updateHousehold2 } = useContext(FirebaseContext);
 
     return (
         <Formik
             initialValues={baseValues}
             onSubmit={(values, actions): void => {
-                editFridge(values);
+                updateHousehold2(values);
 
                 actions.setSubmitting(false);
                 actions.resetForm();

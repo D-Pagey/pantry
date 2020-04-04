@@ -148,6 +148,7 @@ exports[`AddFoodForm2 component should render 1`] = `
   >
     <label
       class="c1"
+      for="What categories of food?"
     >
       What categories of food?
     </label>
@@ -177,15 +178,15 @@ exports[`AddFoodForm2 component should render 1`] = `
                 autocapitalize="none"
                 autocomplete="off"
                 autocorrect="off"
-                id="react-select-2-input"
+                id="What categories of food?"
                 spellcheck="false"
-                style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                 tabindex="0"
                 type="text"
                 value=""
               />
               <div
-                style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
               />
             </div>
           </div>
@@ -258,7 +259,7 @@ exports[`AddFoodForm2 component should render 1`] = `
         class="c7"
         data-testid="dialDatePickerDay"
       >
-        3rd
+        4th
       </span>
       <button
         type="button"

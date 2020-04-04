@@ -1,6 +1,4 @@
-import React, {
-  createContext, useState, useEffect, useCallback,
-} from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
@@ -10,134 +8,156 @@ const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
 export const FirebaseContext = createContext({
-  categories: [],
-  expiringFood: [],
-  editFridge: (values) => {},
-  isAuthed: false,
-  isCheckingAuth: false,
-  fridge: [],
-  signOut: () => null,
-  updateHousehold: ({ key, values, isDeleting }) => null,
-  user: {
-    email: null,
-    name: null,
-  },
+    categories: [],
+    expiringFood: [],
+    isAuthed: false,
+    isCheckingAuth: false,
+    fridge: [],
+    signOut: () => null,
+    updateHousehold: ({ key, values, isDeleting }) => null,
+    updateHousehold2: (values) => null,
+    user: {
+        email: null,
+        name: null
+    }
 });
 
 export const ProviderFirebase = ({ children }) => {
-  const [user, setUser] = useState({});
-  const [isAuthed, setIsAuthed] = useState(false);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [fridge, setFridge] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [expiringFood, setExpiringFood] = useState([]);
-  
-  const editFridge = values => console.log({ values });
+    const [user, setUser] = useState({});
+    const [isAuthed, setIsAuthed] = useState(false);
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+    const [fridge, setFridge] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [expiringFood, setExpiringFood] = useState([]);
 
-  const fetchUserData = useCallback((uid) => {
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setIsAuthed(true);
-          setUser(doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
+    const fetchUserData = useCallback((uid) => {
+        firebase
+            .firestore()
+            .collection('users')
+            .doc(uid)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    setIsAuthed(true);
+                    setUser(doc.data());
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log('No such document!');
+                }
+                setIsCheckingAuth(false);
+            })
+            .catch((error) => {
+                setIsAuthed(false);
+                setIsCheckingAuth(false);
+                console.log('Error getting document:', error);
+            });
+    }, []);
+
+    // check current auth state and add firebase auth data to state
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged((firebaseUser) => {
+            if (firebaseUser) {
+                fetchUserData(firebaseUser.uid);
+            } else {
+                setIsAuthed(false);
+                setIsCheckingAuth(false);
+            }
+        });
+    }, [fetchUserData]);
+
+    useEffect(() => {
+        if (user.household) {
+            const getData = () => {
+                db.collection('households')
+                    .doc(user.household)
+                    .onSnapshot((doc) => {
+                        const data = doc.data();
+                        const formattedData = data.fridge.map((item) => ({
+                            ...item,
+                            expires: item.expires.toDate()
+                        }));
+                        // TODO: this is shit need to refactor
+                        setFridge(calculateExpiringSoon(formattedData));
+                        setCategories(data.categories);
+                        setExpiringFood(calculateExpiringSoon(formattedData).filter((item) => item.isExpiringSoon));
+                    });
+            };
+
+            getData();
         }
-        setIsCheckingAuth(false);
-      })
-      .catch((error) => {
+    }, [user.household]);
+
+    const signOut = () => {
+        firebase.auth().signOut();
         setIsAuthed(false);
-        setIsCheckingAuth(false);
-        console.log('Error getting document:', error);
-      });
-  }, []);
+        setUser({});
+        setCategories([]);
+        setFridge([]);
+    };
 
-  // check current auth state and add firebase auth data to state
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((firebaseUser) => {
-      if (firebaseUser) {
-        fetchUserData(firebaseUser.uid);
-      } else {
-        setIsAuthed(false);
-        setIsCheckingAuth(false);
-      }
-    });
-  }, [fetchUserData]);
+    const updateHousehold = ({ key, values, isEditMode, isDeleting }) => {
+        db.collection(HOUSEHOLDS)
+            .doc(user.household)
+            .update({ [key]: values })
+            .then(() => {
+                if (isDeleting) {
+                    return toast.info('Food item deleted.');
+                }
 
-  useEffect(() => {
-    if (user.household) {
-      const getData = () => {
-        db.collection('households')
-          .doc(user.household)
-          .onSnapshot((doc) => {
-            const data = doc.data();
-            const formattedData = data.fridge.map((item) => ({
-              ...item,
-              expires: item.expires.toDate(),
-            }));
-            // TODO: this is shit need to refactor
-            setFridge(calculateExpiringSoon(formattedData));
-            setCategories(data.categories);
-            setExpiringFood(calculateExpiringSoon(formattedData).filter((item) => item.isExpiringSoon));
-          });
-      };
+                return toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`);
+            })
+            .catch(() => toast.error('Error with updating fridge'));
+    };
 
-      getData();
-    }
-  }, [user.household]);
+    const updateHousehold2 = (values) => {
+        const categoryIds = values.categories.map((category) => category.id);
 
-  const signOut = () => {
-    firebase.auth().signOut();
-    setIsAuthed(false);
-    setUser({});
-    setCategories([]);
-    setFridge([]);
-  };
+        const newCategories = values.categories.reduce((acc, curr) => {
+            const incrementedCount = curr.count + 1;
 
-  const updateHousehold = ({
-    key, values, isEditMode, isDeleting,
-  }) => {
-    db.collection(HOUSEHOLDS)
-      .doc(user.household)
-      .update({ [key]: values })
-      .then(() => {
-        if (isDeleting) {
-          return toast.info('Food item deleted.');
-        }
+            // eslint-disable-next-line no-underscore-dangle
+            if (curr.__isNew__) {
+                const { __isNew__, ...rest } = curr;
 
-        return toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`);
-      })
-      .catch(() => toast.error('Error with updating fridge'));
-  };
+                return [...acc, { ...rest, count: incrementedCount }];
+            }
 
-  return (
-    <FirebaseContext.Provider
-      value={{
-        categories,
-        editFridge,
-        expiringFood,
-        fridge,
-        isAuthed,
-        isCheckingAuth,
-        setIsAuthed,
-        setUser,
-        signOut,
-        updateHousehold,
-        user,
-      }}
-    >
-      {children}
-    </FirebaseContext.Provider>
-  );
+            return [...acc, { ...curr, count: incrementedCount }];
+        }, []);
+
+        db.collection(HOUSEHOLDS)
+            .doc(user.household)
+            .update({
+                categories: [...categories, ...newCategories],
+                fridge: [...fridge, { ...values, categories: categoryIds }]
+            })
+            .then((test) => {
+                console.log('updated');
+            })
+            .catch(() => toast.error('Error with updating fridge'));
+    };
+
+    return (
+        <FirebaseContext.Provider
+            value={{
+                categories,
+                expiringFood,
+                fridge,
+                isAuthed,
+                isCheckingAuth,
+                setIsAuthed,
+                setUser,
+                signOut,
+                updateHousehold,
+                updateHousehold2,
+                user
+            }}
+        >
+            {children}
+        </FirebaseContext.Provider>
+    );
 };
 
 ProviderFirebase.propTypes = {
-  children: node.isRequired,
+    children: node.isRequired
 };
-
-

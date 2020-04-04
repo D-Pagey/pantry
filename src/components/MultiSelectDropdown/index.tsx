@@ -24,11 +24,8 @@ type DropdownTypes = {
 export const MultiSelectDropdown = ({ error, label, options, setValues, value }: DropdownTypes): JSX.Element => {
     const handleChange = (newValue: any, actionMeta: any): void => {
         if (actionMeta.action === 'create-option') {
-            // remove isNew prop
-            const { __isNew__, ...rest } = newValue[newValue.length - 1];
-
             const addedValue = {
-                ...rest,
+                ...newValue[newValue.length - 1],
                 colour: 'black',
                 count: 0,
                 id: uuidv4()
