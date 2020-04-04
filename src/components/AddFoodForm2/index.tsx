@@ -23,7 +23,7 @@ const baseValues = {
 };
 
 export const AddFoodForm2 = (): JSX.Element => {
-    const { updateHousehold2 } = useContext(FirebaseContext);
+    const { categories, updateHousehold2 } = useContext(FirebaseContext);
 
     return (
         <Formik
@@ -40,11 +40,8 @@ export const AddFoodForm2 = (): JSX.Element => {
                     <Form>
                         <MultiSelectDropdown
                             label="What categories of food?"
-                            options={[
-                                { label: 'Meat', value: 'meat', id: '111', count: 1 },
-                                { label: 'Fish', value: 'fish', id: '222', count: 2 }
-                            ]}
-                            setValues={(categories: any): void => setFieldValue('categories', categories)}
+                            options={categories}
+                            setValues={(category: any): void => setFieldValue('categories', category)}
                             value={values.categories}
                         />
 

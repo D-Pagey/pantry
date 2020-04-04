@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../ProviderFirebase';
-import * as S from './styles';
+// import * as S from './styles';
 
 export const PageProfile = (): JSX.Element => {
     const { categories, signOut, user } = useContext(FirebaseContext);
@@ -29,14 +29,14 @@ export const PageProfile = (): JSX.Element => {
                     </tr>
                 </thead>
                 <tbody>
-                    {categories.map((category: { label: string; colour: string }) => (
+                    {/* {categories.map((category: { label: string; colour: string }) => (
                         <tr key={category.label}>
                             <td>{category.label}</td>
                             <td>
                                 <S.ColourSquare colour={category.colour} />
                             </td>
                         </tr>
-                    ))}
+                    ))} */}
                 </tbody>
             </table>
         </div>

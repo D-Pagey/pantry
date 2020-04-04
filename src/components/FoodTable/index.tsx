@@ -11,9 +11,8 @@ import { Button } from '../Button';
 import * as S from './styles';
 
 type itemTypes = {
-    category: { label: string; colour: string };
+    categories: string[];
     expires: Date;
-    id: string;
     name: string;
     servings: number;
 };
@@ -40,14 +39,37 @@ export const FoodTable = (): JSX.Element => {
             case 'expiring':
                 setData(expiringFood);
                 break;
-            default:
-                setData(
-                    fridge.filter(
-                        (item: { category: { label: string; colour: string } }) => item.category.label === category
-                    )
-                );
+            default: {
+                // find the id of the category label in the url
+                const categoryId = categories.reduce((acc, curr: { id: string; label: string }) => {
+                    if (curr.label === category) return curr.id;
+
+                    return acc;
+                }, '');
+
+                const hasMatchingId = (item: itemTypes) => {
+                    return item.categories.reduce((acc, curr) => {
+                        if (curr === categoryId) {
+                            return true;
+                        }
+
+                        return acc;
+                    }, false);
+                };
+
+                // if the food category id matches the table category id then keep it
+                const filteredFridge = fridge.reduce((acc, curr) => {
+                    if (hasMatchingId(curr)) {
+                        return [...acc, curr];
+                    }
+
+                    return acc;
+                }, []);
+
+                setData(filteredFridge);
+            }
         }
-    }, [category, fridge, expiringFood]);
+    }, [categories, category, fridge, expiringFood]);
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
@@ -80,25 +102,15 @@ export const FoodTable = (): JSX.Element => {
                     <tr>
                         <S.Header onClick={sortData('name')}>Name</S.Header>
                         <S.Header onClick={sortData('expires')}>Expires</S.Header>
-                        {category === 'all' && (
-                            <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
-                                Category
-                            </S.Header>
-                        )}
                         <S.Header onClick={sortData('servings')}>Servings</S.Header>
                         <S.Header>Amend</S.Header>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item: itemTypes) => (
-                        <tr key={item.id}>
+                        <tr key={item.name}>
                             <td>{item.name}</td>
                             <td>{expiresColumn(item)}</td>
-                            {category === 'all' && (
-                                <td>
-                                    <Link to={`/food/${item.category.label}`}>{item.category.label}</Link>
-                                </td>
-                            )}
                             <td>{item.servings}</td>
                             <td>
                                 <button
@@ -111,7 +123,7 @@ export const FoodTable = (): JSX.Element => {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={handleDelete(item.id)}
+                                    onClick={handleDelete(item.name)}
                                     style={{ cursor: 'pointer' }}
                                     data-testid="deleteButton"
                                 >
