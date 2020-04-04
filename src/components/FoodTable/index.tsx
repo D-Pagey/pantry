@@ -42,7 +42,7 @@ export const FoodTable = (): JSX.Element => {
             default: {
                 // find the id of the category label in the url
                 const categoryId = categories.reduce((acc, curr: { id: string; label: string }) => {
-                    if (curr.label === category) return curr.id;
+                    if (curr.label.toLowerCase() === category?.toLowerCase()) return curr.id;
 
                     return acc;
                 }, '');
