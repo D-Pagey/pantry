@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Form, Formik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
 
 import { FirebaseContext } from '../ProviderFirebase';
 import { MultiSelectDropdown } from '../MultiSelectDropdown';
@@ -18,6 +19,7 @@ const servingsOptions = [
 const baseValues = {
     categories: [],
     expires: new Date(),
+    id: '',
     name: '',
     servings: servingsOptions[1].value
 };
@@ -29,7 +31,9 @@ export const AddFoodForm2 = (): JSX.Element => {
         <Formik
             initialValues={baseValues}
             onSubmit={(values, actions): void => {
-                updateHousehold2(values);
+                const withId = values.id ? values : { ...values, id: uuidv4() };
+
+                updateHousehold2(withId);
 
                 actions.setSubmitting(false);
                 actions.resetForm();

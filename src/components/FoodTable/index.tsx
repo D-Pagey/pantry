@@ -14,6 +14,7 @@ import * as S from './styles';
 type itemTypes = {
     categories: string[];
     expires: Date;
+    id: string;
     name: string;
     servings: number;
 };
@@ -124,7 +125,7 @@ export const FoodTable = (): JSX.Element => {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={handleDelete(item.name)}
+                                    onClick={handleDelete(item.id)}
                                     style={{ cursor: 'pointer' }}
                                     data-testid="deleteButton"
                                 >
