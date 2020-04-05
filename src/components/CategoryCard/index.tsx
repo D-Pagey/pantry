@@ -4,20 +4,20 @@ import { titleCase } from 'title-case';
 import * as S from './styles';
 
 type CategoryCardTypes = {
-    label: string;
     colour: string;
-    quantity: number;
+    count: number;
+    label: string;
 };
 
-export const CategoryCard = ({ colour, label, quantity }: CategoryCardTypes): JSX.Element => (
+export const CategoryCard = ({ colour, count, label }: CategoryCardTypes): JSX.Element => (
     <S.Link colour={colour} to={`/food/${label.toLowerCase()}`} data-testid="categoryCard">
         <S.Title>{titleCase(label)}</S.Title>
-        <S.Text>{quantity}</S.Text>
+        <S.Text>{count}</S.Text>
     </S.Link>
 );
 
 CategoryCard.propTypes = {
-    label: string.isRequired,
     colour: string.isRequired,
-    quantity: number.isRequired
+    count: number.isRequired,
+    label: string.isRequired
 };

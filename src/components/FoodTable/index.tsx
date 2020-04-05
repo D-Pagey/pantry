@@ -3,6 +3,7 @@ import { Link, useHistory, useParams, Redirect } from 'react-router-dom';
 import { format } from 'date-fns';
 import arraySort from 'array-sort';
 
+import { CategoryType } from '../../types';
 import { chooseDateColour, doesCategoryExist } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
@@ -41,7 +42,7 @@ export const FoodTable = (): JSX.Element => {
                 break;
             default: {
                 // find the id of the category label in the url
-                const categoryId = categories.reduce((acc, curr: { id: string; label: string }) => {
+                const categoryId = categories.reduce((acc, curr: CategoryType) => {
                     if (curr.label.toLowerCase() === category?.toLowerCase()) return curr.id;
 
                     return acc;

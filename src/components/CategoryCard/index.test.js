@@ -4,7 +4,7 @@ import { CategoryCard } from '.';
 const props = {
   colour: 'red',
   label: 'meat',
-  quantity: 2,
+  count: 2,
 };
 
 describe('CategoryCard component', () => {

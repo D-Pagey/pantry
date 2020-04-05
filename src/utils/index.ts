@@ -1,7 +1,8 @@
 import { differenceInDays } from 'date-fns';
+import { CategoryType } from '../types';
 
 type foodTypes = {
-  category: string;
+  categories: string[];
   date: Date;
   expires: number;
   id: string;
@@ -23,15 +24,7 @@ export const chooseDateColour = (date: Date): string => {
   return 'black';
 };
 
-type categoriesTypes = {
-  colour: string;
-  count: number;
-  id: string;
-  label: string;
-  value: string;
-}[];
-
-export const doesCategoryExist = (categories: categoriesTypes, category: string): boolean => {
+export const doesCategoryExist = (categories: CategoryType[], category: string): boolean => {
   if (category === 'all') return true;
 
   return categories.reduce((acc, curr) => {

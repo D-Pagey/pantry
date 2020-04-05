@@ -2,14 +2,14 @@ import { doesCategoryExist, getIndexOfId } from '.';
 
 const arrayOfFoods = [
   {
-    category: 'meat',
+    categories: ['111', '333'],
     date: new Date(),
     expires: 1,
     id: '1234',
     name: 'steak',
   },
   {
-    category: 'fish',
+    categories: ['111', '222'],
     date: new Date(),
     expires: 1,
     id: '5678',
