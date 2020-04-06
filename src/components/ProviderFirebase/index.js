@@ -97,11 +97,11 @@ export const ProviderFirebase = ({ children }) => {
   };
 
   const updateHousehold = ({
-    key, values, isEditMode, isDeleting,
+    values, isEditMode, isDeleting,
   }) => {
     db.collection(HOUSEHOLDS)
       .doc(user.household)
-      .update({ [key]: values })
+      .update({ [`fridge.${values.id}`]: values })
       .then(() => {
         if (isDeleting) {
           return toast.info('Food item deleted.');

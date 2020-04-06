@@ -64,10 +64,10 @@ export const AddFoodForm = () => {
 
         const newCategory = { label: values.category, colour: 'black' };
 
-        updateHousehold({
-            key: 'categories',
-            values: [...categories, newCategory]
-        });
+        // updateHousehold({
+        //     key: 'categories',
+        //     values: [...categories, newCategory]
+        // });
 
         return { ...values, category: newCategory };
     };
@@ -94,22 +94,20 @@ export const AddFoodForm = () => {
                 const indexOfFoodId = getIndexOfId(values.id, fridge);
 
                 if (indexOfFoodId === -1) {
-                    // updateHousehold({
-                    //     isEditMode,
-                    //     key: 'fridge',
-                    //     values: [...fridge, addColourToCategory(addIdToFood(values))]
-                    // });
-                    console.log({ fridge: [...fridge, addColourToCategory(addIdToFood(values))]});
-                } else {
-                    const fridgeCopy = [...fridge];
-                    fridgeCopy[indexOfFoodId] = {
-                        ...addColourToCategory(values),
-                        name: values.name.toLowerCase()
-                    };
+                    updateHousehold({
+                        isEditMode,
+                        values: addColourToCategory(addIdToFood(values))
+                    });
+                } 
+                // else {
+                //     const fridgeCopy = [...fridge];
+                //     fridgeCopy[indexOfFoodId] = {
+                //         ...addColourToCategory(values),
+                //         name: values.name.toLowerCase()
+                //     };
 
-                    console.log({ fridgeCopy });
-                    // updateHousehold({ isEditMode, key: 'fridge', values: fridgeCopy });
-                }
+                //     updateHousehold({ isEditMode, values: fridgeCopy });
+                // }
 
                 actions.setSubmitting(false);
                 actions.resetForm();

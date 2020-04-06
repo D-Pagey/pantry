@@ -5,9 +5,9 @@ const props = {};
 
 const context = {
   categories: [
-    { label: 'Meat', colour: 'red', count: 2 },
-    { label: 'Fish', colour: 'red', count: 3 },
-    { label: 'Vegetables', colour: 'red', count: 5 },
+    { name: 'Meat', colour: 'red', count: 2 },
+    { name: 'Fish', colour: 'red', count: 3 },
+    { name: 'Vegetables', colour: 'red', count: 5 },
   ],
 };
 
