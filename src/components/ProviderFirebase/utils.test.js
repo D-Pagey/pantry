@@ -1,5 +1,5 @@
 import { addDays } from 'date-fns';
-import { calculateExpiringSoon, indexOfLabel } from './utils';
+import { calculateExpiringSoon, indexOfLabel, updateCategoriesObject } from './utils';
 
 describe('calculateExpiringSoon function', () => {
   const food = [
@@ -63,4 +63,15 @@ describe('indexOfLabel function', () => {
     expect(indexOfLabel(array, 'dairy')).toBe(-1);
     expect(indexOfLabel(array, 'chocolate')).toBe(3);
   });
+});
+
+describe('updateCategoriesObject function', () => {
+  it('should return an object', () => {
+    const result = updateCategoriesObject();
+
+    expect(typeof result).toBe('object');
+    expect(Array.isArray(result)).toBe(false);
+  });
+
+  it.todo('should handle adding a new category');
 });

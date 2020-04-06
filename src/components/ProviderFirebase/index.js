@@ -73,13 +73,13 @@ export const ProviderFirebase = ({ children }) => {
           .doc(user.household)
           .onSnapshot((doc) => {
             const data = doc.data();
-            const formattedData = data.fridge.map((item) => ({
+            const formattedData = Object.values(data.fridge).map((item) => ({
               ...item,
               expires: item.expires.toDate(),
             }));
             // TODO: this is shit need to refactor
             setFridge(calculateExpiringSoon(formattedData));
-            setCategories(data.categories);
+            setCategories([...Object.values(data.categories).map(item => ({...item, count: 0}))]);
             setExpiringFood(calculateExpiringSoon(formattedData).filter((item) => item.isExpiringSoon));
           });
       };

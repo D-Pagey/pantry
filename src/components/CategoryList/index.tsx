@@ -4,7 +4,7 @@ import { CategoryCard } from '../CategoryCard';
 import * as S from './styles';
 
 type ItemType = {
-    label: string;
+    name: string;
     colour: string;
     count: number;
 };
@@ -15,7 +15,7 @@ export const CategoryList = (): JSX.Element => {
     return (
         <S.Wrapper data-testid="categoryList">
             {categories.map((item: ItemType) => (
-                <CategoryCard label={item.label} colour={item.colour} quantity={item.count} key={item.label} />
+                <CategoryCard label={item.name} colour={item.colour} quantity={item.count} key={item.name} />
             ))}
         </S.Wrapper>
     );

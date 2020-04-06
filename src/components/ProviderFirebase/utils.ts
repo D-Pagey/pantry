@@ -28,3 +28,7 @@ export const calculateExpiringSoon = (food: FoodType[]): FoodWithExpiringType[] 
     isExpiringSoon: difference <= 2,
   };
 });
+
+export const updateCategoriesObject = () => {
+  return {};
+};

@@ -42,7 +42,7 @@ export const AddFoodForm = () => {
 
     useEffect(() => {
         // TODO: This may be unneccessary once refactor categories to be tags
-        setCategoryLabels(arraySort(categories.map((item) => item.label).filter((item) => item !== 'expiring')));
+        setCategoryLabels(arraySort(categories.map((item) => item.name).filter((item) => item !== 'expiring')));
     }, [categories]);
 
     useEffect(() => {
@@ -94,18 +94,21 @@ export const AddFoodForm = () => {
                 const indexOfFoodId = getIndexOfId(values.id, fridge);
 
                 if (indexOfFoodId === -1) {
-                    updateHousehold({
-                        isEditMode,
-                        key: 'fridge',
-                        values: [...fridge, addColourToCategory(addIdToFood(values))]
-                    });
+                    // updateHousehold({
+                    //     isEditMode,
+                    //     key: 'fridge',
+                    //     values: [...fridge, addColourToCategory(addIdToFood(values))]
+                    // });
+                    console.log({ fridge: [...fridge, addColourToCategory(addIdToFood(values))]});
                 } else {
                     const fridgeCopy = [...fridge];
                     fridgeCopy[indexOfFoodId] = {
                         ...addColourToCategory(values),
                         name: values.name.toLowerCase()
                     };
-                    updateHousehold({ isEditMode, key: 'fridge', values: fridgeCopy });
+
+                    console.log({ fridgeCopy });
+                    // updateHousehold({ isEditMode, key: 'fridge', values: fridgeCopy });
                 }
 
                 actions.setSubmitting(false);
