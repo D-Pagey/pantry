@@ -31,7 +31,7 @@ const context = {
     { label: 'Meat', color: 'red' },
     { label: 'fish', color: 'blue' },
   ],
-  updateHousehold: () => {},
+  updateFridge: () => {},
 };
 
 describe('AddFoodForm component', () => {

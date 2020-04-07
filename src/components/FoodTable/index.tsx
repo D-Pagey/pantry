@@ -24,7 +24,7 @@ export const FoodTable = (): JSX.Element => {
     const history = useHistory();
     const [isDescendingOrder, setIsDescendingOrder] = useState(false);
     const { category } = useParams();
-    const { expiringFood, categories, fridge, updateHousehold } = useContext(FirebaseContext);
+    const { expiringFood, categories, fridge, updateFridge } = useContext(FirebaseContext);
 
     useEffect(() => {
         if (categories.length > 0 && category) {
@@ -51,7 +51,7 @@ export const FoodTable = (): JSX.Element => {
 
     const handleDelete = (id: string) => (): void => {
         const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
-        updateHousehold({ key: 'fridge', values: filteredItems, isDeleting: true });
+        updateFridge({ key: 'fridge', values: filteredItems, isDeleting: true });
     };
 
     const handleEdit = (params: itemTypes) => (): void => {

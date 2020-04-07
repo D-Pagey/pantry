@@ -15,7 +15,7 @@ const firebaseContext = {
             colour: 'green'
         }
     ],
-    updateHousehold: () => {}
+    updateFridge: () => {}
 };
 
 storiesOf('AddFoodForm', module).add('default', () => (

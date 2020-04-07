@@ -37,7 +37,7 @@ export const AddFoodForm = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [categoryLabels, setCategoryLabels] = useState([]);
     const { state } = useLocation();
-    const { categories, fridge, updateHousehold } = useContext(FirebaseContext);
+    const { categories, fridge, updateFridge } = useContext(FirebaseContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -64,7 +64,7 @@ export const AddFoodForm = () => {
 
         const newCategory = { label: values.category, colour: 'black' };
 
-        // updateHousehold({
+        // updateFridge({
         //     key: 'categories',
         //     values: [...categories, newCategory]
         // });
@@ -94,7 +94,7 @@ export const AddFoodForm = () => {
                 const indexOfFoodId = getIndexOfId(values.id, fridge);
 
                 if (indexOfFoodId === -1) {
-                    updateHousehold({
+                    updateFridge({
                         isEditMode,
                         values: addColourToCategory(addIdToFood(values))
                     });
@@ -106,7 +106,7 @@ export const AddFoodForm = () => {
                 //         name: values.name.toLowerCase()
                 //     };
 
-                //     updateHousehold({ isEditMode, values: fridgeCopy });
+                //     updateFridge({ isEditMode, values: fridgeCopy });
                 // }
 
                 actions.setSubmitting(false);

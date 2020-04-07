@@ -16,7 +16,7 @@ export const FirebaseContext = createContext({
   isCheckingAuth: false,
   fridge: [],
   signOut: () => null,
-  updateHousehold: ({ key, values, isDeleting }) => null,
+  updateFridge: (values) => null,
   user: {
     email: null,
     name: null,
@@ -96,9 +96,9 @@ export const ProviderFirebase = ({ children }) => {
     setFridge([]);
   };
 
-  const updateHousehold = ({
+  const updateFridge = (
     values, isEditMode, isDeleting,
-  }) => {
+  ) => {
     db.collection(HOUSEHOLDS)
       .doc(user.household)
       .update({ [`fridge.${values.id}`]: values })
@@ -112,6 +112,14 @@ export const ProviderFirebase = ({ children }) => {
       .catch(() => toast.error('Error with updating fridge'));
   };
 
+  const updateCategories = (values) => {
+    db.collection(HOUSEHOLDS)
+    .doc(user.household)
+    .update({ [`categories.${values.id}`]: values })
+    .then(() => toast.success('Category added'))
+    .catch(() => toast.error('Error with updating fridge'));
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -123,7 +131,7 @@ export const ProviderFirebase = ({ children }) => {
         setIsAuthed,
         setUser,
         signOut,
-        updateHousehold,
+        updateFridge,
         user,
       }}
     >

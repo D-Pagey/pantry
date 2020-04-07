@@ -38,7 +38,7 @@ const context = {
     { label: 'meat', color: 'red' },
     { label: 'fish', color: 'blue' },
   ],
-  updateHousehold: () => null,
+  updateFridge: () => null,
 };
 
 describe('FoodTable component', () => {
@@ -48,16 +48,16 @@ describe('FoodTable component', () => {
   });
 
   it('should handle delete', () => {
-    const updateHousehold = jest.fn();
+    const updateFridge = jest.fn();
     const { queryAllByTestId } = render(<FoodTable {...props} />, {
       ...context,
-      updateHousehold,
+      updateFridge,
     });
     const deleteButton = queryAllByTestId('deleteButton');
 
     userEvent.click(deleteButton[0]);
 
-    expect(updateHousehold).toHaveBeenCalledWith({
+    expect(updateFridge).toHaveBeenCalledWith({
       key: 'fridge',
       isDeleting: true,
       values: context.fridge.filter((item, index) => index !== 0),
