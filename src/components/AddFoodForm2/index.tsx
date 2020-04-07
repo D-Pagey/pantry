@@ -36,7 +36,7 @@ const formatCategories = (categories: CategoryType[]): CategoryType[] => {
 };
 
 export const AddFoodForm2 = (): JSX.Element => {
-    const { categories, updateFridge } = useContext(FirebaseContext);
+    const { categories, updateFridge, updateCategories } = useContext(FirebaseContext);
 
     return (
         <Formik
@@ -49,9 +49,8 @@ export const AddFoodForm2 = (): JSX.Element => {
                     categories: valuesWithId.categories.map((category: CategoryType) => category.id)
                 };
 
-                console.log({ categories: values.categories });
-                // updateCategories()
-                // updateFridge(withCategoryIds);
+                updateCategories(values.categories);
+                updateFridge(withCategoryIds);
 
                 actions.setSubmitting(false);
                 actions.resetForm();

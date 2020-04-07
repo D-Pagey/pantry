@@ -4,7 +4,7 @@ import React, {
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { calculateExpiringSoon } from './utils';
+import { calculateExpiringSoon, updateCategoriesObject } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -16,6 +16,7 @@ export const FirebaseContext = createContext({
   isCheckingAuth: false,
   fridge: [],
   signOut: () => null,
+  updateCategories: (values) => null,
   updateFridge: (values) => null,
   user: {
     email: null,
@@ -112,12 +113,12 @@ export const ProviderFirebase = ({ children }) => {
       .catch(() => toast.error('Error with updating fridge'));
   };
 
-  const updateCategories = (values) => {
+  const updateCategories = (categoryObjects) => {
     db.collection(HOUSEHOLDS)
     .doc(user.household)
-    .update({ [`categories.${values.id}`]: values })
+    .update(updateCategoriesObject(categoryObjects))
     .then(() => toast.success('Category added'))
-    .catch(() => toast.error('Error with updating fridge'));
+    .catch(() => toast.error('Error with updating categories'));
   };
 
   return (
@@ -131,6 +132,7 @@ export const ProviderFirebase = ({ children }) => {
         setIsAuthed,
         setUser,
         signOut,
+        updateCategories,
         updateFridge,
         user,
       }}

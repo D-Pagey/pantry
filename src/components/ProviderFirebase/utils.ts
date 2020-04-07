@@ -31,16 +31,14 @@ export const calculateExpiringSoon = (food: FoodType[]): FoodWithExpiringType[] 
 });
 
 export const updateCategoriesObject = (categories: CategoryType[]): { [key: string]: DatabaseCategoryType } => {
-  return {
-    [categories[0].id]: {
-      colour: categories[0].colour,
-      id: categories[0].id,
-      name: categories[0].name
-    },
-    [categories[1].id]: {
-      colour: categories[1].colour,
-      id: categories[1].id,
-      name: categories[1].name
-  }
-};
+  return categories.reduce((acc, curr) => {
+    return {
+      ...acc,
+      [`categories.${curr.id}`]: {
+        id: curr.id,
+        name: curr.label,
+        colour: curr.colour
+      }
+    };
+  }, {});
 };

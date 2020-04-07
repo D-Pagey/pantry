@@ -96,18 +96,16 @@ describe('updateCategoriesObject function', () => {
       const result = updateCategoriesObject(categories);
 
       expect(result).toStrictEqual({
-        ddd: {
+        'categories.ddd': {
           colour: 'red',
           id: 'ddd',
           name: 'meat',
         },
-        eee: {
+        'categories.eee': {
           colour: 'blue',
           id: 'eee',
           name: 'fish',
         }
       });
     });
-
-    it.todo('should handle adding multiple categories');
 });
