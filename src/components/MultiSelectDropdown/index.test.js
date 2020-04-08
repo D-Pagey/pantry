@@ -8,8 +8,8 @@ jest.mock('uuid', () => ({
 
 const props = {
     options: [
-        { label: 'Meat', value: 'meat' },
-        { label: 'Fish', value: 'fish' }
+        { colour: 'red', label: 'Meat', value: 'meat' },
+        { colour: 'blue', label: 'Fish', value: 'fish' }
     ],
     setValues: () => {},
     values: []

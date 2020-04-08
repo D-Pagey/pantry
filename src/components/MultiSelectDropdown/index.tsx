@@ -45,7 +45,14 @@ export const MultiSelectDropdown = ({ error, label, options, setValues, value }:
         <S.Wrapper>
             {label && <FormLabel htmlFor={label}>{label}</FormLabel>}
 
-            <CreatableSelect inputId={label} isMulti onChange={handleChange} options={options} value={value} />
+            <CreatableSelect
+                inputId={label}
+                isMulti
+                onChange={handleChange}
+                options={options}
+                styles={S.colourStyles}
+                value={value}
+            />
 
             {error && <FormError>{error}</FormError>}
         </S.Wrapper>
