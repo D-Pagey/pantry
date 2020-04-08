@@ -72,6 +72,7 @@ export const AddFoodForm2 = (): JSX.Element => {
                             onChange={handleChange}
                             name="name"
                             placeholder="Name..."
+                            testId="addFoodInput"
                             value={values.name}
                         />
 
@@ -88,7 +89,9 @@ export const AddFoodForm2 = (): JSX.Element => {
                             setSelected={(option: any): void => setFieldValue('servings', option.value)}
                         />
 
-                        <Button variant="submit">Submit</Button>
+                        <Button variant="submit" testId="addFoodFormSubmit">
+                            Submit
+                        </Button>
                     </Form>
                 );
             }}
