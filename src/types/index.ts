@@ -9,3 +9,11 @@ export interface CategoryType extends DatabaseCategoryType {
     label: string;
     value: string;
 }
+
+export interface FoodTypes {
+    categories: string[];
+    expires: Date;
+    id: string;
+    name: string;
+    servings: number;
+}

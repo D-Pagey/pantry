@@ -22,18 +22,3 @@ export const chooseDateColour = (date: Date): string => {
 
   return 'black';
 };
-
-type categoriesTypes = {
-  label: string;
-  colour: string;
-}[];
-
-export const doesCategoryExist = (categories: categoriesTypes, category: string): boolean => {
-  if (category === 'all') return true;
-
-  return categories.reduce((acc, curr) => {
-    if (curr.label === category) return true;
-
-    return acc;
-  }, false as boolean);
-};

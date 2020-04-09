@@ -1,4 +1,4 @@
-import { doesCategoryExist, getIndexOfId } from '.';
+import { getIndexOfId } from '.';
 
 const arrayOfFoods = [
   {
@@ -26,24 +26,4 @@ describe('getIndexOfId function', () => {
     expect(getIndexOfId('1234', arrayOfFoods)).toBe(0);
     expect(getIndexOfId('5678', arrayOfFoods)).toBe(1);
   });
-});
-
-const categories = [
-  { label: 'meat', colour: 'red' },
-  { label: 'fish', colour: 'blue' },
-  { label: 'vegetables', colour: 'blue' },
-];
-
-describe('doesCategoryExist function', () => {
-  it('should return a boolean value', () => {
-    expect(typeof doesCategoryExist(categories, 'meat')).toBe('boolean');
-  });
-
-  it.each`
-        category   | doesExist
-        ${'meat'}  | ${true}
-        ${'dairy'} | ${false}
-    `('should return $doesExist for $category', ({ category, doesExist }) => {
-  expect(doesCategoryExist(categories, category)).toBe(doesExist);
-});
 });

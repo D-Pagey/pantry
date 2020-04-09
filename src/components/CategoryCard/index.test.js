@@ -3,7 +3,7 @@ import { CategoryCard } from '.';
 
 const props = {
   colour: 'red',
-  label: 'meat',
+  name: 'meat',
   quantity: 2,
 };
 
