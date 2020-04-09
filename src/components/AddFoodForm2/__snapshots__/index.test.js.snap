@@ -259,7 +259,7 @@ exports[`AddFoodForm2 component should render 1`] = `
         class="c7"
         data-testid="dialDatePickerDay"
       >
-        9th
+        10th
       </span>
       <button
         type="button"
