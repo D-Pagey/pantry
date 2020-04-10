@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
     push: jest.fn(),
   }),
   useParams: jest.fn(() => ({
-    category: 'all',
+    category: 'meat',
   })),
   Redirect: jest.fn(() => null),
 }));
@@ -60,7 +60,7 @@ describe('FoodTable component', () => {
     expect(push).toHaveBeenCalledWith();
   });
 
-  it.skip.each`
+  it.each`
         colour     | date
         ${'red'}   | ${new Date()}
         ${'blue'}  | ${addDays(new Date(), 2)}
