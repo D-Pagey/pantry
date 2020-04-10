@@ -4,14 +4,13 @@ import React, {
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { calculateExpiringSoon, updateCategoriesObject } from './utils';
+import { updateCategoriesObject } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
 export const FirebaseContext = createContext({
   categories: [],
-  expiringFood: [],
   isAuthed: false,
   isCheckingAuth: false,
   fridge: [],
@@ -30,7 +29,6 @@ export const ProviderFirebase = ({ children }) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [fridge, setFridge] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [expiringFood, setExpiringFood] = useState([]);
 
   const fetchUserData = useCallback((uid) => {
     firebase
@@ -79,9 +77,8 @@ export const ProviderFirebase = ({ children }) => {
               expires: item.expires.toDate(),
             }));
             // TODO: this is shit need to refactor
-            setFridge(calculateExpiringSoon(formattedData));
+            setFridge(formattedData);
             setCategories([...Object.values(data.categories).map(item => ({...item, count: 0}))]);
-            setExpiringFood(calculateExpiringSoon(formattedData).filter((item) => item.isExpiringSoon));
           });
       };
 
@@ -125,7 +122,6 @@ export const ProviderFirebase = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         categories,
-        expiringFood,
         fridge,
         isAuthed,
         isCheckingAuth,

@@ -17,7 +17,6 @@ global.render = (ui, firebaseContextValue = {}) => {
       <FirebaseContext.Provider
         value={{
           categories: [],
-          expiringFood: [],
           isAuthed: false,
           setUser: () => {},
           setIsAuthed: () => {},

@@ -42,7 +42,7 @@ export const AddFoodForm = () => {
 
     useEffect(() => {
         // TODO: This may be unneccessary once refactor categories to be tags
-        setCategoryLabels(arraySort(categories.map((item) => item.name).filter((item) => item !== 'expiring')));
+        setCategoryLabels(arraySort(categories.map((item) => item.name)));
     }, [categories]);
 
     useEffect(() => {
