@@ -1,8 +1,8 @@
-export interface DatabaseCategoryType {
+export type DatabaseCategoryType = {
     colour: string;   
     id: string;
     name: string;
-}
+};
 
 export interface CategoryType extends DatabaseCategoryType {
     count: number;
@@ -10,10 +10,10 @@ export interface CategoryType extends DatabaseCategoryType {
     value: string;
 }
 
-export interface FoodTypes {
+export type FoodTypes = {
     categories: string[];
     expires: Date;
     id: string;
     name: string;
     servings: number;
-}
+};

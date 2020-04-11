@@ -97,4 +97,6 @@ describe('FoodTable component', () => {
     getByText(context.fridge[1].name);
     getByTestId('foodTableCategoryColumn');
   });
+
+  it.todo('should sort categories correctly');
 });
