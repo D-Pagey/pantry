@@ -1,14 +1,12 @@
 import React from 'react';
 import { CategoryList } from '.';
+import { CategoriesArray, Fridge } from '../../fixtures';
 
 const props = {};
 
 const context = {
-  categories: [
-    { name: 'Meat', colour: 'red', count: 2 },
-    { name: 'Fish', colour: 'red', count: 3 },
-    { name: 'Vegetables', colour: 'red', count: 5 },
-  ],
+  categories: CategoriesArray,
+  fridge: Fridge
 };
 
 describe('CategoryList component', () => {

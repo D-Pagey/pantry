@@ -1,12 +1,14 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 import { PageHome } from '.';
+import { CategoriesArray, Fridge } from '../../fixtures';
 
 const props = {};
 
 const context = {
   isAuthed: false,
   isCheckingAuth: true,
+  categories: CategoriesArray,
+  fridge: Fridge
 };
 
 describe('PageHome component', () => {

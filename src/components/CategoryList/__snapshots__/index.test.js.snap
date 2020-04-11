@@ -25,6 +25,102 @@ exports[`CategoryList component should render 1`] = `
   width: 140px;
 }
 
+.c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid blue;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 1rem;
+  width: 140px;
+}
+
+.c5 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid green;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 1rem;
+  width: 140px;
+}
+
+.c6 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid pink;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 1rem;
+  width: 140px;
+}
+
+.c7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid orange;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
+  color: initial;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 1rem;
+  width: 140px;
+}
+
 .c2 {
   margin: 0 0 0.5rem;
 }
@@ -59,13 +155,11 @@ exports[`CategoryList component should render 1`] = `
     </h3>
     <p
       class="c3"
-    >
-      2
-    </p>
+    />
   </a>
   <a
-    class="c1"
-    colour="red"
+    class="c4"
+    colour="blue"
     data-testid="categoryCard"
     href="/food/fish"
   >
@@ -76,13 +170,11 @@ exports[`CategoryList component should render 1`] = `
     </h3>
     <p
       class="c3"
-    >
-      3
-    </p>
+    />
   </a>
   <a
-    class="c1"
-    colour="red"
+    class="c5"
+    colour="green"
     data-testid="categoryCard"
     href="/food/vegetables"
   >
@@ -93,8 +185,38 @@ exports[`CategoryList component should render 1`] = `
     </h3>
     <p
       class="c3"
+    />
+  </a>
+  <a
+    class="c6"
+    colour="pink"
+    data-testid="categoryCard"
+    href="/food/snacks"
+  >
+    <h3
+      class="c2"
     >
-      5
+      Snacks
+    </h3>
+    <p
+      class="c3"
+    />
+  </a>
+  <a
+    class="c7"
+    colour="orange"
+    data-testid="categoryCard"
+    href="/food/all"
+  >
+    <h3
+      class="c2"
+    >
+      All
+    </h3>
+    <p
+      class="c3"
+    >
+      4
     </p>
   </a>
 </div>
