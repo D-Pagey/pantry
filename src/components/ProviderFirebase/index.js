@@ -4,7 +4,7 @@ import React, {
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { updateCategoriesObject } from './utils';
+import { extractAllCategoryIds, updateCategoriesObject, countCategories } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -29,8 +29,6 @@ export const ProviderFirebase = ({ children }) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [fridge, setFridge] = useState([]);
   const [categories, setCategories] = useState([]);
-
-  console.log({ fridge, categories });
 
   const fetchUserData = useCallback((uid) => {
     firebase
@@ -74,13 +72,17 @@ export const ProviderFirebase = ({ children }) => {
           .doc(user.household)
           .onSnapshot((doc) => {
             const data = doc.data();
+            
             const formattedData = Object.values(data.fridge).map((item) => ({
               ...item,
               expires: item.expires.toDate(),
             }));
-            // TODO: this is shit need to refactor
+    
+            const allCategoryIds = extractAllCategoryIds(Object.values(data.fridge));
+            const countedCategories = countCategories(allCategoryIds, data.categories);
+            
             setFridge(formattedData);
-            setCategories([...Object.values(data.categories).map(item => ({...item, count: 0}))]);
+            setCategories(Object.values(countedCategories));
           });
       };
 

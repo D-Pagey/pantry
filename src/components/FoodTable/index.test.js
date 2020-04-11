@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
 import arraySort from 'array-sort';
 
-import { Fridge } from '../../fixtures/fridge';
+import { Fridge } from '../../fixtures';
 import { FoodTable } from '.';
 
 const props = {

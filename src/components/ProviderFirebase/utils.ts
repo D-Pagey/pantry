@@ -1,4 +1,4 @@
-import { CategoryType, DatabaseCategoryType, FoodTypes } from '../../types';
+import { CategoryType, DatabaseCategoryType, FoodTypes, KeyedDatabaseCategoryType } from '../../types';
 
 // converts an array of categories to an object of objects
 export const updateCategoriesObject = (categories: CategoryType[]): { [key: string]: DatabaseCategoryType } => {
@@ -21,20 +21,24 @@ export const extractAllCategoryIds = (fridge: FoodTypes[]): string[] => {
   }).flat();
 };
 
-// export const updateCategoriesCount = (allCategoryIds: string[], categories: DatabaseCategoryType) => {
-//   return fridge.reduce((acc, curr) => {
-      
-//   }, []);
-  
-  
-//   // return fridge.map(food => {
-//     //   categories.map(id => {
-//     //     const fullCategory = categories.filter(category => category.id === id);
+export const countCategories = (categoryIds: string[], categories: KeyedDatabaseCategoryType): KeyedDatabaseCategoryType => {
+  return categoryIds.reduce((acc, curr) => {
+    if (acc[curr] === undefined) {
+      return {
+        ...acc,
+        [curr]: {
+          ...categories[curr],
+          count: 1
+        }
+      };
+    }
 
-//     //     return {
-//     //       ...fullCategory[0],
-
-//     //     }
-//     //   })
-//     // });
-// };
+    return {
+      ...acc,
+      [curr]: {
+        ...acc[curr],
+        count: acc[curr].count + 1
+      }
+    };
+  }, {} as KeyedDatabaseCategoryType);
+};

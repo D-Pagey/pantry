@@ -1,22 +1,21 @@
-import { Categories } from '../../fixtures/categories';
-import { Fridge } from '../../fixtures/fridge';
+import { CategoriesArray, Fridge } from '../../fixtures';
 import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
 
 describe('filterFridge function', () => {
     it('should return an array', () => {
-        const result = filterFridge(Fridge, Categories[0]);
+        const result = filterFridge(Fridge, CategoriesArray[0]);
         expect(Array.isArray(result)).toBe(true);
     });
 
     it('should filter fridge down by category', () => {
-        const result = filterFridge(Fridge, Categories[0]);
+        const result = filterFridge(Fridge, CategoriesArray[0]);
         expect(result).toStrictEqual([Fridge[0], Fridge[1], Fridge[3]]);
     });
 });
 
 describe('swapIdsForNames function', () => {
     it('should return an array', () => {
-        const result = swapIdsForNames(Fridge, Categories);
+        const result = swapIdsForNames(Fridge, CategoriesArray);
         expect(Array.isArray(result)).toBe(true);
     });
 
@@ -29,8 +28,8 @@ describe('swapIdsForNames function', () => {
             servings: 1
         };
 
-        const fridge = swapIdsForNames([...Fridge, multipleCategories], Categories);
-        const categoryNames = Categories.map((category) => category.name);
+        const fridge = swapIdsForNames([...Fridge, multipleCategories], CategoriesArray);
+        const categoryNames = CategoriesArray.map((category) => category.name);
 
         fridge.map((food) => {
             return food.categories.map((category) => {
@@ -59,7 +58,7 @@ describe('swapNamesForIds function', () => {
             }
         ];
 
-        const result = swapNamesForIds(fridgeWithNames, Categories);
+        const result = swapNamesForIds(fridgeWithNames, CategoriesArray);
         expect(Array.isArray(result)).toBe(true);
     });
 
@@ -81,8 +80,8 @@ describe('swapNamesForIds function', () => {
             }
         ];
 
-        const fridge = swapNamesForIds(fridgeWithNames, Categories);
-        const categoryIds = Categories.map((category) => category.id);
+        const fridge = swapNamesForIds(fridgeWithNames, CategoriesArray);
+        const categoryIds = CategoriesArray.map((category) => category.id);
 
         fridge.map((food) => {
             return food.categories.map((category) => {

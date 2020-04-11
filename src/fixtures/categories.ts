@@ -1,4 +1,4 @@
-export const Categories = [
+export const CategoriesArray = [
     {
         colour: 'red',
         id: '111',
@@ -20,3 +20,14 @@ export const Categories = [
         name: 'snacks'
     }
 ];
+
+export const CategoriesObject = CategoriesArray.reduce((acc, curr) => {
+    return {
+        ...acc,
+        [curr.id]: {
+            colour: curr.colour,
+            id: curr.id,
+            name: curr.name,
+        }
+    };
+}, {});

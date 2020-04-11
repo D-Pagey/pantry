@@ -1,5 +1,5 @@
-import { extractAllCategoryIds, updateCategoriesObject } from './utils';
-import { Fridge } from '../../fixtures';
+import { countCategories, extractAllCategoryIds, updateCategoriesObject } from './utils';
+import { CategoriesObject, Fridge } from '../../fixtures';
 
 const categories = [
     {
@@ -54,33 +54,44 @@ describe('extractAllCategoryIds function', () => {
     });
 
     it('should return all of the category ids in the fridge', () => {
-      const result = extractAllCategoryIds(Fridge);
+        const result = extractAllCategoryIds(Fridge);
 
-      expect(result).toStrictEqual(['111', '111', '222', '111', '333']);
+        expect(result).toStrictEqual(['111', '111', '222', '111', '333']);
     });
 });
 
-// describe.only('updateCategoriesCount function', () => {
-//     it('should return an array', () => {
-//         const result = updateCategoriesCount(Fridge, Categories);
+describe('countCategories function', () => {
+    it('should return an array', () => {
+        const allIds = ['111', '111', '222', '111', '333'];
+        const result = countCategories(allIds, CategoriesObject);
 
-//         expect(Array.isArray(result)).toBe(true);
-//     });
+        expect(typeof result).toBe('object');
+        expect(Array.isArray(result)).toBe(false);
+    });
 
-//     it.only('should return an array of categories with counts', () => {
-//         const allIds = fridge.reduce((acc, curr) => {
-//           curr.categories.map(id => {
-//             if ()
-//           })
-//         }, []);
+    it('should return categories with correct counts', () => {
+        const allIds = ['111', '111', '222', '111', '333'];
+        const result = countCategories(allIds, CategoriesObject);
 
-//         const result = updateCategoriesCount(Fridge, Categories);
-
-//         expect(result).toStrictEqual([
-//             { colour: 'red', id: '111', name: 'meat', count: 3 },
-//             { colour: 'blue', id: '222', name: 'fish', count: 1 },
-//             { colour: 'green', id: '333', name: 'vegetables', count: 1 },
-//             { colour: 'pink', id: '444', name: 'snacks', count: 0 }
-//         ]);
-//     });
-// });
+        expect(result).toStrictEqual({
+            '111': {
+                colour: 'red',
+                count: 3,
+                id: '111',
+                name: 'meat'
+            },
+            '222': {
+                colour: 'blue',
+                count: 1,
+                id: '222',
+                name: 'fish'
+            },
+            '333': {
+                colour: 'green',
+                count: 1,
+                id: '333',
+                name: 'vegetables'
+            }
+        });
+    });
+});
