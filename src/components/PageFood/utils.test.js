@@ -10,21 +10,6 @@ describe('filterFridge function', () => {
 
     it('should filter fridge down by category', () => {
         const result = filterFridge(Fridge, Categories[0]);
-        expect(result).toStrictEqual([
-            {
-                categories: ['111'],
-                expires: new Date('2019-10-11T23:00:00.000Z'),
-                id: '1245',
-                name: 'chicken',
-                servings: 2
-            },
-            {
-                categories: ['111'],
-                expires: new Date('2019-04-08T23:00:00.000Z'),
-                id: '9999',
-                name: 'steak',
-                servings: 1
-            }
-        ]);
+        expect(result).toStrictEqual([Fridge[0], Fridge[1]]);
     });
 });
