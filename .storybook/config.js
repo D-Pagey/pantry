@@ -1,17 +1,16 @@
 import React from 'react';
 import { addDecorator, configure } from '@storybook/react';
 import requireContext from 'require-context.macro';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter, Router } from 'react-router-dom';
 import * as S from '../src/components/App/styles';
 
 addDecorator((storyFn) => (
-  <Router history={createMemoryHistory()}>
+  <MemoryRouter>
     <div style={{ margin: '1rem' }}>
       <S.GlobalStyle />
       {storyFn()}
     </div>
-  </Router>
+  </MemoryRouter>
 ));
 
 configure(() => {

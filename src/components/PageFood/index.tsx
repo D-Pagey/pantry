@@ -62,7 +62,7 @@ export const PageFood: FC = () => {
             <h1>{category}</h1>
 
             {food.length === 0 ? (
-                <p>There is no food that falls under the category of {category}</p>
+                <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
             ) : (
                 <FoodTable handleDelete={handleDelete} handleEdit={handleEdit} food={food} setFood={setFood} />
             )}

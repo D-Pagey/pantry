@@ -48,7 +48,7 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
                 <tbody>
                     {food.map((item) => (
                         <tr key={item.id}>
-                            <td>{item.name}</td>
+                            <td data-testid="foodTableName">{item.name}</td>
                             <td>{expiresColumn(item)}</td>
                             <td>{item.servings}</td>
                             <td>

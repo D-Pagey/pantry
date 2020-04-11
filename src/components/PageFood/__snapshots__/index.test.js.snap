@@ -54,7 +54,9 @@ exports[`PageFood component should render 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td>
+          <td
+            data-testid="foodTableName"
+          >
             chicken
           </td>
           <td>
@@ -91,7 +93,9 @@ exports[`PageFood component should render 1`] = `
           </td>
         </tr>
         <tr>
-          <td>
+          <td
+            data-testid="foodTableName"
+          >
             steak
           </td>
           <td>
