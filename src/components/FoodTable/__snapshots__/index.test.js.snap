@@ -1,13 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FoodTable component should render 1`] = `
-.c1 {
+.c2 {
   color: red;
   list-style: none;
 }
 
 .c0 {
   cursor: pointer;
+}
+
+.c1 {
+  cursor: pointer;
+  color: blue;
+  margin: 0 0 0 1rem;
 }
 
 <div>
@@ -50,11 +56,16 @@ exports[`FoodTable component should render 1`] = `
           chicken
         </td>
         <td>
-          111
+          <a
+            class="c1"
+            href="/food/111"
+          >
+            111
+          </a>
         </td>
         <td>
           <li
-            class="c1"
+            class="c2"
           >
             12th Oct
           </li>
@@ -92,11 +103,16 @@ exports[`FoodTable component should render 1`] = `
           steak
         </td>
         <td>
-          111
+          <a
+            class="c1"
+            href="/food/111"
+          >
+            111
+          </a>
         </td>
         <td>
           <li
-            class="c1"
+            class="c2"
           >
             9th Apr
           </li>
@@ -134,11 +150,69 @@ exports[`FoodTable component should render 1`] = `
           salmon
         </td>
         <td>
-          222
+          <a
+            class="c1"
+            href="/food/222"
+          >
+            222
+          </a>
         </td>
         <td>
           <li
+            class="c2"
+          >
+            9th Apr
+          </li>
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          <button
+            data-testid="editButton"
+            style="cursor: pointer; margin: 0px 1rem 0px 0px;"
+            type="button"
+          >
+            <img
+              alt="edit"
+              src="edit.svg"
+            />
+          </button>
+          <button
+            data-testid="deleteButton"
+            style="cursor: pointer;"
+            type="button"
+          >
+            <img
+              alt="delete"
+              src="delete.svg"
+            />
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td
+          data-testid="foodTableName"
+        >
+          broccolli
+        </td>
+        <td>
+          <a
             class="c1"
+            href="/food/111"
+          >
+            111
+          </a>
+          <a
+            class="c1"
+            href="/food/333"
+          >
+            333
+          </a>
+        </td>
+        <td>
+          <li
+            class="c2"
           >
             9th Apr
           </li>

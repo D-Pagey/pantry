@@ -75,7 +75,7 @@ describe('PageFood component', () => {
 
     it('should render a message when there is no data for a category', () => {
         useParams.mockImplementation(() => ({
-            category: Categories[2].name
+            category: Categories[3].name
         }));
 
         const { getByTestId } = render(<PageFood />, context);
@@ -113,4 +113,6 @@ describe('PageFood component', () => {
 
         expect(mockHistoryPush).toHaveBeenCalledWith('/add', Fridge[0]);
     });
+
+    it.todo('should refilter if category changes');
 });

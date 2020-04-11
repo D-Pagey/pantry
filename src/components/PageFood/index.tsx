@@ -10,12 +10,14 @@ import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
 
 export const PageFood: FC = () => {
     const [food, setFood] = useState<FoodTypes[]>([]);
-    const [isValidCategory, setIsValidCategory] = useState<boolean>();
+    const [isValidCategory, setIsValidCategory] = useState<boolean | undefined>();
     const { category } = useParams();
     const { categories, fridge, updateFridge } = useContext(FirebaseContext);
     const history = useHistory();
 
-    console.log({ fridge, categories, isValidCategory });
+    useEffect(() => {
+        setIsValidCategory(undefined);
+    }, [category]);
 
     useEffect(() => {
         if (fridge.length > 0 && categories.length > 0 && isValidCategory === undefined) {

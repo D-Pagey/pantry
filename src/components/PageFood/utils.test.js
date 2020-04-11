@@ -10,7 +10,7 @@ describe('filterFridge function', () => {
 
     it('should filter fridge down by category', () => {
         const result = filterFridge(Fridge, Categories[0]);
-        expect(result).toStrictEqual([Fridge[0], Fridge[1]]);
+        expect(result).toStrictEqual([Fridge[0], Fridge[1], Fridge[3]]);
     });
 });
 
@@ -46,7 +46,7 @@ describe('swapNamesForIds function', () => {
             {
                 categories: ['meat', 'vegetables'],
                 expires: new Date(2019, 3, 9),
-                id: '5678',
+                id: '8888',
                 name: 'broccoli',
                 servings: 1
             },

@@ -19,5 +19,12 @@ export const Fridge = [
         id: '5678',
         name: 'salmon',
         servings: 1
+    },
+    {
+        categories: ['111', '333'],
+        expires: new Date(2019, 3, 9),
+        id: '7777',
+        name: 'broccolli',
+        servings: 1
     }
 ];

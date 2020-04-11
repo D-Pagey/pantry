@@ -13,5 +13,10 @@ export const Categories = [
         colour: 'green',
         id: '333',
         name: 'vegetables'
+    },
+    {
+        colour: 'pink',
+        id: '444',
+        name: 'snacks'
     }
 ];
