@@ -1,102 +1,50 @@
 import React from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { addDays, format } from 'date-fns';
+import arraySort from 'array-sort';
+
 import { Fridge } from '../../fixtures/fridge';
-import { Categories } from '../../fixtures/categories';
 import { FoodTable } from '.';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-  useParams: jest.fn(() => ({
-    category: 'meat',
-  })),
-  Redirect: jest.fn(() => null),
-}));
-
-const props = {};
-
-const context = {
-  fridge: Fridge,
-  categories: Categories,
-  updateFridge: () => null,
+const props = {
+    food: Fridge,
+    handleDelete: () => {},
+    handleEdit: () => {},
+    setFood: () => {}
 };
 
 describe('FoodTable component', () => {
-  // TODO: fix snapshot to be with valid category
-  it('should render', () => {
-    const { container } = render(<FoodTable {...props} />, context);
-    expect(container.firstChild).toMatchSnapshot();
-  });
-
-  it.skip('should handle delete', () => {
-    const updateFridge = jest.fn();
-    const { queryAllByTestId } = render(<FoodTable {...props} />, {
-      ...context,
-      updateFridge,
+    it('should render', () => {
+        const { container } = render(<FoodTable {...props} />);
+        expect(container.firstChild).toMatchSnapshot();
     });
-    const deleteButton = queryAllByTestId('deleteButton');
 
-    userEvent.click(deleteButton[0]);
-
-    expect(updateFridge).toHaveBeenCalledWith({
-      key: 'fridge',
-      isDeleting: true,
-      values: context.fridge.filter((item, index) => index !== 0),
-    });
-  });
-
-  it.skip('should handle edit', () => {
-    // think these mocks are conflicting with the setupTests config
-    const { push } = useHistory();
-    const { queryAllByTestId } = render(<FoodTable {...props} />, context);
-    const editButton = queryAllByTestId('editButton');
-
-    userEvent.click(editButton[0]);
-
-    expect(push).toHaveBeenCalledWith();
-  });
-
-  it.each`
+    it.each`
         colour     | date
         ${'red'}   | ${new Date()}
         ${'blue'}  | ${addDays(new Date(), 2)}
         ${'black'} | ${addDays(new Date(), 4)}
     `('should have $colour for expiry date', ({ colour, date }) => {
-  const item = {
-    categories: ['111'],
-    expires: date,
-    name: 'chicken',
-    servings: 2,
-    id: '666',
-  };
+        const item = {
+            categories: ['111'],
+            expires: date,
+            name: 'chicken',
+            servings: 2,
+            id: '666'
+        };
 
-  const { getByText } = render(<FoodTable {...props} />, { ...context, fridge: [item] });
-  const expiryDate = getByText(format(date, 'do MMM'));
+        const { getByText } = render(<FoodTable {...props} food={[item]} />);
+        const expiryDate = getByText(format(date, 'do MMM'));
 
-  expect(expiryDate).toHaveStyleRule('color', colour);
-});
+        expect(expiryDate).toHaveStyleRule('color', colour);
+    });
 
-  it('should redirect if category does not exist', () => {
-    useParams.mockReturnValueOnce({ category: 'chocolate' });
+    it('should sort categories correctly', () => {
+        const setFood = jest.fn();
+        const { getByText } = render(<FoodTable {...props} setFood={setFood} />);
 
-    render(<FoodTable {...props} />, context);
+        userEvent.click(getByText('Name'));
 
-    expect(Redirect).toHaveBeenCalledWith({ to: '/not-found' }, expect.any(Object));
-  });
-
-  it.skip('should handle the category: all', () => {
-    useParams.mockReturnValue({ category: 'all' });
-
-    const { getByText, getByTestId } = render(<FoodTable {...props} />, context);
-
-    getByText(context.fridge[0].name);
-    getByText(context.fridge[1].name);
-    getByTestId('foodTableCategoryColumn');
-  });
-
-  it.todo('should sort categories correctly');
+        expect(setFood).toHaveBeenCalledWith(arraySort(props.food, 'name'));
+    });
 });
