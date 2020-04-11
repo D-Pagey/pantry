@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { PageHome } from '../PageHome';
 import { AddFoodForm } from '../AddFoodForm';
-import { AddFoodForm2 } from '../AddFoodForm2';
+import { PageAddFoodForm } from '../PageAddFoodForm';
 import { PageFood } from '../PageFood';
 import { PageSignIn } from '../PageSignIn';
 import { PageProfile } from '../PageProfile';
@@ -14,8 +14,8 @@ export const Routes = (): JSX.Element => (
         <Route exact path="/" component={PageHome} />
         <Route path="/sign-in" component={PageSignIn} />
         <RouteProtected path="/profile" component={PageProfile} />
-        <RouteProtected path="/add" component={AddFoodForm} />
-        <RouteProtected path="/test" component={AddFoodForm2} />
+        <RouteProtected path="/add" component={PageAddFoodForm} />
+        <RouteProtected path="/test" component={AddFoodForm} />
         <RouteProtected path="/food/:category" component={PageFood} />
         <Route component={PageNotFound} />
     </Switch>

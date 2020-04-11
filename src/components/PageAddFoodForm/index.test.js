@@ -2,7 +2,7 @@ import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
-import { AddFoodForm2 } from '.';
+import { PageAddFoodForm } from '.';
 import { Categories } from '../../fixtures/categories';
 
 jest.mock('uuid', () => ({
@@ -15,9 +15,9 @@ const context = {
     updateFridge: () => {}
 };
 
-describe('AddFoodForm2 component', () => {
+describe('PageAddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<AddFoodForm2 />, context);
+        const { container } = render(<PageAddFoodForm />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
@@ -25,7 +25,7 @@ describe('AddFoodForm2 component', () => {
         const { colour, id, name } = Categories[0];
         const updateCategories = jest.fn();
         const foodName = 'Chicken';
-        const { getByTestId, getByLabelText } = render(<AddFoodForm2 />, { ...context, updateCategories });
+        const { getByTestId, getByLabelText } = render(<PageAddFoodForm />, { ...context, updateCategories });
 
         await selectEvent.select(getByLabelText('What categories of food?'), [name]);
         await userEvent.type(getByTestId('addFoodInput'), foodName);
@@ -49,7 +49,7 @@ describe('AddFoodForm2 component', () => {
         const { id, name } = Categories[0];
         const updateFridge = jest.fn();
         const foodName = 'Chicken';
-        const { getByTestId, getByLabelText, queryAllByText } = render(<AddFoodForm2 />, { ...context, updateFridge });
+        const { getByTestId, getByLabelText, queryAllByText } = render(<PageAddFoodForm />, { ...context, updateFridge });
 
         await selectEvent.select(getByLabelText('What categories of food?'), [name]);
         await userEvent.type(getByTestId('addFoodInput'), foodName);

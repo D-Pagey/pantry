@@ -35,7 +35,7 @@ const formatCategories = (categories: CategoryType[]): CategoryType[] => {
     });
 };
 
-export const AddFoodForm2 = (): JSX.Element => {
+export const PageAddFoodForm = (): JSX.Element => {
     const { categories, updateFridge, updateCategories } = useContext(FirebaseContext);
 
     return (

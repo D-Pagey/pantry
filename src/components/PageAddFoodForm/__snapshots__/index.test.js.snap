@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddFoodForm2 component should render 1`] = `
+exports[`PageAddFoodForm component should render 1`] = `
 .c1 {
   padding: 0 0 0.5rem;
 }
