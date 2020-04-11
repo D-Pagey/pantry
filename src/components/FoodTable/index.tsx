@@ -35,12 +35,10 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
                 <thead>
                     <tr>
                         <S.Header onClick={sortData('name')}>Name</S.Header>
+                        <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
+                            Categories
+                        </S.Header>
                         <S.Header onClick={sortData('expires')}>Expires</S.Header>
-                        {/* {category === 'all' && (
-                            <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
-                                Category
-                            </S.Header>
-                        )} */}
                         <S.Header onClick={sortData('servings')}>Servings</S.Header>
                         <S.Header>Amend</S.Header>
                     </tr>
@@ -49,6 +47,13 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
                     {food.map((item) => (
                         <tr key={item.id}>
                             <td data-testid="foodTableName">{item.name}</td>
+                            <td>
+                                {item.categories.map((name) => (
+                                    <S.Link key={name} to={`/food/${name.toLowerCase()}`}>
+                                        {name}
+                                    </S.Link>
+                                ))}
+                            </td>
                             <td>{expiresColumn(item)}</td>
                             <td>{item.servings}</td>
                             <td>

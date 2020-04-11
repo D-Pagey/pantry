@@ -21,6 +21,12 @@ exports[`FoodTable component should render 1`] = `
         </th>
         <th
           class="c0"
+          data-testid="foodTableCategoryColumn"
+        >
+          Categories
+        </th>
+        <th
+          class="c0"
         >
           Expires
         </th>
@@ -42,6 +48,9 @@ exports[`FoodTable component should render 1`] = `
           data-testid="foodTableName"
         >
           chicken
+        </td>
+        <td>
+          111
         </td>
         <td>
           <li
@@ -83,6 +92,9 @@ exports[`FoodTable component should render 1`] = `
           steak
         </td>
         <td>
+          111
+        </td>
+        <td>
           <li
             class="c1"
           >
@@ -120,6 +132,9 @@ exports[`FoodTable component should render 1`] = `
           data-testid="foodTableName"
         >
           salmon
+        </td>
+        <td>
+          222
         </td>
         <td>
           <li

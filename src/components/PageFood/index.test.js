@@ -113,6 +113,4 @@ describe('PageFood component', () => {
 
         expect(mockHistoryPush).toHaveBeenCalledWith('/add', Fridge[0]);
     });
-
-    it.todo('when the category is all, it should render a column of category links');
 });

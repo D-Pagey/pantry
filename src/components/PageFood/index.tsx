@@ -6,7 +6,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 import { FoodTable } from '../FoodTable';
 import { Loading } from '../Loading';
 import { Button } from '../Button';
-import { filterFridge } from './utils';
+import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
 
 export const PageFood: FC = () => {
     const [food, setFood] = useState<FoodTypes[]>([]);
@@ -15,30 +15,35 @@ export const PageFood: FC = () => {
     const { categories, fridge, updateFridge } = useContext(FirebaseContext);
     const history = useHistory();
 
+    console.log({ fridge, categories, isValidCategory });
+
     useEffect(() => {
-        if (fridge.length > 0 && isValidCategory === undefined) {
+        if (fridge.length > 0 && categories.length > 0 && isValidCategory === undefined) {
             switch (category) {
-                case 'all':
-                    setFood(fridge);
+                case 'all': {
+                    setFood(swapIdsForNames(fridge, categories));
                     setIsValidCategory(true);
                     break;
+                }
                 default: {
-                    if (categories.length > 0) {
-                        const currentCategory = categories.reduce((acc, curr: DatabaseCategoryType) => {
-                            if (curr.name === category) {
-                                return curr;
-                            }
-
-                            return acc;
-                        }, undefined as DatabaseCategoryType | undefined);
-
-                        if (currentCategory === undefined) {
-                            setIsValidCategory(false);
-                        } else {
-                            setFood(filterFridge(fridge, currentCategory));
-                            setIsValidCategory(true);
+                    const currentCategory = categories.reduce((acc, curr: DatabaseCategoryType) => {
+                        if (curr.name === category) {
+                            return curr;
                         }
+
+                        return acc;
+                    }, undefined as DatabaseCategoryType | undefined);
+
+                    if (currentCategory === undefined) {
+                        setIsValidCategory(false);
+                    } else {
+                        const filtered = filterFridge(fridge, currentCategory);
+                        const formatted = swapIdsForNames(filtered, categories);
+
+                        setFood(formatted);
+                        setIsValidCategory(true);
                     }
+
                     break;
                 }
             }
@@ -51,7 +56,8 @@ export const PageFood: FC = () => {
     };
 
     const handleEdit = (params: FoodTypes) => (): void => {
-        history.push('/add', params);
+        const formatted = swapNamesForIds([params], categories);
+        history.push('/add', formatted[0]);
     };
 
     if (isValidCategory === undefined) return <Loading isLoading />;
