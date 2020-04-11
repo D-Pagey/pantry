@@ -1,9 +1,17 @@
 import React from 'react';
 import { PageFood } from '.';
+import { Categories } from '../../fixtures/categories';
+import { Fridge } from '../../fixtures/fridge';
+
+const context = {
+    categories: Categories,
+    fridge: Fridge,
+    updateFridge: () => {}
+};
 
 describe('PageFood component', () => {
     it('should render', () => {
-        const { container } = render(<PageFood />);
+        const { container } = render(<PageFood />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
