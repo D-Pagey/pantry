@@ -30,6 +30,8 @@ export const ProviderFirebase = ({ children }) => {
   const [fridge, setFridge] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  console.log({ fridge, categories });
+
   const fetchUserData = useCallback((uid) => {
     firebase
       .firestore()
