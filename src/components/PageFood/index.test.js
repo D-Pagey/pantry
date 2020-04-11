@@ -1,7 +1,14 @@
 import React from 'react';
-import { PageFood } from '.';
 import { Categories } from '../../fixtures/categories';
 import { Fridge } from '../../fixtures/fridge';
+import { PageFood } from '.';
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useParams: jest.fn(() => ({
+        category: 'meat'
+    }))
+}));
 
 const context = {
     categories: Categories,
@@ -15,7 +22,16 @@ describe('PageFood component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.todo('should render a loading spinner initially');
+    it('should render a loading spinner initially', () => {
+        const overrideContext = {
+            fridge: [],
+            categories: []
+        };
+
+        const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
+        getByTestId('loading');
+    });
+
     it.todo('when the category is all, it should render all food');
     it.todo('when the category is all, it should render a column of category links');
     it.todo('when the category is not all, it should filter down fridge');

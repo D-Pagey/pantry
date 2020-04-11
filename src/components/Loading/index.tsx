@@ -6,5 +6,7 @@ type LoadingTypes = {
 };
 
 export const Loading = ({ isLoading }: LoadingTypes): JSX.Element => (
-    <PropagateLoader color="blue" loading={isLoading} />
+    <div data-testid="loading">
+        <PropagateLoader color="blue" loading={isLoading} />
+    </div>
 );
