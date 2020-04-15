@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 const context = {
     categories: CategoriesArray,
     fridge: Fridge,
-    updateFridge: () => {}
+    deleteFoodItem: () => {}
 };
 
 describe('PageFood component', () => {
@@ -31,7 +31,8 @@ describe('PageFood component', () => {
 
     it('should render a loading spinner initially', () => {
         const overrideContext = {
-            categories: []
+            categories: [],
+            fridge: []
         };
 
         const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
@@ -79,24 +80,6 @@ describe('PageFood component', () => {
 
         const { getByTestId } = render(<PageFood />, context);
         getByTestId('pageFoodNoData');
-    });
-
-    it('should handle a delete food click', () => {
-        useParams.mockImplementation(() => ({
-            category: 'all'
-        }));
-
-        const updateFridge = jest.fn();
-        const { getAllByTestId } = render(<PageFood />, { ...context, updateFridge });
-        const button = getAllByTestId('deleteButton')[0];
-
-        userEvent.click(button);
-
-        expect(updateFridge).toHaveBeenCalledWith({
-            key: 'fridge',
-            isDeleting: true,
-            values: Fridge.slice(1)
-        });
     });
 
     it('should handle an edit food click', () => {

@@ -10,7 +10,6 @@ export const filterFridge = (fridge: FoodTypes[], category: DatabaseCategoryType
     });
 };
 
-
 // TODO: Refactor this to be one function
 export const swapIdsForNames = (fridge: FoodTypes[], categories: DatabaseCategoryType[]): FoodTypes[] => {
     return fridge.map(foodItem => {

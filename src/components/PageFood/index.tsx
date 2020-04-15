@@ -12,7 +12,7 @@ export const PageFood: FC = () => {
     const [food, setFood] = useState<FoodTypes[]>([]);
     const [isValidCategory, setIsValidCategory] = useState<boolean | undefined>();
     const { category } = useParams();
-    const { categories, fridge, updateFridge } = useContext(FirebaseContext);
+    const { categories, fridge } = useContext(FirebaseContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -20,14 +20,16 @@ export const PageFood: FC = () => {
     }, [category]);
 
     useEffect(() => {
-        if (fridge.length > 0 && categories.length > 0 && isValidCategory === undefined) {
-            switch (category) {
-                case 'all': {
+        switch (category) {
+            case 'all': {
+                if (fridge.length !== 0 && categories.length !== 0) {
                     setFood(swapIdsForNames(fridge, categories));
                     setIsValidCategory(true);
-                    break;
                 }
-                default: {
+                break;
+            }
+            default: {
+                if (fridge.length !== 0 && categories.length !== 0) {
                     const currentCategory = categories.reduce((acc, curr: DatabaseCategoryType) => {
                         if (curr.name === category) {
                             return curr;
@@ -45,17 +47,11 @@ export const PageFood: FC = () => {
                         setFood(formatted);
                         setIsValidCategory(true);
                     }
-
-                    break;
                 }
+                break;
             }
         }
     }, [category, categories, fridge, isValidCategory]);
-
-    const handleDelete = (id: string) => (): void => {
-        const filteredItems = fridge.filter((item: { id: string }) => item.id !== id);
-        updateFridge({ key: 'fridge', values: filteredItems, isDeleting: true });
-    };
 
     const handleEdit = (params: FoodTypes) => (): void => {
         const formatted = swapNamesForIds([params], categories);
@@ -72,7 +68,7 @@ export const PageFood: FC = () => {
             {food.length === 0 ? (
                 <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
             ) : (
-                <FoodTable handleDelete={handleDelete} handleEdit={handleEdit} food={food} setFood={setFood} />
+                <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} />
             )}
 
             <Link to="/add">

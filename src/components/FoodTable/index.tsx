@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { format } from 'date-fns';
 import arraySort from 'array-sort';
 
@@ -6,17 +6,18 @@ import { FoodTypes } from '../../types';
 import { chooseDateColour } from '../../utils';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
+import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
 type FoodTableTypes = {
     food: FoodTypes[];
-    handleDelete: (id: string) => () => void;
     handleEdit: (params: FoodTypes) => () => void;
     setFood: (fridge: FoodTypes[]) => void;
 };
 
-export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, setFood }) => {
+export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => {
     const [isDescendingOrder, setIsDescendingOrder] = useState(false);
+    const { deleteFoodItem } = useContext(FirebaseContext);
 
     const expiresColumn = (item: FoodTypes): JSX.Element => (
         <S.Item colour={chooseDateColour(item.expires)}>{format(item.expires, 'do MMM')}</S.Item>
@@ -28,6 +29,8 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
         setIsDescendingOrder(!isDescendingOrder);
         setFood(sorted);
     };
+
+    const handleDelete = (id: string) => () => deleteFoodItem(id);
 
     return (
         <div>
@@ -44,7 +47,7 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
                     </tr>
                 </thead>
                 <tbody>
-                    {food.map((item) => (
+                    {food.map((item, index) => (
                         <tr key={item.id}>
                             <td data-testid="foodTableName">{item.name}</td>
                             <td>
@@ -69,7 +72,7 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleDelete, handleEdit, 
                                     type="button"
                                     onClick={handleDelete(item.id)}
                                     style={{ cursor: 'pointer' }}
-                                    data-testid="deleteButton"
+                                    data-testid={`deleteButton${index}`}
                                 >
                                     <img src={deleteIcon} alt="delete" />
                                 </button>

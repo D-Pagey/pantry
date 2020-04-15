@@ -8,14 +8,17 @@ import { FoodTable } from '.';
 
 const props = {
     food: Fridge,
-    handleDelete: () => {},
     handleEdit: () => {},
     setFood: () => {}
 };
 
+const context = {
+    deleteFoodItem: () => {},
+};
+
 describe('FoodTable component', () => {
     it('should render', () => {
-        const { container } = render(<FoodTable {...props} />);
+        const { container } = render(<FoodTable {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
@@ -33,7 +36,7 @@ describe('FoodTable component', () => {
             id: '666'
         };
 
-        const { getByText } = render(<FoodTable {...props} food={[item]} />);
+        const { getByText } = render(<FoodTable {...props} food={[item]} />, context);
         const expiryDate = getByText(format(date, 'do MMM'));
 
         expect(expiryDate).toHaveStyleRule('color', colour);
@@ -41,10 +44,20 @@ describe('FoodTable component', () => {
 
     it('should sort categories correctly', () => {
         const setFood = jest.fn();
-        const { getByText } = render(<FoodTable {...props} setFood={setFood} />);
+        const { getByText } = render(<FoodTable {...props} setFood={setFood} />, context);
 
         userEvent.click(getByText('Name'));
 
         expect(setFood).toHaveBeenCalledWith(arraySort(props.food, 'name'));
+    });
+
+    it('should handle a delete food click', () => {
+        const deleteFoodItem = jest.fn();
+        const { getByTestId } = render(<FoodTable {...props} />, { ...context, deleteFoodItem });
+        const button = getByTestId('deleteButton0');
+
+        userEvent.click(button);
+
+        expect(deleteFoodItem).toHaveBeenCalledWith(Fridge[0].id);
     });
 });

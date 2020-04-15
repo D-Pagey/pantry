@@ -101,7 +101,7 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
             <button
-              data-testid="deleteButton"
+              data-testid="deleteButton0"
               style="cursor: pointer;"
               type="button"
             >
@@ -148,7 +148,7 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
             <button
-              data-testid="deleteButton"
+              data-testid="deleteButton1"
               style="cursor: pointer;"
               type="button"
             >
@@ -201,7 +201,7 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
             <button
-              data-testid="deleteButton"
+              data-testid="deleteButton2"
               style="cursor: pointer;"
               type="button"
             >
