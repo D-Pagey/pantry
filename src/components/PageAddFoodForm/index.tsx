@@ -10,6 +10,7 @@ import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
 
+// TODO: move
 const servingsOptions = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -17,6 +18,7 @@ const servingsOptions = [
     { label: '4+', value: 4 }
 ];
 
+// TODO: move
 const baseValues = {
     categories: [],
     expires: new Date(),
@@ -25,6 +27,7 @@ const baseValues = {
     servings: servingsOptions[1].value
 };
 
+// TODO: move
 const formatCategories = (categories: CategoryType[]): CategoryType[] => {
     return categories.map((category: CategoryType) => {
         return {
@@ -34,6 +37,15 @@ const formatCategories = (categories: CategoryType[]): CategoryType[] => {
         };
     });
 };
+
+/** Edit Functionality
+ * Initial values in state
+ * Reinitialise the form
+ * reset state from router state
+ * track isEditMode in state
+ * ensure editing food item and not creating new one as duplicate
+ * go back to where you were after submit
+ */
 
 export const PageAddFoodForm = (): JSX.Element => {
     const { categories, updateFridge, updateCategories } = useContext(FirebaseContext);
