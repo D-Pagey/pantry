@@ -21,3 +21,7 @@ export type FoodTypes = {
     name: string;
     servings: number;
 };
+
+export type CategoryCountType = {
+    [id: string]: number;
+};

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { extractAllCategoryIds, updateCategoriesObject, countCategories } from './utils';
+import { updateCategoriesObject, countCategories } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -63,11 +63,10 @@ export const ProviderFirebase = ({ children }) => {
                     expires: item.expires.toDate()
                 }));
 
-                const allCategoryIds = extractAllCategoryIds(Object.values(data.fridge));
-                const countedCategories = countCategories(allCategoryIds, data.categories);
+                const countedCategories = countCategories(Object.values(data.fridge), data.categories);
 
                 setFridge(formattedData);
-                setCategories(Object.values(countedCategories));
+                setCategories(countedCategories);
             });
     }, [user.household]);
 

@@ -54,54 +54,6 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid green;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 140px;
-}
-
-.c6 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid pink;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 140px;
-}
-
-.c7 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   border: 3px solid orange;
   border-radius: 6px;
   box-sizing: border-box;
@@ -145,7 +97,7 @@ exports[`CategoryList component should render 1`] = `
   <a
     class="c1"
     colour="red"
-    data-testid="categoryCard"
+    data-testid="categoryCardmeat"
     href="/food/meat"
   >
     <h3
@@ -155,12 +107,14 @@ exports[`CategoryList component should render 1`] = `
     </h3>
     <p
       class="c3"
-    />
+    >
+      3
+    </p>
   </a>
   <a
     class="c4"
     colour="blue"
-    data-testid="categoryCard"
+    data-testid="categoryCardfish"
     href="/food/fish"
   >
     <h3
@@ -170,42 +124,14 @@ exports[`CategoryList component should render 1`] = `
     </h3>
     <p
       class="c3"
-    />
+    >
+      1
+    </p>
   </a>
   <a
     class="c5"
-    colour="green"
-    data-testid="categoryCard"
-    href="/food/vegetables"
-  >
-    <h3
-      class="c2"
-    >
-      Vegetables
-    </h3>
-    <p
-      class="c3"
-    />
-  </a>
-  <a
-    class="c6"
-    colour="pink"
-    data-testid="categoryCard"
-    href="/food/snacks"
-  >
-    <h3
-      class="c2"
-    >
-      Snacks
-    </h3>
-    <p
-      class="c3"
-    />
-  </a>
-  <a
-    class="c7"
     colour="orange"
-    data-testid="categoryCard"
+    data-testid="categoryCardall"
     href="/food/all"
   >
     <h3

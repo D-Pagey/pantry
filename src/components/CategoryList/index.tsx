@@ -4,9 +4,9 @@ import { CategoryCard } from '../CategoryCard';
 import * as S from './styles';
 
 type ItemType = {
-    name: string;
     colour: string;
     count: number;
+    name: string;
 };
 
 export const CategoryList = (): JSX.Element => {
@@ -14,9 +14,13 @@ export const CategoryList = (): JSX.Element => {
 
     return (
         <S.Wrapper data-testid="categoryList">
-            {categories.map((item: ItemType) => (
-                <CategoryCard name={item.name} colour={item.colour} quantity={item.count} key={item.name} />
-            ))}
+            {categories.map((item: ItemType) => {
+                if (item.count > 0) {
+                    return <CategoryCard name={item.name} colour={item.colour} quantity={item.count} key={item.name} />;
+                }
+
+                return <React.Fragment key={item.name} />;
+            })}
             <CategoryCard name="all" colour="orange" quantity={fridge.length} />
         </S.Wrapper>
     );

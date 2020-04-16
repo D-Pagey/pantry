@@ -36,7 +36,7 @@ exports[`CategoryCard component should render 1`] = `
 <a
   class="c0"
   colour="red"
-  data-testid="categoryCard"
+  data-testid="categoryCardmeat"
   href="/food/meat"
 >
   <h3
