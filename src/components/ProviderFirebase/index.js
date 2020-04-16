@@ -121,7 +121,7 @@ export const ProviderFirebase = ({ children }) => {
                 [`fridge.${id}`]: firebase.firestore.FieldValue.delete()
             })
             .then(() => {
-                toast.success('Food deleted');
+                toast.error('Food deleted');
             })
             .catch(() => toast.error('Error with deleting food'));
     };
