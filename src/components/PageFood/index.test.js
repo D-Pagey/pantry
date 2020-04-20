@@ -18,24 +18,32 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const context = {
-    categories: CategoriesArray,
-    fridge: Fridge,
+    categories: [],
+    fridge: [],
     deleteFoodItem: () => {}
 };
 
 describe('PageFood component', () => {
     it('should render', () => {
-        const { container } = render(<PageFood />, context);
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge
+        };
+
+        const { container } = render(<PageFood />, { ...context, ...overrideContext });
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should render a loading spinner initially', () => {
-        const overrideContext = {
-            categories: [],
-            fridge: []
-        };
+    it.each`
+        category
+        ${'all'}
+        ${'meat'}
+    `('should render a loading spinner initially when category = $category', ({ category }) => {
+        useParams.mockImplementation(() => ({
+            category
+        }));
 
-        const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
+        const { getByTestId } = render(<PageFood />, context);
         getByTestId('loading');
     });
 
@@ -44,7 +52,12 @@ describe('PageFood component', () => {
             category: 'all'
         }));
 
-        const { getByText } = render(<PageFood />, context);
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge
+        };
+
+        const { getByText } = render(<PageFood />, { ...context, ...overrideContext });
         Fridge.map((item) => getByText(item.name));
     });
 
@@ -53,7 +66,12 @@ describe('PageFood component', () => {
             category: CategoriesArray[1].name
         }));
 
-        const { getByText, queryByText } = render(<PageFood />, context);
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge
+        };
+
+        const { getByText, queryByText } = render(<PageFood />, { ...context, ...overrideContext });
 
         Fridge.map((item) => {
             if (item.categories.includes(CategoriesArray[1].id)) {
@@ -69,7 +87,12 @@ describe('PageFood component', () => {
             category: 'hello'
         }));
 
-        render(<PageFood />, context);
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge
+        };
+
+        render(<PageFood />, { ...context, ...overrideContext });
         expect(Redirect).toHaveBeenCalledWith({ to: '/not-found' }, expect.any(Object));
     });
 
@@ -78,7 +101,12 @@ describe('PageFood component', () => {
             category: CategoriesArray[3].name
         }));
 
-        const { getByTestId } = render(<PageFood />, context);
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge
+        };
+
+        const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
         getByTestId('pageFoodNoData');
     });
 
@@ -87,8 +115,13 @@ describe('PageFood component', () => {
             category: 'all'
         }));
 
-        const updateFridge = jest.fn();
-        const { getAllByTestId } = render(<PageFood />, { ...context, updateFridge });
+        const overrideContext = {
+            categories: CategoriesArray,
+            fridge: Fridge,
+            updateFridge: jest.fn()
+        };
+
+        const { getAllByTestId } = render(<PageFood />, { ...context, ...overrideContext });
         const button = getAllByTestId('editButton')[0];
 
         userEvent.click(button);
