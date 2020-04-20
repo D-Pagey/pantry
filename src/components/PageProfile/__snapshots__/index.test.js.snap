@@ -7,6 +7,24 @@ exports[`PageProfile component should render 1`] = `
   width: 20px;
 }
 
+.c1 {
+  background-color: blue;
+  height: 20px;
+  width: 20px;
+}
+
+.c2 {
+  background-color: green;
+  height: 20px;
+  width: 20px;
+}
+
+.c3 {
+  background-color: pink;
+  height: 20px;
+  width: 20px;
+}
+
 <div
   data-testid="pageProfile"
 >
@@ -46,6 +64,36 @@ exports[`PageProfile component should render 1`] = `
         <td>
           <div
             class="c0"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fish
+        </td>
+        <td>
+          <div
+            class="c1"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          vegetables
+        </td>
+        <td>
+          <div
+            class="c2"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          snacks
+        </td>
+        <td>
+          <div
+            class="c3"
           />
         </td>
       </tr>

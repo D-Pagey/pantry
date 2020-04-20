@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { DatabaseCategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
@@ -29,9 +30,9 @@ export const PageProfile = (): JSX.Element => {
                     </tr>
                 </thead>
                 <tbody>
-                    {categories.map((category: { label: string; colour: string }) => (
-                        <tr key={category.label}>
-                            <td>{category.label}</td>
+                    {categories.map((category: DatabaseCategoryType) => (
+                        <tr key={category.name}>
+                            <td>{category.name}</td>
                             <td>
                                 <S.ColourSquare colour={category.colour} />
                             </td>

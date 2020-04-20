@@ -1,12 +1,12 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { CategoriesArray } from '../../fixtures';
 import { PageProfile } from '.';
 
 const props = {};
 
 const context = {
-  categories: [{ label: 'meat', colour: 'red' }],
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  categories: CategoriesArray,
   signOut: () => {},
   user: {
     email: 'dan@gmail.com',
