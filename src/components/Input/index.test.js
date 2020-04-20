@@ -18,7 +18,7 @@ describe('Input component', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it.skip('should show error', () => {
+  it('should show error', () => {
     const error = 'Required';
     const { getByText } = render(<Input {...props} error={error} />);
     const errorMessage = getByText(error);
