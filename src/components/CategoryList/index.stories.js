@@ -1,16 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
+import { CategoriesArray, Fridge } from '../../fixtures';
 import { FirebaseContext } from '../ProviderFirebase';
 import { CategoryList } from '.';
 
 const props = {};
 
 const firebaseContext = {
-    categories: [
-        { label: 'Meat', count: 2, colour: 'red' },
-        { label: 'Fish', count: 3, colour: 'blue' },
-        { label: 'Vegetables', count: 5, colour: 'green' }
-    ]
+    categories: CategoriesArray,
+    fridge: Fridge
 };
 
 storiesOf('CategoryList', module)

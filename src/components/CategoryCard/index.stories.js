@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { CategoryCard } from '.';
 
 const props = {
-    category: 'Meat',
+    name: 'Meat',
+    colour: 'red',
     quantity: 2
 };
 
