@@ -6,6 +6,7 @@ const options = [
     {
         label: 'Meat',
         value: 'meat',
+        name: 'meat',
         colour: 'red',
         count: 0,
         id: '1'
@@ -13,6 +14,7 @@ const options = [
     {
         label: 'Fish',
         value: 'fish',
+        name: 'fish',
         colour: 'blue',
         count: 2,
         id: '2'
@@ -20,6 +22,7 @@ const options = [
     {
         label: 'Vegetables',
         value: 'vegetables',
+        name: 'vegetables',
         colour: 'green',
         count: 4,
         id: '3'

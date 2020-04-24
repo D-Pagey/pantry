@@ -8,6 +8,7 @@ export interface CategoryType extends DatabaseCategoryType {
     count: number;
     label: string;
     value: string;
+    __isNew__?: boolean;
 }
 
 export interface KeyedDatabaseCategoryType {

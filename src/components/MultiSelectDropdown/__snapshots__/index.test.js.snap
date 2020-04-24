@@ -14,6 +14,7 @@ exports[`MultiSelectDropdown component should render 1`] = `
 <div
   class="c0"
 >
+  
   <div
     class=" css-2b097c-container"
   >
@@ -79,5 +80,6 @@ exports[`MultiSelectDropdown component should render 1`] = `
       </div>
     </div>
   </div>
+  
 </div>
 `;

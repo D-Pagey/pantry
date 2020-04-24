@@ -1,36 +1,33 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
+import { ActionMeta } from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
+
+import { CategoryType } from '../../types';
 import { FormLabel } from '../FormLabel';
 import { FormError } from '../FormError';
 import * as S from './styles';
 
-type ValuesType = {
-    label: string;
-    value: string;
-    colour?: string;
-    id?: string;
-    count?: number;
-};
-
 type DropdownTypes = {
     error?: string;
     label?: string;
-    options: ValuesType[];
-    setValues: Function;
-    value: ValuesType[];
+    options: CategoryType[];
+    setValues: (categories: CategoryType[]) => void;
+    value: CategoryType[];
 };
 
+/**
+ * Return a consistent array of values except for one __isNew__ flag
+ */
 export const MultiSelectDropdown = ({ error, label, options, setValues, value }: DropdownTypes): JSX.Element => {
-    const handleChange = (newValue: any, actionMeta: any): void => {
+    const handleChange = (newValue: any, actionMeta: ActionMeta): void => {
         if (actionMeta.action === 'create-option') {
-            // remove isNew prop
-            const { __isNew__, ...rest } = newValue[newValue.length - 1];
+            const originalAddedValue = newValue[newValue.length - 1];
 
             const addedValue = {
-                ...rest,
+                ...originalAddedValue,
+                name: originalAddedValue.value,
                 colour: 'black',
-                count: 0,
                 id: uuidv4()
             };
 
