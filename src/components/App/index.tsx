@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ProviderFirebase } from '../ProviderFirebase';
-import { BurgerMenu } from '../BurgerMenu';
+import { Navbar } from '../Navbar';
 import { Routes } from '../Routes';
 import * as S from './styles';
 
@@ -14,14 +14,10 @@ toast.configure({
 export const App = (): JSX.Element => (
     <ProviderFirebase>
         <BrowserRouter>
-            <BurgerMenu />
+            <Navbar />
 
             <S.Wrapper>
                 <S.GlobalStyle />
-
-                <S.Link to="/">
-                    <S.Title>Pantry</S.Title>
-                </S.Link>
 
                 <Routes />
             </S.Wrapper>
