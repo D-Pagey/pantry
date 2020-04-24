@@ -26,7 +26,7 @@ export const MultiSelectDropdown = ({ error, label, options, setValues, value }:
 
             const addedValue = {
                 ...originalAddedValue,
-                name: originalAddedValue.value,
+                name: originalAddedValue.value.toLowerCase(),
                 colour: 'black',
                 id: uuidv4()
             };
