@@ -1,161 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component should render 1`] = `
-.c4 {
+.c0 {
   color: white;
   -webkit-text-decoration: none;
   text-decoration: none;
   margin: 0 0 1rem;
 }
 
-.c4:hover {
+.c0:hover {
   color: orange;
 }
 
-.c0 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 33px 24px 0;
-}
-
-.c1 {
-  color: initial;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c3 {
-  font-size: 25px;
-  font-weight: 500;
-  margin: 0;
-  padding: 0 0 0 14px;
-}
-
-.c2 {
-  position: relative;
-  top: 2px;
-  width: 32px;
-}
-
-<div
-  class="c0"
->
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
+<div>
+  <div
+    class="bm-overlay"
+    style="position: fixed; z-index: 1000; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 0; transform: translate3d(100%, 0, 0); transition: opacity 0.3s, transform 0s 0.3s;"
+  />
+  <div
+    class="bm-menu-wrap"
+    id=""
+    style="position: fixed; right: 0px; z-index: 1100; width: 300px; height: 100%; transform: translate3d(100%, 0, 0); transition: all 0.5s;"
   >
-    <img
-      alt="icon"
-      class="c2"
-      src="icon.svg"
-    />
-  </a>
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
-  >
-    <h4
-      class="c3"
-    >
-      Pantry
-    </h4>
-  </a>
-  <div>
     <div
-      class="bm-overlay"
-      style="position: fixed; z-index: 1000; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 0; transform: translate3d(100%, 0, 0); transition: opacity 0.3s, transform 0s 0.3s;"
-    />
-    <div
-      class="bm-menu-wrap"
-      id=""
-      style="position: fixed; right: 0px; z-index: 1100; width: 300px; height: 100%; transform: translate3d(100%, 0, 0); transition: all 0.5s;"
+      class="bm-menu"
+      style="height: 100%; box-sizing: border-box; overflow: auto; background: rgb(55, 58, 71); padding: 2.5em 1.5em 0px; font-size: 1.15em;"
     >
-      <div
-        class="bm-menu"
-        style="height: 100%; box-sizing: border-box; overflow: auto; background: rgb(55, 58, 71); padding: 2.5em 1.5em 0px; font-size: 1.15em;"
+      <nav
+        class="bm-item-list"
+        style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em; display: flex; flex-direction: column;"
       >
-        <nav
-          class="bm-item-list"
-          style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em; display: flex; flex-direction: column;"
+        <a
+          aria-current="page"
+          class="c0 bm-item active"
+          href="/"
+          style="display: block;"
+          tabindex="-1"
         >
-          <a
-            aria-current="page"
-            class="c4 bm-item active"
-            href="/"
-            style="display: block;"
-            tabindex="-1"
-          >
-            Home
-          </a>
-          <a
-            class="c4 bm-item"
-            href="/sign-in"
-            style="display: block;"
-            tabindex="-1"
-          >
-            Sign In
-          </a>
-        </nav>
-      </div>
-      <div>
-        <div
-          class="bm-cross-button"
-          style="position: absolute; width: 24px; height: 24px; right: 8px; top: 8px;"
+          Home
+        </a>
+        <a
+          class="c0 bm-item"
+          href="/sign-in"
+          style="display: block;"
+          tabindex="-1"
         >
-          <span
-            style="position: absolute; top: 6px; right: 14px;"
-          >
-            <span
-              class="bm-cross"
-              style="position: absolute; width: 3px; height: 14px; transform: rotate(45deg); background: rgb(189, 195, 199);"
-            />
-            <span
-              class="bm-cross"
-              style="position: absolute; width: 3px; height: 14px; transform: rotate(-45deg); background: rgb(189, 195, 199);"
-            />
-          </span>
-          <button
-            style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; font-size: 0px; background: transparent; cursor: pointer;"
-            tabindex="-1"
-          >
-            Close Menu
-          </button>
-        </div>
-      </div>
+          Sign In
+        </a>
+      </nav>
     </div>
     <div>
       <div
-        class="bm-burger-button"
-        style="z-index: 1000; position: fixed; width: 36px; height: 30px; right: 36px; top: 36px;"
+        class="bm-cross-button"
+        style="position: absolute; width: 24px; height: 24px; right: 8px; top: 8px;"
       >
-        <span>
+        <span
+          style="position: absolute; top: 6px; right: 14px;"
+        >
           <span
-            class="bm-burger-bars"
-            style="position: absolute; height: 20%; left: 0px; right: 0px; top: 0%; opacity: 1; background: rgb(55, 58, 71);"
+            class="bm-cross"
+            style="position: absolute; width: 3px; height: 14px; transform: rotate(45deg); background: rgb(189, 195, 199);"
           />
           <span
-            class="bm-burger-bars"
-            style="position: absolute; height: 20%; left: 0px; right: 0px; top: 40%; opacity: 1; background: rgb(55, 58, 71);"
-          />
-          <span
-            class="bm-burger-bars"
-            style="position: absolute; height: 20%; left: 0px; right: 0px; top: 80%; opacity: 1; background: rgb(55, 58, 71);"
+            class="bm-cross"
+            style="position: absolute; width: 3px; height: 14px; transform: rotate(-45deg); background: rgb(189, 195, 199);"
           />
         </span>
         <button
           style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; font-size: 0px; background: transparent; cursor: pointer;"
+          tabindex="-1"
         >
-          Open Menu
+          Close Menu
         </button>
       </div>
+    </div>
+  </div>
+  <div>
+    <div
+      class="bm-burger-button"
+      style="z-index: 1000; position: fixed; width: 36px; height: 30px; right: 36px; top: 36px;"
+    >
+      <span>
+        <span
+          class="bm-burger-bars"
+          style="position: absolute; height: 20%; left: 0px; right: 0px; top: 0%; opacity: 1; background: rgb(55, 58, 71);"
+        />
+        <span
+          class="bm-burger-bars"
+          style="position: absolute; height: 20%; left: 0px; right: 0px; top: 40%; opacity: 1; background: rgb(55, 58, 71);"
+        />
+        <span
+          class="bm-burger-bars"
+          style="position: absolute; height: 20%; left: 0px; right: 0px; top: 80%; opacity: 1; background: rgb(55, 58, 71);"
+        />
+      </span>
+      <button
+        style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; font-size: 0px; background: transparent; cursor: pointer;"
+      >
+        Open Menu
+      </button>
     </div>
   </div>
 </div>
