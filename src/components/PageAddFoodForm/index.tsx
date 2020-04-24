@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
-import { CategoryType } from '../../types';
+import { CategoryType, DatabaseCategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { MultiSelectDropdown } from '../MultiSelectDropdown';
 import { DialDatePicker } from '../DialDatePicker';

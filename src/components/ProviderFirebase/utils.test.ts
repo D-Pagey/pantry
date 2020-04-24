@@ -1,22 +1,17 @@
+import { DatabaseCategoryType } from '../../types';
 import { countCategories, countCategoryIds, updateCategoriesObject } from './utils';
 import { CategoriesObject, Fridge } from '../../fixtures';
 
-const categories = [
+const categories: DatabaseCategoryType[] = [
     {
         name: 'meat',
         colour: 'red',
         id: 'ddd',
-        count: 0,
-        label: 'meat',
-        value: 'meat'
     },
     {
         name: 'fish',
         colour: 'blue',
         id: 'eee',
-        count: 0,
-        label: 'fish',
-        value: 'fish'
     }
 ];
 

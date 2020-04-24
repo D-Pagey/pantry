@@ -1,7 +1,7 @@
 import { CategoryCountType, CategoryType, DatabaseCategoryType, FoodTypes, KeyedDatabaseCategoryType } from '../../types';
 
 // converts an array of categories to an object of objects
-export const updateCategoriesObject = (categories: CategoryType[]): { [key: string]: DatabaseCategoryType } => {
+export const updateCategoriesObject = (categories: DatabaseCategoryType[]): { [key: string]: DatabaseCategoryType } => {
     return categories.reduce((acc, curr) => {
         const { label, value, count, ...restOfCategory } = curr;
 
