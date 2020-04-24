@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useContext } from 'react';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +21,7 @@ const servingsOptions = [
 
 // TODO: move
 const baseValues = {
-    categories: [],
+    categories: [] as CategoryType[],
     expires: new Date(),
     id: '',
     name: '',
@@ -48,7 +49,7 @@ const formatCategories = (categories: CategoryType[]): CategoryType[] => {
  */
 
 export const PageAddFoodForm = (): JSX.Element => {
-    const { categories, updateFridge, updateCategories } = useContext(FirebaseContext);
+    const { categories, updateFridge, addNewCategories } = useContext(FirebaseContext);
 
     return (
         <Formik
@@ -56,12 +57,22 @@ export const PageAddFoodForm = (): JSX.Element => {
             onSubmit={(values, actions): void => {
                 const valuesWithId = values.id ? values : { ...values, id: uuidv4() };
 
+                const newCategories = valuesWithId.categories.reduce((acc, curr) => {
+                    if (curr.__isNew__) {
+                        const { __isNew__, ...restOfCategory } = curr;
+
+                        return [...acc, restOfCategory];
+                    }
+
+                    return acc;
+                }, [] as CategoryType[]);
+
                 const withCategoryIds = {
                     ...valuesWithId,
                     categories: valuesWithId.categories.map((category: CategoryType) => category.id)
                 };
 
-                updateCategories(values.categories);
+                if (newCategories.length > 0) addNewCategories(newCategories);
                 updateFridge(withCategoryIds);
 
                 actions.setSubmitting(false);

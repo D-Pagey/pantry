@@ -14,7 +14,7 @@ export const FirebaseContext = createContext({
     isCheckingAuth: false,
     fridge: [],
     signOut: () => null,
-    updateCategories: (values) => null,
+    addNewCategories: (values) => null,
     updateFridge: (values) => null,
     user: {
         email: null,
@@ -106,7 +106,7 @@ export const ProviderFirebase = ({ children }) => {
             .catch(() => toast.error('Error with updating fridge'));
     };
 
-    const updateCategories = (categoryObjects) => {
+    const addNewCategories = (categoryObjects) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update(updateCategoriesObject(categoryObjects))
@@ -137,7 +137,7 @@ export const ProviderFirebase = ({ children }) => {
                 setIsAuthed,
                 setUser,
                 signOut,
-                updateCategories,
+                addNewCategories,
                 updateFridge,
                 user
             }}
