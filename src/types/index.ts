@@ -23,6 +23,14 @@ export type FoodTypes = {
     servings: number;
 };
 
+export type EditFoodTypes = {
+    categories: CategoryType[];
+    expires: Date;
+    id: string;
+    name: string;
+    servings: number;
+};
+
 export type CategoryCountType = {
     [id: string]: number;
 };

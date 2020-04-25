@@ -1,9 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
-import { CategoryType } from '../../types';
+import { CategoryType, FoodTypes, EditFoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { MultiSelectDropdown } from '../MultiSelectDropdown';
 import { DialDatePicker } from '../DialDatePicker';
@@ -49,11 +50,28 @@ const formatCategories = (categories: CategoryType[]): CategoryType[] => {
  */
 
 export const PageAddFoodForm = (): JSX.Element => {
+    const [initialValues, setInitialValues] = useState<EditFoodTypes>(baseValues);
+    const [usedEditValues, setHasUsedEditValues] = useState(false);
+    const { state } = useLocation<FoodTypes>();
     const { categories, updateFridge, addNewCategories } = useContext(FirebaseContext);
+
+    useEffect(() => {
+        if (state && !usedEditValues) {
+            const formattedCategories = formatCategories(categories);
+
+            const swapCategoryIds = state.categories.map((categoryId: string) => {
+                return formattedCategories.find((formatted) => formatted.id === categoryId)!;
+            });
+
+            setInitialValues({ ...state, categories: swapCategoryIds });
+            setHasUsedEditValues(true);
+        }
+    }, [categories, initialValues, state, usedEditValues]);
 
     return (
         <Formik
-            initialValues={baseValues}
+            enableReinitialize
+            initialValues={initialValues}
             onSubmit={(values, actions): void => {
                 const valuesWithId = values.id ? values : { ...values, id: uuidv4() };
 
@@ -77,6 +95,7 @@ export const PageAddFoodForm = (): JSX.Element => {
 
                 actions.setSubmitting(false);
                 actions.resetForm();
+                setInitialValues(baseValues);
             }}
         >
             {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
