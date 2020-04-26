@@ -16,7 +16,7 @@ const context = {
 };
 
 describe('PageAddFoodForm component', () => {
-    it.skip('should render', () => {
+    it('should render', () => {
         const { container } = render(<PageAddFoodForm />, context);
         expect(container.firstChild).toMatchSnapshot();
     });

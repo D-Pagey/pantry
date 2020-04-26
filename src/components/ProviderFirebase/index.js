@@ -96,12 +96,12 @@ export const ProviderFirebase = ({ children }) => {
         setFridge([]);
     };
 
-    const updateFridge = (values, isEditMode) => {
+    const updateFridge = (values) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update({ [`fridge.${values.id}`]: values })
             .then(() => {
-                return toast.success(`Food item ${isEditMode ? 'edited' : 'added'}.`);
+                return toast.success('Food item added');
             })
             .catch(() => toast.error('Error with updating fridge'));
     };
