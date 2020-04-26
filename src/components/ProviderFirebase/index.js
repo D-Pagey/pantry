@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { updateCategoriesObject, countCategories } from './utils';
+import { updateCategoriesObject, countCategories, calculateExpiring } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -57,15 +57,20 @@ export const ProviderFirebase = ({ children }) => {
             .doc(user.household)
             .onSnapshot((doc) => {
                 const data = doc.data();
+                const fridgeData = Object.values(data.fridge);
 
-                const formattedData = Object.values(data.fridge).map((item) => ({
+                const formattedData = fridgeData.map((item) => ({
                     ...item,
                     expires: item.expires.toDate()
                 }));
 
-                const countedCategories = countCategories(Object.values(data.fridge), data.categories);
+                const expiringId = Object.values(data.categories).find((item) => item.name === 'expiring').id;
 
-                setFridge(formattedData);
+                const foodIsExpiring = calculateExpiring(formattedData, expiringId);
+
+                const countedCategories = countCategories(foodIsExpiring, data.categories);
+
+                setFridge(foodIsExpiring);
                 setCategories(countedCategories);
             });
     }, [user.household]);

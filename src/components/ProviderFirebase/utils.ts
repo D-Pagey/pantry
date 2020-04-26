@@ -1,3 +1,4 @@
+import { differenceInDays } from 'date-fns';
 import { CategoryCountType, CategoryType, DatabaseCategoryType, FoodTypes, KeyedDatabaseCategoryType } from '../../types';
 
 // converts an array of categories to an object of objects
@@ -48,5 +49,18 @@ export const countCategories = (
         ...category,
         count: categoriesWithCounts[category.id] || 0
       };
+    });
+};
+
+// takes all items in the fridge and works out if items are expiring soon
+export const calculateExpiring = (fridge: FoodTypes[], expiringCategoryId: string): FoodTypes[] => {
+    return fridge.map(item => {
+         if (differenceInDays(item.expires, new Date()) <= 2) {
+             return {
+                 ...item,
+                 categories: [...item.categories, expiringCategoryId]
+             };
+         }
+        return item;
     });
 };

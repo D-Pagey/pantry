@@ -1,5 +1,6 @@
-import { countCategories, countCategoryIds, updateCategoriesObject } from './utils';
+import { addWeeks } from 'date-fns'; 
 import { CategoriesObject, Fridge } from '../../fixtures';
+import { countCategories, countCategoryIds, updateCategoriesObject, calculateExpiring } from './utils';
 
 const categories = [
     {
@@ -102,5 +103,48 @@ describe('countCategories function', () => {
                 name: 'snacks'
             }
         ]);
+    });
+});
+
+describe('calculatingExpiring function', () => {
+    const expiringId = '123';
+
+    it('should return an array', () => {
+        const result = calculateExpiring(Fridge, expiringId);
+
+        expect(typeof result).toBe('object');
+        expect(Array.isArray(result)).toBe(true);
+    });
+
+    it('should add an expiringID to categories if expiring soon', () => {
+        const fridgeWithExpiring = [
+            {
+                categories: ['abc'],
+                expires: new Date(),
+                id: 'x',
+                name: 'Chicken',
+                servings: 1
+            }
+        ];
+
+        const result = calculateExpiring(fridgeWithExpiring, expiringId);
+
+        expect(result[0].categories).toStrictEqual([...fridgeWithExpiring[0].categories, expiringId]);
+    });
+
+    it('should not have an expiringID to categories if not expiring soon', () => {
+        const fridgeWithExpiring = [
+            {
+                categories: ['abc'],
+                expires: addWeeks(new Date(), 1),
+                id: 'x',
+                name: 'Chicken',
+                servings: 1
+            }
+        ];
+
+        const result = calculateExpiring(fridgeWithExpiring, expiringId);
+
+        expect(result[0].categories).toStrictEqual(fridgeWithExpiring[0].categories);
     });
 });
