@@ -25,6 +25,9 @@ export const PageFood: FC = () => {
                 if (fridge.length !== 0 && categories.length !== 0) {
                     setFood(swapIdsForNames(fridge, categories));
                     setIsValidCategory(true);
+                } else if (categories.length !== 0) {
+                    setFood([]);
+                    setIsValidCategory(true);
                 }
                 break;
             }

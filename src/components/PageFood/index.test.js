@@ -96,6 +96,19 @@ describe('PageFood component', () => {
         expect(Redirect).toHaveBeenCalledWith({ to: '/not-found' }, expect.any(Object));
     });
 
+    it('should render a message when no data for category all', () => {
+        useParams.mockImplementation(() => ({
+            category: 'all'
+        }));
+
+        const overrideContext = {
+            categories: CategoriesArray,
+        };
+
+        const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
+        getByTestId('pageFoodNoData');
+    });
+
     it('should render a message when there is no data for a category', () => {
         useParams.mockImplementation(() => ({
             category: CategoriesArray[3].name
