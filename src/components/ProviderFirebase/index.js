@@ -8,13 +8,14 @@ const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
 export const FirebaseContext = createContext({
+    addNewCategories: (values) => null,
     categories: [],
     deleteFoodItem: (id) => () => null,
+    expiringCount: 0,
     isAuthed: false,
     isCheckingAuth: false,
     fridge: [],
     signOut: () => null,
-    addNewCategories: (values) => null,
     updateFridge: (values) => null,
     user: {
         email: null,
@@ -29,12 +30,6 @@ export const ProviderFirebase = ({ children }) => {
     const [fridge, setFridge] = useState([]);
     const [categories, setCategories] = useState([]);
     const [expiringCount, setExpiringCount] = useState();
-
-    useEffect(() => {
-        if (expiringCount) {
-            toast.error(`${expiringCount} expiring items`);
-        }
-    }, [expiringCount]);
 
     const fetchUserData = useCallback((uid) => {
         firebase
@@ -143,6 +138,7 @@ export const ProviderFirebase = ({ children }) => {
         <FirebaseContext.Provider
             value={{
                 categories,
+                expiringCount,
                 fridge,
                 deleteFoodItem,
                 isAuthed,
