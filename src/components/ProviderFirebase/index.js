@@ -28,6 +28,13 @@ export const ProviderFirebase = ({ children }) => {
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [fridge, setFridge] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [expiringCount, setExpiringCount] = useState();
+
+    useEffect(() => {
+        if (expiringCount) {
+            toast.error(`${expiringCount} expiring items`);
+        }
+    }, [expiringCount]);
 
     const fetchUserData = useCallback((uid) => {
         firebase
@@ -66,12 +73,13 @@ export const ProviderFirebase = ({ children }) => {
 
                 const expiringId = Object.values(data.categories).find((item) => item.name === 'expiring').id;
 
-                const foodIsExpiring = calculateExpiring(formattedData, expiringId);
+                const { fridgeWithExpiring, count } = calculateExpiring(formattedData, expiringId);
 
-                const countedCategories = countCategories(foodIsExpiring, data.categories);
+                const countedCategories = countCategories(fridgeWithExpiring, data.categories);
 
-                setFridge(foodIsExpiring);
+                setFridge(fridgeWithExpiring);
                 setCategories(countedCategories);
+                setExpiringCount(count);
             });
     }, [user.household]);
 

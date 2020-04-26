@@ -1,5 +1,11 @@
 import { differenceInDays } from 'date-fns';
-import { CategoryCountType, CategoryType, DatabaseCategoryType, FoodTypes, KeyedDatabaseCategoryType } from '../../types';
+import {
+    CategoryCountType,
+    CategoryType,
+    DatabaseCategoryType,
+    FoodTypes,
+    KeyedDatabaseCategoryType
+} from '../../types';
 
 // converts an array of categories to an object of objects
 export const updateCategoriesObject = (categories: CategoryType[]): { [key: string]: DatabaseCategoryType } => {
@@ -44,23 +50,37 @@ export const countCategories = (
     const categoriesWithCounts = countCategoryIds(fridge);
     const initialCounts = Object.values(categories).map((x) => ({ ...x, count: 0 }));
 
-    return initialCounts.map(category => {
-      return {
-        ...category,
-        count: categoriesWithCounts[category.id] || 0
-      };
+    return initialCounts.map((category) => {
+        return {
+            ...category,
+            count: categoriesWithCounts[category.id] || 0
+        };
     });
 };
 
+type calculateExpiringReturnType = {
+    fridgeWithExpiring: FoodTypes[];
+    count: number;
+};
+
 // takes all items in the fridge and works out if items are expiring soon
-export const calculateExpiring = (fridge: FoodTypes[], expiringCategoryId: string): FoodTypes[] => {
-    return fridge.map(item => {
-         if (differenceInDays(item.expires, new Date()) <= 2) {
-             return {
-                 ...item,
-                 categories: [...item.categories, expiringCategoryId]
-             };
-         }
+export const calculateExpiring = (fridge: FoodTypes[], expiringCategoryId: string): calculateExpiringReturnType => {
+    let count = 0;
+
+    const fridgeWithExpiring = fridge.map((item) => {
+        if (differenceInDays(item.expires, new Date()) <= 2) {
+            count += 1;
+
+            return {
+                ...item,
+                categories: [...item.categories, expiringCategoryId]
+            };
+        }
         return item;
     });
+
+    return {
+        fridgeWithExpiring,
+        count,
+    };
 };

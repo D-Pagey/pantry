@@ -1,4 +1,4 @@
-import { addWeeks } from 'date-fns'; 
+import { addWeeks } from 'date-fns';
 import { CategoriesObject, Fridge } from '../../fixtures';
 import { countCategories, countCategoryIds, updateCategoriesObject, calculateExpiring } from './utils';
 
@@ -109,15 +109,15 @@ describe('countCategories function', () => {
 describe('calculatingExpiring function', () => {
     const expiringId = '123';
 
-    it('should return an array', () => {
+    it('should return an object', () => {
         const result = calculateExpiring(Fridge, expiringId);
 
         expect(typeof result).toBe('object');
-        expect(Array.isArray(result)).toBe(true);
+        expect(Array.isArray(result)).toBe(false);
     });
 
     it('should add an expiringID to categories if expiring soon', () => {
-        const fridgeWithExpiring = [
+        const fridge = [
             {
                 categories: ['abc'],
                 expires: new Date(),
@@ -127,13 +127,14 @@ describe('calculatingExpiring function', () => {
             }
         ];
 
-        const result = calculateExpiring(fridgeWithExpiring, expiringId);
+        const { fridgeWithExpiring, count } = calculateExpiring(fridge, expiringId);
 
-        expect(result[0].categories).toStrictEqual([...fridgeWithExpiring[0].categories, expiringId]);
+        expect(fridgeWithExpiring[0].categories).toStrictEqual([...fridge[0].categories, expiringId]);
+        expect(count).toEqual(1);
     });
 
     it('should not have an expiringID to categories if not expiring soon', () => {
-        const fridgeWithExpiring = [
+        const fridge = [
             {
                 categories: ['abc'],
                 expires: addWeeks(new Date(), 1),
@@ -143,8 +144,9 @@ describe('calculatingExpiring function', () => {
             }
         ];
 
-        const result = calculateExpiring(fridgeWithExpiring, expiringId);
+        const { fridgeWithExpiring, count } = calculateExpiring(fridge, expiringId);
 
-        expect(result[0].categories).toStrictEqual(fridgeWithExpiring[0].categories);
+        expect(fridgeWithExpiring[0].categories).toStrictEqual(fridge[0].categories);
+        expect(count).toEqual(0);
     });
 });
