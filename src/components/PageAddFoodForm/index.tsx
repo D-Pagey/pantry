@@ -28,13 +28,18 @@ const baseValues = {
 };
 
 const formatCategories = (categories: CategoryType[]): CategoryType[] => {
-    return categories.map((category: CategoryType) => {
-        return {
-            ...category,
-            label: category.name,
-            value: category.name
-        };
-    });
+    return categories.reduce((acc, curr) => {
+        if (curr.name === 'expiring') return acc;
+
+        return [
+            ...acc,
+            {
+                ...curr,
+                label: curr.name,
+                value: curr.name
+            }
+        ];
+    }, [] as CategoryType[]);
 };
 
 export const PageAddFoodForm = (): JSX.Element => {
