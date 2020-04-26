@@ -28,6 +28,14 @@ export const PageHome = (): JSX.Element => {
             <Link to="/categories">
                 <Button>Get started for free</Button>
             </Link>
+
+            <S.FeaturesWrapper>
+                <S.SubTitle>Track what is in your fridge</S.SubTitle>
+                <S.Description>Know what’s in your fridge making it easier to plan your next meal.</S.Description>
+
+                <S.SubTitle>Get notified on expiring items</S.SubTitle>
+                <S.Description>Clearly see and manage your food items that are about to expire.</S.Description>
+            </S.FeaturesWrapper>
         </S.Wrapper>
     );
 };
