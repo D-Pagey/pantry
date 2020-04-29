@@ -13,5 +13,5 @@ export const Header = styled.th`
 export const Link = styled(RouterLink)`
     cursor: pointer;
     color: blue;
-    margin: 0 0 0 1rem;
+    padding: 0 0 0 1rem;
 `;

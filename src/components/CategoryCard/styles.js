@@ -17,7 +17,8 @@ export const Link = styled(RouterLink)`
 `;
 
 export const Title = styled.h3`
-    margin: 0 0 0.5rem;
+    margin: 0;
+    padding: 0 0 0.5rem;
 `;
 
 export const Text = styled.p`

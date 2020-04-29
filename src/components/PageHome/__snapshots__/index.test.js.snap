@@ -31,19 +31,21 @@ exports[`PageHome component should render 1`] = `
 
 .c1 {
   font-size: 3rem;
-  margin: 3rem 0;
+  margin: 0;
+  padding: 3rem 0;
   width: 220px;
 }
 
 .c2 {
   color: #7c7c7c;
   font-size: 18px;
-  margin: 0 0 3rem;
+  margin: 0;
+  padding: 0 0 3rem;
   width: 330px;
 }
 
 .c2:first-of-type {
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .c4 {

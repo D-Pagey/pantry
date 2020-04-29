@@ -10,18 +10,20 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
     font-size: 3rem;
-    margin: 3rem 0;
+    margin: 0;
+    padding: 3rem 0;
     width: 220px;
 `;
 
 export const Text = styled.p`
     color: #7c7c7c;
     font-size: 18px;
-    margin: 0 0 3rem;
+    margin: 0;
+    padding: 0 0 3rem;
     width: 330px;
 
     &:first-of-type {
-        margin-bottom: 2rem;
+        padding-bottom: 2rem;
     }
 `;
 

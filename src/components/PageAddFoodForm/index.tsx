@@ -11,6 +11,7 @@ import { DialDatePicker } from '../DialDatePicker';
 import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import * as S from './styles';
 
 const servingsOptions = [
     { label: '1', value: 1 },
@@ -99,41 +100,43 @@ export const PageAddFoodForm = (): JSX.Element => {
         >
             {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
                 return (
-                    <Form>
-                        <MultiSelectDropdown
-                            label="What categories of food?"
-                            options={formatCategories(categories)}
-                            setValues={(category: any): void => setFieldValue('categories', category)}
-                            value={values.categories}
-                        />
+                    <S.Wrapper>
+                        <Form>
+                            <MultiSelectDropdown
+                                label="What categories of food?"
+                                options={formatCategories(categories)}
+                                setValues={(category: any): void => setFieldValue('categories', category)}
+                                value={values.categories}
+                            />
 
-                        <Input
-                            label="What is the name of the food?"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            name="name"
-                            placeholder="Name..."
-                            testId="addFoodInput"
-                            value={values.name}
-                        />
+                            <Input
+                                label="What is the name of the food?"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                name="name"
+                                placeholder="Name..."
+                                testId="addFoodInput"
+                                value={values.name}
+                            />
 
-                        <DialDatePicker
-                            date={values.expires}
-                            label="When does it expire?"
-                            setDate={(date: Date): void => setFieldValue('expires', date)}
-                        />
+                            <DialDatePicker
+                                date={values.expires}
+                                label="When does it expire?"
+                                setDate={(date: Date): void => setFieldValue('expires', date)}
+                            />
 
-                        <SingleSelect
-                            label="How many servings?"
-                            options={servingsOptions}
-                            selected={values.servings}
-                            setSelected={(option: any): void => setFieldValue('servings', option.value)}
-                        />
+                            <SingleSelect
+                                label="How many servings?"
+                                options={servingsOptions}
+                                selected={values.servings}
+                                setSelected={(option: any): void => setFieldValue('servings', option.value)}
+                            />
 
-                        <Button variant="submit" testId="addFoodFormSubmit">
-                            Submit
-                        </Button>
-                    </Form>
+                            <Button variant="submit" testId="addFoodFormSubmit">
+                                Submit
+                            </Button>
+                        </Form>
+                    </S.Wrapper>
                 );
             }}
         </Formik>

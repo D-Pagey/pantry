@@ -74,7 +74,8 @@ exports[`CategoryList component should render 1`] = `
 }
 
 .c2 {
-  margin: 0 0 0.5rem;
+  margin: 0;
+  padding: 0 0 0.5rem;
 }
 
 .c3 {

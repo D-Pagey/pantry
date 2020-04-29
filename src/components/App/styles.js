@@ -34,5 +34,5 @@ export const Link = styled(NavLink)`
 
 export const Title = styled.h4`
     font-weight: 500;
-    margin: 0 0 2rem;
+    padding: 0 0 2rem;
 `;

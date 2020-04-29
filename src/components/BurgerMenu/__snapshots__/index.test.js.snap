@@ -5,7 +5,7 @@ exports[`BurgerMenu component should render 1`] = `
   color: white;
   -webkit-text-decoration: none;
   text-decoration: none;
-  margin: 0 0 1rem;
+  padding: 0 0 1rem;
 }
 
 .c0:hover {
