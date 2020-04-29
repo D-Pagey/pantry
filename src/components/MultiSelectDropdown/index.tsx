@@ -1,6 +1,5 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
-import { ActionMeta } from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CategoryType } from '../../types';
@@ -20,7 +19,7 @@ type DropdownTypes = {
  * Return a consistent array of values except for one __isNew__ flag
  */
 export const MultiSelectDropdown = ({ error, label, options, setValues, value }: DropdownTypes): JSX.Element => {
-    const handleChange = (newValue: any, actionMeta: ActionMeta): void => {
+    const handleChange = (newValue: any, actionMeta: any): void => {
         if (actionMeta.action === 'create-option') {
             const originalAddedValue = newValue[newValue.length - 1];
 

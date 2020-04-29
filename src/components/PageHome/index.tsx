@@ -30,11 +30,20 @@ export const PageHome = (): JSX.Element => {
             </Link>
 
             <S.FeaturesWrapper>
-                <S.SubTitle>Track what is in your fridge</S.SubTitle>
-                <S.Description>Know what’s in your fridge making it easier to plan your next meal.</S.Description>
-
                 <S.SubTitle>Get notified on expiring items</S.SubTitle>
                 <S.Description>Clearly see and manage your food items that are about to expire.</S.Description>
+
+                <S.SubTitle>Track wastage</S.SubTitle>
+                <S.Description>
+                    One click track whether you ate or threw out food. Check out your household&apos;s wastage stats on
+                    your profile page.
+                </S.Description>
+
+                <S.SubTitle>Share food with your household</S.SubTitle>
+                <S.Description>
+                    Send a notification to other members of the household requesting to borrow their food. Easily let
+                    other household members know that you have extras that need to be eaten!
+                </S.Description>
             </S.FeaturesWrapper>
         </S.Wrapper>
     );

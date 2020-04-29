@@ -26,6 +26,9 @@ export const Text = styled.p`
 `;
 
 export const FeaturesWrapper = styled.div`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     padding: 2rem 0 0 0;
 `;
 
@@ -39,4 +42,5 @@ export const Description = styled.p`
     color: #7c7c7c;
     font-size: 18px;
     margin: 0;
+    max-width: 500px;
 `;
