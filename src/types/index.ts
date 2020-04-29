@@ -4,6 +4,10 @@ export interface DatabaseCategoryType {
     name: string;
 }
 
+export interface DatabaseCategoryWithCountsType extends DatabaseCategoryType {
+    count: number;
+}
+
 export interface CategoryType extends DatabaseCategoryType {
     count: number;
     label: string;

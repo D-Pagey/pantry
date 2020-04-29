@@ -11,6 +11,7 @@ import { DialDatePicker } from '../DialDatePicker';
 import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { formatCategories } from './utils';
 import * as S from './styles';
 
 const servingsOptions = [
@@ -26,21 +27,6 @@ const baseValues = {
     id: '',
     name: '',
     servings: servingsOptions[1].value
-};
-
-const formatCategories = (categories: CategoryType[]): CategoryType[] => {
-    return categories.reduce((acc, curr) => {
-        if (curr.name === 'expiring') return acc;
-
-        return [
-            ...acc,
-            {
-                ...curr,
-                label: curr.name,
-                value: curr.name
-            }
-        ];
-    }, [] as CategoryType[]);
 };
 
 export const PageAddFoodForm = (): JSX.Element => {
