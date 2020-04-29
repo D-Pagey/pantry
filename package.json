@@ -64,7 +64,7 @@
         ]
     },
     "devDependencies": {
-        "@babel/core": "7.9.0",
+        "@babel/core": "7.9.6",
         "@commitlint/cli": "8.3.5",
         "@commitlint/config-conventional": "8.3.4",
         "@storybook/addon-console": "1.2.1",
@@ -93,7 +93,7 @@
         "eslint-plugin-react-hooks": "3.0.0",
         "husky": "4.2.5",
         "jest-environment-jsdom-sixteen": "1.0.3",
-        "lint-staged": ">=10.1.7",
+        "lint-staged": ">=10.2.0",
         "prettier": "2.0.5",
         "react-select-event": "4.1.4",
         "require-context.macro": "1.2.2",
