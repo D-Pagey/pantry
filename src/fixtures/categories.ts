@@ -1,3 +1,30 @@
+export const CategoriesWithCounts = [
+    {
+        colour: 'red',
+        count: 2,
+        id: '888',
+        name: 'meat'
+    },
+    {
+        colour: 'blue',
+        count: 0,
+        id: '999',
+        name: 'fish'
+    },
+    {
+        colour: 'green',
+        count: 1,
+        id: '321',
+        name: 'vegetables'
+    },
+    {
+        colour: 'pink',
+        count: 5,
+        id: '579',
+        name: 'snacks'
+    }
+];
+
 export const CategoriesArray = [
     {
         colour: 'red',
@@ -27,7 +54,7 @@ export const CategoriesObject = CategoriesArray.reduce((acc, curr) => {
         [curr.id]: {
             colour: curr.colour,
             id: curr.id,
-            name: curr.name,
+            name: curr.name
         }
     };
 }, {});

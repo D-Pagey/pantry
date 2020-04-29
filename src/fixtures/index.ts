@@ -1,4 +1,4 @@
-import { CategoriesArray, CategoriesObject } from './categories';
+import { CategoriesArray, CategoriesObject, CategoriesWithCounts } from './categories';
 import { Fridge } from './fridge';
 
-export { CategoriesArray, CategoriesObject, Fridge };
+export { CategoriesArray, CategoriesObject, CategoriesWithCounts, Fridge };

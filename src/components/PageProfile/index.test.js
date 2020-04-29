@@ -1,12 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { CategoriesArray } from '../../fixtures';
+import { CategoriesWithCounts } from '../../fixtures';
 import { PageProfile } from '.';
 
 const props = {};
 
 const context = {
-  categories: CategoriesArray,
+  categories: CategoriesWithCounts,
+  deleteCategory: () => {},
   signOut: () => {},
   user: {
     email: 'dan@gmail.com',
@@ -27,5 +28,23 @@ describe('PageProfile component', () => {
     userEvent.click(getByTestId('pageProfileButton'));
 
     expect(signOut).toHaveBeenCalled();
+  });
+
+  it('should call deleteCategory with id if count = 0', () => {
+    const deleteCategory = jest.fn();
+    const { getByTestId } = render(<PageProfile {...props} />, { ...context, deleteCategory });
+
+    userEvent.click(getByTestId('profileCategoryDeleteButton1'));
+
+    expect(deleteCategory).toHaveBeenCalledWith(CategoriesWithCounts[1].id);
+  });
+
+  it('should not call deleteCategory if count > 0', () => {
+    const deleteCategory = jest.fn();
+    const { getByTestId } = render(<PageProfile {...props} />, { ...context, deleteCategory });
+
+    userEvent.click(getByTestId('profileCategoryDeleteButton0'));
+
+    expect(deleteCategory).not.toHaveBeenCalled();
   });
 });

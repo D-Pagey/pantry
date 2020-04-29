@@ -10,6 +10,7 @@ const HOUSEHOLDS = 'households';
 export const FirebaseContext = createContext({
     addNewCategories: (values) => null,
     categories: [],
+    deleteCategory: (id) => null,
     deleteFoodItem: (id) => () => null,
     expiringCount: 0,
     isAuthed: false,
@@ -134,13 +135,26 @@ export const ProviderFirebase = ({ children }) => {
             .catch(() => toast.error('Error with deleting food'));
     };
 
+    const deleteCategory = (id) => {
+        db.collection(HOUSEHOLDS)
+        .doc(user.household)
+        .update({
+            [`categories.${id}`]: firebase.firestore.FieldValue.delete()
+        })
+        .then(() => {
+            toast.error('Category deleted');
+        })
+        .catch(() => toast.error('Error with deleting category'));
+    };
+
     return (
         <FirebaseContext.Provider
             value={{
                 categories,
+                deleteCategory,
+                deleteFoodItem,
                 expiringCount,
                 fridge,
-                deleteFoodItem,
                 isAuthed,
                 isCheckingAuth,
                 setIsAuthed,
