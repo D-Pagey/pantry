@@ -11,7 +11,7 @@ import { DialDatePicker } from '../DialDatePicker';
 import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
-import { formatCategories } from './utils';
+import { formatCategories, swapCategoryIdsForValues } from './utils';
 import * as S from './styles';
 
 const servingsOptions = [
@@ -37,19 +37,9 @@ export const PageAddFoodForm = (): JSX.Element => {
 
     useEffect(() => {
         if (state && !usedEditValues) {
-            const formattedCategories = formatCategories(categories);
+            const categoryValues = swapCategoryIdsForValues(state.categories, categories);
 
-            const swapCategoryIds = state.categories.reduce((acc, curr): CategoryType[] => {
-                const test = formattedCategories.find((formatted) => formatted.id === curr);
-
-                if (test) {
-                    return [...acc, test];
-                }
-
-                return acc;
-            }, [] as CategoryType[]);
-
-            setInitialValues({ ...state, categories: swapCategoryIds });
+            setInitialValues({ ...state, categories: categoryValues });
             setHasUsedEditValues(true);
         }
     }, [categories, initialValues, state, usedEditValues]);
