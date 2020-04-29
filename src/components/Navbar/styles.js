@@ -3,8 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
     display: flex;
-    padding: 33px 24px 0;
+    padding: 33px 24px 16px;
+    left: 0; 
+    position: fixed;
+    right: 0;
+    top: 0;
 `;
 
 export const Link = styled(NavLink)`

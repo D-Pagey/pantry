@@ -6,11 +6,17 @@ exports[`Navbar component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 33px 24px 0;
+  padding: 33px 24px 16px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .c1 {
