@@ -52,9 +52,15 @@ export const PageAddFoodForm = (): JSX.Element => {
         if (state && !usedEditValues) {
             const formattedCategories = formatCategories(categories);
 
-            const swapCategoryIds = state.categories.map((categoryId: string) => {
-                return formattedCategories.find((formatted) => formatted.id === categoryId)!;
-            });
+            const swapCategoryIds = state.categories.reduce((acc, curr): CategoryType[] => {
+                const test = formattedCategories.find((formatted) => formatted.id === curr);
+
+                if (test) {
+                    return [...acc, test];
+                }
+
+                return acc;
+            }, [] as CategoryType[]);
 
             setInitialValues({ ...state, categories: swapCategoryIds });
             setHasUsedEditValues(true);
