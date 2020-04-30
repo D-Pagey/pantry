@@ -21,26 +21,29 @@ describe('PageAddFoodForm component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.skip('should call addNewCategories with correct values', async () => {
-        const { colour, id, name } = CategoriesArray[0];
+    it('should call addNewCategories with correct values', async () => {
+        const newCategory = (name) => ({
+            colour: 'black',
+            id: '5',
+            label: name,
+            value: name,
+            name
+        });
+        const newCategoryNames = ['sweets', 'chocolate'];
+        
         const addNewCategories = jest.fn();
-        const foodName = 'Chicken';
         const { getByTestId, getByLabelText } = render(<PageAddFoodForm />, { ...context, addNewCategories });
 
-        await selectEvent.select(getByLabelText('What categories of food?'), [name]);
-        await userEvent.type(getByTestId('addFoodInput'), foodName);
+        await selectEvent.create(getByLabelText('What categories of food?'), newCategoryNames[0]);
+        await selectEvent.create(getByLabelText('What categories of food?'), newCategoryNames[1]);
+        await userEvent.type(getByTestId('addFoodInput'), 'Chicken');
 
         userEvent.click(getByTestId('addFoodFormSubmit'));
 
         await waitFor(() =>
             expect(addNewCategories).toHaveBeenCalledWith([
-                {
-                    colour,
-                    id,
-                    label: name,
-                    name,
-                    value: name
-                }
+                newCategory(newCategoryNames[0]),
+                newCategory(newCategoryNames[1])
             ])
         );
     });

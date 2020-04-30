@@ -46,6 +46,8 @@ describe('MultiSelectDropdown component', () => {
         expect(setValues).toHaveBeenCalledWith([props.options[0]]);
     });
 
+    it.todo('should render values passed down as props');
+
     it.skip('should create new values with id and colour', async () => {
         const label = 'categories';
         const setValues = jest.fn();
