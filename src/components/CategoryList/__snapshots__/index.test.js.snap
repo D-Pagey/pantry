@@ -6,7 +6,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid red;
+  border: 3px solid orange;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -30,7 +30,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid blue;
+  border: 3px solid red;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -54,7 +54,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid orange;
+  border: 3px solid blue;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -87,6 +87,7 @@ exports[`CategoryList component should render 1`] = `
   grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
   grid-gap: 1rem;
   justify-items: center;
+  padding: 1rem 0;
 }
 
 <div
@@ -95,6 +96,23 @@ exports[`CategoryList component should render 1`] = `
 >
   <a
     class="c1"
+    colour="orange"
+    data-testid="categoryCardall"
+    href="/food/all"
+  >
+    <h3
+      class="c2"
+    >
+      All
+    </h3>
+    <p
+      class="c3"
+    >
+      4
+    </p>
+  </a>
+  <a
+    class="c4"
     colour="red"
     data-testid="categoryCardmeat"
     href="/food/meat"
@@ -111,7 +129,7 @@ exports[`CategoryList component should render 1`] = `
     </p>
   </a>
   <a
-    class="c4"
+    class="c5"
     colour="blue"
     data-testid="categoryCardfish"
     href="/food/fish"
@@ -125,23 +143,6 @@ exports[`CategoryList component should render 1`] = `
       class="c3"
     >
       1
-    </p>
-  </a>
-  <a
-    class="c5"
-    colour="orange"
-    data-testid="categoryCardall"
-    href="/food/all"
-  >
-    <h3
-      class="c2"
-    >
-      All
-    </h3>
-    <p
-      class="c3"
-    >
-      4
     </p>
   </a>
 </div>

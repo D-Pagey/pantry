@@ -96,7 +96,7 @@ exports[`PageHome component should render 1`] = `
     Pantry gives you the heads up when food is about to expire, reducing your waste and saving you money.
   </p>
   <a
-    href="/categories"
+    href="/food/all"
   >
     <button
       class="c3"

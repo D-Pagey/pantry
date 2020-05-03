@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
 export const Wrapper = styled.div`
     margin: 0 auto;
     max-width: 1250px;
-    padding: 75px 1rem;
+    padding: 100px 1rem;
 `;
 
 export const Link = styled(NavLink)`

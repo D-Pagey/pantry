@@ -33,7 +33,7 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
     const handleDelete = (id: string) => () => deleteFoodItem(id);
 
     return (
-        <div>
+        <S.Wrapper>
             <table>
                 <thead>
                     <tr>
@@ -81,6 +81,6 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                     ))}
                 </tbody>
             </table>
-        </div>
+        </S.Wrapper>
     );
 };

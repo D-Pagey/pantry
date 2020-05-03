@@ -25,7 +25,7 @@ export const PageHome = (): JSX.Element => {
                 Pantry gives you the heads up when food is about to expire, reducing your waste and saving you money.
             </S.Text>
 
-            <Link to="/categories">
+            <Link to="/food/all">
                 <Button>Get started for free</Button>
             </Link>
 

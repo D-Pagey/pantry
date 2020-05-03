@@ -14,6 +14,7 @@ export const CategoryList = (): JSX.Element => {
 
     return (
         <S.Wrapper data-testid="categoryList">
+            <CategoryCard name="all" colour="orange" quantity={fridge.length} />
             {categories.map((item: ItemType) => {
                 if (item.count > 0) {
                     return <CategoryCard name={item.name} colour={item.colour} quantity={item.count} key={item.name} />;
@@ -21,7 +22,6 @@ export const CategoryList = (): JSX.Element => {
 
                 return <React.Fragment key={item.name} />;
             })}
-            <CategoryCard name="all" colour="orange" quantity={fridge.length} />
         </S.Wrapper>
     );
 };

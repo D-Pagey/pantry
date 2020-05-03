@@ -3,16 +3,18 @@ import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { DatabaseCategoryType, FoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
+import { CategoryList } from '../CategoryList';
 import { FoodTable } from '../FoodTable';
 import { Loading } from '../Loading';
 import { Button } from '../Button';
 import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
+import * as S from './styles';
 
 export const PageFood: FC = () => {
     const [food, setFood] = useState<FoodTypes[]>([]);
     const [isValidCategory, setIsValidCategory] = useState<boolean | undefined>();
     const { category } = useParams();
-    const { categories, fridge } = useContext(FirebaseContext);
+    const { categories, fridge, isCheckingAuth } = useContext(FirebaseContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -61,12 +63,14 @@ export const PageFood: FC = () => {
         history.push('/add', formatted[0]);
     };
 
-    if (isValidCategory === undefined) return <Loading isLoading />;
+    if (isValidCategory === undefined || isCheckingAuth) return <Loading isLoading />;
     if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
-        <div>
+        <S.Wrapper>
             <h1>{category}</h1>
+
+            <CategoryList />
 
             {food.length === 0 ? (
                 <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
@@ -77,6 +81,6 @@ export const PageFood: FC = () => {
             <Link to="/add">
                 <Button>Add Item</Button>
             </Link>
-        </div>
+        </S.Wrapper>
     );
 };
