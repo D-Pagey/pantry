@@ -34,8 +34,8 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
 
     return (
         <S.Wrapper>
-            <table>
-                <thead>
+            <S.Table>
+                <S.TableHead>
                     <tr>
                         <S.Header onClick={sortData('name')}>Name</S.Header>
                         <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
@@ -45,21 +45,21 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                         <S.Header onClick={sortData('servings')}>Servings</S.Header>
                         <S.Header>Amend</S.Header>
                     </tr>
-                </thead>
+                </S.TableHead>
                 <tbody>
                     {food.map((item, index) => (
-                        <tr key={item.id}>
-                            <td data-testid="foodTableName">{item.name}</td>
-                            <td>
+                        <S.TableRow key={item.id} isOdd={index % 2 !== 0}>
+                            <S.TableData data-testid="foodTableName">{item.name}</S.TableData>
+                            <S.TableData>
                                 {item.categories.map((name) => (
                                     <S.Link key={name} to={`/food/${name.toLowerCase()}`}>
                                         {name}
                                     </S.Link>
                                 ))}
-                            </td>
-                            <td>{expiresColumn(item)}</td>
-                            <td>{item.servings}</td>
-                            <td>
+                            </S.TableData>
+                            <S.TableData>{expiresColumn(item)}</S.TableData>
+                            <S.TableData>{item.servings}</S.TableData>
+                            <S.TableData>
                                 <button
                                     type="button"
                                     onClick={handleEdit(item)}
@@ -76,11 +76,11 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                                 >
                                     <img src={deleteIcon} alt="delete" />
                                 </button>
-                            </td>
-                        </tr>
+                            </S.TableData>
+                        </S.TableRow>
                     ))}
                 </tbody>
-            </table>
+            </S.Table>
         </S.Wrapper>
     );
 };
