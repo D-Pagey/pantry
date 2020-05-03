@@ -84,11 +84,9 @@ exports[`CategoryList component should render 1`] = `
 
 .c0 {
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
   grid-gap: 1rem;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  justify-items: center;
 }
 
 <div
