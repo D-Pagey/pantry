@@ -68,7 +68,7 @@ export const PageFood: FC = () => {
 
     return (
         <S.Wrapper>
-            <h1>{category}</h1>
+            <h1>{`Food: ${category}`}</h1>
 
             <CategoryList />
 

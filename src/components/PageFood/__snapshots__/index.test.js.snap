@@ -43,25 +43,45 @@ exports[`PageFood component should render 1`] = `
 }
 
 .c4 {
+  overflow: scroll;
   padding: 1rem 0;
 }
 
-.c7 {
+.c5 {
+  border: 1px solid #bdbdbd;
+  border-collapse: collapse;
+}
+
+.c6 {
+  border-bottom: 1px solid grey;
+}
+
+.c10 {
   color: red;
   list-style: none;
 }
 
-.c5 {
+.c7 {
   cursor: pointer;
+  padding: 1rem;
 }
 
-.c6 {
+.c9 {
   cursor: pointer;
   color: blue;
   padding: 0 0 0 1rem;
 }
 
 .c8 {
+  padding: 1rem;
+  background-color: #d7faff;
+}
+
+.c11 > td {
+  background-color: white;
+}
+
+.c12 {
   background-color: #288efc;
   border: 0;
   border-radius: 0.25rem;
@@ -77,7 +97,7 @@ exports[`PageFood component should render 1`] = `
   class=""
 >
   <h1>
-    meat
+    Food: meat
   </h1>
   <div
     class="c0"
@@ -104,63 +124,78 @@ exports[`PageFood component should render 1`] = `
   <div
     class="c4"
   >
-    <table>
-      <thead>
+    <table
+      class="c5"
+    >
+      <thead
+        class="c6"
+      >
         <tr>
           <th
-            class="c5"
+            class="c7"
           >
             Name
           </th>
           <th
-            class="c5"
+            class="c7"
             data-testid="foodTableCategoryColumn"
           >
             Categories
           </th>
           <th
-            class="c5"
+            class="c7"
           >
             Expires
           </th>
           <th
-            class="c5"
+            class="c7"
           >
             Servings
           </th>
           <th
-            class="c5"
+            class="c7"
           >
             Amend
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr
+          class=""
+        >
           <td
+            class="c8"
             data-testid="foodTableName"
           >
             chicken
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <a
-              class="c6"
+              class="c9"
               href="/food/meat"
             >
               meat
             </a>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <li
-              class="c7"
+              class="c10"
             >
               12th Oct
             </li>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             2
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <button
               data-testid="editButton"
               style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -183,31 +218,42 @@ exports[`PageFood component should render 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr
+          class="c11"
+        >
           <td
+            class="c8"
             data-testid="foodTableName"
           >
             steak
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <a
-              class="c6"
+              class="c9"
               href="/food/meat"
             >
               meat
             </a>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <li
-              class="c7"
+              class="c10"
             >
               9th Apr
             </li>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             1
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <button
               data-testid="editButton"
               style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -230,37 +276,48 @@ exports[`PageFood component should render 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr
+          class=""
+        >
           <td
+            class="c8"
             data-testid="foodTableName"
           >
             broccolli
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <a
-              class="c6"
+              class="c9"
               href="/food/meat"
             >
               meat
             </a>
             <a
-              class="c6"
+              class="c9"
               href="/food/vegetables"
             >
               vegetables
             </a>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <li
-              class="c7"
+              class="c10"
             >
               9th Apr
             </li>
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             1
           </td>
-          <td>
+          <td
+            class="c8"
+          >
             <button
               data-testid="editButton"
               style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -290,7 +347,7 @@ exports[`PageFood component should render 1`] = `
     href="/add"
   >
     <button
-      class="c8"
+      class="c12"
       data-testid=""
       type="button"
       width=""

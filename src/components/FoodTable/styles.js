@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
+    overflow: scroll;
     padding: 1rem 0;
 `;
 

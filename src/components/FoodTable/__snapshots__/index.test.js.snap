@@ -2,84 +2,119 @@
 
 exports[`FoodTable component should render 1`] = `
 .c0 {
+  overflow: scroll;
   padding: 1rem 0;
 }
 
-.c3 {
+.c1 {
+  border: 1px solid #bdbdbd;
+  border-collapse: collapse;
+}
+
+.c2 {
+  border-bottom: 1px solid grey;
+}
+
+.c6 {
   color: red;
   list-style: none;
 }
 
-.c1 {
+.c3 {
   cursor: pointer;
+  padding: 1rem;
 }
 
-.c2 {
+.c5 {
   cursor: pointer;
   color: blue;
   padding: 0 0 0 1rem;
 }
 
+.c4 {
+  padding: 1rem;
+  background-color: #d7faff;
+}
+
+.c7 > td {
+  background-color: white;
+}
+
 <div
   class="c0"
 >
-  <table>
-    <thead>
+  <table
+    class="c1"
+  >
+    <thead
+      class="c2"
+    >
       <tr>
         <th
-          class="c1"
+          class="c3"
         >
           Name
         </th>
         <th
-          class="c1"
+          class="c3"
           data-testid="foodTableCategoryColumn"
         >
           Categories
         </th>
         <th
-          class="c1"
+          class="c3"
         >
           Expires
         </th>
         <th
-          class="c1"
+          class="c3"
         >
           Servings
         </th>
         <th
-          class="c1"
+          class="c3"
         >
           Amend
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr
+        class=""
+      >
         <td
+          class="c4"
           data-testid="foodTableName"
         >
           chicken
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <a
-            class="c2"
+            class="c5"
             href="/food/111"
           >
             111
           </a>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <li
-            class="c3"
+            class="c6"
           >
             12th Oct
           </li>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           2
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <button
             data-testid="editButton"
             style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -102,31 +137,42 @@ exports[`FoodTable component should render 1`] = `
           </button>
         </td>
       </tr>
-      <tr>
+      <tr
+        class="c7"
+      >
         <td
+          class="c4"
           data-testid="foodTableName"
         >
           steak
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <a
-            class="c2"
+            class="c5"
             href="/food/111"
           >
             111
           </a>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <li
-            class="c3"
+            class="c6"
           >
             9th Apr
           </li>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           1
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <button
             data-testid="editButton"
             style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -149,31 +195,42 @@ exports[`FoodTable component should render 1`] = `
           </button>
         </td>
       </tr>
-      <tr>
+      <tr
+        class=""
+      >
         <td
+          class="c4"
           data-testid="foodTableName"
         >
           salmon
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <a
-            class="c2"
+            class="c5"
             href="/food/222"
           >
             222
           </a>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <li
-            class="c3"
+            class="c6"
           >
             9th Apr
           </li>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           1
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <button
             data-testid="editButton"
             style="cursor: pointer; margin: 0px 1rem 0px 0px;"
@@ -196,37 +253,48 @@ exports[`FoodTable component should render 1`] = `
           </button>
         </td>
       </tr>
-      <tr>
+      <tr
+        class="c7"
+      >
         <td
+          class="c4"
           data-testid="foodTableName"
         >
           broccolli
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <a
-            class="c2"
+            class="c5"
             href="/food/111"
           >
             111
           </a>
           <a
-            class="c2"
+            class="c5"
             href="/food/333"
           >
             333
           </a>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <li
-            class="c3"
+            class="c6"
           >
             9th Apr
           </li>
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           1
         </td>
-        <td>
+        <td
+          class="c4"
+        >
           <button
             data-testid="editButton"
             style="cursor: pointer; margin: 0px 1rem 0px 0px;"
