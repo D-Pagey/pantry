@@ -19,10 +19,15 @@ exports[`PageFood component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  height: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   padding: 1rem;
-  width: 140px;
+  width: 120px;
 }
 
 .c2 {
@@ -36,8 +41,8 @@ exports[`PageFood component should render 1`] = `
 
 .c0 {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
   justify-items: center;
   padding: 1rem 0;
 }

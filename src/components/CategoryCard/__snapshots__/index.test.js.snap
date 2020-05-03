@@ -19,10 +19,15 @@ exports[`CategoryCard component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  height: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-text-decoration: none;
   text-decoration: none;
   padding: 1rem;
-  width: 140px;
+  width: 120px;
 }
 
 .c1 {

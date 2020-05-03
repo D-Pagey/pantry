@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
+import { CATEGORY_CARD_WIDTH } from '../../tokens';
 
 export const Link = styled(RouterLink)`
     align-items: center;
@@ -11,9 +12,11 @@ export const Link = styled(RouterLink)`
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    height: 100px;
+    justify-content: center;
     text-decoration: none;
     padding: 1rem;
-    width: 140px;
+    width: ${CATEGORY_CARD_WIDTH};
 `;
 
 export const Title = styled.h3`
