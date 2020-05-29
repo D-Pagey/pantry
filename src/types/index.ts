@@ -25,6 +25,7 @@ export type FoodTypes = {
     id: string;
     name: string;
     servings: number;
+    owner: string;
 };
 
 export type EditFoodTypes = {
@@ -33,6 +34,7 @@ export type EditFoodTypes = {
     id: string;
     name: string;
     servings: number;
+    owner: string;
 };
 
 export type CategoryCountType = {

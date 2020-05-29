@@ -38,18 +38,20 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                 <S.TableHead>
                     <tr>
                         <S.Header onClick={sortData('name')}>Name</S.Header>
+                        <S.Header onClick={sortData('expires')}>Expires</S.Header>
                         <S.Header data-testid="foodTableCategoryColumn" onClick={sortData('category.label')}>
                             Categories
                         </S.Header>
-                        <S.Header onClick={sortData('expires')}>Expires</S.Header>
                         <S.Header onClick={sortData('servings')}>Servings</S.Header>
                         <S.Header>Amend</S.Header>
+                        <S.Header>Owner</S.Header>
                     </tr>
                 </S.TableHead>
                 <tbody>
                     {food.map((item, index) => (
                         <S.TableRow key={item.id} isOdd={index % 2 !== 0}>
                             <S.TableData data-testid="foodTableName">{item.name}</S.TableData>
+                            <S.TableData>{expiresColumn(item)}</S.TableData>
                             <S.TableData>
                                 {item.categories.map((name) => (
                                     <S.Link key={name} to={`/food/${name.toLowerCase()}`}>
@@ -57,7 +59,6 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                                     </S.Link>
                                 ))}
                             </S.TableData>
-                            <S.TableData>{expiresColumn(item)}</S.TableData>
                             <S.TableData>{item.servings}</S.TableData>
                             <S.TableData>
                                 <button
@@ -77,6 +78,7 @@ export const FoodTable: FC<FoodTableTypes> = ({ food, handleEdit, setFood }) => 
                                     <img src={deleteIcon} alt="delete" />
                                 </button>
                             </S.TableData>
+                            <S.TableData>{item.owner}</S.TableData>
                         </S.TableRow>
                     ))}
                 </tbody>

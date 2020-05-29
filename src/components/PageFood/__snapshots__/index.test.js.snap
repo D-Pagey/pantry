@@ -61,7 +61,7 @@ exports[`PageFood component should render 1`] = `
   border-bottom: 1px solid grey;
 }
 
-.c10 {
+.c9 {
   color: red;
   list-style: none;
 }
@@ -71,7 +71,7 @@ exports[`PageFood component should render 1`] = `
   padding: 1rem;
 }
 
-.c9 {
+.c10 {
   cursor: pointer;
   color: blue;
   padding: 0 0 0 1rem;
@@ -143,14 +143,14 @@ exports[`PageFood component should render 1`] = `
           </th>
           <th
             class="c7"
-            data-testid="foodTableCategoryColumn"
           >
-            Categories
+            Expires
           </th>
           <th
             class="c7"
+            data-testid="foodTableCategoryColumn"
           >
-            Expires
+            Categories
           </th>
           <th
             class="c7"
@@ -161,6 +161,11 @@ exports[`PageFood component should render 1`] = `
             class="c7"
           >
             Amend
+          </th>
+          <th
+            class="c7"
+          >
+            Owner
           </th>
         </tr>
       </thead>
@@ -177,21 +182,21 @@ exports[`PageFood component should render 1`] = `
           <td
             class="c8"
           >
-            <a
+            <li
               class="c9"
-              href="/food/meat"
             >
-              meat
-            </a>
+              12th Oct
+            </li>
           </td>
           <td
             class="c8"
           >
-            <li
+            <a
               class="c10"
+              href="/food/meat"
             >
-              12th Oct
-            </li>
+              meat
+            </a>
           </td>
           <td
             class="c8"
@@ -222,6 +227,9 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
           </td>
+          <td
+            class="c8"
+          />
         </tr>
         <tr
           class="c11"
@@ -235,21 +243,21 @@ exports[`PageFood component should render 1`] = `
           <td
             class="c8"
           >
-            <a
+            <li
               class="c9"
-              href="/food/meat"
             >
-              meat
-            </a>
+              9th Apr
+            </li>
           </td>
           <td
             class="c8"
           >
-            <li
+            <a
               class="c10"
+              href="/food/meat"
             >
-              9th Apr
-            </li>
+              meat
+            </a>
           </td>
           <td
             class="c8"
@@ -280,6 +288,9 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
           </td>
+          <td
+            class="c8"
+          />
         </tr>
         <tr
           class=""
@@ -293,27 +304,27 @@ exports[`PageFood component should render 1`] = `
           <td
             class="c8"
           >
-            <a
+            <li
               class="c9"
+            >
+              9th Apr
+            </li>
+          </td>
+          <td
+            class="c8"
+          >
+            <a
+              class="c10"
               href="/food/meat"
             >
               meat
             </a>
             <a
-              class="c9"
+              class="c10"
               href="/food/vegetables"
             >
               vegetables
             </a>
-          </td>
-          <td
-            class="c8"
-          >
-            <li
-              class="c10"
-            >
-              9th Apr
-            </li>
           </td>
           <td
             class="c8"
@@ -344,6 +355,9 @@ exports[`PageFood component should render 1`] = `
               />
             </button>
           </td>
+          <td
+            class="c8"
+          />
         </tr>
       </tbody>
     </table>

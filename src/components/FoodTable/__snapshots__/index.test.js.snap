@@ -15,7 +15,7 @@ exports[`FoodTable component should render 1`] = `
   border-bottom: 1px solid grey;
 }
 
-.c6 {
+.c5 {
   color: red;
   list-style: none;
 }
@@ -25,7 +25,7 @@ exports[`FoodTable component should render 1`] = `
   padding: 1rem;
 }
 
-.c5 {
+.c6 {
   cursor: pointer;
   color: blue;
   padding: 0 0 0 1rem;
@@ -57,14 +57,14 @@ exports[`FoodTable component should render 1`] = `
         </th>
         <th
           class="c3"
-          data-testid="foodTableCategoryColumn"
         >
-          Categories
+          Expires
         </th>
         <th
           class="c3"
+          data-testid="foodTableCategoryColumn"
         >
-          Expires
+          Categories
         </th>
         <th
           class="c3"
@@ -75,6 +75,11 @@ exports[`FoodTable component should render 1`] = `
           class="c3"
         >
           Amend
+        </th>
+        <th
+          class="c3"
+        >
+          Owner
         </th>
       </tr>
     </thead>
@@ -91,21 +96,21 @@ exports[`FoodTable component should render 1`] = `
         <td
           class="c4"
         >
-          <a
+          <li
             class="c5"
-            href="/food/111"
           >
-            111
-          </a>
+            12th Oct
+          </li>
         </td>
         <td
           class="c4"
         >
-          <li
+          <a
             class="c6"
+            href="/food/111"
           >
-            12th Oct
-          </li>
+            111
+          </a>
         </td>
         <td
           class="c4"
@@ -136,6 +141,9 @@ exports[`FoodTable component should render 1`] = `
             />
           </button>
         </td>
+        <td
+          class="c4"
+        />
       </tr>
       <tr
         class="c7"
@@ -149,21 +157,21 @@ exports[`FoodTable component should render 1`] = `
         <td
           class="c4"
         >
-          <a
+          <li
             class="c5"
-            href="/food/111"
           >
-            111
-          </a>
+            9th Apr
+          </li>
         </td>
         <td
           class="c4"
         >
-          <li
+          <a
             class="c6"
+            href="/food/111"
           >
-            9th Apr
-          </li>
+            111
+          </a>
         </td>
         <td
           class="c4"
@@ -194,6 +202,9 @@ exports[`FoodTable component should render 1`] = `
             />
           </button>
         </td>
+        <td
+          class="c4"
+        />
       </tr>
       <tr
         class=""
@@ -207,21 +218,21 @@ exports[`FoodTable component should render 1`] = `
         <td
           class="c4"
         >
-          <a
+          <li
             class="c5"
-            href="/food/222"
           >
-            222
-          </a>
+            9th Apr
+          </li>
         </td>
         <td
           class="c4"
         >
-          <li
+          <a
             class="c6"
+            href="/food/222"
           >
-            9th Apr
-          </li>
+            222
+          </a>
         </td>
         <td
           class="c4"
@@ -252,6 +263,9 @@ exports[`FoodTable component should render 1`] = `
             />
           </button>
         </td>
+        <td
+          class="c4"
+        />
       </tr>
       <tr
         class="c7"
@@ -265,27 +279,27 @@ exports[`FoodTable component should render 1`] = `
         <td
           class="c4"
         >
-          <a
+          <li
             class="c5"
+          >
+            9th Apr
+          </li>
+        </td>
+        <td
+          class="c4"
+        >
+          <a
+            class="c6"
             href="/food/111"
           >
             111
           </a>
           <a
-            class="c5"
+            class="c6"
             href="/food/333"
           >
             333
           </a>
-        </td>
-        <td
-          class="c4"
-        >
-          <li
-            class="c6"
-          >
-            9th Apr
-          </li>
         </td>
         <td
           class="c4"
@@ -316,6 +330,9 @@ exports[`FoodTable component should render 1`] = `
             />
           </button>
         </td>
+        <td
+          class="c4"
+        />
       </tr>
     </tbody>
   </table>

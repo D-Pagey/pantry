@@ -26,14 +26,15 @@ const baseValues = {
     expires: new Date(),
     id: '',
     name: '',
-    servings: servingsOptions[1].value
+    servings: servingsOptions[1].value,
+    owner: ''
 };
 
 export const PageAddFoodForm = (): JSX.Element => {
     const [initialValues, setInitialValues] = useState<EditFoodTypes>(baseValues);
     const [usedEditValues, setHasUsedEditValues] = useState(false);
     const { state } = useLocation<FoodTypes>();
-    const { categories, updateFridge, addNewCategories } = useContext(FirebaseContext);
+    const { categories, updateFridge, addNewCategories, user } = useContext(FirebaseContext);
 
     useEffect(() => {
         if (state && !usedEditValues) {
@@ -63,6 +64,7 @@ export const PageAddFoodForm = (): JSX.Element => {
 
                 const withCategoryIds = {
                     ...valuesWithId,
+                    owner: user.name,
                     categories: valuesWithId.categories.map((category: CategoryType) => category.id)
                 };
 
