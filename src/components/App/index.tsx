@@ -9,7 +9,7 @@ import { Routes } from '../Routes';
 import * as S from './styles';
 
 toast.configure({
-    position: toast.POSITION.BOTTOM_RIGHT
+    position: 'bottom-right'
 });
 
 export const App = (): JSX.Element => (

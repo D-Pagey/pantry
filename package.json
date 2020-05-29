@@ -35,7 +35,7 @@
         "react-scripts": "3.4.1",
         "react-select": "3.1.0",
         "react-spinners": "0.8.3",
-        "react-toastify": "5.5.0",
+        "react-toastify": "6.0.5",
         "styled-components": "5.1.1",
         "title-case": "3.0.2",
         "typescript": "3.9.3",
