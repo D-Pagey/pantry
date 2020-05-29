@@ -35,7 +35,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid red;
+  border: 3px solid blue;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -64,7 +64,7 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid blue;
+  border: 3px solid red;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
@@ -128,23 +128,6 @@ exports[`CategoryList component should render 1`] = `
   </a>
   <a
     class="c4"
-    colour="red"
-    data-testid="categoryCardmeat"
-    href="/food/meat"
-  >
-    <h3
-      class="c2"
-    >
-      Meat
-    </h3>
-    <p
-      class="c3"
-    >
-      3
-    </p>
-  </a>
-  <a
-    class="c5"
     colour="blue"
     data-testid="categoryCardfish"
     href="/food/fish"
@@ -158,6 +141,23 @@ exports[`CategoryList component should render 1`] = `
       class="c3"
     >
       1
+    </p>
+  </a>
+  <a
+    class="c5"
+    colour="red"
+    data-testid="categoryCardmeat"
+    href="/food/meat"
+  >
+    <h3
+      class="c2"
+    >
+      Meat
+    </h3>
+    <p
+      class="c3"
+    >
+      3
     </p>
   </a>
 </div>
