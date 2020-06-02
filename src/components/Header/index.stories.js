@@ -1,5 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Header } from '.';
 
-storiesOf('Header', module).add('default', () => <Header />).add('on add page', () => <Header page="Add an item"/>);
+export default { title: 'Header' };
+
+export const normal = () => (
+    <MemoryRouter>
+        <Header />
+    </MemoryRouter>
+);
+
+export const withPageProps = () => (
+    <MemoryRouter>
+        <Header page="Add an item" />
+    </MemoryRouter>
+);

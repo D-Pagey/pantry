@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { CreatableDropdown } from '.';
 
 const options = ['purple', 'orange', 'yellow', 'green'];
@@ -16,6 +15,8 @@ const FakeForm = ({ error, label, preSelected }) => {
     );
 };
 
-storiesOf('CreatableDropdown', module)
-    .add('with label', () => <FakeForm label="What category of food?" />)
-    .add('without label', () => <FakeForm />);
+export default { title: 'CreatableDropdown' };
+
+export const withLabel = () => <FakeForm label="What category of food?" />;
+
+export const withoutLabel = () => <FakeForm />;

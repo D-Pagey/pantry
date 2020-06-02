@@ -1,5 +1,11 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
 import { PageNotFound } from '.';
 
-storiesOf('PageNotFound', module).add('default', () => <PageNotFound />);
+export default { title: 'PageNotFound' };
+
+export const normal = () => (
+    <MemoryRouter>
+        <PageNotFound />
+    </MemoryRouter>
+);

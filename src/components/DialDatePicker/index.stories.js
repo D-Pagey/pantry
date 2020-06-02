@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { DialDatePicker } from '.';
 
 const Wrapper = () => {
@@ -8,4 +7,6 @@ const Wrapper = () => {
     return <DialDatePicker date={date} setDate={setDate} label="Expiry date?" />;
 };
 
-storiesOf('DialDatePicker', module).add('default', () => <Wrapper />);
+export default { title: 'DialDatePicker' };
+
+export const normal = () => <Wrapper />;

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { oneOf, string } from 'prop-types';
 import * as S from './styles';
 
-type propTypes = {
+type ButtonTypes = {
     children: string;
     onClick?: Function;
-    testId: string;
-    variant: string;
-    width: string;
+    testId?: string;
+    variant?: string;
+    width?: string;
 };
 
-export const Button = ({ children, testId, variant, width, ...props }: propTypes): JSX.Element => {
+export const Button: FC<ButtonTypes> = ({ children, testId, variant, width, ...props }) => {
     switch (variant) {
         case 'submit':
             return (

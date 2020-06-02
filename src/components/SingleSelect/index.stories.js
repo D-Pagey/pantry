@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { SingleSelect } from '.';
 
 const options = [
@@ -37,7 +35,12 @@ const SingleSelectWrapper = ({ label, preSelected }) => {
     );
 };
 
-storiesOf('SingleSelect', module)
-    .add('default', () => <SingleSelectWrapper label="What options would you like to select?" />)
-    .add('preselected', () => <SingleSelectWrapper label="What options would you like to select?" preSelected={3} />)
-    .add('no label', () => <SingleSelectWrapper />);
+export default { title: 'SingleSelect' };
+
+export const normal = () => <SingleSelectWrapper label="What options would you like to select?" />;
+
+export const withPreselected = () => (
+    <SingleSelectWrapper label="What options would you like to select?" preSelected={3} />
+);
+
+export const withNoLabel = () => <SingleSelectWrapper />;

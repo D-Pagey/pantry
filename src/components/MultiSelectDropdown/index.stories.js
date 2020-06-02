@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { MultiSelectDropdown } from '.';
 
 const options = [
@@ -34,9 +33,10 @@ const Wrapper = (props) => {
 
     return <MultiSelectDropdown setValues={setValues} options={options} value={values} {...props} />;
 };
+    
+export default { title: 'MultiSelectDropdown' };
 
-storiesOf('MultiSelectDropdown', module)
-    .add('default', () => <Wrapper />)
-    .add('with label', () => <Wrapper label="Food categories" />)
-    .add('with error', () => <Wrapper error="Required" />)
-    .add('with label & error', () => <Wrapper label="Food categories" error="Required" />);
+export const normal = () => <Wrapper />;
+export const withLabel = () => <Wrapper label="Food categories" />;
+export const withError = () => <Wrapper error="Required" />;
+export const withLabelAndError = () => <Wrapper label="Food categories" error="Required" />;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { FormError } from '.';
 
-storiesOf('FormError', module).add('default', () => <FormError>label</FormError>);
+export default { title: 'FormError' };
+
+export const normal = () => <FormError>label</FormError>;

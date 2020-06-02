@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Input } from '.';
 
 const props = {
@@ -11,7 +10,8 @@ const props = {
     value: ''
 };
 
-storiesOf('Input', module)
-    .add('with label', () => <Input {...props} label="Name" />)
-    .add('without label', () => <Input {...props} />)
-    .add('with error', () => <Input {...props} error="Required" />);
+export default { title: 'Input' };
+
+export const withoutLabel = () => <Input {...props} />;
+export const withLabel = () => <Input {...props} label="Name" />;
+export const withError = () => <Input {...props} error="Required" />;
