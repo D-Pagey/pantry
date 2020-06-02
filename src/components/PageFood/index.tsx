@@ -6,6 +6,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 import { CategoryList } from '../CategoryList';
 import { FoodTable } from '../FoodTable';
 import { Loading } from '../Loading';
+import { Header } from '../Header';
 import { Button } from '../Button';
 import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
 import * as S from './styles';
@@ -67,20 +68,23 @@ export const PageFood: FC = () => {
     if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
-        <S.Wrapper>
-            <h1>{`Food: ${category}`}</h1>
+        <>
+            <Header />
+            <S.Wrapper>
+                <h1>{`Food: ${category}`}</h1>
 
-            <CategoryList />
+                <CategoryList />
 
-            {food.length === 0 ? (
-                <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
-            ) : (
-                <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} />
-            )}
+                {food.length === 0 ? (
+                    <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
+                ) : (
+                    <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} />
+                )}
 
-            <Link to="/add">
-                <Button>Add Item</Button>
-            </Link>
-        </S.Wrapper>
+                <Link to="/add">
+                    <Button>Add Item</Button>
+                </Link>
+            </S.Wrapper>
+        </>
     );
 };

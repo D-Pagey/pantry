@@ -1,378 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageFood component should render 1`] = `
-.c1 {
+.c0 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid orange;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 120px;
+  padding: 33px 24px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
-.c2 {
-  margin: 0;
-  padding: 0 0 0.5rem;
+.c1 {
+  color: initial;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .c3 {
+  font-size: 25px;
+  font-weight: 500;
   margin: 0;
+  padding: 0 0 0 14px;
 }
 
-.c0 {
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
-  justify-items: center;
-  padding: 1rem 0;
-}
-
-.c4 {
-  overflow: scroll;
-  padding: 1rem 0;
-}
-
-.c5 {
-  border: 1px solid #bdbdbd;
-  border-collapse: collapse;
-}
-
-.c6 {
-  border-bottom: 1px solid grey;
-}
-
-.c9 {
-  color: red;
-  list-style: none;
-}
-
-.c7 {
-  cursor: pointer;
-  padding: 1rem;
-}
-
-.c10 {
-  cursor: pointer;
-  color: blue;
-  padding: 0 0 0 1rem;
-}
-
-.c8 {
-  padding: 1rem;
-  background-color: #d7faff;
-}
-
-.c11 > td {
-  background-color: white;
-}
-
-.c12 {
-  background-color: #288efc;
-  border: 0;
-  border-radius: 0.25rem;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  height: 45px;
-  line-height: 1.2;
-  width: 200px;
+.c2 {
+  position: relative;
+  top: 2px;
+  width: 32px;
 }
 
 <div
-  class=""
+  class="c0"
 >
-  <h1>
-    Food: meat
-  </h1>
-  <div
-    class="c0"
-    data-testid="categoryList"
-  >
-    <a
-      class="c1"
-      colour="orange"
-      data-testid="categoryCardall"
-      href="/food/all"
-    >
-      <h3
-        class="c2"
-      >
-        All
-      </h3>
-      <p
-        class="c3"
-      >
-        4
-      </p>
-    </a>
-  </div>
-  <div
-    class="c4"
-  >
-    <table
-      class="c5"
-    >
-      <thead
-        class="c6"
-      >
-        <tr>
-          <th
-            class="c7"
-          >
-            Name
-          </th>
-          <th
-            class="c7"
-          >
-            Expires
-          </th>
-          <th
-            class="c7"
-            data-testid="foodTableCategoryColumn"
-          >
-            Categories
-          </th>
-          <th
-            class="c7"
-          >
-            Servings
-          </th>
-          <th
-            class="c7"
-          >
-            Amend
-          </th>
-          <th
-            class="c7"
-          >
-            Owner
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          class=""
-        >
-          <td
-            class="c8"
-            data-testid="foodTableName"
-          >
-            chicken
-          </td>
-          <td
-            class="c8"
-          >
-            <li
-              class="c9"
-            >
-              12th Oct
-            </li>
-          </td>
-          <td
-            class="c8"
-          >
-            <a
-              class="c10"
-              href="/food/meat"
-            >
-              meat
-            </a>
-          </td>
-          <td
-            class="c8"
-          >
-            2
-          </td>
-          <td
-            class="c8"
-          >
-            <button
-              data-testid="editButton"
-              style="cursor: pointer; margin: 0px 1rem 0px 0px;"
-              type="button"
-            >
-              <img
-                alt="edit"
-                src="edit.svg"
-              />
-            </button>
-            <button
-              data-testid="deleteButton0"
-              style="cursor: pointer;"
-              type="button"
-            >
-              <img
-                alt="delete"
-                src="delete.svg"
-              />
-            </button>
-          </td>
-          <td
-            class="c8"
-          />
-        </tr>
-        <tr
-          class="c11"
-        >
-          <td
-            class="c8"
-            data-testid="foodTableName"
-          >
-            steak
-          </td>
-          <td
-            class="c8"
-          >
-            <li
-              class="c9"
-            >
-              9th Apr
-            </li>
-          </td>
-          <td
-            class="c8"
-          >
-            <a
-              class="c10"
-              href="/food/meat"
-            >
-              meat
-            </a>
-          </td>
-          <td
-            class="c8"
-          >
-            1
-          </td>
-          <td
-            class="c8"
-          >
-            <button
-              data-testid="editButton"
-              style="cursor: pointer; margin: 0px 1rem 0px 0px;"
-              type="button"
-            >
-              <img
-                alt="edit"
-                src="edit.svg"
-              />
-            </button>
-            <button
-              data-testid="deleteButton1"
-              style="cursor: pointer;"
-              type="button"
-            >
-              <img
-                alt="delete"
-                src="delete.svg"
-              />
-            </button>
-          </td>
-          <td
-            class="c8"
-          />
-        </tr>
-        <tr
-          class=""
-        >
-          <td
-            class="c8"
-            data-testid="foodTableName"
-          >
-            broccolli
-          </td>
-          <td
-            class="c8"
-          >
-            <li
-              class="c9"
-            >
-              9th Apr
-            </li>
-          </td>
-          <td
-            class="c8"
-          >
-            <a
-              class="c10"
-              href="/food/meat"
-            >
-              meat
-            </a>
-            <a
-              class="c10"
-              href="/food/vegetables"
-            >
-              vegetables
-            </a>
-          </td>
-          <td
-            class="c8"
-          >
-            1
-          </td>
-          <td
-            class="c8"
-          >
-            <button
-              data-testid="editButton"
-              style="cursor: pointer; margin: 0px 1rem 0px 0px;"
-              type="button"
-            >
-              <img
-                alt="edit"
-                src="edit.svg"
-              />
-            </button>
-            <button
-              data-testid="deleteButton2"
-              style="cursor: pointer;"
-              type="button"
-            >
-              <img
-                alt="delete"
-                src="delete.svg"
-              />
-            </button>
-          </td>
-          <td
-            class="c8"
-          />
-        </tr>
-      </tbody>
-    </table>
-  </div>
   <a
-    href="/add"
+    aria-current="page"
+    class="c1 active"
+    href="/"
   >
-    <button
-      class="c12"
-      data-testid=""
-      type="button"
-      width=""
-    >
-      Add Item
-    </button>
+    <img
+      alt="icon"
+      class="c2"
+      src="icon.svg"
+    />
   </a>
+  <h4
+    class="c3"
+  >
+    Pantry
+  </h4>
 </div>
 `;

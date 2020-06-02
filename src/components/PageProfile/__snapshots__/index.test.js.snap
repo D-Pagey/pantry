@@ -2,168 +2,49 @@
 
 exports[`PageProfile component should render 1`] = `
 .c0 {
-  background-color: red;
-  height: 20px;
-  width: 20px;
-}
-
-.c1 {
-  background-color: blue;
-  height: 20px;
-  width: 20px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 33px 24px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .c2 {
-  background-color: green;
-  height: 20px;
-  width: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 0 0 14px;
 }
 
-.c3 {
-  background-color: pink;
-  height: 20px;
-  width: 20px;
+.c1 {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
 }
 
 <div
-  data-testid="pageProfile"
+  class="c0"
 >
-  <p>
-    Welcome
-    Dan
-  </p>
-  <p>
-    Your email is:
-    dan@gmail.com
-  </p>
-  <button
-    data-testid="pageProfileButton"
-    type="button"
+  <img
+    alt="arrow"
+    class="c1"
+    data-testid="headerBackArrow"
+    src="arrow.svg"
+  />
+  <h4
+    class="c2"
   >
-    Sign Out
-  </button>
-  <h2>
-    Your Food Categories
-  </h2>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Category
-        </th>
-        <th>
-          Colour
-        </th>
-        <th>
-          Count
-        </th>
-        <th>
-          Delete
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          meat
-        </td>
-        <td>
-          <div
-            class="c0"
-          />
-        </td>
-        <td>
-          2
-        </td>
-        <td>
-          <button
-            data-testid="profileCategoryDeleteButton0"
-            style="cursor: pointer;"
-            type="button"
-          >
-            <img
-              alt="delete"
-              src="delete.svg"
-            />
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          fish
-        </td>
-        <td>
-          <div
-            class="c1"
-          />
-        </td>
-        <td>
-          0
-        </td>
-        <td>
-          <button
-            data-testid="profileCategoryDeleteButton1"
-            style="cursor: pointer;"
-            type="button"
-          >
-            <img
-              alt="delete"
-              src="delete.svg"
-            />
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          vegetables
-        </td>
-        <td>
-          <div
-            class="c2"
-          />
-        </td>
-        <td>
-          1
-        </td>
-        <td>
-          <button
-            data-testid="profileCategoryDeleteButton2"
-            style="cursor: pointer;"
-            type="button"
-          >
-            <img
-              alt="delete"
-              src="delete.svg"
-            />
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          snacks
-        </td>
-        <td>
-          <div
-            class="c3"
-          />
-        </td>
-        <td>
-          5
-        </td>
-        <td>
-          <button
-            data-testid="profileCategoryDeleteButton3"
-            style="cursor: pointer;"
-            type="button"
-          >
-            <img
-              alt="delete"
-              src="delete.svg"
-            />
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    Profile
+  </h4>
 </div>
 `;

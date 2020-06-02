@@ -25,8 +25,14 @@ export const Title = styled.h4`
     padding: 0 0 0 14px;
 `;
 
-export const Image = styled.img`
+export const Logo = styled.img`
     position: relative;
     top: 2px;
     width: 32px;
+`;
+
+export const Arrow = styled.img`
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
 `;
