@@ -1,6 +1,5 @@
 import React from 'react';
 import { CategoryList } from '.';
-import { Fridge } from '../../fixtures';
 
 export const CategoriesWithCount = [
   {
@@ -24,7 +23,6 @@ export const CategoriesWithCount = [
 
 const context = {
   categories: CategoriesWithCount,
-  fridge: Fridge
 };
 
 describe('CategoryList component', () => {

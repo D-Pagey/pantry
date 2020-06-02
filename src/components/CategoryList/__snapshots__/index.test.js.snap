@@ -6,101 +6,31 @@ exports[`CategoryList component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 3px solid orange;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
+  background-color: white;
+  border: 1px solid rgba(52,136,65,0.6);
+  border-radius: 16px;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100px;
+  height: 115px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 120px;
-}
-
-.c4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid blue;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 120px;
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 3px solid red;
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow: rgba(79,90,109,0.3) 0px 0.1875rem 0.625rem 0px;
-  color: initial;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  padding: 1rem;
-  width: 120px;
+  width: 144px;
 }
 
 .c2 {
-  margin: 0;
-  padding: 0 0 0.5rem;
-}
-
-.c3 {
-  margin: 0;
+  color: #348841;
+  font-size: 18px;
 }
 
 .c0 {
   display: grid;
   grid-gap: 0.5rem;
-  grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(144px,1fr));
   justify-items: center;
   padding: 1rem 0;
 }
@@ -109,56 +39,38 @@ exports[`CategoryList component should render 1`] = `
   class="c0"
   data-testid="categoryList"
 >
-  <a
+  <button
     class="c1"
-    colour="orange"
     data-testid="categoryCardall"
-    href="/food/all"
+    type="button"
   >
-    <h3
+    <p
       class="c2"
     >
       All
-    </h3>
-    <p
-      class="c3"
-    >
-      4
     </p>
-  </a>
-  <a
-    class="c4"
-    colour="blue"
+  </button>
+  <button
+    class="c1"
     data-testid="categoryCardfish"
-    href="/food/fish"
+    type="button"
   >
-    <h3
+    <p
       class="c2"
     >
       Fish
-    </h3>
-    <p
-      class="c3"
-    >
-      1
     </p>
-  </a>
-  <a
-    class="c5"
-    colour="red"
+  </button>
+  <button
+    class="c1"
     data-testid="categoryCardmeat"
-    href="/food/meat"
+    type="button"
   >
-    <h3
+    <p
       class="c2"
     >
       Meat
-    </h3>
-    <p
-      class="c3"
-    >
-      3
     </p>
-  </a>
+  </button>
 </div>
 `;
