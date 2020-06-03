@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChooseCategory component should render 1`] = `
+.c2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(52,136,65,0.6);
+  border-radius: 16px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 115px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 144px;
+}
+
+.c3 {
+  color: #348841;
+  font-size: 18px;
+}
+
+.c0 {
+  margin: 0;
+  padding: 0 0 1.5rem;
+  font-weight: normal;
+}
+
+.c1 {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+<div>
+  <h3
+    class="c0"
+  >
+    What type of food?
+  </h3>
+  <div
+    class="c1"
+  >
+    <button
+      class="c2"
+      data-testid="categoryCardvegetables"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        Vegetables
+      </p>
+    </button>
+    <button
+      class="c2"
+      data-testid="categoryCardfruit"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        Fruit
+      </p>
+    </button>
+    <button
+      class="c2"
+      data-testid="categoryCarddairy"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        Dairy
+      </p>
+    </button>
+    <button
+      class="c2"
+      data-testid="categoryCardmeat"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        Meat
+      </p>
+    </button>
+    <button
+      class="c2"
+      data-testid="categoryCardfish"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        Fish
+      </p>
+    </button>
+    <button
+      class="c2"
+      data-testid="categoryCard[opened tin]"
+      type="button"
+    >
+      <p
+        class="c3"
+      >
+        [Opened Tin]
+      </p>
+    </button>
+  </div>
+</div>
+`;
