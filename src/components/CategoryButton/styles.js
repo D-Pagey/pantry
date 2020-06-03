@@ -12,6 +12,7 @@ export const Button = styled.button.attrs(() => ({
     display: flex;
     height: ${CATEGORY_CARD_HEIGHT};
     justify-content: center;
+    transition: all 0.3s ease 0s;
     width: ${CATEGORY_CARD_WIDTH};
 
     &:hover {

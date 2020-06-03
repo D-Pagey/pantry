@@ -19,6 +19,8 @@ exports[`CategoryList component should render 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
   width: 144px;
 }
 
