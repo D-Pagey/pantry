@@ -44,7 +44,6 @@ exports[`DialDatePicker component should render 1`] = `
 <div
   class="c0"
 >
-  
   <div
     class="c1"
   >
@@ -102,9 +101,7 @@ exports[`DialDatePicker component should render 1`] = `
   </div>
   <button
     class="c4"
-    data-testid=""
     type="button"
-    width=""
   >
     Add 1 week
   </button>

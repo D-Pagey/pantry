@@ -1,17 +1,16 @@
-import React from 'react';
-import { func, instanceOf, string } from 'prop-types';
+import React, { FC } from 'react';
 import { format, addDays, addMonths, addYears, addWeeks, subDays, subMonths, subYears } from 'date-fns';
 import { Button } from '../Button';
 import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
-type DialDatePickerProps = {
+type DialDatePickerTypes = {
     date: Date;
     setDate: Function;
     label?: string;
 };
 
-export const DialDatePicker: React.FC<DialDatePickerProps> = ({ date, setDate, label }) => {
+export const DialDatePicker: FC<DialDatePickerTypes> = ({ date, setDate, label }) => {
     const handleChange = (handler: Function) => (): Function => setDate(handler(date, 1));
 
     return (
@@ -41,14 +40,4 @@ export const DialDatePicker: React.FC<DialDatePickerProps> = ({ date, setDate, l
             <Button onClick={handleChange(addWeeks)}>Add 1 week</Button>
         </S.Wrapper>
     );
-};
-
-DialDatePicker.propTypes = {
-    date: instanceOf(Date).isRequired,
-    label: string,
-    setDate: func.isRequired
-};
-
-DialDatePicker.defaultProps = {
-    label: ''
 };

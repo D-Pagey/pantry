@@ -50,7 +50,6 @@ exports[`SingleSelect component should render 1`] = `
       class="sc-AxjAm c2"
       data-testid="singleSelectButton0"
       type="button"
-      width=""
     >
       20+
     </button>
@@ -58,7 +57,6 @@ exports[`SingleSelect component should render 1`] = `
       class="sc-AxjAm c2"
       data-testid="singleSelectButton1"
       type="button"
-      width=""
     >
       40+
     </button>

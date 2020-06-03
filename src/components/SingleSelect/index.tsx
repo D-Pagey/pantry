@@ -1,22 +1,21 @@
-import React from 'react';
-import { arrayOf, func, number, shape, string } from 'prop-types';
+import React, { FC } from 'react';
 import { Button } from '../Button';
 import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
-type propTypes = {
+type SingleSelectTypes = {
     label: string;
-    margin: string;
+    margin?: string;
     options: {
         label: string;
         value: number;
     }[];
-    selected: number;
+    selected?: number;
     setSelected: Function;
-    testId: string;
+    testId?: string;
 };
 
-export const SingleSelect = ({ label, margin, options, selected, setSelected, testId }: propTypes): JSX.Element => {
+export const SingleSelect: FC<SingleSelectTypes> = ({ label, margin, options, selected, setSelected, testId }) => {
     const handleClick = (option: { label: string; value: number }) => (): Function => setSelected(option);
 
     return (
@@ -39,25 +38,4 @@ export const SingleSelect = ({ label, margin, options, selected, setSelected, te
             </S.ButtonWrapper>
         </S.Wrapper>
     );
-};
-
-SingleSelect.propTypes = {
-    label: string,
-    margin: string,
-    options: arrayOf(
-        shape({
-            label: string.isRequired,
-            value: number.isRequired
-        }).isRequired
-    ).isRequired,
-    selected: number,
-    setSelected: func.isRequired,
-    testId: string
-};
-
-SingleSelect.defaultProps = {
-    label: '',
-    margin: '',
-    selected: null,
-    testId: ''
 };

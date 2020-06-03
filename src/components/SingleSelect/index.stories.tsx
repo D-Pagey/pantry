@@ -21,7 +21,7 @@ const options = [
 ];
 
 const SingleSelectWrapper = ({ label, preSelected }: any) => {
-    const [state, setState] = useState();
+    const [state, setState] = useState<number>();
 
     useEffect(() => preSelected && setState(preSelected), [preSelected]);
 

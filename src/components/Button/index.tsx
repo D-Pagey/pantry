@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { oneOf, string } from 'prop-types';
 import * as S from './styles';
 
 type ButtonTypes = {
@@ -38,17 +37,4 @@ export const Button: FC<ButtonTypes> = ({ children, testId, variant, width, ...p
                 </S.Button>
             );
     }
-};
-
-Button.propTypes = {
-    children: string.isRequired,
-    testId: string,
-    variant: oneOf(['', 'selected', 'unselected', 'submit']),
-    width: string
-};
-
-Button.defaultProps = {
-    testId: '',
-    variant: '',
-    width: ''
 };

@@ -17,7 +17,6 @@ exports[`Button component should render 1`] = `
   class="c0"
   data-testid="testButton"
   type="button"
-  width=""
 >
   Click Me
 </button>
