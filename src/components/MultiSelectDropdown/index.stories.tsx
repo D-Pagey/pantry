@@ -28,12 +28,12 @@ const options = [
     }
 ];
 
-const Wrapper = (props) => {
+const Wrapper = (props: any) => {
     const [values, setValues] = useState([options[0]]);
 
     return <MultiSelectDropdown setValues={setValues} options={options} value={values} {...props} />;
 };
-    
+
 export default { title: 'MultiSelectDropdown' };
 
 export const normal = () => <Wrapper />;

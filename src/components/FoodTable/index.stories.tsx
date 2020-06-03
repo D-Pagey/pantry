@@ -6,11 +6,11 @@ import { FoodTable } from '.';
 
 const props = {
     food: Fridge,
-    handleEdit: () => {},
+    handleEdit: () => () => {},
     setFood: () => {}
 };
 
-const firebaseContext = {
+const firebaseContext: any = {
     deleteFoodItem: () => {}
 };
 

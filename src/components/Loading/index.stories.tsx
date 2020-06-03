@@ -3,4 +3,4 @@ import { Loading } from '.';
 
 export default { title: 'Loading' };
 
-export const normal = () => <Loading />;
+export const normal = () => <Loading isLoading />;

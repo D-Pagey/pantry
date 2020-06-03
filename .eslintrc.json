@@ -59,7 +59,7 @@
             }
         },
         {
-            "files": ["*.stories.js"],
+            "files": ["*.stories.tsx"],
             "rules": {
                 "react/prop-types": 0,
                 "import/no-default-export": "off"

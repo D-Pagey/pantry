@@ -20,7 +20,7 @@ const options = [
     }
 ];
 
-const SingleSelectWrapper = ({ label, preSelected }) => {
+const SingleSelectWrapper = ({ label, preSelected }: any) => {
     const [state, setState] = useState();
 
     useEffect(() => preSelected && setState(preSelected), [preSelected]);
@@ -30,7 +30,7 @@ const SingleSelectWrapper = ({ label, preSelected }) => {
             label={label}
             options={options}
             selected={state}
-            setSelected={(option) => setState(option.value)}
+            setSelected={(option: any) => setState(option.value)}
         />
     );
 };

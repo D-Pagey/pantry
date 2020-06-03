@@ -3,7 +3,7 @@ import { CreatableDropdown } from '.';
 
 const options = ['purple', 'orange', 'yellow', 'green'];
 
-const FakeForm = ({ error, label, preSelected }) => {
+const FakeForm = ({ error, label, preSelected }: any) => {
     const [selected, setSelected] = useState();
 
     useEffect(() => {
