@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CategoryList component should render 1`] = `
-.c1 {
+.c2 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -22,9 +22,17 @@ exports[`CategoryList component should render 1`] = `
   width: 144px;
 }
 
-.c2 {
+.c2:hover {
+  background-color: #348841;
+}
+
+.c3 {
   color: #348841;
   font-size: 18px;
+}
+
+.c1:hover .c3 {
+  color: white;
 }
 
 .c0 {
@@ -40,34 +48,34 @@ exports[`CategoryList component should render 1`] = `
   data-testid="categoryList"
 >
   <button
-    class="c1"
+    class="c1 c2"
     data-testid="categoryCardall"
     type="button"
   >
     <p
-      class="c2"
+      class="c3"
     >
       All
     </p>
   </button>
   <button
-    class="c1"
+    class="c1 c2"
     data-testid="categoryCardfish"
     type="button"
   >
     <p
-      class="c2"
+      class="c3"
     >
       Fish
     </p>
   </button>
   <button
-    class="c1"
+    class="c1 c2"
     data-testid="categoryCardmeat"
     type="button"
   >
     <p
-      class="c2"
+      class="c3"
     >
       Meat
     </p>

@@ -5,7 +5,7 @@ export const Button = styled.button.attrs(() => ({
     type: 'button'
 }))`
     align-items: center;
-    background-color: ${colours.white};
+    background-color: ${({ isSelected }) => (isSelected ? colours.darkGreen100 : colours.white)};
     border: 1px solid ${colours.darkGreen60};
     border-radius: 16px;
     cursor: pointer;
@@ -13,9 +13,18 @@ export const Button = styled.button.attrs(() => ({
     height: ${CATEGORY_CARD_HEIGHT};
     justify-content: center;
     width: ${CATEGORY_CARD_WIDTH};
+
+    &:hover {
+        background-color: ${colours.darkGreen100};
+    }
 `;
 
 export const Name = styled.p`
-    color: ${colours.darkGreen100};
+    color: ${({ isSelected }) => (isSelected ? colours.white : colours.darkGreen100)};
     font-size: 18px;
+
+    /* stylelint-disable-next-line */
+    ${Button}:hover & {
+        color: white;
+    }
 `;

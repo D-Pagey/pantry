@@ -146,7 +146,7 @@
             "!src/serviceWorker.js",
             "!src/index.js",
             "!src/react-app-env.d.ts",
-            "!src/**/index.stories.js",
+            "!src/**/index.stories.tsx",
             "!src/setupTests.js",
             "!src/custom.d.ts"
         ],
