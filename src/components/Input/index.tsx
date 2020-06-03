@@ -1,21 +1,20 @@
-import React from 'react';
-import { func, string } from 'prop-types';
+import React, { FC } from 'react';
 import { FormLabel } from '../FormLabel';
 import { FormError } from '../FormError';
 import * as S from './styles';
 
-type props = {
-    error: string;
-    label: string;
-    name: string;
-    onBlur: Function;
+type InputTypes = {
+    error?: string;
+    label?: string;
+    name?: string;
+    onBlur?: Function;
     onChange: Function;
-    placeholder: string;
-    testId: string;
+    placeholder?: string;
+    testId?: string;
     value: string;
 };
 
-export const Input = ({ error, label, name, onBlur, onChange, placeholder, testId, value }: props): JSX.Element => (
+export const Input: FC<InputTypes> = ({ error, label, name, onBlur, onChange, placeholder, testId, value }) => (
     <S.Wrapper>
         {label && <FormLabel htmlFor={testId}>{label}</FormLabel>}
 
@@ -33,23 +32,3 @@ export const Input = ({ error, label, name, onBlur, onChange, placeholder, testI
         {error && <FormError>{error}</FormError>}
     </S.Wrapper>
 );
-
-Input.propTypes = {
-    error: string,
-    label: string,
-    name: string,
-    onBlur: func,
-    onChange: func.isRequired,
-    placeholder: string,
-    testId: string,
-    value: string.isRequired
-};
-
-Input.defaultProps = {
-    error: '',
-    label: '',
-    name: '',
-    onBlur: (): void => {},
-    placeholder: '',
-    testId: ''
-};

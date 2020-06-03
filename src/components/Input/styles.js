@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -7,7 +8,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Input = styled.input`
-    border: 1px solid hsl(0, 0%, 80%);
+    border: 0;
+    border-bottom: 2px solid ${colours.darkGreen100};
     border-radius: 2px;
-    padding: 5px;
+    padding: 12px;
 `;
