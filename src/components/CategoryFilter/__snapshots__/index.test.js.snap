@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryFilter component should render 1`] = `
+.c0 {
+  background-color: #348841;
+}
+
+.c1 {
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c2 {
+  border-bottom: 2px solid white;
+  cursor: pointer;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
+
+.c2:hover {
+  border-bottom: 2px solid white;
+}
+
+.c3 {
+  cursor: pointer;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
+
+.c3:hover {
+  border-bottom: 2px solid white;
+}
+
+<div
+  class="c0"
+>
+  <ul
+    class="c1"
+  >
+    <li
+      class="c2"
+    >
+      All
+    </li>
+    <li
+      class="c3"
+    >
+      Veg
+    </li>
+    <li
+      class="c3"
+    >
+      Fruit
+    </li>
+    <li
+      class="c3"
+    >
+      Meat
+    </li>
+    <li
+      class="c3"
+    >
+      Dairy
+    </li>
+    <li
+      class="c3"
+    >
+      Fish
+    </li>
+  </ul>
+</div>
+`;

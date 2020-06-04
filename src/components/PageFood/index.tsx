@@ -3,7 +3,7 @@ import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 
 import { DatabaseCategoryType, FoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
-import { CategoryList } from '../CategoryList';
+import { CategoryFilter } from '../CategoryFilter';
 import { FoodTable } from '../FoodTable';
 import { Loading } from '../Loading';
 import { Header } from '../Header';
@@ -70,10 +70,11 @@ export const PageFood: FC = () => {
     return (
         <>
             <Header />
+
+            <CategoryFilter setSelected={(select) => console.log(select)} />
+
             <S.Wrapper>
                 <h1>{`Food: ${category}`}</h1>
-
-                <CategoryList />
 
                 {food.length === 0 ? (
                     <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>

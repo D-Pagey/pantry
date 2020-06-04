@@ -3,6 +3,8 @@ import { addDecorator } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { FirebaseContext } from '../src/components/ProviderFirebase';
 import { CategoriesWithCounts } from '../src/fixtures/categories';
+import { GlobalStyle } from '../src/components/App/styles';
+
 
 addDecorator((storyFn) => (
     <FirebaseContext.Provider
@@ -10,6 +12,10 @@ addDecorator((storyFn) => (
             categories: CategoriesWithCounts
         }}
     >
-        <MemoryRouter>{storyFn()}</MemoryRouter>
+        <MemoryRouter>
+            <GlobalStyle />
+
+            {storyFn()}
+        </MemoryRouter>
     </FirebaseContext.Provider>
 ));

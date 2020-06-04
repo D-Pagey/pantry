@@ -34,7 +34,7 @@ export const PageHome = (): JSX.Element => {
                 </Link>
 
                 <Link to="/test">
-                    <S.GreenButton>Work In Progress</S.GreenButton>
+                    <S.GreenButton>Add Food V2</S.GreenButton>
                 </Link>
 
                 <S.FeaturesWrapper>
