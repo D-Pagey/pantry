@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { FormLabel } from '../FormLabel';
 import { FormError } from '../FormError';
 import * as S from './styles';
@@ -7,8 +7,8 @@ type InputTypes = {
     error?: string;
     label?: string;
     name?: string;
-    onBlur?: Function;
-    onChange: Function;
+    onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
     testId?: string;
     value: string;

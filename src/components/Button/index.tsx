@@ -1,22 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import * as S from './styles';
 
 type ButtonTypes = {
-    children: string;
-    onClick?: Function;
+    children: React.ReactNode;
+    onClick?: (event: MouseEvent<HTMLButtonElement, MouseEvent<Element, MouseEvent>>) => void;
     testId?: string;
     variant?: string;
     width?: string;
 };
 
-export const Button: FC<ButtonTypes> = ({ children, testId, variant, width, ...props }) => {
+export const Button: FC<ButtonTypes> = ({ children, testId, onClick, variant, width, ...props }) => {
     switch (variant) {
         case 'submit':
-            return (
-                <S.Submit data-testid={testId} width={width} {...props}>
-                    {children}
-                </S.Submit>
-            );
+            return <button type="button">{children}</button>;
 
         case 'selected':
             return (

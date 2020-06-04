@@ -15,8 +15,12 @@ export const TableHead = styled.thead`
     border-bottom: 1px solid grey;
 `;
 
-export const Item = styled.li`
-    color: ${({ colour }) => colour};
+type ItemProps = {
+    readonly colour: string;
+};
+
+export const Item = styled.li<ItemProps>`
+    color: ${({ colour }): string => colour};
     list-style: none;
 `;
 
@@ -36,7 +40,11 @@ export const TableData = styled.td`
     background-color: #d7faff;
 `;
 
-export const TableRow = styled.tr`
+type TableRowProps = {
+    readonly isOdd: boolean;
+};
+
+export const TableRow = styled.tr<TableRowProps>`
     & > td {
         background-color: ${({ isOdd }) => isOdd && 'white'};
     }

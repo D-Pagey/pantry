@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { colours } from '../../tokens';
 
-export const Wrapper = styled.div`
+type WrapperProps = {
+    readonly margin?: string;
+};
+
+export const Wrapper = styled.div<WrapperProps>`
     display: flex;
     flex-direction: column;
     margin: ${({ margin }) => margin || '0 0 1rem'};
@@ -13,9 +17,13 @@ export const ButtonWrapper = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
+type ButtonProps = {
+    readonly selected: boolean;
+};
+
 export const Button = styled.button.attrs(() => ({
     type: 'button'
-}))`
+}))<ButtonProps>`
     background-color: ${({ selected }) => (selected ? colours.darkGreen100 : colours.white)};
     border: 1px solid ${colours.darkGreen60};
     border-radius: 5px;

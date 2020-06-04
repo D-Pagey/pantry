@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
+interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+    readonly margin?: string;
+    readonly width?: string;
+}
+
 export const Button = styled.button.attrs({
-  type: 'button',
-})`
+    type: 'button'
+})<ButtonProps>`
     background-color: #288efc;
     border: 0;
     border-radius: 0.25rem;
@@ -30,5 +35,5 @@ export const UnSelected = styled(Button)`
 `;
 
 export const Submit = styled(Button).attrs({
-  type: 'submit',
+    type: 'submit'
 })``;

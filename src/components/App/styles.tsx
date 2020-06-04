@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components/macro';
+import styled, { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
 import { NavLink } from 'react-router-dom';
 

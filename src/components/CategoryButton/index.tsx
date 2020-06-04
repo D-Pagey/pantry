@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { titleCase } from 'title-case';
 import * as S from './styles';
 
 type CategoryButtonTypes = {
     isSelected?: boolean;
     name: string;
-    onClick: Function;
+    onClick?: (event: MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export const CategoryButton: FC<CategoryButtonTypes> = ({ isSelected, name, onClick, ...props }) => (
