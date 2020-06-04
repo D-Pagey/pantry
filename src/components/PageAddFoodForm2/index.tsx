@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -29,6 +30,7 @@ const options = [
 
 export const PageAddFoodForm2: FC = () => {
     const [step, setStep] = useState(1);
+    const history = useHistory();
 
     return (
         <>
@@ -41,6 +43,7 @@ export const PageAddFoodForm2: FC = () => {
 
                     actions.setSubmitting(false);
                     actions.resetForm();
+                    history.push('/food/all');
                 }}
             >
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
