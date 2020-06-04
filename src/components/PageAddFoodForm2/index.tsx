@@ -53,8 +53,9 @@ export const PageAddFoodForm2: FC = () => {
                                 {step === 1 && (
                                     <ChooseCategory onClick={handleCategoryClick} selected={values.category} />
                                 )}
+
                                 {step === 2 && (
-                                    <>
+                                    <S.Step2Wrapper>
                                         <Input
                                             label={`What type of ${values.category} is it?`}
                                             name="name"
@@ -70,8 +71,14 @@ export const PageAddFoodForm2: FC = () => {
                                             setSelected={(option: any) => setFieldValue('servings', option.value)}
                                             selected={values.servings}
                                         />
-                                    </>
+
+                                        <S.Button type="button" onClick={() => setStep(3)}>
+                                            Next
+                                        </S.Button>
+                                    </S.Step2Wrapper>
                                 )}
+
+                                {step === 3 && <p>Date picker</p>}
                             </Form>
                         </S.Wrapper>
                     );

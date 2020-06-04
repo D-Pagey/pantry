@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 1rem;
+    width: 100%;
 `;
 
 export const Input = styled.input`

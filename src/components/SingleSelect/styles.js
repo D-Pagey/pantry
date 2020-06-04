@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: ${({ margin }) => margin || '0 0 1rem'};
+    width: 100%;
 `;
 
 export const ButtonWrapper = styled.div`

@@ -16,10 +16,10 @@ type InputTypes = {
 
 export const Input: FC<InputTypes> = ({ error, label, name, onBlur, onChange, placeholder, testId, value }) => (
     <S.Wrapper>
-        {label && <FormLabel htmlFor={testId}>{label}</FormLabel>}
+        {label && <FormLabel htmlFor={testId || 'input'}>{label}</FormLabel>}
 
         <S.Input
-            id={testId}
+            id={testId || 'input'}
             data-testid={testId}
             name={name}
             onBlur={onBlur}
