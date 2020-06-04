@@ -8,7 +8,7 @@ type OptionType = {
 };
 
 type SingleSelectTypes = {
-    label: string;
+    label?: string;
     margin?: string;
     options: OptionType[];
     selected?: number;

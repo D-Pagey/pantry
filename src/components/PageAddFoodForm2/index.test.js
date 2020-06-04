@@ -13,6 +13,6 @@ describe('PageAddFoodForm2 component', () => {
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        getByText('Step 2');
+        getByText('How many servings?');
     });
 });
