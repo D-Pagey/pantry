@@ -11,7 +11,7 @@ type SingleSelectTypes = {
     label?: string;
     margin?: string;
     options: OptionType[];
-    selected?: number;
+    selected?: number | string;
     setSelected: Function;
     testId?: string;
 };
