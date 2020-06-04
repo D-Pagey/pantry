@@ -1,6 +1,11 @@
 import React from 'react';
-import { ChooseCategory } from '.';
+import { ChooseCategory, ChooseCategoryTypes } from '.';
 
 export default { title: 'ChooseCategory' };
 
-export const normal = () => <ChooseCategory />;
+const props: ChooseCategoryTypes = {
+    onClick: (category) => console.log(category)
+};
+
+export const normal = () => <ChooseCategory {...props} />;
+export const selected = () => <ChooseCategory {...props} selected="vegetables" />;

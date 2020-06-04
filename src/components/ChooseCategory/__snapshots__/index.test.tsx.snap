@@ -63,7 +63,7 @@ exports[`ChooseCategory component should render 1`] = `
   >
     <button
       class="c2 c3"
-      data-testid="categoryCardvegetables"
+      data-testid="vegetablesCategoryButton"
       type="button"
     >
       <p
@@ -74,7 +74,7 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c2 c3"
-      data-testid="categoryCardfruit"
+      data-testid="fruitCategoryButton"
       type="button"
     >
       <p
@@ -85,7 +85,7 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c2 c3"
-      data-testid="categoryCarddairy"
+      data-testid="dairyCategoryButton"
       type="button"
     >
       <p
@@ -96,7 +96,7 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c2 c3"
-      data-testid="categoryCardmeat"
+      data-testid="meatCategoryButton"
       type="button"
     >
       <p
@@ -107,7 +107,7 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c2 c3"
-      data-testid="categoryCardfish"
+      data-testid="fishCategoryButton"
       type="button"
     >
       <p
@@ -118,7 +118,7 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c2 c3"
-      data-testid="categoryCard[opened tin]"
+      data-testid="[opened tin]CategoryButton"
       type="button"
     >
       <p

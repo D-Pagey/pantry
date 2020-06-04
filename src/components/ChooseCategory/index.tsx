@@ -1,13 +1,16 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { CategoryButton } from '../CategoryButton';
 import * as S from './styles';
 
 const categories = ['vegetables', 'fruit', 'dairy', 'meat', 'fish', '[opened tin]'];
 
-export const ChooseCategory: FC = () => {
-    const [selected, setSelected] = useState('');
+export type ChooseCategoryTypes = {
+    onClick: (category: string) => void;
+    selected?: string;
+};
 
-    const handleClick = (category: string) => () => setSelected(category);
+export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) => {
+    const handleClick = (category: string) => () => onClick(category);
 
     return (
         <div>
@@ -19,6 +22,8 @@ export const ChooseCategory: FC = () => {
                         isSelected={selected === category}
                         name={category}
                         onClick={handleClick(category)}
+                        data-testid={`${category}CategoryButton`}
+                        key={category}
                     />
                 ))}
             </S.Grid>
