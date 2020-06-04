@@ -1,29 +1,32 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { FirebaseContext } from '../ProviderFirebase';
+import { formatCategories } from '../PageAddFoodForm/utils';
 import { CategoryButton } from '../CategoryButton';
 import * as S from './styles';
-
-const categories = ['vegetables', 'fruit', 'dairy', 'meat', 'fish', '[opened tin]'];
+import { CategoryType } from '../../types';
 
 export type ChooseCategoryTypes = {
-    onClick: (category: string) => void;
-    selected?: string;
+    onClick: (category: CategoryType) => void;
+    selected?: CategoryType;
 };
 
 export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) => {
-    const handleClick = (category: string) => () => onClick(category);
+    const { categories } = useContext(FirebaseContext);
+
+    const handleClick = (category: CategoryType) => () => onClick(category);
 
     return (
         <div>
             <S.Title>What type of food?</S.Title>
 
             <S.Grid>
-                {categories.map((category) => (
+                {formatCategories(categories).map((category) => (
                     <CategoryButton
-                        isSelected={selected === category}
-                        name={category}
+                        isSelected={selected?.value === category.value}
+                        name={category.label}
                         onClick={handleClick(category)}
-                        data-testid={`${category}CategoryButton`}
-                        key={category}
+                        data-testid={`${category.value}CategoryButton`}
+                        key={category.value}
                     />
                 ))}
             </S.Grid>

@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+import { CategoryType } from '../../types';
 import { Header } from '../Header';
 import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
@@ -37,7 +39,7 @@ export const PageAddFoodForm2: FC = () => {
             <Header />
 
             <Formik
-                initialValues={{ category: '', expires: new Date(), name: '', servings: '' }}
+                initialValues={{ category: {} as CategoryType, expires: new Date(), name: '', servings: '' }}
                 onSubmit={(values, actions): void => {
                     console.log({ values });
 
@@ -47,10 +49,12 @@ export const PageAddFoodForm2: FC = () => {
                 }}
             >
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
-                    const handleCategoryClick = (category: string) => {
+                    const handleCategoryClick = (category: CategoryType) => {
                         setFieldValue('category', category);
                         setStep(2);
                     };
+
+                    // console.log({ values });
 
                     return (
                         <S.Wrapper>
@@ -62,7 +66,7 @@ export const PageAddFoodForm2: FC = () => {
                                 {step === 2 && (
                                     <S.Step2Wrapper>
                                         <Input
-                                            label={`What type of ${values.category} is it?`}
+                                            label={`What type of ${values.category.label} is it?`}
                                             name="name"
                                             onBlur={handleBlur}
                                             onChange={handleChange}

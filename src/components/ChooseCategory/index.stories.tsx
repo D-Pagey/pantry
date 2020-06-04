@@ -8,4 +8,16 @@ const props: ChooseCategoryTypes = {
 };
 
 export const normal = () => <ChooseCategory {...props} />;
-export const selected = () => <ChooseCategory {...props} selected="vegetables" />;
+export const selected = () => (
+    <ChooseCategory
+        {...props}
+        selected={{
+            count: 1,
+            label: 'vegetables',
+            value: 'vegetables',
+            colour: 'green',
+            id: '1111',
+            name: 'vegetables'
+        }}
+    />
+);

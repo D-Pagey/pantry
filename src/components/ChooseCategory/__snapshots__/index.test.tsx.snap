@@ -1,42 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ChooseCategory component should render 1`] = `
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: white;
-  border: 1px solid rgba(52,136,65,0.6);
-  border-radius: 16px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 115px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  width: 144px;
-}
-
-.c3:hover {
-  background-color: #348841;
-}
-
-.c4 {
-  color: #348841;
-  font-size: 18px;
-}
-
-.c2:hover .c4 {
-  color: white;
-}
-
 .c0 {
   margin: 0;
   padding: 0 0 1.5rem;
@@ -60,73 +24,6 @@ exports[`ChooseCategory component should render 1`] = `
   </h3>
   <div
     class="c1"
-  >
-    <button
-      class="c2 c3"
-      data-testid="vegetablesCategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        Vegetables
-      </p>
-    </button>
-    <button
-      class="c2 c3"
-      data-testid="fruitCategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        Fruit
-      </p>
-    </button>
-    <button
-      class="c2 c3"
-      data-testid="dairyCategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        Dairy
-      </p>
-    </button>
-    <button
-      class="c2 c3"
-      data-testid="meatCategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        Meat
-      </p>
-    </button>
-    <button
-      class="c2 c3"
-      data-testid="fishCategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        Fish
-      </p>
-    </button>
-    <button
-      class="c2 c3"
-      data-testid="[opened tin]CategoryButton"
-      type="button"
-    >
-      <p
-        class="c4"
-      >
-        [Opened Tin]
-      </p>
-    </button>
-  </div>
+  />
 </div>
 `;
