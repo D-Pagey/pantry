@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { colours } from '../../tokens';
 import { SingleSelect } from '.';
 
 const props = {
@@ -52,8 +53,8 @@ describe('SingleSelect component', () => {
 
         expect(getByTestId('singleSelectButton0')).toHaveStyleRule(
             'background-color',
-            'linear-gradient(199.65deg,#288efc 0%,#2863fc 100%)'
+            colours.darkGreen100
         );
-        expect(getByTestId('singleSelectButton1')).toHaveStyleRule('background-color', 'white');
+        expect(getByTestId('singleSelectButton1')).toHaveStyleRule('background-color', colours.white);
     });
 });

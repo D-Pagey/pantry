@@ -58,13 +58,13 @@ export const countCategories = (
     });
 };
 
-type calculateExpiringReturnType = {
+type CalculateExpiringReturnType = {
     fridgeWithExpiring: FoodTypes[];
     count: number;
 };
 
 // takes all items in the fridge and works out if items are expiring soon
-export const calculateExpiring = (fridge: FoodTypes[], expiringCategoryId: string): calculateExpiringReturnType => {
+export const calculateExpiring = (fridge: FoodTypes[], expiringCategoryId: string): CalculateExpiringReturnType => {
     let count = 0;
 
     const fridgeWithExpiring = fridge.map((item) => {

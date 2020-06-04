@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-underscore-dangle */
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';

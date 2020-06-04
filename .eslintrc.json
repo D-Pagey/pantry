@@ -35,6 +35,11 @@
         // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
         "import/prefer-default-export": "off",
         "import/no-default-export": "error",
+        // note you must disable the base rule as it can report incorrect errors
+        "dot-notation": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/keyword-spacing": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
         "max-len": [
             "warn",
             {
@@ -52,16 +57,8 @@
     },
     "overrides": [
         {
-            "files": ["*.js"],
-            "rules": {
-                "@typescript-eslint/explicit-function-return-type": "off",
-                "react/prop-types": 2
-            }
-        },
-        {
             "files": ["*.stories.tsx"],
             "rules": {
-                "react/prop-types": 0,
                 "import/no-default-export": "off"
             }
         }

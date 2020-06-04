@@ -1,22 +1,23 @@
 import React, { FC } from 'react';
-import { Button } from '../Button';
 import { FormLabel } from '../FormLabel';
 import * as S from './styles';
+
+type OptionType = {
+    label: string;
+    value: number;
+};
 
 type SingleSelectTypes = {
     label: string;
     margin?: string;
-    options: {
-        label: string;
-        value: number;
-    }[];
+    options: OptionType[];
     selected?: number;
     setSelected: Function;
     testId?: string;
 };
 
 export const SingleSelect: FC<SingleSelectTypes> = ({ label, margin, options, selected, setSelected, testId }) => {
-    const handleClick = (option: { label: string; value: number }) => (): Function => setSelected(option);
+    const handleClick = (option: OptionType) => (): void => setSelected(option);
 
     return (
         <S.Wrapper margin={margin} data-testid={testId}>
@@ -25,14 +26,14 @@ export const SingleSelect: FC<SingleSelectTypes> = ({ label, margin, options, se
             <S.ButtonWrapper>
                 {options.map(
                     (option, index: number): JSX.Element => (
-                        <Button
+                        <S.Button
                             key={option.value}
                             onClick={handleClick(option)}
-                            testId={`singleSelectButton${index}`}
-                            variant={option.value === selected ? 'selected' : 'unselected'}
+                            selected={selected === option.value}
+                            data-testid={`singleSelectButton${index}`}
                         >
                             {option.label}
-                        </Button>
+                        </S.Button>
                     )
                 )}
             </S.ButtonWrapper>

@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 
-type foodTypes = {
+type FoodTypes = {
   category: string;
   date: Date;
   expires: number;
@@ -8,7 +8,7 @@ type foodTypes = {
   name: string;
 }[];
 
-export const getIndexOfId = (id: string, food: foodTypes): number => food.reduce((acc, curr, index) => {
+export const getIndexOfId = (id: string, food: FoodTypes): number => food.reduce((acc, curr, index) => {
   if (curr.id === id) return index;
 
   return acc;

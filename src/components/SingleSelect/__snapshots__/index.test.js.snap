@@ -1,25 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SingleSelect component should render 1`] = `
-.c2 {
-  background-color: #288efc;
-  border: 0;
-  border-radius: 0.25rem;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  height: 45px;
-  line-height: 1.2;
-  width: 200px;
-  background-color: white;
-  border-radius: 6px;
-  color: black;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -32,10 +13,23 @@ exports[`SingleSelect component should render 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.c2 {
+  background-color: white;
+  border: 1px solid rgba(52,136,65,0.6);
+  border-radius: 5px;
+  color: #348841;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.c2:hover {
+  background-color: #348841;
+  color: white;
 }
 
 <div
@@ -47,14 +41,14 @@ exports[`SingleSelect component should render 1`] = `
     class="c1"
   >
     <button
-      class="sc-AxjAm c2"
+      class="c2"
       data-testid="singleSelectButton0"
       type="button"
     >
       20+
     </button>
     <button
-      class="sc-AxjAm c2"
+      class="c2"
       data-testid="singleSelectButton1"
       type="button"
     >
