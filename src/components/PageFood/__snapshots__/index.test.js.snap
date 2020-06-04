@@ -52,10 +52,16 @@ exports[`PageFood component should render 1`] = `
       src="icon.svg"
     />
   </a>
-  <h4
-    class="c3"
+  <a
+    aria-current="page"
+    class="c1 active"
+    href="/"
   >
-    Pantry
-  </h4>
+    <h4
+      class="c3"
+    >
+      Pantry
+    </h4>
+  </a>
 </div>
 `;

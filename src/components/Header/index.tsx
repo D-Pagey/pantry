@@ -23,7 +23,13 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 </S.Link>
             )}
 
-            <S.Title>{page || 'Pantry'}</S.Title>
+            {page ? (
+                <S.Title>{page}</S.Title>
+            ) : (
+                <S.Link to="/">
+                    <S.Title>Pantry</S.Title>
+                </S.Link>
+            )}
         </S.Wrapper>
     );
 };
