@@ -1,4 +1,6 @@
 import React, { FC, useContext } from 'react';
+import arraySort from 'array-sort';
+
 import { FirebaseContext } from '../ProviderFirebase';
 import { formatCategories } from '../PageAddFoodForm/utils';
 import { CategoryButton } from '../CategoryButton';
@@ -15,12 +17,14 @@ export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) =
 
     const handleClick = (category: CategoryType) => () => onClick(category);
 
+    const sortedArray = arraySort(formatCategories(categories), 'value');
+
     return (
         <S.Wrapper>
             <S.Title>What type of food?</S.Title>
 
             <S.Grid>
-                {formatCategories(categories).map((category) => (
+                {sortedArray.map((category) => (
                     <CategoryButton
                         isSelected={selected?.value === category.value}
                         name={category.label}
