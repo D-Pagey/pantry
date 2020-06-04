@@ -13,10 +13,16 @@ jest.mock('react-router-dom', () => ({
     })
   }));
 
+jest.mock('uuid', () => ({
+    v4: () => '5'
+}));
+
   const context = {
     categories: CategoriesArray,
-    addNewCategories: () => {},
-    updateFridge: () => {}
+    updateFridge: () => {},
+    user: {
+        name: 'Dan Page'
+    }
 };
 
 describe('PageAddFoodForm2 component', () => {
@@ -57,5 +63,30 @@ describe('PageAddFoodForm2 component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food/all'));
+    });
+
+    it('should call updateFridge with the right values', async () => {
+        const updatedContext = {...context, updateFridge: jest.fn()};
+        const name = 'chicken';
+
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm2 />, updatedContext);
+        
+        userEvent.click(getByTestId('meatCategoryButton'));
+        await userEvent.type(getByLabelText('What type of meat is it?'), name);
+        userEvent.click(getByTestId('singleSelectButton0'));
+        userEvent.click(getByText('Next'));
+        
+        await waitFor(() => getByText('When is it going to expire?'));
+            
+        userEvent.click(getByText('Add to pantry'));
+
+        await waitFor(() => expect(updatedContext.updateFridge).toBeCalledWith({
+            categories: [CategoriesArray[0].id],
+            expires: expect.any(Date),
+            id: '5',
+            name,
+            owner: updatedContext.user.name,
+            servings: 1
+        }));
     });
 });

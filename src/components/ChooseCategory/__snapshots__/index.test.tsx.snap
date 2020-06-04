@@ -2,12 +2,25 @@
 
 exports[`ChooseCategory component should render 1`] = `
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
   margin: 0;
   padding: 0 0 1.5rem;
   font-weight: normal;
 }
 
-.c1 {
+.c2 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
   display: grid;
   grid-gap: 24px;
   grid-template-columns: 1fr 1fr;
@@ -16,14 +29,16 @@ exports[`ChooseCategory component should render 1`] = `
   width: max-content;
 }
 
-<div>
+<div
+  class="c0"
+>
   <h3
-    class="c0"
+    class="c1"
   >
     What type of food?
   </h3>
   <div
-    class="c1"
+    class="c2"
   />
 </div>
 `;

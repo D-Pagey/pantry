@@ -16,7 +16,7 @@ export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) =
     const handleClick = (category: CategoryType) => () => onClick(category);
 
     return (
-        <div>
+        <S.Wrapper>
             <S.Title>What type of food?</S.Title>
 
             <S.Grid>
@@ -30,6 +30,6 @@ export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) =
                     />
                 ))}
             </S.Grid>
-        </div>
+        </S.Wrapper>
     );
 };

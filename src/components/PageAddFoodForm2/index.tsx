@@ -1,10 +1,12 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { CategoryType } from '../../types';
+import { FirebaseContext } from '../ProviderFirebase';
 import { Header } from '../Header';
 import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
@@ -30,8 +32,10 @@ const options = [
     }
 ];
 
+// TODO: Once I deleted V1, then change value to be category not categories
 export const PageAddFoodForm2: FC = () => {
     const [step, setStep] = useState(1);
+    const { updateFridge, user } = useContext(FirebaseContext);
     const history = useHistory();
 
     return (
@@ -39,9 +43,16 @@ export const PageAddFoodForm2: FC = () => {
             <Header />
 
             <Formik
-                initialValues={{ category: {} as CategoryType, expires: new Date(), name: '', servings: '' }}
+                initialValues={{ categories: {} as CategoryType, expires: new Date(), name: '', servings: '' }}
                 onSubmit={(values, actions): void => {
-                    console.log({ values });
+                    const formattedValues = {
+                        ...values,
+                        id: uuidv4(),
+                        owner: user.name,
+                        categories: [values.categories.id]
+                    };
+
+                    updateFridge(formattedValues);
 
                     actions.setSubmitting(false);
                     actions.resetForm();
@@ -50,23 +61,21 @@ export const PageAddFoodForm2: FC = () => {
             >
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
                     const handleCategoryClick = (category: CategoryType) => {
-                        setFieldValue('category', category);
+                        setFieldValue('categories', category);
                         setStep(2);
                     };
-
-                    // console.log({ values });
 
                     return (
                         <S.Wrapper>
                             <Form>
                                 {step === 1 && (
-                                    <ChooseCategory onClick={handleCategoryClick} selected={values.category} />
+                                    <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
                                 )}
 
                                 {step === 2 && (
                                     <S.Step2Wrapper>
                                         <Input
-                                            label={`What type of ${values.category.label} is it?`}
+                                            label={`What type of ${values.categories.label} is it?`}
                                             name="name"
                                             onBlur={handleBlur}
                                             onChange={handleChange}
