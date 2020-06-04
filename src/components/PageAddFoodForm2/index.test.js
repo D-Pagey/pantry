@@ -24,6 +24,6 @@ describe('PageAddFoodForm2 component', () => {
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
         
-        getByText('Date picker');
+        getByText('When is it going to expire?');
     });
 });

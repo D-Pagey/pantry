@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Form, Formik } from 'formik';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { Header } from '../Header';
 import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
@@ -33,8 +35,10 @@ export const PageAddFoodForm2: FC = () => {
             <Header />
 
             <Formik
-                initialValues={{ category: '', name: '', servings: '' }}
+                initialValues={{ category: '', expires: new Date(), name: '', servings: '' }}
                 onSubmit={(values, actions): void => {
+                    console.log({ values });
+
                     actions.setSubmitting(false);
                     actions.resetForm();
                 }}
@@ -44,8 +48,6 @@ export const PageAddFoodForm2: FC = () => {
                         setFieldValue('category', category);
                         setStep(2);
                     };
-
-                    console.log({ values });
 
                     return (
                         <S.Wrapper>
@@ -78,7 +80,19 @@ export const PageAddFoodForm2: FC = () => {
                                     </S.Step2Wrapper>
                                 )}
 
-                                {step === 3 && <p>Date picker</p>}
+                                {step === 3 && (
+                                    <S.Step2Wrapper>
+                                        <p>When is it going to expire?</p>
+
+                                        <DatePicker
+                                            selected={values.expires}
+                                            onChange={(date: Date) => setFieldValue('expires', date)}
+                                            inline
+                                        />
+
+                                        <S.SubmitButton>Add to pantry</S.SubmitButton>
+                                    </S.Step2Wrapper>
+                                )}
                             </Form>
                         </S.Wrapper>
                     );

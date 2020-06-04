@@ -20,5 +20,9 @@ export const Button = styled.button.attrs(() => ({
     color: ${colours.white};
     cursor: pointer;
     padding: 1rem;
-    width: 68px;
+    min-width: 68px;
 `;
+
+export const SubmitButton = styled(Button).attrs(() => ({
+    type: 'submit'
+}))``;
