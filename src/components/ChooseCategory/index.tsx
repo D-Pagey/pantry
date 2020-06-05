@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react';
 import arraySort from 'array-sort';
 
+import { formatCategories } from '../../utils';
+import { CategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
-import { formatCategories } from '../PageAddFoodForm/utils';
 import { CategoryButton } from '../CategoryButton';
 import * as S from './styles';
-import { CategoryType } from '../../types';
 
 export type ChooseCategoryTypes = {
     onClick: (category: CategoryType) => void;

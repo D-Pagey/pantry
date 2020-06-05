@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { PageAddFoodForm } from '../PageAddFoodForm';
 import { PageAddFoodForm2 } from '../PageAddFoodForm2';
 import { PageFood } from '../PageFood';
 import { PageHome } from '../PageHome';
@@ -15,7 +14,6 @@ export const Routes = (): JSX.Element => (
         <Route path="/sign-in" component={PageSignIn} />
         <RouteProtected path="/profile" component={PageProfile} />
         <RouteProtected path="/add" component={PageAddFoodForm2} />
-        <RouteProtected path="/test" component={PageAddFoodForm} />
         <RouteProtected path="/food/:category" component={PageFood} />
         <Route component={PageNotFound} />
     </Switch>

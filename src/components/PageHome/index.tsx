@@ -32,10 +32,6 @@ export const PageHome = (): JSX.Element => {
                     <Button>Get started for free</Button>
                 </Link>
 
-                <Link to="/test" style={{ margin: '1rem' }}>
-                    <Button>Add Food V2</Button>
-                </Link>
-
                 <S.FeaturesWrapper>
                     <S.SubTitle>Get notified on expiring items</S.SubTitle>
                     <S.Description>Clearly see and manage your food items that are about to expire.</S.Description>
