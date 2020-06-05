@@ -1,34 +1,14 @@
 import styled from 'styled-components';
+import { colours } from '../../tokens';
 
-export const Button = styled.button.attrs({
-  type: 'button',
-})`
-    background-color: #288efc;
+export const Button = styled.button.attrs(({ type }) => ({
+    type: type || 'button'
+}))`
+    background-color: ${colours.darkGreen100};
     border: 0;
-    border-radius: 0.25rem;
-    color: white;
+    border-radius: 5px;
+    color: ${colours.white};
     cursor: pointer;
-    font-size: 1rem;
-    height: 45px;
-    line-height: 1.2;
-    margin: ${({ margin }) => margin};
-    width: ${({ width }) => width || '200px'};
+    padding: 1rem;
+    min-width: 68px;
 `;
-
-export const Selected = styled(Button)`
-    background-color: linear-gradient(199.65deg, #288efc 0%, #2863fc 100%);
-    border-radius: 6px;
-    color: white;
-    flex-grow: 1;
-`;
-
-export const UnSelected = styled(Button)`
-    background-color: white;
-    border-radius: 6px;
-    color: black;
-    flex-grow: 1;
-`;
-
-export const Submit = styled(Button).attrs({
-  type: 'submit',
-})``;

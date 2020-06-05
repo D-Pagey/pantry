@@ -3,4 +3,4 @@ import { Button } from '.';
 
 export default { title: 'Button' };
 
-export const withText = () => <Button>Hello Button</Button>;
+export const normal = () => <Button onClick={() => console.log('clicked')}>Click me</Button>;

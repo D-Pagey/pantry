@@ -114,9 +114,7 @@ export const PageAddFoodForm = (): JSX.Element => {
                                     setSelected={(option: any): void => setFieldValue('servings', option.value)}
                                 />
 
-                                <Button variant="submit" testId="addFoodFormSubmit">
-                                    Submit
-                                </Button>
+                                <Button type="submit">Submit</Button>
                             </Form>
                         </S.Wrapper>
                     );

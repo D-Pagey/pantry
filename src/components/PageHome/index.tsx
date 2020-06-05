@@ -33,8 +33,8 @@ export const PageHome = (): JSX.Element => {
                     <Button>Get started for free</Button>
                 </Link>
 
-                <Link to="/test">
-                    <S.GreenButton>Add Food V2</S.GreenButton>
+                <Link to="/test" style={{ margin: '1rem' }}>
+                    <Button>Add Food V2</Button>
                 </Link>
 
                 <S.FeaturesWrapper>

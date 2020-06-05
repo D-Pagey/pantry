@@ -11,6 +11,7 @@ import { Header } from '../Header';
 import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
 import { SingleSelect } from '../SingleSelect';
+import { Button } from '../Button';
 import * as S from './styles';
 
 const options = [
@@ -90,9 +91,7 @@ export const PageAddFoodForm2: FC = () => {
                                             selected={values.servings}
                                         />
 
-                                        <S.Button type="button" onClick={() => setStep(3)}>
-                                            Next
-                                        </S.Button>
+                                        <Button onClick={() => setStep(3)}>Next</Button>
                                     </S.Step2Wrapper>
                                 )}
 
@@ -106,7 +105,7 @@ export const PageAddFoodForm2: FC = () => {
                                             inline
                                         />
 
-                                        <S.SubmitButton>Add to pantry</S.SubmitButton>
+                                        <Button type="submit">Add to pantry</Button>
                                     </S.Step2Wrapper>
                                 )}
                             </Form>

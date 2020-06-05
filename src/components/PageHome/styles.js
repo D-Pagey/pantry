@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -46,15 +45,4 @@ export const Description = styled.p`
     font-size: 18px;
     margin: 0;
     max-width: 500px;
-`;
-
-// TODO: Delete this
-export const GreenButton = styled.button`
-    background-color: ${colours.darkGreen100};
-    color: ${colours.white};
-    margin: 1rem 0 0;
-    padding: 1rem;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
 `;
