@@ -73,17 +73,22 @@ export const PageAddFoodForm2: FC = () => {
 
                                 {step === 2 && (
                                     <S.Step2Wrapper>
+                                        <S.Label htmlFor="foodName">
+                                            What type of {values.categories.label} is it?
+                                        </S.Label>
+
                                         <Input
-                                            label={`What type of ${values.categories.label} is it?`}
                                             name="name"
                                             onBlur={handleBlur}
                                             onChange={handleChange}
                                             placeholder="e.g. Carrot"
+                                            testId="foodName"
                                             value={values.name}
                                         />
 
+                                        <S.Label>How many servings?</S.Label>
+
                                         <SingleSelect
-                                            label="How many servings?"
                                             options={options}
                                             setSelected={(option: any) => setFieldValue('servings', option.value)}
                                             selected={values.servings}

@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { v4 as uuidv4 } from 'uuid';
-
 import { CategoryType } from '../../types';
-import { FormLabel } from '../FormLabel';
-import { FormError } from '../FormError';
 import * as S from './styles';
 
-type DropdownTypes = {
-    error?: string;
-    label?: string;
+type DropdownProps = {
+    id?: string;
     options: CategoryType[];
     setValues: (categories: CategoryType[]) => void;
     value: CategoryType[];
@@ -18,7 +14,7 @@ type DropdownTypes = {
 /**
  * Return a consistent array of values except for one __isNew__ flag
  */
-export const MultiSelectDropdown = ({ error, label, options, setValues, value }: DropdownTypes): JSX.Element => {
+export const MultiSelectDropdown: FC<DropdownProps> = ({ id, options, setValues, value }) => {
     const handleChange = (newValue: any, actionMeta: any): void => {
         if (actionMeta.action === 'create-option') {
             const originalAddedValue = newValue[newValue.length - 1];
@@ -38,19 +34,13 @@ export const MultiSelectDropdown = ({ error, label, options, setValues, value }:
     };
 
     return (
-        <S.Wrapper>
-            {label && <FormLabel htmlFor={label}>{label}</FormLabel>}
-
-            <CreatableSelect
-                inputId={label}
-                isMulti
-                onChange={handleChange}
-                options={options}
-                styles={S.colourStyles}
-                value={value}
-            />
-
-            {error && <FormError>{error}</FormError>}
-        </S.Wrapper>
+        <CreatableSelect
+            inputId={id}
+            isMulti
+            onChange={handleChange}
+            options={options}
+            styles={S.colourStyles}
+            value={value}
+        />
     );
 };

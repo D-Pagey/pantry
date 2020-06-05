@@ -84,14 +84,12 @@ export const PageAddFoodForm = (): JSX.Element => {
                         <S.Wrapper>
                             <Form>
                                 <MultiSelectDropdown
-                                    label="What categories of food?"
                                     options={formatCategories(categories)}
                                     setValues={(category: any): void => setFieldValue('categories', category)}
                                     value={values.categories}
                                 />
 
                                 <Input
-                                    label="What is the name of the food?"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     name="name"
@@ -102,12 +100,10 @@ export const PageAddFoodForm = (): JSX.Element => {
 
                                 <DialDatePicker
                                     date={values.expires}
-                                    label="When does it expire?"
                                     setDate={(date: Date): void => setFieldValue('expires', date)}
                                 />
 
                                 <SingleSelect
-                                    label="How many servings?"
                                     options={servingsOptions}
                                     selected={values.servings}
                                     setSelected={(option: any): void => setFieldValue('servings', option.value)}

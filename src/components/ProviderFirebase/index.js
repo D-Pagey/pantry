@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { node } from 'prop-types';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
 import { updateCategoriesObject, countCategories, calculateExpiring } from './utils';
@@ -168,8 +167,4 @@ export const ProviderFirebase = ({ children }) => {
             {children}
         </FirebaseContext.Provider>
     );
-};
-
-ProviderFirebase.propTypes = {
-    children: node.isRequired
 };

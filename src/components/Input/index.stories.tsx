@@ -12,6 +12,4 @@ const props = {
 
 export default { title: 'Input' };
 
-export const withoutLabel = () => <Input {...props} />;
-export const withLabel = () => <Input {...props} label="Name" />;
-export const withError = () => <Input {...props} error="Required" />;
+export const normal = () => <Input {...props} />;

@@ -14,12 +14,6 @@ describe('DialDatePicker component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should render label', () => {
-        const label = 'Expiry date?';
-        const { getByText } = render(<DialDatePicker {...props} label={label} />);
-        getByText(label);
-    });
-
     it.each`
         name           | handler      | direction | index
         ${'addDays'}   | ${addDays}   | ${'Up'}   | ${0}

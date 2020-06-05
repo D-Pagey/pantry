@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
-import { FormLabel } from '../FormLabel';
-import { FormError } from '../FormError';
 import * as S from './styles';
 
 type InputTypes = {
-    error?: string;
-    label?: string;
     name?: string;
     onBlur?: Function;
     onChange: Function;
@@ -14,21 +10,15 @@ type InputTypes = {
     value: string;
 };
 
-export const Input: FC<InputTypes> = ({ error, label, name, onBlur, onChange, placeholder, testId, value }) => (
-    <S.Wrapper>
-        {label && <FormLabel htmlFor={testId || 'input'}>{label}</FormLabel>}
-
-        <S.Input
-            id={testId || 'input'}
-            data-testid={testId}
-            name={name}
-            onBlur={onBlur}
-            onChange={onChange}
-            placeholder={placeholder}
-            type="text"
-            value={value}
-        />
-
-        {error && <FormError>{error}</FormError>}
-    </S.Wrapper>
+export const Input: FC<InputTypes> = ({ name, onBlur, onChange, placeholder, testId = 'input', value }) => (
+    <S.Input
+        data-testid={testId}
+        id={testId}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        placeholder={placeholder}
+        type="text"
+        value={value}
+    />
 );

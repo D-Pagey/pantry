@@ -1,22 +1,18 @@
 import React, { FC } from 'react';
 import { format, addDays, addMonths, addYears, addWeeks, subDays, subMonths, subYears } from 'date-fns';
 import { Button } from '../Button';
-import { FormLabel } from '../FormLabel';
 import * as S from './styles';
 
 type DialDatePickerTypes = {
     date: Date;
     setDate: Function;
-    label?: string;
 };
 
-export const DialDatePicker: FC<DialDatePickerTypes> = ({ date, setDate, label }) => {
+export const DialDatePicker: FC<DialDatePickerTypes> = ({ date, setDate }) => {
     const handleChange = (handler: Function) => (): Function => setDate(handler(date, 1));
 
     return (
         <S.Wrapper>
-            {label && <FormLabel>{label}</FormLabel>}
-
             <S.Grid>
                 <S.UpButton onClick={handleChange(addDays)}>Up</S.UpButton>
                 <S.DateSpan data-testid="dialDatePickerDay">{format(date, 'do')}</S.DateSpan>

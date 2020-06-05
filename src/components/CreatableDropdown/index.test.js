@@ -12,16 +12,4 @@ describe('CreatableDropdown component', () => {
     const { container } = render(<CreatableDropdown {...props} />);
     expect(container.firstChild).toMatchSnapshot();
   });
-
-  it('should render a label', () => {
-    const label = 'What food category is it?';
-    const { getByText } = render(<CreatableDropdown {...props} label={label} />);
-    getByText(label);
-  });
-
-  it('should render an error', () => {
-    const error = 'What food category is it?';
-    const { getByText } = render(<CreatableDropdown {...props} error={error} />);
-    getByText(error);
-  });
 });

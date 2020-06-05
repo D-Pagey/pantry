@@ -4,7 +4,7 @@ import { DialDatePicker } from '.';
 const Wrapper = () => {
     const [date, setDate] = useState(new Date());
 
-    return <DialDatePicker date={date} setDate={setDate} label="Expiry date?" />;
+    return <DialDatePicker date={date} setDate={setDate} />;
 };
 
 export default { title: 'DialDatePicker' };

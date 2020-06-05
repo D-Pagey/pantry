@@ -10,3 +10,7 @@ export const Step2Wrapper = styled.div`
     flex-direction: column;
 `;
 
+export const Label = styled.label`
+    padding: 0 0 1rem;
+    width: 100%;
+`;

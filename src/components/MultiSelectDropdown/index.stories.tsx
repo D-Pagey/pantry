@@ -37,6 +37,3 @@ const Wrapper = (props: any) => {
 export default { title: 'MultiSelectDropdown' };
 
 export const normal = () => <Wrapper />;
-export const withLabel = () => <Wrapper label="Food categories" />;
-export const withError = () => <Wrapper error="Required" />;
-export const withLabelAndError = () => <Wrapper label="Food categories" error="Required" />;

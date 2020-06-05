@@ -1,11 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import styled from 'styled-components';
 import chroma from 'chroma-js';
-
-export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
 
 export const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'white' }),

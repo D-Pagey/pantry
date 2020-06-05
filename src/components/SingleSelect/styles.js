@@ -2,16 +2,10 @@ import styled from 'styled-components';
 import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: ${({ margin }) => margin || '0 0 1rem'};
-    width: 100%;
-`;
-
-export const ButtonWrapper = styled.div`
     display: grid;
     grid-column-gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
 `;
 
 export const Button = styled.button.attrs(() => ({

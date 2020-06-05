@@ -36,18 +36,6 @@ describe('SingleSelect component', () => {
         expect(setSelected).toHaveBeenCalledWith(props.options[0]);
     });
 
-    it('should render with margin', () => {
-        const margin = '1rem 0';
-        const { getByTestId } = render(<SingleSelect {...props} margin={margin} />);
-        expect(getByTestId(props.testId)).toHaveStyleRule('margin', margin);
-    });
-
-    it('should render with label', () => {
-        const label = 'What category of food is it?';
-        const { getByText } = render(<SingleSelect {...props} label={label} />);
-        getByText(label);
-    });
-
     it('should render correct selected/unselected buttons', () => {
         const { getByTestId } = render(<SingleSelect {...props} selected={20} />);
 
