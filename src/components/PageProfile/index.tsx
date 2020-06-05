@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 import deleteIcon from '../../assets/delete.svg';
 import { CategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
+import { Layout } from '../Layout';
 import * as S from './styles';
-import { Header } from '../Header';
 
 export const PageProfile = (): JSX.Element => {
     const { categories, deleteCategory, signOut, user } = useContext(FirebaseContext);
@@ -18,8 +18,7 @@ export const PageProfile = (): JSX.Element => {
     };
 
     return (
-        <>
-            <Header page="Profile" />
+        <Layout title="Profile">
             <div data-testid="pageProfile">
                 <p>
                     Welcome
@@ -67,6 +66,6 @@ export const PageProfile = (): JSX.Element => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </Layout>
     );
 };

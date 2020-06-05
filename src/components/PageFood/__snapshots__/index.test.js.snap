@@ -12,11 +12,13 @@ exports[`PageFood component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 33px 24px;
+  height: 100px;
+  padding: 0 24px;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 2;
 }
 
 .c1 {

@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { CategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
 import { SingleSelect } from '../SingleSelect';
@@ -40,9 +40,7 @@ export const PageAddFoodForm2: FC = () => {
     const history = useHistory();
 
     return (
-        <>
-            <Header />
-
+        <Layout title="Add food">
             <Formik
                 initialValues={{ categories: {} as CategoryType, expires: new Date(), name: '', servings: '' }}
                 onSubmit={(values, actions): void => {
@@ -113,6 +111,6 @@ export const PageAddFoodForm2: FC = () => {
                     );
                 }}
             </Formik>
-        </>
+        </Layout>
     );
 };

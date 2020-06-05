@@ -9,7 +9,7 @@ import { CategoryType, FoodTypes, EditFoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { MultiSelectDropdown } from '../MultiSelectDropdown';
 import { DialDatePicker } from '../DialDatePicker';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 import { SingleSelect } from '../SingleSelect';
 import { Input } from '../Input';
 import { Button } from '../Button';
@@ -48,8 +48,7 @@ export const PageAddFoodForm = (): JSX.Element => {
     }, [categories, initialValues, state, usedEditValues]);
 
     return (
-        <>
-            <Header page="Add food" />
+        <Layout title="Add food">
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -120,6 +119,6 @@ export const PageAddFoodForm = (): JSX.Element => {
                     );
                 }}
             </Formik>
-        </>
+        </Layout>
     );
 };

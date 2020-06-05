@@ -16,11 +16,9 @@ export const App = (): JSX.Element => (
         <BrowserRouter>
             <BurgerMenu />
 
-            <S.Wrapper>
-                <S.GlobalStyle />
+            <S.GlobalStyle />
 
-                <Routes />
-            </S.Wrapper>
+            <Routes />
         </BrowserRouter>
     </ProviderFirebase>
 );

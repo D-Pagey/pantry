@@ -6,7 +6,7 @@ import { FirebaseContext } from '../ProviderFirebase';
 import { CategoryFilter } from '../CategoryFilter';
 import { FoodTable } from '../FoodTable';
 import { Loading } from '../Loading';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 import { Button } from '../Button';
 import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
 import * as S from './styles';
@@ -68,9 +68,7 @@ export const PageFood: FC = () => {
     if (isValidCategory === false) return <Redirect to="/not-found" />;
 
     return (
-        <>
-            <Header />
-
+        <Layout>
             <CategoryFilter setSelected={(select) => console.log(select)} />
 
             <S.Wrapper>
@@ -86,6 +84,6 @@ export const PageFood: FC = () => {
                     <Button>Add Item</Button>
                 </Link>
             </S.Wrapper>
-        </>
+        </Layout>
     );
 };

@@ -12,56 +12,41 @@ exports[`PageAddFoodForm2 component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 33px 24px;
+  height: 100px;
+  padding: 0 24px;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 2;
 }
 
-.c1 {
-  color: initial;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c3 {
+.c2 {
   font-size: 25px;
   font-weight: 500;
   margin: 0;
   padding: 0 0 0 14px;
 }
 
-.c2 {
-  position: relative;
-  top: 2px;
-  width: 32px;
+.c1 {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
 }
 
 <div
   class="c0"
 >
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
+  <img
+    alt="arrow"
+    class="c1"
+    data-testid="headerBackArrow"
+    src="arrow.svg"
+  />
+  <h4
+    class="c2"
   >
-    <img
-      alt="icon"
-      class="c2"
-      src="icon.svg"
-    />
-  </a>
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
-  >
-    <h4
-      class="c3"
-    >
-      Pantry
-    </h4>
-  </a>
+    Add food
+  </h4>
 </div>
 `;

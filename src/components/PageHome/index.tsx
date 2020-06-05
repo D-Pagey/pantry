@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FirebaseContext } from '../ProviderFirebase';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 import { Button } from '../Button';
 import * as S from './styles';
 
@@ -17,8 +17,7 @@ export const PageHome = (): JSX.Element => {
     }, [expiringCount, history]);
 
     return (
-        <>
-            <Header />
+        <Layout>
             <S.Wrapper data-testid="pageHome">
                 <S.Title>Play With Your Food</S.Title>
 
@@ -54,6 +53,6 @@ export const PageHome = (): JSX.Element => {
                     </S.Description>
                 </S.FeaturesWrapper>
             </S.Wrapper>
-        </>
+        </Layout>
     );
 };

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 import * as S from './styles';
 
 export const PageNotFound: FC = () => (
-    <div>
-        <Header page="Not found" />
+    <Layout title="Not found">
         <S.Title>404 - This page does not exist</S.Title>
         <S.RouterLink to="/">Return Home</S.RouterLink>
-    </div>
+    </Layout>
 );

@@ -3,7 +3,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { firebase } from '../../services';
 import { FirebaseContext } from '../ProviderFirebase';
-import { Header } from '../Header';
+import { Layout } from '../Layout';
 
 export const PageSignIn = () => {
     const { isAuthed, setUser } = useContext(FirebaseContext);
@@ -28,11 +28,10 @@ export const PageSignIn = () => {
     }
 
     return (
-        <>
-            <Header page="Sign In" />
+        <Layout title="Sign in">
             <div data-testid="pageSignIn">
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
-        </>
+        </Layout>
     );
 };
