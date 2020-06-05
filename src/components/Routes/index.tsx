@@ -14,8 +14,8 @@ export const Routes = (): JSX.Element => (
         <Route exact path="/" component={PageHome} />
         <Route path="/sign-in" component={PageSignIn} />
         <RouteProtected path="/profile" component={PageProfile} />
-        <RouteProtected path="/add" component={PageAddFoodForm} />
-        <RouteProtected path="/test" component={PageAddFoodForm2} />
+        <RouteProtected path="/add" component={PageAddFoodForm2} />
+        <RouteProtected path="/test" component={PageAddFoodForm} />
         <RouteProtected path="/food/:category" component={PageFood} />
         <Route component={PageNotFound} />
     </Switch>
