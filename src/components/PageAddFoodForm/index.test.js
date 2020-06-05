@@ -2,7 +2,7 @@ import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CategoriesArray } from '../../fixtures/categories';
-import { PageAddFoodForm2 } from '.';
+import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
 
@@ -25,14 +25,14 @@ jest.mock('uuid', () => ({
     }
 };
 
-describe('PageAddFoodForm2 component', () => {
+describe('PageAddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<PageAddFoodForm2 />, context);
+        const { container } = render(<PageAddFoodForm />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should render step 2 of the form once category is clicked', async () => {
-        const { getByTestId, getByText } = render(<PageAddFoodForm2 />, context);
+        const { getByTestId, getByText } = render(<PageAddFoodForm />, context);
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
@@ -40,7 +40,7 @@ describe('PageAddFoodForm2 component', () => {
     });
 
     it('should render step 3 of the form once hit next on step 2', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm2 />, context);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
 
         userEvent.click(getByTestId('meatCategoryButton'));
         await userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
@@ -51,7 +51,7 @@ describe('PageAddFoodForm2 component', () => {
     });
 
     it('should redirect to food page once submitted', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm2 />, context);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
         
         userEvent.click(getByTestId('meatCategoryButton'));
         await userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
@@ -69,7 +69,7 @@ describe('PageAddFoodForm2 component', () => {
         const updatedContext = {...context, updateFridge: jest.fn()};
         const name = 'chicken';
 
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm2 />, updatedContext);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
         
         userEvent.click(getByTestId('meatCategoryButton'));
         await userEvent.type(getByLabelText('What type of meat is it?'), name);

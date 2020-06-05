@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { PageAddFoodForm2 } from '../PageAddFoodForm2';
+import { PageAddFoodForm } from '../PageAddFoodForm';
 import { PageFood } from '../PageFood';
 import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
@@ -13,7 +13,7 @@ export const Routes = (): JSX.Element => (
         <Route exact path="/" component={PageHome} />
         <Route path="/sign-in" component={PageSignIn} />
         <RouteProtected path="/profile" component={PageProfile} />
-        <RouteProtected path="/add" component={PageAddFoodForm2} />
+        <RouteProtected path="/add" component={PageAddFoodForm} />
         <RouteProtected path="/food/:category" component={PageFood} />
         <Route component={PageNotFound} />
     </Switch>

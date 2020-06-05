@@ -34,7 +34,7 @@ const options = [
 ];
 
 // TODO: Once I deleted V1, then change value to be category not categories
-export const PageAddFoodForm2: FC = () => {
+export const PageAddFoodForm: FC = () => {
     const [step, setStep] = useState(1);
     const { updateFridge, user } = useContext(FirebaseContext);
     const history = useHistory();
