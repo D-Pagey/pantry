@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import * as S from './styles';
 
 export type CategoryFilterProps = {
-    selected?: string;
+    selected: string;
     setSelected: (category: string) => void;
 };
 
@@ -12,7 +12,7 @@ export const CategoryFilter: FC<CategoryFilterProps> = ({ selected, setSelected 
     return (
         <S.Wrapper>
             <S.List>
-                <S.Item isSelected={!selected} onClick={handleClick('all')}>
+                <S.Item isSelected={selected === 'all'} onClick={handleClick('all')}>
                     All
                 </S.Item>
                 <S.Item isSelected={selected === 'vegetables'} onClick={handleClick('vegetables')}>

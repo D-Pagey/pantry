@@ -69,7 +69,7 @@ export const PageFood: FC = () => {
 
     return (
         <Layout>
-            <CategoryFilter setSelected={(select) => console.log(select)} />
+            <CategoryFilter selected={category} setSelected={(select) => history.push(`/food/${select}`)} />
 
             <S.Wrapper>
                 <h1>{`Food: ${category}`}</h1>

@@ -4,6 +4,7 @@ import { CategoryFilter, CategoryFilterProps } from '.';
 export default { title: 'CategoryFilter' };
 
 const props: CategoryFilterProps = {
+    selected: 'all',
     setSelected: (category) => console.log(category)
 };
 
