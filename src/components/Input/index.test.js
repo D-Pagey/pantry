@@ -32,11 +32,11 @@ describe('Input component', () => {
     getByText(label);
   });
 
-  it('should handle change', () => {
+  it('should handle change', async () => {
     const onChange = jest.fn();
     const { getByTestId } = render(<Input {...props} onChange={onChange} />);
 
-    userEvent.type(getByTestId('testInput'), 'testing onchange');
+    await userEvent.type(getByTestId('testInput'), 'testing onchange');
 
     expect(onChange).toHaveBeenCalled();
   });

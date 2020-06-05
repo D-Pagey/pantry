@@ -43,7 +43,7 @@ describe('PageAddFoodForm2 component', () => {
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm2 />, context);
 
         userEvent.click(getByTestId('meatCategoryButton'));
-        userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
+        await userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
         
