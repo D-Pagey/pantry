@@ -2,22 +2,9 @@ import { differenceInDays } from 'date-fns';
 import {
     CategoryCountType,
     CategoryType,
-    DatabaseCategoryType,
     FoodTypes,
     KeyedDatabaseCategoryType
 } from '../../types';
-
-// converts an array of categories to an object of objects
-export const updateCategoriesObject = (categories: CategoryType[]): { [key: string]: DatabaseCategoryType } => {
-    return categories.reduce((acc, curr) => {
-        const { label, value, count, ...restOfCategory } = curr;
-
-        return {
-            ...acc,
-            [`categories.${curr.id}`]: restOfCategory
-        };
-    }, {});
-};
 
 // pulls all the categories in the fridge into an object of id : count
 export const countCategoryIds = (fridge: FoodTypes[]): CategoryCountType => {

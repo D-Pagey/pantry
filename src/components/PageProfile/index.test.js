@@ -7,7 +7,6 @@ const props = {};
 
 const context = {
   categories: CategoriesWithCounts,
-  deleteCategory: () => {},
   signOut: () => {},
   user: {
     email: 'dan@gmail.com',

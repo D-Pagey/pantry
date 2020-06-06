@@ -1,15 +1,13 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { updateCategoriesObject, countCategories, calculateExpiring } from './utils';
+import { countCategories, calculateExpiring } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
 
 export const FirebaseContext = createContext({
-    addNewCategories: (values) => null,
     categories: [],
-    deleteCategory: (id) => null,
     deleteFoodItem: (id) => () => null,
     expiringCount: 0,
     isAuthed: false,
@@ -114,14 +112,6 @@ export const ProviderFirebase = ({ children }) => {
             .catch(() => toast.error('Error with updating fridge'));
     };
 
-    const addNewCategories = (categoryObjects) => {
-        db.collection(HOUSEHOLDS)
-            .doc(user.household)
-            .update(updateCategoriesObject(categoryObjects))
-            .then(() => toast.success('Category added'))
-            .catch(() => toast.error('Error with updating categories'));
-    };
-
     const deleteFoodItem = (id) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
@@ -134,23 +124,10 @@ export const ProviderFirebase = ({ children }) => {
             .catch(() => toast.error('Error with deleting food'));
     };
 
-    const deleteCategory = (id) => {
-        db.collection(HOUSEHOLDS)
-        .doc(user.household)
-        .update({
-            [`categories.${id}`]: firebase.firestore.FieldValue.delete()
-        })
-        .then(() => {
-            toast.error('Category deleted');
-        })
-        .catch(() => toast.error('Error with deleting category'));
-    };
-
     return (
         <FirebaseContext.Provider
             value={{
                 categories,
-                deleteCategory,
                 deleteFoodItem,
                 expiringCount,
                 fridge,
@@ -159,7 +136,6 @@ export const ProviderFirebase = ({ children }) => {
                 setIsAuthed,
                 setUser,
                 signOut,
-                addNewCategories,
                 updateFridge,
                 user
             }}
