@@ -24,6 +24,8 @@ describe('PageHome component', () => {
         render(<PageHome />, { ...context, expiringCount });
 
         // eslint-disable-next-line @typescript-eslint/unbound-method
-        expect(toast.error).toHaveBeenCalledWith(`${expiringCount} expiring items`, { onClick: expect.any(Function) });
+        expect(toast.error).toHaveBeenCalledWith(`${expiringCount} expiring items`, {
+            onClick: expect.any(Function)
+        });
     });
 });
