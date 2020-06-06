@@ -29,22 +29,4 @@ describe('PageProfile component', () => {
 
     expect(signOut).toHaveBeenCalled();
   });
-
-  it('should call deleteCategory with id if count = 0', () => {
-    const deleteCategory = jest.fn();
-    const { getByTestId } = render(<PageProfile {...props} />, { ...context, deleteCategory });
-
-    userEvent.click(getByTestId('profileCategoryDeleteButton1'));
-
-    expect(deleteCategory).toHaveBeenCalledWith(CategoriesWithCounts[1].id);
-  });
-
-  it('should not call deleteCategory if count > 0', () => {
-    const deleteCategory = jest.fn();
-    const { getByTestId } = render(<PageProfile {...props} />, { ...context, deleteCategory });
-
-    userEvent.click(getByTestId('profileCategoryDeleteButton0'));
-
-    expect(deleteCategory).not.toHaveBeenCalled();
-  });
 });
