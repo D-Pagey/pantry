@@ -9,18 +9,20 @@ exports[`ChooseCategory component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin: 0 auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .c1 {
-  margin: 0;
-  padding: 0 0 1.5rem;
+  font-size: 1rem;
   font-weight: normal;
+  margin: 0;
+  padding: 0 0 2rem;
 }
 
 .c2 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
   display: grid;
   grid-gap: 24px;
   grid-template-columns: 1fr 1fr;

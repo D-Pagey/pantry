@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import * as S from './styles';
 
 type InputTypes = {
+    margin?: string;
     name?: string;
     onBlur?: Function;
     onChange: Function;
@@ -10,10 +11,11 @@ type InputTypes = {
     value: string;
 };
 
-export const Input: FC<InputTypes> = ({ name, onBlur, onChange, placeholder, testId = 'input', value }) => (
+export const Input: FC<InputTypes> = ({ margin, name, onBlur, onChange, placeholder, testId = 'input', value }) => (
     <S.Input
         data-testid={testId}
         id={testId}
+        margin={margin}
         name={name}
         onBlur={onBlur}
         onChange={onChange}

@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -66,52 +66,57 @@ export const PageAddFoodForm: FC = () => {
 
                     return (
                         <S.Wrapper>
-                            <Form>
+                            <S.Form>
                                 {step === 1 && (
                                     <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
                                 )}
 
                                 {step === 2 && (
                                     <S.Step2Wrapper>
-                                        <S.Label htmlFor="foodName">
-                                            What type of {values.categories.label} is it?
-                                        </S.Label>
+                                        <S.InputWrapper>
+                                            <S.Label htmlFor="foodName">
+                                                What type of {values.categories.label} is it?
+                                            </S.Label>
 
-                                        <Input
-                                            name="name"
-                                            onBlur={handleBlur}
-                                            onChange={handleChange}
-                                            placeholder="e.g. Carrot"
-                                            testId="foodName"
-                                            value={values.name}
-                                        />
+                                            <Input
+                                                margin="0 0 3rem"
+                                                name="name"
+                                                onBlur={handleBlur}
+                                                onChange={handleChange}
+                                                placeholder="e.g. Carrot"
+                                                testId="foodName"
+                                                value={values.name}
+                                            />
 
-                                        <S.Label>How many servings?</S.Label>
+                                            <S.Label>How many servings?</S.Label>
 
-                                        <SingleSelect
-                                            options={options}
-                                            setSelected={(option: any) => setFieldValue('servings', option.value)}
-                                            selected={values.servings}
-                                        />
+                                            <SingleSelect
+                                                options={options}
+                                                setSelected={(option: any) => setFieldValue('servings', option.value)}
+                                                selected={values.servings}
+                                            />
+                                        </S.InputWrapper>
 
                                         <Button onClick={() => setStep(3)}>Next</Button>
                                     </S.Step2Wrapper>
                                 )}
 
                                 {step === 3 && (
-                                    <S.Step2Wrapper>
-                                        <p>When is it going to expire?</p>
+                                    <S.Step3Wrapper>
+                                        <div>
+                                            <p>When is it going to expire?</p>
 
-                                        <DatePicker
-                                            selected={values.expires}
-                                            onChange={(date: Date) => setFieldValue('expires', date)}
-                                            inline
-                                        />
+                                            <DatePicker
+                                                selected={values.expires}
+                                                onChange={(date: Date) => setFieldValue('expires', date)}
+                                                inline
+                                            />
+                                        </div>
 
                                         <Button type="submit">Add to pantry</Button>
-                                    </S.Step2Wrapper>
+                                    </S.Step3Wrapper>
                                 )}
-                            </Form>
+                            </S.Form>
                         </S.Wrapper>
                     );
                 }}
