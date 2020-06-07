@@ -9,7 +9,7 @@ export const PageTest = () => {
     return (
         <Layout>
             <div style={{ margin: '2rem 0 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <FoodCard date="14th May" name="Carrots" />
+                <FoodCard date={new Date()} name="Carrots" />
 
                 <ExpiringPill handleClick={() => setIsExpiring(!isExpiring)} isEnabled={isExpiring} margin="1rem 0 0" />
             </div>

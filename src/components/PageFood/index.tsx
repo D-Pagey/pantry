@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useContext, useState } from 'react';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
+import arraySort from 'array-sort';
 
 import { DatabaseCategoryType, FoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { CategoryFilter } from '../CategoryFilter';
-import { FoodTable } from '../FoodTable';
+// import { FoodTable } from '../FoodTable';
+import { FoodCard } from '../FoodCard';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
@@ -59,10 +61,10 @@ export const PageFood: FC = () => {
         }
     }, [category, categories, fridge, isValidCategory]);
 
-    const handleEdit = (params: FoodTypes) => (): void => {
-        const formatted = swapNamesForIds([params], categories);
-        history.push('/add', formatted[0]);
-    };
+    // const handleEdit = (params: FoodTypes) => (): void => {
+    //     const formatted = swapNamesForIds([params], categories);
+    //     history.push('/add', formatted[0]);
+    // };
 
     if (isValidCategory === undefined || isCheckingAuth) return <Loading isLoading />;
     if (isValidCategory === false) return <Redirect to="/not-found" />;
@@ -77,7 +79,12 @@ export const PageFood: FC = () => {
                 {food.length === 0 ? (
                     <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
                 ) : (
-                    <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} />
+                    <>
+                        {/* <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} /> */}
+                        {arraySort(food, 'name').map((item) => (
+                            <FoodCard date={item.expires} name={item.name} margin="0 0 1rem" />
+                        ))}
+                    </>
                 )}
 
                 <Link to="/add">

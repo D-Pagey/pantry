@@ -5,7 +5,7 @@ export default { title: 'FoodCard' };
 
 const props = {
     name: 'Carrots',
-    date: '14th May'
+    date: new Date()
 };
 
 export const normal = () => <FoodCard {...props} />;

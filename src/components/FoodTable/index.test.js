@@ -4,6 +4,7 @@ import { addDays, format } from 'date-fns';
 import arraySort from 'array-sort';
 
 import { Fridge } from '../../fixtures';
+import { colours } from '../../tokens';
 import { FoodTable } from '.';
 
 const props = {
@@ -13,7 +14,7 @@ const props = {
 };
 
 const context = {
-    deleteFoodItem: () => {},
+    deleteFoodItem: () => {}
 };
 
 describe('FoodTable component', () => {
@@ -23,10 +24,10 @@ describe('FoodTable component', () => {
     });
 
     it.each`
-        colour     | date
-        ${'red'}   | ${new Date()}
-        ${'blue'}  | ${addDays(new Date(), 2)}
-        ${'black'} | ${addDays(new Date(), 4)}
+        colour                  | date
+        ${colours.red}          | ${new Date()}
+        ${colours.orange}       | ${addDays(new Date(), 2)}
+        ${colours.darkGreen100} | ${addDays(new Date(), 4)}
     `('should have $colour for expiry date', ({ colour, date }) => {
         const item = {
             categories: ['111'],

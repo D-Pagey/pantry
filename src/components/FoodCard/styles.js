@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin: ${({ margin }) => margin};
     padding: 1rem;
     width: 330px;
 `;

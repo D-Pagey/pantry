@@ -7,8 +7,8 @@ describe('chooseDateColour function', () => {
     it.each`
         date                      | colour
         ${new Date()}             | ${colours.red}
-        ${addDays(new Date(), 2)} | ${colours.blue}
-        ${addDays(new Date(), 5)}             | ${colours.black}
+        ${addDays(new Date(), 2)} | ${colours.orange}
+        ${addDays(new Date(), 5)} | ${colours.darkGreen100}
     `('return $colour for $date', ({ colour, date }) => {
         const result = chooseDateColour(date);
 

@@ -6,9 +6,9 @@ export const chooseDateColour = (date: Date): string => {
   const difference = differenceInDays(date, new Date());
 
   if (difference < 1) return colours.red;
-  if (difference <= 2) return colours.blue;
+  if (difference <= 2) return colours.orange;
 
-  return colours.black;
+  return colours.darkGreen100;
 };
 
 export const formatCategories = (categories: DatabaseCategoryWithCountsType[]): CategoryType[] => {
