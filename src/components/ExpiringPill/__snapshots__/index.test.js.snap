@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpiringPill component should render 1`] = `
+.c0 {
+  border: 2px solid rgba(52,136,65,0.4);
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c1 {
+  color: #348841;
+}
+
+<div
+  class="c0"
+  data-testid="expiringPill"
+>
+  <span
+    class="c1"
+  >
+    Expiring soon 
+  </span>
+</div>
+`;

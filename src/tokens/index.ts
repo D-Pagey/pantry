@@ -4,7 +4,9 @@ export const CATEGORY_CARD_HEIGHT = '115px';
 export const CATEGORY_CARD_WIDTH = '144px';
 
 export const colours = {
+    darkGreen10: 'rgba(52, 136, 65, 0.1)',
     darkGreen20: 'rgba(52, 136, 65, 0.2)',
+    darkGreen40: 'rgba(52, 136, 65, 0.4)',
     darkGreen60: 'rgba(52, 136, 65, 0.6)',
     darkGreen100: '#348841',
     darkGrey: '#7C7C7C',
