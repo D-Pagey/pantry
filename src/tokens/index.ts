@@ -4,6 +4,8 @@ export const CATEGORY_CARD_HEIGHT = '115px';
 export const CATEGORY_CARD_WIDTH = '144px';
 
 export const colours = {
+    black: 'black',
+    blue: 'blue',
     darkGreen10: 'rgba(52, 136, 65, 0.1)',
     darkGreen20: 'rgba(52, 136, 65, 0.2)',
     darkGreen40: 'rgba(52, 136, 65, 0.4)',
@@ -13,5 +15,6 @@ export const colours = {
     grey: 'grey',
     lightGrey: '#767676',
     orange: '#FCBA3B',
+    red: 'red',
     white: 'white'
 };
