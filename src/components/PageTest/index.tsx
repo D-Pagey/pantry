@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from '../Layout';
 import { FoodCard } from '../FoodCard';
+import { ExpiringPill } from '../ExpiringPill';
 
-export const PageTest = () => (
-    <Layout>
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0 0' }}>
-            <FoodCard date="14th May" name="Carrots" />
-        </div>
-    </Layout>
-);
+export const PageTest = () => {
+    const [isExpiring, setIsExpiring] = useState(false);
+
+    return (
+        <Layout>
+            <div style={{ margin: '2rem 0 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <FoodCard date="14th May" name="Carrots" />
+
+                <ExpiringPill handleClick={() => setIsExpiring(!isExpiring)} isEnabled={isExpiring} margin="1rem 0 0" />
+            </div>
+        </Layout>
+    );
+};

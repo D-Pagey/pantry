@@ -33,7 +33,7 @@ export const PageHome = (): JSX.Element => {
                 </Link>
 
                 <Link to="/test" style={{ margin: '1rem 0' }}>
-                    <Button>Food Card</Button>
+                    <Button>Work In Progress</Button>
                 </Link>
 
                 <S.FeaturesWrapper>

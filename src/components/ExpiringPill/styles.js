@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     border: 2px solid ${colours.darkGreen40};
     border-radius: 16px;
     cursor: pointer;
+    margin: ${({ margin }) => margin};
     padding: 0.5rem 1rem;
     width: max-content;
 `;
