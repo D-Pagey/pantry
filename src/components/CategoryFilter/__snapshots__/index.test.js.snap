@@ -3,6 +3,7 @@
 exports[`CategoryFilter component should render 1`] = `
 .c0 {
   background-color: #348841;
+  overflow: scroll;
 }
 
 .c1 {

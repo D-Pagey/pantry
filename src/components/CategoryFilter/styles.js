@@ -3,6 +3,7 @@ import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
     background-color: ${colours.darkGreen100};
+    overflow: scroll;
 `;
 
 export const List = styled.ul`

@@ -7,7 +7,7 @@ exports[`FoodCard component should render 1`] = `
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 1rem;
-  width: 330px;
+  max-width: 330px;
 }
 
 .c1 {
@@ -71,7 +71,7 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c2"
   >
-    7th Jun
+    8th Jun
   </p>
   <div
     class="c3"

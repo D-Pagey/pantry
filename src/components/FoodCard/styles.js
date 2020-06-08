@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     grid-template-columns: 1fr 1fr;
     margin: ${({ margin }) => margin};
     padding: 1rem;
-    width: 330px;
+    max-width: 330px;
 `;
 
 export const Name = styled.p`
