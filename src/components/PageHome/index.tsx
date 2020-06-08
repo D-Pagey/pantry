@@ -32,9 +32,9 @@ export const PageHome = (): JSX.Element => {
                     <Button>Get started for free</Button>
                 </Link>
 
-                <Link to="/test" style={{ margin: '1rem 0' }}>
+                {/* <Link to="/test" style={{ margin: '1rem 0' }}>
                     <Button>Work In Progress</Button>
-                </Link>
+                </Link> */}
 
                 <S.FeaturesWrapper>
                     <S.SubTitle>Get notified on expiring items</S.SubTitle>

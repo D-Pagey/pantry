@@ -1,5 +1,5 @@
 import React from 'react';
-import PropagateLoader from 'react-spinners/PropagateLoader';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 import { colours } from '../../tokens';
 import * as S from './styles';
 
@@ -9,6 +9,6 @@ type LoadingTypes = {
 
 export const Loading = ({ isLoading }: LoadingTypes): JSX.Element => (
     <S.Wrapper data-testid="loading">
-        <PropagateLoader color={colours.darkGreen100} loading={isLoading} />
+        <ScaleLoader color={colours.darkGreen100} loading={isLoading} />
     </S.Wrapper>
 );

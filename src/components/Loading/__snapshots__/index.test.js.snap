@@ -22,25 +22,22 @@ exports[`Loading component should render 1`] = `
   data-testid="loading"
 >
   <div
-    class="css-9ebb9a"
+    class="css-0"
   >
     <div
-      class="css-27lg9n"
+      class="css-1nr7nfg"
     />
     <div
-      class="css-sr5mcw"
+      class="css-52k0ew"
     />
     <div
-      class="css-1u9enze"
+      class="css-l6u9bm"
     />
     <div
-      class="css-1r22dar"
+      class="css-1gpo9io"
     />
     <div
-      class="css-10wmy8t"
-    />
-    <div
-      class="css-15wz10t"
+      class="css-1yqps71"
     />
   </div>
 </div>

@@ -23,6 +23,7 @@ export const PageFood: FC = () => {
     const history = useHistory();
 
     useEffect(() => {
+        // this seems wierd, reset just to rerun another func?
         setIsValidCategory(undefined);
     }, [category]);
 
