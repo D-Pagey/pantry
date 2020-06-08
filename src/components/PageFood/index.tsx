@@ -4,18 +4,20 @@ import arraySort from 'array-sort';
 
 import { DatabaseCategoryType, FoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
+import { ExpiringPill } from '../ExpiringPill';
 import { CategoryFilter } from '../CategoryFilter';
 // import { FoodTable } from '../FoodTable';
 import { FoodCard } from '../FoodCard';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
-import { filterFridge, swapIdsForNames, swapNamesForIds } from './utils';
+import { filterFridge, swapIdsForNames } from './utils';
 import * as S from './styles';
 
 export const PageFood: FC = () => {
     const [food, setFood] = useState<FoodTypes[]>([]);
     const [isValidCategory, setIsValidCategory] = useState<boolean | undefined>();
+    const [isExpiring, setIsExpiring] = useState(false);
     const { category } = useParams();
     const { categories, fridge, isCheckingAuth } = useContext(FirebaseContext);
     const history = useHistory();
@@ -61,6 +63,8 @@ export const PageFood: FC = () => {
         }
     }, [category, categories, fridge, isValidCategory]);
 
+    const handleExpiringClick = () => setIsExpiring(!isExpiring);
+
     // const handleEdit = (params: FoodTypes) => (): void => {
     //     const formatted = swapNamesForIds([params], categories);
     //     history.push('/add', formatted[0]);
@@ -74,7 +78,7 @@ export const PageFood: FC = () => {
             <CategoryFilter selected={category} setSelected={(select) => history.push(`/food/${select}`)} />
 
             <S.Wrapper>
-                <h1>{`Food: ${category}`}</h1>
+                <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />
 
                 {food.length === 0 ? (
                     <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>

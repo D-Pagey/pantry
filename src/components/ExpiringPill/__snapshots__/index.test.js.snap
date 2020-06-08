@@ -2,6 +2,9 @@
 
 exports[`ExpiringPill component should render 1`] = `
 .c0 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
   border: 2px solid rgba(52,136,65,0.4);
   border-radius: 16px;
   cursor: pointer;
