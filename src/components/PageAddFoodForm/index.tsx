@@ -42,10 +42,11 @@ export const PageAddFoodForm: FC = () => {
     return (
         <Layout title="Add food">
             <Formik
-                initialValues={{ categories: {} as CategoryType, expires: new Date(), name: '', servings: '' }}
+                initialValues={{ categories: {} as CategoryType, expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
                     const formattedValues = {
                         ...values,
+                        name: values.name || values.categories.name,
                         id: uuidv4(),
                         owner: user.name,
                         categories: [values.categories.id]
@@ -55,6 +56,7 @@ export const PageAddFoodForm: FC = () => {
 
                     actions.setSubmitting(false);
                     actions.resetForm();
+
                     history.push('/food/all');
                 }}
             >

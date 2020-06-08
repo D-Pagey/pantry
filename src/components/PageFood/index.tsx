@@ -87,7 +87,7 @@ export const PageFood: FC = () => {
                     <>
                         {/* <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} /> */}
                         {arraySort(food, 'name').map((item) => (
-                            <FoodCard date={item.expires} name={item.name} margin="0 0 1rem" />
+                            <FoodCard key={item.id} date={item.expires} name={item.name} margin="0 0 1rem" />
                         ))}
                     </>
                 )}
