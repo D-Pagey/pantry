@@ -74,7 +74,7 @@ export const PageAddFoodForm: FC = () => {
                                 )}
 
                                 {step === 2 && (
-                                    <S.Step2Wrapper>
+                                    <S.StepWrapper>
                                         <S.InputWrapper>
                                             <S.Label htmlFor="foodName">
                                                 What type of {values.categories.label} is it?
@@ -100,11 +100,11 @@ export const PageAddFoodForm: FC = () => {
                                         </S.InputWrapper>
 
                                         <Button onClick={() => setStep(3)}>Next</Button>
-                                    </S.Step2Wrapper>
+                                    </S.StepWrapper>
                                 )}
 
                                 {step === 3 && (
-                                    <S.Step3Wrapper>
+                                    <S.StepWrapper>
                                         <div>
                                             <p>When is it going to expire?</p>
 
@@ -116,7 +116,7 @@ export const PageAddFoodForm: FC = () => {
                                         </div>
 
                                         <Button type="submit">Add to pantry</Button>
-                                    </S.Step3Wrapper>
+                                    </S.StepWrapper>
                                 )}
                             </S.Form>
                         </S.Wrapper>

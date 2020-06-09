@@ -4,16 +4,16 @@ import { Form as FormikForm} from 'formik';
 export const Wrapper = styled.div`
     box-sizing: border-box;
     height: 100%;
-    padding: 2rem 0 4rem 0;
+    padding: 2rem 0 0 0;
 `;
 
-export const Step2Wrapper = styled.div`
+export const StepWrapper = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
     margin: 0 auto;
+    min-height: 500px;
     width: 325px;
 `;
 
@@ -21,7 +21,6 @@ export const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-
 `;
 
 export const Label = styled.label`
@@ -31,13 +30,5 @@ export const Label = styled.label`
 `;
 
 export const Form = styled(FormikForm)`
-    height: 100%;
-`;
-
-export const Step3Wrapper = styled.div`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     height: 100%;
 `;
