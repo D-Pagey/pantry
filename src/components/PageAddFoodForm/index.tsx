@@ -63,22 +63,16 @@ export const PageAddFoodForm: FC = () => {
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
                     const handleCategoryClick = (category: CategoryType) => {
                         setFieldValue('categories', category);
-                        setStep(2);
+                        setStep(3);
                     };
 
                     return (
                         <S.Wrapper>
                             <S.Form>
                                 {step === 1 && (
-                                    <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
-                                )}
-
-                                {step === 2 && (
                                     <S.StepWrapper>
                                         <S.InputWrapper>
-                                            <S.Label htmlFor="foodName">
-                                                What type of {values.categories.label} is it?
-                                            </S.Label>
+                                            <S.Label htmlFor="foodName">What is the food called?</S.Label>
 
                                             <Input
                                                 margin="0 0 3rem"
@@ -99,8 +93,12 @@ export const PageAddFoodForm: FC = () => {
                                             />
                                         </S.InputWrapper>
 
-                                        <Button onClick={() => setStep(3)}>Next</Button>
+                                        <Button onClick={() => setStep(2)}>Next</Button>
                                     </S.StepWrapper>
+                                )}
+
+                                {step === 2 && (
+                                    <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
                                 )}
 
                                 {step === 3 && (

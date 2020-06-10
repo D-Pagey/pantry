@@ -20,7 +20,7 @@ export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) =
     const sortedArray = arraySort(formatCategories(categories), 'value');
 
     return (
-        <S.Wrapper>
+        <S.Wrapper data-testid="chooseCategory">
             <S.Title>What type of food?</S.Title>
 
             <S.Grid>

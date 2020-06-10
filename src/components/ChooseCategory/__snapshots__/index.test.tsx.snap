@@ -33,6 +33,7 @@ exports[`ChooseCategory component should render 1`] = `
 
 <div
   class="c0"
+  data-testid="chooseCategory"
 >
   <h3
     class="c1"

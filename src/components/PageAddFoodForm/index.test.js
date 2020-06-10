@@ -32,20 +32,25 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should render step 2 of the form once category is clicked', async () => {
-        const { getByTestId, getByText } = render(<PageAddFoodForm />, context);
+        const { getByTestId, getByText, getByLabelText } = render(<PageAddFoodForm />, context);
 
-        userEvent.click(getByTestId('meatCategoryButton'));
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
+        userEvent.click(getByTestId('singleSelectButton0'));
+        userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByText('How many servings?'));
+        await waitFor(() => getByTestId('chooseCategory'));
     });
 
     it('should render step 3 of the form once hit next on step 2', async () => {
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
 
-        userEvent.click(getByTestId('meatCategoryButton'));
-        await userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByTestId('meatCategoryButton'));
         
         await waitFor(() => getByText('When is it going to expire?'));
     });
@@ -53,10 +58,13 @@ describe('PageAddFoodForm component', () => {
     it('should redirect to food page once submitted', async () => {
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
         
-        userEvent.click(getByTestId('meatCategoryButton'));
-        await userEvent.type(getByLabelText('What type of meat is it?'), 'chicken');
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByTestId('meatCategoryButton'));
         
         await waitFor(() => getByText('When is it going to expire?'));
             
@@ -71,10 +79,13 @@ describe('PageAddFoodForm component', () => {
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
         
-        userEvent.click(getByTestId('meatCategoryButton'));
-        await userEvent.type(getByLabelText('What type of meat is it?'), name);
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByTestId('meatCategoryButton'));
         
         await waitFor(() => getByText('When is it going to expire?'));
             
