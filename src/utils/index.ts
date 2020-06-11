@@ -1,5 +1,4 @@
 import { differenceInDays } from 'date-fns';
-import { CategoryType, DatabaseCategoryWithCountsType } from '../types';
 import { colours } from '../tokens';
 
 export const chooseDateColour = (date: Date): string => {
@@ -9,19 +8,4 @@ export const chooseDateColour = (date: Date): string => {
   if (difference <= 2) return colours.orange;
 
   return colours.darkGreen100;
-};
-
-export const formatCategories = (categories: DatabaseCategoryWithCountsType[]): CategoryType[] => {
-    return categories.reduce((acc, curr) => {
-        if (curr.name === 'expiring') return acc;
-
-        return [
-            ...acc,
-            {
-                ...curr,
-                label: curr.name,
-                value: curr.name
-            }
-        ];
-    }, [] as CategoryType[]);
 };

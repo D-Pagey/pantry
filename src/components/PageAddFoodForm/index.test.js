@@ -1,7 +1,6 @@
 import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CategoriesArray } from '../../fixtures/categories';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -18,7 +17,6 @@ jest.mock('uuid', () => ({
 }));
 
   const context = {
-    categories: CategoriesArray,
     updateFridge: () => {},
     user: {
         name: 'Dan Page'
@@ -92,7 +90,7 @@ describe.skip('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() => expect(updatedContext.updateFridge).toBeCalledWith({
-            categories: [CategoriesArray[0].id],
+            // categories: [CategoriesArray[0].id],
             expires: expect.any(Date),
             id: '5',
             name,

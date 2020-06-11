@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { Batches } from '../../fixtures';
+import React, { useContext } from 'react';
+
+import { FoodType } from '../../types';
 import { Layout } from '../Layout';
+import { FirebaseContext } from '../ProviderFirebase';
 import { FoodCard } from '../FoodCard';
-import { ExpiringPill } from '../ExpiringPill';
 
 export const PageTest = () => {
-    const [isExpiring, setIsExpiring] = useState(false);
+    const { fridge } = useContext(FirebaseContext);
 
     return (
         <Layout>
             <div style={{ margin: '2rem 0 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <FoodCard batches={Batches} name="Carrots" />
-
-                <ExpiringPill handleClick={() => setIsExpiring(!isExpiring)} isEnabled={isExpiring} margin="1rem 0 0" />
+                {fridge.length > 0 &&
+                    fridge.map((item: FoodType) => (
+                        <FoodCard key={item.name} batches={item.batches} name={item.name} />
+                    ))}
             </div>
         </Layout>
     );
