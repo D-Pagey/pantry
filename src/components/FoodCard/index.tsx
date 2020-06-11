@@ -2,32 +2,35 @@ import React, { FC } from 'react';
 import { differenceInDays, format } from 'date-fns';
 import { titleCase } from 'title-case';
 
-import { colours } from '../../tokens';
+import { BatchType } from '../../types';
 import { chooseDateColour } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { DonutIcon } from '../DonutIcon';
 import * as S from './styles';
 
 type FoodCardProps = {
-    date: Date;
+    batches: BatchType[];
     margin?: string;
     name: string;
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ date, margin, name }) => (
+export const FoodCard: FC<FoodCardProps> = ({ batches, margin, name }) => (
     <S.Wrapper margin={margin}>
         <S.Name>{titleCase(name)}</S.Name>
-        <S.Date>{format(date, 'do MMM')}</S.Date>
+        <S.Date>{format(batches[0].expires, 'do MMM')}</S.Date>
 
         <S.CircleWrapper>
-            <CircleIcon colour={colours.orange} margin="0 4px 0 0" />
-            <CircleIcon colour={colours.darkGreen100} margin="0 4px 0 0" />
-            <CircleIcon colour={colours.darkGreen100} />
+            {batches.map((batch) => {
+                return [...Array(batch.servings)].map((e, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <CircleIcon key={i} colour={chooseDateColour(batch.expires)} margin="0 4px 0 0" />
+                ));
+            })}
         </S.CircleWrapper>
 
         <S.DaysWrapper>
-            <S.Days>{differenceInDays(date, new Date())}</S.Days>
-            <DonutIcon colour={chooseDateColour(date)} />
+            <S.Days>{differenceInDays(batches[0].expires, new Date())}</S.Days>
+            <DonutIcon colour={chooseDateColour(batches[0].expires)} />
         </S.DaysWrapper>
     </S.Wrapper>
 );

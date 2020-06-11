@@ -40,3 +40,9 @@ export type EditFoodTypes = {
 export type CategoryCountType = {
     [id: string]: number;
 };
+
+export type BatchType = {
+    expires: Date | any;
+    servings: number;
+    owner: string;
+};

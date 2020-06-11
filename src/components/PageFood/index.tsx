@@ -2,6 +2,7 @@ import React, { FC, useEffect, useContext, useState } from 'react';
 import { Link, Redirect, useHistory, useParams } from 'react-router-dom';
 import arraySort from 'array-sort';
 
+import { Batches } from '../../fixtures';
 import { DatabaseCategoryType, FoodTypes } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { ExpiringPill } from '../ExpiringPill';
@@ -87,7 +88,7 @@ export const PageFood: FC = () => {
                     <>
                         {/* <FoodTable handleEdit={handleEdit} food={food} setFood={setFood} /> */}
                         {arraySort(food, 'name').map((item) => (
-                            <FoodCard key={item.id} date={item.expires} name={item.name} margin="0 0 1rem" />
+                            <FoodCard key={item.id} batches={Batches} name={item.name} margin="0 0 1rem" />
                         ))}
                     </>
                 )}

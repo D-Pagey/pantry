@@ -25,7 +25,7 @@ describe('FoodTable component', () => {
 
     it.each`
         colour                  | date
-        ${colours.red}          | ${new Date()}
+        ${colours.grey}          | ${new Date()}
         ${colours.orange}       | ${addDays(new Date(), 2)}
         ${colours.darkGreen100} | ${addDays(new Date(), 4)}
     `('should have $colour for expiry date', ({ colour, date }) => {

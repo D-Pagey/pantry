@@ -1,8 +1,9 @@
 import React from 'react';
+import { Batches } from '../../fixtures';
 import { FoodCard } from '.';
 
 const props = {
-    date: new Date(),
+    batches: Batches,
     name: 'carrots'
 };
 

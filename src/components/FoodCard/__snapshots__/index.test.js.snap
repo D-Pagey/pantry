@@ -16,7 +16,7 @@ exports[`FoodCard component should render 1`] = `
 }
 
 .c2 {
-  color: grey;
+  color: #B2B2B2;
   font-size: 14px;
   margin: 4px 0 8px;
 }
@@ -87,6 +87,36 @@ exports[`FoodCard component should render 1`] = `
       <circle
         cx="4"
         cy="4"
+        fill="#B2B2B2"
+        r="4"
+      />
+    </svg>
+    <svg
+      fill="none"
+      height="8"
+      style="margin: 0px 4px 0px 0px;"
+      viewBox="0 0 8 8"
+      width="8"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="4"
+        cy="4"
+        fill="#FCBA3B"
+        r="4"
+      />
+    </svg>
+    <svg
+      fill="none"
+      height="8"
+      style="margin: 0px 4px 0px 0px;"
+      viewBox="0 0 8 8"
+      width="8"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="4"
+        cy="4"
         fill="#FCBA3B"
         r="4"
       />
@@ -109,6 +139,7 @@ exports[`FoodCard component should render 1`] = `
     <svg
       fill="none"
       height="8"
+      style="margin: 0px 4px 0px 0px;"
       viewBox="0 0 8 8"
       width="8"
       xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +170,7 @@ exports[`FoodCard component should render 1`] = `
       <path
         clip-rule="evenodd"
         d="M23 41C32.9411 41 41 32.9411 41 23C41 13.0589 32.9411 5 23 5C13.0589 5 5 13.0589 5 23C5 32.9411 13.0589 41 23 41ZM23 46C35.7025 46 46 35.7025 46 23C46 10.2975 35.7025 0 23 0C10.2975 0 0 10.2975 0 23C0 35.7025 10.2975 46 23 46Z"
-        fill="red"
+        fill="#B2B2B2"
         fill-rule="evenodd"
       />
     </svg>

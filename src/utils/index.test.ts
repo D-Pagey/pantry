@@ -6,7 +6,7 @@ import { chooseDateColour, formatCategories } from '.';
 describe('chooseDateColour function', () => {
     it.each`
         date                      | colour
-        ${new Date()}             | ${colours.red}
+        ${new Date()}             | ${colours.grey}
         ${addDays(new Date(), 2)} | ${colours.orange}
         ${addDays(new Date(), 5)} | ${colours.darkGreen100}
     `('return $colour for $date', ({ colour, date }) => {
