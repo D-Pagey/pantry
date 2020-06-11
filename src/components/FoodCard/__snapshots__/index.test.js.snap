@@ -6,13 +6,14 @@ exports[`FoodCard component should render 1`] = `
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 1rem;
   max-width: 330px;
+  min-width: 220px;
+  padding: 1rem;
 }
 
 .c1 {
-  margin: 0;
   font-size: 18px;
+  margin: 0;
 }
 
 .c2 {

@@ -1,12 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { CategoriesWithCounts } from '../../fixtures';
 import { PageProfile } from '.';
 
 const props = {};
 
 const context = {
-  categories: CategoriesWithCounts,
   signOut: () => {},
   user: {
     email: 'dan@gmail.com',

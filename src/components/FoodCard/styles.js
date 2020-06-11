@@ -7,13 +7,14 @@ export const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: ${({ margin }) => margin};
-    padding: 1rem;
     max-width: 330px;
+    min-width: 220px;
+    padding: 1rem;
 `;
 
 export const Name = styled.p`
-    margin: 0;
     font-size: 18px;
+    margin: 0;
 `;
 
 export const Date = styled.p`

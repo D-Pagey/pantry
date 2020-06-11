@@ -12,4 +12,6 @@ describe('FoodCard component', () => {
         const { container } = render(<FoodCard {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
+
+    it.todo('should sort batches by oldest first');
 });

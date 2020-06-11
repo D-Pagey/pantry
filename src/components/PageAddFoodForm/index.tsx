@@ -1,12 +1,11 @@
 import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { CategoryType } from '../../types';
-import { FirebaseContext } from '../ProviderFirebase';
+// import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 // import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
@@ -36,23 +35,23 @@ const options = [
 // TODO: Once I deleted V1, then change value to be category not categories
 export const PageAddFoodForm: FC = () => {
     const [step, setStep] = useState(1);
-    const { updateFridge, user } = useContext(FirebaseContext);
+    // const { updateFridge, user } = useContext(FirebaseContext);
     const history = useHistory();
 
     return (
         <Layout title="Add food">
             <Formik
-                initialValues={{ categories: {} as CategoryType, expires: new Date(), name: '', servings: 1 }}
+                initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
-                    const formattedValues = {
-                        ...values,
-                        name: values.name || values.categories.name,
-                        id: uuidv4(),
-                        owner: user.name,
-                        categories: [values.categories.id]
-                    };
+                    // const formattedValues = {
+                    //     ...values,
+                    //     name: values.name || values.categories.name,
+                    //     id: uuidv4(),
+                    //     owner: user.name,
+                    //     categories: [values.categories.id]
+                    // };
 
-                    updateFridge(formattedValues);
+                    // updateFridge(formattedValues);
 
                     actions.setSubmitting(false);
                     actions.resetForm();

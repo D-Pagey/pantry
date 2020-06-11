@@ -1,8 +1,4 @@
 import { addDays } from 'date-fns';
-import { CategoriesArray, CategoriesObject, CategoriesWithCounts } from './categories';
-import { Fridge } from './fridge';
-
-export { CategoriesArray, CategoriesObject, CategoriesWithCounts, Fridge };
 
 export const Batches = [
     {
