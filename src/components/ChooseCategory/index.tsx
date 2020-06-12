@@ -1,36 +1,30 @@
-import React, { FC, useContext } from 'react';
-import arraySort from 'array-sort';
+import React, { FC } from 'react';
 
-import { formatCategories } from '../../utils';
-import { CategoryType } from '../../types';
-import { FirebaseContext } from '../ProviderFirebase';
 import { CategoryButton } from '../CategoryButton';
 import * as S from './styles';
 
 export type ChooseCategoryTypes = {
-    onClick: (category: CategoryType) => void;
-    selected?: CategoryType;
+    handleClick: (category: string) => void;
+    selected?: string;
 };
 
-export const ChooseCategory: FC<ChooseCategoryTypes> = ({ onClick, selected }) => {
-    const { categories } = useContext(FirebaseContext);
+const Categories = ['vegetable', 'fruit', 'dairy', 'meat', 'fish', '[opened tin]'];
 
-    const handleClick = (category: CategoryType) => () => onClick(category);
-
-    const sortedArray = arraySort(formatCategories(categories), 'value');
+export const ChooseCategory: FC<ChooseCategoryTypes> = ({ handleClick, selected }) => {
+    const handleCategoryClick = (category: string) => () => handleClick(category);
 
     return (
         <S.Wrapper data-testid="chooseCategory">
             <S.Title>What type of food?</S.Title>
 
             <S.Grid>
-                {sortedArray.map((category) => (
+                {Categories.map((category) => (
                     <CategoryButton
-                        isSelected={selected?.value === category.value}
-                        name={category.label}
-                        onClick={handleClick(category)}
-                        data-testid={`${category.value}CategoryButton`}
-                        key={category.value}
+                        isSelected={selected === category}
+                        name={category}
+                        handleClick={handleCategoryClick(category)}
+                        data-testid={`${category}CategoryButton`}
+                        key={category}
                     />
                 ))}
             </S.Grid>

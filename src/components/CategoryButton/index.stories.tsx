@@ -3,6 +3,8 @@ import { CategoryButton } from '.';
 
 export default { title: 'CategoryButton' };
 
-export const unselected = () => <CategoryButton name="meat" onClick={() => alert('meat')} />;
+const handleClick = (): void => alert('meat');
 
-export const selected = () => <CategoryButton isSelected name="meat" onClick={() => alert('meat')} />;
+export const unselected = (): JSX.Element => <CategoryButton name="meat" handleClick={handleClick} />;
+
+export const selected = (): JSX.Element => <CategoryButton isSelected name="meat" handleClick={handleClick} />;

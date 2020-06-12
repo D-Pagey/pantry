@@ -13,12 +13,12 @@ describe('CategoryButton component', () => {
     });
 
     it('should call onClick when clicked', () => {
-        const onClick = jest.fn();
+        const handleClick = jest.fn();
 
-        const { getByText } = render(<CategoryButton {...props} onClick={onClick} />);
+        const { getByText } = render(<CategoryButton {...props} handleClick={handleClick} />);
 
         userEvent.click(getByText('Meat'));
 
-        expect(onClick).toHaveBeenCalled();
+        expect(handleClick).toHaveBeenCalled();
     });
 });

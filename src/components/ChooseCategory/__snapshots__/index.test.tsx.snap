@@ -1,6 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ChooseCategory component should render 1`] = `
+.c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(52,136,65,0.6);
+  border-radius: 16px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 115px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  width: 144px;
+}
+
+.c4:hover {
+  background-color: #348841;
+}
+
+.c5 {
+  color: #348841;
+  font-size: 18px;
+}
+
+.c3:hover .c5 {
+  color: white;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -42,6 +78,73 @@ exports[`ChooseCategory component should render 1`] = `
   </h3>
   <div
     class="c2"
-  />
+  >
+    <button
+      class="c3 c4"
+      data-testid="vegetableCategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        Vegetable
+      </p>
+    </button>
+    <button
+      class="c3 c4"
+      data-testid="fruitCategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        Fruit
+      </p>
+    </button>
+    <button
+      class="c3 c4"
+      data-testid="dairyCategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        Dairy
+      </p>
+    </button>
+    <button
+      class="c3 c4"
+      data-testid="meatCategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        Meat
+      </p>
+    </button>
+    <button
+      class="c3 c4"
+      data-testid="fishCategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        Fish
+      </p>
+    </button>
+    <button
+      class="c3 c4"
+      data-testid="[opened tin]CategoryButton"
+      type="button"
+    >
+      <p
+        class="c5"
+      >
+        [Opened Tin]
+      </p>
+    </button>
+  </div>
 </div>
 `;

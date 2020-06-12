@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { CategoryType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
-import { ChooseCategory } from '../ChooseCategory';
+// import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
 import { SingleSelect } from '../SingleSelect';
 import { Button } from '../Button';
@@ -61,10 +61,10 @@ export const PageAddFoodForm: FC = () => {
                 }}
             >
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
-                    const handleCategoryClick = (category: CategoryType) => {
-                        setFieldValue('categories', category);
-                        setStep(3);
-                    };
+                    // const handleCategoryClick = (category: CategoryType) => {
+                    //     setFieldValue('categories', category);
+                    //     setStep(3);
+                    // };
 
                     return (
                         <S.Wrapper>
@@ -97,9 +97,9 @@ export const PageAddFoodForm: FC = () => {
                                     </S.StepWrapper>
                                 )}
 
-                                {step === 2 && (
+                                {/* {step === 2 && (
                                     <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
-                                )}
+                                )} */}
 
                                 {step === 3 && (
                                     <S.StepWrapper>

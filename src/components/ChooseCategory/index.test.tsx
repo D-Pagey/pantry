@@ -1,9 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { ChooseCategory, ChooseCategoryTypes } from '.';
 
 const props: ChooseCategoryTypes = {
-    onClick: () => null
+    handleClick: () => null
 };
 
 describe('ChooseCategory component', () => {
@@ -11,4 +13,16 @@ describe('ChooseCategory component', () => {
         const { container } = render(<ChooseCategory {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
+
+    it('should call onClick with category', () => {
+        const handleClick = jest.fn();
+
+        const { getByText } = render(<ChooseCategory {...props} handleClick={handleClick} />);
+
+        userEvent.click(getByText('Meat'));
+
+        expect(handleClick).toHaveBeenCalledWith('meat');
+    });
+
+    it.todo('should have selected styles when selected');
 });
