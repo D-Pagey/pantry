@@ -83,9 +83,15 @@ export const PageAddFoodForm: FC = () => {
                         }, '');
                     };
 
+                    const onKeyDown = (keyEvent: any) => {
+                        if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+                            keyEvent.preventDefault();
+                        }
+                    };
+
                     return (
                         <S.Wrapper>
-                            <S.Form>
+                            <S.Form onKeyDown={onKeyDown}>
                                 {step === 1 && (
                                     <S.StepWrapper>
                                         <S.InputWrapper>
