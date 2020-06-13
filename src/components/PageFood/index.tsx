@@ -19,7 +19,7 @@ export const PageFood: FC = () => {
     const { fridge } = useContext(FirebaseContext);
 
     useEffect(() => {
-        if (!selectedFood && fridge.length > 0) {
+        if (!selectedFood && fridge?.length > 0) {
             setSelectedFood(fridge);
         }
     }, [fridge, selectedFood, setSelectedFood]);
@@ -67,7 +67,7 @@ export const PageFood: FC = () => {
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 
                 {fridge?.length !== 0 && selectedFood?.length === 0 && (
-                    <p data-testid="pageFoodNoData">
+                    <p data-testid={`pageFoodNoData${category}`}>
                         There is no {isExpiring && 'expiring'} food that falls under the category of {category}
                     </p>
                 )}

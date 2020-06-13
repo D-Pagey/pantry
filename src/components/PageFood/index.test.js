@@ -1,140 +1,241 @@
 import React from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { addDays } from 'date-fns';
 import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
+import { Fridge, ExpiringBatch } from '../../fixtures';
 import { PageFood } from '.';
 
-const mockHistoryPush = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn(() => ({
-        category: 'meat'
-    })),
-    Redirect: jest.fn(() => null),
-    useHistory: () => ({
-        push: mockHistoryPush
-    })
-}));
-
 const context = {
-    fridge: [],
+    fridge: Fridge
 };
 
-describe.skip('PageFood component', () => {
+describe('PageFood component', () => {
     it('should render', () => {
         const { container } = render(<PageFood />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.each`
-        category
-        ${'all'}
-        ${'meat'}
-    `('should render a loading spinner initially when category = $category', ({ category }) => {
-        // when fridge is undefined, loading spinner
-
-
-        useParams.mockImplementation(() => ({
-            category
-        }));
-
-        const { getByTestId } = render(<PageFood />, context);
+    it('should render a loading spinner', () => {
+        const { getByTestId } = render(<PageFood />, { ...context, fridge: undefined });
         getByTestId('loading');
     });
 
-    it.skip('when the category is all, it should render all food', () => {
-        // useParams.mockImplementation(() => ({
-        //     category: 'all'
-        // }));
+    it('when the category is all, it should render all food', () => {
+        const { getByText } = render(<PageFood />, context);
 
-        // const overrideContext = {
-        //     fridge: Fridge
-        // };
+        userEvent.click(getByText('All'));
 
-        // const { getByText } = render(<PageFood />, { ...context, ...overrideContext });
-        // Fridge.map((item) => getByText(titleCase(item.name)));
+        Fridge.map((item) => getByText(titleCase(item.name)));
     });
 
-    it.skip('when the category is not all, it should filter down fridge', () => {
-        // useParams.mockImplementation(() => ({
-        //     category: CategoriesArray[1].name
-        // }));
-
-        // const overrideContext = {
-        //     categories: CategoriesArray,
-        //     fridge: Fridge
-        // };
-
-        // const { getByText, queryByText } = render(<PageFood />, { ...context, ...overrideContext });
-
-        // Fridge.map((item) => {
-        //     if (item.categories.includes(CategoriesArray[1].id)) {
-        //         return getByText(titleCase(item.name));
-        //     }
-
-        //     return expect(queryByText(item.name)).toBe(null);
-        // });
+    it('should render a message when no data for category all', () => {
+        const { getByTestId } = render(<PageFood />, { ...context, fridge: [] });
+        getByTestId('pageFoodNoData');
     });
 
-    it.skip('when the category doesnt exist, it should redirect', () => {
-        useParams.mockImplementationOnce(() => ({
-            category: 'hello'
-        }));
+    it('should render a message when there is no data for a category', () => {
+        const overrideContext = {
+            ...context,
+            fridge: Fridge.filter((item) => item.category === 'meat')
+        };
 
-        // const overrideContext = {
-        //     categories: CategoriesArray,
-        //     fridge: Fridge
-        // };
+        const { getByTestId, getByText } = render(<PageFood />, overrideContext);
 
-        // render(<PageFood />, { ...context, ...overrideContext });
-        expect(Redirect).toHaveBeenCalledWith({ to: '/not-found' }, expect.any(Object));
+        userEvent.click(getByText('Veg'));
+
+        getByTestId('pageFoodNoDatavegetables');
     });
 
-    it.skip('should render a message when no data for category all', () => {
-        useParams.mockImplementation(() => ({
-            category: 'all'
-        }));
+    it.each`
+        categoryName    | categoryLabel
+        ${'dairy'}      | ${'Dairy'}
+        ${'fruit'}      | ${'Fruit'}
+        ${'meat'}       | ${'Meat'}
+        ${'vegetables'} | ${'Veg'}
+    `('when the category is $categoryName, it should filter down fridge', ({ categoryName, categoryLabel }) => {
+        const { getByText, queryByText } = render(<PageFood />, context);
 
-        // const overrideContext = {
-        //     categories: CategoriesArray,
-        // };
+        userEvent.click(getByText(categoryLabel));
 
-        // const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
-        // getByTestId('pageFoodNoData');
+        Fridge.map((item) => {
+            if (item.category === categoryName) {
+                return getByText(titleCase(item.name));
+            }
+
+            return expect(queryByText(titleCase(item.name))).toBe(null);
+        });
     });
 
-    it.skip('should render a message when there is no data for a category', () => {
-        // useParams.mockImplementation(() => ({
-        //     category: CategoriesArray[3].name
-        // }));
+    it('should show only expiring items when clicked on expiring button', () => {
+        const ExpiringFridge = [
+            {
+                batches: [ExpiringBatch],
+                category: 'vegetables',
+                name: 'carrots'
+            },
+            {
+                batches: [
+                    {
+                        expires: addDays(new Date(), 5),
+                        owner: '123',
+                        servings: 2
+                    }
+                ],
+                category: 'meat',
+                name: 'steak'
+            }
+        ];
 
-        // const overrideContext = {
-        //     categories: CategoriesArray,
-        //     fridge: Fridge
-        // };
+        const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
 
-        // const { getByTestId } = render(<PageFood />, { ...context, ...overrideContext });
-        // getByTestId('pageFoodNoData');
+        userEvent.click(getByText('Expiring soon'));
+
+        getByText(titleCase(ExpiringFridge[0].name));
+        expect(queryByText(titleCase(ExpiringFridge[1].name))).toBe(null);
     });
 
-    it.skip('should handle an edit food click', () => {
-        useParams.mockImplementation(() => ({
-            category: 'all'
-        }));
+    it('should show all items if click expiring toggle on then off again', () => {
+        const ExpiringFridge = [
+            {
+                batches: [ExpiringBatch],
+                category: 'vegetables',
+                name: 'carrots'
+            },
+            {
+                batches: [
+                    {
+                        expires: addDays(new Date(), 5),
+                        owner: '123',
+                        servings: 2
+                    }
+                ],
+                category: 'meat',
+                name: 'steak'
+            }
+        ];
 
-        // const overrideContext = {
-        //     categories: CategoriesArray,
-        //     fridge: Fridge,
-        //     updateFridge: jest.fn()
-        // };
+        const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
 
-        // const { getAllByTestId } = render(<PageFood />, { ...context, ...overrideContext });
-        // const button = getAllByTestId('editButton')[0];
+        userEvent.click(getByText('Expiring soon'));
 
-        // userEvent.click(button);
+        getByText(titleCase(ExpiringFridge[0].name));
+        expect(queryByText(titleCase(ExpiringFridge[1].name))).toBe(null);
 
-        // expect(mockHistoryPush).toHaveBeenCalledWith('/add', Fridge[0]);
+        userEvent.click(getByText('Expiring soon x'));
+
+        ExpiringFridge.map((item) => {
+            return getByText(titleCase(item.name));
+        });
+    });
+
+    it('should handle expiring toggle when filtered down', () => {
+        const ExpiringFridge = [
+            {
+                batches: [ExpiringBatch],
+                category: 'vegetables',
+                name: 'carrots'
+            },
+            {
+                batches: [ExpiringBatch],
+                category: 'meat',
+                name: 'steak'
+            },
+            {
+                batches: [
+                    {
+                        expires: addDays(new Date(), 5),
+                        owner: '123',
+                        servings: 2
+                    }
+                ],
+                category: 'vegetables',
+                name: 'broccoli'
+            }
+        ];
+
+        const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
+
+        userEvent.click(getByText('Veg'));
+
+        Fridge.map((item) => {
+            if (item.category === 'vegetables') {
+                return getByText(titleCase(item.name));
+            }
+
+            return expect(queryByText(titleCase(item.name))).toBe(null);
+        });
+
+        userEvent.click(getByText('Expiring soon'));
+
+        getByText('Carrots');
+        expect(queryByText('Broccoli')).toBe(null);
+        expect(queryByText('Steak')).toBe(null);
+    });
+
+    it('should handle expiring on then off when filtered down', () => {
+        const ExpiringFridge = [
+            {
+                batches: [ExpiringBatch],
+                category: 'vegetables',
+                name: 'carrots'
+            },
+            {
+                batches: [ExpiringBatch],
+                category: 'meat',
+                name: 'steak'
+            },
+            {
+                batches: [
+                    {
+                        expires: addDays(new Date(), 5),
+                        owner: '123',
+                        servings: 2
+                    }
+                ],
+                category: 'vegetables',
+                name: 'broccoli'
+            }
+        ];
+
+        const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
+
+        userEvent.click(getByText('Veg'));
+
+        Fridge.map((item) => {
+            if (item.category === 'vegetables') {
+                return getByText(titleCase(item.name));
+            }
+
+            return expect(queryByText(titleCase(item.name))).toBe(null);
+        });
+
+        userEvent.click(getByText('Expiring soon'));
+
+        getByText('Carrots');
+        expect(queryByText('Broccoli')).toBe(null);
+        expect(queryByText('Steak')).toBe(null);
+
+        userEvent.click(getByText('Expiring soon x'));
+
+        getByText('Carrots');
+        getByText('Broccoli');
+    });
+
+    it('should render a message if no items in that category', () => {
+        const { getByText, getByTestId } = render(<PageFood />, context);
+
+        userEvent.click(getByText('Fish'));
+
+        getByTestId('pageFoodNoDatafish');
+    });
+
+    it('should render a message if no expiring items in that category', () => {
+        const { getByText } = render(<PageFood />, context);
+
+        userEvent.click(getByText('Fish'));
+        userEvent.click(getByText('Expiring soon'));
+
+        getByText('There is no expiring food that falls under the category of fish');
     });
 });
