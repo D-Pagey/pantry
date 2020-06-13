@@ -93,7 +93,7 @@ export const ProviderFirebase = ({ children }) => {
     const updateFridge = (values) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
-            .update({ [`fridge.${values.id}`]: values })
+            .update({ [`fridge.${values.name}`]: values })
             .then(() => {
                 return toast.success('Food item added');
             })

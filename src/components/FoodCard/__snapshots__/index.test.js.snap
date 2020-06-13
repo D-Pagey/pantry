@@ -152,6 +152,21 @@ exports[`FoodCard component should render 1`] = `
         r="4"
       />
     </svg>
+    <svg
+      fill="none"
+      height="8"
+      style="margin: 0px 4px 0px 0px;"
+      viewBox="0 0 8 8"
+      width="8"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="4"
+        cy="4"
+        fill="#348841"
+        r="4"
+      />
+    </svg>
   </div>
   <div
     class="c4"

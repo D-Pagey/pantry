@@ -5,9 +5,10 @@ import { Formik } from 'formik';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-// import { FirebaseContext } from '../ProviderFirebase';
+import { BatchType, FoodType } from '../../types';
+import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
-// import { ChooseCategory } from '../ChooseCategory';
+import { ChooseCategory } from '../ChooseCategory';
 import { Input } from '../Input';
 import { SingleSelect } from '../SingleSelect';
 import { Button } from '../Button';
@@ -35,7 +36,7 @@ const options = [
 // TODO: Once I deleted V1, then change value to be category not categories
 export const PageAddFoodForm: FC = () => {
     const [step, setStep] = useState(1);
-    // const { updateFridge, user } = useContext(FirebaseContext);
+    const { fridge, updateFridge, user } = useContext(FirebaseContext);
     const history = useHistory();
 
     return (
@@ -43,27 +44,46 @@ export const PageAddFoodForm: FC = () => {
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
-                    // const formattedValues = {
-                    //     ...values,
-                    //     name: values.name || values.categories.name,
-                    //     id: uuidv4(),
-                    //     owner: user.name,
-                    //     categories: [values.categories.id]
-                    // };
+                    const existingBatches = fridge.reduce((acc, curr: FoodType) => {
+                        if (curr.name === values.name.toLowerCase()) {
+                            return [...acc, ...curr.batches];
+                        }
 
-                    // updateFridge(formattedValues);
+                        return acc;
+                    }, [] as BatchType[]);
+
+                    const formattedValues: FoodType = {
+                        category: values.category,
+                        name: values.name.toLowerCase() || values.category,
+                        batches: [
+                            ...existingBatches,
+                            { owner: user.email!, expires: values.expires, servings: values.servings }
+                        ]
+                    };
+
+                    updateFridge(formattedValues);
 
                     actions.setSubmitting(false);
                     actions.resetForm();
 
-                    history.push('/food/all');
+                    history.push('/food');
                 }}
             >
                 {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
-                    // const handleCategoryClick = (category: CategoryType) => {
-                    //     setFieldValue('categories', category);
-                    //     setStep(3);
-                    // };
+                    const handleCategoryClick = (category: string) => {
+                        setFieldValue('category', category);
+                        setStep(3);
+                    };
+
+                    const checkExistingCategory = () => {
+                        return fridge.reduce((acc, curr: FoodType) => {
+                            if (curr.name === values.name.toLowerCase()) {
+                                return curr.category;
+                            }
+
+                            return acc;
+                        }, '');
+                    };
 
                     return (
                         <S.Wrapper>
@@ -96,9 +116,12 @@ export const PageAddFoodForm: FC = () => {
                                     </S.StepWrapper>
                                 )}
 
-                                {/* {step === 2 && (
-                                    <ChooseCategory onClick={handleCategoryClick} selected={values.categories} />
-                                )} */}
+                                {step === 2 && (
+                                    <ChooseCategory
+                                        handleClick={handleCategoryClick}
+                                        selected={checkExistingCategory()}
+                                    />
+                                )}
 
                                 {step === 3 && (
                                     <S.StepWrapper>

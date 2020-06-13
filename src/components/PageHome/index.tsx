@@ -28,7 +28,7 @@ export const PageHome = (): JSX.Element => {
                     money.
                 </S.Text>
 
-                <Link to="/food/all">
+                <Link to="/food">
                     <Button>Get started for free</Button>
                 </Link>
 

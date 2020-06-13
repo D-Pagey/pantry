@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { differenceInDays } from 'date-fns';
 import arraySort from 'array-sort';
 
@@ -9,7 +10,7 @@ import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
-// import { Button } from '../Button';
+import { Button } from '../Button';
 import * as S from './styles';
 
 export const PageFood: FC = () => {
@@ -77,9 +78,9 @@ export const PageFood: FC = () => {
                         <FoodCard key={item.name} batches={item.batches} name={item.name} margin="0 0 1rem" />
                     ))}
 
-                {/* <Link to="/add">
+                <Link to="/add">
                     <Button>Add Item</Button>
-                </Link> */}
+                </Link>
             </S.Wrapper>
         </Layout>
     );
