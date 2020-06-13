@@ -44,9 +44,12 @@ export const PageFood: FC = () => {
 
             <S.Wrapper>
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />
-                {/* {fridge.length === 0 ? (
+
+                {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
+
+                {fridge?.length !== 0 && selectedFood?.length === 0 && (
                     <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
-                ) : ( */}
+                )}
 
                 {selectedFood &&
                     arraySort(selectedFood, 'name').map((item: FoodType) => (
