@@ -56,7 +56,7 @@ export const ProviderFirebase = ({ children }) => {
         db.collection('households')
             .doc(user.household)
             .onSnapshot((doc) => {
-                const fridgeItems = Object.values(doc.data().newFridge);
+                const fridgeItems = Object.values(doc.data().fridge);
 
                 const formatted = formatExpiryDates(fridgeItems);
 

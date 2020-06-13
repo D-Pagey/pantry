@@ -13,10 +13,10 @@ export const Routes = (): JSX.Element => (
     <Switch>
         <Route exact path="/" component={PageHome} />
         <Route path="/sign-in" component={PageSignIn} />
-        <RouteProtected path="/test" component={PageTest} />
-        <RouteProtected path="/profile" component={PageProfile} />
+        <RouteProtected path="/food" component={PageFood} />
         <RouteProtected path="/add" component={PageAddFoodForm} />
-        <RouteProtected path="/food/:category" component={PageFood} />
+        <RouteProtected path="/profile" component={PageProfile} />
+        <RouteProtected path="/test" component={PageTest} />
         <Route component={PageNotFound} />
     </Switch>
 );
