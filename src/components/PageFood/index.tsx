@@ -20,10 +20,10 @@ export const PageFood: FC = () => {
     const { fridge } = useContext(FirebaseContext);
 
     useEffect(() => {
-        if (!selectedFood && fridge?.length > 0) {
+        if (fridge && category === 'all') {
             setSelectedFood(fridge);
         }
-    }, [fridge, selectedFood, setSelectedFood]);
+    }, [fridge, category, setSelectedFood]);
 
     const handleFilter = (selectedCategory: string): void => {
         if (selectedFood) {
