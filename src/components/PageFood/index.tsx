@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState, useEffect } from 'react';
+import { differenceInDays } from 'date-fns';
 import arraySort from 'array-sort';
 
 import { FoodType } from '../../types';
@@ -34,7 +35,25 @@ export const PageFood: FC = () => {
         setCategory(selectedCategory);
     };
 
-    const handleExpiringClick = () => setIsExpiring(!isExpiring);
+    const handleExpiringClick = (): void => {
+        if (selectedFood && !isExpiring) {
+            const expiringFoods = selectedFood.filter((item) => {
+                return item.batches.reduce((acc, curr) => {
+                    if (acc) return acc;
+
+                    const difference = differenceInDays(curr.expires, new Date());
+
+                    return difference < 2;
+                }, false as boolean);
+            });
+
+            setSelectedFood(expiringFoods);
+        } else if (isExpiring) {
+            handleFilter(category);
+        }
+
+        setIsExpiring(!isExpiring);
+    };
 
     if (!fridge) return <Loading isLoading />;
 
@@ -48,7 +67,9 @@ export const PageFood: FC = () => {
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 
                 {fridge?.length !== 0 && selectedFood?.length === 0 && (
-                    <p data-testid="pageFoodNoData">There is no food that falls under the category of {category}</p>
+                    <p data-testid="pageFoodNoData">
+                        There is no {isExpiring && 'expiring'} food that falls under the category of {category}
+                    </p>
                 )}
 
                 {selectedFood &&
