@@ -3,6 +3,7 @@ import arraySort from 'array-sort';
 
 import { FoodType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
+import { Loading } from '../Loading';
 import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
@@ -35,8 +36,7 @@ export const PageFood: FC = () => {
 
     const handleExpiringClick = () => setIsExpiring(!isExpiring);
 
-    // if (isValidCategory === undefined || isCheckingAuth) return <Loading isLoading />;
-    // if (isValidCategory === false) return <Redirect to="/not-found" />;
+    if (!fridge) return <Loading isLoading />;
 
     return (
         <Layout>

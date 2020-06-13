@@ -33,6 +33,9 @@ describe.skip('PageFood component', () => {
         ${'all'}
         ${'meat'}
     `('should render a loading spinner initially when category = $category', ({ category }) => {
+        // when fridge is undefined, loading spinner
+
+
         useParams.mockImplementation(() => ({
             category
         }));
