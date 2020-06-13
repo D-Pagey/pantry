@@ -1,6 +1,7 @@
 import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Fridge, Batches } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -8,22 +9,19 @@ const mockHistoryPush = jest.fn();
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
     useHistory: () => ({
-      push: mockHistoryPush
+        push: mockHistoryPush
     })
-  }));
-
-jest.mock('uuid', () => ({
-    v4: () => '5'
 }));
 
-  const context = {
+const context = {
+    fridge: [],
     updateFridge: () => {},
     user: {
-        name: 'Dan Page'
+        email: 'dan.page91@gmail.com'
     }
 };
 
-describe.skip('PageAddFoodForm component', () => {
+describe('PageAddFoodForm component', () => {
     it('should render', () => {
         const { container } = render(<PageAddFoodForm />, context);
         expect(container.firstChild).toMatchSnapshot();
@@ -49,13 +47,13 @@ describe.skip('PageAddFoodForm component', () => {
         await waitFor(() => getByTestId('chooseCategory'));
 
         userEvent.click(getByTestId('meatCategoryButton'));
-        
+
         await waitFor(() => getByText('When is it going to expire?'));
     });
 
     it('should redirect to food page once submitted', async () => {
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
-        
+
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
@@ -63,39 +61,78 @@ describe.skip('PageAddFoodForm component', () => {
         await waitFor(() => getByTestId('chooseCategory'));
 
         userEvent.click(getByTestId('meatCategoryButton'));
-        
+
         await waitFor(() => getByText('When is it going to expire?'));
-            
+
         userEvent.click(getByText('Add to pantry'));
 
-        await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food/all'));
+        await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food'));
     });
 
-    it('should call updateFridge with the right values', async () => {
-        const updatedContext = {...context, updateFridge: jest.fn()};
+    it('should call updateFridge with the right values if new fridge item', async () => {
+        const updatedContext = { ...context, updateFridge: jest.fn() };
         const name = 'chicken';
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
-        
-        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
+
+        await userEvent.type(getByLabelText('What is the food called?'), name);
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
         await waitFor(() => getByTestId('chooseCategory'));
 
         userEvent.click(getByTestId('meatCategoryButton'));
-        
+
         await waitFor(() => getByText('When is it going to expire?'));
-            
+
         userEvent.click(getByText('Add to pantry'));
 
-        await waitFor(() => expect(updatedContext.updateFridge).toBeCalledWith({
-            // categories: [CategoriesArray[0].id],
-            expires: expect.any(Date),
-            id: '5',
-            name,
-            owner: updatedContext.user.name,
-            servings: 1
-        }));
+        await waitFor(() =>
+            expect(updatedContext.updateFridge).toBeCalledWith({
+                batches: [
+                    {
+                        expires: expect.any(Date),
+                        owner: updatedContext.user.email,
+                        servings: 1
+                    }
+                ],
+                category: 'meat',
+                name
+            })
+        );
+    });
+
+    it('should update a fridge item if already exists', async () => {
+        const updatedContext = { ...context, fridge: Fridge, updateFridge: jest.fn() };
+        const name = 'steak';
+
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
+
+        await userEvent.type(getByLabelText('What is the food called?'), name);
+        userEvent.click(getByTestId('singleSelectButton0'));
+        userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByTestId('meatCategoryButton'));
+
+        await waitFor(() => getByText('When is it going to expire?'));
+
+        userEvent.click(getByText('Add to pantry'));
+
+        await waitFor(() =>
+            expect(updatedContext.updateFridge).toBeCalledWith({
+                batches: [
+                    ...Batches,
+                    {
+                        expires: expect.any(Date),
+                        owner: updatedContext.user.email,
+                        servings: 1
+                    }
+                ],
+                category: 'meat',
+                name
+            })
+        );
     });
 });
