@@ -4,6 +4,7 @@ import { differenceInDays } from 'date-fns';
 import arraySort from 'array-sort';
 
 import { FoodType } from '../../types';
+import { EXPIRING_SOON_DAYS } from '../../tokens';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
@@ -44,7 +45,7 @@ export const PageFood: FC = () => {
 
                     const difference = differenceInDays(curr.expires, new Date());
 
-                    return difference < 2;
+                    return difference < EXPIRING_SOON_DAYS;
                 }, false as boolean);
             });
 

@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { firebase } from '../../services';
-import { formatExpiryDates } from './utils';
+import { formatExpiryDates, countExpiringFoodItems } from './utils';
 
 const db = firebase.firestore();
 const HOUSEHOLDS = 'households';
@@ -57,10 +57,10 @@ export const ProviderFirebase = ({ children }) => {
             .doc(user.household)
             .onSnapshot((doc) => {
                 const fridgeItems = Object.values(doc.data().fridge);
+                const formattedDates = formatExpiryDates(fridgeItems);
 
-                const formatted = formatExpiryDates(fridgeItems);
-
-                setFridge(formatted);
+                setFridge(formattedDates);
+                setExpiringCount(countExpiringFoodItems(formattedDates));
             });
     }, [user.household]);
 

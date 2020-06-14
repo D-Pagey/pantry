@@ -12,7 +12,7 @@ export const PageHome = (): JSX.Element => {
 
     useEffect(() => {
         if (expiringCount) {
-            toast.error(`${expiringCount} expiring items`, { onClick: () => history.push('./food/expiring') });
+            toast.error(`${expiringCount} expiring items`);
         }
     }, [expiringCount, history]);
 

@@ -21,7 +21,7 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, margin, name }) => {
     return (
         <S.Wrapper margin={margin}>
             <S.Name>{titleCase(name)}</S.Name>
-            <S.Date>{format(batches[0].expires, 'do MMM')}</S.Date>
+            <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
 
             <S.CircleWrapper>
                 {sortedBatches.map((batch) => {
@@ -33,8 +33,8 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, margin, name }) => {
             </S.CircleWrapper>
 
             <S.DaysWrapper>
-                <S.Days>{differenceInDays(batches[0].expires, new Date())}</S.Days>
-                <DonutIcon colour={chooseDateColour(batches[0].expires)} />
+                <S.Days>{differenceInDays(sortedBatches[0].expires, new Date())}</S.Days>
+                <DonutIcon colour={chooseDateColour(sortedBatches[0].expires)} />
             </S.DaysWrapper>
         </S.Wrapper>
     );
