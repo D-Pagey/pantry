@@ -81,13 +81,13 @@ exports[`ChooseCategory component should render 1`] = `
   >
     <button
       class="c3 c4"
-      data-testid="vegetableCategoryButton"
+      data-testid="vegetablesCategoryButton"
       type="button"
     >
       <p
         class="c5"
       >
-        Vegetable
+        Vegetables
       </p>
     </button>
     <button

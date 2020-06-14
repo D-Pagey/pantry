@@ -2456,7 +2456,17 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@testing-library/dom@7.14.1", "@testing-library/dom@>=5", "@testing-library/dom@^7.9.0":
+"@testing-library/dom@7.14.2":
+  version "7.14.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.14.2.tgz#e539b2342c5a67e2dfd285bba02308abeb237195"
+  integrity sha512-MZjve+Qn0bPFAJ8w0SIkuplCMd52Bh2JyNAvS0xh/RSZVAsux1HGL24yhTf6fT+HtHMqG1F0vZFU8ncZmmAK1Q==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    aria-query "^4.0.2"
+    dom-accessibility-api "^0.4.5"
+    pretty-format "^25.5.0"
+
+"@testing-library/dom@>=5", "@testing-library/dom@^7.9.0":
   version "7.14.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.14.1.tgz#cbb06fe52fd819cf6bb2859b7e20b2f6ac4def73"
   integrity sha512-inDCC4QInw58JkxIINXqo9AcinV2xNonbSrnDC05FBsnTktJ5T0DUvtFVj241QDNgA2prxQAPttyHcYWxMTS7g==
@@ -2466,10 +2476,10 @@
     dom-accessibility-api "^0.4.5"
     pretty-format "^25.5.0"
 
-"@testing-library/jest-dom@5.10.0":
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.10.0.tgz#6fc80de4760995b3b4281d2f3214e6bb95dd0754"
-  integrity sha512-t6e6Y6cu9cnTRwgNzgGtMn+bluLa/JkQ8j876g0XoZ6QKK/VBPPAIJ2PVWK4pjTD3U/BROP0o29cMwpZHcqltA==
+"@testing-library/jest-dom@5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.10.1.tgz#6508a9f007bd74e5d3c0b3135b668027ab663989"
+  integrity sha512-uv9lLAnEFRzwUTN/y9lVVXVXlEzazDkelJtM5u92PsGkEasmdI+sfzhZHxSDzlhZVTrlLfuMh2safMr8YmzXLg==
   dependencies:
     "@babel/runtime" "^7.9.2"
     "@types/testing-library__jest-dom" "^5.9.1"
