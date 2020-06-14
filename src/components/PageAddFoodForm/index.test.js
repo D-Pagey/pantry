@@ -1,6 +1,7 @@
 import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import selectEvent from 'react-select-event';
 import { Fridge, Batches } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
@@ -71,11 +72,10 @@ describe('PageAddFoodForm component', () => {
 
     it('should call updateFridge with the right values if new fridge item', async () => {
         const updatedContext = { ...context, updateFridge: jest.fn() };
-        const name = 'chicken';
-
+    
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
 
-        await userEvent.type(getByLabelText('What is the food called?'), name);
+        await selectEvent.create(getByLabelText('What is the food called?'), 'Avocado');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
@@ -97,7 +97,7 @@ describe('PageAddFoodForm component', () => {
                     }
                 ],
                 category: 'meat',
-                name
+                name: 'avocado'
             })
         );
     });
@@ -108,7 +108,7 @@ describe('PageAddFoodForm component', () => {
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
 
-        await userEvent.type(getByLabelText('What is the food called?'), name);
+        await selectEvent.select(getByLabelText('What is the food called?'), 'Steak');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 

@@ -8,7 +8,7 @@ import { BatchType, FoodType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
-import { Input } from '../Input';
+import { CreatableDropdown } from '../CreatableDropdown';
 import { SingleSelect } from '../SingleSelect';
 import { Button } from '../Button';
 import * as S from './styles';
@@ -89,6 +89,14 @@ export const PageAddFoodForm: FC = () => {
                         }
                     };
 
+                    const getDropdownOptions = () => {
+                        if (fridge) {
+                            return fridge.map((item: FoodType) => item.name);
+                        }
+
+                        return [];
+                    };
+
                     return (
                         <S.Wrapper>
                             <S.Form onKeyDown={onKeyDown}>
@@ -97,14 +105,10 @@ export const PageAddFoodForm: FC = () => {
                                         <S.InputWrapper>
                                             <S.Label htmlFor="foodName">What is the food called?</S.Label>
 
-                                            <Input
-                                                margin="0 0 3rem"
-                                                name="name"
-                                                onBlur={handleBlur}
-                                                onChange={handleChange}
+                                            <CreatableDropdown
+                                                options={getDropdownOptions()}
+                                                setSelected={(name: string) => setFieldValue('name', name)}
                                                 placeholder="e.g. Carrot"
-                                                testId="foodName"
-                                                value={values.name}
                                             />
 
                                             <S.Label>How many servings?</S.Label>

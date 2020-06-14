@@ -1,6 +1,7 @@
 import { addDays } from 'date-fns';
 import { colours } from '../tokens';
-import { chooseDateColour } from '.';
+import { Fridge } from '../fixtures';
+import { chooseDateColour, getFridgeNameOptions  } from '.';
 
 describe('chooseDateColour function', () => {
     it.each`
@@ -12,5 +13,17 @@ describe('chooseDateColour function', () => {
         const result = chooseDateColour(date);
 
         expect(result).toBe(colour);
+    });
+});
+
+describe('getFridgeNameOptions function', () => {
+    it('should return an array of objects of labels and values', () => {
+        const options = getFridgeNameOptions(Fridge.map(item => item.name));
+        expect(options).toStrictEqual([
+            { label: 'Carrots', value: 'carrots' },
+            { label: 'Broccoli', value: 'broccoli' },
+            { label: 'Steak', value: 'steak' },
+            { label: 'Milk', value: 'milk' }
+        ]);
     });
 });

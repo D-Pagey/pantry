@@ -9,3 +9,8 @@ export type FoodType = {
     name: string;
     batches: BatchType[];
 };
+
+export type DropdownOptionType = {
+    label: string;
+    value: string;
+};
