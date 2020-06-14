@@ -8,7 +8,7 @@ export type ChooseCategoryTypes = {
     selected?: string;
 };
 
-const Categories = ['vegetable', 'fruit', 'dairy', 'meat', 'fish', '[opened tin]'];
+const Categories = ['vegetables', 'fruit', 'dairy', 'meat', 'fish', '[opened tin]'];
 
 export const ChooseCategory: FC<ChooseCategoryTypes> = ({ handleClick, selected }) => {
     const handleCategoryClick = (category: string) => () => handleClick(category);
