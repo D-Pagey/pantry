@@ -4,11 +4,23 @@ import { colours } from '../../tokens';
 export const Button = styled.button.attrs(({ type }) => ({
     type: type || 'button'
 }))`
-    background-color: ${({ disabled }) => (disabled ? colours.grey : colours.darkGreen100)};
+    background-color: ${colours.darkGreen100};
     border: 0;
     border-radius: 5px;
     color: ${colours.white};
-    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    cursor: pointer;
     padding: 1rem;
     min-width: 68px;
+`;
+
+export const SecondaryButton = styled(Button)`
+    background-color: ${colours.white};
+    border: 1px solid ${colours.darkGreen100};
+    color: ${colours.darkGreen100};
+`;
+
+export const DisabledButton = styled(Button)`
+    background-color: ${colours.grey};
+    color: ${colours.white};
+    cursor: not-allowed;
 `;

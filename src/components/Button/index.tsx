@@ -5,12 +5,29 @@ type ButtonProps = {
     children: ReactNode;
     disabled?: boolean;
     onClick?: Function;
+    secondary?: boolean;
     type?: string;
 };
 
-export const Button: FC<ButtonProps> = ({ children, disabled, onClick, type, ...props }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, onClick, secondary, type, ...props }) => {
+    if (disabled) {
+        return (
+            <S.DisabledButton onClick={onClick} type={type} {...props}>
+                {children}
+            </S.DisabledButton>
+        );
+    }
+
+    if (secondary) {
+        return (
+            <S.SecondaryButton onClick={onClick} type={type} {...props}>
+                {children}
+            </S.SecondaryButton>
+        );
+    }
+
     return (
-        <S.Button onClick={onClick} disabled={disabled} type={type} {...props}>
+        <S.Button onClick={onClick} type={type} {...props}>
             {children}
         </S.Button>
     );
