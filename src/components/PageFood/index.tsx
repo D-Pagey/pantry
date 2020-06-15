@@ -1,10 +1,9 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
+import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { differenceInDays } from 'date-fns';
 import arraySort from 'array-sort';
 
 import { FoodType } from '../../types';
-import { EXPIRING_SOON_DAYS } from '../../tokens';
+import { getExpiringItems, filterFridgeByCategory } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
@@ -20,39 +19,47 @@ export const PageFood: FC = () => {
     const [isExpiring, setIsExpiring] = useState(false);
     const { fridge } = useContext(FirebaseContext);
 
+    const filterFood = useCallback(
+        (selectedCategory: string, expiring: boolean): void => {
+            const isCategoryAll = selectedCategory === 'all';
+
+            if (isCategoryAll && !expiring) {
+                setSelectedFood(fridge);
+            }
+
+            if (isCategoryAll && expiring) {
+                const allExpiringItems = getExpiringItems(fridge);
+                setSelectedFood(allExpiringItems);
+            }
+
+            if (!isCategoryAll && !expiring) {
+                const filtered = filterFridgeByCategory(fridge, selectedCategory);
+                setSelectedFood(filtered);
+            }
+
+            if (!isCategoryAll && expiring) {
+                const filtered = filterFridgeByCategory(fridge, selectedCategory);
+                const expiredFilteredItems = getExpiringItems(filtered);
+                setSelectedFood(expiredFilteredItems);
+            }
+        },
+        [fridge]
+    );
+
     useEffect(() => {
         if (fridge && category === 'all') {
-            setSelectedFood(fridge);
+            filterFood('all', isExpiring);
         }
-    }, [fridge, category, setSelectedFood]);
+    }, [fridge, category, isExpiring, filterFood]);
 
-    const handleFilter = (selectedCategory: string): void => {
-        if (selectedFood) {
-            const filtered = fridge.filter((item: FoodType) => item.category === selectedCategory);
-            setSelectedFood(filtered);
-        }
-
-        if (selectedCategory === 'all') setSelectedFood(fridge);
+    const handleCategoryClick = (selectedCategory: string): void => {
+        filterFood(selectedCategory, isExpiring);
 
         setCategory(selectedCategory);
     };
 
     const handleExpiringClick = (): void => {
-        if (selectedFood && !isExpiring) {
-            const expiringFoods = selectedFood.filter((item) => {
-                return item.batches.reduce((acc, curr) => {
-                    if (acc) return acc;
-
-                    const difference = differenceInDays(curr.expires, new Date());
-
-                    return difference < EXPIRING_SOON_DAYS;
-                }, false as boolean);
-            });
-
-            setSelectedFood(expiringFoods);
-        } else if (isExpiring) {
-            handleFilter(category);
-        }
+        filterFood(category, !isExpiring);
 
         setIsExpiring(!isExpiring);
     };
@@ -61,7 +68,7 @@ export const PageFood: FC = () => {
 
     return (
         <Layout>
-            <CategoryFilter selected={category} setSelected={handleFilter} />
+            <CategoryFilter selected={category} setSelected={handleCategoryClick} />
 
             <S.Wrapper>
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />

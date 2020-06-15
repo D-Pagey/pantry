@@ -1,24 +1,29 @@
 import { addDays } from 'date-fns';
 import { BatchType, FoodType } from '../types';
 
-export const ExpiringBatch: BatchType = {
+export const ExpiredBatch: BatchType = {
     expires: new Date(),
-    owner: '123',
+    owner: '1',
     servings: 1
 };
 
+export const ExpiringSoonBatch: BatchType = {
+    expires: addDays(new Date(), 2),
+    owner: '2',
+    servings: 2
+};
+
+export const FreshBatch: BatchType = {
+    expires: addDays(new Date(), 5),
+    owner: '3',
+    servings: 4
+};
+
+
 export const Batches: BatchType[] = [
-    ExpiringBatch,
-    {
-        expires: addDays(new Date(), 2),
-        owner: '123',
-        servings: 2
-    },
-    {
-        expires: addDays(new Date(), 5),
-        owner: '123',
-        servings: 3
-    }
+    ExpiredBatch,
+    ExpiringSoonBatch,
+    FreshBatch
 ];
 
 export const Fridge: FoodType[] = [

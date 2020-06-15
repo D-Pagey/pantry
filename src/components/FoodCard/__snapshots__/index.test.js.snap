@@ -72,7 +72,7 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c2"
   >
-    14th Jun
+    15th Jun
   </p>
   <div
     class="c3"
@@ -119,6 +119,21 @@ exports[`FoodCard component should render 1`] = `
         cx="4"
         cy="4"
         fill="#FCBA3B"
+        r="4"
+      />
+    </svg>
+    <svg
+      fill="none"
+      height="8"
+      style="margin: 0px 4px 0px 0px;"
+      viewBox="0 0 8 8"
+      width="8"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="4"
+        cy="4"
+        fill="#348841"
         r="4"
       />
     </svg>

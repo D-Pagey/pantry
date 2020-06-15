@@ -3,7 +3,7 @@ import { addDays } from 'date-fns';
 import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
-import { Fridge, ExpiringBatch } from '../../fixtures';
+import { Fridge, ExpiredBatch, FreshBatch } from '../../fixtures';
 import { PageFood } from '.';
 
 const context = {
@@ -70,18 +70,12 @@ describe('PageFood component', () => {
     it('should show only expiring items when clicked on expiring button', () => {
         const ExpiringFridge = [
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'vegetables',
                 name: 'carrots'
             },
             {
-                batches: [
-                    {
-                        expires: addDays(new Date(), 5),
-                        owner: '123',
-                        servings: 2
-                    }
-                ],
+                batches: [FreshBatch],
                 category: 'meat',
                 name: 'steak'
             }
@@ -98,18 +92,12 @@ describe('PageFood component', () => {
     it('should show all items if click expiring toggle on then off again', () => {
         const ExpiringFridge = [
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'vegetables',
                 name: 'carrots'
             },
             {
-                batches: [
-                    {
-                        expires: addDays(new Date(), 5),
-                        owner: '123',
-                        servings: 2
-                    }
-                ],
+                batches: [FreshBatch],
                 category: 'meat',
                 name: 'steak'
             }
@@ -132,23 +120,17 @@ describe('PageFood component', () => {
     it('should handle expiring toggle when filtered down', () => {
         const ExpiringFridge = [
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'vegetables',
                 name: 'carrots'
             },
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'meat',
                 name: 'steak'
             },
             {
-                batches: [
-                    {
-                        expires: addDays(new Date(), 5),
-                        owner: '123',
-                        servings: 2
-                    }
-                ],
+                batches: [FreshBatch],
                 category: 'vegetables',
                 name: 'broccoli'
             }
@@ -176,23 +158,17 @@ describe('PageFood component', () => {
     it('should handle expiring on then off when filtered down', () => {
         const ExpiringFridge = [
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'vegetables',
                 name: 'carrots'
             },
             {
-                batches: [ExpiringBatch],
+                batches: [ExpiredBatch],
                 category: 'meat',
                 name: 'steak'
             },
             {
-                batches: [
-                    {
-                        expires: addDays(new Date(), 5),
-                        owner: '123',
-                        servings: 2
-                    }
-                ],
+                batches: [FreshBatch],
                 category: 'vegetables',
                 name: 'broccoli'
             }

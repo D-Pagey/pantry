@@ -1,7 +1,8 @@
 import { addDays } from 'date-fns';
 import { colours } from '../tokens';
-import { Fridge } from '../fixtures';
-import { chooseDateColour, getFridgeNameOptions  } from '.';
+import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch } from '../fixtures';
+import { FoodType } from '../types';
+import { chooseDateColour, getFridgeNameOptions, getExpiringItems, filterFridgeByCategory } from '.';
 
 describe('chooseDateColour function', () => {
     it.each`
@@ -18,7 +19,7 @@ describe('chooseDateColour function', () => {
 
 describe('getFridgeNameOptions function', () => {
     it('should return an array of objects of labels and values', () => {
-        const options = getFridgeNameOptions(Fridge.map(item => item.name));
+        const options = getFridgeNameOptions(Fridge.map((item) => item.name));
         expect(options).toStrictEqual([
             { label: 'Carrots', value: 'carrots' },
             { label: 'Broccoli', value: 'broccoli' },
@@ -27,3 +28,30 @@ describe('getFridgeNameOptions function', () => {
         ]);
     });
 });
+
+describe('getExpiringItems function', () => {
+    it('should return a correct list of food items that are expiring soon', () => {
+        const partiallyExpiringFridge: FoodType[] = [
+            {
+                batches: [ExpiredBatch, ExpiringSoonBatch],
+                category: 'vegetables',
+                name: 'carrots'
+            },
+            {
+                batches: [FreshBatch],
+                category: 'meat',
+                name: 'steak'
+            }
+        ];
+
+        const expiringFood = getExpiringItems(partiallyExpiringFridge);
+        expect(expiringFood).toStrictEqual([partiallyExpiringFridge[0]]);
+    });
+});
+
+describe('filterFridgeByCategory function', () => {
+    it('should correctly filter', () => {
+        const filtered = filterFridgeByCategory(Fridge, 'dairy');
+        expect(filtered).toStrictEqual([Fridge[3]]);
+    });
+}); 
