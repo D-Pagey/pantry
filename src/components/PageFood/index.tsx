@@ -72,11 +72,8 @@ export const PageFood: FC = () => {
     };
 
     const handleFoodClick = (food: string) => () => {
-        if (!editingItem) {
-            setEditingItem(food);
-        } else {
-            setEditingItem(undefined);
-        }
+        if (!editingItem || editingItem !== food) setEditingItem(food);
+        if (editingItem === food) setEditingItem(undefined);
     };
 
     if (!fridge) return <Loading isLoading />;
@@ -106,6 +103,7 @@ export const PageFood: FC = () => {
                                     batches={item.batches}
                                     name={item.name}
                                     margin="0 0 1rem"
+                                    isSelected={item.name === editingItem}
                                 />
                             );
                         }

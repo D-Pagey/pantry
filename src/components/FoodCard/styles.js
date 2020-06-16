@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
+    box-shadow: ${({ isSelected }) => isSelected && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
     border: 1px solid ${colours.darkGreen20};
     border-radius: 10px;
     cursor: pointer;

@@ -12,3 +12,4 @@ const props = {
 };
 
 export const normal = () => <FoodCard {...props} />;
+export const selected = () => <FoodCard {...props} isSelected />;
