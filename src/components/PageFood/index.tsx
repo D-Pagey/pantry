@@ -49,8 +49,8 @@ export const PageFood: FC = () => {
     );
 
     useEffect(() => {
-        if (fridge && category === 'all') {
-            filterFood('all', isExpiring);
+        if (fridge) {
+            filterFood(category, isExpiring);
         }
     }, [fridge, category, isExpiring, filterFood]);
 
