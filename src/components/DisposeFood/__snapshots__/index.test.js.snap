@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DisposeFood component should render 1`] = `
+.c1 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c0 {
+  border: 1px solid #B2B2B2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  padding: 1.5rem 0;
+}
+
+<div
+  class="c0"
+>
+  <button
+    class="sc-AxjAm c1"
+    type="button"
+  >
+    Eat
+  </button>
+  <button
+    class="sc-AxjAm c1"
+    type="button"
+  >
+    Chuck
+  </button>
+</div>
+`;
