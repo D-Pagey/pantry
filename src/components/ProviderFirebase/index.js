@@ -104,7 +104,7 @@ export const ProviderFirebase = ({ children }) => {
         db.collection(HOUSEHOLDS)
             .doc(user.household)
             .update({
-                [`fridge.${id}`]: firebase.firestore.FieldValue.delete()
+                [`fridge.${id}.batches`]: []
             })
             .then(() => {
                 toast.error('Food deleted');

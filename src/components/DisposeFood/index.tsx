@@ -10,7 +10,7 @@ export const DisposeFood: FC<DisposeFoodProps> = ({ handleClick }) => {
     const handleOptionClick = (option: string) => (): void => handleClick(option);
 
     return (
-        <S.Wrapper>
+        <S.Wrapper data-testid="disposeFood">
             <Button secondary onClick={handleOptionClick('eat')}>
                 Eat
             </Button>

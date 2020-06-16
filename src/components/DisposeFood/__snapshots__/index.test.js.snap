@@ -15,7 +15,9 @@ exports[`DisposeFood component should render 1`] = `
 }
 
 .c0 {
-  border: 1px solid #B2B2B2;
+  background-color: white;
+  border-top: 1px solid #B2B2B2;
+  bottom: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,11 +26,15 @@ exports[`DisposeFood component should render 1`] = `
   -webkit-justify-content: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
+  left: 0;
   padding: 1.5rem 0;
+  position: fixed;
+  right: 0;
 }
 
 <div
   class="c0"
+  data-testid="disposeFood"
 >
   <button
     class="sc-AxjAm c1"

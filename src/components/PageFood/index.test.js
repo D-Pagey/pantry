@@ -7,6 +7,7 @@ import { Fridge, ExpiredBatch, FreshBatch } from '../../fixtures';
 import { PageFood } from '.';
 
 const context = {
+    deleteFoodItem: () => {},
     fridge: Fridge
 };
 
@@ -213,5 +214,69 @@ describe('PageFood component', () => {
         userEvent.click(getByText('Expiring soon'));
 
         getByText('There is no expiring food that falls under the category of fish');
+    });
+
+    it('should not render food card if no batches on Fridge item', () => {
+        const contextOveride = {
+            ...context,
+            fridge: [
+                {
+                    batches: [],
+                    category: 'vegetables',
+                    name: 'carrots'
+                },
+                {
+                    batches: [FreshBatch],
+                    category: 'meat',
+                    name: 'steak'
+                },
+            ]
+
+        };
+
+        const { queryByText, getByText } = render(<PageFood />, contextOveride);
+
+        expect(queryByText(titleCase(contextOveride.fridge[0].name))).toBe(null);
+        getByText(titleCase(contextOveride.fridge[1].name));
+    });
+
+
+    it('should render disposeFood component', () => {
+        const { getByText, getByTestId } = render(<PageFood />, context);
+
+        userEvent.click(getByText(titleCase('carrots')));
+
+        getByTestId('disposeFood');
+    });
+    
+    it('if showing, should remove DisposeFood component if clicked again', () => {
+        const { getByText, getByTestId, queryByText } = render(<PageFood />, context);
+
+        userEvent.click(getByText(titleCase('carrots')));
+
+        getByTestId('disposeFood');
+
+        userEvent.click(getByText(titleCase('carrots')));
+
+        expect(queryByText('disposeFood')).toBe(null);
+    });
+
+    it('should handle delete', () => {
+        const contextOveride = {
+            ...context,
+            deleteFoodItem: jest.fn(),
+        };
+
+        const name = 'carrots';
+
+        const { getByText, getByTestId } = render(<PageFood />, contextOveride);
+
+        userEvent.click(getByText(titleCase(name)));
+
+        getByTestId('disposeFood');
+
+        userEvent.click(getByText('Eat'));
+
+        expect(contextOveride.deleteFoodItem).toHaveBeenCalledWith(name);
     });
 });

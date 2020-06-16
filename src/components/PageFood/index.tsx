@@ -11,13 +11,15 @@ import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
 import { Button } from '../Button';
+import { DisposeFood } from '../DisposeFood';
 import * as S from './styles';
 
 export const PageFood: FC = () => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
-    const { fridge } = useContext(FirebaseContext);
+    const [editingItem, setEditingItem] = useState<string | undefined>();
+    const { fridge, deleteFoodItem } = useContext(FirebaseContext);
 
     const filterFood = useCallback(
         (selectedCategory: string, expiring: boolean): void => {
@@ -64,6 +66,19 @@ export const PageFood: FC = () => {
         setIsExpiring(!isExpiring);
     };
 
+    const handleFoodDelete = (option: string) => {
+        deleteFoodItem(editingItem);
+        setEditingItem(undefined);
+    };
+
+    const handleFoodClick = (food: string) => () => {
+        if (!editingItem) {
+            setEditingItem(food);
+        } else {
+            setEditingItem(undefined);
+        }
+    };
+
     if (!fridge) return <Loading isLoading />;
 
     return (
@@ -82,14 +97,28 @@ export const PageFood: FC = () => {
                 )}
 
                 {selectedFood &&
-                    arraySort(selectedFood, 'name').map((item: FoodType) => (
-                        <FoodCard key={item.name} batches={item.batches} name={item.name} margin="0 0 1rem" />
-                    ))}
+                    arraySort(selectedFood, 'name').map((item: FoodType) => {
+                        if (item.batches.length > 0) {
+                            return (
+                                <FoodCard
+                                    key={item.name}
+                                    handleClick={handleFoodClick(item.name)}
+                                    batches={item.batches}
+                                    name={item.name}
+                                    margin="0 0 1rem"
+                                />
+                            );
+                        }
+
+                        return null;
+                    })}
 
                 <Link to="/add">
                     <Button>Add Item</Button>
                 </Link>
             </S.Wrapper>
+
+            {editingItem && <DisposeFood handleClick={handleFoodDelete} />}
         </Layout>
     );
 };
