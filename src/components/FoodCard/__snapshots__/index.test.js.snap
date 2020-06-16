@@ -4,6 +4,7 @@ exports[`FoodCard component should render 1`] = `
 .c0 {
   border: 1px solid rgba(52,136,65,0.2);
   border-radius: 10px;
+  cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 330px;

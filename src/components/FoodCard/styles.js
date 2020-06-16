@@ -4,6 +4,7 @@ import { colours } from '../../tokens';
 export const Wrapper = styled.div`
     border: 1px solid ${colours.darkGreen20};
     border-radius: 10px;
+    cursor: pointer;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: ${({ margin }) => margin};

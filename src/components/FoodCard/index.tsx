@@ -11,15 +11,16 @@ import * as S from './styles';
 
 type FoodCardProps = {
     batches: BatchType[];
+    handleClick?: Function;
     margin?: string;
     name: string;
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ batches, margin, name }) => {
+export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, margin, name }) => {
     const sortedBatches = arraySort(batches, 'expires');
 
     return (
-        <S.Wrapper margin={margin}>
+        <S.Wrapper margin={margin} onClick={handleClick}>
             <S.Name>{titleCase(name)}</S.Name>
             <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
 
