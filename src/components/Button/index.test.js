@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import { Button } from '.';
 
 describe('Button component', () => {
@@ -7,6 +8,28 @@ describe('Button component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.todo('should call onClick once clicked');
-    it.todo('should not call onClick if disabled');
+    it('should call onClick once clicked', () => {
+        const onClick = jest.fn();
+        const name = 'Click me';
+        const { getByText } = render(<Button onClick={onClick}>{name}</Button>);
+
+        userEvent.click(getByText(name));
+
+        expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should have disabled attribute if passed disabled prop', () => {
+        const { getByText } = render(<Button disabled>Click me</Button>);
+        expect(getByText('Click me')).toBeDisabled();
+    });
+
+    it('should not call onClick function if disabled', () => {
+        const onClick = jest.fn();
+        const name = 'Click me';
+        const { getByText } = render(<Button onClick={onClick} disabled>{name}</Button>);
+
+        userEvent.click(getByText(name));
+
+        expect(onClick).not.toHaveBeenCalled();
+    });
 });

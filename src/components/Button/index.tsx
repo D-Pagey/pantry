@@ -12,7 +12,7 @@ type ButtonProps = {
 export const Button: FC<ButtonProps> = ({ children, disabled, onClick, secondary, type, ...props }) => {
     if (disabled) {
         return (
-            <S.DisabledButton onClick={onClick} type={type} {...props}>
+            <S.DisabledButton disabled onClick={onClick} type={type} {...props}>
                 {children}
             </S.DisabledButton>
         );
