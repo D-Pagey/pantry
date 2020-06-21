@@ -4,15 +4,16 @@ import * as S from './styles';
 type ButtonProps = {
     children: ReactNode;
     disabled?: boolean;
+    margin?: string;
     onClick?: Function;
     secondary?: boolean;
     type?: string;
 };
 
-export const Button: FC<ButtonProps> = ({ children, disabled, onClick, secondary, type, ...props }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, margin, onClick, secondary, type, ...props }) => {
     if (disabled) {
         return (
-            <S.DisabledButton disabled onClick={onClick} type={type} {...props}>
+            <S.DisabledButton disabled={disabled} margin={margin} onClick={onClick} type={type} {...props}>
                 {children}
             </S.DisabledButton>
         );
@@ -20,14 +21,14 @@ export const Button: FC<ButtonProps> = ({ children, disabled, onClick, secondary
 
     if (secondary) {
         return (
-            <S.SecondaryButton onClick={onClick} type={type} {...props}>
+            <S.SecondaryButton onClick={onClick} margin={margin} type={type} {...props}>
                 {children}
             </S.SecondaryButton>
         );
     }
 
     return (
-        <S.Button onClick={onClick} type={type} {...props}>
+        <S.Button onClick={onClick} margin={margin} type={type} {...props}>
             {children}
         </S.Button>
     );
