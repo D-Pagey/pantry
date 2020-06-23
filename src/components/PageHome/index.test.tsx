@@ -1,5 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { render } from '../../test-utils';
 import { PageHome } from '.';
 
 jest.mock('react-toastify', () => ({

@@ -1,11 +1,16 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'jest-styled-components';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { FirebaseContext } from './components/ProviderFirebase';
 
-const AllTheProviders: FC = ({ children }) => (
+type AllTheProvidersProps = {
+    children: ReactNode;
+    customContext?: any;
+};
+
+const AllTheProviders: FC<AllTheProvidersProps> = ({ children, customContext }) => (
     <FirebaseContext.Provider
         value={{
             categories: [],
@@ -19,14 +24,16 @@ const AllTheProviders: FC = ({ children }) => (
             user: {
                 email: null,
                 name: null
-            }
+            },
+            ...customContext
         }}
     >
         <MemoryRouter>{children}</MemoryRouter>
     </FirebaseContext.Provider>
 );
 
-const customRender = (ui: any, options?: any) => render(ui, { wrapper: AllTheProviders, ...options });
+const customRender = (ui: any, customContext?: any, options?: any) =>
+    render(ui, { wrapper: () => <AllTheProviders customContext={customContext}>{ui}</AllTheProviders>, ...options });
 
 // re-export everything
 export * from '@testing-library/react';

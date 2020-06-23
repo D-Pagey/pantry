@@ -1,8 +1,8 @@
 import React from 'react';
-import { addDays } from 'date-fns';
 import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
+import { render } from '../../test-utils';
 import { Fridge, ExpiredBatch, FreshBatch } from '../../fixtures';
 import { PageFood } from '.';
 
@@ -229,9 +229,8 @@ describe('PageFood component', () => {
                     batches: [FreshBatch],
                     category: 'meat',
                     name: 'steak'
-                },
+                }
             ]
-
         };
 
         const { queryByText, getByText } = render(<PageFood />, contextOveride);
@@ -240,7 +239,6 @@ describe('PageFood component', () => {
         getByText(titleCase(contextOveride.fridge[1].name));
     });
 
-
     it('should render disposeFood component', () => {
         const { getByText, getByTestId } = render(<PageFood />, context);
 
@@ -248,7 +246,7 @@ describe('PageFood component', () => {
 
         getByTestId('disposeFood');
     });
-    
+
     it('if showing, should remove DisposeFood component if clicked again', () => {
         const { getByText, getByTestId, queryByText } = render(<PageFood />, context);
 
@@ -264,7 +262,7 @@ describe('PageFood component', () => {
     it('should handle delete', () => {
         const contextOveride = {
             ...context,
-            deleteFoodItem: jest.fn(),
+            deleteFoodItem: jest.fn()
         };
 
         const name = 'carrots';

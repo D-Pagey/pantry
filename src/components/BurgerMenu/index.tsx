@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { FirebaseContext } from '../ProviderFirebase';
 import * as S from './styles';
 
-export const BurgerMenu = () => {
+export const BurgerMenu: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { isAuthed, signOut } = useContext(FirebaseContext);
 
-    const handleStateChange = (state) => setIsOpen(state.isOpen);
+    const handleStateChange = (state: { isOpen: boolean }): void => setIsOpen(state.isOpen);
     const closeMenu = () => setIsOpen(false);
     const menuSignOut = () => {
         signOut();

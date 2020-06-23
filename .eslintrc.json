@@ -16,8 +16,7 @@
     "plugins": ["jest"],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "render": "readonly"
+        "SharedArrayBuffer": "readonly"
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -26,6 +25,7 @@
         "project": "./tsconfig.json"
     },
     "rules": {
+        "@typescript-eslint/ban-ts-ignore": "warn",
         // TO DO: work out if I need these 2 linting rules
         "@typescript-eslint/indent": "off",
         "react/jsx-indent": "off",

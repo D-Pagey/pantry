@@ -2,12 +2,14 @@ import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
+import { render } from '../../test-utils';
 import { Fridge, Batches } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
 
 jest.mock('react-router-dom', () => ({
+    // @ts-ignore
     ...jest.requireActual('react-router-dom'),
     useHistory: () => ({
         push: mockHistoryPush
@@ -72,7 +74,7 @@ describe('PageAddFoodForm component', () => {
 
     it('should call updateFridge with the right values if new fridge item', async () => {
         const updatedContext = { ...context, updateFridge: jest.fn() };
-    
+
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
 
         await selectEvent.create(getByLabelText('What is the food called?'), 'Avocado');

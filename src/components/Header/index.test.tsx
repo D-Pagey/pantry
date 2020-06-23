@@ -5,6 +5,7 @@ import { render } from '../../test-utils';
 import { Header } from '.';
 
 jest.mock('react-router-dom', () => ({
+    // @ts-ignore
     ...jest.requireActual('react-router-dom'),
     useHistory: () => ({
         history: {
