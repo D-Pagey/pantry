@@ -1,14 +1,15 @@
 import React from 'react';
+import { render } from '../../test-utils';
 import { colours } from '../../tokens';
-import { CircleIcon } from '.';
+import { DonutIcon } from '.';
 
 const props = {
     colour: colours.orange
 };
 
-describe('CircleIcon component', () => {
+describe('DonutIcon component', () => {
     it('should render', () => {
-        const { container } = render(<CircleIcon {...props} />);
+        const { container } = render(<DonutIcon {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 });

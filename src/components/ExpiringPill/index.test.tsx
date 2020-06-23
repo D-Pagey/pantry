@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { render } from '../../test-utils';
 import { ExpiringPill } from '.';
 
 const props = {
@@ -19,8 +20,8 @@ describe('ExpiringPill component', () => {
 
     it('should call handleClick when clicked', () => {
         const handleClick = jest.fn();
-        const { getByTestId } = render(<ExpiringPill {...props} handleClick={handleClick}/>);
-        
+        const { getByTestId } = render(<ExpiringPill {...props} handleClick={handleClick} />);
+
         userEvent.click(getByTestId('expiringPill'));
 
         expect(handleClick).toHaveBeenCalled();

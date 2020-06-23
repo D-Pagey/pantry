@@ -1,9 +1,10 @@
 import React from 'react';
+import { render } from '../../test-utils';
 import { Fridge } from '../../fixtures';
 import { CreatableDropdown } from '.';
 
 const props = {
-    options: Fridge.map(item => item.name),
+    options: Fridge.map((item) => item.name),
     setSelected: () => {}
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { useHistory } from 'react-router-dom';
+import { render } from '../../test-utils';
 import { Header } from '.';
 
 jest.mock('react-router-dom', () => ({

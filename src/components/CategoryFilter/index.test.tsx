@@ -1,8 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { render } from '../../test-utils';
 import { CategoryFilter } from '.';
 
 const props = {
+    selected: 'all',
     setSelected: () => null
 };
 

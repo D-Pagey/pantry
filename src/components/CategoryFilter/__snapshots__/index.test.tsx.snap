@@ -22,6 +22,7 @@ exports[`CategoryFilter component should render 1`] = `
 }
 
 .c2 {
+  border-bottom: 2px solid white;
   cursor: pointer;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -33,6 +34,21 @@ exports[`CategoryFilter component should render 1`] = `
 }
 
 .c2:hover {
+  border-bottom: 2px solid white;
+}
+
+.c3 {
+  cursor: pointer;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
+
+.c3:hover {
   border-bottom: 2px solid white;
 }
 
@@ -48,27 +64,27 @@ exports[`CategoryFilter component should render 1`] = `
       All
     </li>
     <li
-      class="c2"
+      class="c3"
     >
       Veg
     </li>
     <li
-      class="c2"
+      class="c3"
     >
       Fruit
     </li>
     <li
-      class="c2"
+      class="c3"
     >
       Meat
     </li>
     <li
-      class="c2"
+      class="c3"
     >
       Dairy
     </li>
     <li
-      class="c2"
+      class="c3"
     >
       Fish
     </li>

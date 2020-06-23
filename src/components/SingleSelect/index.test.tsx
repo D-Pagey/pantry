@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { render } from '../../test-utils';
 import { colours } from '../../tokens';
 import { SingleSelect } from '.';
 
@@ -14,8 +15,6 @@ const props = {
             value: 40
         }
     ],
-    label: '',
-    selected: null,
     setSelected: () => {},
     testId: 'singleSelect'
 };
@@ -39,10 +38,7 @@ describe('SingleSelect component', () => {
     it('should render correct selected/unselected buttons', () => {
         const { getByTestId } = render(<SingleSelect {...props} selected={20} />);
 
-        expect(getByTestId('singleSelectButton0')).toHaveStyleRule(
-            'background-color',
-            colours.darkGreen100
-        );
+        expect(getByTestId('singleSelectButton0')).toHaveStyleRule('background-color', colours.darkGreen100);
         expect(getByTestId('singleSelectButton1')).toHaveStyleRule('background-color', colours.white);
     });
 });

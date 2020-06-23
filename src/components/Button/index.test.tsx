@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { render } from '../../test-utils';
 import { Button } from '.';
 
 describe('Button component', () => {
@@ -26,7 +27,11 @@ describe('Button component', () => {
     it('should not call onClick function if disabled', () => {
         const onClick = jest.fn();
         const name = 'Click me';
-        const { getByText } = render(<Button onClick={onClick} disabled>{name}</Button>);
+        const { getByText } = render(
+            <Button onClick={onClick} disabled>
+                {name}
+            </Button>
+        );
 
         userEvent.click(getByText(name));
 
