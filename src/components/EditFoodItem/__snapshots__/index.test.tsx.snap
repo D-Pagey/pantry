@@ -63,10 +63,6 @@ exports[`EditFoodItem component should render 1`] = `
   margin: 0 1rem 0 0;
 }
 
-.c4 .rc-checkbox.inner {
-  border-color: red;
-}
-
 <div
   class="c0"
 >
