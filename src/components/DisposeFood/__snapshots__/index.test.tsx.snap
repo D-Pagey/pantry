@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DisposeFood component should render 1`] = `
+.c2 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
 .c1 {
   background-color: #348841;
   border: 0;
@@ -37,16 +47,18 @@ exports[`DisposeFood component should render 1`] = `
   data-testid="disposeFood"
 >
   <button
-    class="sc-AxjAm c1"
+    class="c1"
     type="button"
   >
-    Eat
+    Edit servings
   </button>
   <button
-    class="sc-AxjAm c1"
+    class="c2"
     type="button"
   >
-    Chuck
+    Eat all 
+    carrot
+    's
   </button>
 </div>
 `;

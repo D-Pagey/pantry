@@ -4,7 +4,9 @@ import { render } from '../../test-utils';
 import { DisposeFood } from '.';
 
 const props = {
-    handleClick: () => {}
+    handleDelete: () => {},
+    handleEdit: () => {},
+    name: 'carrot'
 };
 
 describe('DisposeFood component', () => {
@@ -13,16 +15,21 @@ describe('DisposeFood component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.each`
-        option     | label
-        ${'eat'}   | ${'Eat'}
-        ${'chuck'} | ${'Chuck'}
-    `('should call handleClick with $option', ({ option, label }) => {
-        const handleClick = jest.fn();
-        const { getByText } = render(<DisposeFood handleClick={handleClick} />);
+    it('should call handleDelete when eat clicked', () => {
+        const handleDelete = jest.fn();
+        const { getByText } = render(<DisposeFood {...props} handleDelete={handleDelete} />);
 
-        userEvent.click(getByText(label));
+        userEvent.click(getByText("Eat all carrot's"));
 
-        expect(handleClick).toHaveBeenCalledWith(option);
+        expect(handleDelete).toHaveBeenCalled();
+    });
+
+    it('should call handleEdit when edit clicked', () => {
+        const handleEdit = jest.fn();
+        const { getByText } = render(<DisposeFood {...props} handleEdit={handleEdit} />);
+
+        userEvent.click(getByText('Edit servings'));
+
+        expect(handleEdit).toHaveBeenCalled();
     });
 });

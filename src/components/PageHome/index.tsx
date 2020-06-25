@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FirebaseContext } from '../ProviderFirebase';
@@ -6,7 +6,7 @@ import { Layout } from '../Layout';
 import { Button } from '../Button';
 import * as S from './styles';
 
-export const PageHome = (): JSX.Element => {
+export const PageHome: FC = () => {
     const { expiringCount } = useContext(FirebaseContext);
     const history = useHistory();
 

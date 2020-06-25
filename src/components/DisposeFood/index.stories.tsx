@@ -1,8 +1,10 @@
 import React from 'react';
-import { DisposeFood, DisposeFoodProps } from '.';
+import { DisposeFood } from '.';
 
-const props: DisposeFoodProps = {
-    handleClick: (option) => console.log({ option })
+const props = {
+    handleDelete: () => console.log('delete'),
+    handleEdit: () => console.log('edit'),
+    name: 'carrot'
 };
 
 export default { title: 'DisposeFood' };

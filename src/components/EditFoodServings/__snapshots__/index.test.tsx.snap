@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditFoodItem component should render 1`] = `
+exports[`EditFoodServings component should render 1`] = `
 .c6 {
   background-color: #348841;
   border: 0;
@@ -93,7 +93,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      24th Jun
+      25th Jun
     </li>
     <li
       class="c3"
@@ -112,7 +112,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      26th Jun
+      27th Jun
     </li>
     <li
       class="c3"
@@ -131,7 +131,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      26th Jun
+      27th Jun
     </li>
     <li
       class="c3"
@@ -150,7 +150,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      29th Jun
+      30th Jun
     </li>
     <li
       class="c3"
@@ -169,7 +169,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      29th Jun
+      30th Jun
     </li>
     <li
       class="c3"
@@ -188,7 +188,7 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      29th Jun
+      30th Jun
     </li>
     <li
       class="c3"
@@ -207,18 +207,19 @@ exports[`EditFoodItem component should render 1`] = `
         />
       </span>
       Expired 
-      29th Jun
+      30th Jun
     </li>
   </ul>
   <button
     class="sc-AxjAm c5"
-    data-testid="editFoodItemSubmit"
+    data-testid="EditFoodServingsSubmit"
     disabled=""
     type="button"
   >
     Eat 
     0
-     Carrots
+     
+    carrots
   </button>
   <button
     class="sc-AxjAm c6"

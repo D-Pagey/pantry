@@ -1,19 +1,21 @@
 import 'rc-checkbox/assets/index.css';
 import React, { FC, useReducer, useContext } from 'react';
 import { format } from 'date-fns';
+import { useHistory } from 'react-router-dom';
 import { BatchType, FoodType } from '../../types';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Button } from '../Button';
 import { reducer } from './reducer';
 import * as S from './styles';
 
-type EditFoodItemProps = {
+type EditFoodServingsProps = {
     item: FoodType;
 };
 
-export const EditFoodItem: FC<EditFoodItemProps> = ({ item }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
     const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
     const { updateFridge } = useContext(FirebaseContext);
+    const history = useHistory();
 
     const handleChecked = (batch: BatchType) => (event: any): void => {
         const dispatchType = event.target.checked ? 'checked' : 'unchecked';
@@ -21,7 +23,10 @@ export const EditFoodItem: FC<EditFoodItemProps> = ({ item }) => {
         dispatch({ type: dispatchType, payload: batch });
     };
 
-    const handleEdit = () => updateFridge({ ...item, batches: state.updatedBatches });
+    const handleEdit = () => {
+        updateFridge({ ...item, batches: state.updatedBatches });
+        history.push('/food');
+    };
 
     return (
         <S.Wrapper>
@@ -43,9 +48,9 @@ export const EditFoodItem: FC<EditFoodItemProps> = ({ item }) => {
                 disabled={state.count === 0}
                 margin="0 0 1rem"
                 onClick={handleEdit}
-                data-testid="editFoodItemSubmit"
+                data-testid="EditFoodServingsSubmit"
             >
-                Eat {state.count} Carrots
+                Eat {state.count} {item.name}
             </Button>
             <Button secondary>Cancel</Button>
         </S.Wrapper>

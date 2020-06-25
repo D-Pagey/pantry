@@ -2,21 +2,17 @@ import React, { FC } from 'react';
 import { Button } from '../Button';
 import * as S from './styles';
 
-export type DisposeFoodProps = {
-    handleClick: (option: string) => void;
+type DisposeFoodProps = {
+    handleDelete: () => void;
+    handleEdit: () => void;
+    name: string;
 };
 
-export const DisposeFood: FC<DisposeFoodProps> = ({ handleClick }) => {
-    const handleOptionClick = (option: string) => (): void => handleClick(option);
-
-    return (
-        <S.Wrapper data-testid="disposeFood">
-            <Button secondary onClick={handleOptionClick('eat')}>
-                Eat
-            </Button>
-            <Button secondary onClick={handleOptionClick('chuck')}>
-                Chuck
-            </Button>
-        </S.Wrapper>
-    );
-};
+export const DisposeFood: FC<DisposeFoodProps> = ({ handleDelete, handleEdit, name }) => (
+    <S.Wrapper data-testid="disposeFood">
+        <Button secondary onClick={handleEdit}>
+            Edit servings
+        </Button>
+        <Button onClick={handleDelete}>Eat all {name}&apos;s</Button>
+    </S.Wrapper>
+);

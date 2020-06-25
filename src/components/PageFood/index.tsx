@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
 
 import { FoodType } from '../../types';
@@ -18,8 +18,9 @@ export const PageFood: FC = () => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
-    const [editingItem, setEditingItem] = useState<string | undefined>();
+    const [editingItem, setEditingItem] = useState<FoodType | undefined>();
     const { fridge, deleteFoodItem } = useContext(FirebaseContext);
+    const history = useHistory();
 
     const filterFood = useCallback(
         (selectedCategory: string, expiring: boolean): void => {
@@ -66,14 +67,18 @@ export const PageFood: FC = () => {
         setIsExpiring(!isExpiring);
     };
 
-    const handleFoodDelete = (option: string) => {
+    const handleFoodDelete = () => {
         deleteFoodItem(editingItem);
         setEditingItem(undefined);
     };
 
-    const handleFoodClick = (food: string) => () => {
-        if (!editingItem || editingItem !== food) setEditingItem(food);
-        if (editingItem === food) setEditingItem(undefined);
+    const handleFoodEdit = () => {
+        history.push(`/${editingItem?.name}/edit`, editingItem);
+    };
+
+    const handleFoodClick = (item: FoodType) => () => {
+        if (!editingItem || editingItem.name !== item.name) setEditingItem(item);
+        if (editingItem?.name === item.name) setEditingItem(undefined);
     };
 
     if (!fridge) return <Loading isLoading />;
@@ -99,11 +104,11 @@ export const PageFood: FC = () => {
                             return (
                                 <FoodCard
                                     key={item.name}
-                                    handleClick={handleFoodClick(item.name)}
+                                    handleClick={handleFoodClick(item)}
                                     batches={item.batches}
                                     name={item.name}
                                     margin="0 0 1rem"
-                                    isSelected={item.name === editingItem}
+                                    isSelected={item.name === editingItem?.name}
                                 />
                             );
                         }
@@ -116,7 +121,9 @@ export const PageFood: FC = () => {
                 </Link>
             </S.Wrapper>
 
-            {editingItem && <DisposeFood handleClick={handleFoodDelete} />}
+            {editingItem && (
+                <DisposeFood name={editingItem.name} handleDelete={handleFoodDelete} handleEdit={handleFoodEdit} />
+            )}
         </Layout>
     );
 };
