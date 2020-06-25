@@ -3,19 +3,19 @@ import { BatchType, FoodType } from '../types';
 
 export const ExpiredBatch: BatchType = {
     expires: new Date(),
-    owner: '1',
+    ownerId: '1',
     servings: 1
 };
 
 export const ExpiringSoonBatch: BatchType = {
     expires: addDays(new Date(), 2),
-    owner: '2',
+    ownerId: '2',
     servings: 2
 };
 
 export const FreshBatch: BatchType = {
     expires: addDays(new Date(), 5),
-    owner: '3',
+    ownerId: '3',
     servings: 4
 };
 

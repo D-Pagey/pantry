@@ -24,9 +24,9 @@ describe('EditFoodServings component', () => {
 
         expect(updateFridge).toHaveBeenCalledWith({
             batches: [
-                { expires: expect.any(Date), owner: '1', servings: 1 },
-                { expires: expect.any(Date), owner: '2', servings: 1 },
-                { expires: expect.any(Date), owner: '3', servings: 3 }
+                { expires: expect.any(Date), ownerId: '1', servings: 1 },
+                { expires: expect.any(Date), ownerId: '2', servings: 1 },
+                { expires: expect.any(Date), ownerId: '3', servings: 3 }
             ],
             category: 'vegetables',
             name: 'carrots'
@@ -42,8 +42,8 @@ describe('EditFoodServings component', () => {
 
         expect(updateFridge).toHaveBeenCalledWith({
             batches: [
-                { expires: expect.any(Date), owner: '2', servings: 2 },
-                { expires: expect.any(Date), owner: '3', servings: 4 }
+                { expires: expect.any(Date), ownerId: '2', servings: 2 },
+                { expires: expect.any(Date), ownerId: '3', servings: 4 }
             ],
             category: 'vegetables',
             name: 'carrots'
@@ -65,9 +65,9 @@ describe('EditFoodServings component', () => {
 
         expect(updateFridge).toHaveBeenCalledWith({
             batches: [
-                { expires: expect.any(Date), owner: '1', servings: 1 },
-                { expires: expect.any(Date), owner: '2', servings: 2 },
-                { expires: expect.any(Date), owner: '3', servings: 3 }
+                { expires: expect.any(Date), ownerId: '1', servings: 1 },
+                { expires: expect.any(Date), ownerId: '2', servings: 2 },
+                { expires: expect.any(Date), ownerId: '3', servings: 3 }
             ],
             category: 'vegetables',
             name: 'carrots'

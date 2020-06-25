@@ -2,7 +2,9 @@ import 'rc-checkbox/assets/index.css';
 import React, { FC, useReducer, useContext } from 'react';
 import { format } from 'date-fns';
 import { useHistory } from 'react-router-dom';
+
 import { BatchType, FoodType } from '../../types';
+import { chooseDateColour } from '../../utils';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Button } from '../Button';
 import { reducer } from './reducer';
@@ -37,8 +39,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={i}>
-                            <S.Checkbox onChange={handleChecked(batch)} data-testid={`${batch.owner}-${i}`} />
-                            Expired {format(batch.expires, 'do MMM')}
+                            <S.Checkbox onChange={handleChecked(batch)} data-testid={`${batch.ownerId}-${i}`} />
+                            <S.Text colour={chooseDateColour(batch.expires)}>
+                                Expired {format(batch.expires, 'do MMM')}
+                            </S.Text>
+                            <S.Text>OwnerId: {batch.ownerId}</S.Text>
                         </S.Item>
                     ));
                 })}

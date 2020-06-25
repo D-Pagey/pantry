@@ -17,7 +17,8 @@ export const FirebaseContext = createContext({
     updateFridge: (values) => null,
     user: {
         email: null,
-        name: null
+        name: null,
+        uid: ''
     }
 });
 

@@ -20,7 +20,8 @@ const context = {
     fridge: [],
     updateFridge: () => {},
     user: {
-        email: 'dan.page91@gmail.com'
+        email: 'dan.page91@gmail.com',
+        uid: '1234'
     }
 };
 
@@ -94,7 +95,7 @@ describe('PageAddFoodForm component', () => {
                 batches: [
                     {
                         expires: expect.any(Date),
-                        owner: updatedContext.user.email,
+                        ownerId: updatedContext.user.uid,
                         servings: 1
                     }
                 ],
@@ -128,7 +129,7 @@ describe('PageAddFoodForm component', () => {
                     ...Batches,
                     {
                         expires: expect.any(Date),
-                        owner: updatedContext.user.email,
+                        ownerId: updatedContext.user.uid,
                         servings: 1
                     }
                 ],

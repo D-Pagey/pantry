@@ -15,7 +15,7 @@ describe('countExpiringFoodItems function', () => {
             {
                 batches: [{
                     expires: addDays(new Date(), 5),
-                    owner: '123',
+                    ownerId: '123',
                     servings: 1
                 }],
                 category: 'dairy',
@@ -33,7 +33,7 @@ describe('countExpiringFoodItems function', () => {
             {
                 batches: [{
                     expires: addDays(new Date(), 5),
-                    owner: '123',
+                    ownerId: '123',
                     servings: 1
                 }],
                 category: 'dairy',

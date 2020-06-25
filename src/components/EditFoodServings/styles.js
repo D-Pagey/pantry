@@ -30,3 +30,8 @@ export const Item = styled.li`
 export const Checkbox = styled(ReactCheckbox)`
     margin: 0 1rem 0 0;
 `;
+
+export const Text = styled.span`
+    color: ${({ colour }) => colour};
+    margin: 0 0 0 1rem;
+`;

@@ -55,7 +55,7 @@ export const PageAddFoodForm: FC = () => {
                         name: values.name.toLowerCase() || values.category,
                         batches: [
                             ...existingBatches,
-                            { owner: user.email!, expires: values.expires, servings: values.servings }
+                            { ownerId: user.uid, expires: values.expires, servings: values.servings }
                         ]
                     };
 

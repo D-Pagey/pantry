@@ -1,6 +1,6 @@
 export type BatchType = {
     expires: Date | any;
-    owner: string;
+    ownerId: string;
     servings: number;
 };
 
