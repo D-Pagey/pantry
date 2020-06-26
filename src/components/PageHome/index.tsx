@@ -1,13 +1,16 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
+import { userState } from '../../atoms';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import * as S from './styles';
 
 export const PageHome: FC = () => {
+    const [user, setUser] = useRecoilState(userState);
     const { expiringCount } = useContext(FirebaseContext);
     const history = useHistory();
 
@@ -15,7 +18,7 @@ export const PageHome: FC = () => {
         if (expiringCount) {
             toast.error(`${expiringCount} expiring items`);
         }
-    }, [expiringCount, history]);
+    }, [expiringCount, history, setUser]);
 
     return (
         <Layout>

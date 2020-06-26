@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import { toast } from 'react-toastify';
 import { ProviderFirebase } from '../ProviderFirebase';
 import { BurgerMenu } from '../BurgerMenu';
@@ -12,13 +13,15 @@ toast.configure({
 });
 
 export const App = (): JSX.Element => (
-    <ProviderFirebase>
-        <BrowserRouter>
-            <BurgerMenu />
+    <RecoilRoot>
+        <ProviderFirebase>
+            <BrowserRouter>
+                <BurgerMenu />
 
-            <S.GlobalStyle />
+                <S.GlobalStyle />
 
-            <Routes />
-        </BrowserRouter>
-    </ProviderFirebase>
+                <Routes />
+            </BrowserRouter>
+        </ProviderFirebase>
+    </RecoilRoot>
 );
