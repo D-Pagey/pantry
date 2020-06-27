@@ -4,9 +4,9 @@ import { differenceInDays, format } from 'date-fns';
 import { titleCase } from 'title-case';
 
 import { BatchType } from '../../types';
-import { chooseDateColour } from '../../utils';
+import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
-import { DonutIcon } from '../DonutIcon';
+import { Donut } from '../Donut';
 import * as S from './styles';
 
 type FoodCardProps = {
@@ -29,15 +29,14 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
                 {sortedBatches.map((batch) => {
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
-                        <CircleIcon key={i} colour={chooseDateColour(batch.expires)} margin="0 4px 0 0" />
+                        <CircleIcon key={i} colour={getColourFromDate(batch.expires)} margin="0 4px 0 0" />
                     ));
                 })}
             </S.CircleWrapper>
 
-            <S.DaysWrapper>
-                <S.Days>{differenceInDays(sortedBatches[0].expires, new Date())}</S.Days>
-                <DonutIcon colour={chooseDateColour(sortedBatches[0].expires)} />
-            </S.DaysWrapper>
+            <S.DonutWrapper>
+                <Donut date={sortedBatches[0].expires} />
+            </S.DonutWrapper>
         </S.Wrapper>
     );
 };

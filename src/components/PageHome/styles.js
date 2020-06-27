@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -16,7 +17,7 @@ export const Title = styled.h1`
 `;
 
 export const Text = styled.p`
-    color: #7c7c7c;
+    color: ${colours.darkGrey}; 
     font-size: 18px;
     margin: 0;
     padding: 0 0 3rem;
@@ -41,7 +42,7 @@ export const SubTitle = styled.h2`
 `;
 
 export const Description = styled.p`
-    color: #7c7c7c;
+    color: ${colours.darkGrey};
     font-size: 18px;
     margin: 0;
     max-width: 500px;

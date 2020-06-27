@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Donut component should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 60px;
+}
+
+.c1 {
+  -webkit-animation: kKTezL 1.5s;
+  animation: kKTezL 1.5s;
+  fill: transparent;
+  stroke-dasharray: 282.7433388230814;
+  stroke-dashoffset: 254.46900494077323;
+  stroke: red;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.c2 {
+  -webkit-dominant-baseline: middle;
+  dominant-baseline: middle;
+  font-size: 38px;
+  text-anchor: middle;
+}
+
+.c3 {
+  -webkit-dominant-baseline: middle;
+  dominant-baseline: middle;
+  font-size: 38px;
+  text-anchor: middle;
+  font-size: 20px;
+}
+
+<div
+  class="c0"
+>
+  <svg
+    height="100%"
+    viewBox="0 0 100 100"
+    width="100%"
+  >
+    <circle
+      class="c1"
+      color="red"
+      cx="50"
+      cy="50"
+      r="45"
+      transform="rotate(-90 50 50)"
+    />
+    <text
+      class="c2"
+      x="50%"
+      y="42%"
+    >
+      0
+    </text>
+    <text
+      class="c3"
+      x="51%"
+      y="70%"
+    >
+      days
+    </text>
+  </svg>
+</div>
+`;

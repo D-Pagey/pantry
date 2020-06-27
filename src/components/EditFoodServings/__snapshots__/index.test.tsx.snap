@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditFoodServings component should render 1`] = `
-.c10 {
+.c9 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -14,7 +14,7 @@ exports[`EditFoodServings component should render 1`] = `
   color: #348841;
 }
 
-.c9 {
+.c8 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -64,7 +64,7 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c5 {
-  color: #B2B2B2;
+  color: red;
   margin: 0 0 0 1rem;
 }
 
@@ -73,11 +73,6 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c7 {
-  color: #FCBA3B;
-  margin: 0 0 0 1rem;
-}
-
-.c8 {
   color: #348841;
   margin: 0 0 0 1rem;
 }
@@ -115,7 +110,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c5"
       >
         Expired 
-        27th Jun
+        29th Jun
       </span>
       <span
         class="c6"
@@ -141,10 +136,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c7"
+        class="c5"
       >
         Expired 
-        29th Jun
+        1st Jul
       </span>
       <span
         class="c6"
@@ -170,10 +165,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c7"
+        class="c5"
       >
         Expired 
-        29th Jun
+        1st Jul
       </span>
       <span
         class="c6"
@@ -199,10 +194,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c8"
+        class="c7"
       >
         Expired 
-        2nd Jul
+        4th Jul
       </span>
       <span
         class="c6"
@@ -228,10 +223,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c8"
+        class="c7"
       >
         Expired 
-        2nd Jul
+        4th Jul
       </span>
       <span
         class="c6"
@@ -257,10 +252,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c8"
+        class="c7"
       >
         Expired 
-        2nd Jul
+        4th Jul
       </span>
       <span
         class="c6"
@@ -286,10 +281,10 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <span
-        class="c8"
+        class="c7"
       >
         Expired 
-        2nd Jul
+        4th Jul
       </span>
       <span
         class="c6"
@@ -300,7 +295,7 @@ exports[`EditFoodServings component should render 1`] = `
     </li>
   </ul>
   <button
-    class="sc-AxjAm c9"
+    class="sc-AxjAm c8"
     data-testid="EditFoodServingsSubmit"
     disabled=""
     type="button"
@@ -311,7 +306,7 @@ exports[`EditFoodServings component should render 1`] = `
     carrots
   </button>
   <button
-    class="sc-AxjAm c10"
+    class="sc-AxjAm c9"
     type="button"
   >
     Cancel
