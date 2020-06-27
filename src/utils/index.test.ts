@@ -1,17 +1,47 @@
 import { addDays } from 'date-fns';
+
 import { colours } from '../tokens';
 import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch } from '../fixtures';
 import { FoodType } from '../types';
-import { chooseDateColour, getFridgeNameOptions, getExpiringItems, filterFridgeByCategory } from '.';
+import {
+    getPercentageFromDate,
+    getColourFromDate,
+    getFridgeNameOptions,
+    getExpiringItems,
+    filterFridgeByCategory
+} from '.';
 
-describe('chooseDateColour function', () => {
+describe('getPercentageFromDate function', () => {
     it.each`
-        date                      | colour
-        ${new Date()}             | ${colours.grey}
-        ${addDays(new Date(), 2)} | ${colours.orange}
-        ${addDays(new Date(), 5)} | ${colours.darkGreen100}
+        date                       | percentage
+        ${addDays(new Date(), -1)} | ${100}
+        ${new Date()}              | ${10}
+        ${addDays(new Date(), 1)}  | ${10}
+        ${addDays(new Date(), 2)}  | ${20}
+        ${addDays(new Date(), 3)}  | ${40}
+        ${addDays(new Date(), 4)}  | ${60}
+        ${addDays(new Date(), 5)}  | ${80}
+        ${addDays(new Date(), 6)}  | ${100}
+    `('return $percentage% for $date', ({ percentage, date }) => {
+        const result = getPercentageFromDate(date);
+
+        expect(result).toBe(percentage);
+    });
+});
+
+describe('getColourFromDate function', () => {
+    it.each`
+        date                       | colour
+        ${addDays(new Date(), -1)} | ${colours.grey}
+        ${new Date()}              | ${colours.red}
+        ${addDays(new Date(), 1)}  | ${colours.red}
+        ${addDays(new Date(), 2)}  | ${colours.red}
+        ${addDays(new Date(), 3)}  | ${colours.orange}
+        ${addDays(new Date(), 4)}  | ${colours.orange}
+        ${addDays(new Date(), 5)}  | ${colours.darkGreen100}
+        ${addDays(new Date(), 6)}  | ${colours.darkGreen100}
     `('return $colour for $date', ({ colour, date }) => {
-        const result = chooseDateColour(date);
+        const result = getColourFromDate(date);
 
         expect(result).toBe(colour);
     });
@@ -54,4 +84,4 @@ describe('filterFridgeByCategory function', () => {
         const filtered = filterFridgeByCategory(Fridge, 'dairy');
         expect(filtered).toStrictEqual([Fridge[3]]);
     });
-}); 
+});

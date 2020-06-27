@@ -30,19 +30,8 @@ export const CircleWrapper = styled.div`
     display: flex;
 `;
 
-export const DaysWrapper = styled.div`
-    align-items: center;
-    display: flex;
+export const DonutWrapper = styled.div`
     grid-column: 2 / 3;
     grid-row: 1 / 4;
-    justify-content: center;
     justify-self: end;
-    width: max-content;
-`;
-
-export const Days = styled.span`
-    color: ${colours.darkGrey};
-    grid-column: 2 / 3;
-    grid-row: 1 / 3;
-    position: absolute;
 `;

@@ -1,6 +1,7 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
@@ -31,10 +32,6 @@ export const PageHome: FC = () => {
                 <Link to="/food">
                     <Button>Get started for free</Button>
                 </Link>
-
-                {/* <Link to="/test" style={{ margin: '1rem 0' }}>
-                    <Button>Work In Progress</Button>
-                </Link> */}
 
                 <S.FeaturesWrapper>
                     <S.SubTitle>Get notified on expiring items</S.SubTitle>

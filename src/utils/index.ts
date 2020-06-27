@@ -1,15 +1,30 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
+
 import { DropdownOptionType, FoodType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
-export const chooseDateColour = (date: Date): string => {
+export const getPercentageFromDate = (date: Date): number => {
     const difference = differenceInDays(date, new Date());
 
-    if (difference < 1) return colours.grey;
-    if (difference < EXPIRING_SOON_DAYS) return colours.orange;
+    if (difference >= 5) return 100;
+    if (difference === 4) return 80;
+    if (difference === 3) return 60;
+    if (difference === 2) return 40;
+    if (difference === 1) return 20;
+    if (difference === 0) return 10;
 
-    return colours.darkGreen100;
+    return 100;
+};
+
+export const getColourFromDate = (date: Date): string => {
+    const difference = differenceInDays(date, new Date());
+
+    if (difference >= 4) return colours.darkGreen100;
+    if (difference >= 2) return colours.orange;
+    if (difference >= 0) return colours.red;
+
+    return colours.grey;
 };
 
 export const getFridgeNameOptions = (names: string[]): DropdownOptionType[] => {
@@ -29,5 +44,5 @@ export const getExpiringItems = (food: FoodType[]): FoodType[] => {
 };
 
 export const filterFridgeByCategory = (food: FoodType[], category: string): FoodType[] => {
-    return food.filter(item => item.category === category);
+    return food.filter((item) => item.category === category);
 };
