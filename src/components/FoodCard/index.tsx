@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import arraySort from 'array-sort';
-import { differenceInDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import { titleCase } from 'title-case';
 
 import { BatchType } from '../../types';
