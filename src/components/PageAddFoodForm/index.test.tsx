@@ -2,6 +2,7 @@ import React from 'react';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
+
 import { render } from '../../test-utils';
 import { Fridge, Batches } from '../../fixtures';
 import { PageAddFoodForm } from '.';

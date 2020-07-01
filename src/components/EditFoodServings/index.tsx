@@ -30,6 +30,10 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
         history.push('/food');
     };
 
+    const handleCancel = () => {
+        history.goBack();
+    };
+
     return (
         <S.Wrapper>
             <S.Title>How many {item.name} servings are you eating?</S.Title>
@@ -57,7 +61,9 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
             >
                 Eat {state.count} {item.name}
             </Button>
-            <Button secondary>Cancel</Button>
+            <Button secondary onClick={handleCancel}>
+                Cancel
+            </Button>
         </S.Wrapper>
     );
 };
