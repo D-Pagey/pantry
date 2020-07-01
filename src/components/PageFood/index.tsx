@@ -68,8 +68,10 @@ export const PageFood: FC = () => {
     };
 
     const handleFoodDelete = () => {
-        deleteFoodItem(editingItem);
-        setEditingItem(undefined);
+        if (editingItem?.name) {
+            deleteFoodItem(editingItem.name);
+            setEditingItem(undefined);
+        }
     };
 
     const handleFoodEdit = () => {

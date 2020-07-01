@@ -73,7 +73,7 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrots'
+                name: 'carrot'
             },
             {
                 batches: [FreshBatch],
@@ -95,7 +95,7 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrots'
+                name: 'carrot'
             },
             {
                 batches: [FreshBatch],
@@ -123,7 +123,7 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrots'
+                name: 'carrot'
             },
             {
                 batches: [ExpiredBatch],
@@ -139,8 +139,10 @@ describe('PageFood component', () => {
 
         const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
 
+        // filter to just vegetables
         userEvent.click(getByText('Veg'));
 
+        // check only vegetables are rendering
         Fridge.map((item) => {
             if (item.category === 'vegetables') {
                 return getByText(titleCase(item.name));
@@ -149,9 +151,11 @@ describe('PageFood component', () => {
             return expect(queryByText(titleCase(item.name))).toBe(null);
         });
 
+        // filter down to expiring items
         userEvent.click(getByText('Expiring soon'));
 
-        getByText('Carrots');
+        // check there are expiring vegetables
+        getByText('Carrot');
         expect(queryByText('Broccoli')).toBe(null);
         expect(queryByText('Steak')).toBe(null);
     });
@@ -161,7 +165,7 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrots'
+                name: 'carrot'
             },
             {
                 batches: [ExpiredBatch],
@@ -177,8 +181,10 @@ describe('PageFood component', () => {
 
         const { getByText, queryByText } = render(<PageFood />, { ...context, fridge: ExpiringFridge });
 
+        // filter above fridge down to vegetables
         userEvent.click(getByText('Veg'));
 
+        // check that only vegetables are rendered
         Fridge.map((item) => {
             if (item.category === 'vegetables') {
                 return getByText(titleCase(item.name));
@@ -187,15 +193,21 @@ describe('PageFood component', () => {
             return expect(queryByText(titleCase(item.name))).toBe(null);
         });
 
+        // toggle on expiring item
         userEvent.click(getByText('Expiring soon'));
 
-        getByText('Carrots');
+        // expect an expiring item to be there
+        getByText('Carrot');
+        // expect a non-expiring vegetable to render
         expect(queryByText('Broccoli')).toBe(null);
+        // expect a non-vegetable to render
         expect(queryByText('Steak')).toBe(null);
 
+        // toggle off expiring, show all fridge options
         userEvent.click(getByText('Expiring soon x'));
 
-        getByText('Carrots');
+        // expect all vegetables to render
+        getByText('Carrot');
         getByText('Broccoli');
     });
 
@@ -223,7 +235,7 @@ describe('PageFood component', () => {
                 {
                     batches: [],
                     category: 'vegetables',
-                    name: 'carrots'
+                    name: 'carrot'
                 },
                 {
                     batches: [FreshBatch],
@@ -242,7 +254,7 @@ describe('PageFood component', () => {
     it('should render disposeFood component', () => {
         const { getByText, getByTestId } = render(<PageFood />, context);
 
-        userEvent.click(getByText(titleCase('carrots')));
+        userEvent.click(getByText(titleCase(Fridge[0].name)));
 
         getByTestId('disposeFood');
     });
@@ -250,31 +262,33 @@ describe('PageFood component', () => {
     it('if showing, should remove DisposeFood component if clicked again', () => {
         const { getByText, getByTestId, queryByText } = render(<PageFood />, context);
 
-        userEvent.click(getByText(titleCase('carrots')));
+        const itemName = Fridge[0].name;
+
+        userEvent.click(getByText(titleCase(itemName)));
 
         getByTestId('disposeFood');
 
-        userEvent.click(getByText(titleCase('carrots')));
+        userEvent.click(getByText(titleCase(itemName)));
 
         expect(queryByText('disposeFood')).toBe(null);
     });
 
-    it.skip('should handle delete', () => {
+    it('should handle delete', () => {
         const contextOveride = {
             ...context,
             deleteFoodItem: jest.fn()
         };
 
-        const name = 'carrots';
+        const itemName = Fridge[0].name;
 
         const { getByText, getByTestId } = render(<PageFood />, contextOveride);
 
-        userEvent.click(getByText(titleCase(name)));
+        userEvent.click(getByText(titleCase(itemName)));
 
         getByTestId('disposeFood');
 
-        userEvent.click(getByText("Eat all carrot's"));
+        userEvent.click(getByText(`Eat all ${itemName}'s`));
 
-        expect(contextOveride.deleteFoodItem).toHaveBeenCalledWith(name);
+        expect(contextOveride.deleteFoodItem).toHaveBeenCalledWith(itemName);
     });
 });

@@ -29,7 +29,7 @@ describe('EditFoodServings component', () => {
                 { expires: expect.any(Date), ownerId: '3', servings: 3 }
             ],
             category: 'vegetables',
-            name: 'carrots'
+            name: 'carrot'
         });
     });
 
@@ -46,7 +46,7 @@ describe('EditFoodServings component', () => {
                 { expires: expect.any(Date), ownerId: '3', servings: 4 }
             ],
             category: 'vegetables',
-            name: 'carrots'
+            name: 'carrot'
         });
     });
 
@@ -70,7 +70,7 @@ describe('EditFoodServings component', () => {
                 { expires: expect.any(Date), ownerId: '3', servings: 3 }
             ],
             category: 'vegetables',
-            name: 'carrots'
+            name: 'carrot'
         });
     });
 });

@@ -5,7 +5,7 @@ import { FoodCard } from '.';
 
 const props = {
     batches: Batches,
-    name: 'carrots'
+    name: 'carrot'
 };
 
 describe('FoodCard component', () => {

@@ -80,7 +80,7 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c1"
   >
-    Carrots
+    Carrot
   </p>
   <p
     class="c2"
@@ -227,7 +227,8 @@ exports[`FoodCard component should render 1`] = `
           x="51%"
           y="70%"
         >
-          days
+          day
+          s
         </text>
       </svg>
     </div>

@@ -84,7 +84,7 @@ exports[`EditFoodServings component should render 1`] = `
     class="c1"
   >
     How many 
-    carrots
+    carrot
      servings are you eating?
   </h4>
   <ul
@@ -303,7 +303,7 @@ exports[`EditFoodServings component should render 1`] = `
     Eat 
     0
      
-    carrots
+    carrot
   </button>
   <button
     class="sc-AxjAm c9"

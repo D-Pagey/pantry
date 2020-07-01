@@ -51,7 +51,7 @@ describe('getFridgeNameOptions function', () => {
     it('should return an array of objects of labels and values', () => {
         const options = getFridgeNameOptions(Fridge.map((item) => item.name));
         expect(options).toStrictEqual([
-            { label: 'Carrots', value: 'carrots' },
+            { label: 'Carrot', value: 'carrot' },
             { label: 'Broccoli', value: 'broccoli' },
             { label: 'Steak', value: 'steak' },
             { label: 'Milk', value: 'milk' }
@@ -65,7 +65,7 @@ describe('getExpiringItems function', () => {
             {
                 batches: [ExpiredBatch, ExpiringSoonBatch],
                 category: 'vegetables',
-                name: 'carrots'
+                name: 'carrot'
             },
             {
                 batches: [FreshBatch],
