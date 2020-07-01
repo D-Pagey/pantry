@@ -42,7 +42,7 @@ export const Donut: FC<DonutIconProps> = ({ date }) => {
                         </S.Text>
 
                         <S.Subtext x="51%" y="70%">
-                            days
+                            day{difference !== 1 && 's'}
                         </S.Subtext>
                     </>
                 )}

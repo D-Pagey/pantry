@@ -63,7 +63,8 @@ exports[`Donut component should render 1`] = `
       x="51%"
       y="70%"
     >
-      days
+      day
+      s
     </text>
   </svg>
 </div>
