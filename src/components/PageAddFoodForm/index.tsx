@@ -125,10 +125,14 @@ export const PageAddFoodForm: FC = () => {
                                 )}
 
                                 {step === 2 && (
-                                    <ChooseCategory
-                                        handleClick={handleCategoryClick}
-                                        selected={checkExistingCategory()}
-                                    />
+                                    <S.StepWrapper>
+                                        <ChooseCategory
+                                            handleClick={handleCategoryClick}
+                                            selected={checkExistingCategory()}
+                                        />
+
+                                        <Button onClick={() => setStep(3)}>Next</Button>
+                                    </S.StepWrapper>
                                 )}
 
                                 {step === 3 && (

@@ -55,7 +55,7 @@ exports[`ChooseCategory component should render 1`] = `
   font-size: 1rem;
   font-weight: normal;
   margin: 0;
-  padding: 0 0 2rem;
+  padding: 0 0 1rem;
 }
 
 .c2 {

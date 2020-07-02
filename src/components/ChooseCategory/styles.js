@@ -12,7 +12,7 @@ export const Title = styled.h3`
     font-size: 1rem;
     font-weight: normal;
     margin: 0;
-    padding: 0 0 2rem;
+    padding: 0 0 1rem;
 `;
 
 export const Grid = styled.div`
