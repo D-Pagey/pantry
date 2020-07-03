@@ -4,13 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { render } from '../../test-utils';
 import { Header } from '.';
 
+const mockHistoryBack = jest.fn();
+
 jest.mock('react-router-dom', () => ({
     // @ts-ignore
     ...jest.requireActual('react-router-dom'),
     useHistory: () => ({
-        history: {
-            push: jest.fn()
-        }
+        goBack: mockHistoryBack
     })
 }));
 
@@ -28,13 +28,11 @@ describe('Header component', () => {
         getByText(page);
     });
 
-    it.skip('should call goBack when clicked on back arrow', () => {
-        const history = useHistory();
-
+    it('should call goBack when clicked on back arrow', () => {
         const { getByTestId } = render(<Header page="Add food" />);
 
         userEvent.click(getByTestId('headerBackArrow'));
 
-        // expect history to have been called
+        expect(mockHistoryBack).toHaveBeenCalled();
     });
 });
