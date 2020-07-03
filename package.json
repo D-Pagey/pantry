@@ -146,7 +146,7 @@
             "!src/index.js",
             "!src/react-app-env.d.ts",
             "!src/**/index.stories.tsx",
-            "!src/setupTests.js",
+            "!src/test-utils.tsx",
             "!src/custom.d.ts"
         ],
         "coverageThreshold": {

@@ -23,6 +23,4 @@ describe('ChooseCategory component', () => {
 
         expect(handleClick).toHaveBeenCalledWith('meat');
     });
-
-    it.todo('should have selected styles when selected');
 });

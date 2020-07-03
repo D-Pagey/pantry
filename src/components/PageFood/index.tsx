@@ -100,23 +100,25 @@ export const PageFood: FC = () => {
                     </p>
                 )}
 
-                {selectedFood &&
-                    arraySort(selectedFood, 'name').map((item: FoodType) => {
-                        if (item.batches.length > 0) {
-                            return (
-                                <FoodCard
-                                    key={item.name}
-                                    handleClick={handleFoodClick(item)}
-                                    batches={item.batches}
-                                    name={item.name}
-                                    margin="0 0 1rem"
-                                    isSelected={item.name === editingItem?.name}
-                                />
-                            );
-                        }
+                <div>
+                    {selectedFood &&
+                        arraySort(selectedFood, 'name').map((item: FoodType) => {
+                            if (item.batches.length > 0) {
+                                return (
+                                    <FoodCard
+                                        key={item.name}
+                                        handleClick={handleFoodClick(item)}
+                                        batches={item.batches}
+                                        name={item.name}
+                                        margin="0 0 1rem"
+                                        isSelected={item.name === editingItem?.name}
+                                    />
+                                );
+                            }
 
-                        return null;
-                    })}
+                            return null;
+                        })}
+                </div>
 
                 <Link to="/add">
                     <Button>Add Item</Button>
