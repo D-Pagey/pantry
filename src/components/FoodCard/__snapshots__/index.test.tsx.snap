@@ -85,7 +85,7 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c2"
   >
-    2nd Jul
+    3rd Jul
   </p>
   <div
     class="c3"
