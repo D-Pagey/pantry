@@ -3,7 +3,11 @@ import 'jest-styled-components';
 import React, { FC, ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import MockDate from 'mockdate';
 import { FirebaseContext } from './components/ProviderFirebase';
+
+MockDate.set('01/01/2020');
 
 type AllTheProvidersProps = {
     children: ReactNode;
