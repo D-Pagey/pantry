@@ -6,64 +6,39 @@ exports[`PageFood component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 100px;
-  padding: 0 24px;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 2;
-}
-
-.c1 {
-  color: initial;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c3 {
-  font-size: 25px;
-  font-weight: 500;
-  margin: 0;
-  padding: 0 0 0 14px;
-}
-
-.c2 {
-  position: relative;
-  top: 2px;
-  width: 32px;
+  height: calc(100vh - 100px);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 <div
   class="c0"
+  data-testid="loading"
 >
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
+  <div
+    class="css-0"
   >
-    <img
-      alt="icon"
-      class="c2"
-      src="icon.svg"
+    <div
+      class="css-1nr7nfg"
     />
-  </a>
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
-  >
-    <h4
-      class="c3"
-    >
-      Pantry
-    </h4>
-  </a>
+    <div
+      class="css-52k0ew"
+    />
+    <div
+      class="css-l6u9bm"
+    />
+    <div
+      class="css-1gpo9io"
+    />
+    <div
+      class="css-1yqps71"
+    />
+  </div>
 </div>
 `;

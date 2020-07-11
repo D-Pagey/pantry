@@ -18,4 +18,6 @@ describe('Routes component', () => {
 
         getByTestId(pageTestId);
     });
+
+    it.todo('test every route');
 });

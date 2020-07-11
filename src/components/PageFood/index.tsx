@@ -1,10 +1,11 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
+import { toast } from 'react-toastify';
 
+import { db } from '../../services';
 import { FoodType } from '../../types';
 import { getExpiringItems, filterFridgeByCategory } from '../../utils';
-import { FirebaseContext } from '../ProviderFirebase';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
@@ -12,38 +13,57 @@ import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
 import { Button } from '../Button';
 import { DisposeFood } from '../DisposeFood';
+import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
-export const PageFood: FC = () => {
+type PageFoodProps = {
+    fridge?: FoodType[];
+};
+
+export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
-    const { fridge, deleteFoodItem } = useContext(FirebaseContext);
+    const { user } = useContext(AuthContext);
     const history = useHistory();
+
+    const deleteFoodItem = (id: string): void => {
+        db.collection('households')
+            .doc(user?.household)
+            .update({
+                [`fridge.${id}.batches`]: []
+            })
+            .then(() => {
+                toast.error('Food deleted');
+            })
+            .catch(() => toast.error('Error with deleting food'));
+    };
 
     const filterFood = useCallback(
         (selectedCategory: string, expiring: boolean): void => {
-            const isCategoryAll = selectedCategory === 'all';
+            if (fridge) {
+                const isCategoryAll = selectedCategory === 'all';
 
-            if (isCategoryAll && !expiring) {
-                setSelectedFood(fridge);
-            }
+                if (isCategoryAll && !expiring) {
+                    setSelectedFood(fridge);
+                }
 
-            if (isCategoryAll && expiring) {
-                const allExpiringItems = getExpiringItems(fridge);
-                setSelectedFood(allExpiringItems);
-            }
+                if (isCategoryAll && expiring) {
+                    const allExpiringItems = getExpiringItems(fridge);
+                    setSelectedFood(allExpiringItems);
+                }
 
-            if (!isCategoryAll && !expiring) {
-                const filtered = filterFridgeByCategory(fridge, selectedCategory);
-                setSelectedFood(filtered);
-            }
+                if (!isCategoryAll && !expiring) {
+                    const filtered = filterFridgeByCategory(fridge, selectedCategory);
+                    setSelectedFood(filtered);
+                }
 
-            if (!isCategoryAll && expiring) {
-                const filtered = filterFridgeByCategory(fridge, selectedCategory);
-                const expiredFilteredItems = getExpiringItems(filtered);
-                setSelectedFood(expiredFilteredItems);
+                if (!isCategoryAll && expiring) {
+                    const filtered = filterFridgeByCategory(fridge, selectedCategory);
+                    const expiredFilteredItems = getExpiringItems(filtered);
+                    setSelectedFood(expiredFilteredItems);
+                }
             }
         },
         [fridge]

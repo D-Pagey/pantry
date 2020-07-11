@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import MockDate from 'mockdate';
-import { FirebaseContext } from './components/ProviderFirebase';
+import { AuthContext } from './components/ProviderAuth';
 
 MockDate.set('01/01/2020');
 
@@ -15,25 +15,13 @@ type AllTheProvidersProps = {
 };
 
 const AllTheProviders: FC<AllTheProvidersProps> = ({ children, customContext }) => (
-    <FirebaseContext.Provider
+    <AuthContext.Provider
         value={{
-            categories: [],
-            deleteFoodItem: () => () => null,
-            expiringCount: 0,
-            isAuthed: false,
-            isCheckingAuth: false,
-            fridge: [],
-            signOut: () => null,
-            updateFridge: () => null,
-            user: {
-                email: null,
-                name: null
-            },
             ...customContext
         }}
     >
         <MemoryRouter>{children}</MemoryRouter>
-    </FirebaseContext.Provider>
+    </AuthContext.Provider>
 );
 
 const customRender = (ui: any, customContext?: any, options?: any) =>

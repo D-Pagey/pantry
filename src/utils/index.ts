@@ -1,6 +1,5 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
-
 import { DropdownOptionType, FoodType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
@@ -45,4 +44,22 @@ export const getExpiringItems = (food: FoodType[]): FoodType[] => {
 
 export const filterFridgeByCategory = (food: FoodType[], category: string): FoodType[] => {
     return food.filter((item) => item.category === category);
+};
+
+export const formatExpiryDates = (fridgeItems: FoodType[]): FoodType[] => {
+    return fridgeItems.map((item) => {
+        return {
+            ...item,
+            batches: item.batches.map((batch) => ({ ...batch, expires: batch.expires.toDate() }))
+        };
+    });
+};
+
+export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {
+   return fridgeItems.reduce((acc, curr) => {
+        const expiringSoon = curr.batches.some(batch => differenceInDays(batch.expires, new Date()) < EXPIRING_SOON_DAYS);
+
+        if (expiringSoon) return acc + 1;
+        return acc;
+    }, 0);
 };

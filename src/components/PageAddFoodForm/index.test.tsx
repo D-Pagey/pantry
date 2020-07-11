@@ -18,22 +18,24 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const context = {
-    fridge: [],
-    updateFridge: () => {},
     user: {
         email: 'dan.page91@gmail.com',
         uid: '1234'
     }
 };
 
+const props = {
+    updateFridge: () => {}
+};
+
 describe('PageAddFoodForm component', () => {
     it('should render', () => {
-        const { container } = render(<PageAddFoodForm />, context);
+        const { container } = render(<PageAddFoodForm {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should render step 2 of the form once category is clicked', async () => {
-        const { getByTestId, getByText, getByLabelText } = render(<PageAddFoodForm />, context);
+        const { getByTestId, getByText, getByLabelText } = render(<PageAddFoodForm {...props} />, context);
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
@@ -43,7 +45,7 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should render step 3 of the form once hit next on step 2', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
@@ -57,7 +59,7 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should redirect to food page once submitted', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, context);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
@@ -75,9 +77,9 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should call updateFridge with the right values if new fridge item', async () => {
-        const updatedContext = { ...context, updateFridge: jest.fn() };
+        const updatedProps = { ...props, fridge: Fridge, updateFridge: jest.fn() };
 
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
         await selectEvent.create(getByLabelText('What is the food called?'), 'Avocado');
         userEvent.click(getByTestId('singleSelectButton0'));
@@ -92,11 +94,11 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedContext.updateFridge).toBeCalledWith({
+            expect(updatedProps.updateFridge).toBeCalledWith({
                 batches: [
                     {
                         expires: expect.any(Date),
-                        ownerId: updatedContext.user.uid,
+                        ownerId: context.user.uid,
                         servings: 1
                     }
                 ],
@@ -107,10 +109,14 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should update a fridge item if already exists', async () => {
-        const updatedContext = { ...context, fridge: Fridge, updateFridge: jest.fn() };
+        const updatedProps = {
+            ...props,
+            fridge: Fridge,
+            updateFridge: jest.fn()
+        };
         const name = 'steak';
 
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm />, updatedContext);
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
         await selectEvent.select(getByLabelText('What is the food called?'), 'Steak');
         userEvent.click(getByTestId('singleSelectButton0'));
@@ -125,12 +131,12 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedContext.updateFridge).toBeCalledWith({
+            expect(updatedProps.updateFridge).toBeCalledWith({
                 batches: [
                     ...Batches,
                     {
                         expires: expect.any(Date),
-                        ownerId: updatedContext.user.uid,
+                        ownerId: context.user.uid,
                         servings: 1
                     }
                 ],
