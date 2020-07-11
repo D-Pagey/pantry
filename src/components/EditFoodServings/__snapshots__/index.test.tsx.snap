@@ -110,7 +110,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c5"
       >
         Expired 
-        7th Jul
+        11th Jul
       </span>
       <span
         class="c6"
@@ -139,7 +139,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c5"
       >
         Expired 
-        9th Jul
+        13th Jul
       </span>
       <span
         class="c6"
@@ -168,7 +168,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c5"
       >
         Expired 
-        9th Jul
+        13th Jul
       </span>
       <span
         class="c6"
@@ -197,7 +197,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c7"
       >
         Expired 
-        12th Jul
+        16th Jul
       </span>
       <span
         class="c6"
@@ -226,7 +226,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c7"
       >
         Expired 
-        12th Jul
+        16th Jul
       </span>
       <span
         class="c6"
@@ -255,7 +255,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c7"
       >
         Expired 
-        12th Jul
+        16th Jul
       </span>
       <span
         class="c6"
@@ -284,7 +284,7 @@ exports[`EditFoodServings component should render 1`] = `
         class="c7"
       >
         Expired 
-        12th Jul
+        16th Jul
       </span>
       <span
         class="c6"
