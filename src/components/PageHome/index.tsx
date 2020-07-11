@@ -1,8 +1,7 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import AlexaImage from './assets/alexa.svg';
@@ -10,8 +9,11 @@ import EatingTogetherImage from './assets/eating-together.svg';
 import FoodListImage from './assets/food-list.svg';
 import * as S from './styles';
 
-export const PageHome: FC = () => {
-    const { expiringCount } = useContext(FirebaseContext);
+type PageHomeProps = {
+    expiringCount?: number;
+};
+
+export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
     const history = useHistory();
 
     useEffect(() => {

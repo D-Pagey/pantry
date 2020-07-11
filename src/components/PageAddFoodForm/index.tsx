@@ -5,12 +5,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { BatchType, FoodType } from '../../types';
-import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { SingleSelect } from '../SingleSelect';
 import { Button } from '../Button';
+import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
 const options = [
@@ -32,9 +32,14 @@ const options = [
     }
 ];
 
-export const PageAddFoodForm: FC = () => {
+type PageAddFoodFormProps = {
+    fridge?: FoodType[];
+    updateFridge: (values: FoodType) => void;
+};
+
+export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge }) => {
     const [step, setStep] = useState(1);
-    const { fridge, updateFridge, user } = useContext(FirebaseContext);
+    const { user } = useContext(AuthContext);
     const history = useHistory();
 
     return (
@@ -42,48 +47,53 @@ export const PageAddFoodForm: FC = () => {
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
-                    const existingBatches = fridge.reduce((acc, curr: FoodType) => {
-                        if (curr.name === values.name.toLowerCase()) {
-                            return [...acc, ...curr.batches];
-                        }
+                    if (fridge) {
+                        const existingBatches = fridge.reduce((acc, curr: FoodType) => {
+                            if (curr.name === values.name.toLowerCase()) {
+                                return [...acc, ...curr.batches];
+                            }
 
-                        return acc;
-                    }, [] as BatchType[]);
+                            return acc;
+                        }, [] as BatchType[]);
 
-                    const formattedValues: FoodType = {
-                        category: values.category,
-                        name: values.name.toLowerCase() || values.category,
-                        batches: [
-                            ...existingBatches,
-                            { ownerId: user.uid, expires: values.expires, servings: values.servings }
-                        ]
-                    };
+                        const formattedValues: FoodType = {
+                            category: values.category,
+                            name: values.name.toLowerCase() || values.category,
+                            batches: [
+                                ...existingBatches,
+                                { ownerId: user?.uid!, expires: values.expires, servings: values.servings }
+                            ]
+                        };
 
-                    updateFridge(formattedValues);
-
+                        updateFridge(formattedValues);
+                    }
                     actions.setSubmitting(false);
                     actions.resetForm();
 
                     history.push('/food');
                 }}
             >
-                {({ handleBlur, handleChange, setFieldValue, values }): JSX.Element => {
-                    const handleCategoryClick = (category: string) => {
+                {({ setFieldValue, values }): JSX.Element => {
+                    const handleCategoryClick = (category: string): void => {
                         setFieldValue('category', category);
                         setStep(3);
                     };
 
                     const checkExistingCategory = () => {
-                        return fridge.reduce((acc, curr: FoodType) => {
-                            if (curr.name === values.name.toLowerCase()) {
-                                return curr.category;
-                            }
+                        if (fridge) {
+                            return fridge.reduce((acc, curr: FoodType) => {
+                                if (curr.name === values.name.toLowerCase()) {
+                                    return curr.category;
+                                }
 
-                            return acc;
-                        }, '');
+                                return acc;
+                            }, '');
+                        }
+
+                        return undefined;
                     };
 
-                    const onKeyDown = (keyEvent: any) => {
+                    const onKeyDown = (keyEvent: any): void => {
                         if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
                             keyEvent.preventDefault();
                         }

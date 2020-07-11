@@ -8,7 +8,8 @@ import {
     getColourFromDate,
     getFridgeNameOptions,
     getExpiringItems,
-    filterFridgeByCategory
+    filterFridgeByCategory,
+    countExpiringFoodItems
 } from '.';
 
 describe('getPercentageFromDate function', () => {
@@ -83,5 +84,49 @@ describe('filterFridgeByCategory function', () => {
     it('should correctly filter', () => {
         const filtered = filterFridgeByCategory(Fridge, 'dairy');
         expect(filtered).toStrictEqual([Fridge[3]]);
+    });
+});
+
+describe('formatExpiryDates function', () => {
+    it.todo('should convert timestamps to dates');
+});
+
+describe('countExpiringFoodItems function', () => {
+    it('should return the count of 2 with expiring batches', () => {
+        const HalfExpiringFridge: FoodType[] = [
+            Fridge[0],
+            Fridge[1],
+            {
+                batches: [{
+                    expires: addDays(new Date(), 5),
+                    ownerId: '123',
+                    servings: 1
+                }],
+                category: 'dairy',
+                name: 'milk'
+            }
+        ];
+        
+        
+        const count = countExpiringFoodItems(HalfExpiringFridge);
+        expect(count).toBe(2);
+    });
+
+    it('should return the correct count of 0 with no expiring batches', () => {
+        const HalfExpiringFridge: FoodType[] = [
+            {
+                batches: [{
+                    expires: addDays(new Date(), 5),
+                    ownerId: '123',
+                    servings: 1
+                }],
+                category: 'dairy',
+                name: 'milk'
+            }
+        ];
+        
+        
+        const count = countExpiringFoodItems(HalfExpiringFridge);
+        expect(count).toBe(0);
     });
 });

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { FirebaseContext } from '../ProviderFirebase';
+
 import { Loading } from '../Loading';
+import { AuthContext } from '../ProviderAuth';
 
 export const RouteProtected = (props: any): JSX.Element => {
-    const { isAuthed, isCheckingAuth } = useContext(FirebaseContext);
+    const { isAuthed, isCheckingAuth } = useContext(AuthContext);
 
     if (isCheckingAuth) {
         return (

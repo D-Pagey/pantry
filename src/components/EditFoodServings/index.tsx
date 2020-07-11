@@ -1,22 +1,21 @@
 import 'rc-checkbox/assets/index.css';
-import React, { FC, useReducer, useContext } from 'react';
+import React, { FC, useReducer } from 'react';
 import { format } from 'date-fns';
 import { useHistory } from 'react-router-dom';
 
 import { BatchType, FoodType } from '../../types';
 import { getColourFromDate } from '../../utils';
-import { FirebaseContext } from '../ProviderFirebase';
 import { Button } from '../Button';
 import { reducer } from './reducer';
 import * as S from './styles';
 
 type EditFoodServingsProps = {
+    updateFridge: (food: FoodType) => void;
     item: FoodType;
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge }) => {
     const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
-    const { updateFridge } = useContext(FirebaseContext);
     const history = useHistory();
 
     const handleChecked = (batch: BatchType) => (event: any): void => {

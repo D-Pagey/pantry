@@ -1,5 +1,6 @@
 import { addDays } from 'date-fns';
-import { BatchType, FoodType } from '../types';
+
+import { BatchType, FoodType, UserType } from '../types';
 
 export const ExpiredBatch: BatchType = {
     expires: new Date(),
@@ -48,3 +49,11 @@ export const Fridge: FoodType[] = [
         name: 'milk'
     }
 ];
+
+export const User: UserType = {
+    email: 'dan@test.com',
+    household: '123',
+    name: 'Dan',
+    photo: 'google.com/dan',
+    uid: 'abcde'
+};

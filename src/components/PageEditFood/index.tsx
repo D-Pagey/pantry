@@ -6,7 +6,11 @@ import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
 import * as S from './styles';
 
-export const PageEditFood: FC = () => {
+type PageEditFoodProps = {
+    updateFridge: (food: FoodType) => void;
+};
+
+export const PageEditFood: FC<PageEditFoodProps> = ({ updateFridge }) => {
     const [item, setItem] = useState<FoodType>();
     const location = useLocation();
 
@@ -18,7 +22,7 @@ export const PageEditFood: FC = () => {
 
     return (
         <Layout title="Edit servings">
-            <S.Wrapper>{item && <EditFoodServings item={item} />}</S.Wrapper>
+            <S.Wrapper>{item && <EditFoodServings updateFridge={updateFridge} item={item} />}</S.Wrapper>
         </Layout>
     );
 };

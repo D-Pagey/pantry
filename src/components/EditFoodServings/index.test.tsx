@@ -18,7 +18,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const props = {
-    item: Fridge[0]
+    item: Fridge[0],
+    updateFridge: () => {}
 };
 
 describe('EditFoodServings component', () => {
@@ -29,7 +30,7 @@ describe('EditFoodServings component', () => {
 
     it('should update remove correct servings amount', () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<EditFoodServings {...props} />, { updateFridge });
+        const { getByTestId } = render(<EditFoodServings {...props} updateFridge={updateFridge} />);
 
         userEvent.click(getByTestId('2-0'));
         userEvent.click(getByTestId('3-0'));
@@ -66,7 +67,7 @@ describe('EditFoodServings component', () => {
 
     it('should remove a batch if checked last serving', () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<EditFoodServings {...props} />, { updateFridge });
+        const { getByTestId } = render(<EditFoodServings {...props} updateFridge={updateFridge} />);
 
         userEvent.click(getByTestId('1-0'));
         userEvent.click(getByTestId('EditFoodServingsSubmit'));
@@ -83,7 +84,7 @@ describe('EditFoodServings component', () => {
 
     it('should update remove correct servings amount when checked and unchecked', () => {
         const updateFridge = jest.fn();
-        const { getByTestId } = render(<EditFoodServings {...props} />, { updateFridge });
+        const { getByTestId } = render(<EditFoodServings {...props} updateFridge={updateFridge} />);
 
         userEvent.click(getByTestId('1-0'));
         userEvent.click(getByTestId('1-0'));

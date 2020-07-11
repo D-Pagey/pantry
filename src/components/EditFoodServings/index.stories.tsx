@@ -5,7 +5,8 @@ import { EditFoodServings } from '.';
 export default { title: 'EditFoodServings' };
 
 const props = {
-    item: Fridge[0]
+    item: Fridge[0],
+    updateFridge: () => {}
 };
 
 export const normal = () => <EditFoodServings {...props} />;
