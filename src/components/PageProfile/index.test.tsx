@@ -9,7 +9,8 @@ const context = {
     signOut: () => {},
     user: {
         email: 'dan@gmail.com',
-        name: 'Dan'
+        name: 'Dan',
+        photo: 'www.google.com'
     }
 };
 

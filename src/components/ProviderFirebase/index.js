@@ -18,6 +18,7 @@ export const FirebaseContext = createContext({
     user: {
         email: null,
         name: null,
+        photo: '',
         uid: ''
     }
 });
