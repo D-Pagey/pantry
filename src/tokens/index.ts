@@ -22,3 +22,7 @@ export const colours = {
     red: 'red',
     white: 'white'
 };
+
+export const mediaQuery = {
+    tablet: '(min-width: 768px)',
+};

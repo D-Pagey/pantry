@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
+import { colours, mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -13,11 +13,11 @@ export const Title = styled.h1`
     font-size: 3rem;
     margin: 0;
     padding: 3rem 0;
-    width: 220px;
+    width: 230px;
 `;
 
 export const Text = styled.p`
-    color: ${colours.darkGrey}; 
+    color: ${colours.darkGrey};
     font-size: 18px;
     margin: 0;
     padding: 0 0 3rem;
@@ -28,17 +28,38 @@ export const Text = styled.p`
     }
 `;
 
-export const FeaturesWrapper = styled.div`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0 0 0;
+export const Feature = styled.div`
+    display: grid;
+    grid-row-gap: 2rem;
+    max-width: 700px;
+    padding: 3rem 0;
+
+    @media ${mediaQuery.tablet} {
+        grid-column-gap: 2rem;
+        grid-row-gap: 1rem;
+        grid-template-columns: 1fr max-content;
+    }
+`;
+
+export const Image = styled.img`
+    justify-self: center;
+    max-width: 300px;
+    width: 100%;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        justify-self: end;
+    }
 `;
 
 export const SubTitle = styled.h2`
     font-size: 1.5rem;
     margin: 0;
-    padding: 4rem 0 1.5rem;
+
+    @media ${mediaQuery.tablet} {
+        align-self: end;
+    }
 `;
 
 export const Description = styled.p`

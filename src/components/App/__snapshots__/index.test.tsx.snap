@@ -12,6 +12,18 @@ exports[`App component should render 1`] = `
   color: orange;
 }
 
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
 <div>
   <div
     class="bm-overlay"

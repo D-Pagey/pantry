@@ -5,6 +5,9 @@ import { toast } from 'react-toastify';
 import { FirebaseContext } from '../ProviderFirebase';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
+import AlexaImage from './assets/alexa.svg';
+import EatingTogetherImage from './assets/eating-together.svg';
+import FoodListImage from './assets/food-list.svg';
 import * as S from './styles';
 
 export const PageHome: FC = () => {
@@ -33,22 +36,28 @@ export const PageHome: FC = () => {
                     <Button>Get started for free</Button>
                 </Link>
 
-                <S.FeaturesWrapper>
+                <S.Feature>
+                    <S.Image src={AlexaImage} alt="alexa" />
+                    <S.SubTitle>Hands free</S.SubTitle>
+                    <S.Description>
+                        Ask Alexa what you have that is expiring, or add a list of items as you put your shopping away.
+                    </S.Description>
+                </S.Feature>
+
+                <S.Feature>
+                    <S.Image src={FoodListImage} alt="food list" />
                     <S.SubTitle>Get notified on expiring items</S.SubTitle>
                     <S.Description>Clearly see and manage your food items that are about to expire.</S.Description>
+                </S.Feature>
 
-                    <S.SubTitle>Track wastage</S.SubTitle>
-                    <S.Description>
-                        One click track whether you ate or threw out food. Check out your household&apos;s wastage stats
-                        on your profile page.
-                    </S.Description>
-
+                <S.Feature>
+                    <S.Image src={EatingTogetherImage} alt="eating together" />
                     <S.SubTitle>Share food with your household</S.SubTitle>
                     <S.Description>
                         Send a notification to other members of the household requesting to borrow their food. Easily
                         let other household members know that you have extras that need to be eaten!
                     </S.Description>
-                </S.FeaturesWrapper>
+                </S.Feature>
             </S.Wrapper>
         </Layout>
     );

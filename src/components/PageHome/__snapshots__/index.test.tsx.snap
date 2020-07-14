@@ -40,6 +40,18 @@ exports[`PageHome component should render 1`] = `
   width: 32px;
 }
 
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
+@media (min-width:768px) {
+
+}
+
 <div
   class="c0"
 >
