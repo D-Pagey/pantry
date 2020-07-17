@@ -15,15 +15,18 @@ type FoodCardProps = {
     isSelected?: boolean;
     margin?: string;
     name: string;
+    ownerPhoto: string;
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name }) => {
+export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name, ownerPhoto }) => {
     const sortedBatches = arraySort(batches, 'expires');
 
     return (
         <S.Wrapper margin={margin} onClick={handleClick} isSelected={isSelected}>
             <S.Name>{titleCase(name)}</S.Name>
             <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
+
+            <S.OwnerPicture src={ownerPhoto} alt="food owner" />
 
             <S.CircleWrapper>
                 {sortedBatches.map((batch) => {

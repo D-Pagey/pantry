@@ -7,7 +7,8 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     cursor: pointer;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2rem;
+    grid-template-columns: 1fr max-content max-content;
     margin: ${({ margin }) => margin};
     max-width: 330px;
     min-width: 220px;
@@ -25,13 +26,23 @@ export const Date = styled.p`
     margin: 4px 0 8px;
 `;
 
+export const OwnerPicture = styled.img`
+    align-self: center;
+    border-radius: 50%;
+    grid-row: 1 / 4;
+    grid-column: 2 / 3;
+    width: 50px;
+`;
+
 export const CircleWrapper = styled.div`
     align-items: center;
     display: flex;
 `;
 
 export const DonutWrapper = styled.div`
-    grid-column: 2 / 3;
+    grid-column: 3 / 4;
     grid-row: 1 / 4;
     justify-self: end;
+    position: relative;
+    top: 4px;
 `;

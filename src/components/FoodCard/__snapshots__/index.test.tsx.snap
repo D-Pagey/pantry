@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FoodCard component should render 1`] = `
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,7 +9,7 @@ exports[`FoodCard component should render 1`] = `
   width: 60px;
 }
 
-.c6 {
+.c7 {
   -webkit-animation: kKTezL 1.5s;
   animation: kKTezL 1.5s;
   fill: transparent;
@@ -20,14 +20,14 @@ exports[`FoodCard component should render 1`] = `
   stroke-width: 5;
 }
 
-.c7 {
+.c8 {
   -webkit-dominant-baseline: middle;
   dominant-baseline: middle;
   font-size: 38px;
   text-anchor: middle;
 }
 
-.c8 {
+.c9 {
   -webkit-dominant-baseline: middle;
   dominant-baseline: middle;
   font-size: 38px;
@@ -40,7 +40,8 @@ exports[`FoodCard component should render 1`] = `
   border-radius: 10px;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2rem;
+  grid-template-columns: 1fr max-content max-content;
   max-width: 330px;
   min-width: 220px;
   padding: 1rem;
@@ -58,6 +59,16 @@ exports[`FoodCard component should render 1`] = `
 }
 
 .c3 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border-radius: 50%;
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  width: 50px;
+}
+
+.c4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -68,10 +79,12 @@ exports[`FoodCard component should render 1`] = `
   display: flex;
 }
 
-.c4 {
-  grid-column: 2 / 3;
+.c5 {
+  grid-column: 3 / 4;
   grid-row: 1 / 4;
   justify-self: end;
+  position: relative;
+  top: 4px;
 }
 
 <div
@@ -87,8 +100,13 @@ exports[`FoodCard component should render 1`] = `
   >
     1st Jan
   </p>
-  <div
+  <img
+    alt="food owner"
     class="c3"
+    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+  />
+  <div
+    class="c4"
   >
     <svg
       fill="none"
@@ -197,10 +215,10 @@ exports[`FoodCard component should render 1`] = `
     </svg>
   </div>
   <div
-    class="c4"
+    class="c5"
   >
     <div
-      class="c5"
+      class="c6"
     >
       <svg
         height="100%"
@@ -208,7 +226,7 @@ exports[`FoodCard component should render 1`] = `
         width="100%"
       >
         <circle
-          class="c6"
+          class="c7"
           color="red"
           cx="50"
           cy="50"
@@ -216,14 +234,14 @@ exports[`FoodCard component should render 1`] = `
           transform="rotate(-90 50 50)"
         />
         <text
-          class="c7"
+          class="c8"
           x="50%"
           y="42%"
         >
           0
         </text>
         <text
-          class="c8"
+          class="c9"
           x="51%"
           y="70%"
         >
