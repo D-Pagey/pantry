@@ -17,4 +17,5 @@ describe('FoodCard component', () => {
     });
 
     it.todo('should sort batches by oldest first');
+    it.todo('should handle too many servings');
 });

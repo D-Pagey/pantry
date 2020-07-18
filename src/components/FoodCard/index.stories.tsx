@@ -12,5 +12,11 @@ const props = {
     ownerPhoto: User.photo
 };
 
-export const normal = () => <FoodCard {...props} />;
+export const normal = () => (
+    <>
+        <FoodCard {...props} />
+        <FoodCard {...props} name="Too many carrots" batches={[...Batches, ...Batches]} />
+    </>
+);
+
 export const selected = () => <FoodCard {...props} isSelected />;

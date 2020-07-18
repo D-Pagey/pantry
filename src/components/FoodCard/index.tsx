@@ -7,6 +7,7 @@ import { BatchType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { Donut } from '../Donut';
+import { getTotalServingsCount, reduceBatches } from './utils';
 import * as S from './styles';
 
 type FoodCardProps = {
@@ -20,6 +21,10 @@ type FoodCardProps = {
 
 export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name, ownerPhoto }) => {
     const sortedBatches = arraySort(batches, 'expires');
+    const totalServings = getTotalServingsCount(sortedBatches);
+    // not very well named
+    // basically choose whether or not we need to reduce the batches
+    const circleIconBatches = totalServings <= 10 ? sortedBatches : reduceBatches(sortedBatches);
 
     return (
         <S.Wrapper margin={margin} onClick={handleClick} isSelected={isSelected}>
@@ -29,8 +34,8 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
             <S.OwnerPicture src={ownerPhoto} alt="food owner" />
 
             <S.CircleWrapper>
-                {sortedBatches.map((batch) => {
-                    return [...Array(batch.servings)].map((e, i) => (
+                {circleIconBatches.map((batch) => {
+                    return [...Array(batch.servings)].map((_, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <CircleIcon key={i} colour={getColourFromDate(batch.expires)} margin="0 4px 0 0" />
                     ));
