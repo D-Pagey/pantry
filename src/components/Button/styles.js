@@ -12,6 +12,7 @@ export const Button = styled.button.attrs(({ type }) => ({
     padding: 1rem;
     margin: ${({ margin }) => margin};
     min-width: 68px;
+    width: ${({ size }) => size === 'sm' && 'max-content'};
 `;
 
 export const SecondaryButton = styled(Button)`

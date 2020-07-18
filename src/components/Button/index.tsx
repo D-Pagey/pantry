@@ -7,29 +7,22 @@ type ButtonProps = {
     margin?: string;
     onClick?: Function;
     secondary?: boolean;
+    size?: 'sm' | 'm' | 'l';
     type?: string;
 };
 
-export const Button: FC<ButtonProps> = ({ children, disabled, margin, onClick, secondary, type, ...props }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, secondary, ...props }) => {
     if (disabled) {
         return (
-            <S.DisabledButton disabled={disabled} margin={margin} onClick={onClick} type={type} {...props}>
+            <S.DisabledButton disabled={disabled} {...props}>
                 {children}
             </S.DisabledButton>
         );
     }
 
     if (secondary) {
-        return (
-            <S.SecondaryButton onClick={onClick} margin={margin} type={type} {...props}>
-                {children}
-            </S.SecondaryButton>
-        );
+        return <S.SecondaryButton {...props}>{children}</S.SecondaryButton>;
     }
 
-    return (
-        <S.Button onClick={onClick} margin={margin} type={type} {...props}>
-            {children}
-        </S.Button>
-    );
+    return <S.Button {...props}>{children}</S.Button>;
 };

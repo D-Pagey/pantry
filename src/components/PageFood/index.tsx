@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
 import { toast } from 'react-toastify';
 
@@ -89,18 +89,18 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
         setIsExpiring(!isExpiring);
     };
 
-    const handleFoodDelete = () => {
+    const handleFoodDelete = (): void => {
         if (editingItem?.name) {
             deleteFoodItem(editingItem.name);
             setEditingItem(undefined);
         }
     };
 
-    const handleFoodEdit = () => {
+    const handleFoodEdit = (): void => {
         history.push(`/${editingItem?.name}/edit`, editingItem);
     };
 
-    const handleFoodClick = (item: FoodType) => () => {
+    const handleFoodClick = (item: FoodType) => (): void => {
         if (!editingItem || editingItem.name !== item.name) setEditingItem(item);
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
@@ -143,9 +143,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
                         })}
                 </div>
 
-                <Link to="/add">
-                    <Button>Add Item</Button>
-                </Link>
+                <Button size="sm">
+                    <S.RouterLink to="/add">Add Item</S.RouterLink>
+                </Button>
             </S.Wrapper>
 
             {editingItem && (
