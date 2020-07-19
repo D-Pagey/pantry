@@ -19,7 +19,7 @@ export const PageSignIn = () => {
             // Avoid redirects after sign-in.
             signInSuccessWithAuthResult: (result: any) => {
                 setUser({ name: result.user.displayName, email: result.user.email, photo: result.user.photoURL });
-                return true;
+                return false;
             }
         },
         // We will display Google and Facebook as auth providers.
