@@ -10,16 +10,18 @@ type AuthContextTypes = {
     isAuthed?: boolean;
     isCheckingAuth: boolean;
     signOut: () => void;
-    user?: UserType;
+    setUser: React.Dispatch<React.SetStateAction<Partial<UserType> | undefined>>;
+    user?: Partial<UserType>;
 };
 
 export const AuthContext = createContext<AuthContextTypes>({
     isCheckingAuth: true,
+    setUser: () => {},
     signOut: () => {}
 });
 
 export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
-    const [user, setUser] = useState<UserType>();
+    const [user, setUser] = useState<Partial<UserType>>();
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [isAuthed, setIsAuthed] = useState(false);
 
@@ -70,6 +72,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
                 isAuthed,
                 isCheckingAuth,
                 signOut,
+                setUser,
                 user
             }}
         >

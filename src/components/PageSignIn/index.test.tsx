@@ -25,6 +25,6 @@ describe('PageSignIn component', () => {
 
     it('should redirect if authed', () => {
         render(<PageSignIn />, { ...context, isAuthed: true });
-        expect(Redirect).toHaveBeenCalledWith({ to: '/' }, expect.any(Object));
+        expect(Redirect).toHaveBeenCalledWith({ to: '/food' }, expect.any(Object));
     });
 });
