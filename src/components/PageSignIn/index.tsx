@@ -1,13 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 
 import { firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
+import { Input } from '../Input';
+import { Button } from '../Button';
+import loginImage from './assets/mobile-login.svg';
+import * as S from './styles';
 
 export const PageSignIn = () => {
+    const [email, setEmail] = useState('');
     const { isAuthed, setUser } = useContext(AuthContext);
+
+    const handleEmailChange = (event: any) => setEmail(event.target.value);
 
     // Configure FirebaseUI.
     const uiConfig = {
@@ -32,9 +39,25 @@ export const PageSignIn = () => {
 
     return (
         <Layout title="Sign in">
-            <div data-testid="pageSignIn">
+            <S.Wrapper>
+                <S.Title>Who are you?</S.Title>
+
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            </div>
+
+                <p>or</p>
+
+                <S.EmailWrapper>
+                    <Input
+                        margin="0 2rem 0 0"
+                        onChange={handleEmailChange}
+                        placeholder="Email me a magic link"
+                        value={email}
+                    />
+                    <Button>Send</Button>
+                </S.EmailWrapper>
+
+                <S.Image src={loginImage} alt="login" />
+            </S.Wrapper>
         </Layout>
     );
 };

@@ -5,7 +5,7 @@ type InputTypes = {
     margin?: string;
     name?: string;
     onBlur?: Function;
-    onChange: Function;
+    onChange: (event: any) => void;
     placeholder?: string;
     testId?: string;
     value: string;
