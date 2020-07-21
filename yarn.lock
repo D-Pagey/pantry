@@ -2715,10 +2715,10 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@testing-library/dom@7.21.1":
-  version "7.21.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.21.1.tgz#c59f50fddc33db34547a7860f969dbede110623d"
-  integrity sha512-BVFZeCtZ4cbFqOr/T8rS8q8tfK998SZeC0VcBUGBp3uEr2NVjPaImnzHPJWUx3A+JQqT01aG60SZ7kuyuZCZUQ==
+"@testing-library/dom@7.21.4":
+  version "7.21.4"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.21.4.tgz#24b045f3161b7c91fdb35da7c001908cdc99b55b"
+  integrity sha512-IXjKRTAH31nQ+mx6q3IPw85RTLul8VlWBm1rxURoxDt7JI0HPlAAfbtrKTdeq83XYCYO7HSHogyV+OsD+6FX0Q==
   dependencies:
     "@babel/runtime" "^7.10.3"
     "@types/aria-query" "^4.2.0"
@@ -2924,10 +2924,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.13.tgz#ee1128e881b874c371374c1f72201893616417c9"
   integrity sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
 
-"@types/node@14.0.23":
-  version "14.0.23"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.23.tgz#676fa0883450ed9da0bb24156213636290892806"
-  integrity sha512-Z4U8yDAl5TFkmYsZdFPdjeMa57NOvnaf1tljHzhouaPEp7LCj2JKkejpI1ODviIAQuW4CcQmxkQ77rnLsOOoKw==
+"@types/node@14.0.24":
+  version "14.0.24"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.24.tgz#b0f86f58564fa02a28b68f8b55d4cdec42e3b9d6"
+  integrity sha512-btt/oNOiDWcSuI721MdL8VQGnjsKjlTMdrKyTcLCKeQp/n4AAMFJ961wMbp+09y8WuGPClDEv07RIItdXKIXAA==
 
 "@types/node@^13.7.0":
   version "13.13.12"
@@ -2989,10 +2989,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-datepicker@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-3.0.2.tgz#5752612d599361181563d62f7425a03a05f2fdf1"
-  integrity sha512-xW04NZRF+9ZnzOD3XrlIzBEKgUsN6LVgZJJsXH8NIUlVjyPh+sdtLPfVoDp+GQzGq1M0TuMLNZsv0sJ3N9XwDA==
+"@types/react-datepicker@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-3.1.0.tgz#e55d23224479346cc0405fbe1215017413243419"
+  integrity sha512-NhI001C2W5Sx6aOxKC1P1bvl8WB3PwxGOJ0bTimf7GcjPY2qIfhtFaSnCHZ+rLUQjG7O75UDXpMc0fEEej11dw==
   dependencies:
     "@types/react" "*"
     date-fns "^2.0.1"
