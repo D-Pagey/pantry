@@ -52,7 +52,9 @@ export const Fridge: FoodType[] = [
 
 export const User: UserType = {
     email: 'dan@test.com',
-    household: '123',
+    households: {
+        default: '123'
+    },
     name: 'Dan',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     uid: 'abcde'

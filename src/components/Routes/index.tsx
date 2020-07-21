@@ -22,29 +22,31 @@ export const Routes = (): JSX.Element => {
     const { user } = useContext(AuthContext);
 
     const updateFridge = (values: FoodType): void => {
-        db.collection('households')
-            .doc(user?.household)
-            .update({ [`fridge.${values.name}`]: values })
-            .then(() => {
-                return toast.success('Food item added');
-            })
-            .catch(() => toast.error('Error with updating fridge'));
+        if (user) {
+            db.collection('households')
+                .doc(user.households!.default)
+                .update({ [`fridge.${values.name}`]: values })
+                .then(() => toast.success('Food item added'))
+                .catch(() => toast.error('Error with updating fridge'));
+        }
     };
 
     const getFridgeData = useCallback(() => {
-        db.collection('households')
-            .doc(user!.household)
-            .onSnapshot((doc: any) => {
-                const fridgeItems: FoodType[] = Object.values(doc.data().fridge);
-                const formattedDates = formatExpiryDates(fridgeItems);
+        if (user) {
+            db.collection('households')
+                .doc(user.households!.default)
+                .onSnapshot((doc: any) => {
+                    const fridgeItems: FoodType[] = Object.values(doc.data().fridge);
+                    const formattedDates = formatExpiryDates(fridgeItems);
 
-                setFridge(formattedDates);
-                setExpiringCount(countExpiringFoodItems(formattedDates));
-            });
+                    setFridge(formattedDates);
+                    setExpiringCount(countExpiringFoodItems(formattedDates));
+                });
+        }
     }, [user]);
 
     useEffect(() => {
-        if (user?.household) {
+        if (user?.households?.default) {
             getFridgeData();
         }
     }, [getFridgeData, user]);

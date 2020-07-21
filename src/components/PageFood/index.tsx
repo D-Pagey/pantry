@@ -31,15 +31,13 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     const history = useHistory();
 
     const deleteFoodItem = (id: string): void => {
-        db.collection('households')
-            .doc(user?.household)
-            .update({
-                [`fridge.${id}.batches`]: []
-            })
-            .then(() => {
-                toast.error('Food deleted');
-            })
-            .catch(() => toast.error('Error with deleting food'));
+        if (user) {
+            db.collection('households')
+                .doc(user.households!.default)
+                .update({ [`fridge.${id}.batches`]: [] })
+                .then(() => toast.error('Food deleted'))
+                .catch(() => toast.error('Error with deleting food'));
+        }
     };
 
     const filterFood = useCallback(

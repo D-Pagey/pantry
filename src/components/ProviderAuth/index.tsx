@@ -32,22 +32,23 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
             .firestore()
             .collection('users')
             .doc(uid)
-            .get()
-            .then((doc: any) => {
-                if (doc.exists) {
-                    setIsAuthed(true);
-                    setUser(doc.data());
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log('No such document!');
+            .onSnapshot(
+                (doc: any) => {
+                    if (doc.exists) {
+                        setIsAuthed(true);
+                        setUser(doc.data());
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log('No such document!');
+                    }
+                    setIsCheckingAuth(false);
+                },
+                (error) => {
+                    setIsAuthed(false);
+                    setIsCheckingAuth(false);
+                    console.log('Error getting document:', error);
                 }
-                setIsCheckingAuth(false);
-            })
-            .catch((error) => {
-                setIsAuthed(false);
-                setIsCheckingAuth(false);
-                console.log('Error getting document:', error);
-            });
+            );
     }, []);
 
     const signOut = (): void => {
