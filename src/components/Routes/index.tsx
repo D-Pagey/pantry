@@ -13,6 +13,7 @@ import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
 import { PageProfile } from '../PageProfile';
 import { PageSignIn } from '../PageSignIn';
+import { PageMagicLanding } from '../PageMagicLanding';
 import { RouteProtected } from '../RouteProtected';
 
 export const Routes = (): JSX.Element => {
@@ -56,6 +57,10 @@ export const Routes = (): JSX.Element => {
 
             <Route path="/sign-in">
                 <PageSignIn />
+            </Route>
+
+            <Route path="/magic">
+                <PageMagicLanding />
             </Route>
 
             <RouteProtected path="/food">

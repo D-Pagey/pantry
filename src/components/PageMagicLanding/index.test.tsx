@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { render } from '../../test-utils';
-import { PageSignIn } from '.';
 
-jest.mock('react-firebaseui/StyledFirebaseAuth');
+import { render } from '../../test-utils';
+import { PageMagicLanding } from '.';
 
 jest.mock('react-router-dom', () => ({
     // @ts-ignore
@@ -13,20 +12,17 @@ jest.mock('react-router-dom', () => ({
 
 const context = {
     isAuthed: false,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setUser: () => {}
+    fetchUserData: () => {}
 };
 
-describe('PageSignIn component', () => {
+describe('PageMagicLanding component', () => {
     it('should render', () => {
-        const { container } = render(<PageSignIn />, context);
+        const { container } = render(<PageMagicLanding />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should redirect if authed', () => {
-        render(<PageSignIn />, { ...context, isAuthed: true });
+        render(<PageMagicLanding />, { ...context, isAuthed: true });
         expect(Redirect).toHaveBeenCalledWith({ to: '/food' }, expect.any(Object));
     });
-
-    it.todo('should show that an email has been sent');
 });

@@ -7,6 +7,7 @@ type ProviderAuthProps = {
 };
 
 type AuthContextTypes = {
+    fetchUserData: (userId: string) => void;
     isAuthed?: boolean;
     isCheckingAuth: boolean;
     signOut: () => void;
@@ -15,6 +16,7 @@ type AuthContextTypes = {
 };
 
 export const AuthContext = createContext<AuthContextTypes>({
+    fetchUserData: () => {},
     isCheckingAuth: true,
     setUser: () => {},
     signOut: () => {}
@@ -25,7 +27,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [isAuthed, setIsAuthed] = useState(false);
 
-    const fetchUserData = useCallback((uid) => {
+    const fetchUserData = useCallback((uid: string) => {
         firebase
             .firestore()
             .collection('users')
@@ -69,6 +71,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
+                fetchUserData,
                 isAuthed,
                 isCheckingAuth,
                 signOut,
