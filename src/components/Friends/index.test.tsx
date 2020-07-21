@@ -5,7 +5,11 @@ import { User } from '../../fixtures';
 import { Friends } from '.';
 
 const props = {
-    friends: [User, User, User]
+    friends: [
+        { ...User, uid: '1' },
+        { ...User, uid: '2' },
+        { ...User, uid: '3' }
+    ]
 };
 
 describe('Friends component', () => {
