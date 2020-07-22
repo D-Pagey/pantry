@@ -24,7 +24,7 @@ export const Routes = (): JSX.Element => {
     const updateFridge = (values: FoodType): void => {
         if (user) {
             db.collection('households')
-                .doc(user.households!.default)
+                .doc(user.household)
                 .update({ [`fridge.${values.name}`]: values })
                 .then(() => toast.success('Food item added'))
                 .catch(() => toast.error('Error with updating fridge'));
@@ -34,7 +34,7 @@ export const Routes = (): JSX.Element => {
     const getFridgeData = useCallback(() => {
         if (user) {
             db.collection('households')
-                .doc(user.households!.default)
+                .doc(user.household)
                 .onSnapshot((doc: any) => {
                     const fridgeItems: FoodType[] = Object.values(doc.data().fridge);
                     const formattedDates = formatExpiryDates(fridgeItems);
@@ -46,7 +46,7 @@ export const Routes = (): JSX.Element => {
     }, [user]);
 
     useEffect(() => {
-        if (user?.households?.default) {
+        if (user?.household) {
             getFridgeData();
         }
     }, [getFridgeData, user]);

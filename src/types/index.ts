@@ -17,9 +17,7 @@ export type DropdownOptionType = {
 
 export type UserType = {
     email: string;
-    households: {
-        default: string;
-    };
+    household: string;
     name: string;
     photo: string;
     uid: string;
