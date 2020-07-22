@@ -45,6 +45,7 @@ exports[`FoodCard component should render 1`] = `
   max-width: 330px;
   min-width: 220px;
   padding: 1rem;
+  width: 280px;
 }
 
 .c1 {

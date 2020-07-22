@@ -18,6 +18,13 @@ exports[`ExpiringPill component should render 1`] = `
   color: #348841;
 }
 
+@media (min-width:768px) {
+  .c0 {
+    grid-column: 2 / 3;
+    justify-self: end;
+  }
+}
+
 <div
   class="c0"
   data-testid="expiringPill"

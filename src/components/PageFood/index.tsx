@@ -11,7 +11,6 @@ import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
-import { Button } from '../Button';
 import { DisposeFood } from '../DisposeFood';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
@@ -107,9 +106,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
 
     return (
         <Layout>
-            <CategoryFilter selected={category} setSelected={handleCategoryClick} />
-
             <S.Wrapper>
+                <CategoryFilter selected={category} setSelected={handleCategoryClick} />
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
@@ -120,7 +118,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
                     </p>
                 )}
 
-                <div>
+                <S.FoodCardWrapper>
                     {selectedFood &&
                         arraySort(selectedFood, 'name').map((item: FoodType) => {
                             if (item.batches.length > 0) {
@@ -139,11 +137,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
 
                             return null;
                         })}
-                </div>
+                </S.FoodCardWrapper>
 
-                <Button size="sm">
+                <S.Button size="sm">
                     <S.RouterLink to="/add">Add Item</S.RouterLink>
-                </Button>
+                </S.Button>
             </S.Wrapper>
 
             {editingItem && (
