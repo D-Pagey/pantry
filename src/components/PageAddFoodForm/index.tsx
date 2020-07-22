@@ -141,7 +141,12 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
                                             selected={checkExistingCategory()}
                                         />
 
-                                        <Button onClick={() => setStep(3)}>Next</Button>
+                                        <S.ButtonWrapper>
+                                            <Button secondary onClick={() => setStep(1)}>
+                                                Back
+                                            </Button>
+                                            <Button onClick={() => setStep(3)}>Next</Button>
+                                        </S.ButtonWrapper>
                                     </S.StepWrapper>
                                 )}
 
@@ -157,7 +162,12 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
                                             />
                                         </div>
 
-                                        <Button type="submit">Add to pantry</Button>
+                                        <S.ButtonWrapper>
+                                            <Button secondary onClick={() => setStep(2)}>
+                                                Back
+                                            </Button>
+                                            <Button type="submit">Add to pantry</Button>
+                                        </S.ButtonWrapper>
                                     </S.StepWrapper>
                                 )}
                             </S.Form>

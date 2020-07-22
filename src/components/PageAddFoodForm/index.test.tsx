@@ -58,6 +58,38 @@ describe('PageAddFoodForm component', () => {
         await waitFor(() => getByText('When is it going to expire?'));
     });
 
+    it('should render step 1 of the form once hit back on step 2', async () => {
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
+        userEvent.click(getByTestId('singleSelectButton0'));
+        userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByText('Back'));
+
+        await waitFor(() => getByText('What is the food called?'));
+    });
+
+    it('should render step 2 of the form once hit back on step 3', async () => {
+        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+
+        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
+        userEvent.click(getByTestId('singleSelectButton0'));
+        userEvent.click(getByText('Next'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+
+        userEvent.click(getByTestId('meatCategoryButton'));
+
+        await waitFor(() => getByText('When is it going to expire?'));
+
+        userEvent.click(getByText('Back'));
+
+        await waitFor(() => getByTestId('chooseCategory'));
+    });
+
     it('should redirect to food page once submitted', async () => {
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
 

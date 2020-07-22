@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form as FormikForm} from 'formik';
+import { Form as FormikForm } from 'formik';
 
 export const Wrapper = styled.div`
     box-sizing: border-box;
@@ -31,4 +31,13 @@ export const Label = styled.label`
 
 export const Form = styled(FormikForm)`
     height: 100%;
+`;
+
+export const ButtonWrapper = styled.div`
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0 0;
+    padding: 0 2rem;
+    width: 100%;
 `;
