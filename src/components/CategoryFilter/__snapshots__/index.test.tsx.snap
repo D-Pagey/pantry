@@ -3,10 +3,6 @@
 exports[`CategoryFilter component should render 1`] = `
 .c0 {
   background-color: #348841;
-  overflow: scroll;
-}
-
-.c1 {
   color: white;
   display: -webkit-box;
   display: -webkit-flex;
@@ -21,8 +17,25 @@ exports[`CategoryFilter component should render 1`] = `
   justify-content: space-between;
 }
 
-.c2 {
+.c1 {
+  border-bottom: 2px solid #348841;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
+
+.c1:hover {
   border-bottom: 2px solid white;
+}
+
+.c2 {
+  box-sizing: border-box;
   cursor: pointer;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -37,57 +50,85 @@ exports[`CategoryFilter component should render 1`] = `
   border-bottom: 2px solid white;
 }
 
-.c3 {
-  cursor: pointer;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  font-weight: bold;
-  padding: 1rem;
-  text-align: center;
+@media (min-width:768px) {
+  .c0 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #348841;
+    border-radius: 10px;
+    color: #348841;
+    grid-column: 1 / 2;
+    grid-row: 2;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 175px;
+  }
 }
 
-.c3:hover {
-  border-bottom: 2px solid white;
+@media (min-width:768px) {
+  .c1 {
+    margin: 1rem 0;
+    padding: 0 0 0.25rem;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+
+  .c1:hover {
+    border-bottom: 2px solid #348841;
+  }
 }
 
-<div
+@media (min-width:768px) {
+  .c2 {
+    margin: 1rem 0;
+    padding: 0 0 0.25rem;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+
+  .c2:hover {
+    border-bottom: 2px solid #348841;
+  }
+}
+
+<ul
   class="c0"
 >
-  <ul
+  <li
     class="c1"
   >
-    <li
-      class="c2"
-    >
-      All
-    </li>
-    <li
-      class="c3"
-    >
-      Veg
-    </li>
-    <li
-      class="c3"
-    >
-      Fruit
-    </li>
-    <li
-      class="c3"
-    >
-      Meat
-    </li>
-    <li
-      class="c3"
-    >
-      Dairy
-    </li>
-    <li
-      class="c3"
-    >
-      Fish
-    </li>
-  </ul>
-</div>
+    All
+  </li>
+  <li
+    class="c2"
+  >
+    Veg
+  </li>
+  <li
+    class="c2"
+  >
+    Fruit
+  </li>
+  <li
+    class="c2"
+  >
+    Meat
+  </li>
+  <li
+    class="c2"
+  >
+    Dairy
+  </li>
+  <li
+    class="c2"
+  >
+    Fish
+  </li>
+</ul>
 `;

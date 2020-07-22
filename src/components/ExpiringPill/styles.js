@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
+
+import { colours, mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-self: flex-end;
@@ -10,6 +11,11 @@ export const Wrapper = styled.div`
     margin: ${({ margin }) => margin};
     padding: 0.5rem 1rem;
     width: max-content;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: 2 / 3;
+        justify-self: end;
+    }
 `;
 
 export const Text = styled.span`

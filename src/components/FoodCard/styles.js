@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     max-width: 330px;
     min-width: 220px;
     padding: 1rem;
+    width: 280px;
 `;
 
 export const Name = styled.p`
