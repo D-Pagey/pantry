@@ -19,16 +19,15 @@ export const Notifications: FC<NotificationsProps> = ({ handleClick, notificatio
             <S.List>
                 {notifications.map((item) => (
                     <S.Item key={item.uid}>
-                        {item.description}
-                        <div>
-                            <Button margin="0 1rem 0 0" onClick={handleDecisionClick(item.uid, true)}>
-                                Accept
-                            </Button>
+                        <S.Text>{item.description}</S.Text>
 
-                            <Button onClick={handleDecisionClick(item.uid, false)} secondary>
-                                Decline
-                            </Button>
-                        </div>
+                        <Button margin="0 1rem 0 0" onClick={handleDecisionClick(item.uid, true)}>
+                            Accept
+                        </Button>
+
+                        <Button onClick={handleDecisionClick(item.uid, false)} secondary>
+                            Decline
+                        </Button>
                     </S.Item>
                 ))}
             </S.List>

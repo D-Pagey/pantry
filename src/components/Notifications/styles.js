@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
+import { mediaQuery, colours } from '../../tokens';
+
 export const Wrapper = styled.div`
-    padding: 1rem;
+    margin: 1rem 0;
 `;
 
 export const Title = styled.h2`
@@ -18,13 +20,27 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-    align-items: center;
-    border-bottom: 1px solid grey;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
+    border-bottom: 1px solid ${colours.orange};
+    display: grid;
+    grid-row-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: max-content 1fr;
+    padding: 0 0 1rem;
 
-    &:first-child {
-        padding-top: 0;
+    @media ${mediaQuery.tablet} {
+        grid-template-columns: 1fr 125px 125px;
+        grid-template-rows: 1fr;
+    }
+`;
+
+export const Text = styled.span`
+    grid-column: 1 / 3;
+    justify-self: center;
+    align-self: center;
+
+    @media ${mediaQuery.tablet} {
+     grid-column: 1 / 2;
+     justify-self: left;
+     padding: 0 0 0 1rem;
     }
 `;

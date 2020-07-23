@@ -6,10 +6,6 @@ import { Notifications } from '../Notifications';
 import { Button } from '../Button';
 import * as S from './styles';
 
-import { UnreadNotification, ReadNotification } from '../../fixtures';
-
-const fakeNotifications = [UnreadNotification, ReadNotification, UnreadNotification, ReadNotification];
-
 export const PageProfile: FC = () => {
     const { signOut, user } = useContext(AuthContext);
 
@@ -26,7 +22,9 @@ export const PageProfile: FC = () => {
                         <p>Welcome {user.name}</p>
                         <p>Your email is: {user.email}</p>
 
-                        <Notifications handleClick={handleNotificationClick} notifications={fakeNotifications} />
+                        {user.notifications && (
+                            <Notifications handleClick={handleNotificationClick} notifications={user.notifications} />
+                        )}
 
                         <Button onClick={(): void => signOut()} data-testid="pageProfileButton">
                             Sign Out

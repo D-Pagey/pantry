@@ -50,19 +50,11 @@ export const Fridge: FoodType[] = [
     }
 ];
 
-export const User: UserType = {
-    email: 'dan@test.com',
-    household: '123',
-    name: 'Dan',
-    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
-    uid: 'abcde'
-};
-
 export const UnreadNotification: NotificationType = {
     createdAt: new Date(),
     description: 'Dan is inviting you to join their household',
     hasRead: false,
-    inviterUid: User.uid,
+    inviterUid: 'abcde',
     type: 'invite',
     uid: 'aaa'
 };
@@ -71,7 +63,16 @@ export const ReadNotification: NotificationType = {
     createdAt: addDays(new Date(), 2),
     description: 'Joe has invited you to join their household',
     hasRead: true,
-    inviterUid: User.uid,
+    inviterUid: 'abcde',
     type: 'invite',
     uid: 'bbb'
+};
+
+export const User: UserType = {
+    email: 'dan@test.com',
+    household: '123',
+    name: 'Dan',
+    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
+    notifications: [UnreadNotification],
+    uid: 'abcde'
 };

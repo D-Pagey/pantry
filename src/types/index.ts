@@ -20,6 +20,7 @@ export type UserType = {
     household: string;
     name: string;
     photo: string;
+    notifications: NotificationType[];
     uid: string;
 };
 
@@ -27,7 +28,16 @@ export type NotificationType = {
     createdAt: Date;
     description: string;
     hasRead: boolean;
-    inviterUid: string;
-    type: 'invite';
+    inviterUid?: string;
+    type: 'invite' | 'text';
+    uid: string;
+};
+
+export type DatabaseNotificationType = {
+    createdAt: any;
+    description: string;
+    hasRead: boolean;
+    inviterUid?: string;
+    type: 'invite' | 'text';
     uid: string;
 };

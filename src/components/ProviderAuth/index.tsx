@@ -1,6 +1,7 @@
 import React, { createContext, FC, ReactNode, useState, useEffect, useCallback } from 'react';
 import { firebase } from '../../services';
 import { UserType } from '../../types';
+import { formatUser } from './utils';
 
 type ProviderAuthProps = {
     children: ReactNode;
@@ -35,8 +36,10 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
             .onSnapshot(
                 (doc: any) => {
                     if (doc.exists) {
+                        const formatted = formatUser(doc.data());
+
                         setIsAuthed(true);
-                        setUser(doc.data());
+                        setUser(formatted);
                     } else {
                         // doc.data() will be undefined in this case
                         console.log('No such document!');
