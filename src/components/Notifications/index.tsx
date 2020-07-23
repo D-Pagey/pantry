@@ -5,20 +5,29 @@ import { Button } from '../Button';
 import * as S from './styles';
 
 type NotificationsProps = {
+    handleClick: (itemUid: string, didAccept: boolean) => void;
     notifications: NotificationType[];
 };
 
-export const Notifications: FC<NotificationsProps> = ({ notifications }) => {
+export const Notifications: FC<NotificationsProps> = ({ handleClick, notifications }) => {
+    const handleDecisionClick = (itemUid: string, didAccept: boolean) => () => handleClick(itemUid, didAccept);
+
     return (
         <S.Wrapper>
             <S.Title>Notifications:</S.Title>
 
             <S.List>
                 {notifications.map((item) => (
-                    <S.Item>
+                    <S.Item key={item.uid}>
                         {item.description}
                         <div>
-                            <Button margin="0 1rem 0 0">Accept</Button> <Button secondary>Decline</Button>
+                            <Button margin="0 1rem 0 0" onClick={handleDecisionClick(item.uid, true)}>
+                                Accept
+                            </Button>
+
+                            <Button onClick={handleDecisionClick(item.uid, false)} secondary>
+                                Decline
+                            </Button>
                         </div>
                     </S.Item>
                 ))}

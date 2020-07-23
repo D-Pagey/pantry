@@ -4,6 +4,7 @@ import { UnreadNotification, ReadNotification } from '../../fixtures';
 import { Notifications } from '.';
 
 const props = {
+    handleClick: (itemUid: string, didAccept: boolean) => console.log({ didAccept, itemUid }),
     notifications: [UnreadNotification, ReadNotification, UnreadNotification, ReadNotification]
 };
 

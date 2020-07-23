@@ -13,6 +13,10 @@ const fakeNotifications = [UnreadNotification, ReadNotification, UnreadNotificat
 export const PageProfile: FC = () => {
     const { signOut, user } = useContext(AuthContext);
 
+    const handleNotificationClick = (itemUid: string, didAccept: boolean): void => {
+        console.log({ didAccept, itemUid });
+    };
+
     return (
         <Layout title="Profile">
             <S.Wrapper data-testid="pageProfile">
@@ -22,7 +26,7 @@ export const PageProfile: FC = () => {
                         <p>Welcome {user.name}</p>
                         <p>Your email is: {user.email}</p>
 
-                        <Notifications notifications={fakeNotifications} />
+                        <Notifications handleClick={handleNotificationClick} notifications={fakeNotifications} />
 
                         <Button onClick={(): void => signOut()} data-testid="pageProfileButton">
                             Sign Out
