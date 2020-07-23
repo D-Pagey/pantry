@@ -22,3 +22,12 @@ export type UserType = {
     photo: string;
     uid: string;
 };
+
+export type NotificationType = {
+    createdAt: Date;
+    description: string;
+    hasRead: boolean;
+    inviterUid: string;
+    type: 'invite';
+    uid: string;
+};

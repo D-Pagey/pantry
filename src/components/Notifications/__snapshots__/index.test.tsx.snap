@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notifications component should render 1`] = `
+.c4 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 0 1rem 0 0;
+  min-width: 68px;
+}
+
+.c5 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c0 {
+  padding: 1rem;
+}
+
+.c1 {
+  margin: 0;
+  padding: 0 0 1rem;
+}
+
+.c2 {
+  border: 1px solid black;
+  border-radius: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+}
+
+.c3 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid grey;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.c3:first-child {
+  padding-top: 0;
+}
+
+<div
+  class="c0"
+>
+  <h2
+    class="c1"
+  >
+    Notifications:
+  </h2>
+  <ul
+    class="c2"
+  >
+    <li
+      class="c3"
+    >
+      Dan is inviting you to join their household
+      <div>
+        <button
+          class="c4"
+          type="button"
+        >
+          Accept
+        </button>
+         
+        <button
+          class="c5"
+          type="button"
+        >
+          Decline
+        </button>
+      </div>
+    </li>
+    <li
+      class="c3"
+    >
+      Joe has invited you to join their household
+      <div>
+        <button
+          class="c4"
+          type="button"
+        >
+          Accept
+        </button>
+         
+        <button
+          class="c5"
+          type="button"
+        >
+          Decline
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

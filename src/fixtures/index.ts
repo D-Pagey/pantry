@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns';
 
-import { BatchType, FoodType, UserType } from '../types';
+import { BatchType, FoodType, NotificationType, UserType } from '../types';
 
 export const ExpiredBatch: BatchType = {
     expires: new Date(),
@@ -56,4 +56,22 @@ export const User: UserType = {
     name: 'Dan',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     uid: 'abcde'
+};
+
+export const UnreadNotification: NotificationType = {
+    createdAt: new Date(),
+    description: 'Dan is inviting you to join their household',
+    hasRead: false,
+    inviterUid: User.uid,
+    type: 'invite',
+    uid: 'aaa'
+};
+
+export const ReadNotification: NotificationType = {
+    createdAt: addDays(new Date(), 2),
+    description: 'Joe has invited you to join their household',
+    hasRead: true,
+    inviterUid: User.uid,
+    type: 'invite',
+    uid: 'bbb'
 };
