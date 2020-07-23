@@ -44,6 +44,4 @@ export const DonutWrapper = styled.div`
     grid-column: 3 / 4;
     grid-row: 1 / 4;
     justify-self: end;
-    position: relative;
-    top: 4px;
 `;
