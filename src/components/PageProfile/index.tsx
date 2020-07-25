@@ -23,6 +23,8 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
 
     const notifyUserOfInvite = (userId: string) => {
         if (user?.household && user.uid) {
+            const inviteNotificationUid = uuidv4();
+
             const notification: NotificationType = {
                 createdAt: new Date(),
                 description: `${user?.name} has invited you to join their household`,
@@ -31,12 +33,12 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
                     inviterUserId: user.uid
                 },
                 type: 'invite',
-                uid: uuidv4()
+                uid: inviteNotificationUid
             };
 
             db.collection('users')
                 .doc(userId)
-                .update({ [`notifications.${uuidv4()}`]: notification })
+                .update({ [`notifications.${inviteNotificationUid}`]: notification })
                 .then(() => toast.success(`${emailInvite} has been invited`))
                 .catch(() => toast.error('Error with notifying the user'));
         }

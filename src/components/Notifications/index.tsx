@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,6 +11,7 @@ import * as S from './styles';
 
 export const Notifications: FC = () => {
     const { user } = useContext(AuthContext);
+    const history = useHistory();
 
     const dismissNotification = (notificationId: string) => {
         db.collection('users')
@@ -43,6 +45,24 @@ export const Notifications: FC = () => {
                 .then(() => {})
                 .catch(() => toast.error('Error accepting invite'));
 
+            // add your user id to new household users array
+            db.collection('households')
+                .doc(item.inviteData?.inviterHouseholdId)
+                .update({
+                    users: firebase.firestore.FieldValue.arrayUnion(user?.uid)
+                })
+                .then(() => console.log('added household users'))
+                .catch(() => toast.error('Error adding user to household'));
+
+            // remove your user id from your original household users array
+            db.collection('households')
+                .doc(user?.household)
+                .update({
+                    users: firebase.firestore.FieldValue.arrayRemove(user?.uid)
+                })
+                .then(() => console.log('removed from household users'))
+                .catch(() => toast.error('Error adding user to household'));
+
             // change your own household
             db.collection('users')
                 .doc(user?.uid)
@@ -51,6 +71,8 @@ export const Notifications: FC = () => {
                 })
                 .then(() => toast.success('You have joined another household'))
                 .catch(() => toast.error('Error accepting invite'));
+
+            history.push('/food');
         } else {
             const declinedUid = uuidv4();
 
