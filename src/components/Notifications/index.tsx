@@ -11,20 +11,34 @@ import * as S from './styles';
 export const Notifications: FC = () => {
     const { user } = useContext(AuthContext);
 
+    const dismissNotification = (notificationId: string) => {
+        db.collection('users')
+            .doc(user?.uid)
+            .update({
+                [`notifications.${notificationId}`]: firebase.firestore.FieldValue.delete()
+            })
+            .then(() => toast.info('Notification dismissed'))
+            .catch(() => toast.error('Error dismissing notification'));
+    };
+
+    const handleDismissClick = (itemUid: string) => () => dismissNotification(itemUid);
+
     const handleInviteClick = (item: NotificationType, didAccept: boolean) => () => {
         if (didAccept) {
+            const acceptedUid = uuidv4();
+
             const acceptNotification: NotificationType = {
                 createdAt: new Date(),
                 description: `${user?.name} has accepted your invitation`,
                 type: 'text',
-                uid: uuidv4()
+                uid: acceptedUid
             };
 
             // notify the inviter
             db.collection('users')
                 .doc(item.inviteData?.inviterUserId)
                 .update({
-                    [`notifications.${uuidv4()}`]: acceptNotification
+                    [`notifications.${acceptedUid}`]: acceptNotification
                 })
                 .then(() => {})
                 .catch(() => toast.error('Error accepting invite'));
@@ -38,31 +52,25 @@ export const Notifications: FC = () => {
                 .then(() => toast.success('You have joined another household'))
                 .catch(() => toast.error('Error accepting invite'));
         } else {
+            const declinedUid = uuidv4();
+
             const declinedNotification: NotificationType = {
                 createdAt: new Date(),
                 description: `${user?.name} has declined your invitation`,
                 type: 'text',
-                uid: uuidv4()
+                uid: declinedUid
             };
             // notify the inviter
             db.collection('users')
                 .doc(item.inviteData?.inviterUserId)
                 .update({
-                    [`notifications.${uuidv4()}`]: declinedNotification
+                    [`notifications.${declinedUid}`]: declinedNotification
                 })
                 .then(() => 'You have declined the invite')
                 .catch(() => toast.error('Error accepting invite'));
         }
-    };
-
-    const handleDismissClick = (itemUid: string) => () => {
-        db.collection('users')
-            .doc(user?.uid)
-            .update({
-                [`notifications.${itemUid}`]: firebase.firestore.FieldValue.delete()
-            })
-            .then(() => toast.info('Notification dismissed'))
-            .catch(() => toast.error('Error dismissing notification'));
+        // remove notification from your own notifications
+        dismissNotification(item.uid);
     };
 
     return (
