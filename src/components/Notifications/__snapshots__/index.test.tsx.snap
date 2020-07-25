@@ -106,27 +106,6 @@ exports[`Notifications component should render 1`] = `
         Decline
       </button>
     </li>
-    <li
-      class="c3"
-    >
-      <span
-        class="c4"
-      >
-        Joe has invited you to join their household
-      </span>
-      <button
-        class="c5"
-        type="button"
-      >
-        Accept
-      </button>
-      <button
-        class="c6"
-        type="button"
-      >
-        Decline
-      </button>
-    </li>
   </ul>
 </div>
 `;

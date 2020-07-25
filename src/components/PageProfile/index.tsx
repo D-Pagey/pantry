@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { UserType, NotificationType } from '../../types';
-import { db, firebase } from '../../services';
+import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Notifications } from '../Notifications';
@@ -21,25 +21,25 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
 
-    const handleNotificationClick = (itemUid: string, didAccept: boolean): void => {
-        console.log({ didAccept, itemUid });
-    };
-
     const notifyUserOfInvite = (userId: string) => {
-        const notification: NotificationType = {
-            createdAt: new Date(),
-            description: `${user?.name} has invited you to join their household`,
-            hasRead: false,
-            inviterUid: user?.uid,
-            type: 'invite',
-            uid: uuidv4()
-        };
+        if (user?.household && user.uid) {
+            const notification: NotificationType = {
+                createdAt: new Date(),
+                description: `${user?.name} has invited you to join their household`,
+                inviteData: {
+                    inviterHouseholdId: user.household,
+                    inviterUserId: user.uid
+                },
+                type: 'invite',
+                uid: uuidv4()
+            };
 
-        db.collection('users')
-            .doc(userId)
-            .update({ [`notifications.${uuidv4()}`]: notification })
-            .then(() => toast.success(`${emailInvite} has been invited`))
-            .catch(() => toast.error('Error with notifying the user'));
+            db.collection('users')
+                .doc(userId)
+                .update({ [`notifications.${uuidv4()}`]: notification })
+                .then(() => toast.success(`${emailInvite} has been invited`))
+                .catch(() => toast.error('Error with notifying the user'));
+        }
     };
 
     const handleInviteClick = () => {
@@ -49,7 +49,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
             .get()
             .then((querySnapshot) => {
                 if (querySnapshot.empty) {
-                    toast.error(`A user with the email ${emailInvite} doesn't exists.`);
+                    toast.error(`A user with the email ${emailInvite} doesn't exist.`);
                 } else {
                     querySnapshot.forEach((doc) => {
                         notifyUserOfInvite(doc.data().uid);
@@ -59,20 +59,6 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
             .catch((error) => {
                 console.log('Error getting email user: ', error);
             });
-    };
-
-    const handleDismissClick = (itemUid: string) => {
-        if (user) {
-            db.collection('users')
-                .doc(user.uid)
-                .update({
-                    [`notifications.${itemUid}`]: firebase.firestore.FieldValue.delete()
-                })
-                .then(() => toast.info('Notification dismissed'))
-                .catch((error) => {
-                    console.log('Error dismissing notification: ', error);
-                });
-        }
     };
 
     const fetchFridgeUsersInfo = useCallback(() => {
@@ -103,13 +89,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
                         <p>Welcome {user.name}</p>
                         <p>Your email is: {user.email}</p>
 
-                        {user.notifications && (
-                            <Notifications
-                                handleClick={handleNotificationClick}
-                                handleDismiss={handleDismissClick}
-                                notifications={user.notifications}
-                            />
-                        )}
+                        {user.notifications && user.uid && <Notifications />}
 
                         <p>Your household consists of:</p>
                         {fridgeUsersInfo && <Friends friends={fridgeUsersInfo} />}

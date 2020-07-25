@@ -53,8 +53,10 @@ export const Fridge: FoodType[] = [
 export const UnreadNotification: NotificationType = {
     createdAt: new Date(),
     description: 'Dan is inviting you to join their household',
-    hasRead: false,
-    inviterUid: 'abcde',
+    inviteData: {
+        inviterHouseholdId: 'xxx',
+        inviterUserId: 'abced'
+    },
     type: 'invite',
     uid: 'aaa'
 };
@@ -62,8 +64,10 @@ export const UnreadNotification: NotificationType = {
 export const ReadNotification: NotificationType = {
     createdAt: addDays(new Date(), 2),
     description: 'Joe has invited you to join their household',
-    hasRead: true,
-    inviterUid: 'abcde',
+    inviteData: {
+        inviterHouseholdId: 'xxx',
+        inviterUserId: 'abced'
+    },
     type: 'invite',
     uid: 'bbb'
 };

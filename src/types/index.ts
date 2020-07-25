@@ -27,8 +27,10 @@ export type UserType = {
 export type NotificationType = {
     createdAt: Date;
     description: string;
-    hasRead: boolean;
-    inviterUid?: string;
+    inviteData?: {
+        inviterUserId: string;
+        inviterHouseholdId: string;
+    };
     type: 'invite' | 'text';
     uid: string;
 };
@@ -36,8 +38,10 @@ export type NotificationType = {
 export type DatabaseNotificationType = {
     createdAt: any;
     description: string;
-    hasRead: boolean;
-    inviterUid?: string;
+    inviteData?: {
+        inviterUserId: string;
+        inviterHouseholdId: string;
+    };
     type: 'invite' | 'text';
     uid: string;
 };

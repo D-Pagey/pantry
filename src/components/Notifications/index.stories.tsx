@@ -1,14 +1,22 @@
 import React from 'react';
 
-import { UnreadNotification, ReadNotification } from '../../fixtures';
+import { UnreadNotification, ReadNotification, User } from '../../fixtures';
+import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '.';
-
-const props = {
-    handleClick: (itemUid: string, didAccept: boolean) => console.log({ didAccept, itemUid }),
-    handleDismiss: (itemUid: string) => console.log({ itemUid }),
-    notifications: [UnreadNotification, ReadNotification, UnreadNotification, ReadNotification]
-};
 
 export default { title: 'Notifications' };
 
-export const normal = () => <Notifications {...props} />;
+export const normal = () => (
+    <AuthContext.Provider
+        value={{
+            fetchUserData: () => {},
+            isAuthed: true,
+            isCheckingAuth: false,
+            setUser: () => {},
+            signOut: () => {},
+            user: { ...User, notifications: [UnreadNotification, ReadNotification] }
+        }}
+    >
+        <Notifications />
+    </AuthContext.Provider>
+);
