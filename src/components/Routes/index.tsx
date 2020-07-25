@@ -18,6 +18,7 @@ import { RouteProtected } from '../RouteProtected';
 
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
+    const [fridgeUsers, setFridgeUsers] = useState<string[]>();
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
 
@@ -36,10 +37,13 @@ export const Routes = (): JSX.Element => {
             db.collection('households')
                 .doc(user.household)
                 .onSnapshot((doc: any) => {
-                    const fridgeItems: FoodType[] = Object.values(doc.data().fridge);
+                    const data = doc.data();
+
+                    const fridgeItems: FoodType[] = Object.values(data.fridge);
                     const formattedDates = formatExpiryDates(fridgeItems);
 
                     setFridge(formattedDates);
+                    setFridgeUsers(data.users);
                     setExpiringCount(countExpiringFoodItems(formattedDates));
                 });
         }
@@ -78,7 +82,7 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/profile">
-                <PageProfile />
+                <PageProfile fridgeUsers={fridgeUsers} />
             </RouteProtected>
 
             <Route>

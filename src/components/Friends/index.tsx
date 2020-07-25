@@ -4,7 +4,7 @@ import { UserType } from '../../types';
 import * as S from './styles';
 
 type FriendsProps = {
-    friends: UserType[];
+    friends: Partial<UserType>[];
 };
 
 export const Friends: FC<FriendsProps> = ({ friends }) => (

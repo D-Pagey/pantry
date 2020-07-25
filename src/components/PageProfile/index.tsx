@@ -1,17 +1,44 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useCallback, useEffect, useState } from 'react';
 
+import { UserType } from '../../types';
+import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Notifications } from '../Notifications';
 import { Button } from '../Button';
+import { Friends } from '../Friends';
 import * as S from './styles';
 
-export const PageProfile: FC = () => {
+type PageProfileProps = {
+    fridgeUsers?: string[];
+};
+
+export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
+    const [fridgeUsersInfo, setFridgeUsersInfo] = useState<UserType[]>();
     const { signOut, user } = useContext(AuthContext);
 
     const handleNotificationClick = (itemUid: string, didAccept: boolean): void => {
         console.log({ didAccept, itemUid });
     };
+
+    const fetchFridgeUsersInfo = useCallback(() => {
+        db.collection('users')
+            .where('uid', 'in', fridgeUsers)
+            .get()
+            .then((querySnapshot) => {
+                const data: UserType[] = [];
+
+                querySnapshot.forEach((doc) => {
+                    data.push(doc.data() as UserType);
+                });
+
+                setFridgeUsersInfo(data);
+            });
+    }, [fridgeUsers]);
+
+    useEffect(() => {
+        if (!fridgeUsersInfo && fridgeUsers) fetchFridgeUsersInfo();
+    }, [fridgeUsersInfo, fridgeUsers, fetchFridgeUsersInfo]);
 
     return (
         <Layout title="Profile">
@@ -25,6 +52,9 @@ export const PageProfile: FC = () => {
                         {user.notifications && (
                             <Notifications handleClick={handleNotificationClick} notifications={user.notifications} />
                         )}
+
+                        <p>Your household consists of:</p>
+                        {fridgeUsersInfo && <Friends friends={fridgeUsersInfo} />}
 
                         <Button onClick={(): void => signOut()} data-testid="pageProfileButton">
                             Sign Out
