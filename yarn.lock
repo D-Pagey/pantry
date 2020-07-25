@@ -13356,10 +13356,10 @@ react-scripts@3.4.1:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-select-event@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-select-event/-/react-select-event-4.2.0.tgz#824f9f52fdbd9de305ec1b3405f76f76dcc22cbe"
-  integrity sha512-DK58Q9ucsbGsCFl26n2CZ5MA7WwxSxrA49mM8EKmjJ8Fg0l1R4uZfwy80PdDoVReH3RWAVRLnhfJorqcIKGc2Q==
+react-select-event@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-select-event/-/react-select-event-5.0.0.tgz#e16d1dd240b5e1f41f31cb74a50baaa89aa6406c"
+  integrity sha512-bESECffhi//x1nlMoRJtwI0nGl5n6OKaVYeIEcPTV8flVPycvUoBGank/1RIoxVc6WtoQ4QbPbU8xMvX0xAiOA==
   dependencies:
     "@testing-library/dom" ">=5"
 
