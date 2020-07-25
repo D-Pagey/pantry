@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { UserType, NotificationType } from '../../types';
-import { db } from '../../services';
+import { db, firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Notifications } from '../Notifications';
@@ -61,6 +61,20 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
             });
     };
 
+    const handleDismissClick = (itemUid: string) => {
+        if (user) {
+            db.collection('users')
+                .doc(user.uid)
+                .update({
+                    [`notifications.${itemUid}`]: firebase.firestore.FieldValue.delete()
+                })
+                .then(() => toast.info('Notification dismissed'))
+                .catch((error) => {
+                    console.log('Error dismissing notification: ', error);
+                });
+        }
+    };
+
     const fetchFridgeUsersInfo = useCallback(() => {
         db.collection('users')
             .where('uid', 'in', fridgeUsers)
@@ -90,7 +104,11 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
                         <p>Your email is: {user.email}</p>
 
                         {user.notifications && (
-                            <Notifications handleClick={handleNotificationClick} notifications={user.notifications} />
+                            <Notifications
+                                handleClick={handleNotificationClick}
+                                handleDismiss={handleDismissClick}
+                                notifications={user.notifications}
+                            />
                         )}
 
                         <p>Your household consists of:</p>

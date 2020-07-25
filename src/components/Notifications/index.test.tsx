@@ -7,6 +7,7 @@ import { Notifications } from '.';
 
 const props = {
     handleClick: () => {},
+    handleDismiss: () => {},
     notifications: [UnreadNotification, ReadNotification]
 };
 
