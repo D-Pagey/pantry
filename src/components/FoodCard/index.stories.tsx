@@ -1,21 +1,20 @@
 import React from 'react';
-import { Batches, User } from '../../fixtures';
+import { FoodCardBatches } from '../../fixtures';
 import { FoodCard } from '.';
 
 export default { title: 'FoodCard' };
 
 const props = {
-    batches: Batches,
+    batches: FoodCardBatches,
     handleClick: () => console.log('fired'),
     margin: '1rem 0 0 1rem',
-    name: 'Carrots',
-    ownerPhoto: User.photo
+    name: 'Carrots'
 };
 
 export const normal = () => (
     <>
         <FoodCard {...props} />
-        <FoodCard {...props} name="Too many carrots" batches={[...Batches, ...Batches]} />
+        <FoodCard {...props} name="Too many carrots" batches={[...FoodCardBatches, ...FoodCardBatches]} />
     </>
 );
 

@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { BatchType, FoodType } from '../../types';
+import { FoodCardBatchType, FoodType, FoodCardType } from '../../types';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -33,7 +33,7 @@ const options = [
 ];
 
 type PageAddFoodFormProps = {
-    fridge?: FoodType[];
+    fridge?: FoodCardType[];
     updateFridge: (values: FoodType) => void;
 };
 
@@ -48,13 +48,13 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
                 initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
                     if (fridge) {
-                        const existingBatches = fridge.reduce((acc, curr: FoodType) => {
+                        const existingBatches = fridge.reduce((acc, curr: FoodCardType) => {
                             if (curr.name === values.name.toLowerCase()) {
                                 return [...acc, ...curr.batches];
                             }
 
                             return acc;
-                        }, [] as BatchType[]);
+                        }, [] as FoodCardBatchType[]);
 
                         const formattedValues: FoodType = {
                             category: values.category,
@@ -81,7 +81,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
 
                     const checkExistingCategory = () => {
                         if (fridge) {
-                            return fridge.reduce((acc, curr: FoodType) => {
+                            return fridge.reduce((acc, curr: FoodCardType) => {
                                 if (curr.name === values.name.toLowerCase()) {
                                     return curr.category;
                                 }
@@ -101,7 +101,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
 
                     const getDropdownOptions = () => {
                         if (fridge) {
-                            return fridge.map((item: FoodType) => item.name);
+                            return fridge.map((item: FoodCardType) => item.name);
                         }
 
                         return [];

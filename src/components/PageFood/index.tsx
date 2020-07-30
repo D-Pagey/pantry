@@ -4,7 +4,7 @@ import arraySort from 'array-sort';
 import { toast } from 'react-toastify';
 
 import { db } from '../../services';
-import { FoodType } from '../../types';
+import { FoodCardType } from '../../types';
 import { getExpiringItems, filterFridgeByCategory } from '../../utils';
 import { Loading } from '../Loading';
 import { Layout } from '../Layout';
@@ -15,17 +15,15 @@ import { DisposeFood } from '../DisposeFood';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
-import { User } from '../../fixtures';
-
 type PageFoodProps = {
-    fridge?: FoodType[];
+    fridge?: FoodCardType[];
 };
 
 export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
-    const [selectedFood, setSelectedFood] = useState<FoodType[]>();
+    const [selectedFood, setSelectedFood] = useState<FoodCardType[]>();
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
-    const [editingItem, setEditingItem] = useState<FoodType | undefined>();
+    const [editingItem, setEditingItem] = useState<FoodCardType | undefined>();
     const { user } = useContext(AuthContext);
     const history = useHistory();
 
@@ -97,7 +95,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
         history.push(`/${editingItem?.name}/edit`, editingItem);
     };
 
-    const handleFoodClick = (item: FoodType) => (): void => {
+    const handleFoodClick = (item: FoodCardType) => (): void => {
         if (!editingItem || editingItem.name !== item.name) setEditingItem(item);
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
@@ -120,7 +118,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
 
                 <S.FoodCardWrapper>
                     {selectedFood &&
-                        arraySort(selectedFood, 'name').map((item: FoodType) => {
+                        arraySort(selectedFood, 'name').map((item: FoodCardType) => {
                             if (item.batches.length > 0) {
                                 return (
                                     <FoodCard
@@ -130,7 +128,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
                                         name={item.name}
                                         margin="0 0 1rem"
                                         isSelected={item.name === editingItem?.name}
-                                        ownerPhoto={User.photo}
                                     />
                                 );
                             }

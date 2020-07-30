@@ -1,6 +1,6 @@
-import { BatchType } from '../../types';
+import { FoodCardBatchType } from '../../types';
 
-export const getTotalServingsCount = (batches: BatchType[]): number => {
+export const getTotalServingsCount = (batches: FoodCardBatchType[]): number => {
     return batches.reduce((acc, curr) => {
         if (acc <= 10) return acc + curr.servings;
 
@@ -8,7 +8,7 @@ export const getTotalServingsCount = (batches: BatchType[]): number => {
     }, 0);
 };
 
-export const reduceBatches = (batches: BatchType[]): BatchType[] => {
+export const reduceBatches = (batches: FoodCardBatchType[]): FoodCardBatchType[] => {
     const countedAndCropped = batches.reduce((acc, curr) => {
         if (curr.servings + acc.count <= 10) {
             return { 
@@ -26,7 +26,16 @@ export const reduceBatches = (batches: BatchType[]): BatchType[] => {
         }
 
         return acc;
-    }, { batches: [] as BatchType[], count: 0});
+    }, { batches: [] as FoodCardBatchType[], count: 0});
 
     return countedAndCropped.batches;
 };
+
+// pull out unduplicated ownerPhotos 
+export const getBatchPhotos = (batches: FoodCardBatchType[]): string[] => {
+    return batches.reduce((acc, curr) => {
+        if (acc.includes(curr.ownerPhoto)) return acc;
+
+        return [...acc, curr.ownerPhoto];
+    }, [] as string[]);
+}; 

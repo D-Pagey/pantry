@@ -1,4 +1,4 @@
-import React, { FC, useContext, useCallback, useEffect, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,11 +13,10 @@ import { Friends } from '../Friends';
 import * as S from './styles';
 
 type PageProfileProps = {
-    fridgeUsers?: string[];
+    fridgeUsers: UserType[];
 };
 
 export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
-    const [fridgeUsersInfo, setFridgeUsersInfo] = useState<UserType[]>();
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
 
@@ -63,25 +62,6 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
             });
     };
 
-    const fetchFridgeUsersInfo = useCallback(() => {
-        db.collection('users')
-            .where('uid', 'in', fridgeUsers)
-            .get()
-            .then((querySnapshot) => {
-                const data: UserType[] = [];
-
-                querySnapshot.forEach((doc) => {
-                    data.push(doc.data() as UserType);
-                });
-
-                setFridgeUsersInfo(data);
-            });
-    }, [fridgeUsers]);
-
-    useEffect(() => {
-        if (!fridgeUsersInfo && fridgeUsers) fetchFridgeUsersInfo();
-    }, [fridgeUsersInfo, fridgeUsers, fetchFridgeUsersInfo]);
-
     return (
         <Layout title="Profile">
             <S.Wrapper data-testid="pageProfile">
@@ -94,7 +74,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
                         {user.notifications && user.uid && <Notifications />}
 
                         <p>Your household consists of:</p>
-                        {fridgeUsersInfo && <Friends friends={fridgeUsersInfo} />}
+                        <Friends friends={fridgeUsers} />
 
                         <p>Invite a friend to join your household</p>
                         <Input

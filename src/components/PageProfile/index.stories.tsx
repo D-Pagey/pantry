@@ -16,6 +16,6 @@ export const normal = (): JSX.Element => (
             user: User
         }}
     >
-        <PageProfile />
+        <PageProfile fridgeUsers={[User]} />
     </AuthContext.Provider>
 );

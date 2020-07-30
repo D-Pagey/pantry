@@ -40,12 +40,12 @@ exports[`FoodCard component should render 1`] = `
   border-radius: 10px;
   cursor: pointer;
   display: grid;
-  grid-column-gap: 2rem;
+  grid-column-gap: 1.5rem;
   grid-template-columns: 1fr max-content max-content;
   max-width: 330px;
   min-width: 220px;
   padding: 1rem;
-  width: 280px;
+  width: 300px;
 }
 
 .c1 {
@@ -66,7 +66,10 @@ exports[`FoodCard component should render 1`] = `
   border-radius: 50%;
   grid-row: 1 / 4;
   grid-column: 2 / 3;
+  position: relative;
+  left: 0px;
   width: 50px;
+  z-index: 10;
 }
 
 .c4 {
@@ -102,7 +105,6 @@ exports[`FoodCard component should render 1`] = `
   <img
     alt="food owner"
     class="c3"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
   />
   <div
     class="c4"

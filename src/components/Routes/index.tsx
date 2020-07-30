@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType } from '../../types';
+import { FoodType, FoodCardType, UserType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -15,12 +15,32 @@ import { PageProfile } from '../PageProfile';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
 import { RouteProtected } from '../RouteProtected';
+import { swapUserIdsForPhotos } from './utils';
 
 export const Routes = (): JSX.Element => {
-    const [fridge, setFridge] = useState<FoodType[]>();
-    const [fridgeUsers, setFridgeUsers] = useState<string[]>();
+    const [fridge, setFridge] = useState<FoodType[] | FoodCardType[]>();
+    const [fridgeUsers, setFridgeUsers] = useState<UserType[]>();
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
+
+    const getFridgeUsers = useCallback(
+        (userIds: string[]) => {
+            db.collection('users')
+                .where('uid', 'in', userIds)
+                .get()
+                .then((querySnapshot) => {
+                    const users: UserType[] = [];
+
+                    querySnapshot.forEach((doc) => {
+                        users.push(doc.data() as UserType);
+                    });
+
+                    setFridgeUsers(users);
+                    console.log({ updated: fridge && swapUserIdsForPhotos(fridge, users) });
+                });
+        },
+        [fridge]
+    );
 
     const updateFridge = (values: FoodType): void => {
         if (user) {
@@ -43,11 +63,11 @@ export const Routes = (): JSX.Element => {
                     const formattedDates = formatExpiryDates(fridgeItems);
 
                     setFridge(formattedDates);
-                    setFridgeUsers(data.users);
                     setExpiringCount(countExpiringFoodItems(formattedDates));
+                    getFridgeUsers(data.users);
                 });
         }
-    }, [user]);
+    }, [user, getFridgeUsers]);
 
     useEffect(() => {
         if (user?.household) {
@@ -70,6 +90,7 @@ export const Routes = (): JSX.Element => {
             </Route>
 
             <RouteProtected path="/food">
+                {/* @ts-ignore */}
                 <PageFood fridge={fridge} />
             </RouteProtected>
 
@@ -78,12 +99,11 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/add">
+                {/* @ts-ignore */}
                 <PageAddFoodForm fridge={fridge} updateFridge={updateFridge} />
             </RouteProtected>
 
-            <RouteProtected path="/profile">
-                <PageProfile fridgeUsers={fridgeUsers} />
-            </RouteProtected>
+            <RouteProtected path="/profile">{fridgeUsers && <PageProfile fridgeUsers={fridgeUsers} />}</RouteProtected>
 
             <Route>
                 <PageNotFound />

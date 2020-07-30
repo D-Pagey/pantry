@@ -7,13 +7,13 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     cursor: pointer;
     display: grid;
-    grid-column-gap: 2rem;
+    grid-column-gap: 1.5rem;
     grid-template-columns: 1fr max-content max-content;
     margin: ${({ margin }) => margin};
     max-width: 330px;
     min-width: 220px;
     padding: 1rem;
-    width: 280px;
+    width: 300px;
 `;
 
 export const Name = styled.p`
@@ -32,7 +32,10 @@ export const OwnerPicture = styled.img`
     border-radius: 50%;
     grid-row: 1 / 4;
     grid-column: 2 / 3;
+    position: relative;
+    left: ${({ index }) => index * 10}px;
     width: 50px;
+    z-index: ${({ index }) => 10 - index};
 `;
 
 export const CircleWrapper = styled.div`
