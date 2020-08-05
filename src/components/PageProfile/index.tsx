@@ -45,22 +45,26 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
     };
 
     const handleInviteClick = () => {
-        // does the email exist
-        db.collection('users')
-            .where('email', '==', emailInvite)
-            .get()
-            .then((querySnapshot) => {
-                if (querySnapshot.empty) {
-                    toast.error(`A user with the email ${emailInvite} doesn't exist.`);
-                } else {
-                    querySnapshot.forEach((doc) => {
-                        notifyUserOfInvite(doc.data().uid);
-                    });
-                }
-            })
-            .catch((error) => {
-                console.log('Error getting email user: ', error);
-            });
+        if (fridgeUsersInfo?.map((fridgeUser) => fridgeUser.email).includes(emailInvite)) {
+            toast.error('That user is already in your household');
+        } else {
+            // does the email exist
+            db.collection('users')
+                .where('email', '==', emailInvite)
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        toast.error(`A user with the email ${emailInvite} doesn't exist.`);
+                    } else {
+                        querySnapshot.forEach((doc) => {
+                            notifyUserOfInvite(doc.data().uid);
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log('Error getting email user: ', error);
+                });
+        }
     };
 
     const fetchFridgeUsersInfo = useCallback(() => {
