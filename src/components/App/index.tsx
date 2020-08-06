@@ -1,7 +1,9 @@
 import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useMediaQuery } from 'react-responsive';
+
 import { ProviderAuth } from '../ProviderAuth';
 import { BurgerMenu } from '../BurgerMenu';
 import { Routes } from '../Routes';
@@ -11,14 +13,20 @@ toast.configure({
     position: 'bottom-right'
 });
 
-export const App = (): JSX.Element => (
-    <ProviderAuth>
-        <BrowserRouter>
-            <BurgerMenu />
+export const App: FC = () => {
+    const isMobile = useMediaQuery({
+        query: '(max-device-width: 760px)'
+    });
 
-            <S.GlobalStyle />
+    return (
+        <ProviderAuth>
+            <BrowserRouter>
+                {isMobile && <BurgerMenu />}
 
-            <Routes />
-        </BrowserRouter>
-    </ProviderAuth>
-);
+                <S.GlobalStyle />
+
+                <Routes />
+            </BrowserRouter>
+        </ProviderAuth>
+    );
+};
