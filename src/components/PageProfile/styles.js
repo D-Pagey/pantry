@@ -8,6 +8,8 @@ export const Wrapper = styled.div`
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
     padding: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
 `;
 
 export const Image = styled.img`
