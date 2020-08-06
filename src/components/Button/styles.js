@@ -28,3 +28,7 @@ export const DisabledButton = styled(Button)`
     cursor: not-allowed;
     margin: ${({ margin }) => margin};
 `;
+
+export const DestructiveButton = styled(Button)`
+    background-color: #EB5757;
+`;

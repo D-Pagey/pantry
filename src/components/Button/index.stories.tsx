@@ -16,3 +16,5 @@ export const disabled = () => (
         Click me
     </Button>
 );
+
+export const destructive = () => <Button destructive>Click me</Button>;
