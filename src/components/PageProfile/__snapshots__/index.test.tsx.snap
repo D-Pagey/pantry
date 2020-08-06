@@ -46,7 +46,7 @@ exports[`PageProfile component should render 1`] = `
   <h4
     class="c2"
   >
-    Profile
+    Settings
   </h4>
 </div>
 `;

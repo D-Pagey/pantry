@@ -11,7 +11,16 @@ type InputTypes = {
     value: string;
 };
 
-export const Input: FC<InputTypes> = ({ margin, name, onBlur, onChange, placeholder, testId = 'input', value }) => (
+export const Input: FC<InputTypes> = ({
+    margin,
+    name,
+    onBlur,
+    onChange,
+    placeholder,
+    testId = 'input',
+    value,
+    ...props
+}) => (
     <S.Input
         data-testid={testId}
         id={testId}
@@ -22,5 +31,6 @@ export const Input: FC<InputTypes> = ({ margin, name, onBlur, onChange, placehol
         placeholder={placeholder}
         type="text"
         value={value}
+        {...props}
     />
 );

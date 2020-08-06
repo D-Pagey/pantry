@@ -12,7 +12,7 @@ export const Item = styled.li`
     align-items: center;
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid #9b9b9b;
 
     &:last-child {

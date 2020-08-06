@@ -6,9 +6,7 @@ import { UserType, NotificationType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
-import { Notifications } from '../Notifications';
-import { Button } from '../Button';
-import { Input } from '../Input';
+// import { Notifications } from '../Notifications';
 import { Household } from '../Household';
 import * as S from './styles';
 
@@ -87,30 +85,37 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
     }, [fridgeUsersInfo, fridgeUsers, fetchFridgeUsersInfo]);
 
     return (
-        <Layout title="Profile">
+        <Layout title="Settings">
             <S.Wrapper data-testid="pageProfile">
                 {user && (
                     <>
                         <S.Image src={user.photo} alt="profile" />
-                        <p>Welcome {user.name}</p>
-                        <p>Your email is: {user.email}</p>
+                        <S.Name>Welcome {user.name}</S.Name>
 
-                        {user.notifications && user.uid && <Notifications />}
+                        <S.Heading>Account Settings</S.Heading>
+                        <S.Text>Your email is: {user.email}</S.Text>
 
-                        <p>Your household consists of:</p>
-                        {fridgeUsersInfo && <Household people={fridgeUsersInfo} />}
+                        <S.Heading>Household Settings</S.Heading>
+                        <S.Text>Your household consists of:</S.Text>
+                        {fridgeUsersInfo && (
+                            <S.HouseholdWrapper>
+                                <Household people={fridgeUsersInfo} />
+                            </S.HouseholdWrapper>
+                        )}
 
-                        <p>Invite a friend to join your household</p>
-                        <Input
-                            onChange={(e) => setEmailInvite(e.target.value)}
+                        <S.Text>Invite someone to join your household:</S.Text>
+                        <S.Input
+                            onChange={(e: any) => setEmailInvite(e.target.value)}
                             placeholder="Your friends' email"
                             value={emailInvite}
                         />
-                        <Button onClick={handleInviteClick}>Invite</Button>
+                        <S.InviteButton onClick={handleInviteClick}>Invite</S.InviteButton>
 
-                        <Button onClick={(): void => signOut()} data-testid="pageProfileButton">
+                        {/* {user.notifications && user.uid && <Notifications />} */}
+
+                        <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="pageProfileButton">
                             Sign Out
-                        </Button>
+                        </S.SignOutButton>
                     </>
                 )}
             </S.Wrapper>
