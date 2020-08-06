@@ -21,6 +21,7 @@ export type UserType = {
     name: string;
     photo: string;
     notifications: NotificationType[];
+    houseRole?: string;
     uid: string;
 };
 

@@ -9,7 +9,7 @@ import { Layout } from '../Layout';
 import { Notifications } from '../Notifications';
 import { Button } from '../Button';
 import { Input } from '../Input';
-import { Friends } from '../Friends';
+import { Household } from '../Household';
 import * as S from './styles';
 
 type PageProfileProps = {
@@ -98,7 +98,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
                         {user.notifications && user.uid && <Notifications />}
 
                         <p>Your household consists of:</p>
-                        {fridgeUsersInfo && <Friends friends={fridgeUsersInfo} />}
+                        {fridgeUsersInfo && <Household people={fridgeUsersInfo} />}
 
                         <p>Invite a friend to join your household</p>
                         <Input

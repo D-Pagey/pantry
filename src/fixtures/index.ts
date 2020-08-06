@@ -75,7 +75,7 @@ export const ReadNotification: NotificationType = {
 export const User: UserType = {
     email: 'dan@test.com',
     household: '123',
-    name: 'Dan',
+    name: 'Dan Page',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     notifications: [UnreadNotification],
     uid: 'abcde'
