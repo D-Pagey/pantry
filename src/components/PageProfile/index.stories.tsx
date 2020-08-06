@@ -3,7 +3,7 @@ import { User } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageProfile } from '.';
 
-export default { title: 'PageProfle ' };
+export default { title: 'PageProfile ' };
 
 export const normal = (): JSX.Element => (
     <AuthContext.Provider
