@@ -68,10 +68,18 @@ exports[`PageNotFound component should render 1`] = `
 .c5 {
   font-size: 1.1rem;
   margin: 0 0 0 2rem;
+  position: relative;
 }
 
 .c5:first-child {
   margin: 0;
+}
+
+.c7 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
 }
 
 <div
@@ -125,6 +133,16 @@ exports[`PageNotFound component should render 1`] = `
       >
         Add Food
       </a>
+    </li>
+    <li
+      class="c5"
+    >
+      <button
+        class="c7"
+        type="button"
+      >
+        Notifications
+      </button>
     </li>
     <li
       class="c5"

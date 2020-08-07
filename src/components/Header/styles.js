@@ -56,8 +56,16 @@ export const NavList = styled.ul`
 export const NavItem = styled.li`
     font-size: 1.1rem;
     margin: 0 0 0 2rem;
+    position: relative;
 
     &:first-child {
         margin: 0;
     }
+`;
+
+export const NotificationsButton = styled.button`
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
 `;

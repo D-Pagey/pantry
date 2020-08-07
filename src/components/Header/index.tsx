@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
+import { Notifications } from '../Notifications';
 import Icon from './icon.svg';
 import Arrow from './arrow.svg';
 import * as S from './styles';
@@ -11,12 +12,17 @@ type HeaderTypes = {
 };
 
 export const Header: FC<HeaderTypes> = ({ page }) => {
+    const [showNotifications, setShowNotifications] = useState(false);
+
     const history = useHistory();
     const isMobile = useMediaQuery({
         query: '(max-device-width: 760px)'
     });
 
     const handleBack = (): void => history.goBack();
+
+    const toggleNotifications = (): void => setShowNotifications(!showNotifications);
+    const closeNotifications = (): void => setShowNotifications(false);
 
     return (
         <S.Wrapper>
@@ -52,9 +58,12 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                         <S.Link to="/add">Add Food</S.Link>
                     </S.NavItem>
 
-                    {/* <S.NavItem>
-                        <S.Link to="/">Notifications</S.Link>
-                    </S.NavItem> */}
+                    <S.NavItem>
+                        <S.NotificationsButton type="button" onClick={toggleNotifications}>
+                            Notifications
+                        </S.NotificationsButton>
+                        {showNotifications && <Notifications onClose={closeNotifications} />}
+                    </S.NavItem>
 
                     <S.NavItem>
                         <S.Link to="/settings">Settings</S.Link>

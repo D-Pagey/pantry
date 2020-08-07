@@ -4,6 +4,10 @@ import { UnreadNotification, User, WelcomeNotification } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '.';
 
+const props = {
+    onClose: () => {}
+};
+
 export default { title: 'Notifications' };
 
 export const normal = () => (
@@ -18,7 +22,7 @@ export const normal = () => (
         }}
     >
         <div style={{ margin: 32 }}>
-            <Notifications />
+            <Notifications {...props} />
         </div>
     </AuthContext.Provider>
 );

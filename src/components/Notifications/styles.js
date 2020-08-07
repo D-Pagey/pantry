@@ -3,16 +3,21 @@ import styled from 'styled-components';
 import { Button } from '../Button';
 
 export const List = styled.ul`
+    background-color: white;
     border: 1px solid #504e4e2b;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    left: -5.2rem;
     list-style: none;
     margin: 0;
     padding: 2rem 1rem;
-    width: 250px;
+    position: absolute;
+    top: 3rem;
+    width: 275px;
 `;
 
 export const Title = styled.h3`

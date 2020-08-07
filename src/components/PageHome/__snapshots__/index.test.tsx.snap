@@ -68,10 +68,18 @@ exports[`PageHome component should render 1`] = `
 .c6 {
   font-size: 1.1rem;
   margin: 0 0 0 2rem;
+  position: relative;
 }
 
 .c6:first-child {
   margin: 0;
+}
+
+.c7 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
 }
 
 @media (min-width:768px) {
@@ -148,6 +156,16 @@ exports[`PageHome component should render 1`] = `
       >
         Add Food
       </a>
+    </li>
+    <li
+      class="c6"
+    >
+      <button
+        class="c7"
+        type="button"
+      >
+        Notifications
+      </button>
     </li>
     <li
       class="c6"

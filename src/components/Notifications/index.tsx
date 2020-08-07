@@ -9,7 +9,11 @@ import { AuthContext } from '../ProviderAuth';
 import { Button } from '../Button';
 import * as S from './styles';
 
-export const Notifications: FC = () => {
+type NotificationsProps = {
+    onClose: () => void;
+};
+
+export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
     const { user } = useContext(AuthContext);
     const history = useHistory();
 
@@ -99,7 +103,7 @@ export const Notifications: FC = () => {
         <S.List>
             <S.Title>Your Notifications:</S.Title>
 
-            {user?.notifications!.length === 0 && <p>No notifications</p>}
+            {user?.notifications!.length === 0 && <p>You don&apos;t have any notifications</p>}
 
             {user?.notifications!.map((item) => (
                 <S.Item key={item.uid}>
@@ -121,7 +125,9 @@ export const Notifications: FC = () => {
                 </S.Item>
             ))}
 
-            <S.CloseButton secondary>Close</S.CloseButton>
+            <S.CloseButton secondary onClick={onClose}>
+                Close
+            </S.CloseButton>
         </S.List>
     );
 };
