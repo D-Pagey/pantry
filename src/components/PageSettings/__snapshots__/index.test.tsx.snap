@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageAddFoodForm component should render 1`] = `
+exports[`PageSettings component should render 1`] = `
 .c0 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -89,7 +89,7 @@ exports[`PageAddFoodForm component should render 1`] = `
     <h4
       class="c3"
     >
-      Add food
+      Settings
     </h4>
   </div>
   <ul

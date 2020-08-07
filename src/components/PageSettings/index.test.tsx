@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render } from '../../test-utils';
-import { PageProfile } from '.';
+import { PageSettings } from '.';
 
 const props = {};
 
@@ -14,17 +14,17 @@ const context = {
     }
 };
 
-describe('PageProfile component', () => {
+describe('PageSettings component', () => {
     it('should render', () => {
-        const { container } = render(<PageProfile {...props} />, context);
+        const { container } = render(<PageSettings {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should call sign out on click', () => {
         const signOut = jest.fn();
-        const { getByTestId } = render(<PageProfile {...props} />, { ...context, signOut });
+        const { getByTestId } = render(<PageSettings {...props} />, { ...context, signOut });
 
-        userEvent.click(getByTestId('pageProfileButton'));
+        userEvent.click(getByTestId('PageSettingsButton'));
 
         expect(signOut).toHaveBeenCalled();
     });

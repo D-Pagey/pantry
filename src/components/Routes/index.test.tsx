@@ -5,9 +5,9 @@ import { Routes } from '.';
 
 describe('Routes component', () => {
     it.each`
-        pageTestId       | path          | isAuthed
-        ${'pageHome'}    | ${'/'}        | ${false}
-        ${'pageProfile'} | ${'/profile'} | ${true}
+        pageTestId        | path           | isAuthed
+        ${'pageHome'}     | ${'/'}         | ${false}
+        ${'PageSettings'} | ${'/settings'} | ${true}
     `('should render $pageTestId for $path', ({ pageTestId, path, isAuthed }) => {
         const { getByTestId } = render(
             <MemoryRouter initialEntries={[path]}>

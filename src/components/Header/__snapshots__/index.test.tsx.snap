@@ -7,12 +7,16 @@ exports[`Header component should render 1`] = `
   -ms-flex-align: center;
   align-items: center;
   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,.06);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.06);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   height: 100px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   padding: 0 24px;
   left: 0;
   position: fixed;
@@ -21,49 +25,128 @@ exports[`Header component should render 1`] = `
   z-index: 2;
 }
 
-.c1 {
+.c2 {
   color: initial;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c3 {
+.c4 {
   font-size: 25px;
   font-weight: 500;
   margin: 0;
   padding: 0 0 0 14px;
 }
 
-.c2 {
+.c3 {
   position: relative;
   top: 2px;
   width: 32px;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c6 {
+  font-size: 1.1rem;
+  margin: 0 0 0 2rem;
+}
+
+.c6:first-child {
+  margin: 0;
+}
+
 <div
   class="c0"
 >
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
+  <div
+    class="c1"
   >
-    <img
-      alt="icon"
-      class="c2"
-      src="icon.svg"
-    />
-  </a>
-  <a
-    aria-current="page"
-    class="c1 active"
-    href="/"
-  >
-    <h4
-      class="c3"
+    <a
+      aria-current="page"
+      class="c2 active"
+      href="/"
     >
-      Pantry
-    </h4>
-  </a>
+      <img
+        alt="icon"
+        class="c3"
+        src="icon.svg"
+      />
+    </a>
+    <a
+      aria-current="page"
+      class="c2 active"
+      href="/"
+    >
+      <h4
+        class="c4"
+      >
+        Pantry
+      </h4>
+    </a>
+  </div>
+  <ul
+    class="c5"
+  >
+    <li
+      class="c6"
+    >
+      <a
+        aria-current="page"
+        class="c2 active"
+        href="/"
+      >
+        Home
+      </a>
+    </li>
+    <li
+      class="c6"
+    >
+      <a
+        class="c2"
+        href="/food"
+      >
+        Your Food
+      </a>
+    </li>
+    <li
+      class="c6"
+    >
+      <a
+        class="c2"
+        href="/add"
+      >
+        Add Food
+      </a>
+    </li>
+    <li
+      class="c6"
+    >
+      <a
+        class="c2"
+        href="/settings"
+      >
+        Settings
+      </a>
+    </li>
+  </ul>
 </div>
 `;

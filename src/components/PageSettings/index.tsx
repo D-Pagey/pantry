@@ -10,11 +10,11 @@ import { Layout } from '../Layout';
 import { Household } from '../Household';
 import * as S from './styles';
 
-type PageProfileProps = {
+type PageSettingsProps = {
     fridgeUsers?: string[];
 };
 
-export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
+export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
     const [fridgeUsersInfo, setFridgeUsersInfo] = useState<UserType[]>();
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
@@ -86,7 +86,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
 
     return (
         <Layout title="Settings">
-            <S.Wrapper data-testid="pageProfile">
+            <S.Wrapper data-testid="PageSettings">
                 {user && (
                     <>
                         <S.Image src={user.photo} alt="profile" />
@@ -113,7 +113,7 @@ export const PageProfile: FC<PageProfileProps> = ({ fridgeUsers }) => {
 
                         {/* {user.notifications && user.uid && <Notifications />} */}
 
-                        <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="pageProfileButton">
+                        <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="PageSettingsButton">
                             Sign Out
                         </S.SignOutButton>
                     </>

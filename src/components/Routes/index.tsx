@@ -11,7 +11,7 @@ import { PageFood } from '../PageFood';
 import { PageEditFood } from '../PageEditFood';
 import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
-import { PageProfile } from '../PageProfile';
+import { PageSettings } from '../PageSettings';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
 import { RouteProtected } from '../RouteProtected';
@@ -81,8 +81,8 @@ export const Routes = (): JSX.Element => {
                 <PageAddFoodForm fridge={fridge} updateFridge={updateFridge} />
             </RouteProtected>
 
-            <RouteProtected path="/profile">
-                <PageProfile fridgeUsers={fridgeUsers} />
+            <RouteProtected path="/settings">
+                <PageSettings fridgeUsers={fridgeUsers} />
             </RouteProtected>
 
             <Route>

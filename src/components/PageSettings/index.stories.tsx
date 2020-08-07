@@ -1,9 +1,9 @@
 import React from 'react';
 import { User } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
-import { PageProfile } from '.';
+import { PageSettings } from '.';
 
-export default { title: 'PageProfile ' };
+export default { title: 'PageSettings ' };
 
 export const normal = (): JSX.Element => (
     <AuthContext.Provider
@@ -16,6 +16,6 @@ export const normal = (): JSX.Element => (
             user: User
         }}
     >
-        <PageProfile />
+        <PageSettings />
     </AuthContext.Provider>
 );
