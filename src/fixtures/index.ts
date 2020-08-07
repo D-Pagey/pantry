@@ -72,6 +72,13 @@ export const ReadNotification: NotificationType = {
     uid: 'bbb'
 };
 
+export const WelcomeNotification: NotificationType = {
+    createdAt: new Date(),
+    description: 'Welcome to Pantry',
+    type: 'text',
+    uid: 'xxwxwxwxwxw'
+};
+
 export const User: UserType = {
     email: 'dan@test.com',
     household: '123',

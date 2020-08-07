@@ -8,8 +8,22 @@ exports[`Notifications component should render 1`] = `
   color: white;
   cursor: pointer;
   padding: 1rem;
+  min-width: 68px;
+}
+
+.c4 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
   margin: 0 1rem 0 0;
   min-width: 68px;
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+  margin: 0 1rem 0 0;
 }
 
 .c6 {
@@ -26,86 +40,94 @@ exports[`Notifications component should render 1`] = `
 }
 
 .c0 {
-  margin: 1rem 0;
+  border: 1px solid #504e4e2b;
+  border-radius: 5px;
+  box-shadow: rgba(0,0,0,0.19) 0px 10px 20px,rgba(0,0,0,0.23) 0px 6px 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 2rem 1rem;
+  width: 250px;
 }
 
 .c1 {
-  margin: 0;
-  padding: 0 0 1rem;
+  font-weight: normal;
+  margin: 0 0 1rem;
+  text-align: center;
 }
 
 .c2 {
-  border: 1px solid black;
-  border-radius: 5px;
-  list-style: none;
-  margin: 0;
-  padding: 1rem;
-}
-
-.c3 {
-  border-bottom: 1px solid #FCBA3B;
+  border-bottom: 1px solid #504e4e2b;
   display: grid;
   grid-row-gap: 1rem;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: max-content 1fr;
-  padding: 0 0 1rem;
+  padding: 1.5rem 0;
+  width: 100%;
 }
 
-.c4 {
-  grid-column: 1 / 3;
-  justify-self: center;
+.c2:nth-child(2) {
+  border-top: 1px solid #504e4e2b;
+}
+
+.c3 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
+  grid-column: 1 / 3;
+  justify-self: center;
+  text-align: center;
 }
 
-@media (min-width:768px) {
-  .c3 {
-    grid-template-columns: 1fr 125px 125px;
-    grid-template-rows: 1fr;
-  }
+.c7 {
+  margin: 2rem 0 0;
+  width: 100px;
 }
 
-@media (min-width:768px) {
-  .c4 {
-    grid-column: 1 / 2;
-    justify-self: left;
-    padding: 0 0 0 1rem;
-  }
-}
-
-<div
+<ul
   class="c0"
 >
-  <h2
+  <h3
     class="c1"
   >
-    Notifications:
-  </h2>
-  <ul
+    Your Notifications:
+  </h3>
+  <li
     class="c2"
   >
-    <li
+    <span
       class="c3"
     >
-      <span
-        class="c4"
-      >
-        Dan is inviting you to join their household
-      </span>
-      <button
-        class="c5"
-        type="button"
-      >
-        Accept
-      </button>
-      <button
-        class="c6"
-        type="button"
-      >
-        Decline
-      </button>
-    </li>
-  </ul>
-</div>
+      Dan is inviting you to join their household
+    </span>
+    <button
+      class="c4"
+      type="button"
+    >
+      Decline
+    </button>
+    <button
+      class="c5"
+      type="button"
+    >
+      Accept
+    </button>
+  </li>
+  <button
+    class="c6 c7"
+    type="button"
+  >
+    Close
+  </button>
+</ul>
 `;

@@ -96,32 +96,32 @@ export const Notifications: FC = () => {
     };
 
     return (
-        <S.Wrapper>
-            <S.Title>Notifications:</S.Title>
+        <S.List>
+            <S.Title>Your Notifications:</S.Title>
 
-            <S.List>
-                {user?.notifications!.length === 0 && <p>No notifications</p>}
+            {user?.notifications!.length === 0 && <p>No notifications</p>}
 
-                {user?.notifications!.map((item) => (
-                    <S.Item key={item.uid}>
-                        <S.Text>{item.description}</S.Text>
+            {user?.notifications!.map((item) => (
+                <S.Item key={item.uid}>
+                    <S.Text>{item.description}</S.Text>
 
-                        {item.type === 'invite' ? (
-                            <>
-                                <Button margin="0 1rem 0 0" onClick={handleInviteClick(item, true)}>
-                                    Accept
-                                </Button>
+                    {item.type === 'invite' ? (
+                        <>
+                            <Button margin="0 1rem 0 0" onClick={handleInviteClick(item, false)} secondary>
+                                Decline
+                            </Button>
 
-                                <Button onClick={handleInviteClick(item, false)} secondary>
-                                    Decline
-                                </Button>
-                            </>
-                        ) : (
-                            <Button onClick={handleDismissClick(item.uid)}>Dismiss</Button>
-                        )}
-                    </S.Item>
-                ))}
-            </S.List>
-        </S.Wrapper>
+                            <Button onClick={handleInviteClick(item, true)}>Accept</Button>
+                        </>
+                    ) : (
+                        <S.DismissButton secondary onClick={handleDismissClick(item.uid)}>
+                            Dismiss
+                        </S.DismissButton>
+                    )}
+                </S.Item>
+            ))}
+
+            <S.CloseButton secondary>Close</S.CloseButton>
+        </S.List>
     );
 };

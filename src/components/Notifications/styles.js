@@ -1,46 +1,52 @@
 import styled from 'styled-components';
 
-import { mediaQuery, colours } from '../../tokens';
-
-export const Wrapper = styled.div`
-    margin: 1rem 0;
-`;
-
-export const Title = styled.h2`
-    margin: 0;
-    padding: 0 0 1rem;
-`;
+import { Button } from '../Button';
 
 export const List = styled.ul`
-    border: 1px solid black;
+    border: 1px solid #504e4e2b;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
     margin: 0;
-    padding: 1rem;
+    padding: 2rem 1rem;
+    width: 250px;
+`;
+
+export const Title = styled.h3`
+    font-weight: normal;
+    margin: 0 0 1rem;
+    text-align: center;
 `;
 
 export const Item = styled.li`
-    border-bottom: 1px solid ${colours.orange};
+    border-bottom: 1px solid #504e4e2b;
     display: grid;
     grid-row-gap: 1rem;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: max-content 1fr;
-    padding: 0 0 1rem;
-
-    @media ${mediaQuery.tablet} {
-        grid-template-columns: 1fr 125px 125px;
-        grid-template-rows: 1fr;
+    padding: 1.5rem 0;
+    width: 100%;
+    /* https://stackoverflow.com/questions/54008865/target-first-child-css-styled-components/54009010 */
+    &:nth-child(2) {
+        border-top: 1px solid #504e4e2b;
     }
 `;
 
 export const Text = styled.span`
+    align-self: center;
     grid-column: 1 / 3;
     justify-self: center;
-    align-self: center;
+    text-align: center;
+`;
 
-    @media ${mediaQuery.tablet} {
-     grid-column: 1 / 2;
-     justify-self: left;
-     padding: 0 0 0 1rem;
-    }
+export const DismissButton = styled(Button)`
+    grid-column: 2 / 3;
+`;
+
+export const CloseButton = styled(Button)`
+    margin: 2rem 0 0;
+    width: 100px;
 `;

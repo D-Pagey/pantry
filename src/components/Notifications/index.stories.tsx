@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UnreadNotification, ReadNotification, User } from '../../fixtures';
+import { UnreadNotification, User, WelcomeNotification } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '.';
 
@@ -14,9 +14,11 @@ export const normal = () => (
             isCheckingAuth: false,
             setUser: () => {},
             signOut: () => {},
-            user: { ...User, notifications: [UnreadNotification, ReadNotification] }
+            user: { ...User, notifications: [WelcomeNotification, UnreadNotification] }
         }}
     >
-        <Notifications />
+        <div style={{ margin: 32 }}>
+            <Notifications />
+        </div>
     </AuthContext.Provider>
 );
