@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ChooseCategory component should render 1`] = `
-.c4 {
+.c5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -24,16 +24,16 @@ exports[`ChooseCategory component should render 1`] = `
   width: 144px;
 }
 
-.c4:hover {
+.c5:hover {
   background-color: #348841;
 }
 
-.c5 {
+.c6 {
   color: #348841;
   font-size: 18px;
 }
 
-.c3:hover .c5 {
+.c4:hover .c6 {
   color: white;
 }
 
@@ -59,6 +59,13 @@ exports[`ChooseCategory component should render 1`] = `
 }
 
 .c2 {
+  color: #7C7C7C;
+  font-style: italic;
+  margin: 0;
+  padding: 0 0 1rem;
+}
+
+.c3 {
   display: grid;
   grid-gap: 24px;
   grid-template-columns: 1fr 1fr;
@@ -76,71 +83,76 @@ exports[`ChooseCategory component should render 1`] = `
   >
     What type of food?
   </h3>
-  <div
+  <p
     class="c2"
   >
+    We will remember this choice for next time
+  </p>
+  <div
+    class="c3"
+  >
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="vegetablesCategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         Vegetables
       </p>
     </button>
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="fruitCategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         Fruit
       </p>
     </button>
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="dairyCategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         Dairy
       </p>
     </button>
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="meatCategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         Meat
       </p>
     </button>
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="fishCategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         Fish
       </p>
     </button>
     <button
-      class="c3 c4"
+      class="c4 c5"
       data-testid="[opened tin]CategoryButton"
       type="button"
     >
       <p
-        class="c5"
+        class="c6"
       >
         [Opened Tin]
       </p>

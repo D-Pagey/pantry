@@ -17,6 +17,8 @@ export const ChooseCategory: FC<ChooseCategoryTypes> = ({ handleClick, selected 
         <S.Wrapper data-testid="chooseCategory">
             <S.Title>What type of food?</S.Title>
 
+            <S.GreyText>We will remember this choice for next time</S.GreyText>
+
             <S.Grid>
                 {Categories.map((category) => (
                     <CategoryButton
