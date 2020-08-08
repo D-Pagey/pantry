@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notifications component should render 1`] = `
-.c5 {
+.c7 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -18,12 +18,10 @@ exports[`Notifications component should render 1`] = `
   color: white;
   cursor: pointer;
   padding: 1rem;
-  margin: 0 1rem 0 0;
   min-width: 68px;
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
-  margin: 0 1rem 0 0;
 }
 
 .c6 {
@@ -33,10 +31,12 @@ exports[`Notifications component should render 1`] = `
   color: white;
   cursor: pointer;
   padding: 1rem;
+  margin: 0 1rem 0 0;
   min-width: 68px;
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
+  margin: 0 1rem 0 0;
 }
 
 .c0 {
@@ -94,7 +94,11 @@ exports[`Notifications component should render 1`] = `
   text-align: center;
 }
 
-.c7 {
+.c5 {
+  grid-column: 2 / 3;
+}
+
+.c8 {
   margin: 2rem 0 0;
   width: 100px;
 }
@@ -113,23 +117,38 @@ exports[`Notifications component should render 1`] = `
     <span
       class="c3"
     >
+      Welcome to Pantry
+    </span>
+    <button
+      class="c4 c5"
+      type="button"
+    >
+      Dismiss
+    </button>
+  </li>
+  <li
+    class="c2"
+  >
+    <span
+      class="c3"
+    >
       Dan is inviting you to join their household
     </span>
     <button
-      class="c4"
+      class="c6"
       type="button"
     >
       Decline
     </button>
     <button
-      class="c5"
+      class="c7"
       type="button"
     >
       Accept
     </button>
   </li>
   <button
-    class="c6 c7"
+    class="c4 c8"
     type="button"
   >
     Close

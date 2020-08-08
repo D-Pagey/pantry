@@ -15,6 +15,17 @@ export type DropdownOptionType = {
     value: string;
 };
 
+export type DatabaseUserType = {
+    email: string;
+    household: string;
+    name: string;
+    photo: string;
+    notifications: {
+        [id: string]: DatabaseNotificationType;
+    };
+    uid: string;
+};
+
 export type UserType = {
     email: string;
     household: string;

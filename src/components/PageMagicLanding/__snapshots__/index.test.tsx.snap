@@ -25,12 +25,6 @@ exports[`PageMagicLanding component should render 1`] = `
   z-index: 2;
 }
 
-.c6 {
-  color: initial;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
 .c3 {
   font-size: 25px;
   font-weight: 500;
@@ -55,33 +49,6 @@ exports[`PageMagicLanding component should render 1`] = `
   align-items: center;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.c5 {
-  font-size: 1.1rem;
-  margin: 0 0 0 2rem;
-  position: relative;
-}
-
-.c5:first-child {
-  margin: 0;
-}
-
-.c7 {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-}
-
 <div
   class="c0"
 >
@@ -100,60 +67,5 @@ exports[`PageMagicLanding component should render 1`] = `
       Magic Sign In
     </h4>
   </div>
-  <ul
-    class="c4"
-  >
-    <li
-      class="c5"
-    >
-      <a
-        aria-current="page"
-        class="c6 active"
-        href="/"
-      >
-        Home
-      </a>
-    </li>
-    <li
-      class="c5"
-    >
-      <a
-        class="c6"
-        href="/food"
-      >
-        Your Food
-      </a>
-    </li>
-    <li
-      class="c5"
-    >
-      <a
-        class="c6"
-        href="/add"
-      >
-        Add Food
-      </a>
-    </li>
-    <li
-      class="c5"
-    >
-      <button
-        class="c7"
-        type="button"
-      >
-        Notifications
-      </button>
-    </li>
-    <li
-      class="c5"
-    >
-      <a
-        class="c6"
-        href="/settings"
-      >
-        Settings
-      </a>
-    </li>
-  </ul>
 </div>
 `;

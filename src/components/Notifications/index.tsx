@@ -1,25 +1,25 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { db, firebase } from '../../services';
-import { NotificationType } from '../../types';
-import { AuthContext } from '../ProviderAuth';
+import { NotificationType, UserType } from '../../types';
 import { Button } from '../Button';
 import * as S from './styles';
 
 type NotificationsProps = {
+    notifications: NotificationType[];
     onClose: () => void;
+    user: UserType;
 };
 
-export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
-    const { user } = useContext(AuthContext);
+export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, user }) => {
     const history = useHistory();
 
     const dismissNotification = (notificationId: string) => {
         db.collection('users')
-            .doc(user?.uid)
+            .doc(user.uid)
             .update({
                 [`notifications.${notificationId}`]: firebase.firestore.FieldValue.delete()
             })
@@ -35,7 +35,7 @@ export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
 
             const acceptNotification: NotificationType = {
                 createdAt: new Date(),
-                description: `${user?.name} has accepted your invitation`,
+                description: `${user.name} has accepted your invitation`,
                 type: 'text',
                 uid: acceptedUid
             };
@@ -53,23 +53,23 @@ export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
             db.collection('households')
                 .doc(item.inviteData?.inviterHouseholdId)
                 .update({
-                    users: firebase.firestore.FieldValue.arrayUnion(user?.uid)
+                    users: firebase.firestore.FieldValue.arrayUnion(user.uid)
                 })
                 .then(() => console.log('added household users'))
                 .catch(() => toast.error('Error adding user to household'));
 
             // remove your user id from your original household users array
             db.collection('households')
-                .doc(user?.household)
+                .doc(user.household)
                 .update({
-                    users: firebase.firestore.FieldValue.arrayRemove(user?.uid)
+                    users: firebase.firestore.FieldValue.arrayRemove(user.uid)
                 })
                 .then(() => console.log('removed from household users'))
                 .catch(() => toast.error('Error adding user to household'));
 
             // change your own household
             db.collection('users')
-                .doc(user?.uid)
+                .doc(user.uid)
                 .update({
                     household: item.inviteData?.inviterHouseholdId
                 })
@@ -82,7 +82,7 @@ export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
 
             const declinedNotification: NotificationType = {
                 createdAt: new Date(),
-                description: `${user?.name} has declined your invitation`,
+                description: `${user.name} has declined your invitation`,
                 type: 'text',
                 uid: declinedUid
             };
@@ -103,9 +103,9 @@ export const Notifications: FC<NotificationsProps> = ({ onClose }) => {
         <S.List>
             <S.Title>Your Notifications:</S.Title>
 
-            {user?.notifications!.length === 0 && <p>You don&apos;t have any notifications</p>}
+            {notifications.length === 0 && <p>You don&apos;t have any notifications</p>}
 
-            {user?.notifications!.map((item) => (
+            {notifications.map((item) => (
                 <S.Item key={item.uid}>
                     <S.Text>{item.description}</S.Text>
 

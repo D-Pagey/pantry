@@ -24,5 +24,5 @@ export const colours = {
 };
 
 export const mediaQuery = {
-    tablet: '(min-width: 768px)',
+    tablet: '(min-width: 765px)',
 };

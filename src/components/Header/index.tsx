@@ -1,7 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
+import { NotificationType, UserType } from '../../types';
+import { mediaQuery } from '../../tokens';
+import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '../Notifications';
 import Icon from './icon.svg';
 import Arrow from './arrow.svg';
@@ -13,16 +16,24 @@ type HeaderTypes = {
 
 export const Header: FC<HeaderTypes> = ({ page }) => {
     const [showNotifications, setShowNotifications] = useState(false);
+    const [notifications, setNotifications] = useState<NotificationType[]>();
+    const { user } = useContext(AuthContext);
 
     const history = useHistory();
-    const isMobile = useMediaQuery({
-        query: '(max-device-width: 760px)'
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
     });
 
     const handleBack = (): void => history.goBack();
 
     const toggleNotifications = (): void => setShowNotifications(!showNotifications);
     const closeNotifications = (): void => setShowNotifications(false);
+
+    useEffect(() => {
+        if (user && !notifications) {
+            setNotifications(user.notifications);
+        }
+    }, [notifications, user]);
 
     return (
         <S.Wrapper>
@@ -44,7 +55,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 )}
             </S.LogoWrapper>
 
-            {!isMobile && (
+            {isTabletOrLarger && (
                 <S.NavList>
                     <S.NavItem>
                         <S.Link to="/">Home</S.Link>
@@ -62,7 +73,13 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                         <S.NotificationsButton type="button" onClick={toggleNotifications}>
                             Notifications
                         </S.NotificationsButton>
-                        {showNotifications && <Notifications onClose={closeNotifications} />}
+                        {showNotifications && user && notifications && (
+                            <Notifications
+                                notifications={notifications}
+                                onClose={closeNotifications}
+                                user={user as UserType}
+                            />
+                        )}
                     </S.NavItem>
 
                     <S.NavItem>

@@ -55,33 +55,6 @@ exports[`Header component should render 1`] = `
   align-items: center;
 }
 
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.c6 {
-  font-size: 1.1rem;
-  margin: 0 0 0 2rem;
-  position: relative;
-}
-
-.c6:first-child {
-  margin: 0;
-}
-
-.c7 {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-}
-
 <div
   class="c0"
 >
@@ -111,60 +84,5 @@ exports[`Header component should render 1`] = `
       </h4>
     </a>
   </div>
-  <ul
-    class="c5"
-  >
-    <li
-      class="c6"
-    >
-      <a
-        aria-current="page"
-        class="c2 active"
-        href="/"
-      >
-        Home
-      </a>
-    </li>
-    <li
-      class="c6"
-    >
-      <a
-        class="c2"
-        href="/food"
-      >
-        Your Food
-      </a>
-    </li>
-    <li
-      class="c6"
-    >
-      <a
-        class="c2"
-        href="/add"
-      >
-        Add Food
-      </a>
-    </li>
-    <li
-      class="c6"
-    >
-      <button
-        class="c7"
-        type="button"
-      >
-        Notifications
-      </button>
-    </li>
-    <li
-      class="c6"
-    >
-      <a
-        class="c2"
-        href="/settings"
-      >
-        Settings
-      </a>
-    </li>
-  </ul>
 </div>
 `;
