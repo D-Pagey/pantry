@@ -25,8 +25,8 @@ export const BurgerMenu: FC = () => {
                     <S.NavLink to="/add" onClick={closeMenu}>
                         Add Food
                     </S.NavLink>
-                    <S.NavLink to="/profile" onClick={closeMenu} data-testid="burgerMenuProfileLink">
-                        Profile
+                    <S.NavLink to="/settings" onClick={closeMenu} data-testid="burgerMenuSettingsLink">
+                        Settings
                     </S.NavLink>
                     <S.Button onClick={menuSignOut} data-testid="burgerMenuSignOut">
                         Sign Out
