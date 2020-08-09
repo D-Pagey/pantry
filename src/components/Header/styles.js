@@ -42,8 +42,8 @@ export const Arrow = styled.img`
 `;
 
 export const LogoWrapper = styled.div`
-    display: flex;
     align-items: center;
+    display: flex;
 `;
 
 export const NavList = styled.ul`

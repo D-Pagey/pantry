@@ -105,7 +105,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     if (!fridge) return <Loading isLoading />;
 
     return (
-        <Layout>
+        <Layout title="Food">
             <S.Wrapper>
                 <CategoryFilter selected={category} setSelected={handleCategoryClick} />
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />

@@ -1,8 +1,8 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-import { NotificationType, UserType } from '../../types';
+import { UserType } from '../../types';
 import { mediaQuery } from '../../tokens';
 import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '../Notifications';
@@ -17,7 +17,6 @@ type HeaderTypes = {
 
 export const Header: FC<HeaderTypes> = ({ page }) => {
     const [showNotifications, setShowNotifications] = useState(false);
-    const [notifications, setNotifications] = useState<NotificationType[]>();
     const { user } = useContext(AuthContext);
 
     const history = useHistory();
@@ -30,29 +29,23 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
     const toggleNotifications = (): void => setShowNotifications(!showNotifications);
     const closeNotifications = (): void => setShowNotifications(false);
 
-    useEffect(() => {
-        if (user && !notifications) {
-            setNotifications(user.notifications);
-        }
-    }, [notifications, user]);
-
     return (
         <S.Wrapper>
             <S.LogoWrapper>
                 {page ? (
-                    <S.Arrow src={Arrow} onClick={handleBack} alt="arrow" data-testid="headerBackArrow" />
+                    <>
+                        <S.Arrow src={Arrow} onClick={handleBack} alt="arrow" data-testid="headerBackArrow" />
+                        <S.Title>{page}</S.Title>
+                    </>
                 ) : (
-                    <S.Link to="/">
-                        <S.Logo src={Icon} alt="icon" />
-                    </S.Link>
-                )}
-
-                {page ? (
-                    <S.Title>{page}</S.Title>
-                ) : (
-                    <S.Link to="/">
-                        <S.Title>Pantry</S.Title>
-                    </S.Link>
+                    <>
+                        <S.Link to="/">
+                            <S.Logo src={Icon} alt="icon" />
+                        </S.Link>
+                        <S.Link to="/">
+                            <S.Title>Pantry</S.Title>
+                        </S.Link>
+                    </>
                 )}
             </S.LogoWrapper>
 
@@ -62,9 +55,9 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                         <img src={BellIcon} alt="notifications" />
                     </S.NotificationsButton>
 
-                    {showNotifications && user && notifications && (
+                    {showNotifications && user?.notifications && (
                         <Notifications
-                            notifications={notifications}
+                            notifications={user.notifications}
                             onClose={closeNotifications}
                             user={user as UserType}
                         />
@@ -90,9 +83,9 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                         <S.NotificationsButton type="button" onClick={toggleNotifications}>
                             Notifications
                         </S.NotificationsButton>
-                        {showNotifications && user && notifications && (
+                        {showNotifications && user?.notifications && (
                             <Notifications
-                                notifications={notifications}
+                                notifications={user.notifications}
                                 onClose={closeNotifications}
                                 user={user as UserType}
                             />
