@@ -17,7 +17,7 @@ type HeaderTypes = {
 
 export const Header: FC<HeaderTypes> = ({ page }) => {
     const [showNotifications, setShowNotifications] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { isAuthed, user } = useContext(AuthContext);
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
@@ -50,7 +50,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 )}
             </S.LogoWrapper>
 
-            {!isTabletOrLarger && (
+            {isAuthed && !isTabletOrLarger && (
                 <S.BellWrapper>
                     <S.NotificationsButton type="button" onClick={toggleNotifications}>
                         <Bell color={hasNotifications ? '#1976D2' : undefined} />
@@ -66,7 +66,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 </S.BellWrapper>
             )}
 
-            {isTabletOrLarger && (
+            {isAuthed && isTabletOrLarger && (
                 <S.NavList>
                     <S.NavItem>
                         <S.Link to="/">Home</S.Link>
@@ -99,6 +99,14 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
 
                     <S.NavItem>
                         <S.Link to="/settings">Settings</S.Link>
+                    </S.NavItem>
+                </S.NavList>
+            )}
+
+            {!isAuthed && isTabletOrLarger && (
+                <S.NavList>
+                    <S.NavItem>
+                        <S.Link to="/sign-in">Sign In / Sign Up</S.Link>
                     </S.NavItem>
                 </S.NavList>
             )}
