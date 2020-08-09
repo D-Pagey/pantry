@@ -12,7 +12,7 @@ const props = {
 export default { title: 'Notifications' };
 
 export const normal = () => (
-    <div style={{ margin: 32 }}>
+    <div style={{ width: 50, position: 'relative', right: '-210px' }}>
         <Notifications {...props} />
     </div>
 );

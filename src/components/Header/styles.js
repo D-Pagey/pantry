@@ -66,6 +66,7 @@ export const NavItem = styled.li`
 export const NotificationsButton = styled.button`
     background-color: transparent;
     border: 0;
+    color: ${({ hasNotifications }) => hasNotifications && '#1976D2'};
     cursor: pointer;
     display: flex;
     padding: 0;

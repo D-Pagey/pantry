@@ -8,7 +8,7 @@ import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '../Notifications';
 import Icon from './icon.svg';
 import Arrow from './arrow.svg';
-import BellIcon from './bell.svg';
+import { Bell } from './Bell';
 import * as S from './styles';
 
 type HeaderTypes = {
@@ -18,11 +18,12 @@ type HeaderTypes = {
 export const Header: FC<HeaderTypes> = ({ page }) => {
     const [showNotifications, setShowNotifications] = useState(false);
     const { user } = useContext(AuthContext);
-
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
     });
+
+    const hasNotifications = user?.notifications && user.notifications.length > 0;
 
     const handleBack = (): void => history.goBack();
 
@@ -52,7 +53,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
             {!isTabletOrLarger && (
                 <S.BellWrapper>
                     <S.NotificationsButton type="button" onClick={toggleNotifications}>
-                        <img src={BellIcon} alt="notifications" />
+                        <Bell color={hasNotifications ? '#1976D2' : undefined} />
                     </S.NotificationsButton>
 
                     {showNotifications && user?.notifications && (
@@ -80,7 +81,11 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                     </S.NavItem>
 
                     <S.NavItem>
-                        <S.NotificationsButton type="button" onClick={toggleNotifications}>
+                        <S.NotificationsButton
+                            type="button"
+                            onClick={toggleNotifications}
+                            hasNotifications={hasNotifications}
+                        >
                             Notifications
                         </S.NotificationsButton>
                         {showNotifications && user?.notifications && (
