@@ -67,5 +67,11 @@ export const NotificationsButton = styled.button`
     background-color: transparent;
     border: 0;
     cursor: pointer;
+    display: flex;
     padding: 0;
+`;
+
+export const BellWrapper = styled.div`
+    position: relative;
+    right: 4rem;
 `;

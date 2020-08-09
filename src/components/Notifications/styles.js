@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
+import { mediaQuery } from '../../tokens';
 import { Button } from '../Button';
 
 export const List = styled.ul`
+    align-items: center;
     background-color: white;
     border: 1px solid #504e4e2b;
     border-radius: 5px;
@@ -10,14 +12,17 @@ export const List = styled.ul`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    left: -5.2rem;
     list-style: none;
     margin: 0;
     padding: 2rem 1rem;
     position: absolute;
+    right: -3rem;
     top: 3rem;
     width: 275px;
+
+    @media ${mediaQuery.tablet} {
+        left: -6.6rem;
+    }
 `;
 
 export const Title = styled.h3`

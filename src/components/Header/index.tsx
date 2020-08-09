@@ -8,6 +8,7 @@ import { AuthContext } from '../ProviderAuth';
 import { Notifications } from '../Notifications';
 import Icon from './icon.svg';
 import Arrow from './arrow.svg';
+import BellIcon from './bell.svg';
 import * as S from './styles';
 
 type HeaderTypes = {
@@ -54,6 +55,22 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                     </S.Link>
                 )}
             </S.LogoWrapper>
+
+            {!isTabletOrLarger && (
+                <S.BellWrapper>
+                    <S.NotificationsButton type="button" onClick={toggleNotifications}>
+                        <img src={BellIcon} alt="notifications" />
+                    </S.NotificationsButton>
+
+                    {showNotifications && user && notifications && (
+                        <Notifications
+                            notifications={notifications}
+                            onClose={closeNotifications}
+                            user={user as UserType}
+                        />
+                    )}
+                </S.BellWrapper>
+            )}
 
             {isTabletOrLarger && (
                 <S.NavList>

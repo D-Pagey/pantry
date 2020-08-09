@@ -55,6 +55,22 @@ exports[`PageHome component should render 1`] = `
   align-items: center;
 }
 
+.c6 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c5 {
+  position: relative;
+  right: 4rem;
+}
+
 @media (min-width:765px) {
 
 }
@@ -95,6 +111,19 @@ exports[`PageHome component should render 1`] = `
         Pantry
       </h4>
     </a>
+  </div>
+  <div
+    class="c5"
+  >
+    <button
+      class="c6"
+      type="button"
+    >
+      <img
+        alt="notifications"
+        src="bell.svg"
+      />
+    </button>
   </div>
 </div>
 `;

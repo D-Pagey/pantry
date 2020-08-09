@@ -49,6 +49,22 @@ exports[`PageSignIn component should render 1`] = `
   align-items: center;
 }
 
+.c5 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c4 {
+  position: relative;
+  right: 4rem;
+}
+
 <div
   class="c0"
 >
@@ -66,6 +82,19 @@ exports[`PageSignIn component should render 1`] = `
     >
       Sign in
     </h4>
+  </div>
+  <div
+    class="c4"
+  >
+    <button
+      class="c5"
+      type="button"
+    >
+      <img
+        alt="notifications"
+        src="bell.svg"
+      />
+    </button>
   </div>
 </div>
 `;

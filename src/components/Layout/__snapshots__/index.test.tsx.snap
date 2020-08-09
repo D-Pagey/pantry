@@ -55,6 +55,22 @@ exports[`Layout component should render 1`] = `
   align-items: center;
 }
 
+.c6 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c5 {
+  position: relative;
+  right: 4rem;
+}
+
 <div
   class="c0"
 >
@@ -83,6 +99,19 @@ exports[`Layout component should render 1`] = `
         Pantry
       </h4>
     </a>
+  </div>
+  <div
+    class="c5"
+  >
+    <button
+      class="c6"
+      type="button"
+    >
+      <img
+        alt="notifications"
+        src="bell.svg"
+      />
+    </button>
   </div>
 </div>
 `;
