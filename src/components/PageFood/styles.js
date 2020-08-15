@@ -23,15 +23,22 @@ export const RouterLink = styled(Link)`
 `;
 
 export const FoodCardWrapper = styled.div`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
     @media ${mediaQuery.tablet} {
         grid-column: 2 / 3;
     }
 `;
 
 export const Button = styled(Btn)`
+    justify-self: end;
+    margin: 0 1rem;
+
     @media ${mediaQuery.tablet} {
         grid-column: 2 / 3;
         grid-row: 3 / 4;
-        justify-self: end;
+        margin: 0;
     }
 `;

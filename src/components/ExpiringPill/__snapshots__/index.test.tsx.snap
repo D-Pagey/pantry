@@ -2,12 +2,10 @@
 
 exports[`ExpiringPill component should render 1`] = `
 .c0 {
-  -webkit-align-self: flex-end;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
   border: 2px solid rgba(52,136,65,0.4);
   border-radius: 16px;
   cursor: pointer;
+  justify-self: end;
   padding: 0.5rem 1rem;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -22,6 +20,7 @@ exports[`ExpiringPill component should render 1`] = `
   .c0 {
     grid-column: 2 / 3;
     justify-self: end;
+    margin: 1rem 0;
   }
 }
 

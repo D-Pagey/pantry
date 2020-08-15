@@ -108,7 +108,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
         <Layout title="Food">
             <S.Wrapper>
                 <CategoryFilter selected={category} setSelected={handleCategoryClick} />
-                <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem 0" />
+                <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 
