@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { UnreadNotification, User, WelcomeNotification } from '../../fixtures';
+import { UnreadNotification, UserDan, WelcomeNotification } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { Header } from '.';
 
@@ -16,7 +16,7 @@ export const normal = () => (
                 isCheckingAuth: false,
                 setUser: () => {},
                 signOut: () => {},
-                user: { ...User, notifications: [WelcomeNotification, UnreadNotification] }
+                user: { ...UserDan, notifications: [WelcomeNotification, UnreadNotification] }
             }}
         >
             <Header />

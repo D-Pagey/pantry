@@ -1,9 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
 import { render } from '../../test-utils';
+import { UserDan, UserJoe } from '../../fixtures';
 import { PageSettings } from '.';
 
-const props = {};
+const props = {
+    fridgeUsers: [UserDan, UserJoe]
+};
 
 const context = {
     signOut: () => {},

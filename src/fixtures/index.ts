@@ -79,11 +79,20 @@ export const WelcomeNotification: NotificationType = {
     uid: 'xxwxwxwxwxw'
 };
 
-export const User: UserType = {
+export const UserDan: UserType = {
     email: 'dan@test.com',
     household: '123',
     name: 'Dan Page',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     notifications: [UnreadNotification],
     uid: 'abcde'
+};
+
+export const UserJoe: UserType = {
+    email: 'joe@test.com',
+    household: '456',
+    name: 'Joe Hunt',
+    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
+    notifications: [WelcomeNotification],
+    uid: 'fghij'
 };

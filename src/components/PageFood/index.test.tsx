@@ -3,11 +3,11 @@ import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { Fridge, ExpiredBatch, FreshBatch, User } from '../../fixtures';
+import { Fridge, ExpiredBatch, FreshBatch, UserDan } from '../../fixtures';
 import { PageFood } from '.';
 
 const context = {
-    user: User
+    user: UserDan
 };
 
 describe('PageFood component', () => {

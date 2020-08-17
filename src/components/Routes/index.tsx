@@ -2,8 +2,9 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType } from '../../types';
+import { FoodType, DatabaseUserType, UserType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
+import { formatUser } from '../ProviderAuth/utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
@@ -18,9 +19,31 @@ import { RouteProtected } from '../RouteProtected';
 
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
-    const [fridgeUsers, setFridgeUsers] = useState<string[]>();
+    const [fridgeUsersInfo, setFridgeUsersInfo] = useState<UserType[]>();
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
+
+    const fetchFridgeUsersInfo = useCallback(
+        (users: string[]): void => {
+            if (fridgeUsersInfo) console.log('unneccessary fired');
+            if (!fridgeUsersInfo) console.log('neccessary fired');
+
+            db.collection('users')
+                .where('uid', 'in', users)
+                .get()
+                .then((querySnapshot) => {
+                    const data: UserType[] = [];
+
+                    querySnapshot.forEach((doc) => {
+                        const formatted = formatUser(doc.data() as DatabaseUserType);
+                        data.push(formatted);
+                    });
+
+                    setFridgeUsersInfo(data);
+                });
+        },
+        [fridgeUsersInfo]
+    );
 
     const updateFridge = (values: FoodType): void => {
         if (user) {
@@ -42,12 +65,13 @@ export const Routes = (): JSX.Element => {
                     const fridgeItems: FoodType[] = Object.values(data.fridge);
                     const formattedDates = formatExpiryDates(fridgeItems);
 
+                    if (data.users.length > 0 && !fridgeUsersInfo) fetchFridgeUsersInfo(data.users);
+
                     setFridge(formattedDates);
-                    setFridgeUsers(data.users);
                     setExpiringCount(countExpiringFoodItems(formattedDates));
                 });
         }
-    }, [user]);
+    }, [user, fetchFridgeUsersInfo, fridgeUsersInfo]);
 
     useEffect(() => {
         if (user?.household) {
@@ -82,7 +106,7 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/settings">
-                <PageSettings fridgeUsers={fridgeUsers} />
+                {fridgeUsersInfo && <PageSettings fridgeUsers={fridgeUsersInfo} />}
             </RouteProtected>
 
             <Route>

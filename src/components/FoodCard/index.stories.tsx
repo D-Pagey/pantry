@@ -1,5 +1,5 @@
 import React from 'react';
-import { Batches, User } from '../../fixtures';
+import { Batches, UserDan } from '../../fixtures';
 import { FoodCard } from '.';
 
 export default { title: 'FoodCard' };
@@ -9,7 +9,7 @@ const props = {
     handleClick: () => console.log('fired'),
     margin: '1rem 0 0 1rem',
     name: 'Carrots',
-    ownerPhoto: User.photo
+    ownerPhoto: UserDan.photo
 };
 
 export const normal = () => (

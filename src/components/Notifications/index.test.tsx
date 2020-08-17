@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { User, WelcomeNotification, UnreadNotification } from '../../fixtures';
+import { UserDan, WelcomeNotification, UnreadNotification } from '../../fixtures';
 import { Notifications } from '.';
 
 const props = {
     notifications: [WelcomeNotification, UnreadNotification],
     onClose: () => {},
-    user: User
+    user: UserDan
 };
 
 describe('Notifications component', () => {

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { User } from '../../fixtures';
+import { UserDan } from '../../fixtures';
 import { UserType } from '../../types';
 import { Household } from '.';
 
 const JoinerUser: UserType & { houseRole?: string } = {
-    ...User,
+    ...UserDan,
     houseRole: 'joiner'
 };
 
 const props = {
-    people: [{ ...User, houseRole: 'owner' }, JoinerUser, JoinerUser]
+    people: [{ ...UserDan, houseRole: 'owner' }, JoinerUser, JoinerUser]
 };
 
 export default { title: 'Household' };

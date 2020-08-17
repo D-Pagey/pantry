@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { User, Fridge } from '../../fixtures';
+import { UserDan, Fridge } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageFood } from '.';
 
@@ -14,7 +14,7 @@ export const normal = () => (
             isCheckingAuth: false,
             setUser: () => {},
             signOut: () => {},
-            user: User
+            user: UserDan
         }}
     >
         <PageFood fridge={Fridge} />

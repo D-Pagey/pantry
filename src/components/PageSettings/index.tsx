@@ -1,4 +1,4 @@
-import React, { FC, useContext, useCallback, useEffect, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,11 +11,10 @@ import { Household } from '../Household';
 import * as S from './styles';
 
 type PageSettingsProps = {
-    fridgeUsers?: string[];
+    fridgeUsers: UserType[];
 };
 
 export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
-    const [fridgeUsersInfo, setFridgeUsersInfo] = useState<UserType[]>();
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
 
@@ -43,7 +42,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
     };
 
     const handleInviteClick = () => {
-        if (fridgeUsersInfo?.map((fridgeUser) => fridgeUser.email).includes(emailInvite)) {
+        if (fridgeUsers.map((fridgeUser) => fridgeUser.email).includes(emailInvite)) {
             toast.error('That user is already in your household');
         } else {
             // does the email exist
@@ -65,25 +64,6 @@ export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
         }
     };
 
-    const fetchFridgeUsersInfo = useCallback(() => {
-        db.collection('users')
-            .where('uid', 'in', fridgeUsers)
-            .get()
-            .then((querySnapshot) => {
-                const data: UserType[] = [];
-
-                querySnapshot.forEach((doc) => {
-                    data.push(doc.data() as UserType);
-                });
-
-                setFridgeUsersInfo(data);
-            });
-    }, [fridgeUsers]);
-
-    useEffect(() => {
-        if (!fridgeUsersInfo && fridgeUsers) fetchFridgeUsersInfo();
-    }, [fridgeUsersInfo, fridgeUsers, fetchFridgeUsersInfo]);
-
     return (
         <Layout title="Settings">
             <S.Wrapper data-testid="PageSettings">
@@ -97,11 +77,10 @@ export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
 
                         <S.Heading>Household Settings</S.Heading>
                         <S.Text>Your household consists of:</S.Text>
-                        {fridgeUsersInfo && (
-                            <S.HouseholdWrapper>
-                                <Household people={fridgeUsersInfo} />
-                            </S.HouseholdWrapper>
-                        )}
+
+                        <S.HouseholdWrapper>
+                            <Household people={fridgeUsers} />
+                        </S.HouseholdWrapper>
 
                         <S.Text>Invite someone to join your household:</S.Text>
                         <S.Input

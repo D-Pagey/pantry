@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { User } from '../../fixtures';
+import { UserDan } from '../../fixtures';
 import { Household } from '.';
 
 const props = {
     people: [
-        { ...User, uid: '1' },
-        { ...User, uid: '2' },
-        { ...User, uid: '3' }
+        { ...UserDan, uid: '1' },
+        { ...UserDan, uid: '2' },
+        { ...UserDan, uid: '3' }
     ]
 };
 

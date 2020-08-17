@@ -15,7 +15,7 @@ import { DisposeFood } from '../DisposeFood';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
-import { User } from '../../fixtures';
+import { UserDan } from '../../fixtures';
 
 type PageFoodProps = {
     fridge?: FoodType[];
@@ -130,7 +130,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
                                         name={item.name}
                                         margin="0 0 1rem"
                                         isSelected={item.name === editingItem?.name}
-                                        ownerPhoto={User.photo}
+                                        ownerPhoto={UserDan.photo}
                                     />
                                 );
                             }

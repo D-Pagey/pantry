@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '../../fixtures';
+import { UserDan } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageSettings } from '.';
 
@@ -13,9 +13,9 @@ export const normal = (): JSX.Element => (
             isCheckingAuth: false,
             setUser: () => {},
             signOut: () => {},
-            user: User
+            user: UserDan
         }}
     >
-        <PageSettings />
+        <PageSettings fridgeUsers={[UserDan]} />
     </AuthContext.Provider>
 );
