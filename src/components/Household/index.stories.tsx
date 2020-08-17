@@ -4,7 +4,7 @@ import { User } from '../../fixtures';
 import { UserType } from '../../types';
 import { Household } from '.';
 
-const JoinerUser: UserType = {
+const JoinerUser: UserType & { houseRole?: string } = {
     ...User,
     houseRole: 'joiner'
 };

@@ -3,8 +3,9 @@ import React, { FC } from 'react';
 import { UserType } from '../../types';
 import * as S from './styles';
 
+// TODO: change how these props work
 type HouseholdProps = {
-    people: Partial<UserType>[];
+    people: Partial<UserType & { houseRole?: string }>[];
 };
 
 export const Household: FC<HouseholdProps> = ({ people }) => (

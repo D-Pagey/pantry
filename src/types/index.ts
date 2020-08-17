@@ -15,39 +15,7 @@ export type DropdownOptionType = {
     value: string;
 };
 
-export type DatabaseUserType = {
-    email: string;
-    household: string;
-    name: string;
-    photo: string;
-    notifications: {
-        [id: string]: DatabaseNotificationType;
-    };
-    uid: string;
-};
-
-export type UserType = {
-    email: string;
-    household: string;
-    name: string;
-    photo: string;
-    notifications: NotificationType[];
-    houseRole?: string;
-    uid: string;
-};
-
-export type NotificationType = {
-    createdAt: Date;
-    description: string;
-    inviteData?: {
-        inviterUserId: string;
-        inviterHouseholdId: string;
-    };
-    type: 'invite' | 'text';
-    uid: string;
-};
-
-export type DatabaseNotificationType = {
+export interface DatabaseNotificationType {
     createdAt: any;
     description: string;
     inviteData?: {
@@ -56,4 +24,19 @@ export type DatabaseNotificationType = {
     };
     type: 'invite' | 'text';
     uid: string;
-};
+}
+
+export type NotificationType = Omit<DatabaseNotificationType, 'createdAt'> & { createdAt: Date };
+
+export interface DatabaseUserType {
+    email: string;
+    household: string;
+    name: string;
+    photo: string;
+    notifications: {
+        [id: string]: DatabaseNotificationType;
+    };
+    uid: string;
+}
+
+export type UserType = Omit<DatabaseUserType, 'notifications'> & { notifications: NotificationType[] };
