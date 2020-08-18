@@ -94,7 +94,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     };
 
     const handleFoodEdit = (): void => {
-        history.push(`/${editingItem?.name}/edit`, editingItem);
+        history.push(`/${editingItem?.name}/edit`);
     };
 
     const handleFoodClick = (item: FoodType) => (): void => {

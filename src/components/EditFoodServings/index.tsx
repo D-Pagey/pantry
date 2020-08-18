@@ -3,22 +3,22 @@ import React, { FC, useReducer } from 'react';
 import { format } from 'date-fns';
 import { useHistory } from 'react-router-dom';
 
-import { BatchType, FoodType } from '../../types';
+import { BatchWithPhotoType, FoodWithPhotoType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { Button } from '../Button';
 import { reducer } from './reducer';
 import * as S from './styles';
 
 type EditFoodServingsProps = {
-    updateFridge: (food: FoodType) => void;
-    item: FoodType;
+    updateFridge: (food: FoodWithPhotoType) => void;
+    item: FoodWithPhotoType;
 };
 
 export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge }) => {
     const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
     const history = useHistory();
 
-    const handleChecked = (batch: BatchType) => (event: any): void => {
+    const handleChecked = (batch: BatchWithPhotoType) => (event: any): void => {
         const dispatchType = event.target.checked ? 'checked' : 'unchecked';
 
         dispatch({ type: dispatchType, payload: batch });
@@ -42,11 +42,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={i}>
-                            <S.Checkbox onChange={handleChecked(batch)} data-testid={`${batch.ownerId}-${i}`} />
+                            <S.Checkbox onChange={handleChecked(batch)} data-testid={`${batch.ownerPhoto}-${i}`} />
+                            <S.Photo src={batch.ownerPhoto} alt="owner" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>
-                            <S.Text>OwnerId: {batch.ownerId}</S.Text>
                         </S.Item>
                     ));
                 })}

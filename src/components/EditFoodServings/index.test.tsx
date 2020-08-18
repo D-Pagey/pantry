@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { Fridge } from '../../fixtures';
+import { Fridge, ExpiredPhotoBatch } from '../../fixtures';
 import { EditFoodServings } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const props = {
-    item: Fridge[0],
+    item: { ...Fridge[0], batches: [ExpiredPhotoBatch] },
     updateFridge: () => {}
 };
 

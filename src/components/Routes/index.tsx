@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType, DatabaseUserType, UserType } from '../../types';
+import { FoodType, DatabaseUserType, UserType, FoodWithPhotoType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { formatUser } from '../ProviderAuth/utils';
 import { db } from '../../services';
@@ -23,29 +23,23 @@ export const Routes = (): JSX.Element => {
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
 
-    const fetchFridgeUsersInfo = useCallback(
-        (users: string[]): void => {
-            if (fridgeUsersInfo) console.log('unneccessary fired');
-            if (!fridgeUsersInfo) console.log('neccessary fired');
+    const fetchFridgeUsersInfo = useCallback((users: string[]): void => {
+        db.collection('users')
+            .where('uid', 'in', users)
+            .get()
+            .then((querySnapshot) => {
+                const data: UserType[] = [];
 
-            db.collection('users')
-                .where('uid', 'in', users)
-                .get()
-                .then((querySnapshot) => {
-                    const data: UserType[] = [];
-
-                    querySnapshot.forEach((doc) => {
-                        const formatted = formatUser(doc.data() as DatabaseUserType);
-                        data.push(formatted);
-                    });
-
-                    setFridgeUsersInfo(data);
+                querySnapshot.forEach((doc) => {
+                    const formatted = formatUser(doc.data() as DatabaseUserType);
+                    data.push(formatted);
                 });
-        },
-        [fridgeUsersInfo]
-    );
 
-    const updateFridge = (values: FoodType): void => {
+                setFridgeUsersInfo(data);
+            });
+    }, []);
+
+    const updateFridge = (values: FoodType | FoodWithPhotoType): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
@@ -98,7 +92,9 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/:name/edit">
-                <PageEditFood updateFridge={updateFridge} />
+                {fridgeUsersInfo && (
+                    <PageEditFood fridge={fridge} fridgeUsers={fridgeUsersInfo} updateFridge={updateFridge} />
+                )}
             </RouteProtected>
 
             <RouteProtected path="/add">

@@ -1,12 +1,12 @@
-import { BatchType } from '../../types';
+import { BatchWithPhotoType } from '../../types';
 
 type StateType = {
     count: number;
-    updatedBatches: BatchType[];
+    updatedBatches: BatchWithPhotoType[];
 };
 
 type ActionType = {
-    payload: BatchType;
+    payload: BatchWithPhotoType;
     type: string;
 };
 

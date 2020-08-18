@@ -4,11 +4,15 @@ export type BatchType = {
     servings: number;
 };
 
+export type BatchWithPhotoType = Omit<BatchType, 'ownerId'> & { ownerPhoto: string };
+
 export type FoodType = {
     batches: BatchType[];
     category: string;
     name: string;
 };
+
+export type FoodWithPhotoType = Omit<FoodType, 'batches'> & { batches: BatchWithPhotoType[] };
 
 export type DropdownOptionType = {
     label: string;

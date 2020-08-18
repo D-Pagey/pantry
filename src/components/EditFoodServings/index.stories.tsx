@@ -1,11 +1,11 @@
 import React from 'react';
-import { Fridge } from '../../fixtures';
+import { Fridge, ExpiredPhotoBatch } from '../../fixtures';
 import { EditFoodServings } from '.';
 
 export default { title: 'EditFoodServings' };
 
 const props = {
-    item: Fridge[0],
+    item: { ...Fridge[0], batches: [ExpiredPhotoBatch] },
     updateFridge: () => {}
 };
 
