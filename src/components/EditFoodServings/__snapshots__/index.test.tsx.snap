@@ -300,7 +300,7 @@ exports[`EditFoodServings component should render 1`] = `
     </li>
   </ul>
   <button
-    class="sc-AxjAm c9"
+    class="c9"
     data-testid="EditFoodServingsSubmit"
     disabled=""
     type="button"
@@ -311,7 +311,7 @@ exports[`EditFoodServings component should render 1`] = `
     carrot
   </button>
   <button
-    class="sc-AxjAm c10"
+    class="c10"
     type="button"
   >
     Cancel
