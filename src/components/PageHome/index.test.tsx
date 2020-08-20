@@ -1,5 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+
 import { render } from '../../test-utils';
 import { PageHome } from '.';
 
@@ -21,6 +22,6 @@ describe('PageHome component', () => {
         render(<PageHome expiringCount={expiringCount} />);
 
         // eslint-disable-next-line @typescript-eslint/unbound-method
-        expect(toast.error).toHaveBeenCalledWith(`${expiringCount} expiring items`);
+        expect(toast.error).toHaveBeenCalledWith(`${expiringCount} expiring items`, { onClick: expect.any(Function) });
     });
 });

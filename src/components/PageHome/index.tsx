@@ -18,7 +18,7 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
 
     useEffect(() => {
         if (expiringCount) {
-            toast.error(`${expiringCount} expiring items`);
+            toast.error(`${expiringCount} expiring items`, { onClick: () => history.push('/food') });
         }
     }, [expiringCount, history]);
 
