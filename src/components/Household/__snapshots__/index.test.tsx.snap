@@ -70,70 +70,12 @@ exports[`Household component should render 1`] = `
     <span
       class="c3"
     >
-      Dan Page
+      Heidi Seo
     </span>
     <span
       class="c4"
     >
-      dan@test.com
-    </span>
-    <span
-      aria-label="smile"
-      class="c5"
-      role="img"
-    >
-      😀
-    </span>
-    <span
-      class="c6"
-    />
-  </li>
-  <li
-    class="c1"
-  >
-    <img
-      alt="user"
-      class="c2"
-      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-    />
-    <span
-      class="c3"
-    >
-      Dan Page
-    </span>
-    <span
-      class="c4"
-    >
-      dan@test.com
-    </span>
-    <span
-      aria-label="smile"
-      class="c5"
-      role="img"
-    >
-      😀
-    </span>
-    <span
-      class="c6"
-    />
-  </li>
-  <li
-    class="c1"
-  >
-    <img
-      alt="user"
-      class="c2"
-      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-    />
-    <span
-      class="c3"
-    >
-      Dan Page
-    </span>
-    <span
-      class="c4"
-    >
-      dan@test.com
+      heidi@gmail.com
     </span>
     <span
       aria-label="smile"

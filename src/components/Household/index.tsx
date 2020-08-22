@@ -1,21 +1,20 @@
 import React, { FC } from 'react';
 
-import { UserType } from '../../types';
+import { TenantType } from '../../types';
 import * as S from './styles';
 
-// TODO: change how these props work
 type HouseholdProps = {
-    people: Partial<UserType & { houseRole?: string }>[];
+    tenants: TenantType[];
 };
 
-export const Household: FC<HouseholdProps> = ({ people }) => (
+export const Household: FC<HouseholdProps> = ({ tenants }) => (
     <S.List>
-        {people.map((person) => (
-            <S.Item key={person.uid}>
-                <S.Image src={person.photo} alt="user" onError={(e: any) => console.log('shit balls', e)} />
-                <S.Name>{person.name}</S.Name>
-                <S.Email>{person.email}</S.Email>
-                {person.houseRole === 'owner' ? (
+        {tenants.map((tenant) => (
+            <S.Item key={tenant.uid}>
+                <S.Image src={tenant.photo} alt="user" onError={(e: any) => console.log('shit balls', e)} />
+                <S.Name>{tenant.name}</S.Name>
+                <S.Email>{tenant.email}</S.Email>
+                {tenant.houseRole === 'owner' ? (
                     // eslint-disable-next-line jsx-a11y/accessible-emoji
                     <S.Span role="img" aria-label="cool">
                         😎
@@ -26,7 +25,7 @@ export const Household: FC<HouseholdProps> = ({ people }) => (
                         😀
                     </S.Span>
                 )}
-                <S.HouseRole>{person.houseRole}</S.HouseRole>
+                <S.HouseRole>{tenant.houseRole}</S.HouseRole>
             </S.Item>
         ))}
     </S.List>

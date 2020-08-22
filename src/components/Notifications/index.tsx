@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { db, firebase } from '../../services';
-import { NotificationType, UserType } from '../../types';
+import { NotificationType, UserType, TenantType } from '../../types';
 import { Button } from '../Button';
 import * as S from './styles';
 
@@ -29,7 +29,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
 
     const handleDismissClick = (itemUid: string) => () => dismissNotification(itemUid);
 
-    const handleInviteClick = (item: NotificationType, didAccept: boolean) => () => {
+    const handleInviteDecision = (item: NotificationType, didAccept: boolean) => () => {
         if (didAccept) {
             const acceptedUid = uuidv4();
 
@@ -38,6 +38,13 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                 description: `${user.name} has accepted your invitation`,
                 type: 'text',
                 uid: acceptedUid
+            };
+
+            const myTenant: TenantType = {
+                email: user.email,
+                name: user.name,
+                photo: user.photo,
+                uid: user.uid
             };
 
             // notify the inviter
@@ -53,7 +60,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
             db.collection('households')
                 .doc(item.inviteData?.inviterHouseholdId)
                 .update({
-                    users: firebase.firestore.FieldValue.arrayUnion(user.uid)
+                    [`tenants.${user.uid}`]: myTenant
                 })
                 .then(() => console.log('added household users'))
                 .catch(() => toast.error('Error adding user to household'));
@@ -62,7 +69,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
             db.collection('households')
                 .doc(user.household)
                 .update({
-                    users: firebase.firestore.FieldValue.arrayRemove(user.uid)
+                    [`tenants.${user.uid}`]: firebase.firestore.FieldValue.delete()
                 })
                 .then(() => console.log('removed from household users'))
                 .catch(() => toast.error('Error adding user to household'));
@@ -111,11 +118,11 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
 
                     {item.type === 'invite' ? (
                         <>
-                            <Button margin="0 1rem 0 0" onClick={handleInviteClick(item, false)} secondary>
+                            <Button margin="0 1rem 0 0" onClick={handleInviteDecision(item, false)} secondary>
                                 Decline
                             </Button>
 
-                            <Button onClick={handleInviteClick(item, true)}>Accept</Button>
+                            <Button onClick={handleInviteDecision(item, true)}>Accept</Button>
                         </>
                     ) : (
                         <S.DismissButton secondary onClick={handleDismissClick(item.uid)}>

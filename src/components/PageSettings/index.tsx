@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
-import { UserType, NotificationType } from '../../types';
+import { TenantType, NotificationType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
@@ -11,10 +11,10 @@ import { Household } from '../Household';
 import * as S from './styles';
 
 type PageSettingsProps = {
-    fridgeUsers: UserType[];
+    tenants: TenantType[];
 };
 
-export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
+export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
 
@@ -42,7 +42,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
     };
 
     const handleInviteClick = () => {
-        if (fridgeUsers.map((fridgeUser) => fridgeUser.email).includes(emailInvite)) {
+        if (tenants.map((tenant) => tenant.email).includes(emailInvite)) {
             toast.error('That user is already in your household');
         } else {
             // does the email exist
@@ -79,7 +79,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ fridgeUsers }) => {
                         <S.Text>Your household consists of:</S.Text>
 
                         <S.HouseholdWrapper>
-                            <Household people={fridgeUsers} />
+                            <Household tenants={tenants} />
                         </S.HouseholdWrapper>
 
                         <S.Text>Invite someone to join your household:</S.Text>

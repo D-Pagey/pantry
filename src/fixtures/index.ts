@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns';
 
-import { BatchType, FoodType, NotificationType, UserType } from '../types';
+import { BatchType, FoodType, NotificationType, UserType, TenantType } from '../types';
 
 export const ExpiredBatch: BatchType = {
     expires: new Date(),
@@ -95,4 +95,11 @@ export const UserJoe: UserType = {
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     notifications: [WelcomeNotification],
     uid: 'fghij'
+};
+
+export const Tenant: TenantType = {
+    email: 'heidi@gmail.com',
+    name: 'Heidi Seo',
+    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
+    uid: 'zxwy'
 };

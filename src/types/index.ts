@@ -40,3 +40,11 @@ export interface DatabaseUserType {
 }
 
 export type UserType = Omit<DatabaseUserType, 'notifications'> & { notifications: NotificationType[] };
+
+export type TenantType = {
+    email: string;
+    name: string;
+    houseRole?: string;
+    photo: string;
+    uid: string;
+};
