@@ -2,21 +2,31 @@ import { addDays } from 'date-fns';
 
 import { BatchType, FoodType, NotificationType, UserType, TenantType } from '../types';
 
+export const Tenant: TenantType = {
+    email: 'heidi@gmail.com',
+    name: 'Heidi Seo',
+    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
+    uid: 'zxwy'
+};
+
 export const ExpiredBatch: BatchType = {
+    id: '1111111',
     expires: new Date(),
-    ownerId: '1',
+    owner: Tenant,
     servings: 1
 };
 
 export const ExpiringSoonBatch: BatchType = {
+    id: '22222222',
     expires: addDays(new Date(), 2),
-    ownerId: '2',
+    owner: Tenant,
     servings: 2
 };
 
 export const FreshBatch: BatchType = {
+    id: '3333333',
     expires: addDays(new Date(), 5),
-    ownerId: '3',
+    owner: Tenant,
     servings: 4
 };
 
@@ -95,11 +105,4 @@ export const UserJoe: UserType = {
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     notifications: [WelcomeNotification],
     uid: 'fghij'
-};
-
-export const Tenant: TenantType = {
-    email: 'heidi@gmail.com',
-    name: 'Heidi Seo',
-    photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
-    uid: 'zxwy'
 };

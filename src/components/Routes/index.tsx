@@ -2,13 +2,13 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType, TenantType } from '../../types';
+import { FoodType, TenantType, NewFoodType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
 import { PageFood } from '../PageFood';
-import { PageEditFood } from '../PageEditFood';
+// import { PageEditFood } from '../PageEditFood';
 import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
@@ -22,12 +22,30 @@ export const Routes = (): JSX.Element => {
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
 
-    const updateFridge = (values: FoodType): void => {
+    const updateItemBatch = (values: NewFoodType): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
-                .update({ [`fridge.${values.name}`]: values })
-                .then(() => toast.success('Food item added'))
+                .update({
+                    [`fridge.${values.name}.batches.${values.batch.id}`]: values.batch
+                })
+                .then(() => toast.success(`Batch added for ${values.name}`))
+                .catch(() => toast.error('Error with updating fridge'));
+        }
+    };
+
+    const addItem = (values: NewFoodType): void => {
+        if (user) {
+            db.collection('households')
+                .doc(user.household)
+                .update({
+                    [`fridge.${values.name}`]: {
+                        name: values.name,
+                        category: values.category
+                    },
+                    [`fridge.${values.name}.batches.${values.batch.id}`]: values.batch
+                })
+                .then(() => toast.success(`${values.name} added`))
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
@@ -72,12 +90,10 @@ export const Routes = (): JSX.Element => {
                 <PageFood fridge={fridge} />
             </RouteProtected>
 
-            <RouteProtected path="/:name/edit">
-                <PageEditFood updateFridge={updateFridge} />
-            </RouteProtected>
+            <RouteProtected path="/:name/edit">{/* <PageEditFood updateFridge={updateFridge} /> */}</RouteProtected>
 
             <RouteProtected path="/add">
-                <PageAddFoodForm fridge={fridge} updateFridge={updateFridge} />
+                <PageAddFoodForm fridge={fridge} addItem={addItem} updateItemBatch={updateItemBatch} />
             </RouteProtected>
 
             <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>

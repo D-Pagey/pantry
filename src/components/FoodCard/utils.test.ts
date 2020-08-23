@@ -1,5 +1,5 @@
+import { Batches, Tenant } from '../../fixtures';
 import { getTotalServingsCount, reduceBatches } from './utils';
-import { Batches } from '../../fixtures';
 
 describe('getTotalServingsCount function', () => {
     it.each`
@@ -23,8 +23,9 @@ describe('reduceBatches function', () => {
 
     it('should return a chopped servings for last batch', () => {
         const BigBatch = {
+            id: '1234',
             expires: new Date(),
-            ownerId: '1',
+            owner: Tenant,
             servings: 4
         };
 

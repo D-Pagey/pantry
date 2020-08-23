@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch } from '../fixtures';
+import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, Tenant } from '../fixtures';
 import { FoodType } from '../types';
 import {
     getPercentageFromDate,
@@ -97,17 +97,19 @@ describe('countExpiringFoodItems function', () => {
             Fridge[0],
             Fridge[1],
             {
-                batches: [{
-                    expires: addDays(new Date(), 5),
-                    ownerId: '123',
-                    servings: 1
-                }],
+                batches: [
+                    {
+                        id: '22234',
+                        expires: addDays(new Date(), 5),
+                        owner: Tenant,
+                        servings: 1
+                    }
+                ],
                 category: 'dairy',
                 name: 'milk'
             }
         ];
-        
-        
+
         const count = countExpiringFoodItems(HalfExpiringFridge);
         expect(count).toBe(2);
     });
@@ -115,17 +117,19 @@ describe('countExpiringFoodItems function', () => {
     it('should return the correct count of 0 with no expiring batches', () => {
         const HalfExpiringFridge: FoodType[] = [
             {
-                batches: [{
-                    expires: addDays(new Date(), 5),
-                    ownerId: '123',
-                    servings: 1
-                }],
+                batches: [
+                    {
+                        id: '6677676',
+                        expires: addDays(new Date(), 5),
+                        owner: Tenant,
+                        servings: 1
+                    }
+                ],
                 category: 'dairy',
                 name: 'milk'
             }
         ];
-        
-        
+
         const count = countExpiringFoodItems(HalfExpiringFridge);
         expect(count).toBe(0);
     });

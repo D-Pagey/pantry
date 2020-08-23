@@ -1,7 +1,22 @@
+export type DropdownOptionType = {
+    label: string;
+    value: string;
+};
+
+export type TenantType = {
+    email: string;
+    name: string;
+    houseRole?: string;
+    photo: string;
+    uid: string;
+};
+
+
 export type BatchType = {
     expires: Date | any;
-    ownerId: string;
+    id: string;
     servings: number;
+    owner: TenantType;
 };
 
 export type FoodType = {
@@ -10,10 +25,7 @@ export type FoodType = {
     name: string;
 };
 
-export type DropdownOptionType = {
-    label: string;
-    value: string;
-};
+export type NewFoodType = Omit<FoodType, 'batches'> & { batch: BatchType };
 
 export interface DatabaseNotificationType {
     createdAt: any;
@@ -40,11 +52,3 @@ export interface DatabaseUserType {
 }
 
 export type UserType = Omit<DatabaseUserType, 'notifications'> & { notifications: NotificationType[] };
-
-export type TenantType = {
-    email: string;
-    name: string;
-    houseRole?: string;
-    photo: string;
-    uid: string;
-};

@@ -2,9 +2,10 @@ import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import DatePicker from 'react-datepicker';
+import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { BatchType, FoodType } from '../../types';
+import { FoodType, NewFoodType } from '../../types';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -33,11 +34,12 @@ const options = [
 ];
 
 type PageAddFoodFormProps = {
+    addItem: (values: NewFoodType) => void;
     fridge?: FoodType[];
-    updateFridge: (values: FoodType) => void;
+    updateItemBatch: (values: NewFoodType) => void;
 };
 
-export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge }) => {
+export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, updateItemBatch }) => {
     const [step, setStep] = useState(1);
     const { user } = useContext(AuthContext);
     const history = useHistory();
@@ -47,25 +49,35 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateFridge
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
                 onSubmit={(values, actions): void => {
-                    if (fridge) {
-                        const existingBatches = fridge.reduce((acc, curr: FoodType) => {
-                            if (curr.name === values.name.toLowerCase()) {
-                                return [...acc, ...curr.batches];
-                            }
+                    if (fridge && user) {
+                        const newBatchId = uuidv4();
+                        const doesItemExist = fridge.reduce((acc, curr) => {
+                            if (curr.name === values.name) return true;
 
                             return acc;
-                        }, [] as BatchType[]);
+                        }, false);
 
-                        const formattedValues: FoodType = {
+                        const formattedValues: NewFoodType = {
                             category: values.category,
                             name: values.name.toLowerCase() || values.category,
-                            batches: [
-                                ...existingBatches,
-                                { ownerId: user?.uid!, expires: values.expires, servings: values.servings }
-                            ]
+                            batch: {
+                                owner: {
+                                    email: user.email!,
+                                    name: user.name!,
+                                    photo: user.photo!,
+                                    uid: user.uid!
+                                },
+                                expires: values.expires,
+                                servings: values.servings,
+                                id: newBatchId
+                            }
                         };
 
-                        updateFridge(formattedValues);
+                        if (doesItemExist) {
+                            updateItemBatch(formattedValues);
+                        } else {
+                            addItem(formattedValues);
+                        }
                     }
                     actions.setSubmitting(false);
                     actions.resetForm();

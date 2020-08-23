@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
 
 import { render } from '../../test-utils';
-import { Fridge, Batches } from '../../fixtures';
+import { Fridge, Batches, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -18,14 +18,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const context = {
-    user: {
-        email: 'dan.page91@gmail.com',
-        uid: '1234'
-    }
+    user: UserDan
 };
 
 const props = {
-    updateFridge: () => {}
+    addItem: () => {},
+    updateItemBatch: () => {}
 };
 
 describe('PageAddFoodForm component', () => {
@@ -108,8 +106,8 @@ describe('PageAddFoodForm component', () => {
         await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food'));
     });
 
-    it('should call updateFridge with the right values if new fridge item', async () => {
-        const updatedProps = { ...props, fridge: Fridge, updateFridge: jest.fn() };
+    it('should call addItem with the right values if new fridge item', async () => {
+        const updatedProps = { ...props, fridge: Fridge, addItem: jest.fn() };
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
@@ -126,25 +124,29 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedProps.updateFridge).toBeCalledWith({
-                batches: [
-                    {
-                        expires: expect.any(Date),
-                        ownerId: context.user.uid,
-                        servings: 1
-                    }
-                ],
+            expect(updatedProps.addItem).toBeCalledWith({
+                batch: {
+                    expires: expect.any(Date),
+                    id: expect.any(String),
+                    owner: {
+                        email: context.user.email,
+                        uid: context.user.uid,
+                        photo: context.user.photo,
+                        name: context.user.name
+                    },
+                    servings: 1
+                },
                 category: 'meat',
                 name: 'avocado'
             })
         );
     });
 
-    it('should update a fridge item if already exists', async () => {
+    it('should call updateItemBatch with correct values if already exists', async () => {
         const updatedProps = {
             ...props,
             fridge: Fridge,
-            updateFridge: jest.fn()
+            updateItemBatch: jest.fn()
         };
         const name = 'steak';
 
@@ -163,15 +165,18 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedProps.updateFridge).toBeCalledWith({
-                batches: [
-                    ...Batches,
-                    {
-                        expires: expect.any(Date),
-                        ownerId: context.user.uid,
-                        servings: 1
-                    }
-                ],
+            expect(updatedProps.updateItemBatch).toBeCalledWith({
+                batch: {
+                    expires: expect.any(Date),
+                    id: expect.any(String),
+                    owner: {
+                        email: context.user.email,
+                        uid: context.user.uid,
+                        photo: context.user.photo,
+                        name: context.user.name
+                    },
+                    servings: 1
+                },
                 category: 'meat',
                 name
             })

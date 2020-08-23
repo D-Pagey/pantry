@@ -40,13 +40,12 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
             <S.List>
                 {item.batches.map((batch) => {
                     return [...Array(batch.servings)].map((e, i) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <S.Item key={i}>
-                            <S.Checkbox onChange={handleChecked(batch)} data-testid={`${batch.ownerId}-${i}`} />
+                        <S.Item key={batch.id}>
+                            <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>
-                            <S.Text>OwnerId: {batch.ownerId}</S.Text>
+                            <img src={batch.owner.photo} alt="owner" />
                         </S.Item>
                     ));
                 })}
