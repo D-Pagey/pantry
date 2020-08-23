@@ -6,13 +6,15 @@ type StateType = {
 };
 
 type ActionType = {
-    payload: BatchType;
+    payload: BatchType | BatchType[];
     type: string;
 };
 
 export const reducer = (state: StateType, action: ActionType): StateType => {
-    const currentBatch = state.updatedBatches.filter((batch) => batch.expires === action.payload.expires);
-    const filteredOut = state.updatedBatches.filter((batch) => batch.expires !== action.payload.expires);
+    if ('expires' in action.payload) {
+        const currentBatch = state.updatedBatches.filter((batch) => batch.expires === action.payload.expires);
+        const filteredOut = state.updatedBatches.filter((batch) => batch.expires !== action.payload.expires);
+    }
 
     switch (action.type) {
         case 'checked': {

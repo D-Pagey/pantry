@@ -26,11 +26,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     const { user } = useContext(AuthContext);
     const history = useHistory();
 
-    const deleteFoodItem = (id: string): void => {
+    const deleteFoodItem = (name: string): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
-                .update({ [`fridge.${id}.batches`]: [] })
+                .update({ [`fridge.${name}.batches`]: {} })
                 .then(() => toast.error('Food deleted'))
                 .catch(() => toast.error('Error with deleting food'));
         }
@@ -91,7 +91,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     };
 
     const handleFoodEdit = (): void => {
-        history.push(`/${editingItem?.name}/edit`, editingItem);
+        if (editingItem) {
+            history.push(`/${editingItem.name}/edit`);
+        }
     };
 
     const handleFoodClick = (item: FoodType) => (): void => {
