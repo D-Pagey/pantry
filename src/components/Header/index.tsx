@@ -17,7 +17,7 @@ type HeaderTypes = {
 
 export const Header: FC<HeaderTypes> = ({ page }) => {
     const [showNotifications, setShowNotifications] = useState(false);
-    const { isAuthed, user } = useContext(AuthContext);
+    const { isAuthed, user, isCheckingAuth } = useContext(AuthContext);
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
@@ -50,9 +50,9 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 )}
             </S.LogoWrapper>
 
-            {isAuthed && !isTabletOrLarger && (
+            {isAuthed && !isTabletOrLarger && !isCheckingAuth && (
                 <S.BellWrapper>
-                    <S.NotificationsButton type="button" onClick={toggleNotifications}>
+                    <S.NotificationsButton type="button" onClick={toggleNotifications} data-testid="header-notifications">
                         <Bell color={hasNotifications ? '#1976D2' : undefined} />
                     </S.NotificationsButton>
 
@@ -66,7 +66,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 </S.BellWrapper>
             )}
 
-            {isAuthed && isTabletOrLarger && (
+            {isAuthed && isTabletOrLarger && !isCheckingAuth && (
                 <S.NavList>
                     <S.NavItem>
                         <S.Link to="/">Home</S.Link>
@@ -103,7 +103,7 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 </S.NavList>
             )}
 
-            {!isAuthed && isTabletOrLarger && (
+            {!isAuthed && !isCheckingAuth && isTabletOrLarger && (
                 <S.NavList>
                     <S.NavItem>
                         <S.Link to="/sign-in">Sign In / Sign Up</S.Link>

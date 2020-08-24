@@ -111,6 +111,7 @@ exports[`Notifications component should render 1`] = `
 
 <ul
   class="c0"
+  data-testid="notifications"
 >
   <h3
     class="c1"

@@ -107,7 +107,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
     };
 
     return (
-        <S.List>
+        <S.List data-testid="notifications">
             <S.Title>Your Notifications:</S.Title>
 
             {notifications.length === 0 && <p>You don&apos;t have any notifications</p>}
