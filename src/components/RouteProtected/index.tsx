@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { Loading } from '../Loading';
+import { Layout } from '../Layout';
 import { AuthContext } from '../ProviderAuth';
 
 export const RouteProtected = (props: any): JSX.Element => {
@@ -9,11 +9,13 @@ export const RouteProtected = (props: any): JSX.Element => {
 
     if (isCheckingAuth) {
         return (
-            <div data-testid="routeProtectedEmpty">
-                <Loading isLoading />
-            </div>
+            <Layout isLoading>
+                <div />
+            </Layout>
         );
     }
+
     if (!isCheckingAuth && !isAuthed) return <Redirect to="/sign-in" />;
+
     return <Route {...props} />;
 };

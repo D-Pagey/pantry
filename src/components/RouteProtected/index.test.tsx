@@ -29,6 +29,6 @@ describe('RouteProtected component', () => {
 
     it('should render nothing whilst checking auth', () => {
         const { getByTestId } = render(<RouteProtected {...props} />, { isCheckingAuth: true });
-        getByTestId('routeProtectedEmpty');
+        getByTestId('loading');
     });
 });

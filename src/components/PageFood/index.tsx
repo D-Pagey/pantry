@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import { db } from '../../services';
 import { FoodType } from '../../types';
 import { getExpiringItems, filterFridgeByCategory } from '../../utils';
-import { Loading } from '../Loading';
 import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
@@ -102,10 +101,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
 
-    if (!fridge) return <Loading isLoading />;
-
     return (
-        <Layout title="Food">
+        <Layout title="Food" isLoading={!fridge}>
             <S.Wrapper>
                 <CategoryFilter selected={category} setSelected={handleCategoryClick} />
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
