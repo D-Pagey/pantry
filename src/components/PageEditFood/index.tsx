@@ -1,5 +1,5 @@
 import 'rc-checkbox/assets/index.css';
-import React, { FC, useEffect, useState, useReducer } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -8,7 +8,7 @@ import { FoodType, BatchType } from '../../types';
 import { Layout } from '../Layout';
 import { getColourFromDate } from '../../utils';
 import { Button } from '../Button';
-import { reducer } from './reducer';
+// import { reducer } from './reducer';
 import * as S from './styles';
 
 type PageEditFoodProps = {
@@ -21,11 +21,8 @@ type PageEditFoodProps = {
 
 export const PageEditFood: FC<PageEditFoodProps> = ({ fridge }) => {
     const [item, setItem] = useState<FoodType>();
-    const [state, dispatch] = useReducer(reducer, { count: 0, updatedBatches: [] });
     const history = useHistory();
     const { name } = useParams<{ name: string }>();
-
-    console.log({ state });
 
     useEffect(() => {
         if (fridge) {
@@ -34,7 +31,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge }) => {
             if (editingItem) {
                 const sortedBatches = arraySort(editingItem.batches, 'expires');
 
-                dispatch({ type: 'initialBatches', payload: sortedBatches });
+                // dispatch({ type: 'initialBatches', payload: sortedBatches });
                 setItem({ ...editingItem, batches: sortedBatches });
             }
         }
@@ -42,8 +39,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge }) => {
 
     const handleChecked = (batch: BatchType) => (event: any): void => {
         const action = event.target.checked ? 'checked' : 'unchecked';
-
-        dispatch({ type: action, payload: batch });
+        console.log({ action, batch });
+        // dispatch({ type: action, payload: batch });
     };
 
     const handleEdit = () => {

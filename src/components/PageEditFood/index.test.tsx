@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
 import { Fridge } from '../../fixtures';
-import { EditFoodServings } from '.';
 
 const mockHistoryPush = jest.fn();
 const mockHistoryBack = jest.fn();
