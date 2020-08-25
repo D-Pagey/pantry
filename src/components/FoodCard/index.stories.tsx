@@ -14,7 +14,13 @@ Basic.args = {
 };
 
 Basic.argTypes = {
-    batches: { control: { disable: true } },
+    batches: { 
+        control: { 
+            type: 'select', 
+            options: { multipleOwners: Batches, singleOwner: [Batches[0]] }
+         },
+        //  defaultValue: Batches
+    },
     handleClick: { control: { disable: true } },
     margin: { control: { disable: true } },
-  };
+};

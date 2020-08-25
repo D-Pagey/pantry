@@ -32,7 +32,7 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
             <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
 
             {sortedOwnerPhotos.map((photo, index, array) => {
-                return <S.OwnerPicture index={index} length={array.length} src={photo} alt="food owner" />;
+                return <S.OwnerPicture key="photo" index={index} length={array.length} src={photo} alt="food owner" />;
             })}
 
             <S.CircleWrapper>
