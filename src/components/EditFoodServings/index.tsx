@@ -29,9 +29,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
         history.push('/food');
     };
 
-    const handleCancel = () => {
-        history.goBack();
-    };
+    const handleCancel = () => history.goBack();
 
     return (
         <S.Wrapper>

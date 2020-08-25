@@ -30,3 +30,13 @@ export const reduceBatches = (batches: BatchType[]): BatchType[] => {
 
     return countedAndCropped.batches;
 };
+
+export const getOwnerPhotos = (batches: BatchType[]): string[] => {
+    return batches.reduce((acc, curr, index) => {
+        if (index === 0) return [curr.owner.photo];
+
+        if (!acc.includes(curr.owner.photo)) return [...acc, curr.owner.photo];
+
+        return acc;
+    }, [] as string[]);
+};

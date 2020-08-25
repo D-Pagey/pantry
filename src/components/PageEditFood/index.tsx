@@ -22,7 +22,9 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ updateFridge }) => {
 
     return (
         <Layout title="Edit servings">
-            <S.Wrapper>{item && <EditFoodServings updateFridge={updateFridge} item={item} />}</S.Wrapper>
+            <S.Wrapper>
+                {item && <EditFoodServings updateFridge={updateFridge} item={item} />}
+            </S.Wrapper>
         </Layout>
     );
 };

@@ -1,5 +1,7 @@
+import { addDays } from 'date-fns';
 import { Batches, Tenant } from '../../fixtures';
-import { getTotalServingsCount, reduceBatches } from './utils';
+import { BatchType } from '../../types';
+import { getTotalServingsCount, reduceBatches, getOwnerPhotos } from './utils';
 
 describe('getTotalServingsCount function', () => {
     it.each`
@@ -33,5 +35,50 @@ describe('reduceBatches function', () => {
         const reducedBatches = reduceBatches(largeBatches);
 
         expect(reducedBatches[2].servings).toEqual(2);
+    });
+});
+
+describe('getOwnerPhotos function', () => {
+    it('should return an array of deduplicated owner photos', () => {
+        const batches: BatchType[] = [
+            {
+                expires: new Date(),
+                id: '111',
+                servings: 2,
+                owner: {
+                    email: 'dan@mail.com',
+                    photo: 'www.dan.com',
+                    name: 'dan',
+                    uid: 'dan'
+                }
+            },
+            {
+                expires: addDays(new Date(), 2),
+                id: '222',
+                servings: 2,
+                owner: {
+                    email: 'joe@mail.com',
+                    photo: 'www.joe.com',
+                    name: 'joe',
+                    uid: 'joe'
+                }
+            },
+            {
+                expires: addDays(new Date(), 5),
+                id: '111',
+                servings: 2,
+                owner: {
+                    email: 'dan@mail.com',
+                    photo: 'www.dan.com',
+                    name: 'dan',
+                    uid: 'dan'
+                }
+            }
+        ];
+
+
+        const result = getOwnerPhotos(batches);
+
+        expect(result).toStrictEqual(['www.dan.com', 'www.joe.com']);
     });
 });

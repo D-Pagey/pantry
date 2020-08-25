@@ -7,20 +7,20 @@ import { BatchType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { Donut } from '../Donut';
-import { getTotalServingsCount, reduceBatches } from './utils';
+import { getTotalServingsCount, reduceBatches, getOwnerPhotos } from './utils';
 import * as S from './styles';
 
-type FoodCardProps = {
+export type FoodCardProps = {
     batches: BatchType[];
     handleClick?: Function;
     isSelected?: boolean;
     margin?: string;
     name: string;
-    ownerPhoto: string;
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name, ownerPhoto }) => {
+export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name }) => {
     const sortedBatches = arraySort(batches, 'expires');
+    const sortedOwnerPhotos = getOwnerPhotos(sortedBatches);
     const totalServings = getTotalServingsCount(sortedBatches);
     // not very well named
     // basically choose whether or not we need to reduce the batches
@@ -31,7 +31,9 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
             <S.Name>{titleCase(name)}</S.Name>
             <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
 
-            <S.OwnerPicture src={ownerPhoto} alt="food owner" />
+            {sortedOwnerPhotos.map((photo, index, array) => {
+                return <S.OwnerPicture index={index} length={array.length} src={photo} alt="food owner" />;
+            })}
 
             <S.CircleWrapper>
                 {circleIconBatches.map((batch) => {

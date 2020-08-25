@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     cursor: pointer;
     display: grid;
-    grid-column-gap: 2rem;
-    grid-template-columns: 1fr max-content max-content;
+    grid-column-gap: 1rem;
+    grid-template-columns: 1fr 1fr max-content;
     margin: ${({ margin }) => margin};
     max-width: 330px;
     min-width: 220px;
@@ -32,7 +32,11 @@ export const OwnerPicture = styled.img`
     border-radius: 50%;
     grid-row: 1 / 4;
     grid-column: 2 / 3;
+    justify-self: ${({ length }) => length === 1 && 'center'};
+    position: relative;
+    left: ${({ index }) => `calc(${index * 30}px)`};
     width: 50px;
+    z-index: ${({ index, length }) => length - index};
 `;
 
 export const CircleWrapper = styled.div`
