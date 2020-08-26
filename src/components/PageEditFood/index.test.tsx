@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { render } from '../../test-utils';
+import { Fridge } from '../../fixtures';
 import { PageEditFood } from '.';
 
 const props = {
-    updateFridge: () => {}
+    fridge: Fridge
 };
 
 describe('PageEditFood component', () => {
-    // TODO: mock location state
     it('should render', () => {
         const { container } = render(<PageEditFood {...props} />);
         expect(container.firstChild).toMatchSnapshot();

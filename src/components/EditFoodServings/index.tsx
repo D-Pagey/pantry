@@ -1,22 +1,25 @@
 import 'rc-checkbox/assets/index.css';
-import React, { FC, useReducer } from 'react';
+import React, { FC, useReducer, useContext } from 'react';
 import { format } from 'date-fns';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import { firebase, db } from '../../services';
 import { BatchType, FoodType } from '../../types';
 import { getColourFromDate } from '../../utils';
+import { AuthContext } from '../ProviderAuth';
 import { Button } from '../Button';
 import { reducer } from './reducer';
 import * as S from './styles';
 
 type EditFoodServingsProps = {
-    updateFridge: (food: FoodType) => void;
     item: FoodType;
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
     const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
     const history = useHistory();
+    const { user } = useContext(AuthContext);
 
     const handleChecked = (batch: BatchType) => (event: any): void => {
         const dispatchType = event.target.checked ? 'checked' : 'unchecked';
@@ -24,9 +27,31 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
         dispatch({ type: dispatchType, payload: batch });
     };
 
-    const handleEdit = () => {
-        updateFridge({ ...item, batches: state.updatedBatches });
-        history.push('/food');
+    const handleEditSubmit = () => {
+        const batchesToUpdate = state.updatedBatches.reduce((acc, curr) => {
+            if (curr.servings === 0) {
+                return {
+                    ...acc, 
+                    [`fridge.${item.name}.batches.${curr.id}`]: firebase.firestore.FieldValue.delete()
+                };
+            }
+
+            return {
+                ...acc,
+                [`fridge.${item.name}.batches.${curr.id}`]: curr
+            };
+        }, {});
+        
+        if (user) {
+            db.collection('households')
+            .doc(user.household)
+            .update(batchesToUpdate)
+            .then(() => {
+                toast.success('Batch updated');
+                history.push('/food');
+            })
+            .catch(() => toast.error('Error with updating fridge'));
+        }
     };
 
     const handleCancel = () => history.goBack();
@@ -38,12 +63,13 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
             <S.List>
                 {item.batches.map((batch) => {
                     return [...Array(batch.servings)].map((e, i) => (
-                        <S.Item key={batch.id}>
+                        // eslint-disable-next-line react/no-array-index-key
+                        <S.Item key={`${batch.id}-${i}`}>
                             <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
+                            <S.Image src={batch.owner.photo} alt="owner" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>
-                            <img src={batch.owner.photo} alt="owner" />
                         </S.Item>
                     ));
                 })}
@@ -52,7 +78,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, updateFridge
             <Button
                 disabled={state.count === 0}
                 margin="0 0 1rem"
-                onClick={handleEdit}
+                onClick={handleEditSubmit}
                 data-testid="EditFoodServingsSubmit"
             >
                 Eat {state.count} {item.name}

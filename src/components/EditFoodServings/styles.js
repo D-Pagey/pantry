@@ -19,7 +19,9 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
+    align-items: center;
     border-bottom: 1px solid ${colours.veryLightGrey};
+    display: flex;
     padding: 1rem 0 1rem 3rem;
 
     &:first-child {
@@ -34,4 +36,9 @@ export const Checkbox = styled(ReactCheckbox)`
 export const Text = styled.span`
     color: ${({ colour }) => colour};
     margin: 0 0 0 1rem;
+`;
+
+export const Image = styled.img`
+    border-radius: 50%;
+    width: 50px;
 `;

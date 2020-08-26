@@ -8,7 +8,7 @@ import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
 import { PageFood } from '../PageFood';
-// import { PageEditFood } from '../PageEditFood';
+import { PageEditFood } from '../PageEditFood';
 import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
@@ -90,7 +90,9 @@ export const Routes = (): JSX.Element => {
                 <PageFood fridge={fridge} />
             </RouteProtected>
 
-            <RouteProtected path="/:name/edit">{/* <PageEditFood updateFridge={updateFridge} /> */}</RouteProtected>
+            <RouteProtected path="/:name/edit">
+                <PageEditFood fridge={fridge} />
+            </RouteProtected>
 
             <RouteProtected path="/add">
                 <PageAddFoodForm fridge={fridge} addItem={addItem} updateItemBatch={updateItemBatch} />
