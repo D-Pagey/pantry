@@ -8,10 +8,26 @@ import { FoodType, BatchType } from '../../types';
 import { Layout } from '../Layout';
 import { getColourFromDate } from '../../utils';
 import { Button } from '../Button';
-// import { reducer } from './reducer';
 import * as S from './styles';
 
-type PageEditFoodProps = {
+const CHECKED = 'checked';
+const UNCHECKED = 'unchecked';
+
+const getNewBatch = (action: typeof CHECKED | typeof UNCHECKED, batch: BatchType): BatchType => {
+    if (action === CHECKED) {
+        return {
+            ...batch,
+            servings: batch.servings - 1
+        };
+    } 
+    
+    return {
+        ...batch,
+        servings: batch.servings + 1
+    };
+};
+
+export type PageEditFoodProps = {
     fridge?: FoodType[];
 };
 
@@ -38,8 +54,10 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge }) => {
     }, [fridge, name]);
 
     const handleChecked = (batch: BatchType) => (event: any): void => {
-        const action = event.target.checked ? 'checked' : 'unchecked';
-        console.log({ action, batch });
+        const action = event.target.checked ? CHECKED : UNCHECKED;
+        const newBatch = getNewBatch(action, batch);
+
+        console.log({ batch, newBatch });
         // dispatch({ type: action, payload: batch });
     };
 
