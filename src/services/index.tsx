@@ -1,6 +1,7 @@
 import fb from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/functions';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
