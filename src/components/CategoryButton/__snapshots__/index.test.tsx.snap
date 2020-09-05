@@ -28,7 +28,7 @@ exports[`CategoryButton component should render 1`] = `
   background-color: #348841;
 }
 
-.c2 {
+.c3 {
   color: #348841;
   font-size: 18px;
 }
@@ -43,7 +43,7 @@ exports[`CategoryButton component should render 1`] = `
   type="button"
 >
   <p
-    class="c2"
+    class="c2 c3"
   >
     Meat
   </p>

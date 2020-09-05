@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notifications component should render 1`] = `
-.c7 {
-  background-color: #348841;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  min-width: 68px;
-}
-
 .c4 {
   background-color: #348841;
   border: 0;
@@ -19,12 +9,9 @@ exports[`Notifications component should render 1`] = `
   cursor: pointer;
   padding: 1rem;
   min-width: 68px;
-  background-color: white;
-  border: 1px solid #348841;
-  color: #348841;
 }
 
-.c6 {
+.c7 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -33,6 +20,15 @@ exports[`Notifications component should render 1`] = `
   padding: 1rem;
   margin: 0 1rem 0 0;
   min-width: 68px;
+}
+
+.c5 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c8 {
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
@@ -94,11 +90,11 @@ exports[`Notifications component should render 1`] = `
   text-align: center;
 }
 
-.c5 {
+.c6 {
   grid-column: 2 / 3;
 }
 
-.c8 {
+.c9 {
   margin: 2rem 0 0;
   width: 100px;
 }
@@ -127,7 +123,7 @@ exports[`Notifications component should render 1`] = `
       Welcome to Pantry
     </span>
     <button
-      class="c4 c5"
+      class="c4 c5 c6"
       type="button"
     >
       Dismiss
@@ -142,20 +138,20 @@ exports[`Notifications component should render 1`] = `
       Dan is inviting you to join their household
     </span>
     <button
-      class="c6"
+      class="c7 c8"
       type="button"
     >
       Decline
     </button>
     <button
-      class="c7"
+      class="c4"
       type="button"
     >
       Accept
     </button>
   </li>
   <button
-    class="c4 c8"
+    class="c4 c5 c9"
     type="button"
   >
     Close

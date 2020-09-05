@@ -28,10 +28,6 @@ exports[`FoodCard component should render 1`] = `
 }
 
 .c10 {
-  -webkit-dominant-baseline: middle;
-  dominant-baseline: middle;
-  font-size: 38px;
-  text-anchor: middle;
   font-size: 20px;
 }
 
@@ -261,7 +257,7 @@ exports[`FoodCard component should render 1`] = `
           0
         </text>
         <text
-          class="c10"
+          class="c9 c10"
           x="51%"
           y="70%"
         >

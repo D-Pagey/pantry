@@ -1,19 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditFoodServings component should render 1`] = `
-.c10 {
-  background-color: #348841;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  min-width: 68px;
-  background-color: white;
-  border: 1px solid #348841;
-  color: #348841;
-}
-
 .c9 {
   background-color: #348841;
   border: 0;
@@ -23,6 +10,25 @@ exports[`EditFoodServings component should render 1`] = `
   padding: 1rem;
   margin: 0 0 1rem;
   min-width: 68px;
+}
+
+.c11 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c12 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c10 {
   background-color: #B2B2B2;
   color: white;
   cursor: not-allowed;
@@ -302,7 +308,7 @@ exports[`EditFoodServings component should render 1`] = `
     </li>
   </ul>
   <button
-    class="c9"
+    class="c9 c10"
     data-testid="EditFoodServingsSubmit"
     disabled=""
     type="button"
@@ -313,7 +319,7 @@ exports[`EditFoodServings component should render 1`] = `
     carrot
   </button>
   <button
-    class="c10"
+    class="c11 c12"
     type="button"
   >
     Cancel

@@ -28,7 +28,7 @@ exports[`ChooseCategory component should render 1`] = `
   background-color: #348841;
 }
 
-.c6 {
+.c7 {
   color: #348841;
   font-size: 18px;
 }
@@ -97,7 +97,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         Vegetables
       </p>
@@ -108,7 +108,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         Fruit
       </p>
@@ -119,7 +119,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         Dairy
       </p>
@@ -130,7 +130,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         Meat
       </p>
@@ -141,7 +141,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         Fish
       </p>
@@ -152,7 +152,7 @@ exports[`ChooseCategory component should render 1`] = `
       type="button"
     >
       <p
-        class="c6"
+        class="c6 c7"
       >
         [Opened Tin]
       </p>

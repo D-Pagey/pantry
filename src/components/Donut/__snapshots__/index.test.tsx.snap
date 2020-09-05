@@ -28,10 +28,6 @@ exports[`Donut component should render 1`] = `
 }
 
 .c3 {
-  -webkit-dominant-baseline: middle;
-  dominant-baseline: middle;
-  font-size: 38px;
-  text-anchor: middle;
   font-size: 20px;
 }
 
@@ -59,7 +55,7 @@ exports[`Donut component should render 1`] = `
       0
     </text>
     <text
-      class="c3"
+      class="c2 c3"
       x="51%"
       y="70%"
     >
