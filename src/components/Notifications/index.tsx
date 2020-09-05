@@ -8,6 +8,8 @@ import { NotificationType, UserType, TenantType } from '../../types';
 import { Button } from '../Button';
 import * as S from './styles';
 
+const acceptHouseholdInvite = firebase.functions().httpsCallable('acceptHouseholdInvite');
+
 type NotificationsProps = {
     notifications: NotificationType[];
     onClose: () => void;
@@ -29,17 +31,8 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
 
     const handleDismissClick = (itemUid: string) => () => dismissNotification(itemUid);
 
-    const handleInviteDecision = (item: NotificationType, didAccept: boolean) => () => {
+    const handleInviteDecision = (item: NotificationType, didAccept: boolean) => async () => {
         if (didAccept) {
-            const acceptedUid = uuidv4();
-
-            const acceptNotification: NotificationType = {
-                createdAt: new Date(),
-                description: `${user.name} has accepted your invitation`,
-                type: 'text',
-                uid: acceptedUid
-            };
-
             const myTenant: TenantType = {
                 email: user.email,
                 name: user.name,
@@ -47,43 +40,18 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                 uid: user.uid
             };
 
-            // notify the inviter
-            db.collection('users')
-                .doc(item.inviteData?.inviterUserId)
-                .update({
-                    [`notifications.${acceptedUid}`]: acceptNotification
-                })
-                .then(() => {})
-                .catch(() => toast.error('Error accepting invite'));
+            try {
+                await acceptHouseholdInvite({
+                    notification: item,
+                    tenant: myTenant,
+                    currentHouseholdId: user.household
+                });
 
-            // add your user id to new household users array
-            db.collection('households')
-                .doc(item.inviteData?.inviterHouseholdId)
-                .update({
-                    [`tenants.${user.uid}`]: myTenant
-                })
-                .then(() => console.log('added household users'))
-                .catch(() => toast.error('Error adding user to household'));
-
-            // remove your user id from your original household users array
-            db.collection('households')
-                .doc(user.household)
-                .update({
-                    [`tenants.${user.uid}`]: firebase.firestore.FieldValue.delete()
-                })
-                .then(() => console.log('removed from household users'))
-                .catch(() => toast.error('Error adding user to household'));
-
-            // change your own household
-            db.collection('users')
-                .doc(user.uid)
-                .update({
-                    household: item.inviteData?.inviterHouseholdId
-                })
-                .then(() => toast.success('You have joined another household'))
-                .catch(() => toast.error('Error accepting invite'));
-
-            history.push('/food');
+                toast.success('You have joined another household');
+                history.push('/food');
+            } catch (error) {
+                toast.error('Something went wrong joining another household');
+            }
         } else {
             const declinedUid = uuidv4();
 
