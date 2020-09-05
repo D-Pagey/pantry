@@ -1,7 +1,8 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import AlexaImage from './assets/alexa.svg';
@@ -14,6 +15,7 @@ type PageHomeProps = {
 };
 
 export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
+    const { user } = useContext(AuthContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -24,6 +26,12 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
 
     return (
         <Layout>
+            {user?.email === 'dan.page91@gmail.com' && (
+                <Link to="/dev">
+                    <Button>Dev Mode</Button>
+                </Link>
+            )}
+
             <S.Wrapper data-testid="pageHome">
                 <S.Title>Play With Your Food</S.Title>
 

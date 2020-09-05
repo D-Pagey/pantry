@@ -14,6 +14,7 @@ import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
+import { PageDev } from '../PageDev';
 import { RouteProtected } from '../RouteProtected';
 
 export const Routes = (): JSX.Element => {
@@ -84,6 +85,10 @@ export const Routes = (): JSX.Element => {
 
             <Route path="/magic">
                 <PageMagicLanding />
+            </Route>
+
+            <Route path="/dev">
+                <PageDev />
             </Route>
 
             <RouteProtected path="/food">
