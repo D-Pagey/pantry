@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
 
 import { db, firebase } from '../../services';
 import { NotificationType, UserType, TenantType } from '../../types';
@@ -9,6 +8,7 @@ import { Button } from '../Button';
 import * as S from './styles';
 
 const acceptHouseholdInvite = firebase.functions().httpsCallable('acceptHouseholdInvite');
+const declineHouseholdInvite = firebase.functions().httpsCallable('declineHouseholdInvite');
 
 type NotificationsProps = {
     notifications: NotificationType[];
@@ -53,25 +53,19 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                 toast.error('Something went wrong joining another household');
             }
         } else {
-            const declinedUid = uuidv4();
+            try {
+                await declineHouseholdInvite({
+                    inviterId: item.inviteData?.inviterUserId,
+                    inviteeName: user.name,
+                    inviteeId: user.uid,
+                    inviteId: item.uid
+                });
 
-            const declinedNotification: NotificationType = {
-                createdAt: new Date(),
-                description: `${user.name} has declined your invitation`,
-                type: 'text',
-                uid: declinedUid
-            };
-            // notify the inviter
-            db.collection('users')
-                .doc(item.inviteData?.inviterUserId)
-                .update({
-                    [`notifications.${declinedUid}`]: declinedNotification
-                })
-                .then(() => 'You have declined the invite')
-                .catch(() => toast.error('Error accepting invite'));
+                toast.error('You have declined the invite');
+            } catch (error) {
+                toast.error('Something went wrong decline the invite');
+            }
         }
-        // remove notification from your own notifications
-        dismissNotification(item.uid);
     };
 
     return (
