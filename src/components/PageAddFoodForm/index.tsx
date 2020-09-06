@@ -61,12 +61,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, upd
                             category: values.category,
                             name: values.name.toLowerCase() || values.category,
                             batch: {
-                                owner: {
-                                    email: user.email!,
-                                    name: user.name!,
-                                    photo: user.photo!,
-                                    uid: user.uid!
-                                },
+                                ownerId: user.uid!,
                                 expires: values.expires,
                                 servings: values.servings,
                                 id: newBatchId

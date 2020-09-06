@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
 
 import { render } from '../../test-utils';
-import { Fridge, Batches, UserDan } from '../../fixtures';
+import { Fridge, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -128,12 +128,7 @@ describe('PageAddFoodForm component', () => {
                 batch: {
                     expires: expect.any(Date),
                     id: expect.any(String),
-                    owner: {
-                        email: context.user.email,
-                        uid: context.user.uid,
-                        photo: context.user.photo,
-                        name: context.user.name
-                    },
+                    ownerId: context.user.uid,
                     servings: 1
                 },
                 category: 'meat',
@@ -169,12 +164,7 @@ describe('PageAddFoodForm component', () => {
                 batch: {
                     expires: expect.any(Date),
                     id: expect.any(String),
-                    owner: {
-                        email: context.user.email,
-                        uid: context.user.uid,
-                        photo: context.user.photo,
-                        name: context.user.name
-                    },
+                    ownerId: context.user.uid,
                     servings: 1
                 },
                 category: 'meat',

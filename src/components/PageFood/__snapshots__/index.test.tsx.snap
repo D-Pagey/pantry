@@ -49,6 +49,34 @@ exports[`PageFood component should render 1`] = `
   display: flex;
 }
 
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
 <div
   class="c0"
 >

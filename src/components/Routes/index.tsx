@@ -92,11 +92,11 @@ export const Routes = (): JSX.Element => {
             </Route>
 
             <RouteProtected path="/food">
-                <PageFood fridge={fridge} />
+                {fridge && tenants && <PageFood fridge={fridge} tenants={tenants} />}
             </RouteProtected>
 
             <RouteProtected path="/:name/edit">
-                <PageEditFood fridge={fridge} />
+                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} />}
             </RouteProtected>
 
             <RouteProtected path="/add">

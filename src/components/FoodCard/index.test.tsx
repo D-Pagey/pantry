@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { Batches, UserDan } from '../../fixtures';
+import { Batches, TenantDan, TenantJoe, TenantHeidi } from '../../fixtures';
 import { FoodCard } from '.';
 
 const props = {
     batches: Batches,
     name: 'carrot',
-    ownerPhoto: UserDan.photo
+    tenants: [TenantDan, TenantJoe, TenantHeidi]
 };
 
 describe('FoodCard component', () => {

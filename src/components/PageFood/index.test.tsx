@@ -3,26 +3,26 @@ import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { Fridge, ExpiredBatch, FreshBatch, UserDan } from '../../fixtures';
+import { Fridge, ExpiredBatch, FreshBatch, UserDan, TenantHeidi, TenantDan, TenantJoe } from '../../fixtures';
 import { PageFood } from '.';
 
 const context = {
     user: UserDan
 };
 
+const props = {
+    fridge: Fridge,
+    tenants: [TenantHeidi, TenantDan, TenantJoe]
+};
+
 describe('PageFood component', () => {
     it('should render', () => {
-        const { container } = render(<PageFood />, context);
+        const { container } = render(<PageFood {...props} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should render a loading spinner', () => {
-        const { getByTestId } = render(<PageFood />);
-        getByTestId('loading');
-    });
-
     it('when the category is all, it should render all food', () => {
-        const { getByText } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText('All'));
 
@@ -30,16 +30,16 @@ describe('PageFood component', () => {
     });
 
     it('should render a message when no data for category all', () => {
-        const { getByTestId } = render(<PageFood fridge={[]} />, context);
+        const { getByTestId } = render(<PageFood {...props} fridge={[]} />, context);
         getByTestId('pageFoodNoData');
     });
 
     it('should render a message when there is no data for a category', () => {
-        const props = {
+        const overrideprops = {
             fridge: Fridge.filter((item) => item.category === 'meat')
         };
 
-        const { getByTestId, getByText } = render(<PageFood {...props} />, context);
+        const { getByTestId, getByText } = render(<PageFood {...props} {...overrideprops} />, context);
 
         userEvent.click(getByText('Veg'));
 
@@ -53,7 +53,7 @@ describe('PageFood component', () => {
         ${'meat'}       | ${'Meat'}
         ${'vegetables'} | ${'Veg'}
     `('when the category is $categoryName, it should filter down fridge', ({ categoryName, categoryLabel }) => {
-        const { getByText, queryByText } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText, queryByText } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText(categoryLabel));
 
@@ -80,7 +80,7 @@ describe('PageFood component', () => {
             }
         ];
 
-        const { getByText, queryByText } = render(<PageFood fridge={ExpiringFridge} />, context);
+        const { getByText, queryByText } = render(<PageFood {...props} fridge={ExpiringFridge} />, context);
 
         userEvent.click(getByText('Expiring soon'));
 
@@ -102,7 +102,7 @@ describe('PageFood component', () => {
             }
         ];
 
-        const { getByText, queryByText } = render(<PageFood fridge={ExpiringFridge} />, context);
+        const { getByText, queryByText } = render(<PageFood {...props} fridge={ExpiringFridge} />, context);
 
         userEvent.click(getByText('Expiring soon'));
 
@@ -135,7 +135,7 @@ describe('PageFood component', () => {
             }
         ];
 
-        const { getByText, queryByText } = render(<PageFood fridge={ExpiringFridge} />, context);
+        const { getByText, queryByText } = render(<PageFood {...props} fridge={ExpiringFridge} />, context);
 
         // filter to just vegetables
         userEvent.click(getByText('Veg'));
@@ -177,7 +177,7 @@ describe('PageFood component', () => {
             }
         ];
 
-        const { getByText, queryByText } = render(<PageFood fridge={ExpiringFridge} />, context);
+        const { getByText, queryByText } = render(<PageFood {...props} fridge={ExpiringFridge} />, context);
 
         // filter above fridge down to vegetables
         userEvent.click(getByText('Veg'));
@@ -210,7 +210,7 @@ describe('PageFood component', () => {
     });
 
     it('should render a message if no items in that category', () => {
-        const { getByText, getByTestId } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText, getByTestId } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText('Fish'));
 
@@ -218,7 +218,7 @@ describe('PageFood component', () => {
     });
 
     it('should render a message if no expiring items in that category', () => {
-        const { getByText } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText('Fish'));
         userEvent.click(getByText('Expiring soon'));
@@ -227,7 +227,7 @@ describe('PageFood component', () => {
     });
 
     it('should not render food card if no batches on Fridge item', () => {
-        const props = {
+        const overrideProps = {
             fridge: [
                 {
                     batches: [],
@@ -242,14 +242,14 @@ describe('PageFood component', () => {
             ]
         };
 
-        const { queryByText, getByText } = render(<PageFood {...props} />, context);
+        const { queryByText, getByText } = render(<PageFood {...props} {...overrideProps} />, context);
 
-        expect(queryByText(titleCase(props.fridge[0].name))).toBe(null);
-        getByText(titleCase(props.fridge[1].name));
+        expect(queryByText(titleCase(overrideProps.fridge[0].name))).toBe(null);
+        getByText(titleCase(overrideProps.fridge[1].name));
     });
 
     it('should render disposeFood component', () => {
-        const { getByText, getByTestId } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText, getByTestId } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText(titleCase(Fridge[0].name)));
 
@@ -257,7 +257,7 @@ describe('PageFood component', () => {
     });
 
     it('if showing, should remove DisposeFood component if clicked again', () => {
-        const { getByText, getByTestId, queryByText } = render(<PageFood fridge={Fridge} />, context);
+        const { getByText, getByTestId, queryByText } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         const itemName = Fridge[0].name;
 
@@ -278,7 +278,7 @@ describe('PageFood component', () => {
 
         const itemName = Fridge[0].name;
 
-        const { getByText, getByTestId } = render(<PageFood />, contextOveride);
+        const { getByText, getByTestId } = render(<PageFood {...props} />, contextOveride);
 
         userEvent.click(getByText(titleCase(itemName)));
 

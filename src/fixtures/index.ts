@@ -2,7 +2,7 @@ import { addDays } from 'date-fns';
 
 import { BatchType, FoodType, NotificationType, UserType, TenantType } from '../types';
 
-export const Tenant: TenantType = {
+export const TenantHeidi: TenantType = {
     email: 'heidi@gmail.com',
     name: 'Heidi Seo',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
@@ -36,43 +36,52 @@ export const UserDan: UserType = {
     uid: 'abcde'
 };
 
+export const TenantDan: TenantType = {
+    email: UserDan.email,
+    name: UserDan.name,
+    photo: UserDan.photo,
+    uid: UserDan.uid
+};
+
 export const UserJoe: UserType = {
     email: 'joe@test.com',
     household: '456',
     name: 'Joe Hunt',
-    photo: 'https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg',
+    photo:
+        'https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg',
     notifications: [WelcomeNotification],
     uid: 'fghij'
 };
 
+export const TenantJoe: TenantType = {
+    email: UserJoe.email,
+    name: UserJoe.name,
+    photo: UserJoe.photo,
+    uid: UserJoe.uid
+};
 
 export const ExpiredBatch: BatchType = {
     id: '1111111',
     expires: new Date(),
-    owner: UserJoe,
+    ownerId: TenantJoe.uid,
     servings: 1
 };
 
 export const ExpiringSoonBatch: BatchType = {
     id: '22222222',
     expires: addDays(new Date(), 2),
-    owner: UserDan,
+    ownerId: TenantDan.uid,
     servings: 2
 };
 
 export const FreshBatch: BatchType = {
     id: '3333333',
     expires: addDays(new Date(), 5),
-    owner: Tenant,
+    ownerId: TenantHeidi.uid,
     servings: 4
 };
 
-
-export const Batches: BatchType[] = [
-    ExpiredBatch,
-    ExpiringSoonBatch,
-    FreshBatch
-];
+export const Batches: BatchType[] = [ExpiredBatch, ExpiringSoonBatch, FreshBatch];
 
 export const Fridge: FoodType[] = [
     {

@@ -1,7 +1,8 @@
 import { addDays } from 'date-fns';
-import { Batches, Tenant } from '../../fixtures';
+
+import { Batches, TenantHeidi, TenantJoe, TenantDan } from '../../fixtures';
 import { BatchType } from '../../types';
-import { getTotalServingsCount, reduceBatches, getOwnerPhotoAndName } from './utils';
+import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
 
 describe('getTotalServingsCount function', () => {
     it.each`
@@ -27,7 +28,7 @@ describe('reduceBatches function', () => {
         const BigBatch = {
             id: '1234',
             expires: new Date(),
-            owner: Tenant,
+            ownerId: TenantHeidi.uid,
             servings: 4
         };
 
@@ -38,49 +39,62 @@ describe('reduceBatches function', () => {
     });
 });
 
-describe('getOwnerPhotoAndName function', () => {
-    it('should return an array of deduplicated owner photos', () => {
-        const batches: BatchType[] = [
+describe('getBatchTenants function', () => {
+    it('should return an array of Tenants', () => {
+        const sortedBatches: BatchType[] = [
             {
+                id: '1234',
                 expires: new Date(),
-                id: '111',
-                servings: 2,
-                owner: {
-                    email: 'dan@mail.com',
-                    photo: 'www.dan.com',
-                    name: 'dan',
-                    uid: 'dan'
-                }
+                ownerId: TenantHeidi.uid,
+                servings: 2
             },
             {
+                id: '3333',
                 expires: addDays(new Date(), 2),
-                id: '222',
-                servings: 2,
-                owner: {
-                    email: 'joe@mail.com',
-                    photo: 'www.joe.com',
-                    name: 'joe',
-                    uid: 'joe'
-                }
+                ownerId: TenantJoe.uid,
+                servings: 2
             },
             {
-                expires: addDays(new Date(), 5),
-                id: '111',
-                servings: 2,
-                owner: {
-                    email: 'dan@mail.com',
-                    photo: 'www.dan.com',
-                    name: 'dan',
-                    uid: 'dan'
-                }
+                id: '3333',
+                expires: addDays(new Date(), 4),
+                ownerId: TenantDan.uid,
+                servings: 1
             }
         ];
 
-        const result = getOwnerPhotoAndName(batches);
+        const tenants = [TenantHeidi, TenantJoe, TenantDan];
 
-        expect(result).toStrictEqual([
-            { photo: 'www.dan.com', name: 'dan' },
-            { photo: 'www.joe.com', name: 'joe' }
-        ]);
+        const sortedTenants = getBatchTenants(sortedBatches, tenants);
+
+        expect(sortedTenants).toStrictEqual([TenantHeidi, TenantJoe, TenantDan]);
+    });
+
+    it('should return duplicated array of Tenants', () => {
+        const sortedBatches: BatchType[] = [
+            {
+                id: '1234',
+                expires: new Date(),
+                ownerId: TenantHeidi.uid,
+                servings: 2
+            },
+            {
+                id: '3333',
+                expires: addDays(new Date(), 2),
+                ownerId: TenantJoe.uid,
+                servings: 2
+            },
+            {
+                id: '3333',
+                expires: addDays(new Date(), 4),
+                ownerId: TenantHeidi.uid,
+                servings: 1
+            }
+        ];
+
+        const tenants = [TenantHeidi, TenantJoe, TenantDan];
+
+        const sortedTenants = getBatchTenants(sortedBatches, tenants);
+
+        expect(sortedTenants).toStrictEqual([TenantHeidi, TenantJoe]);
     });
 });

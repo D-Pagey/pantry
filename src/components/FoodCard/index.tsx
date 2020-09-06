@@ -3,11 +3,11 @@ import arraySort from 'array-sort';
 import { format } from 'date-fns';
 import { titleCase } from 'title-case';
 
-import { BatchType } from '../../types';
+import { BatchType, TenantType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { Donut } from '../Donut';
-import { getTotalServingsCount, reduceBatches, getOwnerPhotoAndName } from './utils';
+import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
 import * as S from './styles';
 
 export type FoodCardProps = {
@@ -16,12 +16,13 @@ export type FoodCardProps = {
     isSelected?: boolean;
     margin?: string;
     name: string;
+    tenants: TenantType[];
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name }) => {
+export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name, tenants }) => {
     const sortedBatches = arraySort(batches, 'expires');
-    const sortedOwnerPhotoAndName = getOwnerPhotoAndName(sortedBatches);
     const totalServings = getTotalServingsCount(sortedBatches);
+    const sortedTenants = getBatchTenants(sortedBatches, tenants);
     // not very well named
     // basically choose whether or not we need to reduce the batches
     const circleIconBatches = totalServings <= 10 ? sortedBatches : reduceBatches(sortedBatches);
@@ -31,7 +32,7 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
             <S.Name>{titleCase(name)}</S.Name>
             <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
 
-            {sortedOwnerPhotoAndName.map((owner, index, array) => {
+            {sortedTenants.map((owner, index, array) => {
                 return (
                     <S.OwnerPicture
                         // eslint-disable-next-line react/no-array-index-key

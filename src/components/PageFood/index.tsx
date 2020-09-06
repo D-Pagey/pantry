@@ -4,7 +4,7 @@ import arraySort from 'array-sort';
 import { toast } from 'react-toastify';
 
 import { db } from '../../services';
-import { FoodType } from '../../types';
+import { FoodType, TenantType } from '../../types';
 import { getExpiringItems, filterFridgeByCategory } from '../../utils';
 import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
@@ -15,10 +15,11 @@ import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
 type PageFoodProps = {
-    fridge?: FoodType[];
+    fridge: FoodType[];
+    tenants: TenantType[];
 };
 
-export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
+export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
@@ -100,7 +101,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
     };
 
     return (
-        <Layout title="Food" isLoading={!fridge}>
+        <Layout title="Food">
             <S.Wrapper>
                 <CategoryFilter selected={category} setSelected={handleCategoryClick} />
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
@@ -119,12 +120,13 @@ export const PageFood: FC<PageFoodProps> = ({ fridge }) => {
                             if (item.batches.length > 0) {
                                 return (
                                     <FoodCard
-                                        key={item.name}
-                                        handleClick={handleFoodClick(item)}
                                         batches={item.batches}
-                                        name={item.name}
-                                        margin="0 0 1rem"
+                                        handleClick={handleFoodClick(item)}
                                         isSelected={item.name === editingItem?.name}
+                                        key={item.name}
+                                        margin="0 0 1rem"
+                                        name={item.name}
+                                        tenants={tenants}
                                     />
                                 );
                             }

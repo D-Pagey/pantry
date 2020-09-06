@@ -16,7 +16,7 @@ export type BatchType = {
     expires: Date | any;
     id: string;
     servings: number;
-    owner: TenantType;
+    ownerId: string;
 };
 
 export type FoodType = {

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Tenant } from '../../fixtures';
+import { TenantHeidi } from '../../fixtures';
 import { Household } from '.';
 
 const props = {
-    tenants: [Tenant, Tenant]
+    tenants: [TenantHeidi, TenantHeidi]
 };
 
 export default { title: 'Household' };

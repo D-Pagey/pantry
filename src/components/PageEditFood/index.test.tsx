@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { Fridge } from '../../fixtures';
+import { Fridge, TenantHeidi } from '../../fixtures';
 import { PageEditFood } from '.';
 
 const props = {
-    fridge: Fridge
+    fridge: Fridge,
+    tenants: [TenantHeidi]
 };
 
 describe('PageEditFood component', () => {

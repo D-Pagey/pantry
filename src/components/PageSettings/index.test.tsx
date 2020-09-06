@@ -2,11 +2,11 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { Tenant } from '../../fixtures';
+import { TenantHeidi } from '../../fixtures';
 import { PageSettings } from '.';
 
 const props = {
-    tenants: [Tenant]
+    tenants: [TenantHeidi]
 };
 
 const context = {

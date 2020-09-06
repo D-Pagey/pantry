@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserDan, Tenant } from '../../fixtures';
+import { UserDan, TenantHeidi } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageSettings } from '.';
 
@@ -16,6 +16,6 @@ export const normal = (): JSX.Element => (
             user: UserDan
         }}
     >
-        <PageSettings tenants={[Tenant]} />
+        <PageSettings tenants={[TenantHeidi]} />
     </AuthContext.Provider>
 );

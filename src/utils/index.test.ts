@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, Tenant } from '../fixtures';
+import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi } from '../fixtures';
 import { FoodType } from '../types';
 import {
     getPercentageFromDate,
@@ -101,7 +101,7 @@ describe('countExpiringFoodItems function', () => {
                     {
                         id: '22234',
                         expires: addDays(new Date(), 5),
-                        owner: Tenant,
+                        ownerId: TenantHeidi.uid,
                         servings: 1
                     }
                 ],
@@ -121,7 +121,7 @@ describe('countExpiringFoodItems function', () => {
                     {
                         id: '6677676',
                         expires: addDays(new Date(), 5),
-                        owner: Tenant,
+                        ownerId: TenantHeidi.uid,
                         servings: 1
                     }
                 ],

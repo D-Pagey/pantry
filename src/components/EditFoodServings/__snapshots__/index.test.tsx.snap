@@ -35,7 +35,7 @@ exports[`EditFoodServings component should render 1`] = `
   margin: 0 0 1rem;
 }
 
-.c5 {
+.c7 {
   border-radius: 50%;
   height: auto;
   width: 50px;
@@ -83,12 +83,12 @@ exports[`EditFoodServings component should render 1`] = `
   margin: 0 1rem 0 0;
 }
 
-.c6 {
+.c5 {
   color: red;
   margin: 0 0 0 1rem;
 }
 
-.c7 {
+.c6 {
   color: #FCBA3B;
   margin: 0 0 0 1rem;
 }
@@ -127,15 +127,8 @@ exports[`EditFoodServings component should render 1`] = `
           class="rc-checkbox-inner"
         />
       </span>
-      <img
-        alt="profile"
-        class="c5"
-        data-testid="photo"
-        src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
-        width="50px"
-      />
       <span
-        class="c6"
+        class="c5"
       >
         Expired 
         1st Jan
@@ -157,15 +150,8 @@ exports[`EditFoodServings component should render 1`] = `
           class="rc-checkbox-inner"
         />
       </span>
-      <img
-        alt="profile"
-        class="c5"
-        data-testid="photo"
-        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-        width="50px"
-      />
       <span
-        class="c7"
+        class="c6"
       >
         Expired 
         3rd Jan
@@ -187,15 +173,8 @@ exports[`EditFoodServings component should render 1`] = `
           class="rc-checkbox-inner"
         />
       </span>
-      <img
-        alt="profile"
-        class="c5"
-        data-testid="photo"
-        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-        width="50px"
-      />
       <span
-        class="c7"
+        class="c6"
       >
         Expired 
         3rd Jan
@@ -219,7 +198,7 @@ exports[`EditFoodServings component should render 1`] = `
       </span>
       <img
         alt="profile"
-        class="c5"
+        class="c7"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
@@ -249,7 +228,7 @@ exports[`EditFoodServings component should render 1`] = `
       </span>
       <img
         alt="profile"
-        class="c5"
+        class="c7"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
@@ -279,7 +258,7 @@ exports[`EditFoodServings component should render 1`] = `
       </span>
       <img
         alt="profile"
-        class="c5"
+        class="c7"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
@@ -309,7 +288,7 @@ exports[`EditFoodServings component should render 1`] = `
       </span>
       <img
         alt="profile"
-        class="c5"
+        class="c7"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"

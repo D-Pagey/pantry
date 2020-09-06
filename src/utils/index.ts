@@ -56,8 +56,10 @@ export const formatExpiryDates = (fridgeItems: FoodType[]): FoodType[] => {
 };
 
 export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {
-   return fridgeItems.reduce((acc, curr) => {
-        const expiringSoon = curr.batches.some(batch => differenceInDays(batch.expires, new Date()) < EXPIRING_SOON_DAYS);
+    return fridgeItems.reduce((acc, curr) => {
+        const expiringSoon = curr.batches.some(
+            (batch) => differenceInDays(batch.expires, new Date()) < EXPIRING_SOON_DAYS
+        );
 
         if (expiringSoon) return acc + 1;
         return acc;

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { firebase, db } from '../../services';
-import { BatchType, FoodType } from '../../types';
+import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { AuthContext } from '../ProviderAuth';
 import { Button } from '../Button';
@@ -15,9 +15,10 @@ import * as S from './styles';
 
 type EditFoodServingsProps = {
     item: FoodType;
+    tenants: TenantType[];
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) => {
     const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
     const history = useHistory();
     const { user } = useContext(AuthContext);
@@ -57,6 +58,10 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
 
     const handleCancel = () => history.goBack();
 
+    const getOwner = (ownerId: string): TenantType => {
+        return tenants.filter((tenant) => tenant.uid === ownerId)[0];
+    };
+
     return (
         <S.Wrapper>
             <S.Title>How many {item.name} servings are you eating?</S.Title>
@@ -67,7 +72,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
                             <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
-                            <ProfilePhoto owner={batch.owner} width="50px" />
+                            <ProfilePhoto owner={getOwner(batch.ownerId)} width="50px" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>

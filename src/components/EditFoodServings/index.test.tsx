@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { Fridge } from '../../fixtures';
+import { Fridge, TenantHeidi } from '../../fixtures';
 import { EditFoodServings } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -19,6 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 const props = {
     item: Fridge[0],
+    tenants: [TenantHeidi]
 };
 
 describe('EditFoodServings component', () => {
@@ -29,12 +30,12 @@ describe('EditFoodServings component', () => {
 
     it('should redirect if cancelled', () => {
         const { getByText } = render(<EditFoodServings {...props} />);
-        
+
         userEvent.click(getByText('Cancel'));
-        
+
         expect(mockHistoryBack).toHaveBeenCalled();
     });
-    
+
     it.todo('should redirect once updatedFridge');
     it.todo('should update remove correct servings amount');
     it.todo('should remove a batch if checked last serving');
