@@ -22,7 +22,6 @@ export const PageSignIn: FC = () => {
         // Popup signin flow rather than redirect flow.
         signInFlow: 'popup',
         // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-        // signInSuccessUrl: '/signedIn',
         callbacks: {
             // Avoid redirects after sign-in.
             signInSuccessWithAuthResult: (result: any): boolean => {
@@ -30,7 +29,7 @@ export const PageSignIn: FC = () => {
                 return false;
             }
         },
-        // We will display Google and Facebook as auth providers.
+        // We will display Google as auth providers.
         signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
     };
 
