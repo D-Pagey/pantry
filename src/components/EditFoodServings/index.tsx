@@ -9,6 +9,7 @@ import { BatchType, FoodType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { AuthContext } from '../ProviderAuth';
 import { Button } from '../Button';
+import { ProfilePhoto } from '../ProfilePhoto';
 import { reducer } from './reducer';
 import * as S from './styles';
 
@@ -31,7 +32,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
         const batchesToUpdate = state.updatedBatches.reduce((acc, curr) => {
             if (curr.servings === 0) {
                 return {
-                    ...acc, 
+                    ...acc,
                     [`fridge.${item.name}.batches.${curr.id}`]: firebase.firestore.FieldValue.delete()
                 };
             }
@@ -41,16 +42,16 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
                 [`fridge.${item.name}.batches.${curr.id}`]: curr
             };
         }, {});
-        
+
         if (user) {
             db.collection('households')
-            .doc(user.household)
-            .update(batchesToUpdate)
-            .then(() => {
-                toast.success('Batch updated');
-                history.push('/food');
-            })
-            .catch(() => toast.error('Error with updating fridge'));
+                .doc(user.household)
+                .update(batchesToUpdate)
+                .then(() => {
+                    toast.success('Batch updated');
+                    history.push('/food');
+                })
+                .catch(() => toast.error('Error with updating fridge'));
         }
     };
 
@@ -66,7 +67,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item }) => {
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
                             <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
-                            <S.Image src={batch.owner.photo} alt="owner" />
+                            <ProfilePhoto owner={batch.owner} width="50px" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>

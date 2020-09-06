@@ -12,11 +12,6 @@ export const Wrapper = styled.div`
     margin: 0 auto;
 `;
 
-export const Image = styled.img`
-    border-radius: 50%;
-    width: 100px;
-`;
-
 export const Name = styled.h3`
     align-self: center;
     font-size: 1.25rem;

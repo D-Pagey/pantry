@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ProfilePhoto as Photo } from '../ProfilePhoto';
 
 export const List = styled.ul`
     border: 1px solid #9b9b9b;
@@ -39,10 +40,8 @@ export const Span = styled.span`
     text-align: center;
 `;
 
-export const Image = styled.img`
-    border-radius: 50%;
+export const ProfilePhoto = styled(Photo)`
     grid-row: 1 / 3;
-    width: 50px;
 `;
 
 export const HouseRole = styled.span`

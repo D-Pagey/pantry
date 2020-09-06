@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Household component should render 1`] = `
+.c2 {
+  border-radius: 50%;
+  height: auto;
+  width: 50px;
+}
+
 .c0 {
   border: 1px solid #9b9b9b;
   border-radius: 5px;
@@ -24,13 +30,13 @@ exports[`Household component should render 1`] = `
   border: 0;
 }
 
-.c3 {
+.c4 {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   text-align: center;
 }
 
-.c4 {
+.c5 {
   color: darkgrey;
   font-size: 14px;
   font-style: italic;
@@ -39,17 +45,15 @@ exports[`Household component should render 1`] = `
   text-align: center;
 }
 
-.c5 {
+.c6 {
   text-align: center;
 }
 
-.c2 {
-  border-radius: 50%;
+.c3 {
   grid-row: 1 / 3;
-  width: 50px;
 }
 
-.c6 {
+.c7 {
   grid-column: 3 / 4;
   grid-row: 2 / 3;
   color: darkgrey;
@@ -63,29 +67,31 @@ exports[`Household component should render 1`] = `
     class="c1"
   >
     <img
-      alt="user"
-      class="c2"
+      alt="profile"
+      class="c2 c3"
+      data-testid="photo"
       src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      width="50px"
     />
     <span
-      class="c3"
+      class="c4"
     >
       Heidi Seo
     </span>
     <span
-      class="c4"
+      class="c5"
     >
       heidi@gmail.com
     </span>
     <span
       aria-label="smile"
-      class="c5"
+      class="c6"
       role="img"
     >
       😀
     </span>
     <span
-      class="c6"
+      class="c7"
     />
   </li>
 </ul>

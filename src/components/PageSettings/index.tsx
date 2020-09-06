@@ -5,6 +5,7 @@ import { TenantType } from '../../types';
 import { firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
+import { ProfilePhoto } from '../ProfilePhoto';
 import { Household } from '../Household';
 import * as S from './styles';
 
@@ -43,7 +44,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
             <S.Wrapper data-testid="PageSettings">
                 {user && (
                     <>
-                        <S.Image src={user.photo} alt="profile" />
+                        <ProfilePhoto owner={user} width="100px" />
                         <S.Name>Welcome {user.name}</S.Name>
 
                         <S.Heading>Account Settings</S.Heading>

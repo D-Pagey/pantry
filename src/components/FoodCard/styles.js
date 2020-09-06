@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { colours } from '../../tokens';
+import { ProfilePhoto } from '../ProfilePhoto';
 
 export const Wrapper = styled.div`
     box-shadow: ${({ isSelected }) => isSelected && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
@@ -27,15 +29,13 @@ export const Date = styled.p`
     margin: 4px 0 8px;
 `;
 
-export const OwnerPicture = styled.img`
+export const OwnerPicture = styled(ProfilePhoto)`
     align-self: center;
-    border-radius: 50%;
     grid-row: 1 / 4;
     grid-column: 2 / 3;
     justify-self: ${({ length }) => length === 1 && 'center'};
     position: relative;
     left: ${({ index }) => `calc(${index * 30}px)`};
-    width: 50px;
     z-index: ${({ index, length }) => length - index};
 `;
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FoodCard component should render 1`] = `
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,7 +9,7 @@ exports[`FoodCard component should render 1`] = `
   width: 60px;
 }
 
-.c8 {
+.c10 {
   -webkit-animation: kKTezL 1.5s;
   animation: kKTezL 1.5s;
   fill: transparent;
@@ -20,15 +20,21 @@ exports[`FoodCard component should render 1`] = `
   stroke-width: 5;
 }
 
-.c9 {
+.c11 {
   -webkit-dominant-baseline: middle;
   dominant-baseline: middle;
   font-size: 38px;
   text-anchor: middle;
 }
 
-.c10 {
+.c12 {
   font-size: 20px;
+}
+
+.c3 {
+  border-radius: 50%;
+  height: auto;
+  width: 50px;
 }
 
 .c0 {
@@ -55,33 +61,40 @@ exports[`FoodCard component should render 1`] = `
   margin: 4px 0 8px;
 }
 
-.c3 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  border-radius: 50%;
-  grid-row: 1 / 4;
-  grid-column: 2 / 3;
-  position: relative;
-  left: calc(0px);
-  width: 50px;
-  z-index: 2;
-}
-
 .c4 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  border-radius: 50%;
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  position: relative;
+  left: calc(0px);
+  z-index: 3;
+}
+
+.c5 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
   grid-row: 1 / 4;
   grid-column: 2 / 3;
   position: relative;
   left: calc(30px);
-  width: 50px;
+  z-index: 2;
+}
+
+.c6 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  position: relative;
+  left: calc(60px);
   z-index: 1;
 }
 
-.c5 {
+.c7 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -92,7 +105,7 @@ exports[`FoodCard component should render 1`] = `
   display: flex;
 }
 
-.c6 {
+.c8 {
   grid-column: 3 / 4;
   grid-row: 1 / 4;
   justify-self: end;
@@ -113,16 +126,27 @@ exports[`FoodCard component should render 1`] = `
   </p>
   <img
     alt="food owner"
-    class="c3"
+    class="c3 c4"
+    data-testid="photo"
     src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+    width="50px"
   />
   <img
     alt="food owner"
-    class="c4"
+    class="c3 c5"
+    data-testid="photo"
     src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    width="50px"
+  />
+  <img
+    alt="food owner"
+    class="c3 c6"
+    data-testid="photo"
+    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    width="50px"
   />
   <div
-    class="c5"
+    class="c7"
   >
     <svg
       fill="none"
@@ -231,10 +255,10 @@ exports[`FoodCard component should render 1`] = `
     </svg>
   </div>
   <div
-    class="c6"
+    class="c8"
   >
     <div
-      class="c7"
+      class="c9"
     >
       <svg
         height="100%"
@@ -242,7 +266,7 @@ exports[`FoodCard component should render 1`] = `
         width="100%"
       >
         <circle
-          class="c8"
+          class="c10"
           color="red"
           cx="50"
           cy="50"
@@ -250,14 +274,14 @@ exports[`FoodCard component should render 1`] = `
           transform="rotate(-90 50 50)"
         />
         <text
-          class="c9"
+          class="c11"
           x="50%"
           y="42%"
         >
           0
         </text>
         <text
-          class="c9 c10"
+          class="c11 c12"
           x="51%"
           y="70%"
         >

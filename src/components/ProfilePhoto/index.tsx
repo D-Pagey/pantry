@@ -1,19 +1,41 @@
 import React, { FC } from 'react';
+
+import { UserType } from '../../types';
 import * as S from './styles';
 
 type ProfilePhotoTypes = {
-    photoUrl: string | null;
-    fullName: string;
+    owner: Partial<UserType>;
+    width?: string;
 };
 
-export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ photoUrl, fullName }) => {
-    if (photoUrl) return <S.Image src={photoUrl} alt="profile" data-testid="photo" />;
+export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ owner, width, ...props }) => {
+    if (owner) {
+        const { photo, email, name } = owner;
 
-    const initials = fullName.split(' ').map(word => word[0]).join('');
+        if (photo) return <S.Image src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
 
-    return (
-        <S.Circle>
-            <S.Initials>{initials}</S.Initials>
-        </S.Circle>
-    );
+        const getInitials = () => {
+            let nameOrEmail = '';
+
+            if (name) {
+                nameOrEmail = name;
+            } else if (email) {
+                nameOrEmail = email;
+            }
+
+            return nameOrEmail
+                .split(' ')
+                .map((word) => word[0])
+                .join('')
+                .toUpperCase();
+        };
+
+        return (
+            <S.Circle width={width} {...props}>
+                <S.Initials>{getInitials()}</S.Initials>
+            </S.Circle>
+        );
+    }
+
+    return null;
 };

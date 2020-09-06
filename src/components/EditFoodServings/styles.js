@@ -37,8 +37,3 @@ export const Text = styled.span`
     color: ${({ colour }) => colour};
     margin: 0 0 0 1rem;
 `;
-
-export const Image = styled.img`
-    border-radius: 50%;
-    width: 50px;
-`;

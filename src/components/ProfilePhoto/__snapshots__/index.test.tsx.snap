@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProfilePhoto component should render 1`] = `
+exports[`ProfilePhoto component should render initials if photo not provided 1`] = `
 .c0 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -31,7 +31,7 @@ exports[`ProfilePhoto component should render 1`] = `
   <span
     class="c1"
   >
-    HS
+    DP
   </span>
 </div>
 `;

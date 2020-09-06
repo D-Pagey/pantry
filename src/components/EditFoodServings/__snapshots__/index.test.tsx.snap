@@ -35,6 +35,12 @@ exports[`EditFoodServings component should render 1`] = `
   margin: 0 0 1rem;
 }
 
+.c5 {
+  border-radius: 50%;
+  height: auto;
+  width: 50px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -92,11 +98,6 @@ exports[`EditFoodServings component should render 1`] = `
   margin: 0 0 0 1rem;
 }
 
-.c5 {
-  border-radius: 50%;
-  width: 50px;
-}
-
 <div
   class="c0"
 >
@@ -127,9 +128,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+        width="50px"
       />
       <span
         class="c6"
@@ -155,9 +158,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c7"
@@ -183,9 +188,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c7"
@@ -211,9 +218,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c8"
@@ -239,9 +248,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c8"
@@ -267,9 +278,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c8"
@@ -295,9 +308,11 @@ exports[`EditFoodServings component should render 1`] = `
         />
       </span>
       <img
-        alt="owner"
+        alt="profile"
         class="c5"
+        data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
       />
       <span
         class="c8"

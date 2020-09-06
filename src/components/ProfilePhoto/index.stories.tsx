@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tenant } from '../../fixtures';
+import { UserDan } from '../../fixtures';
 import { ProfilePhoto } from '.';
 
 export default {
@@ -11,10 +11,10 @@ export default {
 export const normal = (args: any) => (
     <div style={{ display: 'grid', gridTemplateColumns: 'max-content max-content', gridGap: '1rem' }}>
         <ProfilePhoto {...args} />
-        <ProfilePhoto {...args} photoUrl={Tenant.photo} />
+        <ProfilePhoto {...args} owner={{ name: null, email: UserDan.email, photo: null }} />
     </div>
 );
 
 normal.args = {
-    fullName: Tenant.name,
+    owner: UserDan
 };

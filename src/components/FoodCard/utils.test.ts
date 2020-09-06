@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 import { Batches, Tenant } from '../../fixtures';
 import { BatchType } from '../../types';
-import { getTotalServingsCount, reduceBatches, getOwnerPhotos } from './utils';
+import { getTotalServingsCount, reduceBatches, getOwnerPhotoAndName } from './utils';
 
 describe('getTotalServingsCount function', () => {
     it.each`
@@ -38,7 +38,7 @@ describe('reduceBatches function', () => {
     });
 });
 
-describe('getOwnerPhotos function', () => {
+describe('getOwnerPhotoAndName function', () => {
     it('should return an array of deduplicated owner photos', () => {
         const batches: BatchType[] = [
             {
@@ -76,9 +76,11 @@ describe('getOwnerPhotos function', () => {
             }
         ];
 
+        const result = getOwnerPhotoAndName(batches);
 
-        const result = getOwnerPhotos(batches);
-
-        expect(result).toStrictEqual(['www.dan.com', 'www.joe.com']);
+        expect(result).toStrictEqual([
+            { photo: 'www.dan.com', name: 'dan' },
+            { photo: 'www.joe.com', name: 'joe' }
+        ]);
     });
 });
