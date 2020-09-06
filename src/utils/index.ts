@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
-import { DropdownOptionType, FoodType } from '../types';
+import { DropdownOptionType, FoodType, TenantType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
 export const getPercentageFromDate = (date: Date): number => {
@@ -64,4 +64,8 @@ export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {
         if (expiringSoon) return acc + 1;
         return acc;
     }, 0);
+};
+
+export const getOwnerFromId = (tenantId: string, tenants: TenantType[]): TenantType => {
+    return tenants.filter((tenant) => tenant.uid === tenantId)[0];
 };

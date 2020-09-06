@@ -1,4 +1,5 @@
 import { BatchType, TenantType } from '../../types';
+import { getOwnerFromId } from '../../utils';
 
 export const getTotalServingsCount = (batches: BatchType[]): number => {
     return batches.reduce((acc, curr) => {
@@ -34,18 +35,14 @@ export const reduceBatches = (batches: BatchType[]): BatchType[] => {
     return countedAndCropped.batches;
 };
 
-export const getTenantFromBatches = (tenantId: string, tenants: TenantType[]): TenantType => {
-    return tenants.filter((tenant) => tenant.uid === tenantId)[0];
-};
-
 export const getBatchTenants = (sortedBatches: BatchType[], tenants: TenantType[]): TenantType[] => {
     return sortedBatches.reduce((acc, curr, index) => {
-        if (index === 0) return [...acc, getTenantFromBatches(curr.ownerId, tenants)];
+        if (index === 0) return [...acc, getOwnerFromId(curr.ownerId, tenants)];
 
         const accumulatorIds = acc.map(tenant => tenant.uid);
 
         if (!accumulatorIds.includes(curr.ownerId)) {
-            return [...acc, getTenantFromBatches(curr.ownerId, tenants)];
+            return [...acc, getOwnerFromId(curr.ownerId, tenants)];
         }
 
         return acc;

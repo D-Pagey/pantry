@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi } from '../fixtures';
+import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import { FoodType } from '../types';
 import {
     getPercentageFromDate,
@@ -9,7 +9,8 @@ import {
     getFridgeNameOptions,
     getExpiringItems,
     filterFridgeByCategory,
-    countExpiringFoodItems
+    countExpiringFoodItems,
+    getOwnerFromId
 } from '.';
 
 describe('getPercentageFromDate function', () => {
@@ -132,5 +133,12 @@ describe('countExpiringFoodItems function', () => {
 
         const count = countExpiringFoodItems(HalfExpiringFridge);
         expect(count).toBe(0);
+    });
+});
+
+describe('getOwnerFromId function', () => {
+    it('should return a single owner object', () => {
+        const result = getOwnerFromId(TenantHeidi.uid, [TenantHeidi, TenantDan, TenantJoe]);
+        expect(result).toStrictEqual(TenantHeidi);
     });
 });

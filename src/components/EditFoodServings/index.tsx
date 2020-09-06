@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { firebase, db } from '../../services';
 import { BatchType, FoodType, TenantType } from '../../types';
-import { getColourFromDate } from '../../utils';
+import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { AuthContext } from '../ProviderAuth';
 import { Button } from '../Button';
 import { ProfilePhoto } from '../ProfilePhoto';
@@ -58,10 +58,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
 
     const handleCancel = () => history.goBack();
 
-    const getOwner = (ownerId: string): TenantType => {
-        return tenants.filter((tenant) => tenant.uid === ownerId)[0];
-    };
-
     return (
         <S.Wrapper>
             <S.Title>How many {item.name} servings are you eating?</S.Title>
@@ -72,7 +68,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
                             <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
-                            <ProfilePhoto owner={getOwner(batch.ownerId)} width="50px" />
+                            <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} width="50px" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expired {format(batch.expires, 'do MMM')}
                             </S.Text>
