@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
+import { colours, zIndex } from '../../tokens';
 
 export const Wrapper = styled.div`
     background-color: ${colours.white};
@@ -11,4 +11,5 @@ export const Wrapper = styled.div`
     padding: 1.5rem 0;
     position: fixed;
     right: 0;
+    z-index: ${zIndex.rise};
 `;

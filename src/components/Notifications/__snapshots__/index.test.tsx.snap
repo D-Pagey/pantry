@@ -59,6 +59,7 @@ exports[`Notifications component should render 1`] = `
   right: -3rem;
   top: 3rem;
   width: 275px;
+  z-index: 200;
 }
 
 .c1 {

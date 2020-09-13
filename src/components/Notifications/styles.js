@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mediaQuery } from '../../tokens';
+import { mediaQuery, zIndex } from '../../tokens';
 import { Button } from '../Button';
 
 export const List = styled.ul`
@@ -19,6 +19,7 @@ export const List = styled.ul`
     right: -3rem;
     top: 3rem;
     width: 275px;
+    z-index: ${zIndex.rise};
 
     @media ${mediaQuery.tablet} {
         left: -6.6rem;

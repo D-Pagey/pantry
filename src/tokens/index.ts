@@ -26,3 +26,12 @@ export const colours = {
 export const mediaQuery = {
     tablet: '(min-width: 765px)',
 };
+
+export const zIndex = {
+    dive: -200,
+    default: 1,
+    levitate: 2,
+    rise: 200,
+    sky: 400,
+    top: 600
+};

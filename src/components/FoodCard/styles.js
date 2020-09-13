@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colours } from '../../tokens';
+import { colours, zIndex } from '../../tokens';
 import { ProfilePhoto } from '../ProfilePhoto';
 
 export const Wrapper = styled.div`
@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
     min-width: 220px;
     padding: 1rem;
     width: 280px;
+    z-index: ${zIndex.default};
 `;
 
 export const Name = styled.p`
