@@ -10,7 +10,7 @@ import {
     getExpiringItems,
     filterFridgeByCategory,
     countExpiringFoodItems,
-    getOwnerFromId
+    getOwnerFromId,
 } from '.';
 
 describe('getPercentageFromDate function', () => {

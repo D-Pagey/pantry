@@ -47,12 +47,20 @@ export const filterFridgeByCategory = (food: FoodType[], category: string): Food
 };
 
 export const formatExpiryDates = (fridgeItems: FoodType[]): FoodType[] => {
-    return fridgeItems.map((item) => {
-        return {
-            ...item,
-            batches: Object.values(item.batches).map((batch) => ({ ...batch, expires: batch.expires.toDate() }))
-        };
-    });
+    return fridgeItems.reduce((acc, curr): FoodType[] => {
+        const batchesArray = curr.batches ? Object.values(curr.batches) : []; 
+
+        if (batchesArray.length === 0) return acc;
+
+        const formattedBatches = batchesArray.map((batch) => {
+            return {
+                ...batch,
+                expires: batch.expires.toDate()
+            };
+        });
+
+        return [...acc, {...curr, batches: formattedBatches }];
+    }, [] as FoodType[]);
 };
 
 export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {
