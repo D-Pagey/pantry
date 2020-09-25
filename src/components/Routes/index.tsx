@@ -67,6 +67,15 @@ export const Routes = (): JSX.Element => {
         }
     }, [user]);
 
+    /**
+     * This function adds a brand new item then deletes the old item out of firestore
+     */
+    const replaceItem = () => {
+        // add new item
+        // delete old item
+        console.log('shit');
+    };
+
     useEffect(() => {
         if (user?.household) {
             getFridgeData();
@@ -96,7 +105,7 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/:name/edit">
-                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} />}
+                {fridge && tenants && <PageEditFood fridge={fridge} replaceItem={replaceItem} tenants={tenants} />}
             </RouteProtected>
 
             <RouteProtected path="/add">
