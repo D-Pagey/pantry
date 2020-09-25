@@ -15,7 +15,7 @@ exports[`Donut component should render 1`] = `
   fill: transparent;
   stroke-dasharray: 282.7433388230814;
   stroke-dashoffset: 254.46900494077323;
-  stroke: red;
+  stroke: #EB5757;
   stroke-linecap: round;
   stroke-width: 5;
 }
@@ -41,7 +41,7 @@ exports[`Donut component should render 1`] = `
   >
     <circle
       class="c1"
-      color="red"
+      color="#EB5757"
       cx="50"
       cy="50"
       r="45"

@@ -84,7 +84,7 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c5 {
-  color: red;
+  color: #EB5757;
   margin: 0 0 0 1rem;
 }
 

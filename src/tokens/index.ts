@@ -20,7 +20,7 @@ export const colours = {
     lightGrey: '#767676',
     veryLightGrey: '#E5E5E5',
     orange: '#FCBA3B',
-    red: 'red',
+    red: '#EB5757',
     white: 'white'
 };
 

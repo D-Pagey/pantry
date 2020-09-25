@@ -61,3 +61,7 @@ export const CloseButton = styled(Button)`
     margin: 2rem 0 0;
     width: 100px;
 `;
+
+export const InviteButton = styled(Button)`
+    grid-column: 1 / 3;
+`;

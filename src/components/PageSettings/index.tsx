@@ -16,6 +16,7 @@ type PageSettingsProps = {
 };
 
 export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
+    const [isLoading, setIsLoading] = useState(false);
     const [emailInvite, setEmailInvite] = useState('');
     const { signOut, user } = useContext(AuthContext);
 
@@ -23,6 +24,8 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
         if (tenants.map((tenant) => tenant.email).includes(emailInvite)) {
             toast.error('That user is already in your household');
         } else {
+            setIsLoading(true);
+
             try {
                 const { data } = await inviteToHousehold({ email: emailInvite });
 
@@ -36,6 +39,8 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
             } catch (error) {
                 toast.error('Error with notifying the user');
             }
+
+            setIsLoading(false);
         }
     };
 
@@ -64,7 +69,9 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                             placeholder="Your friends' email"
                             value={emailInvite}
                         />
-                        <S.InviteButton onClick={handleInviteClick}>Invite</S.InviteButton>
+                        <S.InviteButton isLoading={isLoading} onClick={handleInviteClick} loadingContent="Inviting">
+                            Invite
+                        </S.InviteButton>
 
                         <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="PageSettingsButton">
                             Sign Out

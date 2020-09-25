@@ -30,7 +30,7 @@ export const DisabledButton = styled(Button)`
 `;
 
 export const DestructiveButton = styled(Button)`
-    background-color: ${colours.lightGreen};
+    background-color: ${colours.red};
 `;
 
 const ellipsis = keyframes`
@@ -41,6 +41,7 @@ const ellipsis = keyframes`
 
 export const LoadingButton = styled(Button)`
     background-color: ${colours.lightGreen};
+    cursor: wait;
     padding: 1rem 2rem 1rem 1rem;
 
     &:after {

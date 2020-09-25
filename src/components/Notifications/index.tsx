@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -17,6 +17,7 @@ type NotificationsProps = {
 };
 
 export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, user }) => {
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     const dismissNotification = (notificationId: string) => {
@@ -32,6 +33,8 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
     const handleDismissClick = (itemUid: string) => () => dismissNotification(itemUid);
 
     const handleInviteDecision = (item: NotificationType, didAccept: boolean) => async () => {
+        setIsLoading(true);
+
         if (didAccept) {
             const myTenant: TenantType = {
                 email: user.email,
@@ -66,6 +69,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                 toast.error('Something went wrong decline the invite');
             }
         }
+        setIsLoading(false);
     };
 
     return (
@@ -78,7 +82,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                 <S.Item key={item.uid}>
                     <S.Text>{item.description}</S.Text>
 
-                    {item.type === 'invite' ? (
+                    {item.type === 'invite' && !isLoading && (
                         <>
                             <Button margin="0 1rem 0 0" onClick={handleInviteDecision(item, false)} secondary>
                                 Decline
@@ -86,7 +90,11 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
 
                             <Button onClick={handleInviteDecision(item, true)}>Accept</Button>
                         </>
-                    ) : (
+                    )}
+
+                    {item.type === 'invite' && isLoading && <S.InviteButton isLoading={isLoading}>Responding</S.InviteButton>}
+
+                    {item.type === 'text' && (
                         <S.DismissButton secondary onClick={handleDismissClick(item.uid)}>
                             Dismiss
                         </S.DismissButton>
