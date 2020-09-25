@@ -32,7 +32,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                 if (data.userExists && data.hasNotified) {
                     toast.success(`An invite was sent to ${emailInvite}`);
                 } else {
-                    toast.error('Something went wrong');
+                    toast.error(data.result);
                 }
 
                 setEmailInvite('');
