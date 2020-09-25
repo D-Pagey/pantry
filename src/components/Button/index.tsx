@@ -1,18 +1,28 @@
 import React, { FC, ReactNode } from 'react';
 import * as S from './styles';
 
-type ButtonProps = {
+export type ButtonProps = {
     children: ReactNode;
+    destructive?: boolean;
     disabled?: boolean;
+    isLoading?: boolean;
+    loadingContent?: string;
     margin?: string;
     onClick?: Function;
     secondary?: boolean;
     size?: 'sm' | 'm' | 'l';
     type?: string;
-    destructive?: boolean;
 };
 
-export const Button: FC<ButtonProps> = ({ children, disabled, secondary, destructive, ...props }) => {
+export const Button: FC<ButtonProps> = ({
+    children,
+    destructive,
+    disabled,
+    isLoading,
+    loadingContent,
+    secondary,
+    ...props
+}) => {
     if (disabled) {
         return (
             <S.DisabledButton disabled={disabled} {...props}>
@@ -27,6 +37,10 @@ export const Button: FC<ButtonProps> = ({ children, disabled, secondary, destruc
 
     if (destructive) {
         return <S.DestructiveButton {...props}>{children}</S.DestructiveButton>;
+    }
+
+    if (isLoading) {
+        return <S.LoadingButton {...props}>{loadingContent || 'Loading'}</S.LoadingButton>;
     }
 
     return <S.Button {...props}>{children}</S.Button>;

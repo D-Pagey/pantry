@@ -37,4 +37,16 @@ describe('Button component', () => {
 
         expect(onClick).not.toHaveBeenCalled();
     });
+
+    it('should render loading content when loading', () => {
+        const loadingContent = 'I am loading';
+
+        const { getByText } = render(
+            <Button isLoading loadingContent={loadingContent}>
+                Helloooooo
+            </Button>
+        );
+
+        getByText(loadingContent);
+    });
 });

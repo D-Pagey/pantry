@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { colours } from '../../tokens';
 
 export const Button = styled.button.attrs(({ type }) => ({
@@ -30,5 +30,26 @@ export const DisabledButton = styled(Button)`
 `;
 
 export const DestructiveButton = styled(Button)`
-    background-color: #EB5757;
+    background-color: ${colours.lightGreen};
+`;
+
+const ellipsis = keyframes`
+  to {
+      width: 1.25rem;    
+    }
+`;
+
+export const LoadingButton = styled(Button)`
+    background-color: ${colours.lightGreen};
+    padding: 1rem 2rem 1rem 1rem;
+
+    &:after {
+        animation: ${ellipsis} steps(4, end) 1000ms infinite;
+        content: '...';
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        vertical-align: bottom;
+        width: 0px;
+    }
 `;
