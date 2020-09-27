@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType, TenantType, NewFoodType } from '../../types';
+import { FoodType, TenantType, NewFoodType, DatabaseFoodType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -57,7 +57,7 @@ export const Routes = (): JSX.Element => {
                 .doc(user.household)
                 .onSnapshot((doc: any) => {
                     const data = doc.data();
-                    const fridgeItems: FoodType[] = Object.values(data.fridge);
+                    const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
                     const formattedDates = formatExpiryDates(fridgeItems);
 
                     setFridge(formattedDates);

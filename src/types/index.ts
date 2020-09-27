@@ -11,7 +11,6 @@ export type TenantType = {
     uid: string;
 };
 
-
 export type BatchType = {
     expires: Date | any;
     id: string;
@@ -19,12 +18,15 @@ export type BatchType = {
     ownerId: string;
 };
 
-export type FoodType = {
-    batches: BatchType[];
+export type DatabaseFoodType = {
+    batches: {
+        [id: string]: BatchType;
+    };
     category: string;
     name: string;
 };
 
+export type FoodType = Omit<DatabaseFoodType, 'batches'> & { batches: BatchType[] };
 export type NewFoodType = Omit<FoodType, 'batches'> & { batch: BatchType };
 
 export interface DatabaseNotificationType {

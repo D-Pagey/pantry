@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
-import { DropdownOptionType, FoodType, TenantType } from '../types';
+import { DatabaseFoodType, DropdownOptionType, FoodType, TenantType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
 export const getPercentageFromDate = (date: Date): number => {
@@ -46,7 +46,7 @@ export const filterFridgeByCategory = (food: FoodType[], category: string): Food
     return food.filter((item) => item.category === category);
 };
 
-export const formatExpiryDates = (fridgeItems: FoodType[]): FoodType[] => {
+export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
     return fridgeItems.reduce((acc, curr): FoodType[] => {
         const batchesArray = curr.batches ? Object.values(curr.batches) : []; 
 
