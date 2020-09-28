@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
-import { DatabaseFoodType, DropdownOptionType, FoodType, TenantType } from '../types';
+import { BatchType, DatabaseFoodType, DropdownOptionType, FoodType, TenantType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
 export const getPercentageFromDate = (date: Date): number => {
@@ -48,7 +48,7 @@ export const filterFridgeByCategory = (food: FoodType[], category: string): Food
 
 export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
     return fridgeItems.reduce((acc, curr): FoodType[] => {
-        const batchesArray = curr.batches ? Object.values(curr.batches) : []; 
+        const batchesArray = curr.batches ? Object.values(curr.batches) : [];
 
         if (batchesArray.length === 0) return acc;
 
@@ -59,8 +59,24 @@ export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] =
             };
         });
 
-        return [...acc, {...curr, batches: formattedBatches }];
+        return [...acc, { ...curr, batches: formattedBatches }];
     }, [] as FoodType[]);
+};
+
+export const convertBatchesArray = (fridgeItems: FoodType[]): DatabaseFoodType[] => {
+    return fridgeItems.map((item) => {
+        
+        const newBatches: { [id: string]: BatchType } = {};
+
+        item.batches.forEach((batch) => {
+            newBatches[batch.id] = batch;
+        });
+
+        return {
+            ...item,
+            batches: newBatches
+        };
+    });
 };
 
 export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {

@@ -11,6 +11,7 @@ import {
     filterFridgeByCategory,
     countExpiringFoodItems,
     getOwnerFromId,
+    convertBatchesArray
 } from '.';
 
 describe('getPercentageFromDate function', () => {
@@ -140,5 +141,22 @@ describe('getOwnerFromId function', () => {
     it('should return a single owner object', () => {
         const result = getOwnerFromId(TenantHeidi.uid, [TenantHeidi, TenantDan, TenantJoe]);
         expect(result).toStrictEqual(TenantHeidi);
+    });
+});
+
+describe('convertBatchesArray function', () => {
+    it('should convert batches array into object of objects', () => {
+        const result = convertBatchesArray([Fridge[0]]);
+        expect(result).toStrictEqual([
+            {
+                batches: {
+                    '1111111': { expires: expect.any(Date), id: '1111111', ownerId: 'fghij', servings: 1 },
+                    '22222222': { expires: expect.any(Date), id: '22222222', ownerId: 'abcde', servings: 2 },
+                    '3333333': { expires: expect.any(Date), id: '3333333', ownerId: 'zxwy', servings: 4 }
+                },
+                category: 'vegetables',
+                name: 'carrot'
+            }
+        ]);
     });
 });

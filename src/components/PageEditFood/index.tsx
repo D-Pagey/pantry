@@ -1,24 +1,49 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
 
-import { FoodType, TenantType } from '../../types';
+import { convertBatchesArray } from '../../utils';
+import { DatabaseFoodType, FoodType, TenantType } from '../../types';
+import { db, firebase } from '../../services';
+import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Input } from '../Input';
 import { Button } from '../Button';
 import { EditFoodServings } from '../EditFoodServings';
 import * as S from './styles';
 
+/**
+ * This function adds a brand new item then deletes the old item out of firestore
+ */
+const replaceItem = async (newItem: DatabaseFoodType, nameToBeDeleted: string, household: string) => {
+    // add new item
+    await db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${newItem.name}`]: newItem
+        });
+
+    // delete old item
+    await db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${nameToBeDeleted}`]: firebase.firestore.FieldValue.delete()
+        });
+};
+
 type PageEditFoodProps = {
     fridge: FoodType[];
-    replaceItem: () => void;
     tenants: TenantType[];
 };
 
-export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, replaceItem, tenants }) => {
+export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     const [item, setItem] = useState<FoodType>();
     const [newName, setNewName] = useState('');
+    const { user } = useContext(AuthContext);
     const { name } = useParams<{ name: string }>();
+    const history = useHistory();
 
     useEffect(() => {
         const editingItem = fridge.filter((food) => food.name === name)[0];
@@ -31,12 +56,18 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, replaceItem, tenan
         }
     }, [fridge, name]);
 
-    const handleNameChange = (e: any) => setNewName(e.target.value);
+    const handleNameChange = (e: any): void => setNewName(e.target.value);
 
-    const handleEdit = () => {
+    // TODO: Add check for if newName already exists, if so then call mergeItem instead of replaceItem
+    const handleEdit = async () => {
         // converts batches back to object of objects
-        replaceItem();
-        console.log('handling edit');
+        if (item && user?.household) {
+            const updatedItem = { ...item, name: newName };
+            const converted = convertBatchesArray([updatedItem]);
+            await replaceItem(converted[0], item.name, user.household);
+        }
+
+        history.push('/food');
     };
 
     return (
