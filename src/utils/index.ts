@@ -63,6 +63,10 @@ export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] =
     }, [] as FoodType[]);
 };
 
+/**
+ * Converts a food item with `batches` as an array into a food item with `batches`
+ * as an object of objects
+ */
 export const convertBatchesArray = (fridgeItems: FoodType[]): DatabaseFoodType[] => {
     return fridgeItems.map((item) => {
         

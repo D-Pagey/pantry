@@ -4,7 +4,7 @@ import arraySort from 'array-sort';
 
 import { convertBatchesArray } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType } from '../../types';
-import { db, firebase } from '../../services';
+import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Input } from '../Input';
@@ -29,7 +29,26 @@ const replaceItem = async (newItem: DatabaseFoodType, nameToBeDeleted: string, h
         .collection('households')
         .doc(household)
         .update({
-            [`fridge.${nameToBeDeleted}`]: firebase.firestore.FieldValue.delete()
+            [`fridge.${nameToBeDeleted}.batches`]: {}
+        });
+};
+
+const mergeItem = async (existingItem: FoodType, currentItem: FoodType, household: string) => {
+    const mergedBatches = [...existingItem.batches, ...currentItem.batches];
+    const updatedItem = { ...existingItem, batches: mergedBatches };
+
+    await db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${existingItem.name}`]: updatedItem
+        });
+
+    await db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${currentItem.name}`]: {}
         });
 };
 
@@ -48,23 +67,28 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     useEffect(() => {
         const editingItem = fridge.filter((food) => food.name === name)[0];
 
-        if (editingItem) {
+        if (editingItem && newName === '') {
             const sortedBatches = arraySort(editingItem.batches, 'expires');
 
             setItem({ ...editingItem, batches: sortedBatches });
             setNewName(editingItem.name);
         }
-    }, [fridge, name]);
+    }, [fridge, name, newName]);
 
     const handleNameChange = (e: any): void => setNewName(e.target.value);
 
-    // TODO: Add check for if newName already exists, if so then call mergeItem instead of replaceItem
     const handleEdit = async () => {
         // converts batches back to object of objects
         if (item && user?.household) {
             const updatedItem = { ...item, name: newName };
-            const converted = convertBatchesArray([updatedItem]);
-            await replaceItem(converted[0], item.name, user.household);
+            const existingItem = fridge.filter((item) => item.name === newName);
+
+            if (existingItem.length === 0) {
+                const converted = convertBatchesArray([updatedItem]);
+                await replaceItem(converted[0], item.name, user.household);
+            } else {
+                await mergeItem(existingItem[0], item, user.household);
+            }
         }
 
         history.push('/food');
