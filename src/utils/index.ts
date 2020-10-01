@@ -1,5 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
+import arraySort from 'array-sort';
 import { BatchType, DatabaseFoodType, DropdownOptionType, FoodType, TenantType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
@@ -47,10 +48,10 @@ export const filterFridgeByCategory = (food: FoodType[], category: string): Food
 };
 
 export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
-    return fridgeItems.reduce((acc, curr): FoodType[] => {
+    const formatted = fridgeItems.reduce((acc, curr): FoodType[] => {
         const batchesArray = curr.batches ? Object.values(curr.batches) : [];
 
-        if (batchesArray.length === 0) return acc;
+        if (batchesArray.length === 0) return [...acc, { ...curr, batches: [] }];
 
         const formattedBatches = batchesArray.map((batch) => {
             return {
@@ -61,6 +62,8 @@ export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] =
 
         return [...acc, { ...curr, batches: formattedBatches }];
     }, [] as FoodType[]);
+
+    return arraySort(formatted, 'name');
 };
 
 /**
@@ -69,7 +72,6 @@ export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] =
  */
 export const convertBatchesArray = (fridgeItems: FoodType[]): DatabaseFoodType[] => {
     return fridgeItems.map((item) => {
-        
         const newBatches: { [id: string]: BatchType } = {};
 
         item.batches.forEach((batch) => {
