@@ -104,7 +104,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     };
 
     return (
-        <Layout title="Edit servings" isLoading={isLoading}>
+        <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading}>
             <S.Wrapper>
                 {item && (
                     <>
