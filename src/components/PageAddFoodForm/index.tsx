@@ -106,7 +106,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, upd
                         }
                     };
 
-                    const getDropdownOptions = () => {
+                    const getDropdownOptions = (): string[] => {
                         if (fridge) {
                             return fridge.map((item: FoodType) => item.name);
                         }

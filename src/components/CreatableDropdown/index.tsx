@@ -4,12 +4,13 @@ import { getFridgeNameOptions } from '../../utils';
 import * as S from './styles';
 
 type CreatableDropdownProps = {
+    defaultValue?: string;
     options: string[];
     placeholder?: string;
     setSelected: (value: string) => void;
 };
 
-export const CreatableDropdown: FC<CreatableDropdownProps> = ({ options, placeholder, setSelected }) => {
+export const CreatableDropdown: FC<CreatableDropdownProps> = ({ defaultValue, options, placeholder, setSelected }) => {
     const handleChange = (value: any, action: any) => {
         const isSelected = action.action === 'select-option' || action.action === 'create-option';
 
@@ -23,12 +24,13 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({ options, placeho
     return (
         <S.Wrapper>
             <CreatableSelect
+                defaultValue={defaultValue ? getFridgeNameOptions([defaultValue]) : null}
+                inputId="foodName"
                 isClearable
+                name="foodName"
                 onChange={handleChange}
                 options={getFridgeNameOptions(options)}
                 placeholder={placeholder}
-                name="foodName"
-                inputId="foodName"
             />
         </S.Wrapper>
     );
