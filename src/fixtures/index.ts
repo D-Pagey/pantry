@@ -103,6 +103,11 @@ export const Fridge: FoodType[] = [
         batches: Batches,
         category: 'dairy',
         name: 'milk'
+    },
+    {
+        batches: [],
+        category: 'dairy',
+        name: 'chocolate'
     }
 ];
 

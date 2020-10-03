@@ -57,7 +57,8 @@ describe('getFridgeNameOptions function', () => {
             { label: 'Carrot', value: 'carrot' },
             { label: 'Broccoli', value: 'broccoli' },
             { label: 'Steak', value: 'steak' },
-            { label: 'Milk', value: 'milk' }
+            { label: 'Milk', value: 'milk' },
+            { label: 'Chocolate', value: 'chocolate' }
         ]);
     });
 });
@@ -84,8 +85,8 @@ describe('getExpiringItems function', () => {
 
 describe('filterFridgeByCategory function', () => {
     it('should correctly filter', () => {
-        const filtered = filterFridgeByCategory(Fridge, 'dairy');
-        expect(filtered).toStrictEqual([Fridge[3]]);
+        const filtered = filterFridgeByCategory(Fridge, 'meat');
+        expect(filtered).toStrictEqual([Fridge[2]]);
     });
 });
 

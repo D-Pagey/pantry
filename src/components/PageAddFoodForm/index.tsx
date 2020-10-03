@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { FoodType, NewFoodType } from '../../types';
+import { BatchType, FoodType, NewFoodType } from '../../types';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -34,15 +34,35 @@ const options = [
 ];
 
 type PageAddFoodFormProps = {
-    addItem: (values: NewFoodType) => void;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    updateNameAndCategory: ({ name, category }: { name: string; category: string }) => void;
     fridge?: FoodType[];
-    updateItemBatch: (values: NewFoodType) => void;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
-export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, updateItemBatch }) => {
+export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAndCategory, updateBatch }) => {
     const [step, setStep] = useState(1);
+    const [itemExists, setItemExists] = useState(false);
     const { user } = useContext(AuthContext);
     const history = useHistory();
+
+    const handleStepOneNext = (name: string) => () => {
+        if (fridge) {
+            const doesItemExist = fridge.reduce((acc, curr) => {
+                if (curr.name === name && curr.batches.length > 0) return true;
+
+                return acc;
+            }, false);
+
+            if (doesItemExist) {
+                setStep(3);
+                setItemExists(true);
+            } else {
+                setStep(2);
+            }
+        }
+    };
 
     return (
         <Layout title="Add food">
@@ -51,11 +71,6 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, upd
                 onSubmit={(values, actions): void => {
                     if (fridge && user) {
                         const newBatchId = uuidv4();
-                        const doesItemExist = fridge.reduce((acc, curr) => {
-                            if (curr.name === values.name) return true;
-
-                            return acc;
-                        }, false);
 
                         const formattedValues: NewFoodType = {
                             category: values.category,
@@ -68,11 +83,11 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, upd
                             }
                         };
 
-                        if (doesItemExist) {
-                            updateItemBatch(formattedValues);
-                        } else {
-                            addItem(formattedValues);
+                        if (!itemExists) {
+                            updateNameAndCategory({ name: formattedValues.name, category: formattedValues.category });
                         }
+                        
+                        updateBatch({ name: formattedValues.name, batch: formattedValues.batch });
                     }
                     actions.setSubmitting(false);
                     actions.resetForm();
@@ -137,7 +152,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, addItem, upd
                                             />
                                         </S.InputWrapper>
 
-                                        <Button onClick={() => setStep(2)}>Next</Button>
+                                        <Button onClick={handleStepOneNext(values.name)}>Next</Button>
                                     </S.StepWrapper>
                                 )}
 

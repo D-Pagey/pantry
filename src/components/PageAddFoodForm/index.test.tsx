@@ -22,8 +22,9 @@ const context = {
 };
 
 const props = {
-    addItem: () => {},
-    updateItemBatch: () => {}
+    fridge: Fridge,
+    updateNameAndCategory: () => {},
+    updateBatch: () => {}
 };
 
 describe('PageAddFoodForm component', () => {
@@ -106,8 +107,8 @@ describe('PageAddFoodForm component', () => {
         await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food'));
     });
 
-    it('should call addItem with the right values if new fridge item', async () => {
-        const updatedProps = { ...props, fridge: Fridge, addItem: jest.fn() };
+    it('should call updateBatch with the right values', async () => {
+        const updatedProps = { ...props, fridge: Fridge, updateBatch: jest.fn() };
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
@@ -124,30 +125,29 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedProps.addItem).toBeCalledWith({
+            expect(updatedProps.updateBatch).toBeCalledWith({
                 batch: {
                     expires: expect.any(Date),
                     id: expect.any(String),
                     ownerId: context.user.uid,
                     servings: 1
                 },
-                category: 'meat',
                 name: 'avocado'
             })
         );
     });
 
-    it('should call updateItemBatch with correct values if already exists', async () => {
+    it('should call updateNameAndCategory with correct values if does not already exist', async () => {
         const updatedProps = {
             ...props,
             fridge: Fridge,
-            updateItemBatch: jest.fn()
+            updateNameAndCategory: jest.fn()
         };
-        const name = 'steak';
+        const name = 'chocolate';
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
-        await selectEvent.select(getByLabelText('What is the food called?'), 'Steak');
+        await selectEvent.select(getByLabelText('What is the food called?'), 'Chocolate');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
@@ -160,13 +160,7 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updatedProps.updateItemBatch).toBeCalledWith({
-                batch: {
-                    expires: expect.any(Date),
-                    id: expect.any(String),
-                    ownerId: context.user.uid,
-                    servings: 1
-                },
+            expect(updatedProps.updateNameAndCategory).toBeCalledWith({
                 category: 'meat',
                 name
             })

@@ -26,7 +26,11 @@ describe('PageFood component', () => {
 
         userEvent.click(getByText('All'));
 
-        Fridge.map((item) => getByText(titleCase(item.name)));
+        Fridge.forEach((item) => {
+            if (item.batches.length > 0) {
+                getByText(titleCase(item.name));
+            }
+        });
     });
 
     it('should render a message when no data for category all', () => {
@@ -57,7 +61,9 @@ describe('PageFood component', () => {
 
         userEvent.click(getByText(categoryLabel));
 
-        Fridge.map((item) => {
+        Fridge.forEach((item) => {
+            if (item.batches.length === 0) return null;
+
             if (item.category === categoryName) {
                 return getByText(titleCase(item.name));
             }

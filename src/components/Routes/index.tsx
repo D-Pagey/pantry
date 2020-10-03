@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType, TenantType, NewFoodType, DatabaseFoodType } from '../../types';
+import { FoodType, TenantType, BatchType, DatabaseFoodType } from '../../types';
 import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -23,30 +23,26 @@ export const Routes = (): JSX.Element => {
     const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
 
-    const updateItemBatch = (values: NewFoodType): void => {
+    const updateBatch = ({ name, batch }: { name: string; batch: BatchType }): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
                 .update({
-                    [`fridge.${values.name}.batches.${values.batch.id}`]: values.batch
+                    [`fridge.${name}.batches.${batch.id}`]: batch
                 })
-                .then(() => toast.success(`Batch added for ${values.name}`))
+                .then(() => toast.success(`Batch added for ${name}`))
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
 
-    const addItem = (values: NewFoodType): void => {
+    const updateNameAndCategory = ({ name, category }: { name: string; category: string }): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
                 .update({
-                    [`fridge.${values.name}`]: {
-                        name: values.name,
-                        category: values.category
-                    },
-                    [`fridge.${values.name}.batches.${values.batch.id}`]: values.batch
+                    [`fridge.${name}`]: { name, category }
                 })
-                .then(() => toast.success(`${values.name} added`))
+                .then(() => toast.success(`${name} (${category}) added`))
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
@@ -100,7 +96,11 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/add">
-                <PageAddFoodForm fridge={fridge} addItem={addItem} updateItemBatch={updateItemBatch} />
+                <PageAddFoodForm
+                    fridge={fridge}
+                    updateNameAndCategory={updateNameAndCategory}
+                    updateBatch={updateBatch}
+                />
             </RouteProtected>
 
             <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>
