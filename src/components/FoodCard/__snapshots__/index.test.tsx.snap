@@ -57,9 +57,9 @@ exports[`FoodCard component should render 1`] = `
 }
 
 .c2 {
-  color: #B2B2B2;
+  color: #7C7C7C;
   font-size: 14px;
-  margin: 4px 0 8px;
+  margin: 0.5rem 0 1rem;
 }
 
 .c4 {
@@ -123,7 +123,9 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c2"
   >
-    1st Jan
+    (
+    vegetables
+    )
   </p>
   <img
     alt="food owner"

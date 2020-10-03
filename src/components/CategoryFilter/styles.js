@@ -29,7 +29,7 @@ export const Item = styled.li`
     cursor: pointer;
     flex-grow: 1;
     font-weight: bold;
-    padding: 1rem;
+    padding: 1rem 0;
     text-align: center;
 
     &:hover {

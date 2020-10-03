@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { Batches, TenantDan, TenantJoe, TenantHeidi } from '../../fixtures';
+import { Fridge, TenantDan, TenantJoe, TenantHeidi } from '../../fixtures';
 import { FoodCard } from '.';
 
 const props = {
-    batches: Batches,
+    item: Fridge[0],
     name: 'carrot',
     tenants: [TenantDan, TenantJoe, TenantHeidi]
 };

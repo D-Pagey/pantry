@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import arraySort from 'array-sort';
-import { format } from 'date-fns';
 import { titleCase } from 'title-case';
 
-import { BatchType, TenantType } from '../../types';
+import { FoodType, TenantType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { Donut } from '../Donut';
@@ -11,16 +10,15 @@ import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
 import * as S from './styles';
 
 export type FoodCardProps = {
-    batches: BatchType[];
     handleClick?: Function;
+    item: FoodType;
     isSelected?: boolean;
     margin?: string;
-    name: string;
     tenants: TenantType[];
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, margin, name, tenants }) => {
-    const sortedBatches = arraySort(batches, 'expires');
+export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, margin, tenants }) => {
+    const sortedBatches = arraySort(item.batches, 'expires');
     const totalServings = getTotalServingsCount(sortedBatches);
     const sortedTenants = getBatchTenants(sortedBatches, tenants);
     // not very well named
@@ -29,8 +27,8 @@ export const FoodCard: FC<FoodCardProps> = ({ batches, handleClick, isSelected, 
 
     return (
         <S.Wrapper margin={margin} onClick={handleClick} isSelected={isSelected}>
-            <S.Name>{titleCase(name)}</S.Name>
-            <S.Date>{format(sortedBatches[0].expires, 'do MMM')}</S.Date>
+            <S.Name>{titleCase(item.name)}</S.Name>
+            <S.Category>({item.category})</S.Category>
 
             {sortedTenants.map((owner, index, array) => {
                 return (

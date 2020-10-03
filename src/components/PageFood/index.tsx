@@ -120,12 +120,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                             if (item.batches.length > 0) {
                                 return (
                                     <FoodCard
-                                        batches={item.batches}
                                         handleClick={handleFoodClick(item)}
                                         isSelected={item.name === editingItem?.name}
+                                        item={item}
                                         key={item.name}
                                         margin="0 0 1rem"
-                                        name={item.name}
                                         tenants={tenants}
                                     />
                                 );

@@ -24,10 +24,10 @@ export const Name = styled.p`
     margin: 0;
 `;
 
-export const Date = styled.p`
-    color: ${colours.grey};
+export const Category = styled.p`
+    color: ${colours.darkGrey};
     font-size: 14px;
-    margin: 4px 0 8px;
+    margin: 0.5rem 0 1rem;
 `;
 
 export const OwnerPicture = styled(ProfilePhoto)`
