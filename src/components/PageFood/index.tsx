@@ -10,7 +10,7 @@ import { Layout } from '../Layout';
 import { CategoryFilter } from '../CategoryFilter';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
-import { DisposeFood } from '../DisposeFood';
+import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
@@ -140,7 +140,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
             </S.Wrapper>
 
             {editingItem && (
-                <DisposeFood name={editingItem.name} handleDelete={handleFoodDelete} handleEdit={handleFoodEdit} />
+                <FoodOptions name={editingItem.name} handleDelete={handleFoodDelete} handleEdit={handleFoodEdit} />
             )}
         </Layout>
     );

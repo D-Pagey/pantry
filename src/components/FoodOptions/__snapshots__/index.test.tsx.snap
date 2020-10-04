@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DisposeFood component should render 1`] = `
+exports[`FoodOptions component should render 1`] = `
 .c1 {
   background-color: #348841;
   border: 0;
@@ -15,6 +15,10 @@ exports[`DisposeFood component should render 1`] = `
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
+}
+
+.c3 {
+  background-color: #EB5757;
 }
 
 .c0 {
@@ -38,21 +42,21 @@ exports[`DisposeFood component should render 1`] = `
 
 <div
   class="c0"
-  data-testid="disposeFood"
+  data-testid="foodOptions"
 >
   <button
     class="c1 c2"
     type="button"
   >
-    Edit servings
+    Amend 
+    carrot
   </button>
   <button
-    class="c1"
+    class="c1 c3"
     type="button"
   >
-    Eat all 
+    Remove 
     carrot
-    's
   </button>
 </div>
 `;

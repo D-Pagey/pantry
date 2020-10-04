@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render } from '../../test-utils';
-import { DisposeFood } from '.';
+import { FoodOptions } from '.';
 
 const props = {
     handleDelete: () => {},
@@ -9,26 +9,26 @@ const props = {
     name: 'carrot'
 };
 
-describe('DisposeFood component', () => {
+describe('FoodOptions component', () => {
     it('should render', () => {
-        const { container } = render(<DisposeFood {...props} />);
+        const { container } = render(<FoodOptions {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should call handleDelete when eat clicked', () => {
         const handleDelete = jest.fn();
-        const { getByText } = render(<DisposeFood {...props} handleDelete={handleDelete} />);
+        const { getByText } = render(<FoodOptions {...props} handleDelete={handleDelete} />);
 
-        userEvent.click(getByText("Eat all carrot's"));
+        userEvent.click(getByText(`Remove ${props.name}`));
 
         expect(handleDelete).toHaveBeenCalled();
     });
 
     it('should call handleEdit when edit clicked', () => {
         const handleEdit = jest.fn();
-        const { getByText } = render(<DisposeFood {...props} handleEdit={handleEdit} />);
+        const { getByText } = render(<FoodOptions {...props} handleEdit={handleEdit} />);
 
-        userEvent.click(getByText('Edit servings'));
+        userEvent.click(getByText(`Amend ${props.name}`));
 
         expect(handleEdit).toHaveBeenCalled();
     });

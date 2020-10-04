@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 import { Button } from '../Button';
 import * as S from './styles';
 
-type DisposeFoodProps = {
+export type FoodOptionsProps = {
     handleDelete: () => void;
     handleEdit: () => void;
     name: string;
 };
 
-export const DisposeFood: FC<DisposeFoodProps> = ({ handleDelete, handleEdit, name }) => (
-    <S.Wrapper data-testid="disposeFood">
+export const FoodOptions: FC<FoodOptionsProps> = ({ handleDelete, handleEdit, name }) => (
+    <S.Wrapper data-testid="foodOptions">
         <Button secondary onClick={handleEdit}>
-            Edit servings
+            Amend {name}
         </Button>
-        <Button onClick={handleDelete}>Eat all {name}&apos;s</Button>
+        <Button destructive onClick={handleDelete}>Remove {name}</Button>
     </S.Wrapper>
 );

@@ -254,26 +254,26 @@ describe('PageFood component', () => {
         getByText(titleCase(overrideProps.fridge[1].name));
     });
 
-    it('should render disposeFood component', () => {
+    it('should render foodOptions component', () => {
         const { getByText, getByTestId } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         userEvent.click(getByText(titleCase(Fridge[0].name)));
 
-        getByTestId('disposeFood');
+        getByTestId('foodOptions');
     });
 
-    it('if showing, should remove DisposeFood component if clicked again', () => {
+    it('if showing, should remove FoodOptions component if clicked again', () => {
         const { getByText, getByTestId, queryByText } = render(<PageFood {...props} fridge={Fridge} />, context);
 
         const itemName = Fridge[0].name;
 
         userEvent.click(getByText(titleCase(itemName)));
 
-        getByTestId('disposeFood');
+        getByTestId('foodOptions');
 
         userEvent.click(getByText(titleCase(itemName)));
 
-        expect(queryByText('disposeFood')).toBe(null);
+        expect(queryByText('foodOptions')).toBe(null);
     });
 
     it.skip('should handle delete', () => {
@@ -288,7 +288,7 @@ describe('PageFood component', () => {
 
         userEvent.click(getByText(titleCase(itemName)));
 
-        getByTestId('disposeFood');
+        getByTestId('foodOptions');
 
         userEvent.click(getByText(`Eat all ${itemName}'s`));
 
