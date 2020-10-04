@@ -24,7 +24,7 @@ export const GreyText = styled.p`
 
 export const Grid = styled.div`
     display: grid;
-    grid-gap: 24px;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: ${({ small }) => small ? '16px' : '24px'};
+    grid-template-columns: 1fr 1fr ${({ small }) => small && '1fr'};
     width: max-content;
 `;

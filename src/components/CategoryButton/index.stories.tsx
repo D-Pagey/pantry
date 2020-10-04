@@ -1,10 +1,16 @@
 import React from 'react';
-import { CategoryButton } from '.';
+import { Story } from '@storybook/react/types-6-0';
+import { CategoryButton, CategoryButtonProps } from '.';
 
-export default { title: 'CategoryButton' };
+export default { title: 'CategoryButton', component: CategoryButton };
 
-const handleClick = (): void => alert('meat');
+const Template: Story<CategoryButtonProps> = (args) => <CategoryButton {...args}>Click me</CategoryButton>;
 
-export const unselected = (): JSX.Element => <CategoryButton name="meat" handleClick={handleClick} />;
+export const Primary = Template.bind({});
 
-export const selected = (): JSX.Element => <CategoryButton isSelected name="meat" handleClick={handleClick} />;
+Primary.args = {
+    isSelected: false,
+    name: 'Vegetables',
+    handleClick: () => {},
+    small: false
+};

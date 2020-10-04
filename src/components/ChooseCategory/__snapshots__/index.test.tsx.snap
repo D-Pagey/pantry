@@ -148,13 +148,13 @@ exports[`ChooseCategory component should render 1`] = `
     </button>
     <button
       class="c4 c5"
-      data-testid="[opened tin]CategoryButton"
+      data-testid="misc.CategoryButton"
       type="button"
     >
       <p
         class="c6 c7"
       >
-        [Opened Tin]
+        Misc.
       </p>
     </button>
   </div>

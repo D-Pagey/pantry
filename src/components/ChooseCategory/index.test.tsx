@@ -2,9 +2,9 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render } from '../../test-utils';
 
-import { ChooseCategory, ChooseCategoryTypes } from '.';
+import { ChooseCategory, ChooseCategoryProps } from '.';
 
-const props: ChooseCategoryTypes = {
+const props: ChooseCategoryProps = {
     handleClick: () => null
 };
 
