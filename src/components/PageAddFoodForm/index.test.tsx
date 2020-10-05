@@ -143,11 +143,11 @@ describe('PageAddFoodForm component', () => {
             fridge: Fridge,
             updateNameAndCategory: jest.fn()
         };
-        const name = 'chocolate';
+        const name = 'salmon';
 
         const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
 
-        await selectEvent.select(getByLabelText('What is the food called?'), 'Chocolate');
+        await selectEvent.create(getByLabelText('What is the food called?'), 'Salmon');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 

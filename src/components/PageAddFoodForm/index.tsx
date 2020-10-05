@@ -50,7 +50,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
     const handleStepOneNext = (name: string) => () => {
         if (fridge) {
             const doesItemExist = fridge.reduce((acc, curr) => {
-                if (curr.name === name && curr.batches.length > 0) return true;
+                if (curr.name === name) return true;
 
                 return acc;
             }, false);
