@@ -6,51 +6,46 @@ import { convertBatchesArray } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
+import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import { EditFoodServings } from '../EditFoodServings';
 import * as S from './styles';
 
-/**
- * This function adds a brand new item then deletes the old item out of firestore
- */
-const replaceItem = async (newItem: DatabaseFoodType, nameToBeDeleted: string, household: string) => {
-    // add new item
-    await db
+const deleteItemBatches = (itemName: string, household: string) =>
+    db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${itemName}.batches`]: {}
+        });
+
+const addItem = (newItem: DatabaseFoodType, household: string) =>
+    db
         .collection('households')
         .doc(household)
         .update({
             [`fridge.${newItem.name}`]: newItem
         });
 
+const updateItemField = (name: string, property: string, value: string, household: string) =>
+    db
+        .collection('households')
+        .doc(household)
+        .update({
+            [`fridge.${name}.${property}`]: value
+        });
+
+/**
+ * This function adds a brand new item then deletes the old item out of firestore
+ */
+const addItemDeleteItem = async (newItem: DatabaseFoodType, nameToBeDeleted: string, household: string) => {
+    // add new item
+    await addItem(newItem, household);
+
     // delete old item
-    await db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${nameToBeDeleted}.batches`]: {}
-        });
-};
-
-const mergeItem = async (existingItem: FoodType, currentItem: FoodType, household: string) => {
-    const mergedBatches = [...existingItem.batches, ...currentItem.batches];
-    const updatedItem = { ...existingItem, batches: mergedBatches };
-    const databaseFoodType = convertBatchesArray([updatedItem]);
-
-    await db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${existingItem.name}`]: databaseFoodType[0]
-        });
-
-    await db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${currentItem.name}.batches`]: {}
-        });
+    await deleteItemBatches(nameToBeDeleted, household);
 };
 
 type PageEditFoodProps = {
@@ -62,6 +57,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [item, setItem] = useState<FoodType>();
     const [newName, setNewName] = useState('');
+    const [newCategory, setNewCategory] = useState('');
     const { user } = useContext(AuthContext);
     const { name } = useParams<{ name: string }>();
     const history = useHistory();
@@ -74,21 +70,59 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
 
             setItem({ ...editingItem, batches: sortedBatches });
             setNewName(editingItem.name);
+            setNewCategory(editingItem.category);
         }
     }, [fridge, name, newName]);
 
     const handleEdit = async () => {
         setIsLoading(true);
-        // converts batches back to object of objects
-        if (item && user?.household) {
-            const updatedItem = { ...item, name: newName };
-            const existingItem = fridge.filter((item) => item.batches.length > 0 && item.name === newName);
 
-            if (existingItem.length === 0) {
-                const converted = convertBatchesArray([updatedItem]);
-                await replaceItem(converted[0], item.name, user.household);
-            } else {
-                await mergeItem(existingItem[0], item, user.household);
+        if (item && user?.household) {
+            const hasNamedChanged = newName !== item.name;
+            const hasCategoryChanged = newCategory !== item.category;
+            // check if any items with live batches exists with changed name
+            const existingItems = fridge.filter((item) => item.batches.length > 0 && item.name === newName);
+
+            // if no newName or newCategory disable button
+            if (!hasNamedChanged && !hasCategoryChanged) console.log('nothing changed');
+
+            // if newName but no new category, specifically update name
+            if (hasNamedChanged && !hasCategoryChanged) {
+                if (existingItems.length > 0) {
+                    // merge batches of current item and existing item
+                    const mergedBatches = [...existingItems[0].batches, ...item.batches];
+                    const mergedItem = { ...existingItems[0], batches: mergedBatches };
+
+                    const converted = convertBatchesArray([mergedItem]);
+                    await addItemDeleteItem(converted[0], item.name, user.household);
+                } else {
+                    // create a new database food type for current item with new name
+                    const converted = convertBatchesArray([{ ...item, name: newName.toLowerCase() }]);
+                    await addItemDeleteItem(converted[0], item.name, user.household);
+                }
+            }
+
+            // if new category but no new name, specifically update category
+            if (!hasNamedChanged && hasCategoryChanged) {
+                await updateItemField(item.name, 'category', newCategory, user.household);
+            }
+
+            // if both updated, update both without deleting batches
+            if (hasNamedChanged && hasCategoryChanged) {
+                if (existingItems.length > 0) {
+                    // merge batches of current item and existing item
+                    const mergedBatches = [...existingItems[0].batches, ...item.batches];
+                    const mergedItem = { batches: mergedBatches, category: newCategory, name: newName };
+
+                    const converted = convertBatchesArray([mergedItem]);
+                    await addItemDeleteItem(converted[0], item.name, user.household);
+                } else {
+                    // create a new database food type for current item with new name
+                    const converted = convertBatchesArray([
+                        { ...item, name: newName.toLowerCase(), category: newCategory.toLowerCase() }
+                    ]);
+                    await addItemDeleteItem(converted[0], item.name, user.household);
+                }
             }
         }
 
@@ -115,6 +149,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
                             setSelected={setNewName}
                             defaultValue={item.name}
                         />
+
+                        <ChooseCategory handleClick={setNewCategory} selected={newCategory} small />
 
                         <Button margin="0 0 2rem" onClick={handleEdit}>
                             Make Change
