@@ -1,6 +1,7 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
+import ReactModal from 'react-modal';
 
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
@@ -10,6 +11,8 @@ import { AuthContext } from '../ProviderAuth';
 import { ProfilePhoto } from '../ProfilePhoto';
 import * as S from './styles';
 
+if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
+
 type EditFoodServingsProps = {
     item: FoodType;
     tenants: TenantType[];
@@ -18,6 +21,8 @@ type EditFoodServingsProps = {
 };
 
 export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, updateBatch }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedBatch, setSelectedBatch] = useState<BatchType>();
     const { user } = useContext(AuthContext);
 
     const deleteBatch = ({ name, batchId }: { name: string; batchId: string }): void => {
@@ -42,8 +47,46 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
         }
     };
 
+    const handleChangeOwnerClick = (tenantId: string) => () => {
+        if (tenantId !== selectedBatch?.ownerId) {
+            const updatedBatch = selectedBatch && { ...selectedBatch, ownerId: tenantId };
+
+            if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch });
+        }
+
+        setIsModalOpen(false);
+    };
+
+    const handleOwnerClick = (batch: BatchType) => () => {
+        setIsModalOpen(true);
+        setSelectedBatch(batch);
+    };
+
     return (
         <S.Wrapper>
+            <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
+                <h2>Change Owner</h2>
+                <p>3 servings expiring in: 2 days</p>
+                <p>Current Owner:</p>
+                {selectedBatch && <ProfilePhoto owner={getOwnerFromId(selectedBatch.ownerId, tenants)} width="50px" />}
+                <p>Click owner:</p>
+                <ul>
+                    {tenants.map((tenant) => (
+                        <li key={tenant.uid}>
+                            <ProfilePhoto
+                                onClick={handleChangeOwnerClick(tenant.uid)}
+                                owner={getOwnerFromId(tenant.uid, tenants)}
+                                width="50px"
+                            />
+                        </li>
+                    ))}
+                </ul>
+
+                <button onClick={() => setIsModalOpen(false)} type="button">
+                    Close
+                </button>
+            </ReactModal>
+
             <S.Title>How many {item.name} servings are you eating?</S.Title>
 
             <S.List>
@@ -54,7 +97,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                             <S.Text colour={getColourFromDate(batch.expires)}>
                                 Expires in {formatDistanceToNowStrict(batch.expires)}
                             </S.Text>
-                            <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} width="50px" />
+                            <ProfilePhoto
+                                onClick={handleOwnerClick(batch)}
+                                owner={getOwnerFromId(batch.ownerId, tenants)}
+                                width="50px"
+                            />
                             <button type="button" onClick={handleDelete(batch)}>
                                 <img src={deleteIcon} alt="delete" />
                             </button>

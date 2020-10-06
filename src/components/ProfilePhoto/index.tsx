@@ -6,13 +6,15 @@ import * as S from './styles';
 type ProfilePhotoTypes = {
     owner: Partial<UserType>;
     width?: string;
+    onClick?: Function;
 };
 
-export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ owner, width, ...props }) => {
+export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, owner, width, ...props }) => {
     if (owner) {
         const { photo, email, name } = owner;
 
-        if (photo) return <S.Image src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
+        if (photo)
+            return <S.Image onClick={onClick} src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
 
         const getInitials = () => {
             let nameOrEmail = '';
@@ -31,7 +33,7 @@ export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ owner, width, ...props }) 
         };
 
         return (
-            <S.Circle width={width} {...props}>
+            <S.Circle onClick={onClick} width={width} {...props}>
                 <S.Initials>{getInitials()}</S.Initials>
             </S.Circle>
         );

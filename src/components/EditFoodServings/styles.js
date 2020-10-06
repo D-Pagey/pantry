@@ -32,3 +32,14 @@ export const Text = styled.span`
     color: ${({ colour }) => colour};
     margin: 0 0 0 1rem;
 `;
+
+export const ModalStyles = {
+    content: {
+        bottom: 'auto',
+        left: '50%',
+        marginRight: '-50%',
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
