@@ -7,7 +7,7 @@ import { PageEditFood } from '.';
 const props = {
     fridge: Fridge,
     tenants: [TenantHeidi],
-    replaceItem: () => {}
+    updateBatch: () => {}
 };
 
 describe('PageEditFood component', () => {

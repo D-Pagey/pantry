@@ -1,40 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditFoodServings component should render 1`] = `
-.c9 {
-  background-color: #348841;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  margin: 0 0 1rem;
-  min-width: 68px;
-}
-
-.c11 {
-  background-color: #348841;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  min-width: 68px;
-}
-
-.c12 {
-  background-color: white;
-  border: 1px solid #348841;
-  color: #348841;
-}
-
-.c10 {
-  background-color: #B2B2B2;
-  color: white;
-  cursor: not-allowed;
-  margin: 0 0 1rem;
-}
-
 .c7 {
   border-radius: 50%;
   height: auto;
@@ -80,20 +46,16 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c4 {
-  margin: 0 1rem 0 0;
-}
-
-.c5 {
   color: #EB5757;
   margin: 0 0 0 1rem;
 }
 
-.c6 {
+.c5 {
   color: #FCBA3B;
   margin: 0 0 0 1rem;
 }
 
-.c8 {
+.c6 {
   color: #348841;
   margin: 0 0 0 1rem;
 }
@@ -115,86 +77,89 @@ exports[`EditFoodServings component should render 1`] = `
       class="c3"
     >
       <span
-        class="rc-checkbox c4"
+        class="c4"
       >
-        <input
-          class="rc-checkbox-input"
-          data-testid="1111111"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
+        Expires in 
+        0 seconds
       </span>
+      <button
+        type="button"
+      >
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
+    </li>
+    <li
+      class="c3"
+    >
       <span
         class="c5"
       >
-        Expired 
-        1st Jan
+        Expires in 
+        2 days
       </span>
+      <button
+        type="button"
+      >
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
     </li>
     <li
       class="c3"
     >
       <span
-        class="rc-checkbox c4"
+        class="c5"
       >
-        <input
-          class="rc-checkbox-input"
-          data-testid="22222222"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
+        Expires in 
+        2 days
       </span>
+      <button
+        type="button"
+      >
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
+    </li>
+    <li
+      class="c3"
+    >
       <span
         class="c6"
       >
-        Expired 
-        3rd Jan
+        Expires in 
+        5 days
       </span>
+      <img
+        alt="profile"
+        class="c7"
+        data-testid="photo"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
+      />
+      <button
+        type="button"
+      >
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
     </li>
     <li
       class="c3"
     >
-      <span
-        class="rc-checkbox c4"
-      >
-        <input
-          class="rc-checkbox-input"
-          data-testid="22222222"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
-      </span>
       <span
         class="c6"
       >
-        Expired 
-        3rd Jan
-      </span>
-    </li>
-    <li
-      class="c3"
-    >
-      <span
-        class="rc-checkbox c4"
-      >
-        <input
-          class="rc-checkbox-input"
-          data-testid="3333333"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
+        Expires in 
+        5 days
       </span>
       <img
         alt="profile"
@@ -203,28 +168,23 @@ exports[`EditFoodServings component should render 1`] = `
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
-      <span
-        class="c8"
+      <button
+        type="button"
       >
-        Expired 
-        6th Jan
-      </span>
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
     </li>
     <li
       class="c3"
     >
       <span
-        class="rc-checkbox c4"
+        class="c6"
       >
-        <input
-          class="rc-checkbox-input"
-          data-testid="3333333"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
+        Expires in 
+        5 days
       </span>
       <img
         alt="profile"
@@ -233,28 +193,23 @@ exports[`EditFoodServings component should render 1`] = `
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
-      <span
-        class="c8"
+      <button
+        type="button"
       >
-        Expired 
-        6th Jan
-      </span>
+        <img
+          alt="delete"
+          src="delete.svg"
+        />
+      </button>
     </li>
     <li
       class="c3"
     >
       <span
-        class="rc-checkbox c4"
+        class="c6"
       >
-        <input
-          class="rc-checkbox-input"
-          data-testid="3333333"
-          type="checkbox"
-          value=""
-        />
-        <span
-          class="rc-checkbox-inner"
-        />
+        Expires in 
+        5 days
       </span>
       <img
         alt="profile"
@@ -263,60 +218,15 @@ exports[`EditFoodServings component should render 1`] = `
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
-      <span
-        class="c8"
+      <button
+        type="button"
       >
-        Expired 
-        6th Jan
-      </span>
-    </li>
-    <li
-      class="c3"
-    >
-      <span
-        class="rc-checkbox c4"
-      >
-        <input
-          class="rc-checkbox-input"
-          data-testid="3333333"
-          type="checkbox"
-          value=""
+        <img
+          alt="delete"
+          src="delete.svg"
         />
-        <span
-          class="rc-checkbox-inner"
-        />
-      </span>
-      <img
-        alt="profile"
-        class="c7"
-        data-testid="photo"
-        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-        width="50px"
-      />
-      <span
-        class="c8"
-      >
-        Expired 
-        6th Jan
-      </span>
+      </button>
     </li>
   </ul>
-  <button
-    class="c9 c10"
-    data-testid="EditFoodServingsSubmit"
-    disabled=""
-    type="button"
-  >
-    Eat 
-    0
-     
-    carrot
-  </button>
-  <button
-    class="c11 c12"
-    type="button"
-  >
-    Cancel
-  </button>
 </div>
 `;

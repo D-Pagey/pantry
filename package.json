@@ -23,7 +23,6 @@
         "formik": "2.1.7",
         "jest-styled-components": "7.0.3",
         "polished": "3.6.7",
-        "rc-checkbox": "2.3.1",
         "react": "16.13.1",
         "react-burger-menu": "2.8.0",
         "react-datepicker": "3.2.2",

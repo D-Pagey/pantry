@@ -1,62 +1,46 @@
-import 'rc-checkbox/assets/index.css';
-import React, { FC, useReducer, useContext } from 'react';
-import { format } from 'date-fns';
-import { useHistory } from 'react-router-dom';
+import React, { FC, useContext } from 'react';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
 
-import { firebase, db } from '../../services';
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
+import { db, firebase } from '../../services';
+import deleteIcon from '../../assets/delete.svg';
 import { AuthContext } from '../ProviderAuth';
-import { Button } from '../Button';
 import { ProfilePhoto } from '../ProfilePhoto';
-import { reducer } from './reducer';
 import * as S from './styles';
 
 type EditFoodServingsProps = {
     item: FoodType;
     tenants: TenantType[];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) => {
-    const [state, dispatch] = useReducer(reducer, { updatedBatches: item.batches, count: 0 });
-    const history = useHistory();
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, updateBatch }) => {
     const { user } = useContext(AuthContext);
 
-    const handleChecked = (batch: BatchType) => (event: any): void => {
-        const dispatchType = event.target.checked ? 'checked' : 'unchecked';
-
-        dispatch({ type: dispatchType, payload: batch });
-    };
-
-    const handleEditSubmit = () => {
-        const batchesToUpdate = state.updatedBatches.reduce((acc, curr) => {
-            if (curr.servings === 0) {
-                return {
-                    ...acc,
-                    [`fridge.${item.name}.batches.${curr.id}`]: firebase.firestore.FieldValue.delete()
-                };
-            }
-
-            return {
-                ...acc,
-                [`fridge.${item.name}.batches.${curr.id}`]: curr
-            };
-        }, {});
-
+    const deleteBatch = ({ name, batchId }: { name: string; batchId: string }): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
-                .update(batchesToUpdate)
-                .then(() => {
-                    toast.success('Batch updated');
-                    history.push('/food');
+                .update({
+                    [`fridge.${name}.batches.${batchId}`]: firebase.firestore.FieldValue.delete()
                 })
-                .catch(() => toast.error('Error with updating fridge'));
+                .then(() => toast.success(`Batch deleted for ${name}`))
+                .catch(() => toast.error('Error with deleting batch'));
         }
     };
 
-    const handleCancel = () => history.goBack();
+    const handleDelete = (batch: BatchType) => () => {
+        const updatedServings = batch.servings - 1;
+
+        if (updatedServings === 0) {
+            deleteBatch({ name: item.name, batchId: batch.id });
+        } else {
+            updateBatch({ name: item.name, batch: { ...batch, servings: updatedServings } });
+        }
+    };
 
     return (
         <S.Wrapper>
@@ -67,27 +51,17 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
-                            <S.Checkbox onChange={handleChecked(batch)} data-testid={batch.id} />
-                            <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} width="50px" />
                             <S.Text colour={getColourFromDate(batch.expires)}>
-                                Expired {format(batch.expires, 'do MMM')}
+                                Expires in {formatDistanceToNowStrict(batch.expires)}
                             </S.Text>
+                            <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} width="50px" />
+                            <button type="button" onClick={handleDelete(batch)}>
+                                <img src={deleteIcon} alt="delete" />
+                            </button>
                         </S.Item>
                     ));
                 })}
             </S.List>
-
-            <Button
-                disabled={state.count === 0}
-                margin="0 0 1rem"
-                onClick={handleEditSubmit}
-                data-testid="EditFoodServingsSubmit"
-            >
-                Eat {state.count} {item.name}
-            </Button>
-            <Button secondary onClick={handleCancel}>
-                Cancel
-            </Button>
         </S.Wrapper>
     );
 };

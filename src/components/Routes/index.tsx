@@ -30,7 +30,7 @@ export const Routes = (): JSX.Element => {
                 .update({
                     [`fridge.${name}.batches.${batch.id}`]: batch
                 })
-                .then(() => toast.success(`Batch added for ${name}`))
+                .then(() => toast.success(`Batch updated for ${name}`))
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
@@ -92,7 +92,7 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/:name/edit">
-                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} />}
+                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} updateBatch={updateBatch} />}
             </RouteProtected>
 
             <RouteProtected path="/add">

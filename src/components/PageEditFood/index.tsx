@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
 
 import { convertBatchesArray } from '../../utils';
-import { DatabaseFoodType, FoodType, TenantType } from '../../types';
+import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { ChooseCategory } from '../ChooseCategory';
@@ -51,9 +51,11 @@ const addItemDeleteItem = async (newItem: DatabaseFoodType, nameToBeDeleted: str
 type PageEditFoodProps = {
     fridge: FoodType[];
     tenants: TenantType[];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
-export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
+export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBatch }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [item, setItem] = useState<FoodType>();
     const [newName, setNewName] = useState('');
@@ -65,14 +67,14 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     useEffect(() => {
         const editingItem = fridge.filter((food) => food.name === name)[0];
 
-        if (editingItem && newName === '') {
+        if (editingItem) {
             const sortedBatches = arraySort(editingItem.batches, 'expires');
 
             setItem({ ...editingItem, batches: sortedBatches });
             setNewName(editingItem.name);
             setNewCategory(editingItem.category);
         }
-    }, [fridge, name, newName]);
+    }, [fridge, name]);
 
     const handleEdit = async () => {
         setIsLoading(true);
@@ -145,9 +147,9 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
                         <p>Change the name of {item.name}:</p>
 
                         <CreatableDropdown
+                            defaultValue={item.name}
                             options={getDropdownOptions()}
                             setSelected={setNewName}
-                            defaultValue={item.name}
                         />
 
                         <ChooseCategory handleClick={setNewCategory} selected={newCategory} small />
@@ -155,7 +157,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
                         <Button margin="0 0 2rem" onClick={handleEdit}>
                             Make Change
                         </Button>
-                        <EditFoodServings item={item} tenants={tenants} />
+
+                        <EditFoodServings item={item} tenants={tenants} updateBatch={updateBatch} />
                     </>
                 )}
             </S.Wrapper>

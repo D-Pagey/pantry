@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ReactCheckbox from 'rc-checkbox';
 import { colours } from '../../tokens';
 
 export const Wrapper = styled.div`
@@ -27,10 +26,6 @@ export const Item = styled.li`
     &:first-child {
         border-top: 1px solid ${colours.veryLightGrey};
     }
-`;
-
-export const Checkbox = styled(ReactCheckbox)`
-    margin: 0 1rem 0 0;
 `;
 
 export const Text = styled.span`
