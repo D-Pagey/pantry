@@ -1,7 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EditFoodServings component should render 1`] = `
-.c7 {
+.c4 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c5 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c10 {
   border-radius: 50%;
   height: auto;
   width: 50px;
@@ -38,26 +54,45 @@ exports[`EditFoodServings component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 1rem 0 1rem 3rem;
+  padding: 1rem 0;
 }
 
 .c3:first-child {
   border-top: 1px solid #E5E5E5;
 }
 
-.c4 {
+.c6 {
   color: #EB5757;
   margin: 0 0 0 1rem;
 }
 
-.c5 {
+.c8 {
   color: #FCBA3B;
   margin: 0 0 0 1rem;
 }
 
-.c6 {
+.c9 {
   color: #348841;
   margin: 0 0 0 1rem;
+}
+
+.c7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: none;
+  border: 1px solid red;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 <div
@@ -76,13 +111,19 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c4"
-      >
-        Expires in 
-        0 seconds
-      </span>
       <button
+        class="c4 c5"
+        type="button"
+      >
+        <span
+          class="c6"
+        >
+          Expires in 
+          0 seconds
+        </span>
+      </button>
+      <button
+        class="c7"
         type="button"
       >
         <img
@@ -94,13 +135,19 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c5"
-      >
-        Expires in 
-        2 days
-      </span>
       <button
+        class="c4 c5"
+        type="button"
+      >
+        <span
+          class="c8"
+        >
+          Expires in 
+          2 days
+        </span>
+      </button>
+      <button
+        class="c7"
         type="button"
       >
         <img
@@ -112,13 +159,19 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c5"
-      >
-        Expires in 
-        2 days
-      </span>
       <button
+        class="c4 c5"
+        type="button"
+      >
+        <span
+          class="c8"
+        >
+          Expires in 
+          2 days
+        </span>
+      </button>
+      <button
+        class="c7"
         type="button"
       >
         <img
@@ -130,20 +183,26 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c6"
+      <button
+        class="c4 c5"
+        type="button"
       >
-        Expires in 
-        5 days
-      </span>
+        <span
+          class="c9"
+        >
+          Expires in 
+          5 days
+        </span>
+      </button>
       <img
         alt="profile"
-        class="c7"
+        class="c10"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
       <button
+        class="c7"
         type="button"
       >
         <img
@@ -155,20 +214,26 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c6"
+      <button
+        class="c4 c5"
+        type="button"
       >
-        Expires in 
-        5 days
-      </span>
+        <span
+          class="c9"
+        >
+          Expires in 
+          5 days
+        </span>
+      </button>
       <img
         alt="profile"
-        class="c7"
+        class="c10"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
       <button
+        class="c7"
         type="button"
       >
         <img
@@ -180,20 +245,26 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c6"
+      <button
+        class="c4 c5"
+        type="button"
       >
-        Expires in 
-        5 days
-      </span>
+        <span
+          class="c9"
+        >
+          Expires in 
+          5 days
+        </span>
+      </button>
       <img
         alt="profile"
-        class="c7"
+        class="c10"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
       <button
+        class="c7"
         type="button"
       >
         <img
@@ -205,20 +276,26 @@ exports[`EditFoodServings component should render 1`] = `
     <li
       class="c3"
     >
-      <span
-        class="c6"
+      <button
+        class="c4 c5"
+        type="button"
       >
-        Expires in 
-        5 days
-      </span>
+        <span
+          class="c9"
+        >
+          Expires in 
+          5 days
+        </span>
+      </button>
       <img
         alt="profile"
-        class="c7"
+        class="c10"
         data-testid="photo"
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
       <button
+        class="c7"
         type="button"
       >
         <img

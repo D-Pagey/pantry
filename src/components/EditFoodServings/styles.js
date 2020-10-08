@@ -21,7 +21,7 @@ export const Item = styled.li`
     align-items: center;
     border-bottom: 1px solid ${colours.veryLightGrey};
     display: flex;
-    padding: 1rem 0 1rem 3rem;
+    padding: 1rem 0;
 
     &:first-child {
         border-top: 1px solid ${colours.veryLightGrey};
@@ -43,3 +43,15 @@ export const ModalStyles = {
         transform: 'translate(-50%, -50%)'
     }
 };
+
+export const DeleteButton = styled.button.attrs({
+    type: 'button'
+})`
+    align-items: center;
+    background: none;
+    border: 1px solid red;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+`;

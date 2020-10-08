@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalChangeOwner component should render 1`] = `
+.c1 {
+  border-radius: 50%;
+  height: auto;
+  width: 50px;
+}
+
+.c0 {
+  border: 1px solid red;
+}
+
+<div
+  class="c0"
+>
+  <h2>
+    Change Owner
+  </h2>
+  <p>
+    3 servings expiring in: 2 days
+  </p>
+  <p>
+    Current Owner:
+  </p>
+  <img
+    alt="profile"
+    class="c1"
+    data-testid="photo"
+    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    width="50px"
+  />
+  <p>
+    Click owner:
+  </p>
+  <ul>
+    <li>
+      <img
+        alt="profile"
+        class="c1"
+        data-testid="photo"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+        width="50px"
+      />
+    </li>
+    <li>
+      <img
+        alt="profile"
+        class="c1"
+        data-testid="photo"
+        src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+        width="50px"
+      />
+    </li>
+  </ul>
+  <button
+    type="button"
+  >
+    Close
+  </button>
+</div>
+`;

@@ -8,7 +8,9 @@ import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { db, firebase } from '../../services';
 import deleteIcon from '../../assets/delete.svg';
 import { AuthContext } from '../ProviderAuth';
+import { Button } from '../Button';
 import { ProfilePhoto } from '../ProfilePhoto';
+import { ModalChangeOwner } from '../ModalChangeOwner';
 import * as S from './styles';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -65,26 +67,14 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
     return (
         <S.Wrapper>
             <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                <h2>Change Owner</h2>
-                <p>3 servings expiring in: 2 days</p>
-                <p>Current Owner:</p>
-                {selectedBatch && <ProfilePhoto owner={getOwnerFromId(selectedBatch.ownerId, tenants)} width="50px" />}
-                <p>Click owner:</p>
-                <ul>
-                    {tenants.map((tenant) => (
-                        <li key={tenant.uid}>
-                            <ProfilePhoto
-                                onClick={handleChangeOwnerClick(tenant.uid)}
-                                owner={getOwnerFromId(tenant.uid, tenants)}
-                                width="50px"
-                            />
-                        </li>
-                    ))}
-                </ul>
-
-                <button onClick={() => setIsModalOpen(false)} type="button">
-                    Close
-                </button>
+                {selectedBatch && (
+                    <ModalChangeOwner
+                        closeModal={() => setIsModalOpen(false)}
+                        handleChangeOwnerClick={handleChangeOwnerClick}
+                        ownerId={selectedBatch.ownerId}
+                        tenants={tenants}
+                    />
+                )}
             </ReactModal>
 
             <S.Title>How many {item.name} servings are you eating?</S.Title>
@@ -94,17 +84,19 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
-                            <S.Text colour={getColourFromDate(batch.expires)}>
-                                Expires in {formatDistanceToNowStrict(batch.expires)}
-                            </S.Text>
+                            <Button secondary>
+                                <S.Text colour={getColourFromDate(batch.expires)}>
+                                    Expires in {formatDistanceToNowStrict(batch.expires)}
+                                </S.Text>
+                            </Button>
                             <ProfilePhoto
                                 onClick={handleOwnerClick(batch)}
                                 owner={getOwnerFromId(batch.ownerId, tenants)}
                                 width="50px"
                             />
-                            <button type="button" onClick={handleDelete(batch)}>
+                            <S.DeleteButton type="button" onClick={handleDelete(batch)}>
                                 <img src={deleteIcon} alt="delete" />
-                            </button>
+                            </S.DeleteButton>
                         </S.Item>
                     ));
                 })}
