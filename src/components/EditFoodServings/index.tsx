@@ -2,13 +2,14 @@ import React, { FC, useContext, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { db, firebase } from '../../services';
 import deleteIcon from '../../assets/delete.svg';
 import { AuthContext } from '../ProviderAuth';
-import { Button } from '../Button';
 import { ProfilePhoto } from '../ProfilePhoto';
 import { ModalChangeOwner } from '../ModalChangeOwner';
 import * as S from './styles';
@@ -24,6 +25,7 @@ type EditFoodServingsProps = {
 
 export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, updateBatch }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditingDate, setIsEditingDate] = useState<boolean>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
     const { user } = useContext(AuthContext);
 
@@ -64,18 +66,50 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
         setSelectedBatch(batch);
     };
 
+    const handleDateClick = (batch: BatchType) => () => {
+        setIsModalOpen(true);
+        setSelectedBatch(batch);
+        setIsEditingDate(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        setIsEditingDate(undefined);
+    };
+
+    const handleDateChange = (date: Date) => {
+        if (selectedBatch) {
+            const updatedBatch = { ...selectedBatch, expires: date };
+            updateBatch({ name: item.name, batch: updatedBatch });
+        }
+
+        setIsModalOpen(false);
+    };
+
     return (
         <S.Wrapper>
-            <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                {selectedBatch && (
-                    <ModalChangeOwner
-                        closeModal={() => setIsModalOpen(false)}
-                        handleChangeOwnerClick={handleChangeOwnerClick}
-                        ownerId={selectedBatch.ownerId}
-                        tenants={tenants}
-                    />
-                )}
-            </ReactModal>
+            {selectedBatch && (
+                <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
+                    {!isEditingDate && (
+                        <ModalChangeOwner
+                            closeModal={handleModalClose}
+                            handleChangeOwnerClick={handleChangeOwnerClick}
+                            ownerId={selectedBatch.ownerId}
+                            tenants={tenants}
+                        />
+                    )}
+
+                    {isEditingDate && (
+                        <>
+                            <p>Edit the expiry date for this batch</p>
+                            <DatePicker selected={selectedBatch.expires} onChange={handleDateChange} inline />
+                            <button type="button" onClick={handleModalClose}>
+                                Back
+                            </button>
+                        </>
+                    )}
+                </ReactModal>
+            )}
 
             <S.Title>How many {item.name} servings are you eating?</S.Title>
 
@@ -84,11 +118,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
-                            <Button secondary>
+                            <S.DateButton secondary onClick={handleDateClick(batch)} borderColour={getColourFromDate(batch.expires)}>
                                 <S.Text colour={getColourFromDate(batch.expires)}>
                                     Expires in {formatDistanceToNowStrict(batch.expires)}
                                 </S.Text>
-                            </Button>
+                            </S.DateButton>
                             <ProfilePhoto
                                 onClick={handleOwnerClick(batch)}
                                 owner={getOwnerFromId(batch.ownerId, tenants)}

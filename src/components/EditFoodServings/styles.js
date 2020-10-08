@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colours } from '../../tokens';
+import { Button } from '../Button';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -21,6 +22,7 @@ export const Item = styled.li`
     align-items: center;
     border-bottom: 1px solid ${colours.veryLightGrey};
     display: flex;
+    justify-content: space-evenly;
     padding: 1rem 0;
 
     &:first-child {
@@ -49,9 +51,13 @@ export const DeleteButton = styled.button.attrs({
 })`
     align-items: center;
     background: none;
-    border: 1px solid red;
+    border: 1px solid darkgrey;
     cursor: pointer;
     display: flex;
     justify-content: center;
     padding: 1rem;
+`;
+
+export const DateButton = styled(Button)`
+    border: 1px solid ${({ borderColour }) => borderColour};
 `;
