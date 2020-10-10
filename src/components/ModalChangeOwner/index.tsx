@@ -14,7 +14,7 @@ type ModalChangeOwnerTypes = {
 
 export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({ closeModal, handleChangeOwnerClick, ownerId, tenants }) => {
     return (
-        <S.Wrapper>
+        <S.Wrapper data-testid="modalChangeOwner">
             <h2>Change Owner</h2>
             <p>3 servings expiring in: 2 days</p>
             <p>Current Owner:</p>

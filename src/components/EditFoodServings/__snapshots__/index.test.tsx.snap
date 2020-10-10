@@ -140,6 +140,7 @@ exports[`EditFoodServings component should render 1`] = `
       </button>
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -164,6 +165,7 @@ exports[`EditFoodServings component should render 1`] = `
       </button>
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -188,6 +190,7 @@ exports[`EditFoodServings component should render 1`] = `
       </button>
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -219,6 +222,7 @@ exports[`EditFoodServings component should render 1`] = `
       />
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -250,6 +254,7 @@ exports[`EditFoodServings component should render 1`] = `
       />
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -281,6 +286,7 @@ exports[`EditFoodServings component should render 1`] = `
       />
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img
@@ -312,6 +318,7 @@ exports[`EditFoodServings component should render 1`] = `
       />
       <button
         class="c8"
+        data-testid="deleteServing"
         type="button"
       >
         <img

@@ -13,6 +13,7 @@ exports[`ModalChangeOwner component should render 1`] = `
 
 <div
   class="c0"
+  data-testid="modalChangeOwner"
 >
   <h2>
     Change Owner

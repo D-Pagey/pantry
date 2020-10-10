@@ -2,8 +2,6 @@ import React, { FC, useContext, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
@@ -12,6 +10,7 @@ import deleteIcon from '../../assets/delete.svg';
 import { AuthContext } from '../ProviderAuth';
 import { ProfilePhoto } from '../ProfilePhoto';
 import { ModalChangeOwner } from '../ModalChangeOwner';
+import { ModalChangeDate } from '../ModalChangeDate';
 import * as S from './styles';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -100,13 +99,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                     )}
 
                     {isEditingDate && (
-                        <>
-                            <p>Edit the expiry date for this batch</p>
-                            <DatePicker selected={selectedBatch.expires} onChange={handleDateChange} inline />
-                            <button type="button" onClick={handleModalClose}>
-                                Back
-                            </button>
-                        </>
+                        <ModalChangeDate
+                            expires={selectedBatch.expires}
+                            handleDateChange={handleDateChange}
+                            handleModalClose={handleModalClose}
+                        />
                     )}
                 </ReactModal>
             )}
@@ -118,7 +115,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                     return [...Array(batch.servings)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
-                            <S.DateButton secondary onClick={handleDateClick(batch)} borderColour={getColourFromDate(batch.expires)}>
+                            <S.DateButton
+                                secondary
+                                onClick={handleDateClick(batch)}
+                                borderColour={getColourFromDate(batch.expires)}
+                            >
                                 <S.Text colour={getColourFromDate(batch.expires)}>
                                     Expires in {formatDistanceToNowStrict(batch.expires)}
                                 </S.Text>
@@ -128,7 +129,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                                 owner={getOwnerFromId(batch.ownerId, tenants)}
                                 width="50px"
                             />
-                            <S.DeleteButton type="button" onClick={handleDelete(batch)}>
+                            <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
                                 <img src={deleteIcon} alt="delete" />
                             </S.DeleteButton>
                         </S.Item>
