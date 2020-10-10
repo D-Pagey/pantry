@@ -46,9 +46,21 @@ export type HouseholdProps = {
 };
 
 export const Household: FC<HouseholdProps> = ({ tenants }) => {
+    const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
+
+    const sortedTenants = [...tenants].sort((a, b) => {
+        const aOrder = sortOrder.indexOf(a.houseRole);
+        const bOrder = sortOrder.indexOf(b.houseRole);
+
+        if (aOrder < bOrder) return -1;
+        if (aOrder > bOrder) return 1;
+
+        return 0;
+    });
+
     return (
         <S.List>
-            {tenants.map((tenant) => {
+            {sortedTenants.map((tenant) => {
                 const isPending = tenant.houseRole === 'pending';
 
                 return (

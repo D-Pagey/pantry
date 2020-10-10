@@ -10,6 +10,14 @@ export const TenantHeidi: TenantType = {
     uid: 'zxwy'
 };
 
+export const TenantAlexa: TenantType = {
+    houseRole: 'alexa',
+    name: 'Alexa',
+    photo:
+        'https://firebasestorage.googleapis.com/v0/b/pantry-fcdad.appspot.com/o/alexa.jpg?alt=media&token=3a0702d7-a46c-49b9-b791-69d77ab66de3',
+    uid: 'gfdd'
+};
+
 export const WelcomeNotification: NotificationType = {
     createdAt: new Date(),
     description: 'Welcome to Pantry',
