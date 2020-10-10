@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+import { Button } from '../Button';
 import * as S from './styles';
 
 type ModalChangeDateTypes = {
@@ -14,9 +16,9 @@ export const ModalChangeDate: FC<ModalChangeDateTypes> = ({ expires, handleDateC
         <S.Wrapper data-testid="modalChangeDate">
             <p>Edit the expiry date for this batch</p>
             <DatePicker selected={expires} onChange={handleDateChange} inline />
-            <button type="button" onClick={handleModalClose}>
+            <Button secondary onClick={handleModalClose}>
                 Back
-            </button>
+            </Button>
         </S.Wrapper>
     );
 };

@@ -34,6 +34,7 @@ exports[`FoodCard component should render 1`] = `
 .c3 {
   border-radius: 50%;
   height: auto;
+  min-height: 50px;
   width: 50px;
 }
 

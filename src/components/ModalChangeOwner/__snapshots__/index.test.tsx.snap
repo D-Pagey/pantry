@@ -4,11 +4,41 @@ exports[`ModalChangeOwner component should render 1`] = `
 .c1 {
   border-radius: 50%;
   height: auto;
+  min-height: 50px;
   width: 50px;
+}
+
+.c3 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c4 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
 }
 
 .c0 {
   border: 1px solid red;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
 }
 
 <div
@@ -31,10 +61,13 @@ exports[`ModalChangeOwner component should render 1`] = `
     src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
     width="50px"
   />
+  Dan Page
   <p>
     Click owner:
   </p>
-  <ul>
+  <ul
+    class="c2"
+  >
     <li>
       <img
         alt="profile"
@@ -43,6 +76,9 @@ exports[`ModalChangeOwner component should render 1`] = `
         src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
         width="50px"
       />
+      <p>
+        Dan Page
+      </p>
     </li>
     <li>
       <img
@@ -52,9 +88,13 @@ exports[`ModalChangeOwner component should render 1`] = `
         src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
         width="50px"
       />
+      <p>
+        Joe Hunt
+      </p>
     </li>
   </ul>
   <button
+    class="c3 c4"
     type="button"
   >
     Close

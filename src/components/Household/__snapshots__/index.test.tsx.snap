@@ -4,6 +4,7 @@ exports[`Household component should render 1`] = `
 .c2 {
   border-radius: 50%;
   height: auto;
+  min-height: 50px;
   width: 50px;
 }
 

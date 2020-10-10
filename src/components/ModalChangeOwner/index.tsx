@@ -3,6 +3,7 @@ import { TenantType } from '../../types';
 
 import { getOwnerFromId } from '../../utils';
 import { ProfilePhoto } from '../ProfilePhoto';
+import { Button } from '../Button';
 import * as S from './styles';
 
 type ModalChangeOwnerTypes = {
@@ -13,14 +14,17 @@ type ModalChangeOwnerTypes = {
 };
 
 export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({ closeModal, handleChangeOwnerClick, ownerId, tenants }) => {
+    const currentOwner = getOwnerFromId(ownerId, tenants);
+
     return (
         <S.Wrapper data-testid="modalChangeOwner">
             <h2>Change Owner</h2>
             <p>3 servings expiring in: 2 days</p>
             <p>Current Owner:</p>
-            <ProfilePhoto owner={getOwnerFromId(ownerId, tenants)} width="50px" />
+            <ProfilePhoto owner={currentOwner} width="50px" />
+            {currentOwner.name}
             <p>Click owner:</p>
-            <ul>
+            <S.List>
                 {tenants.map((tenant) => (
                     <li key={tenant.uid}>
                         <ProfilePhoto
@@ -28,13 +32,14 @@ export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({ closeModal, handle
                             owner={getOwnerFromId(tenant.uid, tenants)}
                             width="50px"
                         />
+                        <p>{tenant.name}</p>
                     </li>
                 ))}
-            </ul>
+            </S.List>
 
-            <button onClick={closeModal} type="button">
+            <Button secondary onClick={closeModal}>
                 Close
-            </button>
+            </Button>
         </S.Wrapper>
     );
 };

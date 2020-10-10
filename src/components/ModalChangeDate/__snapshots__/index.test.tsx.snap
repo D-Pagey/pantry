@@ -1,6 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModalChangeDate component should render 1`] = `
+.c1 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c2 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
 .c0 {
   border: 1px solid red;
 }
@@ -431,6 +447,7 @@ exports[`ModalChangeDate component should render 1`] = `
     </div>
   </div>
   <button
+    class="c1 c2"
     type="button"
   >
     Back

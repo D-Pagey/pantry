@@ -7,6 +7,7 @@ const DEFAULT_WIDTH = '60px';
 export const Image = styled.img`
     border-radius: 50%;
     height: auto;
+    min-height: 50px;
     width: ${({ width }) => width || DEFAULT_WIDTH};
 `;
 
