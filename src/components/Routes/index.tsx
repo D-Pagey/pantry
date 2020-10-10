@@ -53,12 +53,15 @@ export const Routes = (): JSX.Element => {
                 .doc(user.household)
                 .onSnapshot((doc: any) => {
                     const data = doc.data();
-                    const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
-                    const formattedDates = formatExpiryDates(fridgeItems);
 
-                    setFridge(formattedDates);
-                    setExpiringCount(countExpiringFoodItems(formattedDates));
-                    setTenants(Object.values(data.tenants));
+                    if (data) {
+                        const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
+                        const formattedDates = formatExpiryDates(fridgeItems);
+
+                        setFridge(formattedDates);
+                        setExpiringCount(countExpiringFoodItems(formattedDates));
+                        setTenants(Object.values(data.tenants));
+                    }
                 });
         }
     }, [user]);

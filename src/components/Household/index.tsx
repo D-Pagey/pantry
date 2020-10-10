@@ -15,10 +15,12 @@ export const Household: FC<HouseholdProps> = ({ tenants }) => (
                 <S.Name>{tenant.name}</S.Name>
                 <S.Email>{tenant.email}</S.Email>
                 {tenant.houseRole === 'owner' ? (
+                    // eslint-disable-next-line
                     <S.Span role="img" aria-label="cool">
                         😎
                     </S.Span>
                 ) : (
+                    // eslint-disable-next-line
                     <S.Span role="img" aria-label="smile">
                         😀
                     </S.Span>
