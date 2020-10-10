@@ -13,7 +13,12 @@ type ModalChangeOwnerTypes = {
     tenants: TenantType[];
 };
 
-export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({ closeModal, handleChangeOwnerClick, ownerId, tenants }) => {
+export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({
+    closeModal,
+    handleChangeOwnerClick,
+    ownerId,
+    tenants
+}) => {
     const currentOwner = getOwnerFromId(ownerId, tenants);
 
     return (

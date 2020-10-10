@@ -4,7 +4,7 @@ import { render } from '../../test-utils';
 import { ExpiringPill } from '.';
 
 const props = {
-    handleClick: () => {}
+    handleClick: () => null
 };
 
 describe('ExpiringPill component', () => {

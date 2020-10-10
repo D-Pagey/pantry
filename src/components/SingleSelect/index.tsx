@@ -9,7 +9,7 @@ type OptionType = {
 type SingleSelectTypes = {
     options: OptionType[];
     selected?: number | string;
-    setSelected: Function;
+    setSelected: (option: OptionType) => void;
     testId?: string;
 };
 

@@ -8,11 +8,11 @@ export default { title: 'PageSettings ' };
 export const normal = (): JSX.Element => (
     <AuthContext.Provider
         value={{
-            fetchUserData: () => {},
+            fetchUserData: () => null,
             isAuthed: true,
             isCheckingAuth: false,
-            setUser: () => {},
-            signOut: () => {},
+            setUser: () => null,
+            signOut: () => null,
             user: UserDan
         }}
     >

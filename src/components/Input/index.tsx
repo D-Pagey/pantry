@@ -4,7 +4,7 @@ import * as S from './styles';
 type InputTypes = {
     margin?: string;
     name?: string;
-    onBlur?: Function;
+    onBlur?: () => void;
     onChange: (event: any) => void;
     placeholder?: string;
     testId?: string;

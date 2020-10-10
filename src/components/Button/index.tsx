@@ -8,7 +8,7 @@ export type ButtonProps = {
     isLoading?: boolean;
     loadingContent?: string;
     margin?: string;
-    onClick?: Function;
+    onClick?: () => void;
     secondary?: boolean;
     size?: 'sm' | 'm' | 'l';
     type?: string;

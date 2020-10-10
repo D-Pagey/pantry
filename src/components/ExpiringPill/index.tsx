@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import * as S from './styles';
 
 type ExpiringPillProps = {
-    handleClick: Function;
+    handleClick: () => void;
     isEnabled?: boolean;
     margin?: string;
 };

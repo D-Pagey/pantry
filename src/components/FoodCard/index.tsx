@@ -10,7 +10,7 @@ import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
 import * as S from './styles';
 
 export type FoodCardProps = {
-    handleClick?: Function;
+    handleClick?: () => void;
     item: FoodType;
     isSelected?: boolean;
     margin?: string;

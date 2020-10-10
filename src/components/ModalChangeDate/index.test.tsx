@@ -4,8 +4,8 @@ import { ModalChangeDate } from '.';
 
 const props = {
     expires: new Date(),
-    handleDateChange: () => {},
-    handleModalClose: () => {}
+    handleDateChange: () => null,
+    handleModalClose: () => null
 };
 
 describe('ModalChangeDate component', () => {

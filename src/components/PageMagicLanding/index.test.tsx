@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
 
 const context = {
     isAuthed: false,
-    fetchUserData: () => {}
+    fetchUserData: () => null
 };
 
 describe('PageMagicLanding component', () => {

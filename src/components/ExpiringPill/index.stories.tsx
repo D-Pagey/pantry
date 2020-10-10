@@ -4,7 +4,7 @@ import { ExpiringPill } from '.';
 export default { title: 'ExpiringPill' };
 
 const props = {
-    handleClick: () => {}
+    handleClick: () => null
 };
 
 export const disabled = () => <ExpiringPill {...props} />;

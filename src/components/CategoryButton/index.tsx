@@ -6,7 +6,7 @@ export type CategoryButtonProps = {
     isSelected?: boolean;
     small?: boolean;
     name: string;
-    handleClick: Function;
+    handleClick: () => void;
 };
 
 export const CategoryButton: FC<CategoryButtonProps> = ({ handleClick, isSelected, name, small, ...props }) => (

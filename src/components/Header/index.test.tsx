@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 const context = {
     isAuthed: false,
     isCheckedAuth: false,
-    user: UserDan,
+    user: UserDan
 };
 
 describe('Header component', () => {
@@ -46,7 +46,7 @@ describe('Header component', () => {
     it('should render a Notifications bell on mobile', () => {
         const authedContext = {
             ...context,
-            isAuthed: true,
+            isAuthed: true
         };
 
         const { getByTestId } = render(<Header />, authedContext);
@@ -56,11 +56,11 @@ describe('Header component', () => {
     it('should render Notifications panel if Bell is clicked', () => {
         const authedContext = {
             ...context,
-            isAuthed: true,
+            isAuthed: true
         };
 
         const { getByTestId } = render(<Header />, authedContext);
-        
+
         userEvent.click(getByTestId('header-notifications'));
 
         getByTestId('notifications');

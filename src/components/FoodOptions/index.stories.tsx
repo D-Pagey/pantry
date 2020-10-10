@@ -4,12 +4,12 @@ import { FoodOptions, FoodOptionsProps } from '.';
 
 export default { title: 'FoodOptions', component: FoodOptions };
 
-const Template: Story<FoodOptionsProps> = (args) => <FoodOptions {...args}/>;
+const Template: Story<FoodOptionsProps> = (args) => <FoodOptions {...args} />;
 
 export const Primary = Template.bind({});
 
 Primary.args = {
-    handleDelete: () => {},
-    handleEdit: () => {},
+    handleDelete: () => null,
+    handleEdit: () => null,
     name: 'Carrots'
 };

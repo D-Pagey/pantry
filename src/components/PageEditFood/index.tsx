@@ -150,11 +150,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                             Make Change
                         </Button>
 
-                        <EditFoodServings
-                            item={item}
-                            tenants={tenants}
-                            updateBatch={updateBatch}
-                        />
+                        <EditFoodServings item={item} tenants={tenants} updateBatch={updateBatch} />
                     </>
                 )}
             </S.Wrapper>

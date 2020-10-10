@@ -52,7 +52,11 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
 
             {isAuthed && !isTabletOrLarger && !isCheckingAuth && (
                 <S.BellWrapper>
-                    <S.NotificationsButton type="button" onClick={toggleNotifications} data-testid="header-notifications">
+                    <S.NotificationsButton
+                        type="button"
+                        onClick={toggleNotifications}
+                        data-testid="header-notifications"
+                    >
                         <Bell color={hasNotifications ? '#1976D2' : undefined} />
                     </S.NotificationsButton>
 

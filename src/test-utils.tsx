@@ -3,7 +3,6 @@ import 'jest-styled-components';
 import React, { FC, ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import MockDate from 'mockdate';
 import { AuthContext } from './components/ProviderAuth';
 
@@ -25,6 +24,7 @@ const AllTheProviders: FC<AllTheProvidersProps> = ({ children, customContext }) 
 );
 
 const customRender = (ui: any, customContext?: any, options?: any) =>
+    /* eslint-disable react/display-name */
     render(ui, { wrapper: () => <AllTheProviders customContext={customContext}>{ui}</AllTheProviders>, ...options });
 
 // re-export everything

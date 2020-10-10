@@ -4,8 +4,8 @@ import { render } from '../../test-utils';
 import { FoodOptions } from '.';
 
 const props = {
-    handleDelete: () => {},
-    handleEdit: () => {},
+    handleDelete: () => null,
+    handleEdit: () => null,
     name: 'carrot'
 };
 

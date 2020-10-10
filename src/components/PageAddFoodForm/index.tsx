@@ -87,7 +87,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                         if (!itemExists) {
                             updateNameAndCategory({ name: formattedValues.name, category: formattedValues.category });
                         }
-                        
+
                         updateBatch({ name: formattedValues.name, batch: formattedValues.batch });
                     }
                     actions.setSubmitting(false);

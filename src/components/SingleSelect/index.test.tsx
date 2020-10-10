@@ -15,7 +15,7 @@ const props = {
             value: 40
         }
     ],
-    setSelected: () => {},
+    setSelected: () => null,
     testId: 'singleSelect'
 };
 

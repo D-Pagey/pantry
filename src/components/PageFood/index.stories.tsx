@@ -9,11 +9,11 @@ export default { title: 'PageFood' };
 export const normal = () => (
     <AuthContext.Provider
         value={{
-            fetchUserData: () => {},
+            fetchUserData: () => null,
             isAuthed: true,
             isCheckingAuth: false,
-            setUser: () => {},
-            signOut: () => {},
+            setUser: () => null,
+            signOut: () => null,
             user: UserDan
         }}
     >

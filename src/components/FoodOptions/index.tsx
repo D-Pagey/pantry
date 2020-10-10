@@ -13,6 +13,8 @@ export const FoodOptions: FC<FoodOptionsProps> = ({ handleDelete, handleEdit, na
         <Button secondary onClick={handleEdit}>
             Amend {name}
         </Button>
-        <Button destructive onClick={handleDelete}>Remove {name}</Button>
+        <Button destructive onClick={handleDelete}>
+            Remove {name}
+        </Button>
     </S.Wrapper>
 );

@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
 const context = {
     isAuthed: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setUser: () => {}
+    setUser: () => null
 };
 
 describe('PageSignIn component', () => {

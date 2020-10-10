@@ -10,7 +10,7 @@ const props = {
 };
 
 const context = {
-    signOut: () => {},
+    signOut: () => null,
     user: {
         email: 'dan@gmail.com',
         name: 'Dan',

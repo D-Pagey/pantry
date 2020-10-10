@@ -92,7 +92,9 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                         </>
                     )}
 
-                    {item.type === 'invite' && isLoading && <S.InviteButton isLoading={isLoading}>Responding</S.InviteButton>}
+                    {item.type === 'invite' && isLoading && (
+                        <S.InviteButton isLoading={isLoading}>Responding</S.InviteButton>
+                    )}
 
                     {item.type === 'text' && (
                         <S.DismissButton secondary onClick={handleDismissClick(item.uid)}>

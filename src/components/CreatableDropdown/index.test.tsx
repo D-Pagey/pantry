@@ -7,7 +7,7 @@ import { CreatableDropdown } from '.';
 
 const props = {
     options: formatDropdownOptions(Fridge),
-    setSelected: () => {}
+    setSelected: () => null
 };
 
 describe('CreatableDropdown component', () => {

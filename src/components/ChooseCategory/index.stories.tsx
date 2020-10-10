@@ -9,7 +9,7 @@ const Template: Story<ChooseCategoryProps> = (args) => <ChooseCategory {...args}
 export const Primary = Template.bind({});
 
 Primary.args = {
-    handleClick: () => {},
+    handleClick: () => null,
     selected: '',
     small: false
 };

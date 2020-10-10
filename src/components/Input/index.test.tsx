@@ -5,8 +5,8 @@ import { Input } from '.';
 
 const props = {
     name: 'test',
-    onBlur: () => {},
-    onChange: () => {},
+    onBlur: () => null,
+    onChange: () => null,
     testId: 'testInput',
     value: ''
 };

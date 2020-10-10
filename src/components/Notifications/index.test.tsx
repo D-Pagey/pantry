@@ -6,7 +6,7 @@ import { Notifications } from '.';
 
 const props = {
     notifications: [WelcomeNotification, UnreadNotification],
-    onClose: () => {},
+    onClose: () => null,
     user: UserDan
 };
 

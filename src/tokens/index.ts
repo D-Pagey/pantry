@@ -25,7 +25,7 @@ export const colours = {
 };
 
 export const mediaQuery = {
-    tablet: '(min-width: 765px)',
+    tablet: '(min-width: 765px)'
 };
 
 export const zIndex = {

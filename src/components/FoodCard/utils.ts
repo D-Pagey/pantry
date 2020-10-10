@@ -39,7 +39,7 @@ export const getBatchTenants = (sortedBatches: BatchType[], tenants: TenantType[
     return sortedBatches.reduce((acc, curr, index) => {
         if (index === 0) return [...acc, getOwnerFromId(curr.ownerId, tenants)];
 
-        const accumulatorIds = acc.map(tenant => tenant.uid);
+        const accumulatorIds = acc.map((tenant) => tenant.uid);
 
         if (!accumulatorIds.includes(curr.ownerId)) {
             return [...acc, getOwnerFromId(curr.ownerId, tenants)];

@@ -4,7 +4,7 @@ import { render } from '../../test-utils';
 import { CategoryButton } from '.';
 
 const props = {
-    handleClick: () => {},
+    handleClick: () => null,
     name: 'meat'
 };
 

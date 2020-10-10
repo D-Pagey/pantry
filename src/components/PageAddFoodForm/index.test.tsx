@@ -23,8 +23,8 @@ const context = {
 
 const props = {
     fridge: Fridge,
-    updateNameAndCategory: () => {},
-    updateBatch: () => {}
+    updateNameAndCategory: () => null,
+    updateBatch: () => null
 };
 
 describe('PageAddFoodForm component', () => {

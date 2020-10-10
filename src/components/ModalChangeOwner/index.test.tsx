@@ -5,8 +5,8 @@ import { TenantDan, TenantJoe, UserDan } from '../../fixtures';
 import { ModalChangeOwner } from '.';
 
 const props = {
-    closeModal: () => () => {},
-    handleChangeOwnerClick: () => () => {},
+    closeModal: () => () => null,
+    handleChangeOwnerClick: () => () => null,
     ownerId: UserDan.uid,
     tenants: [TenantDan, TenantJoe]
 };

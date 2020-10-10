@@ -10,5 +10,5 @@ export const normal = (args: any) => <EditFoodServings {...args} />;
 normal.args = {
     item: Fridge[0],
     tenants: [TenantHeidi],
-    updateFridge: () => {}
+    updateFridge: () => null
 };

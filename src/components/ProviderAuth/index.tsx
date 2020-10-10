@@ -17,10 +17,10 @@ type AuthContextTypes = {
 };
 
 export const AuthContext = createContext<AuthContextTypes>({
-    fetchUserData: () => {},
+    fetchUserData: () => null,
     isCheckingAuth: true,
-    setUser: () => {},
-    signOut: () => {}
+    setUser: () => null,
+    signOut: () => null
 });
 
 export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {

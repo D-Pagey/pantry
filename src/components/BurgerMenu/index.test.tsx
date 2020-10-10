@@ -6,7 +6,7 @@ import { BurgerMenu } from '.';
 const context = {
     isAuthed: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    signOut: () => {}
+    signOut: () => null
 };
 
 describe('BurgerMenu component', () => {

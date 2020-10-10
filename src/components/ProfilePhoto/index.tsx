@@ -6,7 +6,7 @@ import * as S from './styles';
 type ProfilePhotoTypes = {
     owner: Partial<UserType>;
     width?: string;
-    onClick?: Function;
+    onClick?: () => void;
 };
 
 export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, owner, width, ...props }) => {

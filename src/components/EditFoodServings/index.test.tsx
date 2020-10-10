@@ -8,7 +8,7 @@ import { EditFoodServings } from '.';
 const props = {
     item: Fridge[0],
     tenants: [TenantHeidi],
-    updateBatch: () => {}
+    updateBatch: () => null
 };
 
 const context = {
@@ -35,10 +35,10 @@ describe('EditFoodServings component', () => {
         userEvent.click(allDeleteButtons[1]);
 
         expect(updateBatch).toHaveBeenCalledWith({
-            batch: { 
-                expires: expect.any(Date), 
-                id: '22222222', 
-                ownerId: 'abcde', 
+            batch: {
+                expires: expect.any(Date),
+                id: '22222222',
+                ownerId: 'abcde',
                 servings: 1
             },
             name: 'broccoli'

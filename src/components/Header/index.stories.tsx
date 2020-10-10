@@ -11,11 +11,11 @@ export const normal = () => (
     <MemoryRouter>
         <AuthContext.Provider
             value={{
-                fetchUserData: () => {},
+                fetchUserData: () => null,
                 isAuthed: true,
                 isCheckingAuth: false,
-                setUser: () => {},
-                signOut: () => {},
+                setUser: () => null,
+                signOut: () => null,
                 user: { ...UserDan, notifications: [WelcomeNotification, UnreadNotification] }
             }}
         >
