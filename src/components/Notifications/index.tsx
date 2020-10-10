@@ -38,6 +38,7 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
         if (didAccept) {
             const myTenant: TenantType = {
                 email: user.email,
+                houseRole: 'tenant',
                 name: user.name,
                 photo: user.photo,
                 uid: user.uid

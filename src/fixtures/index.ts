@@ -4,6 +4,7 @@ import { BatchType, FoodType, NotificationType, UserType, TenantType } from '../
 
 export const TenantHeidi: TenantType = {
     email: 'heidi@gmail.com',
+    houseRole: 'tenant',
     name: 'Heidi Seo',
     photo: 'https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ',
     uid: 'zxwy'
@@ -38,6 +39,7 @@ export const UserDan: UserType = {
 
 export const TenantDan: TenantType = {
     email: UserDan.email,
+    houseRole: 'admin',
     name: UserDan.name,
     photo: UserDan.photo,
     uid: UserDan.uid
@@ -55,6 +57,7 @@ export const UserJoe: UserType = {
 
 export const TenantJoe: TenantType = {
     email: UserJoe.email,
+    houseRole: 'pending',
     name: UserJoe.name,
     photo: UserJoe.photo,
     uid: UserJoe.uid

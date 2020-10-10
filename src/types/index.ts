@@ -3,10 +3,12 @@ export type DropdownOptionType = {
     value: string;
 };
 
+export type HouseRoleType = 'admin' | 'tenant' | 'alexa' | 'pending';
+
 export type TenantType = {
     email: string;
     name: string;
-    houseRole?: string;
+    houseRole: HouseRoleType;
     photo: string;
     uid: string;
 };

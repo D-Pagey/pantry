@@ -1,16 +1,15 @@
 import React from 'react';
+import { Story } from '@storybook/react/types-6-0';
 
-import { TenantHeidi } from '../../fixtures';
-import { Household } from '.';
+import { TenantDan, TenantHeidi, TenantJoe } from '../../fixtures';
+import { Household, HouseholdProps } from '.';
 
-const props = {
-    tenants: [TenantHeidi, TenantHeidi]
+export default { title: 'Household', component: Household };
+
+const Template: Story<HouseholdProps> = (args) => <Household {...args} />;
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+    tenants: [TenantHeidi, TenantDan, TenantJoe]
 };
-
-export default { title: 'Household' };
-
-export const normal = () => (
-    <div style={{ maxWidth: 400, padding: '1rem' }}>
-        <Household {...props} />
-    </div>
-);
