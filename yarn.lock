@@ -2170,13 +2170,6 @@
     react "^16.8.3"
     regenerator-runtime "^0.13.3"
 
-"@storybook/addon-console@1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-console/-/addon-console-1.2.2.tgz#018cd712e1ed6eee1a7eae57c3d96f1fbbedc191"
-  integrity sha512-aTuYoz1Fit9PAhy0VDTjQ5rovRz5a+DgPRIaA5cktkiA9Y0ikK/cu525DDZLTh7oNMOt0fmRYyYPtknTMyeXrQ==
-  dependencies:
-    global "^4.3.2"
-
 "@storybook/addon-controls@6.0.26":
   version "6.0.26"
   resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.0.26.tgz#4cc4c30ee7bf89ab873158ead4d25d6f7e07ffba"
@@ -2250,24 +2243,6 @@
     "@storybook/api" "6.0.26"
     "@storybook/node-logger" "6.0.26"
     core-js "^3.0.1"
-    regenerator-runtime "^0.13.3"
-    ts-dedent "^1.1.1"
-
-"@storybook/addon-links@6.0.26":
-  version "6.0.26"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.0.26.tgz#e23891550b608b8b996ec58378d3940738aff9e4"
-  integrity sha512-yHC6gSMW6qLqikf9yF62tXvykwCDLZy/7SRW9PEAsQcz27bilTh5swoV4HK24Gb6d+TAR+8sJK+BXuFlKFJE+Q==
-  dependencies:
-    "@storybook/addons" "6.0.26"
-    "@storybook/client-logger" "6.0.26"
-    "@storybook/core-events" "6.0.26"
-    "@storybook/csf" "0.0.1"
-    "@storybook/router" "6.0.26"
-    "@types/qs" "^6.9.0"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    prop-types "^15.7.2"
-    qs "^6.6.0"
     regenerator-runtime "^0.13.3"
     ts-dedent "^1.1.1"
 
@@ -2555,18 +2530,6 @@
   integrity sha512-B9Dh66MfserWw1J4KbLqfxpnanN//yeDjrrkowzqa3OFLqEPQCekv0ALocovnCkQ13+TcVGjPprxnWXfGhEMpg==
   dependencies:
     core-js "^3.0.1"
-
-"@storybook/preset-create-react-app@3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@storybook/preset-create-react-app/-/preset-create-react-app-3.1.4.tgz#64bb674f69fe860ef1a4909e686775adf6c05fdd"
-  integrity sha512-VwzGCvv+HnEDXxSwF6ITRIZ4EaMhiMu1Mxrwm+nb49XTT2VME8VTzmbDjrdpZXPXUJrwLYmvqzaBT/qGZoMlgA==
-  dependencies:
-    "@types/babel__core" "^7.1.7"
-    "@types/webpack" "^4.41.13"
-    babel-plugin-react-docgen "^4.1.0"
-    pnp-webpack-plugin "^1.6.4"
-    react-docgen-typescript-plugin "^0.5.0"
-    semver "^7.3.2"
 
 "@storybook/react@6.0.26":
   version "6.0.26"
@@ -2976,7 +2939,7 @@
   resolved "https://registry.yarnpkg.com/@types/array-sort/-/array-sort-1.0.0.tgz#08e85fd7c94616b01da7d4d6eff8f02d29f6edf4"
   integrity sha512-RvlCHZdp+XAlFtVxHxG5LY3rj4GIr65FquoniYpE5/oXX22Z6w/LYt2I2sBt87V+qmltHfcySM98LdkJ/fqi7w==
 
-"@types/babel__core@^7.1.0", "@types/babel__core@^7.1.7":
+"@types/babel__core@^7.1.0":
   version "7.1.10"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.10.tgz#ca58fc195dd9734e77e57c6f2df565623636ab40"
   integrity sha512-x8OM8XzITIMyiwl5Vmo2B1cR1S1Ipkyv4mdlbJjMa1lmuKvKY9FrBbEANIaMlnWn5Rf7uO+rC/VgYabNkE17Hw==
@@ -3384,7 +3347,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack@^4.41.13", "@types/webpack@^4.41.8":
+"@types/webpack@^4.41.8":
   version "4.41.22"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.22.tgz#ff9758a17c6bd499e459b91e78539848c32d0731"
   integrity sha512-JQDJK6pj8OMV9gWOnN1dcLCyU9Hzs6lux0wBO4lr1+gyEhIBR9U3FMrz12t2GPkg110XAxEAw2WHF6g7nZIbRQ==
@@ -12517,7 +12480,7 @@ pn@^1.1.0:
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
 
-pnp-webpack-plugin@1.6.4, pnp-webpack-plugin@^1.6.4:
+pnp-webpack-plugin@1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/pnp-webpack-plugin/-/pnp-webpack-plugin-1.6.4.tgz#c9711ac4dc48a685dabafc86f8b6dd9f8df84149"
   integrity sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==
@@ -13712,7 +13675,7 @@ react-docgen-typescript-loader@^3.7.2:
     loader-utils "^1.2.3"
     react-docgen-typescript "^1.15.0"
 
-react-docgen-typescript-plugin@^0.5.0, react-docgen-typescript-plugin@^0.5.2:
+react-docgen-typescript-plugin@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript-plugin/-/react-docgen-typescript-plugin-0.5.2.tgz#2b294d75ef3145c36303da82be5d447cb67dc0dc"
   integrity sha512-NQfWyWLmzUnedkiN2nPDb6Nkm68ik6fqbC3UvgjqYSeZsbKijXUA4bmV6aU7qICOXdop9PevPdjEgJuAN0nNVQ==
