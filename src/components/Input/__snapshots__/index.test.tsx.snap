@@ -11,6 +11,10 @@ exports[`Input component should render 1`] = `
   width: 100%;
 }
 
+.c0:disabled {
+  background-color: #E5E5E5;
+}
+
 <input
   class="c0"
   data-testid="testInput"

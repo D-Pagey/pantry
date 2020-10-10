@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import * as S from './styles';
 
-type InputTypes = {
+export type InputProps = {
+    disabled?: boolean;
     margin?: string;
     name?: string;
     onBlur?: () => void;
@@ -11,7 +12,8 @@ type InputTypes = {
     value: string;
 };
 
-export const Input: FC<InputTypes> = ({
+export const Input: FC<InputProps> = ({
+    disabled,
     margin,
     name,
     onBlur,
@@ -23,6 +25,7 @@ export const Input: FC<InputTypes> = ({
 }) => (
     <S.Input
         data-testid={testId}
+        disabled={disabled}
         id={testId}
         margin={margin}
         name={name}

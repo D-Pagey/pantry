@@ -65,6 +65,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                         <S.Text>Invite someone to join your household:</S.Text>
 
                         <S.Input
+                            disabled={isLoading}
                             onChange={(e: any) => setEmailInvite(e.target.value)}
                             placeholder="Your friends' email"
                             value={emailInvite}

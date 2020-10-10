@@ -10,4 +10,8 @@ export const Input = styled.input`
     margin: ${({ margin }) => margin};
     padding: 12px;
     width: 100%;
+
+    &:disabled {
+        background-color: ${colours.veryLightGrey};
+    }
 `;

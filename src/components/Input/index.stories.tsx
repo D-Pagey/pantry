@@ -1,7 +1,15 @@
 import React from 'react';
-import { Input } from '.';
+import { Story } from '@storybook/react/types-6-0';
+import { Input, InputProps } from '.';
 
-const props = {
+export default { title: 'Input', component: Input };
+
+const Template: Story<InputProps> = (args) => <Input {...args} />;
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+    disabled: false,
     name: 'test',
     onBlur: () => null,
     onChange: () => null,
@@ -9,7 +17,3 @@ const props = {
     placeholder: 'test',
     value: ''
 };
-
-export default { title: 'Input' };
-
-export const normal = () => <Input {...props} />;
