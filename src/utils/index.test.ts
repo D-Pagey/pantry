@@ -1,17 +1,17 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import { FoodType } from '../types';
+import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import {
-    getPercentageFromDate,
-    getColourFromDate,
-    getFridgeNameOptions,
-    getExpiringItems,
-    filterFridgeByCategory,
+    convertBatchesArray,
     countExpiringFoodItems,
+    filterFridgeByCategory,
+    formatDropdownOptions,
+    getColourFromDate,
+    getExpiringItems,
     getOwnerFromId,
-    convertBatchesArray
+    getPercentageFromDate
 } from '.';
 
 describe('getPercentageFromDate function', () => {
@@ -50,15 +50,15 @@ describe('getColourFromDate function', () => {
     });
 });
 
-describe('getFridgeNameOptions function', () => {
+describe('formatDropdownOptions function', () => {
     it('should return an array of objects of labels and values', () => {
-        const options = getFridgeNameOptions(Fridge.map((item) => item.name));
+        const options = formatDropdownOptions(Fridge);
         expect(options).toStrictEqual([
-            { label: 'Carrot', value: 'carrot' },
-            { label: 'Broccoli', value: 'broccoli' },
-            { label: 'Steak', value: 'steak' },
-            { label: 'Milk', value: 'milk' },
-            { label: 'Chocolate', value: 'chocolate' }
+            { label: 'Carrot (7 servings)', value: 'carrot' },
+            { label: 'Broccoli (7 servings)', value: 'broccoli' },
+            { label: 'Steak (7 servings)', value: 'steak' },
+            { label: 'Milk (7 servings)', value: 'milk' },
+            { label: 'Chocolate (0 servings)', value: 'chocolate' }
         ]);
     });
 });

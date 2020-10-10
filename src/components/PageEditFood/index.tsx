@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import arraySort from 'array-sort';
 
-import { convertBatchesArray } from '../../utils';
+import { convertBatchesArray, formatDropdownOptions } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -131,14 +131,6 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
         history.push('/food');
     };
 
-    const getDropdownOptions = (): string[] => {
-        if (fridge) {
-            return fridge.map((item: FoodType) => item.name);
-        }
-
-        return [];
-    };
-
     return (
         <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading}>
             <S.Wrapper>
@@ -148,7 +140,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
 
                         <CreatableDropdown
                             defaultValue={item.name}
-                            options={getDropdownOptions()}
+                            options={formatDropdownOptions(fridge || [])}
                             setSelected={setNewName}
                         />
 

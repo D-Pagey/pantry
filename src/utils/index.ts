@@ -27,8 +27,12 @@ export const getColourFromDate = (date: Date): string => {
     return colours.grey;
 };
 
-export const getFridgeNameOptions = (names: string[]): DropdownOptionType[] => {
-    return names.map((name) => ({ label: titleCase(name), value: name }));
+export const formatDropdownOptions = (fridge: FoodType[]): DropdownOptionType[] => {
+    return fridge.map((food) => {
+        const totalServings = food.batches.reduce((acc, curr) => acc + curr.servings, 0);
+
+        return { label: `${titleCase(food.name)} (${totalServings} servings)`, value: food.name };
+    });
 };
 
 export const getExpiringItems = (food: FoodType[]): FoodType[] => {

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import CreatableSelect from 'react-select/creatable';
-import { getFridgeNameOptions } from '../../utils';
 import * as S from './styles';
 
 type CreatableDropdownProps = {
     defaultValue?: string;
-    options: string[];
+    options: { label: string; value: string }[];
     placeholder?: string;
     setSelected: (value: string) => void;
 };
@@ -21,15 +20,19 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({ defaultValue, op
         return null;
     };
 
+    const getDefaultValue = () => {
+        return options.filter((option) => option.value === defaultValue)[0];
+    };
+
     return (
         <S.Wrapper>
             <CreatableSelect
-                defaultValue={defaultValue ? getFridgeNameOptions([defaultValue]) : null}
+                defaultValue={getDefaultValue()}
                 inputId="foodName"
                 isClearable
                 name="foodName"
                 onChange={handleChange}
-                options={getFridgeNameOptions(options)}
+                options={options}
                 placeholder={placeholder}
             />
         </S.Wrapper>

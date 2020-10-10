@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { BatchType, FoodType, NewFoodType } from '../../types';
+import { formatDropdownOptions } from '../../utils';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -121,14 +122,6 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                         }
                     };
 
-                    const getDropdownOptions = (): string[] => {
-                        if (fridge) {
-                            return fridge.map((item: FoodType) => item.name);
-                        }
-
-                        return [];
-                    };
-
                     return (
                         <S.Wrapper>
                             <S.Form onKeyDown={onKeyDown}>
@@ -138,7 +131,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                                             <S.Label htmlFor="foodName">What is the food called?</S.Label>
 
                                             <CreatableDropdown
-                                                options={getDropdownOptions()}
+                                                options={formatDropdownOptions(fridge || [])}
                                                 setSelected={(name: string) => setFieldValue('name', name)}
                                                 placeholder="e.g. Carrot"
                                             />
