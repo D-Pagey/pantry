@@ -58,9 +58,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                         <S.Heading>Household Settings</S.Heading>
                         <S.Text>Your household consists of:</S.Text>
 
-                        <S.HouseholdWrapper>
-                            <Household tenants={tenants} />
-                        </S.HouseholdWrapper>
+                        <S.HouseholdWrapper>{user && <Household tenants={tenants} user={user} />}</S.HouseholdWrapper>
 
                         <S.Text>Invite someone to join your household:</S.Text>
 

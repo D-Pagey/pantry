@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
 import ReactModal from 'react-modal';
 
+import { firebase } from '../../services';
+import { TenantType, HouseRoleType, UserType } from '../../types';
 import threeDots from '../../assets/three-dots.svg';
-import { TenantType, HouseRoleType } from '../../types';
 import { ModalHousehold } from '../ModalHousehold';
 import * as S from './styles';
 
@@ -45,9 +46,12 @@ const getEmoji = (houseRole: HouseRoleType) => {
 
 export type HouseholdProps = {
     tenants: TenantType[];
+    user: Partial<UserType>;
 };
 
-export const Household: FC<HouseholdProps> = ({ tenants }) => {
+const leaveCurrentHousehold = firebase.functions().httpsCallable('leaveCurrentHousehold');
+
+export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
 
@@ -61,18 +65,34 @@ export const Household: FC<HouseholdProps> = ({ tenants }) => {
         return 0;
     });
 
+    const handleLeaveHousehold = async () => {
+        const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
+
+        try {
+            const { data } = await leaveCurrentHousehold({ householdId: user.household, tenant: currentTenant });
+
+            console.log({ data });
+        } catch (error) {
+            console.log({ error });
+        }
+    };
+
     return (
         <S.List>
             {sortedTenants.map((tenant) => {
                 const isPending = tenant.houseRole === 'pending';
 
                 return (
-                    <>
+                    <React.Fragment key={tenant.uid}>
                         <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                            <ModalHousehold isAdmin onModalClose={() => setIsModalOpen(false)} />
+                            <ModalHousehold
+                                handleLeaveHousehold={handleLeaveHousehold}
+                                isAdmin
+                                onModalClose={() => setIsModalOpen(false)}
+                            />
                         </ReactModal>
 
-                        <S.Item key={tenant.uid}>
+                        <S.Item>
                             <S.ProfilePhoto owner={tenant} width="50px" />
                             <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
                             <S.Email>{tenant.email}</S.Email>
@@ -82,7 +102,7 @@ export const Household: FC<HouseholdProps> = ({ tenants }) => {
                                 <img src={threeDots} alt="menu" />
                             </S.MenuButton>
                         </S.Item>
-                    </>
+                    </React.Fragment>
                 );
             })}
         </S.List>

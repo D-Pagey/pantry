@@ -94,19 +94,19 @@ exports[`Household component should render 1`] = `
     <span
       class="c4"
     >
-      Heidi Seo
+      Dan Page
     </span>
     <span
       class="c5"
     >
-      heidi@gmail.com
+      dan@test.com
     </span>
     <span
-      aria-label="carrot"
+      aria-label="avocado"
       class="c6"
       role="img"
     >
-      🥕
+      🥑
     </span>
     <button
       class="c7"

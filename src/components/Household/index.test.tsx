@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { render } from '../../test-utils';
-import { TenantHeidi } from '../../fixtures';
+import { TenantDan, UserDan } from '../../fixtures';
 import { Household } from '.';
 
 const props = {
-    tenants: [TenantHeidi]
+    tenants: [TenantDan],
+    user: UserDan
 };
 
 describe('Household component', () => {

@@ -4,7 +4,8 @@ import { ModalHousehold } from '.';
 
 const props = {
     isAdmin: false,
-    onModalClose: () => null
+    onModalClose: () => null,
+    handleLeaveHousehold: () => null
 };
 
 describe('ModalHousehold component', () => {
