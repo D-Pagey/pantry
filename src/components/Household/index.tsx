@@ -67,7 +67,9 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     });
 
     const handleLeaveHousehold = async () => {
-        if (tenants.length === 2) {
+        const noPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
+
+        if (noPendingTenants.length === 2) {
             toast.error(`You can't leave as the only person in the household`);
         } else {
             const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
