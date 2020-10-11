@@ -9,6 +9,7 @@ const Template: Story<ModalHouseholdProps> = (args) => <ModalHousehold {...args}
 export const Primary = Template.bind({});
 
 Primary.args = {
-    isAdmin: false,
+    handleLeaveHousehold: () => null,
+    isCurrentUser: false,
     onModalClose: () => null
 };

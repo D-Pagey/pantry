@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import ReactModal from 'react-modal';
+import { toast } from 'react-toastify';
 
 import { firebase } from '../../services';
 import { TenantType, HouseRoleType, UserType } from '../../types';
@@ -66,20 +67,26 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     });
 
     const handleLeaveHousehold = async () => {
-        const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
+        if (tenants.length === 2) {
+            setIsModalOpen(false);
+            toast.error(`You can't leave as the only person in the household`);
+        } else {
+            const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
 
-        try {
-            const { data } = await leaveCurrentHousehold({ householdId: user.household, tenant: currentTenant });
+            try {
+                const { data } = await leaveCurrentHousehold({ householdId: user.household, tenant: currentTenant });
 
-            console.log({ data });
-        } catch (error) {
-            console.log({ error });
+                console.log({ data });
+            } catch (error) {
+                console.log({ error });
+            }
         }
     };
 
     return (
         <S.List>
             {sortedTenants.map((tenant) => {
+                const isAlexa = tenant.houseRole === 'alexa';
                 const isPending = tenant.houseRole === 'pending';
 
                 return (
@@ -87,7 +94,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                         <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
                             <ModalHousehold
                                 handleLeaveHousehold={handleLeaveHousehold}
-                                isAdmin
+                                isCurrentUser
                                 onModalClose={() => setIsModalOpen(false)}
                             />
                         </ReactModal>
@@ -98,9 +105,11 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                             <S.Email>{tenant.email}</S.Email>
                             {getEmoji(tenant.houseRole)}
 
-                            <S.MenuButton onClick={() => setIsModalOpen(true)}>
-                                <img src={threeDots} alt="menu" />
-                            </S.MenuButton>
+                            {!isAlexa && (
+                                <S.MenuButton onClick={() => setIsModalOpen(true)}>
+                                    <img src={threeDots} alt="menu" />
+                                </S.MenuButton>
+                            )}
                         </S.Item>
                     </React.Fragment>
                 );

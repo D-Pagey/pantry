@@ -3,9 +3,9 @@ import { render } from '../../test-utils';
 import { ModalHousehold } from '.';
 
 const props = {
-    isAdmin: false,
-    onModalClose: () => null,
-    handleLeaveHousehold: () => null
+    isCurrentUser: false,
+    handleLeaveHousehold: () => null,
+    onModalClose: () => null
 };
 
 describe('ModalHousehold component', () => {
