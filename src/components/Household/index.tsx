@@ -68,7 +68,6 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
 
     const handleLeaveHousehold = async () => {
         if (tenants.length === 2) {
-            setIsModalOpen(false);
             toast.error(`You can't leave as the only person in the household`);
         } else {
             const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
@@ -81,6 +80,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                 console.log({ error });
             }
         }
+        setIsModalOpen(false);
     };
 
     return (
