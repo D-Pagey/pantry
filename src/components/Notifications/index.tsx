@@ -62,12 +62,13 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
                     inviterId: item.inviteData?.inviterUserId,
                     inviteeName: user.name,
                     inviteeId: user.uid,
-                    inviteId: item.uid
+                    inviteId: item.uid,
+                    inviterHousehold: item.inviteData?.inviterHouseholdId
                 });
 
                 toast.error('You have declined the invite');
             } catch (error) {
-                toast.error('Something went wrong decline the invite');
+                toast.error('Something went wrong declining the invite');
             }
         }
         setIsLoading(false);
