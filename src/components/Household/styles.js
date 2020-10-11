@@ -63,3 +63,14 @@ export const MenuButton = styled.button.attrs({
     justify-content: center;
     padding: 0.5rem;
 `;
+
+export const ModalStyles = {
+    content: {
+        bottom: 'auto',
+        left: '50%',
+        marginRight: '-50%',
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};

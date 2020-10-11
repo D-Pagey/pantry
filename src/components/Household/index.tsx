@@ -1,7 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import ReactModal from 'react-modal';
 
 import threeDots from '../../assets/three-dots.svg';
 import { TenantType, HouseRoleType } from '../../types';
+import { ModalHousehold } from '../ModalHousehold';
 import * as S from './styles';
 
 const getEmoji = (houseRole: HouseRoleType) => {
@@ -46,6 +48,7 @@ export type HouseholdProps = {
 };
 
 export const Household: FC<HouseholdProps> = ({ tenants }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
 
     const sortedTenants = [...tenants].sort((a, b) => {
@@ -64,16 +67,22 @@ export const Household: FC<HouseholdProps> = ({ tenants }) => {
                 const isPending = tenant.houseRole === 'pending';
 
                 return (
-                    <S.Item key={tenant.uid}>
-                        <S.ProfilePhoto owner={tenant} width="50px" />
-                        <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
-                        <S.Email>{tenant.email}</S.Email>
-                        {getEmoji(tenant.houseRole)}
+                    <>
+                        <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
+                            <ModalHousehold isAdmin onModalClose={() => setIsModalOpen(false)} />
+                        </ReactModal>
 
-                        <S.MenuButton>
-                            <img src={threeDots} alt="menu" />
-                        </S.MenuButton>
-                    </S.Item>
+                        <S.Item key={tenant.uid}>
+                            <S.ProfilePhoto owner={tenant} width="50px" />
+                            <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
+                            <S.Email>{tenant.email}</S.Email>
+                            {getEmoji(tenant.houseRole)}
+
+                            <S.MenuButton onClick={() => setIsModalOpen(true)}>
+                                <img src={threeDots} alt="menu" />
+                            </S.MenuButton>
+                        </S.Item>
+                    </>
                 );
             })}
         </S.List>
