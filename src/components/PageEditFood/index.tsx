@@ -64,6 +64,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
     const { name } = useParams<{ name: string }>();
     const history = useHistory();
 
+    const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
+
     useEffect(() => {
         const editingItem = fridge.filter((food) => food.name === name)[0];
 
@@ -150,7 +152,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                             Make Change
                         </Button>
 
-                        <EditFoodServings item={item} tenants={tenants} updateBatch={updateBatch} />
+                        <EditFoodServings item={item} tenants={nonPendingTenants} updateBatch={updateBatch} />
                     </>
                 )}
             </S.Wrapper>

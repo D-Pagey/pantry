@@ -27,7 +27,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
             setIsLoading(true);
 
             try {
-                const { data } = await inviteToHousehold({ email: emailInvite });
+                const { data } = await inviteToHousehold({ email: emailInvite, householdId: user?.household });
 
                 if (data.userExists && data.hasNotified) {
                     toast.success(`An invite was sent to ${emailInvite}`);
