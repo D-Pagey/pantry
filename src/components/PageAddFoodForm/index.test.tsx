@@ -34,73 +34,88 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should render step 2 of the form once category is clicked', async () => {
-        const { getByTestId, getByText, getByLabelText } = render(<PageAddFoodForm {...props} />, context);
+        const { getByTestId, getByText, getByLabelText, findByTestId } = render(
+            <PageAddFoodForm {...props} />,
+            context
+        );
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
     });
 
     it('should render step 3 of the form once hit next on step 2', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...props} />,
+            context
+        );
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        await waitFor(() => getByText('When is it going to expire?'));
+        await findByText('When is it going to expire?');
     });
 
     it('should render step 1 of the form once hit back on step 2', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...props} />,
+            context
+        );
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByText('Back'));
 
-        await waitFor(() => getByText('What is the food called?'));
+        await findByText('What is the food called?');
     });
 
     it('should render step 2 of the form once hit back on step 3', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...props} />,
+            context
+        );
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        await waitFor(() => getByText('When is it going to expire?'));
+        await findByText('When is it going to expire?');
 
         userEvent.click(getByText('Back'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
     });
 
     it('should redirect to food page once submitted', async () => {
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...props} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...props} />,
+            context
+        );
 
         await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        await waitFor(() => getByText('When is it going to expire?'));
+        await findByText('When is it going to expire?');
 
         userEvent.click(getByText('Add to pantry'));
 
@@ -110,17 +125,20 @@ describe('PageAddFoodForm component', () => {
     it('should call updateBatch with the right values', async () => {
         const updatedProps = { ...props, fridge: Fridge, updateBatch: jest.fn() };
 
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...updatedProps} />,
+            context
+        );
 
         await selectEvent.create(getByLabelText('What is the food called?'), 'Avocado');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        await waitFor(() => getByText('When is it going to expire?'));
+        await findByText('When is it going to expire?');
 
         userEvent.click(getByText('Add to pantry'));
 
@@ -145,17 +163,20 @@ describe('PageAddFoodForm component', () => {
         };
         const name = 'salmon';
 
-        const { getByTestId, getByLabelText, getByText } = render(<PageAddFoodForm {...updatedProps} />, context);
+        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
+            <PageAddFoodForm {...updatedProps} />,
+            context
+        );
 
         await selectEvent.create(getByLabelText('What is the food called?'), 'Salmon');
         userEvent.click(getByTestId('singleSelectButton0'));
         userEvent.click(getByText('Next'));
 
-        await waitFor(() => getByTestId('chooseCategory'));
+        await findByTestId('chooseCategory');
 
         userEvent.click(getByTestId('meatCategoryButton'));
 
-        await waitFor(() => getByText('When is it going to expire?'));
+        await findByText('When is it going to expire?');
 
         userEvent.click(getByText('Add to pantry'));
 
