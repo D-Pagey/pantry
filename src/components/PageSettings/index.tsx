@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { TenantType } from '../../types';
@@ -7,6 +7,7 @@ import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { ProfilePhoto } from '../ProfilePhoto';
 import { Household } from '../Household';
+import { Button } from '../Button';
 import * as S from './styles';
 
 const inviteToHousehold = firebase.functions().httpsCallable('inviteToHousehold');
@@ -18,7 +19,14 @@ type PageSettingsProps = {
 export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [emailInvite, setEmailInvite] = useState('');
+    const [notificationConsent, setNotificationConsent] = useState(false);
     const { signOut, user } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (Notification.permission === 'granted') {
+            setNotificationConsent(true);
+        }
+    }, []);
 
     const handleInviteClick = async () => {
         if (tenants.map((tenant) => tenant.email).includes(emailInvite)) {
@@ -44,6 +52,16 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
         }
     };
 
+    const handleUserPermission = async () => {
+        const consent = await Notification.requestPermission();
+
+        if (consent === 'granted') {
+            setNotificationConsent(true);
+        } else {
+            setNotificationConsent(false);
+        }
+    };
+
     return (
         <Layout title="Settings">
             <S.Wrapper data-testid="PageSettings">
@@ -51,6 +69,10 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                     <>
                         <ProfilePhoto owner={user} width="100px" />
                         <S.Name>Welcome {user.name}</S.Name>
+
+                        <S.Heading>Notifications</S.Heading>
+                        <S.Text>You have {!notificationConsent && 'not'} allowed push notifications</S.Text>
+                        {!notificationConsent && <Button onClick={handleUserPermission}>Request Permission</Button>}
 
                         <S.Heading>Account Settings</S.Heading>
                         <S.Text>Your email is: {user.email}</S.Text>

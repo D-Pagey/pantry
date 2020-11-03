@@ -8,6 +8,11 @@ import { AuthContext } from './components/ProviderAuth';
 
 MockDate.set('01/01/2020');
 
+globalThis.Notification = ({
+    requestPermission: jest.fn(),
+    permission: 'granted'
+} as unknown) as jest.Mocked<typeof Notification>;
+
 type AllTheProvidersProps = {
     children: ReactNode;
     customContext?: any;
