@@ -3,7 +3,7 @@ import { render } from '../../test-utils';
 import { CategoryFilterDesktop } from '.';
 
 const props = {
-    categories: { all: 10, meat: 5, fish: 2, vegetables: 1, dairy: 1 },
+    categories: { meat: 5, fish: 2, vegetables: 1, dairy: 1 },
     handleCategoryClick: (category: string) => console.log({ category }),
     selected: 'all'
 };

@@ -9,7 +9,7 @@ const Template: Story<CategoryFilterDesktopProps> = (args) => <CategoryFilterDes
 export const Primary = Template.bind({});
 
 Primary.args = {
-    categories: { all: 10, meat: 5, fish: 2, vegetables: 1, dairy: 1 },
+    categories: { meat: 5, fish: 2, vegetables: 1, dairy: 1 },
     handleCategoryClick: (category) => console.log({ category }),
     selected: 'all'
 };

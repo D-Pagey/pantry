@@ -52,15 +52,7 @@ exports[`CategoryFilterDesktop component should render 1`] = `
   >
     All
     (
-    5
-    )
-  </li>
-  <li
-    class="c1"
-  >
-    All
-    (
-    10
+    9
     )
   </li>
   <li

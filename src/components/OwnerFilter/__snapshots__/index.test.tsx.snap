@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OwnerFilter component should render 1`] = `
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  list-style: none;
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.c2 {
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 0 1rem;
+  padding: 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2:first-child {
+  margin: 0;
+}
+
+.c3 {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.c4 {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+  class="c0"
+>
+  <span>
+    Filter: 
+  </span>
+  <ul
+    class="c1"
+  >
+    <button
+      class="c2"
+      type="button"
+    >
+      <img
+        alt="Dan Page"
+        class="c3"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      />
+    </button>
+    <button
+      class="c2"
+      type="button"
+    >
+      <img
+        alt="Heidi Seo"
+        class="c3"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      />
+    </button>
+  </ul>
+  <button
+    class="c4"
+    type="button"
+  >
+    Clear Filter
+  </button>
+</div>
+`;

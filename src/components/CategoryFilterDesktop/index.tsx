@@ -18,7 +18,7 @@ export const CategoryFilterDesktop: FC<CategoryFilterDesktopProps> = ({
     return (
         <S.List>
             <S.Item key={'all'} onClick={handleClick('all')} isSelected={selected === 'all'}>
-                {titleCase('all')}({Object.values(categories).length})
+                {titleCase('all')}({Object.values(categories).reduce((acc, curr) => acc + curr)})
             </S.Item>
 
             {Object.entries(categories).map((entry) => (
