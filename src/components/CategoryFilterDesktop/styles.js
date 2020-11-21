@@ -20,4 +20,8 @@ export const Item = styled.li`
         color: ${colours.darkGreen100};
         border-bottom: 2px solid ${colours.darkGreen100};
     }
+
+    &:first-child {
+        padding: 0 0.5rem 1rem;
+    }
 `;

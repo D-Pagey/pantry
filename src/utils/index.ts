@@ -103,3 +103,18 @@ export const countExpiringFoodItems = (fridgeItems: FoodType[]): number => {
 export const getOwnerFromId = (tenantId: string, tenants: TenantType[]): TenantType => {
     return tenants.filter((tenant) => tenant.uid === tenantId)[0];
 };
+
+type CategoryWithCount = { [category: string]: number };
+
+export const getCategoriesAndCounts = (fridge: FoodType[]): CategoryWithCount => {
+    return fridge.reduce((acc, curr) => {
+        if (curr.batches.length > 0) {
+            return {
+                ...acc,
+                [curr.category]: acc[curr.category] ? acc[curr.category] + 1 : 1
+            };
+        }
+
+        return acc;
+    }, {} as CategoryWithCount);
+};

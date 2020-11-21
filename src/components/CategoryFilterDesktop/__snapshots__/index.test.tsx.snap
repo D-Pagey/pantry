@@ -25,6 +25,10 @@ exports[`CategoryFilterDesktop component should render 1`] = `
   border-bottom: 2px solid #348841;
 }
 
+.c1:first-child {
+  padding: 0 0.5rem 1rem;
+}
+
 .c2 {
   border-bottom: 2px solid;
   cursor: pointer;
@@ -36,9 +40,21 @@ exports[`CategoryFilterDesktop component should render 1`] = `
   border-bottom: 2px solid #348841;
 }
 
+.c2:first-child {
+  padding: 0 0.5rem 1rem;
+}
+
 <ul
   class="c0"
 >
+  <li
+    class="c1"
+  >
+    All
+    (
+    5
+    )
+  </li>
   <li
     class="c1"
   >

@@ -1,23 +1,23 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render } from '../../test-utils';
-import { CategoryFilter } from '.';
+import { CategoryFilterMobile } from '.';
 
 const props = {
     selected: 'all',
     setSelected: () => null
 };
 
-describe('CategoryFilter component', () => {
+describe('CategoryFilterMobile component', () => {
     it('should render', () => {
-        const { container } = render(<CategoryFilter {...props} />);
+        const { container } = render(<CategoryFilterMobile {...props} />);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should handle click', () => {
         const setSelected = jest.fn();
 
-        const { getByText } = render(<CategoryFilter {...props} setSelected={setSelected} />);
+        const { getByText } = render(<CategoryFilterMobile {...props} setSelected={setSelected} />);
 
         userEvent.click(getByText('Fruit'));
 

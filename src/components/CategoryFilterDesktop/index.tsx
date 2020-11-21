@@ -17,6 +17,10 @@ export const CategoryFilterDesktop: FC<CategoryFilterDesktopProps> = ({
 
     return (
         <S.List>
+            <S.Item key={'all'} onClick={handleClick('all')} isSelected={selected === 'all'}>
+                {titleCase('all')}({Object.values(categories).length})
+            </S.Item>
+
             {Object.entries(categories).map((entry) => (
                 <S.Item key={entry[0]} onClick={handleClick(entry[0])} isSelected={selected === entry[0]}>
                     {titleCase(entry[0])}({entry[1]})

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CategoryFilter component should render 1`] = `
+exports[`CategoryFilterMobile component should render 1`] = `
 .c0 {
   background-color: #348841;
   color: white;
@@ -48,53 +48,6 @@ exports[`CategoryFilter component should render 1`] = `
 
 .c2:hover {
   border-bottom: 2px solid white;
-}
-
-@media (min-width:765px) {
-  .c0 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: white;
-    border: 1px solid #348841;
-    border-radius: 10px;
-    color: #348841;
-    grid-column: 1 / 2;
-    grid-row: 2;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    width: 175px;
-  }
-}
-
-@media (min-width:765px) {
-  .c1 {
-    margin: 1rem 0;
-    padding: 0 0 0.25rem;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-  }
-
-  .c1:hover {
-    border-bottom: 2px solid #348841;
-  }
-}
-
-@media (min-width:765px) {
-  .c2 {
-    margin: 1rem 0;
-    padding: 0 0 0.25rem;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-  }
-
-  .c2:hover {
-    border-bottom: 2px solid #348841;
-  }
 }
 
 <ul

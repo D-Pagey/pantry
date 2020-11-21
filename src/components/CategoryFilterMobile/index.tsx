@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import * as S from './styles';
 
-export type CategoryFilterProps = {
+export type CategoryFilterMobileProps = {
     selected: string;
     setSelected: (category: string) => void;
 };
 
-export const CategoryFilter: FC<CategoryFilterProps> = ({ selected, setSelected }) => {
+export const CategoryFilterMobile: FC<CategoryFilterMobileProps> = ({ selected, setSelected }) => {
     const handleClick = (category: string) => () => setSelected(category);
 
     return (

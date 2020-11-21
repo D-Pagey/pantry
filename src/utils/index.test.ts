@@ -8,6 +8,7 @@ import {
     countExpiringFoodItems,
     filterFridgeByCategory,
     formatDropdownOptions,
+    getCategoriesAndCounts,
     getColourFromDate,
     getExpiringItems,
     getOwnerFromId,
@@ -159,5 +160,12 @@ describe('convertBatchesArray function', () => {
                 name: 'carrot'
             }
         ]);
+    });
+});
+
+describe('getCategoriesAndCounts function', () => {
+    it('should return an object of names and counts', () => {
+        const result = getCategoriesAndCounts(Fridge);
+        expect(result).toStrictEqual({ dairy: 1, meat: 1, vegetables: 2 });
     });
 });

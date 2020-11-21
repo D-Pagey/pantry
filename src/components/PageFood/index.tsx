@@ -1,13 +1,16 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import arraySort from 'array-sort';
 import { toast } from 'react-toastify';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
-import { getExpiringItems, filterFridgeByCategory } from '../../utils';
+import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
+import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
-import { CategoryFilter } from '../CategoryFilter';
+import { CategoryFilterMobile } from '../CategoryFilterMobile';
+import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
@@ -26,6 +29,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
     const { user } = useContext(AuthContext);
     const history = useHistory();
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
+    });
 
     const deleteFoodItem = (name: string): void => {
         if (user) {
@@ -101,9 +107,18 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     };
 
     return (
-        <Layout title="Food">
+        <Layout title="Your Food:">
             <S.Wrapper>
-                <CategoryFilter selected={category} setSelected={handleCategoryClick} />
+                {isTabletOrLarger ? (
+                    <CategoryFilterDesktop
+                        categories={getCategoriesAndCounts(fridge)}
+                        selected={category}
+                        handleCategoryClick={handleCategoryClick}
+                    />
+                ) : (
+                    <CategoryFilterMobile selected={category} setSelected={handleCategoryClick} />
+                )}
+
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
