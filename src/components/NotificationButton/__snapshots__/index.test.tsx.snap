@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component should render 1`] = `
+.c0 {
+  background-color: #348841;
+  border: 1px solid #348841;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c1 {
+  height: 32px;
+  width: 32px;
+}
+
+<button
+  class="c0"
+  type="button"
+>
+  <img
+    alt="accept"
+    class="c1"
+    src="tick.svg"
+  />
+</button>
+`;
