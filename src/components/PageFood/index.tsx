@@ -6,11 +6,12 @@ import { toast } from 'react-toastify';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
-import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
+import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts, filterByTenantIds } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { CategoryFilterMobile } from '../CategoryFilterMobile';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
+import { OwnerFilter } from '../OwnerFilter';
 import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
@@ -27,6 +28,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
+    const [selectedTenants, setSelectedTenants] = useState<string[]>([]);
     const { user } = useContext(AuthContext);
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
@@ -43,50 +45,35 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
         }
     };
 
-    const filterFood = useCallback(
-        (selectedCategory: string, expiring: boolean): void => {
-            if (fridge) {
-                const isCategoryAll = selectedCategory === 'all';
+    const filterFood = useCallback(() => {
+        const isCategoryAll = category === 'all';
 
-                if (isCategoryAll && !expiring) {
-                    setSelectedFood(fridge);
-                }
+        let filteredFridge = [...fridge];
 
-                if (isCategoryAll && expiring) {
-                    const allExpiringItems = getExpiringItems(fridge);
-                    setSelectedFood(allExpiringItems);
-                }
+        if (!isCategoryAll) {
+            filteredFridge = filterFridgeByCategory(filteredFridge, category);
+        }
 
-                if (!isCategoryAll && !expiring) {
-                    const filtered = filterFridgeByCategory(fridge, selectedCategory);
-                    setSelectedFood(filtered);
-                }
+        if (isExpiring) {
+            filteredFridge = getExpiringItems(filteredFridge);
+        }
 
-                if (!isCategoryAll && expiring) {
-                    const filtered = filterFridgeByCategory(fridge, selectedCategory);
-                    const expiredFilteredItems = getExpiringItems(filtered);
-                    setSelectedFood(expiredFilteredItems);
-                }
-            }
-        },
-        [fridge]
-    );
+        if (selectedTenants.length > 0) {
+            filteredFridge = filterByTenantIds(filteredFridge, selectedTenants);
+        }
+
+        return filteredFridge;
+    }, [category, fridge, isExpiring, selectedTenants]);
 
     useEffect(() => {
-        if (fridge) {
-            filterFood(category, isExpiring);
-        }
-    }, [fridge, category, isExpiring, filterFood]);
+        setSelectedFood(filterFood());
+    }, [category, selectedTenants, isExpiring, filterFood]);
 
     const handleCategoryClick = (selectedCategory: string): void => {
-        filterFood(selectedCategory, isExpiring);
-
         setCategory(selectedCategory);
     };
 
     const handleExpiringClick = (): void => {
-        filterFood(category, !isExpiring);
-
         setIsExpiring(!isExpiring);
     };
 
@@ -120,6 +107,12 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                 )}
 
                 <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
+
+                <OwnerFilter
+                    tenants={tenants}
+                    setSelectedTenants={setSelectedTenants}
+                    selectedTenants={selectedTenants}
+                />
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 

@@ -118,3 +118,23 @@ export const getCategoriesAndCounts = (fridge: FoodType[]): CategoryWithCount =>
         return acc;
     }, {} as CategoryWithCount);
 };
+
+export const filterByTenantIds = (fridge: FoodType[], selectedTenants: string[]): FoodType[] => {
+    return fridge.filter((item) => {
+        if (item.batches.length === 0) return false;
+
+        return item.batches.reduce((acc, curr): boolean => {
+            // once we have decided to keep the item, we don't need to check again
+            if (acc === true) return acc;
+
+            // if any of the batches have a selecte tenant that keep the item
+            if (selectedTenants.includes(curr.ownerId)) {
+                return true;
+            }
+
+            // if we aren't already keeping the item and the selected tenants
+            // are one of the owners of a batch, then filter it out
+            return false;
+        }, false as boolean);
+    });
+};

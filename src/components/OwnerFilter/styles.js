@@ -33,7 +33,7 @@ export const Button = styled.button.attrs(() => ({
 
 export const Image = styled.img`
     border-radius: 50%;
-    border: ${({ isSelected }) => isSelected && `2px solid ${colours.darkGreen100}`};
+    border: ${({ isSelected }) => `2px solid ${isSelected ? colours.darkGreen100 : colours.white}`};
     height: 50px;
     width: 50px;
 `;
@@ -43,7 +43,7 @@ export const ClearButton = styled.button.attrs(() => ({
 }))`
     background: none;
     border: none;
-    color: ${colours.blue};
+    color: ${({ disabled }) => (disabled ? colours.darkGrey : colours.blue)};
     cursor: pointer;
     text-decoration: underline;
 `;

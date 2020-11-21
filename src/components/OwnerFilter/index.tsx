@@ -5,11 +5,25 @@ import * as S from './styles';
 export type OwnerFilterProps = {
     tenants: TenantType[];
     selectedTenants: string[];
-    setSelectedTenants: (uid: string) => void;
+    setSelectedTenants: (uid: string[]) => void;
 };
 
 export const OwnerFilter: FC<OwnerFilterProps> = ({ tenants, selectedTenants, setSelectedTenants }) => {
-    const handleClick = (uid: string) => () => setSelectedTenants(uid);
+    const noneSelected = selectedTenants.length === 0;
+
+    const handleClick = (uid: string) => () => {
+        if (selectedTenants.includes(uid)) {
+            setSelectedTenants(selectedTenants.filter((tenant) => tenant !== uid));
+        } else {
+            setSelectedTenants([...selectedTenants, uid]);
+        }
+    };
+
+    const handleReset = () => {
+        if (noneSelected) return;
+
+        setSelectedTenants([]);
+    };
 
     return (
         <S.Wrapper>
@@ -27,7 +41,9 @@ export const OwnerFilter: FC<OwnerFilterProps> = ({ tenants, selectedTenants, se
                 ))}
             </S.List>
 
-            <S.ClearButton>Clear Filter</S.ClearButton>
+            <S.ClearButton onClick={handleReset} disabled={noneSelected}>
+                Clear Filter
+            </S.ClearButton>
         </S.Wrapper>
     );
 };

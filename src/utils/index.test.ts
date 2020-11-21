@@ -6,6 +6,7 @@ import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, Tenan
 import {
     convertBatchesArray,
     countExpiringFoodItems,
+    filterByTenantIds,
     filterFridgeByCategory,
     formatDropdownOptions,
     getCategoriesAndCounts,
@@ -167,5 +168,63 @@ describe('getCategoriesAndCounts function', () => {
     it('should return an object of names and counts', () => {
         const result = getCategoriesAndCounts(Fridge);
         expect(result).toStrictEqual({ dairy: 1, meat: 1, vegetables: 2 });
+    });
+});
+
+describe('filterByTenantIds function', () => {
+    it('should return foods only with selected tenant', () => {
+        const fridge: FoodType[] = [
+            {
+                batches: [ExpiringSoonBatch],
+                name: 'Carrots',
+                category: 'vegetables'
+            },
+            {
+                batches: [FreshBatch],
+                name: 'Steak',
+                category: 'meat'
+            },
+            {
+                batches: [],
+                name: 'Salmon',
+                category: 'fish'
+            }
+        ];
+
+        const result = filterByTenantIds(fridge, [ExpiringSoonBatch.ownerId]);
+        expect(result).toStrictEqual([fridge[0]]);
+    });
+
+    it('should return foods only with multiple selected tenants', () => {
+        const fridge: FoodType[] = [
+            {
+                batches: [ExpiringSoonBatch],
+                name: 'Carrots',
+                category: 'vegetables'
+            },
+            {
+                batches: [FreshBatch],
+                name: 'Steak',
+                category: 'meat'
+            },
+            {
+                batches: [FreshBatch, ExpiringSoonBatch],
+                name: 'Chicken',
+                category: 'meat'
+            },
+            {
+                batches: [],
+                name: 'Salmon',
+                category: 'fish'
+            },
+            {
+                batches: [ExpiredBatch],
+                name: 'Cod',
+                category: 'fish'
+            }
+        ];
+
+        const result = filterByTenantIds(fridge, [FreshBatch.ownerId, ExpiringSoonBatch.ownerId]);
+        expect(result).toStrictEqual([fridge[0], fridge[1], fridge[2]]);
     });
 });
