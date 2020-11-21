@@ -1,25 +1,34 @@
 import React, { FC } from 'react';
 
-import tick from './tick.svg';
-import close from './close.svg';
+import { CloseIcon } from './CloseIcon';
+import { TickIcon } from './TickIcon';
 import * as S from './styles';
 
 export type NotificationButtonProps = {
-    secondary?: boolean;
+    dismiss?: boolean;
+    disabled?: boolean;
 };
 
-export const NotificationButton: FC<NotificationButtonProps> = ({ secondary, ...props }) => {
-    if (secondary) {
+export const NotificationButton: FC<NotificationButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+    dismiss,
+    disabled,
+    ...props
+}) => {
+    if (disabled) {
+        return <S.DisabledButton {...props}>{dismiss ? <CloseIcon disabled /> : <TickIcon />}</S.DisabledButton>;
+    }
+
+    if (dismiss) {
         return (
-            <S.SecondaryButton {...props}>
-                <S.Image src={close} alt="dismiss" />
-            </S.SecondaryButton>
+            <S.DismissButton {...props}>
+                <CloseIcon />
+            </S.DismissButton>
         );
     }
 
     return (
-        <S.Button {...props}>
-            <S.Image src={tick} alt="accept" />
-        </S.Button>
+        <S.AcceptButton {...props}>
+            <TickIcon />
+        </S.AcceptButton>
     );
 };

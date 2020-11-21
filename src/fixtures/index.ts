@@ -36,6 +36,17 @@ export const UnreadNotification: NotificationType = {
     uid: 'aaa'
 };
 
+export const RejectedNotification: NotificationType = {
+    createdAt: new Date(),
+    description: 'Heidi declined your invite.',
+    inviteData: {
+        inviterHouseholdId: 'xxx',
+        inviterUserId: 'abced'
+    },
+    type: 'invite',
+    uid: 'xasxaxs'
+};
+
 export const UserDan: UserType = {
     email: 'dan@test.com',
     household: '123',

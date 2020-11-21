@@ -2,6 +2,10 @@
 
 exports[`Button component should render 1`] = `
 .c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background-color: #348841;
   border: 1px solid #348841;
   border-radius: 5px;
@@ -11,10 +15,11 @@ exports[`Button component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   padding: 0;
-}
-
-.c1 {
   height: 32px;
   width: 32px;
 }
@@ -23,10 +28,17 @@ exports[`Button component should render 1`] = `
   class="c0"
   type="button"
 >
-  <img
-    alt="accept"
-    class="c1"
-    src="tick.svg"
-  />
+  <svg
+    fill="none"
+    height="36"
+    viewBox="0 0 36 36"
+    width="36"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M27.9998 11.5772L14.2855 25L7.99976 18.8479L9.61118 17.2707L14.2855 21.8345L26.3883 10L27.9998 11.5772Z"
+      fill="white"
+    />
+  </svg>
 </button>
 `;

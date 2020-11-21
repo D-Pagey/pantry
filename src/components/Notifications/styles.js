@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { mediaQuery, zIndex } from '../../tokens';
+import { NotificationButton as AcceptButton } from '../NotificationButton';
 import { Button } from '../Button';
 
 export const List = styled.ul`
@@ -14,11 +15,11 @@ export const List = styled.ul`
     flex-direction: column;
     list-style: none;
     margin: 0;
-    padding: 2rem 1rem;
+    padding: 1.5rem;
     position: absolute;
     right: -3rem;
     top: 3rem;
-    width: 275px;
+    width: 300px;
     z-index: ${zIndex.rise};
 
     @media ${mediaQuery.tablet} {
@@ -33,12 +34,11 @@ export const Title = styled.h3`
 `;
 
 export const Item = styled.li`
+    align-items: center;
     border-bottom: 1px solid #504e4e2b;
-    display: grid;
-    grid-row-gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: max-content 1fr;
-    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
     width: 100%;
     /* https://stackoverflow.com/questions/54008865/target-first-child-css-styled-components/54009010 */
     &:nth-child(2) {
@@ -47,21 +47,22 @@ export const Item = styled.li`
 `;
 
 export const Text = styled.span`
-    align-self: center;
-    grid-column: 1 / 3;
-    justify-self: center;
-    text-align: center;
+    margin: 0 0.5rem 0 0;
 `;
 
-export const DismissButton = styled(Button)`
-    grid-column: 2 / 3;
+export const CloseWrapper = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0 0;
+    width: 100%;
 `;
 
 export const CloseButton = styled(Button)`
-    margin: 2rem 0 0;
-    width: 100px;
+    align-self: flex-end;
+    padding: ${({ isLoading }) => (isLoading ? '0.75rem 2rem 0.75rem 1rem' : '0.75rem')};
 `;
 
-export const InviteButton = styled(Button)`
-    grid-column: 1 / 3;
+export const NotificationButton = styled(AcceptButton)`
+    margin: 0 0.75rem 0 0;
 `;

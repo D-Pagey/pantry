@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { db, firebase } from '../../services';
 import { NotificationType, UserType, TenantType } from '../../types';
-import { Button } from '../Button';
+import { NotificationButton } from '../NotificationButton';
 import * as S from './styles';
 
 const acceptHouseholdInvite = firebase.functions().httpsCallable('acceptHouseholdInvite');
@@ -78,37 +78,36 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
         <S.List data-testid="notifications">
             <S.Title>Your Notifications:</S.Title>
 
-            {notifications.length === 0 && <p>You don&apos;t have any notifications</p>}
-
             {notifications.map((item) => (
                 <S.Item key={item.uid}>
                     <S.Text>{item.description}</S.Text>
 
-                    {item.type === 'invite' && !isLoading && (
+                    {item.type === 'invite' ? (
                         <>
-                            <Button margin="0 1rem 0 0" onClick={handleInviteDecision(item, false)} secondary>
-                                Decline
-                            </Button>
-
-                            <Button onClick={handleInviteDecision(item, true)}>Accept</Button>
+                            <S.NotificationButton disabled={isLoading} onClick={handleInviteDecision(item, true)} />
+                            <NotificationButton
+                                disabled={isLoading}
+                                dismiss
+                                onClick={handleInviteDecision(item, false)}
+                            />
                         </>
-                    )}
-
-                    {item.type === 'invite' && isLoading && (
-                        <S.InviteButton isLoading={isLoading}>Responding</S.InviteButton>
-                    )}
-
-                    {item.type === 'text' && (
-                        <S.DismissButton secondary onClick={handleDismissClick(item.uid)}>
-                            Dismiss
-                        </S.DismissButton>
+                    ) : (
+                        <NotificationButton disabled={isLoading} dismiss onClick={handleDismissClick(item.uid)} />
                     )}
                 </S.Item>
             ))}
 
-            <S.CloseButton secondary onClick={onClose}>
-                Close
-            </S.CloseButton>
+            <S.CloseWrapper>
+                {notifications.length === 0 && <span>You don&apos;t have any notifications</span>}
+
+                {isLoading ? (
+                    <S.CloseButton isLoading={isLoading}>Responding</S.CloseButton>
+                ) : (
+                    <S.CloseButton secondary onClick={onClose}>
+                        Close
+                    </S.CloseButton>
+                )}
+            </S.CloseWrapper>
         </S.List>
     );
 };

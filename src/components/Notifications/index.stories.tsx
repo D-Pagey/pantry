@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { UnreadNotification, UserDan, WelcomeNotification } from '../../fixtures';
+import { UnreadNotification, UserDan, WelcomeNotification, RejectedNotification } from '../../fixtures';
 import { Notifications } from '.';
 
 const props = {
-    notifications: [WelcomeNotification, UnreadNotification],
+    notifications: [WelcomeNotification, UnreadNotification, RejectedNotification],
     onClose: () => null,
     user: UserDan
 };

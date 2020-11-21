@@ -2,24 +2,26 @@
 
 exports[`Notifications component should render 1`] = `
 .c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background-color: #348841;
-  border: 0;
+  border: 1px solid #348841;
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  padding: 1rem;
-  min-width: 68px;
-}
-
-.c7 {
-  background-color: #348841;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  margin: 0 1rem 0 0;
-  min-width: 68px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  height: 32px;
+  width: 32px;
 }
 
 .c5 {
@@ -29,10 +31,19 @@ exports[`Notifications component should render 1`] = `
 }
 
 .c8 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c9 {
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
-  margin: 0 1rem 0 0;
 }
 
 .c0 {
@@ -54,11 +65,11 @@ exports[`Notifications component should render 1`] = `
   flex-direction: column;
   list-style: none;
   margin: 0;
-  padding: 2rem 1rem;
+  padding: 1.5rem;
   position: absolute;
   right: -3rem;
   top: 3rem;
-  width: 275px;
+  width: 300px;
   z-index: 200;
 }
 
@@ -69,12 +80,20 @@ exports[`Notifications component should render 1`] = `
 }
 
 .c2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   border-bottom: 1px solid #504e4e2b;
-  display: grid;
-  grid-row-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: max-content 1fr;
-  padding: 1.5rem 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 0;
   width: 100%;
 }
 
@@ -83,21 +102,35 @@ exports[`Notifications component should render 1`] = `
 }
 
 .c3 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  grid-column: 1 / 3;
-  justify-self: center;
-  text-align: center;
+  margin: 0 0.5rem 0 0;
+}
+
+.c7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin: 1rem 0 0;
+  width: 100%;
+}
+
+.c10 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  padding: 0.75rem;
 }
 
 .c6 {
-  grid-column: 2 / 3;
-}
-
-.c9 {
-  margin: 2rem 0 0;
-  width: 100px;
+  margin: 0 0.75rem 0 0;
 }
 
 @media (min-width:765px) {
@@ -124,10 +157,21 @@ exports[`Notifications component should render 1`] = `
       Welcome to Pantry
     </span>
     <button
-      class="c4 c5 c6"
+      class="c4 c5"
       type="button"
     >
-      Dismiss
+      <svg
+        fill="none"
+        height="40"
+        viewBox="0 0 40 40"
+        width="40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M30 12.0143L27.9857 10L20 17.9857L12.0143 10L10 12.0143L17.9857 20L10 27.9857L12.0143 30L20 22.0143L27.9857 30L30 27.9857L22.0143 20L30 12.0143Z"
+          fill="#348841"
+        />
+      </svg>
     </button>
   </li>
   <li
@@ -139,23 +183,49 @@ exports[`Notifications component should render 1`] = `
       Dan is inviting you to join their household
     </span>
     <button
-      class="c7 c8"
+      class="c4 c6"
       type="button"
     >
-      Decline
+      <svg
+        fill="none"
+        height="36"
+        viewBox="0 0 36 36"
+        width="36"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M27.9998 11.5772L14.2855 25L7.99976 18.8479L9.61118 17.2707L14.2855 21.8345L26.3883 10L27.9998 11.5772Z"
+          fill="white"
+        />
+      </svg>
     </button>
     <button
-      class="c4"
+      class="c4 c5"
       type="button"
     >
-      Accept
+      <svg
+        fill="none"
+        height="40"
+        viewBox="0 0 40 40"
+        width="40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M30 12.0143L27.9857 10L20 17.9857L12.0143 10L10 12.0143L17.9857 20L10 27.9857L12.0143 30L20 22.0143L27.9857 30L30 27.9857L22.0143 20L30 12.0143Z"
+          fill="#348841"
+        />
+      </svg>
     </button>
   </li>
-  <button
-    class="c4 c5 c9"
-    type="button"
+  <div
+    class="c7"
   >
-    Close
-  </button>
+    <button
+      class="c8 c9 c10"
+      type="button"
+    >
+      Close
+    </button>
+  </div>
 </ul>
 `;
