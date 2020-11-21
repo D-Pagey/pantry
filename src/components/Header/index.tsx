@@ -32,66 +32,35 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
 
     return (
         <S.Wrapper>
-            <S.LogoWrapper>
-                {page ? (
-                    <>
-                        <S.Arrow src={Arrow} onClick={handleBack} alt="arrow" data-testid="headerBackArrow" />
-                        <S.Title>{page}</S.Title>
-                    </>
-                ) : (
-                    <>
-                        <S.Link to="/">
-                            <S.Logo src={Icon} alt="icon" />
-                        </S.Link>
-                        <S.Link to="/">
-                            <S.Title>Pantry</S.Title>
-                        </S.Link>
-                    </>
-                )}
-            </S.LogoWrapper>
-
-            {isAuthed && !isTabletOrLarger && !isCheckingAuth && (
-                <S.BellWrapper>
-                    <S.NotificationsButton
-                        type="button"
-                        onClick={toggleNotifications}
-                        data-testid="header-notifications"
-                    >
-                        <Bell color={hasNotifications ? '#1976D2' : undefined} />
-                    </S.NotificationsButton>
-
-                    {showNotifications && user?.notifications && (
-                        <Notifications
-                            notifications={user.notifications}
-                            onClose={closeNotifications}
-                            user={user as UserType}
-                        />
+            <S.InnerWrapper>
+                <S.LogoWrapper>
+                    {page ? (
+                        <>
+                            <S.Arrow src={Arrow} onClick={handleBack} alt="arrow" data-testid="headerBackArrow" />
+                            <S.Title>{page}</S.Title>
+                        </>
+                    ) : (
+                        <>
+                            <S.Link to="/">
+                                <S.Logo src={Icon} alt="icon" />
+                            </S.Link>
+                            <S.Link to="/">
+                                <S.Title>Pantry</S.Title>
+                            </S.Link>
+                        </>
                     )}
-                </S.BellWrapper>
-            )}
+                </S.LogoWrapper>
 
-            {isAuthed && isTabletOrLarger && !isCheckingAuth && (
-                <S.NavList>
-                    <S.NavItem>
-                        <S.Link to="/">Home</S.Link>
-                    </S.NavItem>
-
-                    <S.NavItem>
-                        <S.Link to="/food">Your Food</S.Link>
-                    </S.NavItem>
-
-                    <S.NavItem>
-                        <S.Link to="/add">Add Food</S.Link>
-                    </S.NavItem>
-
-                    <S.NavItem>
+                {isAuthed && !isTabletOrLarger && !isCheckingAuth && (
+                    <S.BellWrapper>
                         <S.NotificationsButton
                             type="button"
                             onClick={toggleNotifications}
-                            hasNotifications={hasNotifications}
+                            data-testid="header-notifications"
                         >
-                            Notifications
+                            <Bell color={hasNotifications ? '#1976D2' : undefined} />
                         </S.NotificationsButton>
+
                         {showNotifications && user?.notifications && (
                             <Notifications
                                 notifications={user.notifications}
@@ -99,21 +68,54 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                                 user={user as UserType}
                             />
                         )}
-                    </S.NavItem>
+                    </S.BellWrapper>
+                )}
 
-                    <S.NavItem>
-                        <S.Link to="/settings">Settings</S.Link>
-                    </S.NavItem>
-                </S.NavList>
-            )}
+                {isAuthed && isTabletOrLarger && !isCheckingAuth && (
+                    <S.NavList>
+                        <S.NavItem>
+                            <S.Link to="/">Home</S.Link>
+                        </S.NavItem>
 
-            {!isAuthed && !isCheckingAuth && isTabletOrLarger && (
-                <S.NavList>
-                    <S.NavItem>
-                        <S.Link to="/sign-in">Sign In / Sign Up</S.Link>
-                    </S.NavItem>
-                </S.NavList>
-            )}
+                        <S.NavItem>
+                            <S.Link to="/food">Your Food</S.Link>
+                        </S.NavItem>
+
+                        <S.NavItem>
+                            <S.Link to="/add">Add Food</S.Link>
+                        </S.NavItem>
+
+                        <S.NavItem>
+                            <S.NotificationsButton
+                                type="button"
+                                onClick={toggleNotifications}
+                                hasNotifications={hasNotifications}
+                            >
+                                Notifications
+                            </S.NotificationsButton>
+                            {showNotifications && user?.notifications && (
+                                <Notifications
+                                    notifications={user.notifications}
+                                    onClose={closeNotifications}
+                                    user={user as UserType}
+                                />
+                            )}
+                        </S.NavItem>
+
+                        <S.NavItem>
+                            <S.Link to="/settings">Settings</S.Link>
+                        </S.NavItem>
+                    </S.NavList>
+                )}
+
+                {!isAuthed && !isCheckingAuth && isTabletOrLarger && (
+                    <S.NavList>
+                        <S.NavItem>
+                            <S.Link to="/sign-in">Sign In / Sign Up</S.Link>
+                        </S.NavItem>
+                    </S.NavList>
+                )}
+            </S.InnerWrapper>
         </S.Wrapper>
     );
 };

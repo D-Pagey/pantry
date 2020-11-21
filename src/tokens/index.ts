@@ -1,4 +1,5 @@
 export const HEADER_HEIGHT = '100px';
+export const PAGE_WIDTH = '1100px';
 
 export const CATEGORY_CARD_HEIGHT = '115px';
 export const CATEGORY_CARD_WIDTH = '144px';

@@ -13,11 +13,10 @@ exports[`Layout component should render 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0 24px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   left: 0;
   position: fixed;
   right: 0;
@@ -25,26 +24,44 @@ exports[`Layout component should render 1`] = `
   z-index: 2;
 }
 
-.c2 {
+.c1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 1100px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.c3 {
   color: initial;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c4 {
+.c5 {
   font-size: 25px;
   font-weight: 500;
   margin: 0;
   padding: 0 0 0 14px;
 }
 
-.c3 {
+.c4 {
   position: relative;
   top: 2px;
   width: 32px;
 }
 
-.c1 {
+.c2 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -61,28 +78,32 @@ exports[`Layout component should render 1`] = `
   <div
     class="c1"
   >
-    <a
-      aria-current="page"
-      class="c2 active"
-      href="/"
+    <div
+      class="c2"
     >
-      <img
-        alt="icon"
-        class="c3"
-        src="icon.svg"
-      />
-    </a>
-    <a
-      aria-current="page"
-      class="c2 active"
-      href="/"
-    >
-      <h4
-        class="c4"
+      <a
+        aria-current="page"
+        class="c3 active"
+        href="/"
       >
-        Pantry
-      </h4>
-    </a>
+        <img
+          alt="icon"
+          class="c4"
+          src="icon.svg"
+        />
+      </a>
+      <a
+        aria-current="page"
+        class="c3 active"
+        href="/"
+      >
+        <h4
+          class="c5"
+        >
+          Pantry
+        </h4>
+      </a>
+    </div>
   </div>
 </div>
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
-import { colours, HEADER_HEIGHT } from '../../tokens';
+import { colours, HEADER_HEIGHT, PAGE_WIDTH } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -8,13 +8,21 @@ export const Wrapper = styled.div`
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06);
     display: flex;
     height: ${HEADER_HEIGHT};
-    justify-content: space-between;
-    padding: 0 24px;
+    justify-content: center;
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 2;
+`;
+
+export const InnerWrapper = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    max-width: ${PAGE_WIDTH};
+    padding: 0 24px;
+    width: 100%;
 `;
 
 export const Link = styled(NavLink)`
