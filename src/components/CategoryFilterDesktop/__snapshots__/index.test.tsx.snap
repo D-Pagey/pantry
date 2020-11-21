@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryFilterDesktop component should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  font-size: 26px;
+  margin: 0;
+  padding: 0;
+}
+
+.c1 {
+  border-bottom: 2px solid;
+  border-color: #348841;
+  color: #348841;
+  cursor: pointer;
+  padding: 0 1rem 1rem;
+}
+
+.c1:hover {
+  color: #348841;
+  border-bottom: 2px solid #348841;
+}
+
+.c2 {
+  border-bottom: 2px solid;
+  cursor: pointer;
+  padding: 0 1rem 1rem;
+}
+
+.c2:hover {
+  color: #348841;
+  border-bottom: 2px solid #348841;
+}
+
+<ul
+  class="c0"
+>
+  <li
+    class="c1"
+  >
+    All
+    (
+    10
+    )
+  </li>
+  <li
+    class="c2"
+  >
+    Meat
+    (
+    5
+    )
+  </li>
+  <li
+    class="c2"
+  >
+    Fish
+    (
+    2
+    )
+  </li>
+  <li
+    class="c2"
+  >
+    Vegetables
+    (
+    1
+    )
+  </li>
+  <li
+    class="c2"
+  >
+    Dairy
+    (
+    1
+    )
+  </li>
+</ul>
+`;
