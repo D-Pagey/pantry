@@ -12,7 +12,6 @@ import { Layout } from '../Layout';
 import { CategoryFilterMobile } from '../CategoryFilterMobile';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { OwnerFilter } from '../OwnerFilter';
-import { ExpiringPill } from '../ExpiringPill';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
@@ -93,6 +92,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
 
+    const handleAddClick = () => history.push('/add');
+
     return (
         <Layout title="Your Food:">
             <S.Wrapper>
@@ -106,13 +107,15 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     <CategoryFilterMobile selected={category} setSelected={handleCategoryClick} />
                 )}
 
-                <ExpiringPill handleClick={handleExpiringClick} isEnabled={isExpiring} margin="1rem" />
+                <S.FilterWrapper>
+                    <OwnerFilter
+                        tenants={tenants}
+                        setSelectedTenants={setSelectedTenants}
+                        selectedTenants={selectedTenants}
+                    />
 
-                <OwnerFilter
-                    tenants={tenants}
-                    setSelectedTenants={setSelectedTenants}
-                    selectedTenants={selectedTenants}
-                />
+                    <S.ExpiringButton handleClick={handleExpiringClick} isEnabled={isExpiring} />
+                </S.FilterWrapper>
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 
@@ -122,7 +125,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     </p>
                 )}
 
-                <S.FoodCardWrapper>
+                <S.FoodCardGrid>
                     {selectedFood &&
                         arraySort(selectedFood, 'name').map((item: FoodType) => {
                             if (item.batches.length > 0) {
@@ -140,11 +143,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
                             return null;
                         })}
-                </S.FoodCardWrapper>
+                </S.FoodCardGrid>
 
-                <S.Button size="sm">
-                    <S.RouterLink to="/add">Add Item</S.RouterLink>
-                </S.Button>
+                <S.AddButton size="sm" onClick={handleAddClick}>
+                    Add Item
+                </S.AddButton>
             </S.Wrapper>
 
             {editingItem && (

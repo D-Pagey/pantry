@@ -76,6 +76,14 @@ exports[`PageHome component should render 1`] = `
 
 }
 
+@media (min-width:1100px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
 @media (min-width:765px) {
 
 }

@@ -26,6 +26,7 @@ export const colours = {
 };
 
 export const mediaQuery = {
+    maxPage: `(min-width: ${PAGE_WIDTH})`,
     tablet: '(min-width: 765px)'
 };
 
