@@ -17,8 +17,9 @@ export const FilterWrapper = styled.div`
     padding: 1rem;
 
     @media ${mediaQuery.tablet} {
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: space-between;
+        padding: 1rem 0;
     }
 `;
 
