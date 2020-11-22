@@ -65,8 +65,10 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     }, [category, fridge, isExpiring, selectedTenants]);
 
     useEffect(() => {
-        setSelectedFood(filterFood());
-    }, [category, selectedTenants, isExpiring, filterFood]);
+        if (fridge.length > 0 && tenants.length > 0) {
+            setSelectedFood(filterFood());
+        }
+    }, [category, selectedTenants, isExpiring, filterFood, fridge, tenants]);
 
     const handleCategoryClick = (selectedCategory: string): void => {
         setCategory(selectedCategory);

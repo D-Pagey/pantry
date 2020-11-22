@@ -10,14 +10,19 @@ const context = {
     user: UserDan
 };
 
+const emptyProps = {
+    fridge: [],
+    tenants: []
+};
+
 const props = {
     fridge: Fridge,
-    tenants: [TenantHeidi, TenantDan, TenantJoe]
+    tenants: [TenantHeidi, TenantJoe, TenantDan]
 };
 
 describe('PageFood component', () => {
     it('should render', () => {
-        const { container } = render(<PageFood {...props} />, context);
+        const { container } = render(<PageFood {...emptyProps} />, context);
         expect(container.firstChild).toMatchSnapshot();
     });
 

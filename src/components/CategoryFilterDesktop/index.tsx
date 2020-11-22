@@ -14,11 +14,17 @@ export const CategoryFilterDesktop: FC<CategoryFilterDesktopProps> = ({
     selected
 }) => {
     const handleClick = (category: string) => () => handleCategoryClick(category);
+    const getTotalItems = () => {
+        if (categories) {
+            return Object.values(categories).reduce((acc, curr) => acc + curr, 0);
+        }
+        return 0;
+    };
 
     return (
         <S.List>
             <S.Item key={'all'} onClick={handleClick('all')} isSelected={selected === 'all'}>
-                {titleCase('all')}({Object.values(categories).reduce((acc, curr) => acc + curr)})
+                {titleCase('all')}({getTotalItems()})
             </S.Item>
 
             {Object.entries(categories).map((entry) => (
