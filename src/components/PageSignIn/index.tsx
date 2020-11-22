@@ -1,5 +1,4 @@
 import React, { FC, useContext, useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 
 import { firebase } from '../../services';
@@ -13,25 +12,24 @@ import * as S from './styles';
 export const PageSignIn: FC = () => {
     const [email, setEmail] = useState('');
     const [emailSent, setEmailSent] = useState(false);
-    const { isAuthed, setUser } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const { isAuthed } = useContext(AuthContext);
+
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+    const handleSignIn = () => {
+        setIsLoading(true);
+
+        firebase
+            .auth()
+            .signInWithPopup(googleProvider)
+            .then((result) => null)
+            .catch((error) => {
+                setIsLoading(false);
+            });
+    };
 
     const handleEmailChange = (event: any): void => setEmail(event.target.value);
-
-    // Configure FirebaseUI.
-    const uiConfig = {
-        // Popup signin flow rather than redirect flow.
-        signInFlow: 'popup',
-        // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-        callbacks: {
-            // Avoid redirects after sign-in.
-            signInSuccessWithAuthResult: (result: any): boolean => {
-                setUser({ name: result.user.displayName, email: result.user.email, photo: result.user.photoURL });
-                return false;
-            }
-        },
-        // We will display Google as auth providers.
-        signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
-    };
 
     const actionCodeSettings = {
         url: `${process.env.REACT_APP_DOMAIN}/magic`,
@@ -60,7 +58,7 @@ export const PageSignIn: FC = () => {
     }
 
     return (
-        <Layout title="Sign in">
+        <Layout title="Sign in" isLoading={isLoading}>
             <S.Wrapper>
                 <S.Title>Who are you?</S.Title>
 
@@ -68,7 +66,7 @@ export const PageSignIn: FC = () => {
                     <p>A magic email sign-in email was sent to {email}</p>
                 ) : (
                     <>
-                        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                        <S.GoogleButton onClick={handleSignIn}>Sign In With Google</S.GoogleButton>
 
                         <p>or</p>
 

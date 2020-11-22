@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { colours } from '../../tokens';
+import { Button } from '../Button';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -12,13 +14,17 @@ export const Title = styled.h1`
     margin: 1rem 0;
 `;
 
-export const Image = styled.img`
-    margin: 2rem 0 0;
-    width: 400px;
+export const GoogleButton = styled(Button)`
+    background-color: ${colours.blue};
 `;
 
 export const EmailWrapper = styled.div`
     display: flex;
     margin: 0;
     width: 330px;
+`;
+
+export const Image = styled.img`
+    margin: 2rem 0 0;
+    width: 400px;
 `;
