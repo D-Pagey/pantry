@@ -5,7 +5,6 @@ import { firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Input } from '../Input';
-import { Button } from '../Button';
 import loginImage from './assets/mobile-login.svg';
 import * as S from './styles';
 
@@ -60,29 +59,22 @@ export const PageSignIn: FC = () => {
     return (
         <Layout title="Sign in" isLoading={isLoading}>
             <S.Wrapper>
-                <S.Title>Who are you?</S.Title>
+                <S.Image src={loginImage} alt="login" />
 
                 {emailSent ? (
                     <p>A magic email sign-in email was sent to {email}</p>
                 ) : (
-                    <>
-                        <S.GoogleButton onClick={handleSignIn}>Sign In With Google</S.GoogleButton>
+                    <S.LoginWrapper>
+                        <S.GoogleButton onClick={handleSignIn}>Continue With Google</S.GoogleButton>
 
-                        <p>or</p>
+                        <S.Text>or</S.Text>
 
                         <S.EmailWrapper>
-                            <Input
-                                margin="0 2rem 0 0"
-                                onChange={handleEmailChange}
-                                placeholder="Email me a magic link"
-                                value={email}
-                            />
-                            <Button onClick={handleEmailClick}>Send</Button>
+                            <Input onChange={handleEmailChange} placeholder="Email me a magic link" value={email} />
+                            <S.SendButton onClick={handleEmailClick}>Send</S.SendButton>
                         </S.EmailWrapper>
-                    </>
+                    </S.LoginWrapper>
                 )}
-
-                <S.Image src={loginImage} alt="login" />
             </S.Wrapper>
         </Layout>
     );
