@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
+import { Button } from '../Button';
 
 export const PageDev: FC = () => {
     const { user } = useContext(AuthContext);
@@ -11,7 +12,16 @@ export const PageDev: FC = () => {
 
     return (
         <Layout title="Super secret">
-            <h1>Test shit out</h1>
+            <p>Hey, link your Pantry with Alexa and you can ask: </p>
+
+            <ul>
+                <li>What should I eat today?</li>
+                <li>Add Chicken, Cucumber and Yoghurt</li>
+                <li>Remove humous</li>
+                <li>Who&apos;s is this Salmon?</li>
+            </ul>
+
+            <Button>Link Alexa Account</Button>
         </Layout>
     );
 };
