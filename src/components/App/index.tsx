@@ -20,14 +20,14 @@ export const App: FC = () => {
     });
 
     return (
-        <ProviderAuth>
-            <BrowserRouter>
+        <BrowserRouter>
+            <ProviderAuth>
                 {!isTabletOrLarger && <BurgerMenu />}
 
                 <S.GlobalStyle />
 
                 <Routes />
-            </BrowserRouter>
-        </ProviderAuth>
+            </ProviderAuth>
+        </BrowserRouter>
     );
 };

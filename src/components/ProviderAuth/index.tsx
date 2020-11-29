@@ -1,5 +1,7 @@
 import React, { createContext, FC, ReactNode, useState, useEffect, useCallback } from 'react';
-import { firebase } from '../../services';
+import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { firebase, db } from '../../services';
 import { UserType } from '../../types';
 import { formatUser } from './utils';
 
@@ -27,6 +29,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
     const [user, setUser] = useState<Partial<UserType>>();
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [isAuthed, setIsAuthed] = useState(false);
+    const { state, redirect_uri } = useParams<{ state?: any; redirect_uri?: string }>();
 
     const fetchUserData = useCallback((uid: string) => {
         firebase
@@ -65,12 +68,37 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
                 fetchUserData(firebaseUser.uid);
+
+                const authCode = uuidv4();
+
+                db.collection(`auth_codes`).doc(firebaseUser.uid).set(
+                    {
+                        code: authCode,
+                        uid: firebaseUser.uid,
+                        created: firebase.firestore.FieldValue.serverTimestamp()
+                    },
+                    { merge: true }
+                );
+
+                const urlParams = new URLSearchParams(window.location.search);
+                // State sent by Alexa which we have to return.
+                const state = urlParams.get('state');
+                // Redirect uri sent by Alexa.
+                const redirect_uri = urlParams.get('redirect_uri');
+
+                if (redirect_uri) {
+                    // Combine all the uri elements.
+                    const url = redirect_uri + '?state=' + state + '&code=' + authCode;
+
+                    // Redirect
+                    window.location.href = url;
+                }
             } else {
                 setIsAuthed(false);
                 setIsCheckingAuth(false);
             }
         });
-    }, [fetchUserData]);
+    }, [fetchUserData, redirect_uri, state]);
 
     return (
         <AuthContext.Provider
