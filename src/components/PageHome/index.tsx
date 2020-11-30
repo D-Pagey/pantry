@@ -27,8 +27,8 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
     return (
         <Layout>
             {user?.email === 'dan.page91@gmail.com' && (
-                <Link to="/dev">
-                    <Button>Dev Mode</Button>
+                <Link to="/alexa">
+                    <Button>Link Alexa</Button>
                 </Link>
             )}
 
