@@ -14,16 +14,24 @@ export const PageAlexa: FC = () => {
             // @ts-ignore
             return amazon.Login.setClientId('amzn1.application-oa2-client.a239a53e644d488cb584d90b1b5550ed');
         };
+    }, []);
 
-        (function (d) {
-            const a = d.createElement('script');
+    useEffect(() => {
+        const amazonRootDiv = document.getElementById('amazon-root');
+
+        const appendLink = () => {
+            const a = document.createElement('script');
             a.type = 'text/javascript';
             a.async = true;
             a.id = 'amazon-login-sdk';
             a.src = 'https://assets.loginwithamazon.com/sdk/na/login1.js';
             // @ts-ignore
-            d.getElementById('amazon-root').appendChild(a);
-        })(document);
+            amazonRootDiv.appendChild(a);
+        };
+
+        if (amazonRootDiv) {
+            appendLink();
+        }
     }, []);
 
     const handleLoginWithAmazon = () => {
@@ -38,8 +46,6 @@ export const PageAlexa: FC = () => {
         amazon.Login.authorize(options, '/alexa');
         return false;
     };
-
-    if (user?.email !== 'dan.page91@gmail.com') return <Redirect to="/" />;
 
     return (
         <Layout title="Link to Alexa">
