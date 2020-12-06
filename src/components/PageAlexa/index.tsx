@@ -1,13 +1,8 @@
-import React, { FC, useContext, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-
-import { AuthContext } from '../ProviderAuth';
+import React, { FC, useEffect } from 'react';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 
 export const PageAlexa: FC = () => {
-    const { user } = useContext(AuthContext);
-
     useEffect(() => {
         // @ts-ignore
         window.onAmazonLoginReady = () => {
