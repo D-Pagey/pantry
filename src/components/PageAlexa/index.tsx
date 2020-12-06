@@ -35,7 +35,7 @@ export const PageAlexa: FC = () => {
         };
 
         // @ts-ignore
-        amazon.Login.authorize(options, 'https://www.getpantry.co.uk/alexa');
+        amazon.Login.authorize(options, '/alexa');
         return false;
     };
 
