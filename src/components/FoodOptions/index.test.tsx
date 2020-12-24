@@ -19,7 +19,7 @@ describe('FoodOptions component', () => {
         const handleDelete = jest.fn();
         const { getByText } = render(<FoodOptions {...props} handleDelete={handleDelete} />);
 
-        userEvent.click(getByText(`Remove ${props.name}`));
+        userEvent.click(getByText(`Delete`));
 
         expect(handleDelete).toHaveBeenCalled();
     });
@@ -28,7 +28,7 @@ describe('FoodOptions component', () => {
         const handleEdit = jest.fn();
         const { getByText } = render(<FoodOptions {...props} handleEdit={handleEdit} />);
 
-        userEvent.click(getByText(`Amend ${props.name}`));
+        userEvent.click(getByText(`Amend`));
 
         expect(handleEdit).toHaveBeenCalled();
     });
