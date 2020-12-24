@@ -9,7 +9,13 @@ type CreatableDropdownProps = {
     setSelected: (value: string) => void;
 };
 
-export const CreatableDropdown: FC<CreatableDropdownProps> = ({ defaultValue, options, placeholder, setSelected }) => {
+export const CreatableDropdown: FC<CreatableDropdownProps> = ({
+    defaultValue,
+    options,
+    placeholder,
+    setSelected,
+    ...props
+}) => {
     const handleChange = (value: any, action: any) => {
         const isSelected = action.action === 'select-option' || action.action === 'create-option';
 
@@ -25,7 +31,7 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({ defaultValue, op
     };
 
     return (
-        <S.Wrapper>
+        <S.Wrapper {...props}>
             <CreatableSelect
                 defaultValue={getDefaultValue()}
                 inputId="foodName"

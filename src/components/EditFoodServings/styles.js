@@ -1,33 +1,18 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
 import { Button } from '../Button';
 
-export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-export const Title = styled.h4`
-    font-weight: normal;
-    margin: 0 0 1.5rem;
-`;
-
 export const List = styled.ul`
-    margin: 0 0 2rem;
+    margin: 1.5rem auto;
     padding: 0;
     list-style: none;
+    width: 17rem;
 `;
 
 export const Item = styled.li`
     align-items: center;
-    border-bottom: 1px solid ${colours.veryLightGrey};
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 1rem 0;
-
-    &:first-child {
-        border-top: 1px solid ${colours.veryLightGrey};
-    }
 `;
 
 export const Text = styled.span`
@@ -56,6 +41,7 @@ export const DeleteButton = styled.button.attrs({
     display: flex;
     justify-content: center;
     padding: 1rem;
+    border-radius: 50%;
 `;
 
 export const DateButton = styled(Button)`

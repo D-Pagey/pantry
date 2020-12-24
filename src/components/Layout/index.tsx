@@ -10,9 +10,10 @@ type LayoutProps = {
     children: ReactNode;
     isLoading?: boolean;
     title?: string;
+    hideTitle?: boolean;
 };
 
-export const Layout: FC<LayoutProps> = ({ children, isLoading, title }) => {
+export const Layout: FC<LayoutProps> = ({ children, isLoading, title, hideTitle }) => {
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
     });
@@ -26,7 +27,7 @@ export const Layout: FC<LayoutProps> = ({ children, isLoading, title }) => {
                     <Loading isLoading />
                 ) : (
                     <>
-                        {isTabletOrLarger && <S.Title>{title}</S.Title>}
+                        {isTabletOrLarger && !hideTitle && <S.Title>{title}</S.Title>}
 
                         {children}
                     </>

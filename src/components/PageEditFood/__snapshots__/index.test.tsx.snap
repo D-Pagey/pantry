@@ -74,6 +74,10 @@ exports[`PageEditFood component should render 1`] = `
 
 }
 
+@media (min-width:765px) {
+
+}
+
 <div
   class="c0"
 >

@@ -10,11 +10,10 @@ export const Button = styled.button.attrs(() => ({
     border-radius: 16px;
     cursor: pointer;
     display: flex;
-    height: ${({ small }) => !small && CATEGORY_CARD_HEIGHT};
-    padding: ${({ small }) => small && '0 1rem'};
+    height: ${CATEGORY_CARD_HEIGHT};
     justify-content: center;
     transition: all 0.3s ease 0s;
-    width: ${({ small }) => !small && CATEGORY_CARD_WIDTH};
+    width: ${CATEGORY_CARD_WIDTH};
 
     &:hover {
         background-color: ${colours.darkGreen100};

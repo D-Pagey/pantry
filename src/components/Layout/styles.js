@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
     @media ${mediaQuery.tablet} {
         padding: 0 2rem;
     }
+
     @media ${mediaQuery.maxPage} {
         padding: 0;
     }

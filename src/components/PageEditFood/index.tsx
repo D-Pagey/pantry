@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { titleCase } from 'title-case';
 import arraySort from 'array-sort';
 
 import { convertBatchesArray, formatDropdownOptions } from '../../utils';
@@ -7,7 +8,6 @@ import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { ChooseCategory } from '../ChooseCategory';
-import { CreatableDropdown } from '../CreatableDropdown';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import { EditFoodServings } from '../EditFoodServings';
@@ -134,25 +134,25 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
     };
 
     return (
-        <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading}>
+        <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading} hideTitle>
             <S.Wrapper>
                 {item && (
                     <>
-                        <p>Change the name of {item.name}:</p>
+                        <S.Title>
+                            Edit your <S.Span>{titleCase(item.name)}</S.Span>:
+                        </S.Title>
 
-                        <CreatableDropdown
+                        <S.CreatableDropdown
                             defaultValue={item.name}
                             options={formatDropdownOptions(fridge || [])}
                             setSelected={setNewName}
                         />
 
-                        <ChooseCategory handleClick={setNewCategory} selected={newCategory} small />
-
-                        <Button margin="0 0 2rem" onClick={handleEdit}>
-                            Make Change
-                        </Button>
+                        <ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
 
                         <EditFoodServings item={item} tenants={nonPendingTenants} updateBatch={updateBatch} />
+
+                        <Button onClick={handleEdit}>Save Changes</Button>
                     </>
                 )}
             </S.Wrapper>

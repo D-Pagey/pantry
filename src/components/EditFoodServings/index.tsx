@@ -3,12 +3,11 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 
-import { BatchType, FoodType, TenantType } from '../../types';
-import { getColourFromDate, getOwnerFromId } from '../../utils';
-import { db, firebase } from '../../services';
 import deleteIcon from '../../assets/delete.svg';
+import { BatchType, FoodType, TenantType } from '../../types';
+import { getColourFromDate } from '../../utils';
+import { db, firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
-import { ProfilePhoto } from '../ProfilePhoto';
 import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ModalChangeDate } from '../ModalChangeDate';
 import * as S from './styles';
@@ -18,7 +17,6 @@ if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 type EditFoodServingsProps = {
     item: FoodType;
     tenants: TenantType[];
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
@@ -60,11 +58,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
         setIsModalOpen(false);
     };
 
-    const handleOwnerClick = (batch: BatchType) => () => {
-        setIsModalOpen(true);
-        setSelectedBatch(batch);
-    };
-
     const handleDateClick = (batch: BatchType) => () => {
         setIsModalOpen(true);
         setSelectedBatch(batch);
@@ -86,7 +79,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
     };
 
     return (
-        <S.Wrapper>
+        <>
             {selectedBatch && (
                 <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
                     {!isEditingDate && (
@@ -108,8 +101,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                 </ReactModal>
             )}
 
-            <S.Title>How many {item.name} servings are you eating?</S.Title>
-
             <S.List>
                 {item.batches.map((batch) => {
                     return [...Array(batch.servings)].map((e, i) => (
@@ -124,11 +115,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                                     Expires in {formatDistanceToNowStrict(batch.expires)}
                                 </S.Text>
                             </S.DateButton>
-                            <ProfilePhoto
-                                onClick={handleOwnerClick(batch)}
-                                owner={getOwnerFromId(batch.ownerId, tenants)}
-                                width="50px"
-                            />
+
                             <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
                                 <img src={deleteIcon} alt="delete" />
                             </S.DeleteButton>
@@ -136,6 +123,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                     ));
                 })}
             </S.List>
-        </S.Wrapper>
+        </>
     );
 };

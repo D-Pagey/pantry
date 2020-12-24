@@ -11,6 +11,5 @@ export const Primary = Template.bind({});
 Primary.args = {
     isSelected: false,
     name: 'Vegetables',
-    handleClick: () => null,
-    small: false
+    handleClick: () => null
 };
