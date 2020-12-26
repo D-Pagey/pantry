@@ -11,6 +11,7 @@ export const List = styled.ul`
 
     @media ${mediaQuery.tablet} {
         justify-self: auto;
+        width: 21rem;
     }
 `;
 

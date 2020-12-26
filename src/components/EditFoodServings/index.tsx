@@ -2,14 +2,17 @@ import React, { FC, useContext, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
+import { useMediaQuery } from 'react-responsive';
 
 import deleteIcon from '../../assets/delete.svg';
 import { BatchType, FoodType, TenantType } from '../../types';
-import { getColourFromDate } from '../../utils';
+import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { db, firebase } from '../../services';
+import { mediaQuery } from '../../tokens';
 import { AuthContext } from '../ProviderAuth';
 import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ModalChangeDate } from '../ModalChangeDate';
+import { ProfilePhoto } from '../ProfilePhoto';
 import * as S from './styles';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
@@ -25,6 +28,9 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
     const [isEditingDate, setIsEditingDate] = useState<boolean>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
     const { user } = useContext(AuthContext);
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
+    });
 
     const deleteBatch = ({ name, batchId }: { name: string; batchId: string }): void => {
         if (user) {
@@ -115,6 +121,8 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
                                     Expires in {formatDistanceToNowStrict(batch.expires)}
                                 </S.Text>
                             </S.DateButton>
+
+                            {isTabletOrLarger && <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} />}
 
                             <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
                                 <img src={deleteIcon} alt="delete" />

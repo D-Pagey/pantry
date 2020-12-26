@@ -91,6 +91,7 @@ exports[`EditFoodServings component should render 1`] = `
 @media (min-width:765px) {
   .c0 {
     justify-self: auto;
+    width: 21rem;
   }
 }
 
