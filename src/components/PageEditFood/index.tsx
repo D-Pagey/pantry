@@ -7,9 +7,7 @@ import { convertBatchesArray, formatDropdownOptions } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
-import { ChooseCategory } from '../ChooseCategory';
 import { Layout } from '../Layout';
-import { Button } from '../Button';
 import { EditFoodServings } from '../EditFoodServings';
 import * as S from './styles';
 
@@ -135,27 +133,30 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
 
     return (
         <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading} hideTitle>
-            <S.Wrapper>
-                {item && (
-                    <>
-                        <S.Title>
-                            Edit your <S.Span>{titleCase(item.name)}</S.Span>:
-                        </S.Title>
+            {item && (
+                <>
+                    <S.Title>
+                        Edit your <S.Span>{titleCase(item.name)}</S.Span>:
+                    </S.Title>
 
+                    <S.Wrapper>
+                        <S.Subtitle>Change item name:</S.Subtitle>
                         <S.CreatableDropdown
                             defaultValue={item.name}
                             options={formatDropdownOptions(fridge || [])}
                             setSelected={setNewName}
                         />
 
-                        <ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
+                        <S.Subtitle>Change category:</S.Subtitle>
+                        <S.ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
 
+                        <S.Subtitle>Change date or owner:</S.Subtitle>
                         <EditFoodServings item={item} tenants={nonPendingTenants} updateBatch={updateBatch} />
 
-                        <Button onClick={handleEdit}>Save Changes</Button>
-                    </>
-                )}
-            </S.Wrapper>
+                        <S.Button onClick={handleEdit}>Save Changes</S.Button>
+                    </S.Wrapper>
+                </>
+            )}
         </Layout>
     );
 };

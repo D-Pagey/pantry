@@ -18,7 +18,8 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c0 {
-  margin: 1.5rem auto;
+  justify-self: center;
+  margin: 0;
   padding: 0;
   list-style: none;
   width: 17rem;

@@ -12,11 +12,11 @@ export type ChooseCategoryProps = {
 
 const Categories = ['vegetables', 'fruit', 'dairy', 'meat', 'fish', 'misc.'];
 
-export const ChooseCategory: FC<ChooseCategoryProps> = ({ handleClick, selected, hideTitle }) => {
+export const ChooseCategory: FC<ChooseCategoryProps> = ({ handleClick, selected, hideTitle, ...props }) => {
     const handleCategoryClick = (category: string) => () => handleClick(category);
 
     return (
-        <S.Wrapper data-testid="chooseCategory">
+        <S.Wrapper data-testid="chooseCategory" {...props}>
             {!hideTitle && (
                 <>
                     <S.Title>What type of food?</S.Title>

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Button } from '../Button';
 
 export const List = styled.ul`
-    margin: 1.5rem auto;
+    justify-self: center;
+    margin: 0;
     padding: 0;
     list-style: none;
     width: 17rem;
