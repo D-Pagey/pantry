@@ -88,6 +88,12 @@ exports[`EditFoodServings component should render 1`] = `
   border: 1px solid #348841;
 }
 
+@media (min-width:765px) {
+  .c0 {
+    justify-self: auto;
+  }
+}
+
 <ul
   class="c0"
 >

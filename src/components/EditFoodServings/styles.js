@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQuery } from '../../tokens';
 import { Button } from '../Button';
 
 export const List = styled.ul`
@@ -7,6 +8,10 @@ export const List = styled.ul`
     padding: 0;
     list-style: none;
     width: 17rem;
+
+    @media ${mediaQuery.tablet} {
+        justify-self: auto;
+    }
 `;
 
 export const Item = styled.li`

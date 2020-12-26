@@ -147,10 +147,12 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                             setSelected={setNewName}
                         />
 
-                        <S.Subtitle>Change category:</S.Subtitle>
+                        <S.Subtitle column="1/2">Change category:</S.Subtitle>
                         <S.ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
 
-                        <S.Subtitle>Change date or owner:</S.Subtitle>
+                        <S.Subtitle column="2/3" row="3/4">
+                            Change date or owner:
+                        </S.Subtitle>
                         <EditFoodServings item={item} tenants={nonPendingTenants} updateBatch={updateBatch} />
 
                         <S.Button onClick={handleEdit}>Save Changes</S.Button>

@@ -17,9 +17,10 @@ export const Wrapper = styled.div`
     padding: 1rem;
 
     @media ${mediaQuery.tablet} {
+        grid-column-gap: 4rem;
         grid-template-columns: 1fr 1fr;
-        margin: 0;
-        max-width: none;
+        margin: 0 auto;
+        max-width: 750px;
     }
 `;
 
@@ -29,6 +30,7 @@ export const Span = styled.span`
 
 export const CreatableDropdown = styled(Dropdown)`
     margin: 0;
+    max-width: 330px;
 `;
 
 export const Button = styled(Btn)`
@@ -43,10 +45,16 @@ export const Button = styled(Btn)`
 export const ChooseCategory = styled(Choose)`
     @media ${mediaQuery.tablet} {
         grid-column: 1 / 2;
-        border: 1px solid red;
+        margin: 0;
     }
 `;
 
 export const Subtitle = styled.h3`
+    align-self: end;
     margin: 0;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: ${({ column }) => column};
+        grid-row: ${({ row }) => row};
+    }
 `;
