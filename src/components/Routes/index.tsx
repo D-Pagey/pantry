@@ -57,10 +57,11 @@ export const Routes = (): JSX.Element => {
                     if (data) {
                         const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
                         const formattedDates = formatExpiryDates(fridgeItems);
+                        const firebaseTenants = Object.values(data.tenants) as TenantType[];
 
                         setFridge(formattedDates);
                         setExpiringCount(countExpiringFoodItems(formattedDates));
-                        setTenants(Object.values(data.tenants));
+                        setTenants(firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa'));
                     }
                 });
         }
