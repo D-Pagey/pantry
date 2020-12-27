@@ -110,11 +110,13 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                 )}
 
                 <S.FilterWrapper>
-                    <OwnerFilter
-                        tenants={tenants}
-                        setSelectedTenants={setSelectedTenants}
-                        selectedTenants={selectedTenants}
-                    />
+                    {tenants.length > 1 && (
+                        <OwnerFilter
+                            tenants={tenants}
+                            setSelectedTenants={setSelectedTenants}
+                            selectedTenants={selectedTenants}
+                        />
+                    )}
 
                     <S.ExpiringButton handleClick={handleExpiringClick} isEnabled={isExpiring} />
                 </S.FilterWrapper>
