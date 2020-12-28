@@ -27,7 +27,7 @@ export const colours = {
 
 export const mediaQuery = {
     laptop: '(min-width: 1024px)',
-    largeMobile: '(min-width: 400px)',
+    largeMobile: '(min-width: 375px)',
     maxPage: `(min-width: ${PAGE_WIDTH})`,
     tablet: '(min-width: 765px)'
 };

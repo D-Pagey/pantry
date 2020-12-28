@@ -74,7 +74,7 @@ exports[`PageSignIn component should render 1`] = `
 
 }
 
-@media (min-width:400px) {
+@media (min-width:375px) {
 
 }
 
