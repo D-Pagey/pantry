@@ -11,7 +11,7 @@ import { Routes } from '../Routes';
 import * as S from './styles';
 
 toast.configure({
-    position: 'bottom-right'
+    position: 'top-right'
 });
 
 export const App: FC = () => {
