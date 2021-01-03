@@ -3,9 +3,16 @@ import { render } from '../../test-utils';
 import { ModalHousehold } from '.';
 
 const props = {
-    isCurrentUser: false,
+    handleCancelInvite: () => null,
+    handleClose: () => null,
     handleLeaveHousehold: () => null,
-    onModalClose: () => null
+    handlePromoteUser: () => null,
+    handleRemoveUser: () => null,
+    showCancelOption: true,
+    showLeaveOption: true,
+    showRemoveOptionts: true,
+    showPromoteOption: true,
+    showRemoveOption: true
 };
 
 describe('ModalHousehold component', () => {

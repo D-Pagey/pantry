@@ -2,20 +2,16 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render } from '../../test-utils';
-import { TenantHeidi } from '../../fixtures';
+import { TenantDan, TenantHeidi, UserDan } from '../../fixtures';
 import { PageSettings } from '.';
 
 const props = {
-    tenants: [TenantHeidi]
+    tenants: [TenantHeidi, TenantDan]
 };
 
 const context = {
     signOut: () => null,
-    user: {
-        email: 'dan@gmail.com',
-        name: 'Dan',
-        photo: 'www.google.com'
-    }
+    user: UserDan
 };
 
 describe('PageSettings component', () => {

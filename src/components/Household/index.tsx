@@ -2,48 +2,13 @@ import React, { FC, useState } from 'react';
 import ReactModal from 'react-modal';
 import { toast } from 'react-toastify';
 
+import threeDots from '../../assets/three-dots.svg';
 import { firebase } from '../../services';
 import { TenantType, HouseRoleType, UserType } from '../../types';
-import threeDots from '../../assets/three-dots.svg';
 import { ModalHousehold } from '../ModalHousehold';
+import { getEmoji } from './utils';
 import * as S from './styles';
-
-const getEmoji = (houseRole: HouseRoleType) => {
-    if (houseRole === 'admin') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="avocado">
-                🥑
-            </S.Span>
-        );
-    }
-
-    if (houseRole === 'tenant') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="carrot">
-                🥕
-            </S.Span>
-        );
-    }
-
-    if (houseRole === 'alexa') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="robot">
-                🤖
-            </S.Span>
-        );
-    }
-
-    // pending
-    return (
-        // eslint-disable-next-line
-        <S.Span role="img" aria-label="potato">
-            🥔
-        </S.Span>
-    );
-};
+import { selected } from '../CategoryFilterMobile/index.stories';
 
 export type HouseholdProps = {
     tenants: TenantType[];
@@ -54,6 +19,9 @@ const leaveCurrentHousehold = firebase.functions().httpsCallable('leaveCurrentHo
 
 export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTenant, setSelectedTenant] = useState<TenantType>();
+    const currentUser = tenants.filter((tenant) => tenant.uid === user.uid)[0];
+
     const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
 
     const sortedTenants = [...tenants].sort((a, b) => {
@@ -62,7 +30,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
 
         if (aOrder < bOrder) return -1;
         if (aOrder > bOrder) return 1;
-
+        5;
         return 0;
     });
 
@@ -80,42 +48,62 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                 console.log({ data });
             } catch (error) {
                 console.log({ error });
+                toast.error('Something went wrong leaving, try again.');
             }
         }
         setIsModalOpen(false);
     };
 
+    const handleMenuClick = (id: string) => () => {
+        setSelectedTenant(tenants.filter((tenant) => tenant.uid === id)[0]);
+        setIsModalOpen(true);
+    };
+
     return (
-        <S.List>
-            {sortedTenants.map((tenant) => {
-                const isAlexa = tenant.houseRole === 'alexa';
-                const isPending = tenant.houseRole === 'pending';
+        <>
+            <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
+                <ModalHousehold
+                    handleCancelInvite={() => console.log('cancel invite user')}
+                    handleClose={() => setIsModalOpen(false)}
+                    handleLeaveHousehold={handleLeaveHousehold}
+                    handlePromoteUser={() => console.log('promote user')}
+                    handleRemoveUser={() => console.log('remove user')}
+                    showCancelOption={selectedTenant?.houseRole === 'pending'}
+                    showLeaveOption={selectedTenant?.uid === user.uid}
+                    showPromoteOption={
+                        currentUser.houseRole === 'admin' &&
+                        selectedTenant?.uid !== currentUser.uid &&
+                        selectedTenant?.houseRole !== 'pending'
+                    }
+                    showRemoveOption={
+                        currentUser.houseRole === 'admin' &&
+                        selectedTenant?.uid !== currentUser.uid &&
+                        selectedTenant?.houseRole !== 'pending'
+                    }
+                />
+            </ReactModal>
 
-                return (
-                    <React.Fragment key={tenant.uid}>
-                        <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                            <ModalHousehold
-                                handleLeaveHousehold={handleLeaveHousehold}
-                                isCurrentUser
-                                onModalClose={() => setIsModalOpen(false)}
-                            />
-                        </ReactModal>
+            <S.List>
+                {sortedTenants.map((tenant) => {
+                    const isAlexa = tenant.houseRole === 'alexa';
+                    const isPending = tenant.houseRole === 'pending';
 
-                        <S.Item>
+                    return (
+                        <S.Item key={tenant.uid}>
                             <S.ProfilePhoto owner={tenant} width="50px" />
                             <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
                             <S.Email>{tenant.email}</S.Email>
                             {getEmoji(tenant.houseRole)}
 
                             {!isAlexa && (
-                                <S.MenuButton onClick={() => setIsModalOpen(true)}>
+                                <S.MenuButton onClick={handleMenuClick(tenant.uid)}>
                                     <img src={threeDots} alt="menu" />
                                 </S.MenuButton>
                             )}
                         </S.Item>
-                    </React.Fragment>
-                );
-            })}
-        </S.List>
+                    );
+                })}
+            </S.List>
+        </>
     );
 };

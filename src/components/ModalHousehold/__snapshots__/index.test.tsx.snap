@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModalHousehold component should render 1`] = `
-.c1 {
+.c2 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -23,18 +23,85 @@ exports[`ModalHousehold component should render 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  list-style: none;
-  padding: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
-<ul
+.c1 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0 0 20px;
+}
+
+.c3 {
+  background-color: white;
+  border: 1px solid rgb(66,133,244);
+  color: rgb(66,133,244);
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  width: 200px;
+}
+
+.c4 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  width: 200px;
+}
+
+.c5 {
+  background-color: white;
+  border: 1px solid #EB5757;
+  color: #EB5757;
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  width: 200px;
+}
+
+<div
   class="c0"
 >
-  <button
+  <h3
     class="c1"
+  >
+    Household Options:
+  </h3>
+  <button
+    class="c2 c3"
+    color="rgb(66, 133, 244)"
+    type="button"
+  >
+    Remove User
+  </button>
+  <button
+    class="c2 c3"
+    color="rgb(66, 133, 244)"
+    type="button"
+  >
+    Cancel Invite
+  </button>
+  <button
+    class="c2 c4"
+    color="#348841"
+    type="button"
+  >
+    Promote to Owner
+  </button>
+  <button
+    class="c2 c5"
+    color="#EB5757"
+    type="button"
+  >
+    Leave household
+  </button>
+  <button
+    class="c2"
     type="button"
   >
     Close
   </button>
-</ul>
+</div>
 `;
