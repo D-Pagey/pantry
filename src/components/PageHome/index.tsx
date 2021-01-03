@@ -55,7 +55,7 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
                     </S.Feature>
 
                     <S.Feature>
-                        <S.Image src={AlexaImage} alt="alexa" />
+                        <S.Image src={AlexaImage} alt="alexa" positionImageRight />
                         <S.FeatureTitle>Alexa, what should I eat today?</S.FeatureTitle>
                         <S.Description>
                             Ask Alexa what you have that is expiring, or add a list of items as you put your shopping

@@ -40,6 +40,14 @@ exports[`App component should render 1`] = `
 
 }
 
+@media (min-width:765px) {
+
+}
+
+@media (min-width:765px) {
+
+}
+
 @media (min-width:375px) {
 
 }

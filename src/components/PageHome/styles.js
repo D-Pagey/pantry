@@ -5,6 +5,8 @@ import { colours, mediaQuery } from '../../tokens';
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    max-width: 45rem;
     padding: 0 0 4rem;
 `;
 
@@ -56,6 +58,12 @@ export const FeaturesWrapper = styled.div`
     grid-row-gap: 2rem;
     justify-items: center;
     padding: 1.75rem 1rem 0;
+
+    @media ${mediaQuery.tablet} {
+        justify-items: start;
+        padding: 3rem 0 0;
+        grid-row-gap: 2.5rem;
+    }
 `;
 
 export const SubTitle = styled.h2`
@@ -67,12 +75,11 @@ export const SubTitle = styled.h2`
 export const Feature = styled.div`
     display: grid;
     grid-row-gap: 1.5rem;
-    max-width: 700px;
 
     @media ${mediaQuery.tablet} {
         grid-column-gap: 2rem;
         grid-row-gap: 1rem;
-        grid-template-columns: 1fr max-content;
+        grid-template-columns: 1fr 1fr;
     }
 `;
 
@@ -82,9 +89,8 @@ export const Image = styled.img`
     width: 100%;
 
     @media ${mediaQuery.tablet} {
-        grid-column: 2 / 3;
+        grid-column: ${({ positionImageRight }) => (positionImageRight ? '2' : '1')};
         grid-row: 1 / 3;
-        justify-self: end;
     }
 `;
 
@@ -106,7 +112,6 @@ export const Description = styled.p`
     color: ${colours.darkGrey};
     font-size: 18px;
     margin: 0;
-    max-width: 500px;
 `;
 
 export const PositionedLink = styled(Link)`
