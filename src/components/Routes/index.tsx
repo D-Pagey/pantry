@@ -51,6 +51,7 @@ export const Routes = (): JSX.Element => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
+                // eslint-disable-next-line
                 .onSnapshot((doc: any) => {
                     const data = doc.data();
 

@@ -22,12 +22,15 @@ export const PageSignIn: FC = () => {
         firebase
             .auth()
             .signInWithPopup(googleProvider)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             .then((result) => null)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             .catch((error) => {
                 setIsLoading(false);
             });
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleEmailChange = (event: any): void => setEmail(event.target.value);
 
     const actionCodeSettings = {

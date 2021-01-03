@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     width: 60px;
 `;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const animate = (props) => keyframes`
     0% {
         stroke-dashoffset: ${props.perimeter};

@@ -86,6 +86,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
 
                         <S.Input
                             disabled={isLoading}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             onChange={(e: any) => setEmailInvite(e.target.value)}
                             placeholder="Your friends' email"
                             value={emailInvite}

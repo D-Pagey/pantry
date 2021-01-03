@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import * as S from './styles';

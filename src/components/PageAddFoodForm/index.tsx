@@ -77,6 +77,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                             category: values.category,
                             name: values.name.toLowerCase() || values.category,
                             batch: {
+                                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                                 ownerId: user.uid!,
                                 expires: values.expires,
                                 servings: values.servings,
@@ -116,6 +117,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                         return undefined;
                     };
 
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const onKeyDown = (keyEvent: any): void => {
                         if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
                             keyEvent.preventDefault();
@@ -140,6 +142,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
 
                                             <SingleSelect
                                                 options={options}
+                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                                 setSelected={(option: any) => setFieldValue('servings', option.value)}
                                                 selected={values.servings}
                                             />

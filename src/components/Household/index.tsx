@@ -8,7 +8,6 @@ import { TenantType, HouseRoleType, UserType } from '../../types';
 import { ModalHousehold } from '../ModalHousehold';
 import { getEmoji } from './utils';
 import * as S from './styles';
-import { selected } from '../CategoryFilterMobile/index.stories';
 
 export type HouseholdProps = {
     tenants: TenantType[];

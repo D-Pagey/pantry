@@ -1,7 +1,7 @@
 import { HouseRoleType } from '../../types';
 import * as S from './styles';
 
-export const getEmoji = (houseRole: HouseRoleType) => {
+export const getEmoji = (houseRole: HouseRoleType): JSX.Element => {
     if (houseRole === 'admin') {
         return (
             // eslint-disable-next-line

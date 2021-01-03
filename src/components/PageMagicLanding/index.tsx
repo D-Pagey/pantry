@@ -45,6 +45,7 @@ export const PageMagicLanding: FC = () => {
                 .auth()
                 .signInWithEmailLink(emailToCheck, window.location.href)
                 .then((result) => {
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     fetchUserData(result.user!.uid);
                     // Clear email from storage.
                     window.localStorage.removeItem('emailForSignIn');
@@ -62,6 +63,7 @@ export const PageMagicLanding: FC = () => {
         }
     }, [localEmail, manualSubmit, email, fetchUserData]);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleEmailChange = (event: any): void => setEmail(event.target.value);
 
     const handleEmailClick = (): void => setManualSubmit(true);

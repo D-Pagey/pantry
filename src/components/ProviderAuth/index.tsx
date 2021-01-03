@@ -29,6 +29,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
     const [user, setUser] = useState<Partial<UserType>>();
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [isAuthed, setIsAuthed] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { state, redirect_uri } = useParams<{ state?: any; redirect_uri?: string }>();
 
     const fetchUserData = useCallback((uid: string) => {
@@ -37,6 +38,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
             .collection('users')
             .doc(uid)
             .onSnapshot(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (doc: any) => {
                     if (doc.exists) {
                         const formatted = formatUser(doc.data());
