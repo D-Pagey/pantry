@@ -15,7 +15,11 @@ export const HeroWrapper = styled.div`
     padding: 1.5rem 1rem 0;
 
     @media ${mediaQuery.tablet} {
-        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 2rem;
+        grid-template-columns: 1fr max-content;
+        grid-template-rows: 13rem max-content max-content;
+        margin: 2rem 0 0;
+        padding: 0;
     }
 `;
 
@@ -25,6 +29,20 @@ export const Title = styled.h1`
     margin: 0;
     text-align: center;
     width: 230px;
+
+    @media ${mediaQuery.tablet} {
+        align-self: end;
+    }
+`;
+
+export const Screenshot = styled.img`
+    max-width: 300px;
+    width: 100%;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: 2;
+        grid-row: 1 / 5;
+    }
 `;
 
 export const Text = styled.p`
@@ -94,9 +112,4 @@ export const Description = styled.p`
 export const PositionedLink = styled(Link)`
     align-self: center;
     margin: 2rem 0 0;
-`;
-
-export const Screenshot = styled.img`
-    max-width: 300px;
-    width: 100%;
 `;
