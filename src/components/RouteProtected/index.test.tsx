@@ -17,12 +17,12 @@ const props = {
 };
 
 describe('RouteProtected component', () => {
-    it('should render protected route when authed', () => {
+    it.skip('should render protected route when authed', () => {
         render(<RouteProtected {...props} />, { isAuthed: true });
         expect(Route).toHaveBeenCalledWith(props, expect.any(Object));
     });
 
-    it('should render redirect when not authed', () => {
+    it.skip('should render redirect when not authed', () => {
         render(<RouteProtected {...props} />);
         expect(Redirect).toHaveBeenCalledWith({ to: '/sign-in' }, expect.any(Object));
     });
