@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { colours, mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
-    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     padding: 0 0 4rem;
 `;
 
 export const HeroWrapper = styled.div`
-    /* border: 2px solid blue; */
     display: grid;
     grid-row-gap: 1.5rem;
     justify-items: center;
@@ -33,11 +31,9 @@ export const Text = styled.p`
     color: ${colours.darkGrey};
     font-size: 18px;
     margin: 0;
-    /* width: 330px; */
 `;
 
 export const FeaturesWrapper = styled.div`
-    /* border: 2px solid green; */
     display: grid;
     grid-row-gap: 2rem;
     justify-items: center;
@@ -98,4 +94,9 @@ export const Description = styled.p`
 export const PositionedLink = styled(Link)`
     align-self: center;
     margin: 2rem 0 0;
+`;
+
+export const Screenshot = styled.img`
+    max-width: 300px;
+    width: 100%;
 `;

@@ -29,7 +29,7 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
                 <S.HeroWrapper>
                     <S.Title>Play With Your Food</S.Title>
 
-                    <img src={ScreenshotImage} alt="screenshot of food page" />
+                    <S.Screenshot src={ScreenshotImage} alt="screenshot of food page" />
 
                     <S.Text>Stop wasting food and get creative with what you have.</S.Text>
 
@@ -39,7 +39,7 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
                     </S.Text>
 
                     <Link to="/food">
-                        <Button>Get started for free</Button>
+                        <Button>Get started in 30 seconds</Button>
                     </Link>
                 </S.HeroWrapper>
 
@@ -74,7 +74,7 @@ export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
                 </S.FeaturesWrapper>
 
                 <S.PositionedLink to="/food">
-                    <Button>Get started for free</Button>
+                    <Button>Get started in 30 seconds</Button>
                 </S.PositionedLink>
             </S.Wrapper>
         </Layout>
