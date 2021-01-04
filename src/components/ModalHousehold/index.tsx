@@ -30,12 +30,6 @@ export const ModalHousehold: FC<ModalHouseholdProps> = ({
         <S.Wrapper>
             <S.Title>Household Options:</S.Title>
 
-            {showRemoveOption && (
-                <S.ColouredButton color={colours.blue} onClick={handleRemoveUser}>
-                    Remove User
-                </S.ColouredButton>
-            )}
-
             {showCancelOption && (
                 <S.ColouredButton color={colours.blue} onClick={handleCancelInvite}>
                     Cancel Invite
@@ -45,6 +39,12 @@ export const ModalHousehold: FC<ModalHouseholdProps> = ({
             {showPromoteOption && (
                 <S.ColouredButton color={colours.darkGreen100} onClick={handlePromoteUser}>
                     Promote to Owner
+                </S.ColouredButton>
+            )}
+
+            {showRemoveOption && (
+                <S.ColouredButton color={colours.red} onClick={handleRemoveUser}>
+                    Remove User
                 </S.ColouredButton>
             )}
 

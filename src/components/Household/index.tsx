@@ -36,7 +36,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const handleLeaveHousehold = async () => {
         const noPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
-        if (noPendingTenants.length === 2) {
+        // will need to change this when reintroducing Alexa as default tenant
+        if (noPendingTenants.length === 1) {
             toast.error(`You can't leave as the only person in the household`);
         } else {
             const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
@@ -84,8 +85,16 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
 
             <S.List>
                 {sortedTenants.map((tenant) => {
-                    const isAlexa = tenant.houseRole === 'alexa';
+                    // const isAlexa = tenant.houseRole === 'alexa';
                     const isPending = tenant.houseRole === 'pending';
+                    const currentUserIsAdmin = currentUser.houseRole === 'admin';
+                    const showMenu = () => {
+                        if (currentUserIsAdmin) return true;
+
+                        if (currentUser.uid === tenant.uid) return true;
+
+                        return false;
+                    };
 
                     return (
                         <S.Item key={tenant.uid}>
@@ -94,7 +103,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                             <S.Email>{tenant.email}</S.Email>
                             {getEmoji(tenant.houseRole)}
 
-                            {!isAlexa && (
+                            {showMenu() && (
                                 <S.MenuButton onClick={handleMenuClick(tenant.uid)}>
                                     <img src={threeDots} alt="menu" />
                                 </S.MenuButton>

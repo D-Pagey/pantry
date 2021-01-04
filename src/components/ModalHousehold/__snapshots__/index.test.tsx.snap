@@ -74,13 +74,6 @@ exports[`ModalHousehold component should render 1`] = `
     color="rgb(66, 133, 244)"
     type="button"
   >
-    Remove User
-  </button>
-  <button
-    class="c2 c3"
-    color="rgb(66, 133, 244)"
-    type="button"
-  >
     Cancel Invite
   </button>
   <button
@@ -89,6 +82,13 @@ exports[`ModalHousehold component should render 1`] = `
     type="button"
   >
     Promote to Owner
+  </button>
+  <button
+    class="c2 c5"
+    color="#EB5757"
+    type="button"
+  >
+    Remove User
   </button>
   <button
     class="c2 c5"
