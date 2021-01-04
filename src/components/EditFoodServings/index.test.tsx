@@ -39,7 +39,7 @@ describe('EditFoodServings component', () => {
                 expires: expect.any(Date),
                 id: '22222222',
                 ownerId: 'abcde',
-                servings: 1
+                quantity: 1
             },
             name: 'broccoli'
         });

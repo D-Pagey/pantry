@@ -82,12 +82,14 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrot'
+                name: 'carrot',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 category: 'meat',
-                name: 'steak'
+                name: 'steak',
+                unit: 'servings'
             }
         ];
 
@@ -104,12 +106,14 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrot'
+                name: 'carrot',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 category: 'meat',
-                name: 'steak'
+                name: 'steak',
+                unit: 'servings'
             }
         ];
 
@@ -132,17 +136,20 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrot'
+                name: 'carrot',
+                unit: 'servings'
             },
             {
                 batches: [ExpiredBatch],
                 category: 'meat',
-                name: 'steak'
+                name: 'steak',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 category: 'vegetables',
-                name: 'broccoli'
+                name: 'broccoli',
+                unit: 'servings'
             }
         ];
 
@@ -174,17 +181,20 @@ describe('PageFood component', () => {
             {
                 batches: [ExpiredBatch],
                 category: 'vegetables',
-                name: 'carrot'
+                name: 'carrot',
+                unit: 'servings'
             },
             {
                 batches: [ExpiredBatch],
                 category: 'meat',
-                name: 'steak'
+                name: 'steak',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 category: 'vegetables',
-                name: 'broccoli'
+                name: 'broccoli',
+                unit: 'servings'
             }
         ];
 
@@ -243,12 +253,14 @@ describe('PageFood component', () => {
                 {
                     batches: [],
                     category: 'vegetables',
-                    name: 'carrot'
+                    name: 'carrot',
+                    unit: 'servings'
                 },
                 {
                     batches: [FreshBatch],
                     category: 'meat',
-                    name: 'steak'
+                    name: 'steak',
+                    unit: 'servings'
                 }
             ]
         };

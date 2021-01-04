@@ -16,6 +16,7 @@ export const convertBatches = (batches: { [id: string]: BatchType }): NewBatchTy
     const batchValues = Object.values(batches);
 
     const swapKeys = batchValues.map((batch) => {
+        // @ts-ignore
         const { servings, ...rest } = batch;
 
         return {

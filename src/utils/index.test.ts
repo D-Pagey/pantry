@@ -8,7 +8,7 @@ import {
     countExpiringFoodItems,
     filterByTenantIds,
     filterFridgeByCategory,
-    formatDropdownOptions,
+    formatFoodDropdownOptions,
     getCategoriesAndCounts,
     getColourFromDate,
     getExpiringItems,
@@ -52,14 +52,14 @@ describe('getColourFromDate function', () => {
     });
 });
 
-describe('formatDropdownOptions function', () => {
+describe('formatFoodDropdownOptions function', () => {
     it('should return an array of objects of labels and values', () => {
-        const options = formatDropdownOptions(Fridge);
+        const options = formatFoodDropdownOptions(Fridge);
         expect(options).toStrictEqual([
             { label: 'Really Long Food Name for Carrot (7 servings)', value: 'really long food name for carrot' },
             { label: 'Broccoli (7 servings)', value: 'broccoli' },
             { label: 'Steak (7 servings)', value: 'steak' },
-            { label: 'Milk (7 servings)', value: 'milk' },
+            { label: 'Milk (7 carton)', value: 'milk' },
             { label: 'Chocolate (0 servings)', value: 'chocolate' }
         ]);
     });
@@ -71,12 +71,14 @@ describe('getExpiringItems function', () => {
             {
                 batches: [ExpiredBatch, ExpiringSoonBatch],
                 category: 'vegetables',
-                name: 'carrot'
+                name: 'carrot',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 category: 'meat',
-                name: 'steak'
+                name: 'steak',
+                unit: 'servings'
             }
         ];
 
@@ -107,11 +109,12 @@ describe('countExpiringFoodItems function', () => {
                         id: '22234',
                         expires: addDays(new Date(), 5),
                         ownerId: TenantHeidi.uid,
-                        servings: 1
+                        quantity: 1
                     }
                 ],
                 category: 'dairy',
-                name: 'milk'
+                name: 'milk',
+                unit: 'servings'
             }
         ];
 
@@ -127,11 +130,12 @@ describe('countExpiringFoodItems function', () => {
                         id: '6677676',
                         expires: addDays(new Date(), 5),
                         ownerId: TenantHeidi.uid,
-                        servings: 1
+                        quantity: 1
                     }
                 ],
                 category: 'dairy',
-                name: 'milk'
+                name: 'milk',
+                unit: 'servings'
             }
         ];
 
@@ -153,12 +157,28 @@ describe('convertBatchesArray function', () => {
         expect(result).toStrictEqual([
             {
                 batches: {
-                    '1111111': { expires: expect.any(Date), id: '1111111', ownerId: 'fghij', servings: 1 },
-                    '22222222': { expires: expect.any(Date), id: '22222222', ownerId: 'abcde', servings: 2 },
-                    '3333333': { expires: expect.any(Date), id: '3333333', ownerId: 'zxwy', servings: 4 }
+                    '1111111': {
+                        expires: expect.any(Date),
+                        id: '1111111',
+                        ownerId: 'fghij',
+                        quantity: 1
+                    },
+                    '22222222': {
+                        expires: expect.any(Date),
+                        id: '22222222',
+                        ownerId: 'abcde',
+                        quantity: 2
+                    },
+                    '3333333': {
+                        expires: expect.any(Date),
+                        id: '3333333',
+                        ownerId: 'zxwy',
+                        quantity: 4
+                    }
                 },
                 category: 'vegetables',
-                name: Fridge[0].name
+                name: Fridge[0].name,
+                unit: 'servings'
             }
         ]);
     });
@@ -177,17 +197,20 @@ describe('filterByTenantIds function', () => {
             {
                 batches: [ExpiringSoonBatch],
                 name: 'Carrots',
-                category: 'vegetables'
+                category: 'vegetables',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 name: 'Steak',
-                category: 'meat'
+                category: 'meat',
+                unit: 'servings'
             },
             {
                 batches: [],
                 name: 'Salmon',
-                category: 'fish'
+                category: 'fish',
+                unit: 'servings'
             }
         ];
 
@@ -200,27 +223,32 @@ describe('filterByTenantIds function', () => {
             {
                 batches: [ExpiringSoonBatch],
                 name: 'Carrots',
-                category: 'vegetables'
+                category: 'vegetables',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch],
                 name: 'Steak',
-                category: 'meat'
+                category: 'meat',
+                unit: 'servings'
             },
             {
                 batches: [FreshBatch, ExpiringSoonBatch],
                 name: 'Chicken',
-                category: 'meat'
+                category: 'meat',
+                unit: 'servings'
             },
             {
                 batches: [],
                 name: 'Salmon',
-                category: 'fish'
+                category: 'fish',
+                unit: 'servings'
             },
             {
                 batches: [ExpiredBatch],
                 name: 'Cod',
-                category: 'fish'
+                category: 'fish',
+                unit: 'servings'
             }
         ];
 

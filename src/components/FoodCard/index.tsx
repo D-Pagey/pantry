@@ -44,7 +44,7 @@ export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, ten
 
             <S.CircleWrapper>
                 {circleIconBatches.map((batch) => {
-                    return [...Array(batch.servings)].map((_, i) => (
+                    return [...Array(batch.quantity)].map((_, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <CircleIcon key={i} colour={getColourFromDate(batch.expires)} margin="0 4px 0 0" />
                     ));

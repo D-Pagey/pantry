@@ -16,7 +16,7 @@ export type TenantType = {
 export type BatchType = {
     expires: Date | any;
     id: string;
-    servings: number;
+    quantity: number;
     ownerId: string;
 };
 
@@ -26,6 +26,7 @@ export type DatabaseFoodType = {
     };
     category: string;
     name: string;
+    unit: string;
 };
 
 export type FoodType = Omit<DatabaseFoodType, 'batches'> & { batches: BatchType[] };
@@ -56,3 +57,8 @@ export interface DatabaseUserType {
 }
 
 export type UserType = Omit<DatabaseUserType, 'notifications'> & { notifications: NotificationType[] };
+
+export type MetaDataType = {
+    quantities: number[];
+    units: string[];
+};

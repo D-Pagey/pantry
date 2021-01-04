@@ -5,44 +5,30 @@ import DatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { BatchType, FoodType, NewFoodType } from '../../types';
-import { formatDropdownOptions } from '../../utils';
+import { BatchType, FoodType, MetaDataType, NewFoodType } from '../../types';
+import { formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
-import { SingleSelect } from '../SingleSelect';
 import { Button } from '../Button';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
-const options = [
-    {
-        label: '1',
-        value: 1
-    },
-    {
-        label: '2',
-        value: 2
-    },
-    {
-        label: '3',
-        value: 3
-    },
-    {
-        label: '4',
-        value: 4
-    }
-];
-
 type PageAddFoodFormProps = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    updateNameAndCategory: ({ name, category }: { name: string; category: string }) => void;
+    updateExistingProperties: ({ name, category, unit }: { name: string; category: string; unit: string }) => void;
     fridge?: FoodType[];
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
+    metaData: MetaDataType;
 };
 
-export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAndCategory, updateBatch }) => {
+export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({
+    fridge,
+    updateExistingProperties,
+    updateBatch,
+    metaData
+}) => {
     const [step, setStep] = useState(1);
     const [itemExists, setItemExists] = useState(false);
     const { user } = useContext(AuthContext);
@@ -68,7 +54,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
     return (
         <Layout title="Add food">
             <Formik
-                initialValues={{ category: '', expires: new Date(), name: '', servings: 1 }}
+                initialValues={{ category: '', expires: new Date(), name: '', quantity: '', unit: '' }}
                 onSubmit={(values, actions): void => {
                     if (fridge && user) {
                         const newBatchId = uuidv4();
@@ -76,17 +62,22 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                         const formattedValues: NewFoodType = {
                             category: values.category,
                             name: values.name.toLowerCase() || values.category,
+                            unit: values.unit,
                             batch: {
                                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                                 ownerId: user.uid!,
                                 expires: values.expires,
-                                servings: values.servings,
+                                quantity: parseInt(values.quantity, 10),
                                 id: newBatchId
                             }
                         };
 
                         if (!itemExists) {
-                            updateNameAndCategory({ name: formattedValues.name, category: formattedValues.category });
+                            updateExistingProperties({
+                                name: formattedValues.name,
+                                category: formattedValues.category,
+                                unit: formattedValues.unit
+                            });
                         }
 
                         updateBatch({ name: formattedValues.name, batch: formattedValues.batch });
@@ -133,19 +124,28 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, updateNameAn
                                             <S.Label htmlFor="foodName">What is the food called?</S.Label>
 
                                             <CreatableDropdown
-                                                options={formatDropdownOptions(fridge || [])}
+                                                options={formatFoodDropdownOptions(fridge || [])}
                                                 setSelected={(name: string) => setFieldValue('name', name)}
                                                 placeholder="e.g. Carrot"
                                             />
 
-                                            <S.Label>How many servings?</S.Label>
+                                            <S.Grid>
+                                                <S.SmallLabel>Quantity</S.SmallLabel>
+                                                <CreatableDropdown
+                                                    options={formatDropdownOptions(metaData.quantities)}
+                                                    setSelected={(quantity: string) =>
+                                                        setFieldValue('quantity', quantity)
+                                                    }
+                                                    placeholder="2"
+                                                />
 
-                                            <SingleSelect
-                                                options={options}
-                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                setSelected={(option: any) => setFieldValue('servings', option.value)}
-                                                selected={values.servings}
-                                            />
+                                                <S.SmallLabel>Unit</S.SmallLabel>
+                                                <CreatableDropdown
+                                                    options={formatDropdownOptions(metaData.units)}
+                                                    setSelected={(unit: string) => setFieldValue('unit', unit)}
+                                                    placeholder="cans"
+                                                />
+                                            </S.Grid>
                                         </S.InputWrapper>
 
                                         <Button onClick={handleStepOneNext(values.name)}>Next</Button>

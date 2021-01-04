@@ -45,12 +45,12 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
     };
 
     const handleDelete = (batch: BatchType) => () => {
-        const updatedServings = batch.servings - 1;
+        const updatedServings = batch.quantity - 1;
 
         if (updatedServings === 0) {
             deleteBatch({ name: item.name, batchId: batch.id });
         } else {
-            updateBatch({ name: item.name, batch: { ...batch, servings: updatedServings } });
+            updateBatch({ name: item.name, batch: { ...batch, quantity: updatedServings } });
         }
     };
 
@@ -109,7 +109,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
 
             <S.List>
                 {item.batches.map((batch) => {
-                    return [...Array(batch.servings)].map((e, i) => (
+                    return [...Array(batch.quantity)].map((e, i) => (
                         // eslint-disable-next-line react/no-array-index-key
                         <S.Item key={`${batch.id}-${i}`}>
                             <S.DateButton

@@ -8,12 +8,14 @@ const Fridge: DatabaseFridgeType = {
             abc: {
                 id: 'abc',
                 expires: new Date(),
+                // @ts-ignore
                 servings: 2,
                 ownerId: 'zz'
             },
             def: {
                 id: 'def',
                 expires: new Date(),
+                // @ts-ignore
                 servings: 3,
                 ownerId: 'zz'
             }
@@ -26,12 +28,14 @@ const Fridge: DatabaseFridgeType = {
             ghi: {
                 id: 'ghi',
                 expires: new Date(),
+                // @ts-ignore
                 servings: 1,
                 ownerId: 'zz'
             },
             jkl: {
                 id: 'jkl',
                 expires: new Date(),
+                // @ts-ignore
                 servings: 4,
                 ownerId: 'zz'
             }
@@ -106,6 +110,7 @@ describe('updateFridge function', () => {
             }
         };
 
+        // @ts-ignore
         const result = updateFridge(FridgeWithEmpty);
         expect(result).toStrictEqual(NewFridgeWithEmpty);
     });
