@@ -41,3 +41,14 @@ export const ButtonWrapper = styled.div`
     padding: 0 2rem;
     width: 100%;
 `;
+
+export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
+`;
+
+export const SmallLabel = styled.span`
+    grid-row: 1;
+`;

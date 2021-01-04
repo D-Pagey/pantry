@@ -7,13 +7,14 @@ export const Batch: BatchType = {
     id: '3333333',
     expires: addDays(new Date(), 5),
     ownerId: TenantDan.uid,
-    servings: 4
+    quantity: 4
 };
 
 const ItemOne: FoodType = {
     batches: [{ ...Batch, expires: addDays(new Date(), 5) }],
     category: 'vegetables',
-    name: 'radish'
+    name: 'radish',
+    unit: 'servings'
 };
 
 const ItemTwo: FoodType = {
@@ -22,7 +23,8 @@ const ItemTwo: FoodType = {
         { ...Batch, expires: addDays(new Date(), 5) }
     ],
     category: 'meat',
-    name: 'bacon'
+    name: 'bacon',
+    unit: 'servings'
 };
 
 const ItemThree: FoodType = {
@@ -31,7 +33,8 @@ const ItemThree: FoodType = {
         { ...Batch, expires: addDays(new Date(), 7) }
     ],
     category: 'dairy',
-    name: 'cheese'
+    name: 'cheese',
+    unit: 'servings'
 };
 
 const FridgeWithDifferentBatches: FoodType[] = [ItemOne, ItemTwo, ItemThree];

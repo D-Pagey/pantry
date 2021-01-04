@@ -2,8 +2,8 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { FoodType, TenantType, BatchType, DatabaseFoodType } from '../../types';
-import { formatExpiryDates } from '../../utils';
+import { FoodType, TenantType, BatchType, DatabaseFoodType, MetaDataType } from '../../types';
+import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
@@ -20,6 +20,8 @@ import { RouteProtected } from '../RouteProtected';
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
     const [tenants, setTenants] = useState<TenantType[]>();
+    const [expiringCount, setExpiringCount] = useState<number>(0);
+    const [metaData, setMetaData] = useState<MetaDataType>();
     const { user } = useContext(AuthContext);
 
     const updateBatch = ({ name, batch }: { name: string; batch: BatchType }): void => {
@@ -36,12 +38,20 @@ export const Routes = (): JSX.Element => {
         }
     };
 
-    const updateNameAndCategory = ({ name, category }: { name: string; category: string }): void => {
+    const updateExistingProperties = ({
+        name,
+        category,
+        unit
+    }: {
+        name: string;
+        category: string;
+        unit: string;
+    }): void => {
         if (user) {
             db.collection('households')
                 .doc(user.household)
                 .update({
-                    [`fridge.${name}`]: { name, category }
+                    [`fridge.${name}`]: { name, category, unit }
                 })
                 // .then(() => toast.success(`${name} (${category}) added`))
                 // TODO: Do we need a toast for adding food?!
@@ -64,6 +74,7 @@ export const Routes = (): JSX.Element => {
                         const firebaseTenants = Object.values(data.tenants) as TenantType[];
 
                         setFridge(formattedDates);
+                        setMetaData(data.meta);
                         setTenants(firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa'));
                     }
                 });
@@ -102,13 +113,16 @@ export const Routes = (): JSX.Element => {
                 {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} updateBatch={updateBatch} />}
             </RouteProtected>
 
-            <RouteProtected path="/add">
-                <PageAddFoodForm
-                    fridge={fridge}
-                    updateNameAndCategory={updateNameAndCategory}
-                    updateBatch={updateBatch}
-                />
-            </RouteProtected>
+            {metaData && (
+                <RouteProtected path="/add">
+                    <PageAddFoodForm
+                        fridge={fridge}
+                        updateExistingProperties={updateExistingProperties}
+                        updateBatch={updateBatch}
+                        metaData={metaData}
+                    />
+                </RouteProtected>
+            )}
 
             <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>
 

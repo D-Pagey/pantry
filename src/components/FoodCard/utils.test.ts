@@ -29,13 +29,14 @@ describe('reduceBatches function', () => {
             id: '1234',
             expires: new Date(),
             ownerId: TenantHeidi.uid,
-            servings: 4
+            quantity: 4,
+            unit: 'servings'
         };
 
         const largeBatches = [BigBatch, BigBatch, BigBatch];
         const reducedBatches = reduceBatches(largeBatches);
 
-        expect(reducedBatches[2].servings).toEqual(2);
+        expect(reducedBatches[2].quantity).toEqual(2);
     });
 });
 
@@ -46,19 +47,19 @@ describe('getBatchTenants function', () => {
                 id: '1234',
                 expires: new Date(),
                 ownerId: TenantHeidi.uid,
-                servings: 2
+                quantity: 2
             },
             {
                 id: '3333',
                 expires: addDays(new Date(), 2),
                 ownerId: TenantJoe.uid,
-                servings: 2
+                quantity: 2
             },
             {
                 id: '3333',
                 expires: addDays(new Date(), 4),
                 ownerId: TenantDan.uid,
-                servings: 1
+                quantity: 1
             }
         ];
 
@@ -75,19 +76,19 @@ describe('getBatchTenants function', () => {
                 id: '1234',
                 expires: new Date(),
                 ownerId: TenantHeidi.uid,
-                servings: 2
+                quantity: 2
             },
             {
                 id: '3333',
                 expires: addDays(new Date(), 2),
                 ownerId: TenantJoe.uid,
-                servings: 2
+                quantity: 2
             },
             {
                 id: '3333',
                 expires: addDays(new Date(), 4),
                 ownerId: TenantHeidi.uid,
-                servings: 1
+                quantity: 1
             }
         ];
 
@@ -102,7 +103,7 @@ describe('getBatchTenants function', () => {
 const batchOne: BatchType = {
     expires: addDays(new Date(), 5),
     id: 'asdasdasd',
-    servings: 2,
+    quantity: 2,
     ownerId: 'bbb'
 };
 

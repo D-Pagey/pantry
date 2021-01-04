@@ -86,21 +86,21 @@ export const ExpiredBatch: BatchType = {
     id: '1111111',
     expires: new Date(),
     ownerId: TenantJoe.uid,
-    servings: 1
+    quantity: 1
 };
 
 export const ExpiringSoonBatch: BatchType = {
     id: '22222222',
     expires: addDays(new Date(), 2),
     ownerId: TenantDan.uid,
-    servings: 2
+    quantity: 2
 };
 
 export const FreshBatch: BatchType = {
     id: '3333333',
     expires: addDays(new Date(), 5),
     ownerId: TenantHeidi.uid,
-    servings: 4
+    quantity: 4
 };
 
 export const Batches: BatchType[] = [ExpiredBatch, ExpiringSoonBatch, FreshBatch];
@@ -109,27 +109,32 @@ export const Fridge: FoodType[] = [
     {
         batches: Batches,
         category: 'vegetables',
-        name: 'really long food name for carrot'
+        name: 'really long food name for carrot',
+        unit: 'servings'
     },
     {
         batches: Batches,
         category: 'vegetables',
-        name: 'broccoli'
+        name: 'broccoli',
+        unit: 'servings'
     },
     {
         batches: Batches,
         category: 'meat',
-        name: 'steak'
+        name: 'steak',
+        unit: 'servings'
     },
     {
         batches: Batches,
         category: 'dairy',
-        name: 'milk'
+        name: 'milk',
+        unit: 'carton'
     },
     {
         batches: [],
         category: 'dairy',
-        name: 'chocolate'
+        name: 'chocolate',
+        unit: 'servings'
     }
 ];
 

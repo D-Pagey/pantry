@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 
-import { convertBatchesArray, formatDropdownOptions } from '../../utils';
+import { convertBatchesArray, formatFoodDropdownOptions } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -114,7 +114,12 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                 if (existingItems.length > 0) {
                     // merge batches of current item and existing item
                     const mergedBatches = [...existingItems[0].batches, ...item.batches];
-                    const mergedItem = { batches: mergedBatches, category: newCategory, name: newName };
+                    const mergedItem = {
+                        batches: mergedBatches,
+                        category: newCategory,
+                        name: newName,
+                        unit: 'servings'
+                    };
 
                     const converted = convertBatchesArray([mergedItem]);
                     await addItemDeleteItem(converted[0], item.name, user.household);
@@ -143,7 +148,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                         <S.Subtitle>Change item name:</S.Subtitle>
                         <S.CreatableDropdown
                             defaultValue={item.name}
-                            options={formatDropdownOptions(fridge || [])}
+                            options={formatFoodDropdownOptions(fridge || [])}
                             setSelected={setNewName}
                         />
 

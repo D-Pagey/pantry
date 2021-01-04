@@ -26,12 +26,21 @@ export const getColourFromDate = (date: Date): string => {
     return colours.grey;
 };
 
-export const formatDropdownOptions = (fridge: FoodType[]): DropdownOptionType[] => {
+// TODO: Change to units
+export const formatFoodDropdownOptions = (fridge: FoodType[]): DropdownOptionType[] => {
     return fridge.map((food) => {
-        const totalServings = food.batches.reduce((acc, curr) => acc + curr.servings, 0);
+        const total = food.batches.reduce((acc, curr) => acc + curr.quantity, 0);
 
-        return { label: `${titleCase(food.name)} (${totalServings} servings)`, value: food.name };
+        return { label: `${titleCase(food.name)} (${total} ${food.unit})`, value: food.name };
     });
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const formatDropdownOptions = (array: any[]): DropdownOptionType[] => {
+    return array.map((item: string | number) => ({
+        label: item.toString(),
+        value: item.toString()
+    }));
 };
 
 export const getExpiringItems = (food: FoodType[]): FoodType[] => {
