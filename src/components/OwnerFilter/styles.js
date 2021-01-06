@@ -1,9 +1,16 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
+import { colours, mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
     display: flex;
+    grid-column: 1 / 3;
+    justify-content: center;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: 1 / 2;
+        justify-self: start;
+    }
 `;
 
 export const List = styled.ul`

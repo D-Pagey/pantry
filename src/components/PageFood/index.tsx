@@ -110,15 +110,17 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                 )}
 
                 <S.FilterWrapper>
-                    {tenants.length > 1 && (
-                        <OwnerFilter
-                            tenants={tenants}
-                            setSelectedTenants={setSelectedTenants}
-                            selectedTenants={selectedTenants}
-                        />
-                    )}
+                    <OwnerFilter
+                        tenants={tenants}
+                        setSelectedTenants={setSelectedTenants}
+                        selectedTenants={selectedTenants}
+                    />
 
                     <S.ExpiringButton handleClick={handleExpiringClick} isEnabled={isExpiring} />
+
+                    <S.TopAddButton size="sm" onClick={handleAddClick}>
+                        Add Item
+                    </S.TopAddButton>
                 </S.FilterWrapper>
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}

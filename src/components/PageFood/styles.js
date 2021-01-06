@@ -10,27 +10,38 @@ export const Wrapper = styled.div`
     padding: 0 0 2rem;
 `;
 
-export const FilterWrapper = styled.div`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
+export const AddButton = styled(Btn)`
+    align-self: flex-end;
+    margin: 0 1rem 0 0;
 
     @media ${mediaQuery.tablet} {
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        padding: 1rem 0;
+        margin: 0;
     }
 `;
 
-export const ExpiringButton = styled(ExpiringPill)`
-    align-self: flex-end;
-    margin: 1rem 0 0;
+export const FilterWrapper = styled.div`
+    display: grid;
+    gap: 2rem 1rem;
+    padding: 1rem;
+    grid-template-columns: 1fr 1fr;
 
     @media ${mediaQuery.tablet} {
-        align-self: center;
-        margin: 0;
+        padding: 1rem 0;
+        gap: 0 2rem;
+        grid-template-columns: 1fr max-content max-content;
     }
+`;
+
+export const TopAddButton = styled(AddButton)`
+    justify-self: end;
+    margin: 0;
+`;
+
+export const ExpiringButton = styled(ExpiringPill)`
+    align-items: center;
+    display: flex;
+    padding: 0.5rem;
+    justify-self: start;
 `;
 
 export const FoodCardGrid = styled.div`
@@ -42,9 +53,4 @@ export const FoodCardGrid = styled.div`
         justify-items: start;
         padding: 1rem 0 0;
     }
-`;
-
-export const AddButton = styled(Btn)`
-    align-self: flex-end;
-    margin: 0 1rem 0 0;
 `;
