@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FoodType, TenantType, BatchType, DatabaseFoodType } from '../../types';
-import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
+import { formatExpiryDates } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
@@ -20,7 +20,6 @@ import { RouteProtected } from '../RouteProtected';
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
     const [tenants, setTenants] = useState<TenantType[]>();
-    const [expiringCount, setExpiringCount] = useState<number>(0);
     const { user } = useContext(AuthContext);
 
     const updateBatch = ({ name, batch }: { name: string; batch: BatchType }): void => {
@@ -30,7 +29,9 @@ export const Routes = (): JSX.Element => {
                 .update({
                     [`fridge.${name}.batches.${batch.id}`]: batch
                 })
-                .then(() => toast.success(`Batch updated for ${name}`))
+                // .then(() => toast.success(`Batch updated for ${name}`))
+                // TODO: Do we need toast here?
+                .then(() => null)
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
@@ -42,7 +43,9 @@ export const Routes = (): JSX.Element => {
                 .update({
                     [`fridge.${name}`]: { name, category }
                 })
-                .then(() => toast.success(`${name} (${category}) added`))
+                // .then(() => toast.success(`${name} (${category}) added`))
+                // TODO: Do we need a toast for adding food?!
+                .then(() => null)
                 .catch(() => toast.error('Error with updating fridge'));
         }
     };
@@ -61,7 +64,6 @@ export const Routes = (): JSX.Element => {
                         const firebaseTenants = Object.values(data.tenants) as TenantType[];
 
                         setFridge(formattedDates);
-                        setExpiringCount(countExpiringFoodItems(formattedDates));
                         setTenants(firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa'));
                     }
                 });
@@ -77,7 +79,7 @@ export const Routes = (): JSX.Element => {
     return (
         <Switch>
             <Route exact path="/">
-                <PageHome expiringCount={expiringCount} />
+                <PageHome />
             </Route>
 
             <Route path="/sign-in">

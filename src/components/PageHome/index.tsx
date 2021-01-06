@@ -1,6 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Layout } from '../Layout';
 import { Button } from '../Button';
@@ -10,19 +9,7 @@ import FoodListImage from './assets/food-list.svg';
 import ScreenshotImage from './assets/screenshot.png';
 import * as S from './styles';
 
-type PageHomeProps = {
-    expiringCount?: number;
-};
-
-export const PageHome: FC<PageHomeProps> = ({ expiringCount }) => {
-    const history = useHistory();
-
-    useEffect(() => {
-        if (expiringCount) {
-            toast.error(`${expiringCount} expiring items`, { onClick: () => history.push('/food') });
-        }
-    }, [expiringCount, history]);
-
+export const PageHome: FC = () => {
     return (
         <Layout hideTitle>
             <S.Wrapper data-testid="pageHome">

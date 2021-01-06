@@ -39,7 +39,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
             db.collection('households')
                 .doc(user.household)
                 .update({ [`fridge.${name}.batches`]: {} })
-                .then(() => toast.error('Food deleted'))
+                .then(() => null)
                 .catch(() => toast.error('Error with deleting food'));
         }
     };
