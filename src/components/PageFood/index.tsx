@@ -141,7 +141,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                                         isSelected={item.name === editingItem?.name}
                                         item={item}
                                         key={item.name}
-                                        margin="0 0 1rem"
                                         tenants={tenants}
                                     />
                                 );

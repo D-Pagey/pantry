@@ -45,12 +45,19 @@ export const ExpiringButton = styled(ExpiringPill)`
 `;
 
 export const FoodCardGrid = styled.div`
+    align-self: center;
+    box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    justify-items: center;
+    grid-row-gap: 1rem;
+    padding: 0.5rem;
+    margin: 0 0 1rem;
+    max-width: 330px;
+    width: 100%;
 
     @media ${mediaQuery.tablet} {
-        justify-items: start;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+        grid-column-gap: 1rem;
         padding: 1rem 0 0;
+        max-width: none;
     }
 `;

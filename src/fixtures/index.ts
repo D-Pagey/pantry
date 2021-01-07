@@ -109,7 +109,7 @@ export const Fridge: FoodType[] = [
     {
         batches: Batches,
         category: 'vegetables',
-        name: 'carrot'
+        name: 'really long food name for carrot'
     },
     {
         batches: Batches,

@@ -56,7 +56,7 @@ describe('formatDropdownOptions function', () => {
     it('should return an array of objects of labels and values', () => {
         const options = formatDropdownOptions(Fridge);
         expect(options).toStrictEqual([
-            { label: 'Carrot (7 servings)', value: 'carrot' },
+            { label: 'Really Long Food Name for Carrot (7 servings)', value: 'really long food name for carrot' },
             { label: 'Broccoli (7 servings)', value: 'broccoli' },
             { label: 'Steak (7 servings)', value: 'steak' },
             { label: 'Milk (7 servings)', value: 'milk' },
@@ -158,7 +158,7 @@ describe('convertBatchesArray function', () => {
                     '3333333': { expires: expect.any(Date), id: '3333333', ownerId: 'zxwy', servings: 4 }
                 },
                 category: 'vegetables',
-                name: 'carrot'
+                name: Fridge[0].name
             }
         ]);
     });

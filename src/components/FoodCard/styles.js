@@ -7,15 +7,13 @@ export const Wrapper = styled.div`
     box-shadow: ${({ isSelected }) => isSelected && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
     border: 1px solid ${colours.darkGreen20};
     border-radius: 10px;
+    box-sizing: border-box;
     cursor: pointer;
     display: grid;
     grid-column-gap: 1rem;
     grid-template-columns: 1fr 1fr max-content;
-    margin: ${({ margin }) => margin};
-    max-width: 330px;
-    min-width: 220px;
     padding: 1rem;
-    width: 280px;
+    width: 100%;
     z-index: ${zIndex.default};
 `;
 

@@ -13,11 +13,10 @@ export type FoodCardProps = {
     handleClick?: () => void;
     item: FoodType;
     isSelected?: boolean;
-    margin?: string;
     tenants: TenantType[];
 };
 
-export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, margin, tenants }) => {
+export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, tenants }) => {
     const sortedBatches = arraySort(item.batches, 'expires');
     const totalServings = getTotalServingsCount(sortedBatches);
     const sortedTenants = getBatchTenants(sortedBatches, tenants);
@@ -26,7 +25,7 @@ export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, mar
     const circleIconBatches = totalServings <= 10 ? sortedBatches : reduceBatches(sortedBatches);
 
     return (
-        <S.Wrapper margin={margin} onClick={handleClick} isSelected={isSelected}>
+        <S.Wrapper onClick={handleClick} isSelected={isSelected}>
             <S.Name>{titleCase(item.name)}</S.Name>
             <S.Category>({item.category})</S.Category>
 

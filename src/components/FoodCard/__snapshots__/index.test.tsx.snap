@@ -41,14 +41,13 @@ exports[`FoodCard component should render 1`] = `
 .c0 {
   border: 1px solid rgba(52,136,65,0.2);
   border-radius: 10px;
+  box-sizing: border-box;
   cursor: pointer;
   display: grid;
   grid-column-gap: 1rem;
   grid-template-columns: 1fr 1fr max-content;
-  max-width: 330px;
-  min-width: 220px;
   padding: 1rem;
-  width: 280px;
+  width: 100%;
   z-index: 1;
 }
 
@@ -119,7 +118,7 @@ exports[`FoodCard component should render 1`] = `
   <p
     class="c1"
   >
-    Carrot
+    Really Long Food Name for Carrot
   </p>
   <p
     class="c2"
