@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import arraySort from 'array-sort';
 import { toast } from 'react-toastify';
+import sortArray from 'sort-array';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
@@ -16,6 +16,7 @@ import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
+import { sortByOldestExpiryDate } from './utils';
 
 type PageFoodProps = {
     fridge: FoodType[];
@@ -28,6 +29,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [isExpiring, setIsExpiring] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
     const [selectedTenants, setSelectedTenants] = useState<string[]>([]);
+    const [isSortedByDate, setIsSortedByDate] = useState(false);
+
     const { user } = useContext(AuthContext);
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
@@ -66,7 +69,13 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
     useEffect(() => {
         if (fridge.length > 0 && tenants.length > 0) {
-            setSelectedFood(filterFood());
+            const sortByName = sortArray(filterFood(), {
+                // @ts-ignore
+                by: 'name',
+                order: 'asc'
+            });
+
+            setSelectedFood(sortByName);
         }
     }, [category, selectedTenants, isExpiring, filterFood, fridge, tenants]);
 
@@ -92,6 +101,27 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const handleFoodClick = (item: FoodType) => (): void => {
         if (!editingItem || editingItem.name !== item.name) setEditingItem(item);
         if (editingItem?.name === item.name) setEditingItem(undefined);
+    };
+
+    const handleSortClick = () => {
+        if (selectedFood) {
+            if (isSortedByDate) {
+                setSelectedFood(
+                    sortArray(selectedFood, {
+                        // @ts-ignore
+                        by: 'name',
+                        order: 'asc'
+                    })
+                );
+                setIsSortedByDate(false);
+            } else {
+                setSelectedFood(sortByOldestExpiryDate(selectedFood));
+
+                console.log(sortByOldestExpiryDate(selectedFood));
+
+                setIsSortedByDate(true);
+            }
+        }
     };
 
     const handleAddClick = () => history.push('/add');
@@ -121,6 +151,10 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     <S.TopAddButton size="sm" onClick={handleAddClick}>
                         Add Item
                     </S.TopAddButton>
+
+                    <S.SortButton onClick={handleSortClick}>
+                        Sort by {isSortedByDate ? 'name' : 'expiry date'}
+                    </S.SortButton>
                 </S.FilterWrapper>
 
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
@@ -133,7 +167,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
                 <S.FoodCardGrid>
                     {selectedFood &&
-                        arraySort(selectedFood, 'name').map((item: FoodType) => {
+                        selectedFood.map((item: FoodType) => {
                             if (item.batches.length > 0) {
                                 return (
                                     <FoodCard

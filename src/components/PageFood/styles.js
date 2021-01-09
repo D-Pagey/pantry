@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mediaQuery } from '../../tokens';
+import { colours, mediaQuery } from '../../tokens';
 import { Button as Btn } from '../Button';
 import { ExpiringPill } from '../ExpiringPill';
 
@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 export const AddButton = styled(Btn)`
     align-self: flex-end;
     margin: 0 1rem 0 0;
+    border: 2px solid ${colours.darkGreen100};
 
     @media ${mediaQuery.tablet} {
         margin: 0;
@@ -42,6 +43,11 @@ export const ExpiringButton = styled(ExpiringPill)`
     display: flex;
     padding: 0.5rem;
     justify-self: start;
+`;
+
+export const SortButton = styled(Btn)`
+    background-color: ${colours.blue};
+    border: 2px solid ${colours.blue};
 `;
 
 export const FoodCardGrid = styled.div`

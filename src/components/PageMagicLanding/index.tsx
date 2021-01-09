@@ -24,7 +24,6 @@ export const PageMagicLanding: FC = () => {
             // Get the email if available. This should be available if the user completes
             // the flow on the same device where they started it.
             const localStorageEmail = window.localStorage.getItem('emailForSignIn');
-            console.log({ localStorageEmail });
 
             if (localStorageEmail) {
                 setLocalEmail(localStorageEmail);

@@ -44,11 +44,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
             const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
 
             try {
-                const { data } = await leaveCurrentHousehold({ householdId: user.household, tenant: currentTenant });
-
-                console.log({ data });
+                await leaveCurrentHousehold({ householdId: user.household, tenant: currentTenant });
             } catch (error) {
-                console.log({ error });
                 toast.error('Something went wrong leaving, try again.');
             }
         }
@@ -66,7 +63,6 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
             toast.info('Invite cancelled');
             setIsModalOpen(false);
         } catch (error) {
-            console.log({ error });
             toast.error('Something went wrong leaving, try again.');
         }
     };

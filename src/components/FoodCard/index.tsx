@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import arraySort from 'array-sort';
+import sortArray from 'sort-array';
 import { titleCase } from 'title-case';
 
 import { FoodType, TenantType } from '../../types';
@@ -17,7 +17,11 @@ export type FoodCardProps = {
 };
 
 export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, tenants }) => {
-    const sortedBatches = arraySort(item.batches, 'expires');
+    const sortedBatches = sortArray(item.batches, {
+        // @ts-ignore
+        by: 'expires',
+        order: 'asc'
+    });
     const totalServings = getTotalServingsCount(sortedBatches);
     const sortedTenants = getBatchTenants(sortedBatches, tenants);
     // not very well named
