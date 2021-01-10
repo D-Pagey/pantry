@@ -17,7 +17,7 @@ export const variety = () => (
         <Donut {...props} date={addDays(new Date(), 2)} />
         <Donut {...props} date={addDays(new Date(), 3)} />
         <Donut {...props} date={addDays(new Date(), 4)} />
-        <Donut {...props} date={addDays(new Date(), 5)} />
-        <Donut {...props} date={addDays(new Date(), 6)} />
+        <Donut {...props} date={addDays(new Date(), 50)} />
+        <Donut {...props} date={addDays(new Date(), 600)} />
     </div>
 );

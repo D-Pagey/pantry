@@ -10,6 +10,7 @@ type DonutIconProps = {
 
 export const Donut: FC<DonutIconProps> = ({ date }) => {
     const difference = differenceInDays(date, Date.now());
+    const differentRelativeToUnit = parseInt(formatDistanceToNowStrict(date).split(' ')[0], 10);
     const unitOfTime = formatDistanceToNowStrict(date).split(' ')[1];
     const hasExpired = difference < 0;
     const percentage = getPercentageFromDate(date);
@@ -39,7 +40,7 @@ export const Donut: FC<DonutIconProps> = ({ date }) => {
                 ) : (
                     <>
                         <S.Text x="50%" y="38%">
-                            {difference}
+                            {differentRelativeToUnit}
                         </S.Text>
 
                         <S.Subtext x="51%" y="67%">
