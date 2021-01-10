@@ -68,6 +68,8 @@ export const PageSignIn: FC = () => {
                     <p>A magic email sign-in email was sent to {email}</p>
                 ) : (
                     <S.LoginWrapper>
+                        <S.Title>Sign in to get started</S.Title>
+
                         <S.GoogleButton onClick={handleSignIn}>Continue With Google</S.GoogleButton>
 
                         <S.Text>or</S.Text>

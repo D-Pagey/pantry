@@ -65,3 +65,7 @@ export const SendButton = styled(Button)`
     margin: 1rem 0 0;
     max-width: fit-content;
 `;
+
+export const Title = styled.h2`
+    font-weight: 400;
+`;
