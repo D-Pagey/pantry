@@ -13,3 +13,15 @@ export const sortByOldestExpiryDate = (food: FoodType[]): FoodType[] => {
         return 0;
     });
 };
+
+export const sortByName = (food: FoodType[]): FoodType[] => {
+    return [...food].sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+
+        if (aName < bName) return -1;
+        if (aName > bName) return 1;
+
+        return 0;
+    });
+};

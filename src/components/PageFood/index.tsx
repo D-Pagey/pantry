@@ -2,7 +2,6 @@ import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
-import sortArray from 'sort-array';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
@@ -16,7 +15,7 @@ import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
-import { sortByOldestExpiryDate } from './utils';
+import { sortByName, sortByOldestExpiryDate } from './utils';
 
 type PageFoodProps = {
     fridge: FoodType[];
@@ -69,13 +68,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
     useEffect(() => {
         if (fridge.length > 0 && tenants.length > 0) {
-            const sortByName = sortArray(filterFood(), {
-                // @ts-ignore
-                by: 'name',
-                order: 'asc'
-            });
+            const sortedByName = sortByName(filterFood());
 
-            setSelectedFood(sortByName);
+            setSelectedFood(sortedByName);
         }
     }, [category, selectedTenants, isExpiring, filterFood, fridge, tenants]);
 
@@ -106,13 +101,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const handleSortClick = () => {
         if (selectedFood) {
             if (isSortedByDate) {
-                setSelectedFood(
-                    sortArray(selectedFood, {
-                        // @ts-ignore
-                        by: 'name',
-                        order: 'asc'
-                    })
-                );
+                setSelectedFood(sortByName(selectedFood));
                 setIsSortedByDate(false);
             } else {
                 setSelectedFood(sortByOldestExpiryDate(selectedFood));

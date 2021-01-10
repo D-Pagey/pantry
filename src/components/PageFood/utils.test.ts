@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 import { TenantDan } from '../../fixtures';
 import { FoodType, BatchType } from '../../types';
-import { sortByOldestExpiryDate } from './utils';
+import { sortByName, sortByOldestExpiryDate } from './utils';
 
 export const Batch: BatchType = {
     id: '3333333',
@@ -41,5 +41,13 @@ describe('sortByOldestExpiryDate function', () => {
         const result = sortByOldestExpiryDate(FridgeWithDifferentBatches);
 
         expect(result).toStrictEqual([ItemThree, ItemTwo, ItemOne]);
+    });
+});
+
+describe('sortByName function', () => {
+    it('should return values in alphabetical order', () => {
+        const result = sortByName([ItemOne, ItemTwo, ItemThree]);
+
+        expect(result).toStrictEqual([ItemTwo, ItemThree, ItemOne]);
     });
 });

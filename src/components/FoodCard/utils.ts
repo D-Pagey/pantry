@@ -48,3 +48,15 @@ export const getBatchTenants = (sortedBatches: BatchType[], tenants: TenantType[
         return acc;
     }, [] as TenantType[]);
 };
+
+export const sortBatches = (batches: BatchType[]): BatchType[] => {
+    return [...batches].sort((a, b) => {
+        const aTime = a.expires.getTime();
+        const bTime = b.expires.getTime();
+
+        if (aTime < bTime) return -1;
+        if (aTime > bTime) return 1;
+
+        return 0;
+    });
+};

@@ -1,7 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
-import sortArray from 'sort-array';
 
 import { convertBatchesArray, formatDropdownOptions } from '../../utils';
 import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
@@ -10,6 +9,7 @@ import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
 import * as S from './styles';
+import { sortBatches } from '../FoodCard/utils';
 
 const deleteItemBatches = (itemName: string, household: string) =>
     db
@@ -68,11 +68,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
         const editingItem = fridge.filter((food) => food.name === name)[0];
 
         if (editingItem) {
-            const sortedBatches = sortArray(editingItem.batches, {
-                // @ts-ignore
-                by: 'expires',
-                order: 'asc'
-            });
+            const sortedBatches = sortBatches(editingItem.batches);
 
             setItem({ ...editingItem, batches: sortedBatches });
             setNewName(editingItem.name);

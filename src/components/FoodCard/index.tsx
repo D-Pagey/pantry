@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
-import sortArray from 'sort-array';
 import { titleCase } from 'title-case';
 
 import { FoodType, TenantType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import { CircleIcon } from '../CircleIcon';
 import { Donut } from '../Donut';
-import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
+import { getTotalServingsCount, reduceBatches, getBatchTenants, sortBatches } from './utils';
 import * as S from './styles';
 
 export type FoodCardProps = {
@@ -17,11 +16,7 @@ export type FoodCardProps = {
 };
 
 export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, tenants }) => {
-    const sortedBatches = sortArray(item.batches, {
-        // @ts-ignore
-        by: 'expires',
-        order: 'asc'
-    });
+    const sortedBatches = sortBatches(item.batches);
     const totalServings = getTotalServingsCount(sortedBatches);
     const sortedTenants = getBatchTenants(sortedBatches, tenants);
     // not very well named

@@ -2,7 +2,7 @@ import { addDays } from 'date-fns';
 
 import { Batches, TenantHeidi, TenantJoe, TenantDan } from '../../fixtures';
 import { BatchType } from '../../types';
-import { getTotalServingsCount, reduceBatches, getBatchTenants } from './utils';
+import { getTotalServingsCount, reduceBatches, getBatchTenants, sortBatches } from './utils';
 
 describe('getTotalServingsCount function', () => {
     it.each`
@@ -96,5 +96,29 @@ describe('getBatchTenants function', () => {
         const sortedTenants = getBatchTenants(sortedBatches, tenants);
 
         expect(sortedTenants).toStrictEqual([TenantHeidi, TenantJoe]);
+    });
+});
+
+const batchOne: BatchType = {
+    expires: addDays(new Date(), 5),
+    id: 'asdasdasd',
+    servings: 2,
+    ownerId: 'bbb'
+};
+
+const batchTwo: BatchType = {
+    ...batchOne,
+    expires: addDays(new Date(), 2)
+};
+
+const batchThree: BatchType = {
+    ...batchOne,
+    expires: addDays(new Date(), 3)
+};
+
+describe('sortBatches function', () => {
+    it('should sort batches from oldest to newest', () => {
+        const result = sortBatches([batchOne, batchTwo, batchThree]);
+        expect(result).toStrictEqual([batchTwo, batchThree, batchOne]);
     });
 });
