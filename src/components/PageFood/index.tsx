@@ -106,8 +106,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
             } else {
                 setSelectedFood(sortByOldestExpiryDate(selectedFood));
 
-                console.log(sortByOldestExpiryDate(selectedFood));
-
                 setIsSortedByDate(true);
             }
         }
