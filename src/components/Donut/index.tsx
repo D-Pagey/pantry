@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { differenceInDays } from 'date-fns';
+import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 
 import { getColourFromDate, getPercentageFromDate } from '../../utils';
 import * as S from './styles';
@@ -9,7 +9,8 @@ type DonutIconProps = {
 };
 
 export const Donut: FC<DonutIconProps> = ({ date }) => {
-    const difference = differenceInDays(date, new Date());
+    const difference = differenceInDays(date, Date.now());
+    const unitOfTime = formatDistanceToNowStrict(date).split(' ')[1];
     const hasExpired = difference < 0;
     const percentage = getPercentageFromDate(date);
     const cx = 50;
@@ -37,12 +38,12 @@ export const Donut: FC<DonutIconProps> = ({ date }) => {
                     </S.ExpiredText>
                 ) : (
                     <>
-                        <S.Text x="50%" y="42%">
+                        <S.Text x="50%" y="38%">
                             {difference}
                         </S.Text>
 
-                        <S.Subtext x="51%" y="70%">
-                            day{difference !== 1 && 's'}
+                        <S.Subtext x="51%" y="67%">
+                            {unitOfTime}
                         </S.Subtext>
                     </>
                 )}
