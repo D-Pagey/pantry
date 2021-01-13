@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { FoodType, TenantType, BatchType, DatabaseFoodType, MetaDataType } from '../../types';
-import { formatExpiryDates, countExpiringFoodItems } from '../../utils';
+import { formatExpiryDates } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
@@ -20,7 +20,6 @@ import { RouteProtected } from '../RouteProtected';
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
     const [tenants, setTenants] = useState<TenantType[]>();
-    const [expiringCount, setExpiringCount] = useState<number>(0);
     const [metaData, setMetaData] = useState<MetaDataType>();
     const { user } = useContext(AuthContext);
 
