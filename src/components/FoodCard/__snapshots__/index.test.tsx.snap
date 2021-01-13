@@ -124,7 +124,7 @@ exports[`FoodCard component should render 1`] = `
     class="c2"
   >
     (
-    vegetables
+    servings
     )
   </p>
   <img

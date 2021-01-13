@@ -22,7 +22,7 @@ export const Name = styled.p`
     margin: 0;
 `;
 
-export const Category = styled.p`
+export const Subtext = styled.p`
     color: ${colours.darkGrey};
     font-size: 14px;
     margin: 0.5rem 0 1rem;
