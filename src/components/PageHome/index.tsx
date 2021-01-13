@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-// import { DatabaseFoodType } from '../../types';
-// import { db } from '../../services';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import AlexaImage from './assets/alexa.svg';
@@ -10,40 +8,11 @@ import EatingTogetherImage from './assets/eating-together.svg';
 import FoodListImage from './assets/food-list.svg';
 import ScreenshotImage from './assets/screenshot.png';
 import * as S from './styles';
-// import { updateFridge } from './utils';
 
 export const PageHome: FC = () => {
-    const updateDatabase = () => {
-        // Create a reference to the SF doc.
-        // const householdRef = db.collection('households').doc('CslPbikx8p0WmgZefsy4');
-        // // Uncomment to initialize the doc.
-        // // sfDocRef.set({ population: 0 });
-        // return db
-        //     .runTransaction(function (transaction) {
-        //         // This code may get re-run multiple times if there are conflicts.
-        //         return transaction.get(householdRef).then(function (doc) {
-        //             if (!doc.exists) {
-        //                 throw 'Document does not exist!';
-        //             }
-        //             const originalFridge = doc.data()?.fridge;
-        //             const result = updateFridge(originalFridge);
-        //             console.log({ result });
-        //             // transaction.update(householdRef, { population: newPopulation });
-        //         });
-        //     })
-        //     .then(function () {
-        //         console.log('Transaction successfully committed!');
-        //     })
-        //     .catch(function (error) {
-        //         console.log('Transaction failed: ', error);
-        //     });
-    };
-
     return (
         <Layout hideTitle>
             <S.Wrapper data-testid="pageHome">
-                <button onClick={updateDatabase}>update database</button>
-
                 <S.HeroWrapper>
                     <S.Title>Play With Your Food</S.Title>
 
