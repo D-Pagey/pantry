@@ -86,7 +86,29 @@ describe('updateFridge function', () => {
         expect(result).toStrictEqual(NewFridge);
     });
 
-    it.todo('should convert even with empty batches');
+    it('should convert even with empty batches', () => {
+        const FridgeWithEmpty = {
+            ...Fridge,
+            chicken: {
+                name: 'chicken',
+                category: 'vegetables',
+                batches: {}
+            }
+        };
+
+        const NewFridgeWithEmpty = {
+            ...NewFridge,
+            chicken: {
+                unit: 'servings',
+                name: 'chicken',
+                category: 'vegetables',
+                batches: {}
+            }
+        };
+
+        const result = updateFridge(FridgeWithEmpty);
+        expect(result).toStrictEqual(NewFridgeWithEmpty);
+    });
 });
 
 describe('convertBatches function', () => {
