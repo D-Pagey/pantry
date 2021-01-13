@@ -30,31 +30,20 @@ export const convertBatches = (batches: { [id: string]: BatchType }): NewBatchTy
 };
 
 export const updateFridge = (fridge: DatabaseFridgeType): NewDatabaseFridgeType => {
-    const firstItem = Object.values(fridge)[0];
+    const items = Object.values(fridge);
 
-    const batches = firstItem.batches;
+    const updatedItems = items.map((item) => {
+        const { batches, ...rest } = item;
+        const updatedBatches = convertBatches(batches);
 
-    console.log(batches);
-    // const firstItemBatchesArray = Object.values(firstItem.batches).map((batch) => {
-    //     const { servings, ...rest } = batch;
+        return {
+            ...rest,
+            batches: updatedBatches,
+            unit: 'servings'
+        };
+    });
 
-    //     return {
-    //         ...rest,
-    //         quantity: servings
-    //     };
-    // });
+    const withKeys = updatedItems.map((item) => [item.name, item]);
 
-    // const nestedArray = firstItemBatchesArray.map((batch) => {
-    //     return [batch.id, batch];
-    // });
-
-    // const newBatches = Object.fromEntries(nestedArray);
-
-    // const updatedItem = {
-    //     ...firstItem,
-    //     batches: newBatches,
-    //     unit: 'servings'
-    // };
-
-    return fridge;
+    return Object.fromEntries(withKeys);
 };

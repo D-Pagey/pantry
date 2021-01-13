@@ -18,25 +18,25 @@ const Fridge: DatabaseFridgeType = {
                 ownerId: 'zz'
             }
         }
+    },
+    carrots: {
+        name: 'carrots',
+        category: 'vegetables',
+        batches: {
+            ghi: {
+                id: 'ghi',
+                expires: new Date(),
+                servings: 1,
+                ownerId: 'zz'
+            },
+            jkl: {
+                id: 'jkl',
+                expires: new Date(),
+                servings: 4,
+                ownerId: 'zz'
+            }
+        }
     }
-    // carrots: {
-    //     name: 'carrots',
-    //     category: 'vegetables',
-    //     batches: {
-    //         ghi: {
-    //             id: 'ghi',
-    //             expires: new Date(),
-    //             servings: 1,
-    //             ownerId: 'zz'
-    //         },
-    //         jkl: {
-    //             id: 'jkl',
-    //             expires: new Date(),
-    //             servings: 4,
-    //             ownerId: 'zz'
-    //         }
-    //     }
-    // }
 };
 
 const NewFridge: NewDatabaseFridgeType = {
@@ -58,26 +58,26 @@ const NewFridge: NewDatabaseFridgeType = {
                 ownerId: 'zz'
             }
         }
+    },
+    carrots: {
+        unit: 'servings',
+        name: 'carrots',
+        category: 'vegetables',
+        batches: {
+            ghi: {
+                id: 'ghi',
+                expires: new Date(),
+                quantity: 1,
+                ownerId: 'zz'
+            },
+            jkl: {
+                id: 'jkl',
+                expires: new Date(),
+                quantity: 4,
+                ownerId: 'zz'
+            }
+        }
     }
-    // carrots: {
-    //     unit: 'servings',
-    //     name: 'carrots',
-    //     category: 'vegetables',
-    //     batches: {
-    //         ghi: {
-    //             id: 'ghi',
-    //             expires: new Date(),
-    //             quantity: 1,
-    //             ownerId: 'zz'
-    //         },
-    //         jkl: {
-    //             id: 'jkl',
-    //             expires: new Date(),
-    //             quantity: 4,
-    //             ownerId: 'zz'
-    //         }
-    //     }
-    // }
 };
 
 describe('updateFridge function', () => {
