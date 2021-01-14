@@ -1,11 +1,9 @@
 import { BatchType, TenantType } from '../../types';
 import { getOwnerFromId } from '../../utils';
 
-export const getTotalServingsCount = (batches: BatchType[]): number => {
+export const getTotalQuantity = (batches: BatchType[]): number => {
     return batches.reduce((acc, curr) => {
-        if (acc <= 10) return acc + curr.quantity;
-
-        return acc;
+        return acc + curr.quantity;
     }, 0);
 };
 

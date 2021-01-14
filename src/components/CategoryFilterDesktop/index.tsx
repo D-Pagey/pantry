@@ -15,10 +15,7 @@ export const CategoryFilterDesktop: FC<CategoryFilterDesktopProps> = ({
 }) => {
     const handleClick = (category: string) => () => handleCategoryClick(category);
     const getTotalItems = () => {
-        if (categories) {
-            return Object.values(categories).reduce((acc, curr) => acc + curr, 0);
-        }
-        return 0;
+        return Object.values(categories).reduce((acc, curr) => acc + curr, 0);
     };
 
     return (

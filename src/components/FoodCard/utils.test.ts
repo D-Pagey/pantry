@@ -2,15 +2,23 @@ import { addDays } from 'date-fns';
 
 import { Batches, TenantHeidi, TenantJoe, TenantDan } from '../../fixtures';
 import { BatchType } from '../../types';
-import { getTotalServingsCount, reduceBatches, getBatchTenants, sortBatches } from './utils';
+import { getTotalQuantity, reduceBatches, getBatchTenants, sortBatches } from './utils';
 
-describe('getTotalServingsCount function', () => {
+const LargeBatch: BatchType = {
+    expires: new Date(),
+    id: 'id',
+    ownerId: TenantHeidi.uid,
+    quantity: 15
+};
+
+describe('getTotalQuantity function', () => {
     it.each`
         batches                     | expectedCount
         ${Batches}                  | ${7}
         ${[...Batches, ...Batches]} | ${14}
+        ${[LargeBatch, ...Batches]} | ${22}
     `('should return $expectedCount count for certain batches', ({ batches, expectedCount }) => {
-        const count = getTotalServingsCount(batches);
+        const count = getTotalQuantity(batches);
         expect(count).toEqual(expectedCount);
     });
 });
@@ -19,7 +27,7 @@ describe('reduceBatches function', () => {
     it('should return a reduced array of batches', () => {
         const largeBatches = [...Batches, ...Batches];
         const reducedBatches = reduceBatches(largeBatches);
-        const count = getTotalServingsCount(reducedBatches);
+        const count = getTotalQuantity(reducedBatches);
 
         expect(count).toEqual(10);
     });
