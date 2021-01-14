@@ -40,7 +40,11 @@ export const Button: FC<ButtonProps> = ({
     }
 
     if (isLoading) {
-        return <S.LoadingButton {...props}>{loadingContent || children}</S.LoadingButton>;
+        return (
+            <S.LoadingButton {...props} data-testid="loadingButton">
+                {loadingContent || children}
+            </S.LoadingButton>
+        );
     }
 
     return <S.Button {...props}>{children}</S.Button>;
