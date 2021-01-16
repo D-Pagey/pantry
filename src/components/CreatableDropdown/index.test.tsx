@@ -7,7 +7,8 @@ import { CreatableDropdown } from '.';
 
 const props = {
     options: formatFoodDropdownOptions(Fridge),
-    setSelected: () => null
+    setSelected: () => null,
+    inputName: 'test-input-name'
 };
 
 describe('CreatableDropdown component', () => {

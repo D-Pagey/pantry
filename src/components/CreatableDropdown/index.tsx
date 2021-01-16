@@ -6,6 +6,7 @@ import * as S from './styles';
 type CreatableDropdownProps = {
     defaultValue?: string;
     options: { label: string; value: string }[];
+    inputName: string;
     placeholder?: string;
     setSelected: (value: string) => void;
 };
@@ -15,6 +16,7 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({
     options,
     placeholder,
     setSelected,
+    inputName,
     ...props
 }) => {
     const handleChange = (value: any, action: any) => {
@@ -35,9 +37,9 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({
         <S.Wrapper {...props}>
             <CreatableSelect
                 defaultValue={getDefaultValue()}
-                inputId="foodName"
+                inputId={inputName}
                 isClearable
-                name="foodName"
+                name={inputName}
                 onChange={handleChange}
                 options={options}
                 placeholder={placeholder}

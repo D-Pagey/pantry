@@ -16,7 +16,7 @@ import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
 type PageAddFoodFormProps = {
-    fridge?: FoodType[];
+    fridge: FoodType[];
     metaData: MetaDataType;
 };
 
@@ -27,19 +27,17 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
     const history = useHistory();
 
     const handleStepOneNext = (name: string) => () => {
-        if (fridge) {
-            const doesItemExist = fridge.reduce((acc, curr) => {
-                if (curr.name === name) return true;
+        const doesItemExist = fridge.reduce((acc, curr) => {
+            if (curr.name === name) return true;
 
-                return acc;
-            }, false);
+            return acc;
+        }, false);
 
-            if (doesItemExist) {
-                setStep(3);
-                setItemExists(true);
-            } else {
-                setStep(2);
-            }
+        if (doesItemExist) {
+            setStep(3);
+            setItemExists(true);
+        } else {
+            setStep(2);
         }
     };
 
@@ -48,7 +46,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', quantity: '', unit: '' }}
                 onSubmit={async (values, actions) => {
-                    if (fridge && user) {
+                    if (user) {
                         const newBatchId = uuidv4();
 
                         const formattedValues: NewFoodType = {
@@ -64,7 +62,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                             }
                         };
 
-                        if (!itemExists) {
+                        if (itemExists) {
                             await updateExistingProperties({
                                 name: formattedValues.name,
                                 category: formattedValues.category,
@@ -92,17 +90,13 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                     };
 
                     const checkExistingCategory = () => {
-                        if (fridge) {
-                            return fridge.reduce((acc, curr: FoodType) => {
-                                if (curr.name === values.name.toLowerCase()) {
-                                    return curr.category;
-                                }
+                        return fridge.reduce((acc, curr: FoodType) => {
+                            if (curr.name === values.name.toLowerCase()) {
+                                return curr.category;
+                            }
 
-                                return acc;
-                            }, '');
-                        }
-
-                        return undefined;
+                            return acc;
+                        }, '');
                     };
 
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -124,23 +118,26 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                                 options={formatFoodDropdownOptions(fridge || [])}
                                                 setSelected={(name: string) => setFieldValue('name', name)}
                                                 placeholder="e.g. Carrot"
+                                                inputName="foodName"
                                             />
 
                                             <S.Grid>
-                                                <S.SmallLabel>Quantity</S.SmallLabel>
+                                                <S.SmallLabel htmlFor="foodQuantity">Quantity</S.SmallLabel>
                                                 <CreatableDropdown
                                                     options={formatDropdownOptions(metaData.quantities)}
                                                     setSelected={(quantity: string) =>
                                                         setFieldValue('quantity', quantity)
                                                     }
                                                     placeholder="2"
+                                                    inputName="foodQuantity"
                                                 />
 
-                                                <S.SmallLabel>Unit</S.SmallLabel>
+                                                <S.SmallLabel htmlFor="foodUnit">Unit</S.SmallLabel>
                                                 <CreatableDropdown
                                                     options={formatDropdownOptions(metaData.units)}
                                                     setSelected={(unit: string) => setFieldValue('unit', unit)}
                                                     placeholder="cans"
+                                                    inputName="foodUnit"
                                                 />
                                             </S.Grid>
                                         </S.InputWrapper>

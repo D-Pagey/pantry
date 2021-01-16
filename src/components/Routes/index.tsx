@@ -75,7 +75,7 @@ export const Routes = (): JSX.Element => {
                 {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} />}
             </RouteProtected>
 
-            {metaData && (
+            {metaData && fridge && (
                 <RouteProtected path="/add">
                     <PageAddFoodForm fridge={fridge} metaData={metaData} />
                 </RouteProtected>

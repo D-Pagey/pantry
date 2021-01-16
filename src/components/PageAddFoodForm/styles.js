@@ -49,6 +49,6 @@ export const Grid = styled.div`
     grid-row-gap: 1rem;
 `;
 
-export const SmallLabel = styled.span`
+export const SmallLabel = styled.label`
     grid-row: 1;
 `;
