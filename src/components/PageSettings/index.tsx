@@ -67,7 +67,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
             <S.Wrapper data-testid="PageSettings">
                 {user && (
                     <>
-                        <ProfilePhoto owner={user} width="100px" />
+                        <ProfilePhoto email={user.email!} name={user.name} photo={user.photo!} width="100px" />
                         <S.Name>Welcome {user.name}</S.Name>
 
                         <S.Heading>Notifications</S.Heading>

@@ -1,27 +1,30 @@
 import React from 'react';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { UserDan } from '../../fixtures';
 import { ProfilePhoto } from '.';
 
 const props = {
-    owner: UserDan
+    name: UserDan.name,
+    email: UserDan.email,
+    photo: UserDan.photo
 };
 
 describe('ProfilePhoto component', () => {
     it('should render initials if photo not provided', () => {
         const noPhotoUser = {
             name: 'Dan Page',
-            email: 'dan@google.com'
+            email: 'dan@google.com',
+            photo: ''
         };
 
-        const { container, getByText } = render(<ProfilePhoto {...props} owner={noPhotoUser} />);
+        const { container } = render(<ProfilePhoto {...props} {...noPhotoUser} />);
         expect(container.firstChild).toMatchSnapshot();
-        getByText('DP');
+        screen.getByText('DP');
     });
 
     it('should render a photo if url provided', () => {
-        const { getByTestId } = render(<ProfilePhoto {...props} />);
-        getByTestId('photo');
+        render(<ProfilePhoto {...props} />);
+        screen.getByTestId('photo');
     });
 });

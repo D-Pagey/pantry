@@ -111,7 +111,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
 
                     return (
                         <S.Item key={tenant.uid}>
-                            <S.ProfilePhoto owner={tenant} width="50px" />
+                            <S.ProfilePhoto email={tenant.email} name={tenant.name} photo={tenant.photo} width="50px" />
                             <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
                             <S.Email>{tenant.email}</S.Email>
                             {getEmoji(tenant.houseRole)}

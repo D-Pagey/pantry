@@ -109,26 +109,35 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
 
             <S.List>
                 {item.batches.map((batch) => {
-                    return [...Array(batch.quantity)].map((e, i) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <S.Item key={`${batch.id}-${i}`}>
-                            <S.DateButton
-                                secondary
-                                onClick={handleDateClick(batch)}
-                                borderColour={getColourFromDate(batch.expires)}
-                            >
-                                <S.Text colour={getColourFromDate(batch.expires)}>
-                                    Expires in {formatDistanceToNowStrict(batch.expires)}
-                                </S.Text>
-                            </S.DateButton>
+                    return [...Array(batch.quantity)].map((e, i) => {
+                        const currentOwner = getOwnerFromId(batch.ownerId, tenants);
+                        return (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <S.Item key={`${batch.id}-${i}`}>
+                                <S.DateButton
+                                    secondary
+                                    onClick={handleDateClick(batch)}
+                                    borderColour={getColourFromDate(batch.expires)}
+                                >
+                                    <S.Text colour={getColourFromDate(batch.expires)}>
+                                        Expires in {formatDistanceToNowStrict(batch.expires)}
+                                    </S.Text>
+                                </S.DateButton>
 
-                            {isTabletOrLarger && <ProfilePhoto owner={getOwnerFromId(batch.ownerId, tenants)} />}
+                                {isTabletOrLarger && currentOwner.email && (
+                                    <ProfilePhoto
+                                        email={currentOwner.email}
+                                        name={currentOwner.name}
+                                        photo={currentOwner.photo}
+                                    />
+                                )}
 
-                            <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
-                                <img src={deleteIcon} alt="delete" />
-                            </S.DeleteButton>
-                        </S.Item>
-                    ));
+                                <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
+                                    <img src={deleteIcon} alt="delete" />
+                                </S.DeleteButton>
+                            </S.Item>
+                        );
+                    });
                 })}
             </S.List>
         </>

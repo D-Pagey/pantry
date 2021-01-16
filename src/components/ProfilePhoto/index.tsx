@@ -1,43 +1,25 @@
 import React, { FC } from 'react';
 
-import { UserType } from '../../types';
+import { getInitials } from './utils';
 import * as S from './styles';
 
 type ProfilePhotoTypes = {
-    owner: Partial<UserType>;
+    photo: string;
+    email: string;
     width?: string;
+    name?: string;
     onClick?: () => void;
 };
 
-export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, owner, width, ...props }) => {
-    if (owner) {
-        const { photo, email, name } = owner;
+export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, photo, width, email, name, ...props }) => {
+    if (photo)
+        return <S.Image onClick={onClick} src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
 
-        if (photo)
-            return <S.Image onClick={onClick} src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
+    console.log({ photo, initials: getInitials({ name, email }), name, email });
 
-        const getInitials = () => {
-            let nameOrEmail = '';
-
-            if (name) {
-                nameOrEmail = name;
-            } else if (email) {
-                nameOrEmail = email;
-            }
-
-            return nameOrEmail
-                .split(' ')
-                .map((word) => word[0])
-                .join('')
-                .toUpperCase();
-        };
-
-        return (
-            <S.Circle onClick={onClick} width={width} {...props}>
-                <S.Initials>{getInitials()}</S.Initials>
-            </S.Circle>
-        );
-    }
-
-    return null;
+    return (
+        <S.Circle onClick={onClick} width={width} {...props}>
+            <S.Initials>{getInitials({ name, email })}</S.Initials>
+        </S.Circle>
+    );
 };

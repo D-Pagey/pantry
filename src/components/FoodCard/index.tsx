@@ -35,7 +35,9 @@ export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, ten
                         key={`${owner.photo}-${index}`}
                         index={index}
                         length={array.length}
-                        owner={owner}
+                        email={owner.email}
+                        name={owner.name}
+                        photo={owner.photo}
                         alt="food owner"
                         width="50px"
                     />
@@ -46,7 +48,12 @@ export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, ten
                 {circleIconBatches.map((batch) => {
                     return [...Array(batch.quantity)].map((_, i) => (
                         // eslint-disable-next-line react/no-array-index-key
-                        <CircleIcon key={i} colour={getColourFromDate(batch.expires)} margin="0 4px 0 0" />
+                        <CircleIcon
+                            key={i}
+                            colour={getColourFromDate(batch.expires)}
+                            margin="0 4px 0 0"
+                            data-testid={`circleIcon-${i}`}
+                        />
                     ));
                 })}
             </S.CircleWrapper>

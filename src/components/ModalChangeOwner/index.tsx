@@ -26,20 +26,30 @@ export const ModalChangeOwner: FC<ModalChangeOwnerTypes> = ({
             <h2>Change Owner</h2>
             <p>3 servings expiring in: 2 days</p>
             <p>Current Owner:</p>
-            <ProfilePhoto owner={currentOwner} width="50px" />
+            <ProfilePhoto
+                name={currentOwner.name}
+                email={currentOwner.email!}
+                photo={currentOwner.photo}
+                width="50px"
+            />
             {currentOwner.name}
             <p>Click owner:</p>
             <S.List>
-                {tenants.map((tenant) => (
-                    <li key={tenant.uid}>
-                        <ProfilePhoto
-                            onClick={handleChangeOwnerClick(tenant.uid)}
-                            owner={getOwnerFromId(tenant.uid, tenants)}
-                            width="50px"
-                        />
-                        <p>{tenant.name}</p>
-                    </li>
-                ))}
+                {tenants.map((tenant) => {
+                    const currentOwner = getOwnerFromId(tenant.uid, tenants);
+                    return (
+                        <li key={tenant.uid}>
+                            <ProfilePhoto
+                                email={currentOwner.email!}
+                                name={currentOwner.name}
+                                photo={currentOwner.photo}
+                                onClick={handleChangeOwnerClick(tenant.uid)}
+                                width="50px"
+                            />
+                            <p>{tenant.name}</p>
+                        </li>
+                    );
+                })}
             </S.List>
 
             <Button secondary onClick={closeModal}>
