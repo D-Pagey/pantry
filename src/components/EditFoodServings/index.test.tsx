@@ -1,18 +1,34 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { render } from '../../test-utils';
-import { Fridge, TenantHeidi, UserDan } from '../../fixtures';
+import { render, screen } from '../../test-utils';
+import { deleteBatch, updateBatch } from '../../services/firestore';
+import { Fridge, TenantHeidi, TenantJoe, UserDan } from '../../fixtures';
 import { EditFoodServings } from '.';
+
+jest.mock('../../services/firestore');
 
 const props = {
     item: Fridge[0],
-    tenants: [TenantHeidi],
-    updateBatch: () => null
+    tenants: [TenantHeidi]
 };
 
 const context = {
     user: UserDan
+};
+
+const item = {
+    batches: [
+        {
+            id: '1111111',
+            expires: new Date(),
+            ownerId: TenantJoe.uid,
+            quantity: 1
+        }
+    ],
+    category: 'vegetables',
+    name: 'asparagus',
+    unit: 'servings'
 };
 
 describe('EditFoodServings component', () => {
@@ -21,24 +37,42 @@ describe('EditFoodServings component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.skip('should call updateBatch if deleting and new servings are not 0', () => {
-        const item = Fridge[1];
-        const updateBatch = jest.fn();
-
-        const { getAllByTestId } = render(<EditFoodServings {...props} item={item} />, context);
-        const allDeleteButtons = getAllByTestId('deleteServing');
+    it('should call deleteBatch when clicking delete button', () => {
+        render(<EditFoodServings {...props} item={item} />, context);
 
         // click the first batch that has servings > 1
-        userEvent.click(allDeleteButtons[1]);
+        userEvent.click(screen.getAllByTestId('deleteServing')[0]);
+
+        expect(deleteBatch).toHaveBeenCalledWith({
+            batchId: item.batches[0].id,
+            name: item.name,
+            userHousehold: context.user.household
+        });
+    });
+
+    it('should call updateBatch when clicking delete button', () => {
+        const multipleServings = {
+            ...item,
+            batches: [
+                {
+                    ...item.batches[0],
+                    quantity: 4
+                }
+            ]
+        };
+
+        render(<EditFoodServings {...props} item={multipleServings} />, context);
+
+        // click the first batch that has servings > 1
+        userEvent.click(screen.getAllByTestId('deleteServing')[0]);
 
         expect(updateBatch).toHaveBeenCalledWith({
+            name: item.name,
+            userHousehold: context.user.household,
             batch: {
-                expires: expect.any(Date),
-                id: '22222222',
-                ownerId: 'abcde',
-                quantity: 1
-            },
-            name: 'broccoli'
+                ...item.batches[0],
+                quantity: 3
+            }
         });
     });
 });

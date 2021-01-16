@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
+import { colours } from '../../tokens';
 import { CategoryButton } from '.';
 
 const props = {
@@ -17,10 +18,17 @@ describe('CategoryButton component', () => {
     it('should call onClick when clicked', () => {
         const handleClick = jest.fn();
 
-        const { getByText } = render(<CategoryButton {...props} handleClick={handleClick} />);
+        render(<CategoryButton {...props} handleClick={handleClick} />);
 
-        userEvent.click(getByText('Meat'));
+        userEvent.click(screen.getByText('Meat'));
 
         expect(handleClick).toHaveBeenCalled();
+    });
+
+    it('should have selected styles if prop is selected', () => {
+        render(<CategoryButton {...props} isSelected />);
+
+        expect(screen.getByText('Meat')).toHaveStyleRule('color', colours.white);
+        expect(screen.getByTestId('categoryCardmeat')).toHaveStyleRule('background-color', colours.darkGreen100);
     });
 });

@@ -31,20 +31,16 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
         query: mediaQuery.tablet
     });
 
-    const deleteEntireBatch = async ({ name, batchId }: { name: string; batchId: string }) => {
-        try {
-            await deleteBatch({ name, batchId, userHousehold: user!.household! });
-            toast.success(`Batch deleted for ${name}`);
-        } catch {
-            toast.error('Error with deleting batch');
-        }
-    };
-
     const handleDelete = (batch: BatchType) => async () => {
         const updatedServings = batch.quantity - 1;
 
         if (updatedServings === 0) {
-            deleteEntireBatch({ name: item.name, batchId: batch.id });
+            try {
+                await deleteBatch({ name: item.name, batchId: batch.id, userHousehold: user!.household! });
+                toast.success(`Batch deleted for ${name}`);
+            } catch {
+                toast.error('Error with deleting batch');
+            }
         } else {
             await updateBatch({
                 userHousehold: user!.household!,
@@ -54,15 +50,15 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
         }
     };
 
-    const handleChangeOwnerClick = (tenantId: string) => () => {
-        if (tenantId !== selectedBatch?.ownerId) {
-            const updatedBatch = selectedBatch && { ...selectedBatch, ownerId: tenantId };
+    // const handleChangeOwnerClick = (tenantId: string) => () => {
+    //     if (tenantId !== selectedBatch?.ownerId) {
+    //         const updatedBatch = selectedBatch && { ...selectedBatch, ownerId: tenantId };
 
-            if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
-        }
+    //         if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
+    //     }
 
-        setIsModalOpen(false);
-    };
+    //     setIsModalOpen(false);
+    // };
 
     const handleDateClick = (batch: BatchType) => () => {
         setIsModalOpen(true);
@@ -88,14 +84,14 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
         <>
             {selectedBatch && (
                 <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                    {!isEditingDate && (
+                    {/* {!isEditingDate && (
                         <ModalChangeOwner
                             closeModal={handleModalClose}
                             handleChangeOwnerClick={handleChangeOwnerClick}
                             ownerId={selectedBatch.ownerId}
                             tenants={tenants}
                         />
-                    )}
+                    )} */}
 
                     {isEditingDate && (
                         <ModalChangeDate
