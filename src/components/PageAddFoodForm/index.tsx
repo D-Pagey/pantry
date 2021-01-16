@@ -13,6 +13,7 @@ import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Button } from '../Button';
 import { AuthContext } from '../ProviderAuth';
+import { checkExistingCategory } from './utils';
 import * as S from './styles';
 
 type PageAddFoodFormProps = {
@@ -89,33 +90,24 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                         setStep(3);
                     };
 
-                    const checkExistingCategory = () => {
-                        return fridge.reduce((acc, curr: FoodType) => {
-                            if (curr.name === values.name.toLowerCase()) {
-                                return curr.category;
-                            }
-
-                            return acc;
-                        }, '');
-                    };
-
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const onKeyDown = (keyEvent: any): void => {
-                        if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
-                            keyEvent.preventDefault();
-                        }
-                    };
+                    // const onKeyDown = (keyEvent: any): void => {
+                    //     if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+                    //         keyEvent.preventDefault();
+                    //         console.log('enter');
+                    //     }
+                    // };
 
                     return (
                         <S.Wrapper>
-                            <S.Form onKeyDown={onKeyDown}>
+                            <S.Form>
                                 {step === 1 && (
                                     <S.StepWrapper>
                                         <S.InputWrapper>
                                             <S.Label htmlFor="foodName">What is the food called?</S.Label>
 
                                             <CreatableDropdown
-                                                options={formatFoodDropdownOptions(fridge || [])}
+                                                options={formatFoodDropdownOptions(fridge)}
                                                 setSelected={(name: string) => setFieldValue('name', name)}
                                                 placeholder="e.g. Carrot"
                                                 inputName="foodName"
@@ -150,7 +142,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                     <S.StepWrapper>
                                         <ChooseCategory
                                             handleClick={handleCategoryClick}
-                                            selected={checkExistingCategory()}
+                                            selected={checkExistingCategory(fridge, values.name) || values.category}
                                         />
 
                                         <S.ButtonWrapper>

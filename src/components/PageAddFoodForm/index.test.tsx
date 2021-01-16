@@ -7,6 +7,7 @@ import { updateExistingProperties, updateBatch } from '../../services/firestore'
 import { render, screen } from '../../test-utils';
 import { Fridge, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
+import { addDays } from 'date-fns';
 
 const mockHistoryPush = jest.fn();
 
@@ -35,7 +36,7 @@ describe('PageAddFoodForm component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should submit correct values for item that does not exist', async () => {
+    it('should submit correct values for item that does not exist, and redirect', async () => {
         const name = 'unique-food';
         const quantity = '3';
         const unit = props.metaData.units[1];
@@ -54,6 +55,7 @@ describe('PageAddFoodForm component', () => {
 
         // Step 3
         screen.getByText('When is it going to expire?');
+        userEvent.click(screen.getAllByText('29')[0]);
         userEvent.click(screen.getByText('Add to pantry'));
 
         await waitFor(() =>
@@ -61,7 +63,7 @@ describe('PageAddFoodForm component', () => {
                 name,
                 userHousehold: UserDan.household,
                 batch: {
-                    expires: expect.any(Date),
+                    expires: addDays(new Date(), -3),
                     id: expect.any(String),
                     ownerId: UserDan.uid,
                     quantity: 3
@@ -70,6 +72,8 @@ describe('PageAddFoodForm component', () => {
         );
 
         expect(updateExistingProperties).not.toHaveBeenCalled();
+
+        expect(mockHistoryPush).toHaveBeenCalledWith('/food');
     });
 
     it('should submit correct values for item that does exist', async () => {
@@ -112,129 +116,36 @@ describe('PageAddFoodForm component', () => {
         });
     });
 
-    it.skip('should render step 1 of the form once hit back on step 2', async () => {
-        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
-            <PageAddFoodForm {...props} />,
-            context
-        );
+    it('next and back buttons should navigate the right steps of the form', async () => {
+        render(<PageAddFoodForm {...props} />, context);
 
-        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
-        userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Next'));
+        // Step 1
+        userEvent.type(screen.getByLabelText('What is the food called?'), 'chicken');
+        await selectEvent.select(screen.getByLabelText('Quantity'), '2');
+        await selectEvent.select(screen.getByLabelText('Unit'), props.metaData.units[2]);
+        userEvent.click(screen.getByText('Next'));
 
-        await findByTestId('chooseCategory');
+        // Step 2
+        screen.getByText('What type of food?');
+        userEvent.click(screen.getByText('Back'));
 
-        userEvent.click(getByText('Back'));
+        // Step 1
+        await screen.findByText('What is the food called?');
+        userEvent.click(screen.getByText('Next'));
 
-        await findByText('What is the food called?');
-    });
+        // Step 2
+        screen.getByText('What type of food?');
+        userEvent.click(screen.getByText('Next'));
 
-    it.skip('should render step 2 of the form once hit back on step 3', async () => {
-        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
-            <PageAddFoodForm {...props} />,
-            context
-        );
+        // Step 3
+        screen.getByText('When is it going to expire?');
+        userEvent.click(screen.getByText('Back'));
 
-        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
-        userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Next'));
+        // Step 2
+        screen.getByText('What type of food?');
+        userEvent.click(screen.getByText('Next'));
 
-        await findByTestId('chooseCategory');
-
-        userEvent.click(getByTestId('meatCategoryButton'));
-
-        await findByText('When is it going to expire?');
-
-        userEvent.click(getByText('Back'));
-
-        await findByTestId('chooseCategory');
-    });
-
-    it.skip('should redirect to food page once submitted', async () => {
-        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
-            <PageAddFoodForm {...props} />,
-            context
-        );
-
-        await userEvent.type(getByLabelText('What is the food called?'), 'chicken');
-        userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Next'));
-
-        await findByTestId('chooseCategory');
-
-        userEvent.click(getByTestId('meatCategoryButton'));
-
-        await findByText('When is it going to expire?');
-
-        userEvent.click(getByText('Add to pantry'));
-
-        await waitFor(() => expect(mockHistoryPush).toBeCalledWith('/food'));
-    });
-
-    it.skip('should call updateBatch with the right values', async () => {
-        const updatedProps = { ...props, fridge: Fridge, updateBatch: jest.fn() };
-
-        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
-            <PageAddFoodForm {...updatedProps} />,
-            context
-        );
-
-        await selectEvent.create(getByLabelText('What is the food called?'), 'Avocado');
-        userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Next'));
-
-        await findByTestId('chooseCategory');
-
-        userEvent.click(getByTestId('meatCategoryButton'));
-
-        await findByText('When is it going to expire?');
-
-        userEvent.click(getByText('Add to pantry'));
-
-        await waitFor(() =>
-            expect(updatedProps.updateBatch).toBeCalledWith({
-                batch: {
-                    expires: expect.any(Date),
-                    id: expect.any(String),
-                    ownerId: context.user.uid,
-                    quantity: 1,
-                    unit: 'servings'
-                },
-                name: 'avocado'
-            })
-        );
-    });
-
-    it.skip('should call updateExistingProperties with correct values if does not already exist', async () => {
-        const updatedProps = {
-            ...props,
-            fridge: Fridge,
-            updateExistingProperties: jest.fn()
-        };
-        const name = 'salmon';
-
-        const { getByTestId, getByLabelText, getByText, findByTestId, findByText } = render(
-            <PageAddFoodForm {...updatedProps} />,
-            context
-        );
-
-        await selectEvent.create(getByLabelText('What is the food called?'), 'Salmon');
-        userEvent.click(getByTestId('singleSelectButton0'));
-        userEvent.click(getByText('Next'));
-
-        await findByTestId('chooseCategory');
-
-        userEvent.click(getByTestId('meatCategoryButton'));
-
-        await findByText('When is it going to expire?');
-
-        userEvent.click(getByText('Add to pantry'));
-
-        await waitFor(() =>
-            expect(updatedProps.updateExistingProperties).toBeCalledWith({
-                category: 'meat',
-                name
-            })
-        );
+        // Step 3
+        screen.getByText('When is it going to expire?');
     });
 });

@@ -15,8 +15,6 @@ export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, photo, width, ema
     if (photo)
         return <S.Image onClick={onClick} src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
 
-    console.log({ photo, initials: getInitials({ name, email }), name, email });
-
     return (
         <S.Circle onClick={onClick} width={width} {...props}>
             <S.Initials>{getInitials({ name, email })}</S.Initials>
