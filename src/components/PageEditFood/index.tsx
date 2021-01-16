@@ -3,57 +3,20 @@ import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 
 import { convertBatchesArray, formatFoodDropdownOptions } from '../../utils';
-import { DatabaseFoodType, FoodType, TenantType, BatchType } from '../../types';
-import { db } from '../../services';
+import { FoodType, TenantType } from '../../types';
+import { addItemDeleteItem, updateItemField } from '../../services/firestore';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
-import * as S from './styles';
 import { sortBatches } from '../FoodCard/utils';
-
-const deleteItemBatches = (itemName: string, household: string) =>
-    db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${itemName}.batches`]: {}
-        });
-
-const addItem = (newItem: DatabaseFoodType, household: string) =>
-    db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${newItem.name}`]: newItem
-        });
-
-const updateItemField = (name: string, property: string, value: string, household: string) =>
-    db
-        .collection('households')
-        .doc(household)
-        .update({
-            [`fridge.${name}.${property}`]: value
-        });
-
-/**
- * This function adds a brand new item then deletes the old item out of firestore
- */
-const addItemDeleteItem = async (newItem: DatabaseFoodType, nameToBeDeleted: string, household: string) => {
-    // add new item
-    await addItem(newItem, household);
-
-    // delete old item
-    await deleteItemBatches(nameToBeDeleted, household);
-};
+import * as S from './styles';
 
 type PageEditFoodProps = {
     fridge: FoodType[];
     tenants: TenantType[];
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
-export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBatch }) => {
+export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [item, setItem] = useState<FoodType>();
     const [newName, setNewName] = useState('');
@@ -158,7 +121,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, updateBat
                         <S.Subtitle column="2/3" row="3/4">
                             Change date or owner:
                         </S.Subtitle>
-                        <EditFoodServings item={item} tenants={nonPendingTenants} updateBatch={updateBatch} />
+                        <EditFoodServings item={item} tenants={nonPendingTenants} />
 
                         <S.Button onClick={handleEdit}>Save Changes</S.Button>
                     </S.Wrapper>

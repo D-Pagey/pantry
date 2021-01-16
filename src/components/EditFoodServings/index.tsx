@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import deleteIcon from '../../assets/delete.svg';
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
-import { db, firebase } from '../../services';
+import { deleteBatch, updateBatch } from '../../services/firestore';
 import { mediaQuery } from '../../tokens';
 import { AuthContext } from '../ProviderAuth';
 import { ModalChangeOwner } from '../ModalChangeOwner';
@@ -20,10 +20,9 @@ if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 type EditFoodServingsProps = {
     item: FoodType;
     tenants: TenantType[];
-    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, updateBatch }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditingDate, setIsEditingDate] = useState<boolean>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
@@ -32,25 +31,26 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
         query: mediaQuery.tablet
     });
 
-    const deleteBatch = ({ name, batchId }: { name: string; batchId: string }): void => {
-        if (user) {
-            db.collection('households')
-                .doc(user.household)
-                .update({
-                    [`fridge.${name}.batches.${batchId}`]: firebase.firestore.FieldValue.delete()
-                })
-                .then(() => toast.success(`Batch deleted for ${name}`))
-                .catch(() => toast.error('Error with deleting batch'));
+    const deleteEntireBatch = async ({ name, batchId }: { name: string; batchId: string }) => {
+        try {
+            await deleteBatch({ name, batchId, userHousehold: user!.household! });
+            toast.success(`Batch deleted for ${name}`);
+        } catch {
+            toast.error('Error with deleting batch');
         }
     };
 
-    const handleDelete = (batch: BatchType) => () => {
+    const handleDelete = (batch: BatchType) => async () => {
         const updatedServings = batch.quantity - 1;
 
         if (updatedServings === 0) {
-            deleteBatch({ name: item.name, batchId: batch.id });
+            deleteEntireBatch({ name: item.name, batchId: batch.id });
         } else {
-            updateBatch({ name: item.name, batch: { ...batch, quantity: updatedServings } });
+            await updateBatch({
+                userHousehold: user!.household!,
+                name: item.name,
+                batch: { ...batch, quantity: updatedServings }
+            });
         }
     };
 
@@ -58,7 +58,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
         if (tenantId !== selectedBatch?.ownerId) {
             const updatedBatch = selectedBatch && { ...selectedBatch, ownerId: tenantId };
 
-            if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch });
+            if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
         }
 
         setIsModalOpen(false);
@@ -78,7 +78,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants, upd
     const handleDateChange = (date: Date) => {
         if (selectedBatch) {
             const updatedBatch = { ...selectedBatch, expires: date };
-            updateBatch({ name: item.name, batch: updatedBatch });
+            updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
         }
 
         setIsModalOpen(false);

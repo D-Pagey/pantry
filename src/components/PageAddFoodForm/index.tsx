@@ -5,8 +5,9 @@ import DatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { BatchType, FoodType, MetaDataType, NewFoodType } from '../../types';
+import { FoodType, MetaDataType, NewFoodType } from '../../types';
 import { formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
+import { updateExistingProperties, updateBatch } from '../../services/firestore';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -15,20 +16,11 @@ import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
 
 type PageAddFoodFormProps = {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    updateExistingProperties: ({ name, category, unit }: { name: string; category: string; unit: string }) => void;
     fridge?: FoodType[];
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    updateBatch: ({ name, batch }: { name: string; batch: BatchType }) => void;
     metaData: MetaDataType;
 };
 
-export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({
-    fridge,
-    updateExistingProperties,
-    updateBatch,
-    metaData
-}) => {
+export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) => {
     const [step, setStep] = useState(1);
     const [itemExists, setItemExists] = useState(false);
     const { user } = useContext(AuthContext);
@@ -55,7 +47,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({
         <Layout title="Add food">
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', quantity: '', unit: '' }}
-                onSubmit={(values, actions): void => {
+                onSubmit={async (values, actions) => {
                     if (fridge && user) {
                         const newBatchId = uuidv4();
 
@@ -73,14 +65,19 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({
                         };
 
                         if (!itemExists) {
-                            updateExistingProperties({
+                            await updateExistingProperties({
                                 name: formattedValues.name,
                                 category: formattedValues.category,
-                                unit: formattedValues.unit
+                                unit: formattedValues.unit,
+                                userHousehold: user.household!
                             });
                         }
 
-                        updateBatch({ name: formattedValues.name, batch: formattedValues.batch });
+                        await updateBatch({
+                            name: formattedValues.name,
+                            userHousehold: user.household!,
+                            batch: formattedValues.batch
+                        });
                     }
                     actions.setSubmitting(false);
                     actions.resetForm();

@@ -1,8 +1,7 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
-import { FoodType, TenantType, BatchType, DatabaseFoodType, MetaDataType } from '../../types';
+import { FoodType, TenantType, DatabaseFoodType, MetaDataType } from '../../types';
 import { formatExpiryDates } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
@@ -22,42 +21,6 @@ export const Routes = (): JSX.Element => {
     const [tenants, setTenants] = useState<TenantType[]>();
     const [metaData, setMetaData] = useState<MetaDataType>();
     const { user } = useContext(AuthContext);
-
-    const updateBatch = ({ name, batch }: { name: string; batch: BatchType }): void => {
-        if (user) {
-            db.collection('households')
-                .doc(user.household)
-                .update({
-                    [`fridge.${name}.batches.${batch.id}`]: batch
-                })
-                // .then(() => toast.success(`Batch updated for ${name}`))
-                // TODO: Do we need toast here?
-                .then(() => null)
-                .catch(() => toast.error('Error with updating fridge'));
-        }
-    };
-
-    const updateExistingProperties = ({
-        name,
-        category,
-        unit
-    }: {
-        name: string;
-        category: string;
-        unit: string;
-    }): void => {
-        if (user) {
-            db.collection('households')
-                .doc(user.household)
-                .update({
-                    [`fridge.${name}`]: { name, category, unit }
-                })
-                // .then(() => toast.success(`${name} (${category}) added`))
-                // TODO: Do we need a toast for adding food?!
-                .then(() => null)
-                .catch(() => toast.error('Error with updating fridge'));
-        }
-    };
 
     const getFridgeData = useCallback(() => {
         if (user) {
@@ -109,17 +72,12 @@ export const Routes = (): JSX.Element => {
             </RouteProtected>
 
             <RouteProtected path="/:name/edit">
-                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} updateBatch={updateBatch} />}
+                {fridge && tenants && <PageEditFood fridge={fridge} tenants={tenants} />}
             </RouteProtected>
 
             {metaData && (
                 <RouteProtected path="/add">
-                    <PageAddFoodForm
-                        fridge={fridge}
-                        updateExistingProperties={updateExistingProperties}
-                        updateBatch={updateBatch}
-                        metaData={metaData}
-                    />
+                    <PageAddFoodForm fridge={fridge} metaData={metaData} />
                 </RouteProtected>
             )}
 

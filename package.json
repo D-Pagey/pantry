@@ -141,6 +141,7 @@
             "src/**/*.{js,ts,tsx}",
             "!src/serviceWorker.js",
             "!src/index.js",
+            "!src/services/*",
             "!src/react-app-env.d.ts",
             "!src/**/index.stories.tsx",
             "!src/test-utils.tsx",
