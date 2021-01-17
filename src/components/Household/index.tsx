@@ -89,10 +89,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                 {getSortedTenants(tenants).map((tenant) => {
                     // const isAlexa = tenant.houseRole === 'alexa';
                     const isPending = tenant.houseRole === 'pending';
-                    const currentUserIsAdmin = currentUser.houseRole === 'admin';
                     const showMenu = () => {
-                        if (currentUserIsAdmin) return true;
-
+                        if (currentUser.houseRole === 'admin') return true;
                         if (currentUser.uid === tenant.uid) return true;
 
                         return false;

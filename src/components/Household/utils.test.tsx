@@ -17,11 +17,16 @@ const Dan: TenantType = {
     houseRole: 'tenant'
 };
 
-const tenants: TenantType[] = [InvitedJoe, TenantAlexa, AdminHeidi, Dan];
+const Toni: TenantType = {
+    ...TenantJoe,
+    houseRole: 'tenant'
+};
+
+const tenants: TenantType[] = [InvitedJoe, TenantAlexa, AdminHeidi, Dan, Toni];
 
 describe('getSortedTenants function', () => {
     it('should return tenants in correct order', () => {
         const sorted = getSortedTenants(tenants);
-        expect(sorted).toStrictEqual([AdminHeidi, Dan, TenantAlexa, InvitedJoe]);
+        expect(sorted).toStrictEqual([AdminHeidi, Dan, Toni, TenantAlexa, InvitedJoe]);
     });
 });

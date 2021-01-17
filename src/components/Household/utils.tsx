@@ -9,7 +9,7 @@ export const getSortedTenants = (tenants: TenantType[]): TenantType[] => {
 
         if (aOrder < bOrder) return -1;
         if (aOrder > bOrder) return 1;
-        5;
+
         return 0;
     });
 };

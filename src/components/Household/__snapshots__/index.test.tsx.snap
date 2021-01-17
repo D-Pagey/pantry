@@ -43,6 +43,14 @@ exports[`Household component should render 1`] = `
   text-align: center;
 }
 
+.c8 {
+  color: rgb(66,133,244);
+  font-style: italic;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  text-align: center;
+}
+
 .c5 {
   color: darkgrey;
   font-size: 14px;
@@ -107,6 +115,80 @@ exports[`Household component should render 1`] = `
       role="img"
     >
       🥑
+    </span>
+    <button
+      class="c7"
+      type="button"
+    >
+      <img
+        alt="menu"
+        src="three-dots.svg"
+      />
+    </button>
+  </li>
+  <li
+    class="c1"
+  >
+    <img
+      alt="profile"
+      class="c2 c3"
+      data-testid="photo"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      width="50px"
+    />
+    <span
+      class="c4"
+    >
+      Heidi Seo
+    </span>
+    <span
+      class="c5"
+    >
+      heidi@gmail.com
+    </span>
+    <span
+      aria-label="avocado"
+      class="c6"
+      role="img"
+    >
+      🥑
+    </span>
+    <button
+      class="c7"
+      type="button"
+    >
+      <img
+        alt="menu"
+        src="three-dots.svg"
+      />
+    </button>
+  </li>
+  <li
+    class="c1"
+  >
+    <img
+      alt="profile"
+      class="c2 c3"
+      data-testid="photo"
+      src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+      width="50px"
+    />
+    <span
+      class="c8"
+    >
+      Pending
+    </span>
+    <span
+      class="c5"
+    >
+      joe@test.com
+    </span>
+    <span
+      aria-label="potato"
+      class="c6"
+      role="img"
+    >
+      🥔
     </span>
     <button
       class="c7"
