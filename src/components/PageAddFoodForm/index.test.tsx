@@ -37,6 +37,8 @@ describe('PageAddFoodForm component', () => {
     });
 
     it('should submit correct values for item that does not exist, and redirect', async () => {
+        jest.setTimeout(10000);
+
         const name = 'unique-food';
         const quantity = '3';
         const unit = props.metaData.units[1];
