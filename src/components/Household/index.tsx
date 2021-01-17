@@ -4,9 +4,10 @@ import { toast } from 'react-toastify';
 
 import threeDots from '../../assets/three-dots.svg';
 import { firebase } from '../../services';
-import { TenantType, HouseRoleType, UserType } from '../../types';
+import { TenantType, UserType } from '../../types';
 import { ModalHousehold } from '../ModalHousehold';
-import { getEmoji } from './utils';
+import { getSortedTenants } from './utils';
+import { Emoji } from './Emoji';
 import * as S from './styles';
 
 export type HouseholdProps = {
@@ -21,18 +22,6 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState<TenantType>();
     const currentUser = tenants.filter((tenant) => tenant.uid === user.uid)[0];
-
-    const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
-
-    const sortedTenants = [...tenants].sort((a, b) => {
-        const aOrder = sortOrder.indexOf(a.houseRole);
-        const bOrder = sortOrder.indexOf(b.houseRole);
-
-        if (aOrder < bOrder) return -1;
-        if (aOrder > bOrder) return 1;
-        5;
-        return 0;
-    });
 
     const handleLeaveHousehold = async () => {
         const noPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
@@ -97,7 +86,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
             </ReactModal>
 
             <S.List>
-                {sortedTenants.map((tenant) => {
+                {getSortedTenants(tenants).map((tenant) => {
                     // const isAlexa = tenant.houseRole === 'alexa';
                     const isPending = tenant.houseRole === 'pending';
                     const currentUserIsAdmin = currentUser.houseRole === 'admin';
@@ -114,7 +103,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                             <S.ProfilePhoto email={tenant.email} name={tenant.name} photo={tenant.photo} width="50px" />
                             <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
                             <S.Email>{tenant.email}</S.Email>
-                            {getEmoji(tenant.houseRole)}
+                            <Emoji houseRole={tenant.houseRole} />
 
                             {showMenu() && (
                                 <S.MenuButton onClick={handleMenuClick(tenant.uid)}>

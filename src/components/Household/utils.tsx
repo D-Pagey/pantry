@@ -1,39 +1,15 @@
-import { HouseRoleType } from '../../types';
-import * as S from './styles';
+import { HouseRoleType, TenantType } from '../../types';
 
-export const getEmoji = (houseRole: HouseRoleType): JSX.Element => {
-    if (houseRole === 'admin') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="avocado">
-                🥑
-            </S.Span>
-        );
-    }
+const sortOrder: HouseRoleType[] = ['admin', 'tenant', 'alexa', 'pending'];
 
-    if (houseRole === 'tenant') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="carrot">
-                🥕
-            </S.Span>
-        );
-    }
+export const getSortedTenants = (tenants: TenantType[]): TenantType[] => {
+    return [...tenants].sort((a, b) => {
+        const aOrder = sortOrder.indexOf(a.houseRole);
+        const bOrder = sortOrder.indexOf(b.houseRole);
 
-    if (houseRole === 'alexa') {
-        return (
-            // eslint-disable-next-line
-            <S.Span role="img" aria-label="robot">
-                🤖
-            </S.Span>
-        );
-    }
-
-    // pending
-    return (
-        // eslint-disable-next-line
-        <S.Span role="img" aria-label="potato">
-            🥔
-        </S.Span>
-    );
+        if (aOrder < bOrder) return -1;
+        if (aOrder > bOrder) return 1;
+        5;
+        return 0;
+    });
 };

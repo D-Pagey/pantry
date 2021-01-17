@@ -20,8 +20,6 @@ export const OwnerFilter: FC<OwnerFilterProps> = ({ tenants, selectedTenants, se
     };
 
     const handleReset = () => {
-        if (noneSelected) return;
-
         setSelectedTenants([]);
     };
 
@@ -31,7 +29,11 @@ export const OwnerFilter: FC<OwnerFilterProps> = ({ tenants, selectedTenants, se
 
             <S.List>
                 {tenants.map((tenant) => (
-                    <S.Button key={tenant.uid} onClick={handleClick(tenant.uid)}>
+                    <S.Button
+                        key={tenant.uid}
+                        onClick={handleClick(tenant.uid)}
+                        data-testid={`ownerFilter${tenant.name}`}
+                    >
                         <S.Image
                             src={tenant.photo}
                             alt={tenant.name}

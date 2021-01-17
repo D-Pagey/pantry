@@ -19,8 +19,8 @@ describe('Donut component', () => {
         getByText('Expired');
     });
 
-    it.skip('should render singular of days if 1 day difference', () => {
-        const date = addDays(new Date(), 2);
+    it('should render singular of days if 1 day difference', () => {
+        const date = addDays(new Date(), 1);
 
         const { getByText } = render(<Donut {...props} date={date} />);
         getByText('1');

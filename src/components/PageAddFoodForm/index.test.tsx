@@ -71,8 +71,6 @@ describe('PageAddFoodForm component', () => {
             })
         );
 
-        expect(updateExistingProperties).not.toHaveBeenCalled();
-
         expect(mockHistoryPush).toHaveBeenCalledWith('/food');
     });
 
