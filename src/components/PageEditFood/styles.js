@@ -49,7 +49,7 @@ export const ChooseCategory = styled(Choose)`
     }
 `;
 
-export const Subtitle = styled.h3`
+export const Label = styled.label`
     align-self: end;
     margin: 0;
 

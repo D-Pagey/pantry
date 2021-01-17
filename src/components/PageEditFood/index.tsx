@@ -43,37 +43,40 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
         setIsLoading(true);
 
         if (item && user?.household) {
-            const hasNamedChanged = newName !== item.name;
+            const hasNameChanged = newName !== item.name;
             const hasCategoryChanged = newCategory !== item.category;
             // check if any items with live batches exists with changed name
             const existingItems = fridge.filter((item) => item.batches.length > 0 && item.name === newName);
 
             // if no newName or newCategory disable button
-            if (!hasNamedChanged && !hasCategoryChanged) console.log('nothing changed');
+            // if (!hasNameChanged && !hasCategoryChanged) console.log('nothing changed');
 
             // if newName but no new category, specifically update name
-            if (hasNamedChanged && !hasCategoryChanged) {
+            if (hasNameChanged && !hasCategoryChanged) {
+                let converted;
+
                 if (existingItems.length > 0) {
                     // merge batches of current item and existing item
                     const mergedBatches = [...existingItems[0].batches, ...item.batches];
                     const mergedItem = { ...existingItems[0], batches: mergedBatches };
-
-                    const converted = convertBatchesArray([mergedItem]);
-                    await addItemDeleteItem(converted[0], item.name, user.household);
+                    converted = convertBatchesArray([mergedItem]);
                 } else {
                     // create a new database food type for current item with new name
-                    const converted = convertBatchesArray([{ ...item, name: newName.toLowerCase() }]);
-                    await addItemDeleteItem(converted[0], item.name, user.household);
+                    converted = convertBatchesArray([{ ...item, name: newName.toLowerCase() }]);
                 }
+
+                await addItemDeleteItem(converted[0], item.name, user.household);
             }
 
             // if new category but no new name, specifically update category
-            if (!hasNamedChanged && hasCategoryChanged) {
+            if (!hasNameChanged && hasCategoryChanged) {
                 await updateItemField(item.name, 'category', newCategory, user.household);
             }
 
             // if both updated, update both without deleting batches
-            if (hasNamedChanged && hasCategoryChanged) {
+            if (hasNameChanged && hasCategoryChanged) {
+                let converted;
+
                 if (existingItems.length > 0) {
                     // merge batches of current item and existing item
                     const mergedBatches = [...existingItems[0].batches, ...item.batches];
@@ -84,15 +87,14 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
                         unit: 'servings'
                     };
 
-                    const converted = convertBatchesArray([mergedItem]);
-                    await addItemDeleteItem(converted[0], item.name, user.household);
+                    converted = convertBatchesArray([mergedItem]);
                 } else {
                     // create a new database food type for current item with new name
-                    const converted = convertBatchesArray([
+                    converted = convertBatchesArray([
                         { ...item, name: newName.toLowerCase(), category: newCategory.toLowerCase() }
                     ]);
-                    await addItemDeleteItem(converted[0], item.name, user.household);
                 }
+                await addItemDeleteItem(converted[0], item.name, user.household);
             }
         }
 
@@ -108,19 +110,20 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
                     </S.Title>
 
                     <S.Wrapper>
-                        <S.Subtitle>Change item name:</S.Subtitle>
+                        <S.Label htmlFor="editItemName">Change item name:</S.Label>
                         <S.CreatableDropdown
                             defaultValue={item.name}
-                            options={formatFoodDropdownOptions(fridge || [])}
+                            options={formatFoodDropdownOptions(fridge)}
                             setSelected={setNewName}
+                            inputName="editItemName"
                         />
 
-                        <S.Subtitle column="1/2">Change category:</S.Subtitle>
+                        <S.Label column="1/2">Change category:</S.Label>
                         <S.ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
 
-                        <S.Subtitle column="2/3" row="3/4">
+                        <S.Label column="2/3" row="3/4">
                             Change date or owner:
-                        </S.Subtitle>
+                        </S.Label>
                         <EditFoodServings item={item} tenants={nonPendingTenants} />
 
                         <S.Button onClick={handleEdit}>Save Changes</S.Button>
