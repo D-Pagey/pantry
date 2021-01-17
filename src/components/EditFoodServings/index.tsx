@@ -10,7 +10,7 @@ import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { deleteBatch, updateBatch } from '../../services/firestore';
 import { mediaQuery } from '../../tokens';
 import { AuthContext } from '../ProviderAuth';
-import { ModalChangeOwner } from '../ModalChangeOwner';
+// import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ModalChangeDate } from '../ModalChangeDate';
 import { ProfilePhoto } from '../ProfilePhoto';
 import * as S from './styles';
