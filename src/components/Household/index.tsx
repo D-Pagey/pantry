@@ -17,6 +17,7 @@ export type HouseholdProps = {
 
 const leaveCurrentHousehold = firebase.functions().httpsCallable('leaveCurrentHousehold');
 const cancelInvite = firebase.functions().httpsCallable('cancelInvite');
+const removeUser = firebase.functions().httpsCallable('removeUserFromHousehold');
 
 export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,6 +57,19 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
         }
     };
 
+    const handleRemoveUser = async () => {
+        try {
+            await removeUser({
+                householdId: user.household,
+                tenant: selectedTenant
+            });
+
+            setIsModalOpen(false);
+        } catch (error) {
+            toast.error('Something went wrong removing user, try again.');
+        }
+    };
+
     const handleMenuClick = (id: string) => () => {
         setSelectedTenant(tenants.filter((tenant) => tenant.uid === id)[0]);
         setIsModalOpen(true);
@@ -69,7 +83,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     handleClose={() => setIsModalOpen(false)}
                     handleLeaveHousehold={handleLeaveHousehold}
                     handlePromoteUser={() => console.log('promote user')}
-                    handleRemoveUser={() => console.log('remove user')}
+                    handleRemoveUser={handleRemoveUser}
                     showCancelOption={selectedTenant?.houseRole === 'pending'}
                     showLeaveOption={selectedTenant?.uid === user.uid}
                     showPromoteOption={
