@@ -18,6 +18,7 @@ export type HouseholdProps = {
 const leaveCurrentHousehold = firebase.functions().httpsCallable('leaveCurrentHousehold');
 const cancelInvite = firebase.functions().httpsCallable('cancelInvite');
 const removeUser = firebase.functions().httpsCallable('removeUserFromHousehold');
+const promoteUser = firebase.functions().httpsCallable('promoteUser');
 
 export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,6 +71,19 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
         }
     };
 
+    const handlePromoteUser = async () => {
+        try {
+            await promoteUser({
+                householdId: user.household,
+                tenant: selectedTenant
+            });
+
+            setIsModalOpen(false);
+        } catch (error) {
+            toast.error('Something went wrong promoting user, try again.');
+        }
+    };
+
     const handleMenuClick = (id: string) => () => {
         setSelectedTenant(tenants.filter((tenant) => tenant.uid === id)[0]);
         setIsModalOpen(true);
@@ -82,19 +96,21 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     handleCancelInvite={handleCancelInvite}
                     handleClose={() => setIsModalOpen(false)}
                     handleLeaveHousehold={handleLeaveHousehold}
-                    handlePromoteUser={() => console.log('promote user')}
+                    handlePromoteUser={handlePromoteUser}
                     handleRemoveUser={handleRemoveUser}
                     showCancelOption={selectedTenant?.houseRole === 'pending'}
                     showLeaveOption={selectedTenant?.uid === user.uid}
                     showPromoteOption={
                         currentUser.houseRole === 'admin' &&
                         selectedTenant?.uid !== currentUser.uid &&
-                        selectedTenant?.houseRole !== 'pending'
+                        selectedTenant?.houseRole !== 'pending' &&
+                        selectedTenant?.houseRole !== 'admin'
                     }
                     showRemoveOption={
                         currentUser.houseRole === 'admin' &&
                         selectedTenant?.uid !== currentUser.uid &&
-                        selectedTenant?.houseRole !== 'pending'
+                        selectedTenant?.houseRole !== 'pending' &&
+                        selectedTenant?.houseRole !== 'admin'
                     }
                 />
             </ReactModal>
@@ -104,6 +120,14 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     // const isAlexa = tenant.houseRole === 'alexa';
                     const isPending = tenant.houseRole === 'pending';
                     const showMenu = () => {
+                        const admins = tenants.filter((tenant) => tenant.houseRole === 'admin');
+                        const otherAdmins = admins.reduce((acc, curr) => {
+                            if (curr.uid === user.uid) return acc;
+
+                            return [...acc, curr.uid];
+                        }, [] as string[]);
+
+                        if (otherAdmins.includes(tenant.uid)) return false;
                         if (currentUser.houseRole === 'admin') return true;
                         if (currentUser.uid === tenant.uid) return true;
 

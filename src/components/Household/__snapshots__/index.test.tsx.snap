@@ -153,15 +153,6 @@ exports[`Household component should render 1`] = `
     >
       🥑
     </span>
-    <button
-      class="c7"
-      type="button"
-    >
-      <img
-        alt="menu"
-        src="three-dots.svg"
-      />
-    </button>
   </li>
   <li
     class="c1"
