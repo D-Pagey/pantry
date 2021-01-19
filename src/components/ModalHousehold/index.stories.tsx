@@ -9,6 +9,7 @@ const Template: Story<ModalHouseholdProps> = (args) => <ModalHousehold {...args}
 export const Primary = Template.bind({});
 
 Primary.args = {
+    loading: false,
     showCancelOption: true,
     showLeaveOption: true,
     showPromoteOption: true,

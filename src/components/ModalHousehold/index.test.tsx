@@ -8,6 +8,7 @@ const props = {
     handleLeaveHousehold: () => null,
     handlePromoteUser: () => null,
     handleRemoveUser: () => null,
+    loading: false,
     showCancelOption: true,
     showLeaveOption: true,
     showRemoveOptionts: true,

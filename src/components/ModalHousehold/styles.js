@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colours } from '../../tokens';
 import { Button } from '../Button';
 
 export const Wrapper = styled.div`
@@ -15,9 +16,9 @@ export const Title = styled.h3`
 `;
 
 export const ColouredButton = styled(Button)`
-    background-color: white;
-    border: 1px solid ${({ color }) => color};
-    color: ${({ color }) => color};
+    background-color: ${({ disabled }) => (disabled ? colours.grey : 'white')};
+    border: 1px solid ${({ color, disabled }) => (disabled ? colours.white : color)};
+    color: ${({ color, disabled }) => (disabled ? colours.white : color)};
     font-size: 1.25rem;
     margin: 0 0 20px;
     width: 200px;

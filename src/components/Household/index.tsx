@@ -21,6 +21,7 @@ const removeUser = firebase.functions().httpsCallable('removeUserFromHousehold')
 const promoteUser = firebase.functions().httpsCallable('promoteUser');
 
 export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
+    const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState<TenantType>();
     const currentUser = tenants.filter((tenant) => tenant.uid === user.uid)[0];
@@ -32,6 +33,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
         if (noPendingTenants.length === 1) {
             toast.error(`You can't leave as the only person in the household`);
         } else {
+            setIsLoading(true);
             const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
 
             try {
@@ -44,6 +46,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     };
 
     const handleCancelInvite = async () => {
+        setIsLoading(true);
         try {
             await cancelInvite({
                 inviteeId: selectedTenant?.uid,
@@ -59,6 +62,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     };
 
     const handleRemoveUser = async () => {
+        setIsLoading(true);
         try {
             await removeUser({
                 householdId: user.household,
@@ -72,6 +76,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     };
 
     const handlePromoteUser = async () => {
+        setIsLoading(true);
         try {
             await promoteUser({
                 householdId: user.household,
@@ -98,6 +103,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     handleLeaveHousehold={handleLeaveHousehold}
                     handlePromoteUser={handlePromoteUser}
                     handleRemoveUser={handleRemoveUser}
+                    loading={isLoading}
                     showCancelOption={selectedTenant?.houseRole === 'pending'}
                     showLeaveOption={selectedTenant?.uid === user.uid}
                     showPromoteOption={
