@@ -1,26 +1,26 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useReducer } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 
-import { convertBatchesArray, formatFoodDropdownOptions } from '../../utils';
-import { FoodType, TenantType } from '../../types';
-import { addItemDeleteItem, updateItemField } from '../../services/firestore';
+import { convertBatchesArray, formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
+import { FoodType, MetaDataType, TenantType } from '../../types';
+import { addItemDeleteItem, addItem } from '../../services/firestore';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
 import { sortBatches } from '../FoodCard/utils';
+import { initialState, itemReducer } from './itemReducer';
 import * as S from './styles';
+import { toast } from 'react-toastify';
 
 type PageEditFoodProps = {
     fridge: FoodType[];
     tenants: TenantType[];
+    metadata: MetaDataType;
 };
 
-export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [item, setItem] = useState<FoodType>();
-    const [newName, setNewName] = useState('');
-    const [newCategory, setNewCategory] = useState('');
+export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata }) => {
+    const [state, dispatch] = useReducer(itemReducer, initialState);
     const { user } = useContext(AuthContext);
     const { name } = useParams<{ name: string }>();
     const history = useHistory();
@@ -33,100 +33,86 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants }) => {
         if (editingItem) {
             const sortedBatches = sortBatches(editingItem.batches);
 
-            setItem({ ...editingItem, batches: sortedBatches });
-            setNewName(editingItem.name);
-            setNewCategory(editingItem.category);
+            dispatch({ type: 'INITIALISE', item: { ...editingItem, batches: sortedBatches } });
         }
     }, [fridge, name]);
 
     const handleEdit = async () => {
-        setIsLoading(true);
+        const { originalItem, editedItem } = state;
+        const hasNameChanged = originalItem.name !== editedItem.name;
 
-        if (item && user?.household) {
-            const hasNameChanged = newName !== item.name;
-            const hasCategoryChanged = newCategory !== item.category;
-            // check if any items with live batches exists with changed name
-            const existingItems = fridge.filter((item) => item.batches.length > 0 && item.name === newName);
+        dispatch({ type: 'TOGGLE_LOADING' });
 
-            // if no newName or newCategory disable button
-            // if (!hasNameChanged && !hasCategoryChanged) console.log('nothing changed');
+        try {
+            // name hasn't changed so update the existing item
+            if (!hasNameChanged) {
+                const convertedFoodItem = convertBatchesArray([editedItem])[0];
+                await addItem(convertedFoodItem, user!.household!);
+            } else {
+                // name has changed so update new name and remove old name batches
+                const existingItem = fridge.filter((item) => item.name === editedItem.name)[0];
+                const mergedItem = {
+                    ...existingItem,
+                    ...editedItem,
+                    batches: existingItem ? [...existingItem.batches, ...editedItem.batches] : editedItem.batches
+                };
+                const convertedMergedItem = convertBatchesArray([mergedItem])[0];
 
-            // if newName but no new category, specifically update name
-            if (hasNameChanged && !hasCategoryChanged) {
-                let converted;
-
-                if (existingItems.length > 0) {
-                    // merge batches of current item and existing item
-                    const mergedBatches = [...existingItems[0].batches, ...item.batches];
-                    const mergedItem = { ...existingItems[0], batches: mergedBatches };
-                    converted = convertBatchesArray([mergedItem]);
-                } else {
-                    // create a new database food type for current item with new name
-                    converted = convertBatchesArray([{ ...item, name: newName.toLowerCase() }]);
-                }
-
-                await addItemDeleteItem(converted[0], item.name, user.household);
+                await addItemDeleteItem(convertedMergedItem, originalItem.name, user!.household!);
             }
 
-            // if new category but no new name, specifically update category
-            if (!hasNameChanged && hasCategoryChanged) {
-                await updateItemField(item.name, 'category', newCategory, user.household);
-            }
-
-            // if both updated, update both without deleting batches
-            if (hasNameChanged && hasCategoryChanged) {
-                let converted;
-
-                if (existingItems.length > 0) {
-                    // merge batches of current item and existing item
-                    const mergedBatches = [...existingItems[0].batches, ...item.batches];
-                    const mergedItem = {
-                        batches: mergedBatches,
-                        category: newCategory,
-                        name: newName,
-                        unit: 'servings'
-                    };
-
-                    converted = convertBatchesArray([mergedItem]);
-                } else {
-                    // create a new database food type for current item with new name
-                    converted = convertBatchesArray([
-                        { ...item, name: newName.toLowerCase(), category: newCategory.toLowerCase() }
-                    ]);
-                }
-                await addItemDeleteItem(converted[0], item.name, user.household);
-            }
+            history.push('/food');
+        } catch (error) {
+            console.log({ error });
+            dispatch({ type: 'TOGGLE_LOADING' });
+            toast.error('Something went wrong editing this item');
         }
-
-        history.push('/food');
     };
 
     return (
-        <Layout title={`Edit ${item ? item.name : ''}`} isLoading={isLoading} hideTitle>
-            {item && (
+        <Layout
+            title={`Edit ${state.originalItem.name ? state.originalItem.name : null}`}
+            isLoading={state.loading}
+            hideTitle
+        >
+            {state.originalItem.name && (
                 <>
                     <S.Title>
-                        Edit your <S.Span>{titleCase(item.name)}</S.Span>:
+                        Edit your <S.Span>{titleCase(state.originalItem.name)}</S.Span>:
                     </S.Title>
 
                     <S.Wrapper>
                         <S.Label htmlFor="editItemName">Change item name:</S.Label>
                         <S.CreatableDropdown
-                            defaultValue={item.name}
+                            defaultValue={state.originalItem.name}
                             options={formatFoodDropdownOptions(fridge)}
-                            setSelected={setNewName}
+                            setSelected={(name: string) => dispatch({ type: 'CHANGE_NAME', name })}
                             inputName="editItemName"
                         />
 
+                        <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
+                        <S.CreatableDropdown
+                            defaultValue={state.originalItem.unit}
+                            options={formatDropdownOptions(metadata.units)}
+                            setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
+                            inputName="editItemUnit"
+                        />
+
                         <S.Label column="1/2">Change category:</S.Label>
-                        <S.ChooseCategory handleClick={setNewCategory} selected={newCategory} hideTitle />
+                        <S.ChooseCategory
+                            handleClick={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
+                            selected={state.editedItem.category}
+                            hideTitle
+                        />
 
                         <S.Label column="2/3" row="3/4">
                             Change date or owner:
                         </S.Label>
-                        <EditFoodServings item={item} tenants={nonPendingTenants} />
+                        <EditFoodServings item={state.originalItem} tenants={nonPendingTenants} />
 
-                        <S.Button onClick={handleEdit}>Save Changes</S.Button>
+                        <S.Button onClick={handleEdit} disabled={!state.hasItemChanged}>
+                            Save Changes
+                        </S.Button>
                     </S.Wrapper>
                 </>
             )}

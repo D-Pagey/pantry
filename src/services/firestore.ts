@@ -7,6 +7,9 @@ type UpdateBatchProps = {
     userHousehold: string;
 };
 
+/**
+ * This function updates a specific batch within an existing item
+ */
 export const updateBatch = ({ name, batch, userHousehold }: UpdateBatchProps): Promise<void> => {
     return db
         .collection('households')
@@ -23,6 +26,9 @@ type UpdateExistingPropertiesProps = {
     userHousehold: string;
 };
 
+/**
+ * This function updates name, category and unit for an item
+ */
 export const updateExistingProperties = ({
     name,
     category,
@@ -37,15 +43,21 @@ export const updateExistingProperties = ({
         });
 };
 
-export const deleteItemBatches = (itemName: string, household: string): Promise<void> => {
+/**
+ * This function deletes all batches for an item
+ */
+export const deleteItemBatches = (name: string, household: string): Promise<void> => {
     return db
         .collection('households')
         .doc(household)
         .update({
-            [`fridge.${itemName}.batches`]: {}
+            [`fridge.${name}.batches`]: {}
         });
 };
 
+/**
+ * This function adds a brand new item or overwrites an existing one
+ */
 export const addItem = (newItem: DatabaseFoodType, household: string): Promise<void> => {
     return db
         .collection('households')
@@ -55,6 +67,9 @@ export const addItem = (newItem: DatabaseFoodType, household: string): Promise<v
         });
 };
 
+/**
+ * This function updates a specific field within an existing item
+ */
 export const updateItemField = (name: string, property: string, value: string, household: string): Promise<void> => {
     return db
         .collection('households')
@@ -85,6 +100,9 @@ type DeleteBatchProps = {
     userHousehold: string;
 };
 
+/**
+ * This function deletes a specific batchId from firestore
+ */
 export const deleteBatch = ({ name, batchId, userHousehold }: DeleteBatchProps): Promise<void> => {
     return db
         .collection('households')

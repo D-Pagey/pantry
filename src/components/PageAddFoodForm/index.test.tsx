@@ -1,4 +1,5 @@
 import React from 'react';
+import { addDays } from 'date-fns';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
@@ -7,7 +8,6 @@ import { updateExistingProperties, updateBatch } from '../../services/firestore'
 import { render, screen } from '../../test-utils';
 import { Fridge, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
-import { addDays } from 'date-fns';
 
 const mockHistoryPush = jest.fn();
 
@@ -77,7 +77,7 @@ describe('PageAddFoodForm component', () => {
                     expires: addDays(new Date(), -3),
                     id: expect.any(String),
                     ownerId: UserDan.uid,
-                    quantity: 3
+                    quantity: parseInt(quantity, 10)
                 }
             })
         );
