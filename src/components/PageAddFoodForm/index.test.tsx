@@ -19,6 +19,14 @@ jest.mock('react-router-dom', () => ({
     })
 }));
 
+const mockToastInfo = jest.fn();
+
+jest.mock('react-toastify', () => ({
+    toast: {
+        info: (text: string) => mockToastInfo(text)
+    }
+}));
+
 jest.mock('../../services/firestore');
 
 const context = {
@@ -120,8 +128,8 @@ describe('PageAddFoodForm component', () => {
         render(<PageAddFoodForm {...props} />, context);
 
         // Step 1
-        userEvent.type(screen.getByLabelText('What is the food called?'), 'chicken');
-        await selectEvent.select(screen.getByLabelText('Quantity'), '2');
+        await selectEvent.create(screen.getByLabelText('What is the food called?'), 'chicken');
+        await selectEvent.select(screen.getByLabelText('Quantity'), '1');
         await selectEvent.select(screen.getByLabelText('Unit'), props.metaData.units[2]);
         userEvent.click(screen.getByText('Next'));
 
@@ -147,5 +155,32 @@ describe('PageAddFoodForm component', () => {
 
         // Step 3
         screen.getByText('When is it going to expire?');
+    });
+
+    it('should call toast notification if no name', () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastInfo).toHaveBeenCalledWith('Please enter a name for the food item');
+    });
+
+    it('should call toast notification if no quantity', async () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        await selectEvent.select(screen.getByLabelText('What is the food called?'), 'Broccoli (7 servings)');
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastInfo).toHaveBeenCalledWith('Please enter a quantity for the food item');
+    });
+
+    it('should call toast notification if no unit', async () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        await selectEvent.select(screen.getByLabelText('What is the food called?'), 'Broccoli (7 servings)');
+        await selectEvent.select(screen.getByLabelText('Quantity'), '1');
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastInfo).toHaveBeenCalledWith('Please enter a unit for the food item');
     });
 });
