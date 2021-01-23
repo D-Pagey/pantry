@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import DatePicker from 'react-datepicker';
@@ -21,15 +22,33 @@ type PageAddFoodFormProps = {
     metaData: MetaDataType;
 };
 
+type StepOneValues = {
+    name: string;
+    quantity: string;
+    unit: string;
+};
+
 export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) => {
     const [step, setStep] = useState(1);
     const [itemExists, setItemExists] = useState(false);
     const { user } = useContext(AuthContext);
     const history = useHistory();
 
-    const handleStepOneNext = (name: string) => () => {
+    const handleStepOneNext = (values: StepOneValues) => () => {
+        if (values.name === '') {
+            return toast.info('Please enter a name for the food item');
+        }
+
+        if (values.quantity === '') {
+            return toast.info('Please enter a quantity for the food item');
+        }
+
+        if (values.unit === '') {
+            return toast.info('Please enter a unit for the food item');
+        }
+
         const doesItemExist = fridge.reduce((acc, curr) => {
-            if (curr.name === name) return true;
+            if (curr.name === values.name) return true;
 
             return acc;
         }, false);
@@ -134,7 +153,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                             </S.Grid>
                                         </S.InputWrapper>
 
-                                        <Button onClick={handleStepOneNext(values.name)}>Next</Button>
+                                        <Button onClick={handleStepOneNext(values)}>Next</Button>
                                     </S.StepWrapper>
                                 )}
 
