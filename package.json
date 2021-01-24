@@ -19,7 +19,7 @@
         "firebase": "8.2.4",
         "formik": "2.2.6",
         "jest-styled-components": "7.0.3",
-        "polished": "4.0.5",
+        "polished": "4.1.0",
         "react": "17.0.1",
         "react-burger-menu": "3.0.3",
         "react-datepicker": "3.4.1",
