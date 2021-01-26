@@ -88,8 +88,5 @@ export const itemReducer = (state: EditState, action: ActionType): EditState => 
                 }
             };
         }
-
-        default:
-            return state;
     }
 };

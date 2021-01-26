@@ -1,6 +1,7 @@
 import React, { FC, useContext, useEffect, useReducer } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
+import { toast } from 'react-toastify';
 
 import { convertBatchesArray, formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
 import { FoodType, MetaDataType, TenantType } from '../../types';
@@ -11,7 +12,6 @@ import { EditFoodServings } from '../EditFoodServings';
 import { sortBatches } from '../FoodCard/utils';
 import { initialState, itemReducer } from './itemReducer';
 import * as S from './styles';
-import { toast } from 'react-toastify';
 
 type PageEditFoodProps = {
     fridge: FoodType[];
@@ -63,7 +63,6 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
 
             history.push('/food');
         } catch (error) {
-            console.log({ error });
             dispatch({ type: 'TOGGLE_LOADING' });
             toast.error('Something went wrong editing this item');
         }

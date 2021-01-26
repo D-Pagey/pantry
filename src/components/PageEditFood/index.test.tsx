@@ -1,12 +1,19 @@
 import React from 'react';
 import selectEvent from 'react-select-event';
-import { render, screen } from '../../test-utils';
-import { Fridge, TenantHeidi, UserDan } from '../../fixtures';
-import { addItemDeleteItem, updateItemField } from '../../services/firestore';
-import { PageEditFood } from '.';
 import userEvent from '@testing-library/user-event';
 
-jest.mock('../../services/firestore');
+import { render, screen, waitFor } from '../../test-utils';
+import { Fridge, MetaData, TenantHeidi, UserDan } from '../../fixtures';
+import { PageEditFood } from '.';
+
+const mockAddItemDeleteItem = jest.fn();
+const mockAddItem = jest.fn();
+
+jest.mock('../../services/firestore', () => ({
+    addItem: (item: any, household: string) => mockAddItem(item, household),
+    addItemDeleteItem: (item: any, name: string, household: string) => mockAddItemDeleteItem(item, name, household)
+}));
+
 jest.mock('react-router-dom', () => ({
     // @ts-ignore
     ...jest.requireActual('react-router-dom'),
@@ -15,9 +22,18 @@ jest.mock('react-router-dom', () => ({
     })
 }));
 
+const mockToastError = jest.fn();
+
+jest.mock('react-toastify', () => ({
+    toast: {
+        error: (text: string) => mockToastError(text)
+    }
+}));
+
 const props = {
     fridge: Fridge,
-    tenants: [TenantHeidi]
+    tenants: [TenantHeidi],
+    metadata: MetaData
 };
 
 const context = {
@@ -51,6 +67,29 @@ describe('PageEditFood component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
+    it('should call addItem when name has not changed', async () => {
+        const newCategory = 'Dairy';
+        const newUnit = 'kilograms';
+
+        render(<PageEditFood {...props} />, context);
+
+        await selectEvent.select(screen.getByLabelText('Change item unit:'), newUnit);
+        userEvent.click(screen.getByText(newCategory));
+        userEvent.click(screen.getByText('Save Changes'));
+
+        screen.getByTestId('loading');
+
+        expect(mockAddItem).toHaveBeenCalledWith(
+            {
+                batches: batchesObject,
+                category: newCategory.toLowerCase(),
+                name: 'broccoli',
+                unit: newUnit
+            },
+            UserDan.household
+        );
+    });
+
     it('should call addItemDeleteItem when name changes to a new name', async () => {
         const newName = 'editing-item-name';
 
@@ -60,7 +99,7 @@ describe('PageEditFood component', () => {
 
         userEvent.click(screen.getByText('Save Changes'));
 
-        expect(addItemDeleteItem).toHaveBeenCalledWith(
+        expect(mockAddItemDeleteItem).toHaveBeenCalledWith(
             {
                 batches: batchesObject,
                 category: 'vegetables',
@@ -73,16 +112,21 @@ describe('PageEditFood component', () => {
     });
 
     it('should call addItemDeleteItem when name changes to an existing name', async () => {
+        const newCategory = 'Meat';
+
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.select(screen.getByLabelText('Change item name:'), 'Steak (7 servings)');
+        userEvent.click(screen.getByText(newCategory));
 
         userEvent.click(screen.getByText('Save Changes'));
 
-        expect(addItemDeleteItem).toHaveBeenCalledWith(
+        screen.getByTestId('loading');
+
+        expect(mockAddItemDeleteItem).toHaveBeenCalledWith(
             {
                 batches: batchesObject,
-                category: 'meat',
+                category: newCategory.toLowerCase(),
                 name: 'steak',
                 unit: 'servings'
             },
@@ -91,60 +135,16 @@ describe('PageEditFood component', () => {
         );
     });
 
-    it('should call updateItemField if just the category changes', () => {
-        const category = 'Dairy';
+    it('should render toast notification if API errors', async () => {
+        mockAddItem.mockRejectedValueOnce('error message');
 
         render(<PageEditFood {...props} />, context);
 
-        userEvent.click(screen.getByText(category));
-
+        await selectEvent.select(screen.getByLabelText('Change item unit:'), 'kilograms');
         userEvent.click(screen.getByText('Save Changes'));
 
-        expect(updateItemField).toHaveBeenCalledWith('broccoli', 'category', category.toLowerCase(), UserDan.household);
-    });
+        screen.getByTestId('loading');
 
-    it('should call addItemDeleteItem when name and category changes to a new item name', async () => {
-        const newName = 'new-name-and-category';
-        const category = 'Dairy';
-
-        render(<PageEditFood {...props} />, context);
-
-        await selectEvent.create(screen.getByLabelText('Change item name:'), newName);
-        userEvent.click(screen.getByText(category));
-
-        userEvent.click(screen.getByText('Save Changes'));
-
-        expect(addItemDeleteItem).toHaveBeenCalledWith(
-            {
-                batches: batchesObject,
-                category: category.toLowerCase(),
-                name: newName,
-                unit: 'servings'
-            },
-            'broccoli',
-            UserDan.household
-        );
-    });
-
-    it('should call addItemDeleteItem when name and category changes to an existing name', async () => {
-        const category = 'Dairy';
-
-        render(<PageEditFood {...props} />, context);
-
-        await selectEvent.select(screen.getByLabelText('Change item name:'), 'Steak (7 servings)');
-        userEvent.click(screen.getByText(category));
-
-        userEvent.click(screen.getByText('Save Changes'));
-
-        expect(addItemDeleteItem).toHaveBeenCalledWith(
-            {
-                batches: batchesObject,
-                category: category.toLowerCase(),
-                name: 'steak',
-                unit: 'servings'
-            },
-            'broccoli',
-            UserDan.household
-        );
+        await waitFor(() => expect(mockToastError).toHaveBeenCalledWith('Something went wrong editing this item'));
     });
 });
