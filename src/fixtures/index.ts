@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns';
 
-import { BatchType, FoodType, NotificationType, UserType, TenantType } from '../types';
+import { BatchType, FoodType, NotificationType, UserType, TenantType, MetaDataType } from '../types';
 
 export const TenantHeidi: TenantType = {
     email: 'heidi@gmail.com',
@@ -147,4 +147,9 @@ export const ReadNotification: NotificationType = {
     },
     type: 'invite',
     uid: 'bbb'
+};
+
+export const MetaData: MetaDataType = {
+    quantities: [1, 2, 3, 4, 5, 6],
+    units: ['servings', 'units', 'kilograms', 'grams', 'jars']
 };
