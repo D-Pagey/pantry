@@ -20,10 +20,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const mockToastInfo = jest.fn();
+const mockToastError = jest.fn();
 
 jest.mock('react-toastify', () => ({
     toast: {
-        info: (text: string) => mockToastInfo(text)
+        info: (text: string) => mockToastInfo(text),
+        error: (text: string) => mockToastError(text)
     }
 }));
 
@@ -168,15 +170,6 @@ describe('PageAddFoodForm component', () => {
         expect(mockToastInfo).toHaveBeenCalledWith('Please enter a name for the food item');
     });
 
-    it('should call toast notification if no quantity', async () => {
-        render(<PageAddFoodForm {...props} />, context);
-
-        await selectEvent.select(screen.getByLabelText('What is the food called?'), 'Broccoli (7 servings)');
-        userEvent.click(screen.getByText('Next'));
-
-        expect(mockToastInfo).toHaveBeenCalledWith('Please enter a quantity for the food item');
-    });
-
     it('should call toast notification if no unit', async () => {
         render(<PageAddFoodForm {...props} />, context);
 
@@ -185,5 +178,24 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(screen.getByText('Next'));
 
         expect(mockToastInfo).toHaveBeenCalledWith('Please enter a unit for the food item');
+    });
+
+    it('should call toast notification if quantity is not a number', async () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        await selectEvent.select(screen.getByLabelText('What is the food called?'), 'Broccoli (7 servings)');
+        await selectEvent.create(screen.getByLabelText('Quantity'), 'hello-world');
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastError).toHaveBeenCalledWith('Please enter a number for the quantity');
+    });
+
+    it('should call toast notification if quantity is not entered', async () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        await selectEvent.select(screen.getByLabelText('What is the food called?'), 'Broccoli (7 servings)');
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastError).toHaveBeenCalledWith('Please enter a number for the quantity');
     });
 });

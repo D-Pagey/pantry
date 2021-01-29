@@ -39,8 +39,8 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             return toast.info('Please enter a name for the food item');
         }
 
-        if (values.quantity === '') {
-            return toast.info('Please enter a quantity for the food item');
+        if (isNaN(parseInt(values.quantity, 10))) {
+            return toast.error('Please enter a number for the quantity');
         }
 
         if (values.unit === '') {
