@@ -8,6 +8,10 @@ import { AuthContext } from './components/ProviderAuth';
 
 MockDate.set('01/01/2020');
 
+jest.mock('uuid', () => ({
+    v4: () => 'uuid'
+}));
+
 globalThis.Notification = ({
     requestPermission: jest.fn(),
     permission: 'granted'

@@ -6,9 +6,9 @@ import DatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { FoodType, MetaDataType, NewFoodType } from '../../types';
-import { formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
-import { updateExistingProperties, updateBatch } from '../../services/firestore';
+import { FoodType, MetaDataType } from '../../types';
+import { formatDropdownOptions, formatFoodDropdownOptions, convertBatchesArray } from '../../utils';
+import { addItem, addNewUnit } from '../../services/firestore';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
@@ -30,7 +30,7 @@ type StepOneValues = {
 
 export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) => {
     const [step, setStep] = useState(1);
-    const [itemExists, setItemExists] = useState(false);
+    const [existingItem, setExistingItem] = useState<FoodType>();
     const { user } = useContext(AuthContext);
     const history = useHistory();
 
@@ -47,15 +47,15 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             return toast.info('Please enter a unit for the food item');
         }
 
-        const doesItemExist = fridge.reduce((acc, curr) => {
-            if (curr.name === values.name) return true;
+        const existingItem = fridge.reduce((acc, curr): FoodType | undefined => {
+            if (curr.name === values.name) return curr;
 
             return acc;
-        }, false);
+        }, undefined as FoodType | undefined);
 
-        if (doesItemExist) {
+        if (existingItem) {
             setStep(3);
-            setItemExists(true);
+            setExistingItem(existingItem);
         } else {
             setStep(2);
         }
@@ -66,36 +66,31 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             <Formik
                 initialValues={{ category: '', expires: new Date(), name: '', quantity: '', unit: '' }}
                 onSubmit={async (values, actions) => {
-                    if (user) {
-                        const newBatchId = uuidv4();
+                    const newUnit = values.unit.toLowerCase();
+                    const newBatchId = uuidv4();
 
-                        const formattedValues: NewFoodType = {
-                            category: values.category,
-                            name: values.name.toLowerCase() || values.category,
-                            unit: values.unit,
-                            batch: {
+                    const item: FoodType = {
+                        name: values.name.toLowerCase(),
+                        category: values.category || existingItem!.category,
+                        unit: newUnit || existingItem!.unit,
+                        batches: [
+                            ...(existingItem ? existingItem.batches : []),
+                            {
                                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                                ownerId: user.uid!,
+                                ownerId: user!.uid!,
                                 expires: values.expires,
                                 quantity: parseInt(values.quantity, 10),
                                 id: newBatchId
                             }
-                        };
+                        ]
+                    };
 
-                        if (itemExists) {
-                            await updateExistingProperties({
-                                name: formattedValues.name,
-                                category: formattedValues.category,
-                                unit: formattedValues.unit,
-                                userHousehold: user.household!
-                            });
-                        }
+                    await addItem(convertBatchesArray([item])[0], user!.household!);
 
-                        await updateBatch({
-                            name: formattedValues.name,
-                            userHousehold: user.household!,
-                            batch: formattedValues.batch
-                        });
+                    if (!metaData.units.includes(newUnit)) {
+                        const updatedUnits = [...metaData.units, newUnit];
+
+                        await addNewUnit(updatedUnits, user!.household!);
                     }
                     actions.setSubmitting(false);
                     actions.resetForm();

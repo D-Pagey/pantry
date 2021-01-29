@@ -4,7 +4,7 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
 
-import { updateExistingProperties, updateBatch } from '../../services/firestore';
+import { addItem } from '../../services/firestore';
 import { render, screen } from '../../test-utils';
 import { Fridge, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
@@ -44,10 +44,7 @@ describe('PageAddFoodForm component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    // TODO: Fix this as it takes ages in CI for some reason
-    it.skip('should submit correct values for item that does not exist, and redirect', async () => {
-        jest.setTimeout(10000);
-
+    it('should submit correct values for new item and redirect', async () => {
         const name = 'unique-food';
         const quantity = '3';
         const unit = props.metaData.units[1];
@@ -70,22 +67,28 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(screen.getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updateBatch).toHaveBeenCalledWith({
-                name,
-                userHousehold: UserDan.household,
-                batch: {
-                    expires: addDays(new Date(), -3),
-                    id: expect.any(String),
-                    ownerId: UserDan.uid,
-                    quantity: parseInt(quantity, 10)
-                }
-            })
+            expect(addItem).toHaveBeenCalledWith(
+                {
+                    name,
+                    category: 'meat',
+                    unit: props.metaData.units[1],
+                    batches: {
+                        uuid: {
+                            expires: addDays(new Date(), -3),
+                            id: 'uuid',
+                            ownerId: UserDan.uid,
+                            quantity: parseInt(quantity, 10)
+                        }
+                    }
+                },
+                UserDan.household
+            )
         );
 
         expect(mockHistoryPush).toHaveBeenCalledWith('/food');
     });
 
-    it('should submit correct values for item that does exist', async () => {
+    it.skip('should submit correct values for existing item', async () => {
         const quantity = '4';
         const unit = props.metaData.units[2];
 
@@ -105,24 +108,23 @@ describe('PageAddFoodForm component', () => {
         userEvent.click(screen.getByText('Add to pantry'));
 
         await waitFor(() =>
-            expect(updateExistingProperties).toHaveBeenCalledWith({
-                category: '',
-                name: 'broccoli',
-                unit,
-                userHousehold: '123'
-            })
+            expect(addItem).toHaveBeenCalledWith(
+                {
+                    name: 'broccoli',
+                    category: 'meat',
+                    unit: props.metaData.units[1],
+                    batches: {
+                        uuid: {
+                            expires: addDays(new Date(), -3),
+                            id: 'uuid',
+                            ownerId: UserDan.uid,
+                            quantity: parseInt(quantity, 10)
+                        }
+                    }
+                },
+                UserDan.household
+            )
         );
-
-        expect(updateBatch).toHaveBeenCalledWith({
-            name: props.fridge[1].name,
-            userHousehold: UserDan.household,
-            batch: {
-                expires: expect.any(Date),
-                id: expect.any(String),
-                ownerId: UserDan.uid,
-                quantity: 4
-            }
-        });
     });
 
     it('next and back buttons should navigate the right steps of the form', async () => {

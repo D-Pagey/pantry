@@ -19,30 +19,6 @@ export const updateBatch = ({ name, batch, userHousehold }: UpdateBatchProps): P
         });
 };
 
-type UpdateExistingPropertiesProps = {
-    name: string;
-    category: string;
-    unit: string;
-    userHousehold: string;
-};
-
-/**
- * This function updates name, category and unit for an item
- */
-export const updateExistingProperties = ({
-    name,
-    category,
-    unit,
-    userHousehold
-}: UpdateExistingPropertiesProps): Promise<void> => {
-    return db
-        .collection('households')
-        .doc(userHousehold)
-        .update({
-            [`fridge.${name}`]: { name, category, unit }
-        });
-};
-
 /**
  * This function deletes all batches for an item
  */
@@ -68,14 +44,14 @@ export const addItem = (newItem: DatabaseFoodType, household: string): Promise<v
 };
 
 /**
- * This function updates a specific field within an existing item
+ * This function adds a brand new item or overwrites an existing one
  */
-export const updateItemField = (name: string, property: string, value: string, household: string): Promise<void> => {
+export const addNewUnit = (units: string[], household: string): Promise<void> => {
     return db
         .collection('households')
         .doc(household)
         .update({
-            [`fridge.${name}.${property}`]: value
+            [`meta.units`]: units
         });
 };
 
