@@ -74,10 +74,6 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                 {isAuthed && isTabletOrLarger && !isCheckingAuth && (
                     <S.NavList>
                         <S.NavItem>
-                            <S.Link to="/">Home</S.Link>
-                        </S.NavItem>
-
-                        <S.NavItem>
                             <S.Link to="/food">Your Food</S.Link>
                         </S.NavItem>
 

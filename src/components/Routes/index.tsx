@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { FoodType, TenantType, DatabaseFoodType, MetaDataType } from '../../types';
 import { formatExpiryDates } from '../../utils';
@@ -20,7 +20,7 @@ export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
     const [tenants, setTenants] = useState<TenantType[]>();
     const [metaData, setMetaData] = useState<MetaDataType>();
-    const { user } = useContext(AuthContext);
+    const { user, isAuthed } = useContext(AuthContext);
 
     const getFridgeData = useCallback(() => {
         if (user) {
@@ -52,7 +52,7 @@ export const Routes = (): JSX.Element => {
     return (
         <Switch>
             <Route exact path="/">
-                <PageHome />
+                {isAuthed ? <Redirect to="food" /> : <PageHome />}
             </Route>
 
             <Route path="/sign-in">

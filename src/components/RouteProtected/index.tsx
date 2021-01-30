@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { Layout } from '../Layout';
 import { AuthContext } from '../ProviderAuth';
 
-// eslint-disable-next-line
-export const RouteProtected = (props: any): JSX.Element => {
+type RouteProtectedProps = {
+    path: string;
+};
+
+export const RouteProtected: FC<RouteProtectedProps> = ({ path, ...props }) => {
     const { isAuthed, isCheckingAuth } = useContext(AuthContext);
 
     if (isCheckingAuth) {
@@ -18,5 +21,5 @@ export const RouteProtected = (props: any): JSX.Element => {
 
     if (!isCheckingAuth && !isAuthed) return <Redirect to="/sign-in" />;
 
-    return <Route {...props} />;
+    return <Route path={path} {...props} />;
 };
