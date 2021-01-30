@@ -8,10 +8,12 @@ import { PageEditFood } from '.';
 
 const mockAddItemDeleteItem = jest.fn();
 const mockAddItem = jest.fn();
+const mockAddNewUnit = jest.fn();
 
 jest.mock('../../services/firestore', () => ({
     addItem: (item: any, household: string) => mockAddItem(item, household),
-    addItemDeleteItem: (item: any, name: string, household: string) => mockAddItemDeleteItem(item, name, household)
+    addItemDeleteItem: (item: any, name: string, household: string) => mockAddItemDeleteItem(item, name, household),
+    addNewUnit: (units: string[], household: string) => mockAddNewUnit(units, household)
 }));
 
 jest.mock('react-router-dom', () => ({
@@ -146,5 +148,18 @@ describe('PageEditFood component', () => {
         screen.getByTestId('loading');
 
         await waitFor(() => expect(mockToastError).toHaveBeenCalledWith('Something went wrong editing this item'));
+    });
+
+    it('should call addNewUnit if a new unit does not exist', async () => {
+        const newUnit = 'brand-new-unit';
+
+        render(<PageEditFood {...props} />, context);
+
+        await selectEvent.create(screen.getByLabelText('Change item unit:'), newUnit);
+        userEvent.click(screen.getByText('Save Changes'));
+
+        await waitFor(() =>
+            expect(mockAddNewUnit).toHaveBeenCalledWith([...props.metadata.units, newUnit], UserDan.household)
+        );
     });
 });

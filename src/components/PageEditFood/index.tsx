@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { convertBatchesArray, formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
 import { FoodType, MetaDataType, TenantType } from '../../types';
-import { addItemDeleteItem, addItem } from '../../services/firestore';
+import { addItemDeleteItem, addItem, addNewUnit } from '../../services/firestore';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
@@ -37,7 +37,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
         }
     }, [fridge, name]);
 
-    const handleEdit = async () => {
+    const handleSaveChanges = async () => {
         const { originalItem, editedItem } = state;
         const hasNameChanged = originalItem.name !== editedItem.name;
 
@@ -59,6 +59,12 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                 const convertedMergedItem = convertBatchesArray([mergedItem])[0];
 
                 await addItemDeleteItem(convertedMergedItem, originalItem.name, user!.household!);
+            }
+
+            if (!metadata.units.includes(editedItem.unit)) {
+                const updatedUnits = [...metadata.units, editedItem.unit];
+
+                await addNewUnit(updatedUnits, user!.household!);
             }
 
             history.push('/food');
@@ -109,7 +115,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         </S.Label>
                         <EditFoodServings item={state.originalItem} tenants={nonPendingTenants} />
 
-                        <S.Button onClick={handleEdit} disabled={!state.hasItemChanged}>
+                        <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
                             Save Changes
                         </S.Button>
                     </S.Wrapper>
