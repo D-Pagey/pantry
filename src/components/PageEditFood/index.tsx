@@ -70,7 +70,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
             history.push('/food');
         } catch (error) {
             dispatch({ type: 'TOGGLE_LOADING' });
-            toast.error('Something went wrong editing this item');
+            toast.error(error.message);
         }
     };
 

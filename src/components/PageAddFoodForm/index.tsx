@@ -39,6 +39,10 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             return toast.info('Please enter a name for the food item');
         }
 
+        if (values.name.split('').includes('.')) {
+            return toast.error('Item name should not contain a period');
+        }
+
         if (isNaN(parseInt(values.quantity, 10))) {
             return toast.error('Please enter a number for the quantity');
         }

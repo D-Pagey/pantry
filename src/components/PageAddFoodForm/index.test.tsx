@@ -198,4 +198,13 @@ describe('PageAddFoodForm component', () => {
 
         expect(mockToastError).toHaveBeenCalledWith('Please enter a number for the quantity');
     });
+
+    it('should call toast error notification if name contains a period', async () => {
+        render(<PageAddFoodForm {...props} />, context);
+
+        await selectEvent.create(screen.getByLabelText('What is the food called?'), 'Chicken.test');
+        userEvent.click(screen.getByText('Next'));
+
+        expect(mockToastError).toHaveBeenCalledWith('Item name should not contain a period');
+    });
 });

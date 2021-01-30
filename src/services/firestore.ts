@@ -35,6 +35,10 @@ export const deleteItemBatches = (name: string, household: string): Promise<void
  * This function adds a brand new item or overwrites an existing one
  */
 export const addItem = (newItem: DatabaseFoodType, household: string): Promise<void> => {
+    if (newItem.name.split('').includes('.')) {
+        throw new Error('Item name should not contain a period');
+    }
+
     return db
         .collection('households')
         .doc(household)

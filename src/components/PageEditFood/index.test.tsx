@@ -138,7 +138,9 @@ describe('PageEditFood component', () => {
     });
 
     it('should render toast notification if API errors', async () => {
-        mockAddItem.mockRejectedValueOnce('error message');
+        const message = 'error message';
+
+        mockAddItem.mockRejectedValueOnce({ message });
 
         render(<PageEditFood {...props} />, context);
 
@@ -147,7 +149,7 @@ describe('PageEditFood component', () => {
 
         screen.getByTestId('loading');
 
-        await waitFor(() => expect(mockToastError).toHaveBeenCalledWith('Something went wrong editing this item'));
+        await waitFor(() => expect(mockToastError).toHaveBeenCalledWith(message));
     });
 
     it('should call addNewUnit if a new unit does not exist', async () => {
