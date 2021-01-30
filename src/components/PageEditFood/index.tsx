@@ -75,11 +75,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
     };
 
     return (
-        <Layout
-            title={`Edit ${state.originalItem.name ? state.originalItem.name : null}`}
-            isLoading={state.loading}
-            hideTitle
-        >
+        <Layout isLoading={state.loading} hideTitle>
             {state.originalItem.name && (
                 <>
                     <S.Title>
