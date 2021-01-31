@@ -32,8 +32,8 @@ export const MenuStyles = {
         position: 'fixed',
         width: '36px',
         height: '30px',
-        right: '36px',
-        top: '36px'
+        right: '28px',
+        top: '25px'
     },
 
     /* Color/shape of burger icon bars */

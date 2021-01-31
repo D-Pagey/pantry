@@ -1,3 +1,4 @@
+export const MOBILE_HEADER_HEIGHT = '80px';
 export const HEADER_HEIGHT = '100px';
 export const PAGE_WIDTH = '1100px';
 

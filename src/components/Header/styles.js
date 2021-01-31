@@ -1,19 +1,23 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
-import { colours, HEADER_HEIGHT, PAGE_WIDTH } from '../../tokens';
+import { colours, MOBILE_HEADER_HEIGHT, HEADER_HEIGHT, PAGE_WIDTH, mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
     background-color: ${colours.white};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06);
     display: flex;
-    height: ${HEADER_HEIGHT};
+    height: ${MOBILE_HEADER_HEIGHT};
     justify-content: center;
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 2;
+
+    @media ${mediaQuery.tablet} {
+        height: ${HEADER_HEIGHT};
+    }
 `;
 
 export const InnerWrapper = styled.div`
