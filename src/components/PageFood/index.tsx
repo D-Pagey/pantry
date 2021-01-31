@@ -5,17 +5,16 @@ import { toast } from 'react-toastify';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
-import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts, filterByTenantIds } from '../../utils';
+import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { CategoryFilterMobile } from '../CategoryFilterMobile';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
-import { OwnerFilter } from '../OwnerFilter';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
-import * as S from './styles';
 import { sortByName, sortByOldestExpiryDate } from './utils';
+import * as S from './styles';
 
 type PageFoodProps = {
     fridge: FoodType[];
@@ -27,7 +26,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [category, setCategory] = useState('all');
     const [isExpiring, setIsExpiring] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
-    const [selectedTenants, setSelectedTenants] = useState<string[]>([]);
     const [isSortedByDate, setIsSortedByDate] = useState(false);
 
     const { user } = useContext(AuthContext);
@@ -59,12 +57,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
             filteredFridge = getExpiringItems(filteredFridge);
         }
 
-        if (selectedTenants.length > 0) {
-            filteredFridge = filterByTenantIds(filteredFridge, selectedTenants);
-        }
-
         return filteredFridge;
-    }, [category, fridge, isExpiring, selectedTenants]);
+    }, [category, fridge, isExpiring]);
 
     useEffect(() => {
         if (fridge.length > 0 && tenants.length > 0) {
@@ -72,7 +66,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
             setSelectedFood(sortedByName);
         }
-    }, [category, selectedTenants, isExpiring, filterFood, fridge, tenants]);
+    }, [category, isExpiring, filterFood, fridge, tenants]);
 
     const handleCategoryClick = (selectedCategory: string): void => {
         setCategory(selectedCategory);
@@ -127,12 +121,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                 )}
 
                 <S.FilterWrapper>
-                    <OwnerFilter
-                        tenants={tenants}
-                        setSelectedTenants={setSelectedTenants}
-                        selectedTenants={selectedTenants}
-                    />
-
                     <S.ExpiringButton handleClick={handleExpiringClick} isEnabled={isExpiring} />
 
                     <S.TopAddButton size="sm" onClick={handleAddClick}>
