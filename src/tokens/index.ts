@@ -20,9 +20,10 @@ export const colours = {
     grey: '#B2B2B2',
     lightGreen: '#31bb47',
     lightGrey: '#767676',
-    veryLightGrey: '#E5E5E5',
     orange: '#FCBA3B',
     red: '#EB5757',
+    silver: '#C2C2C2',
+    veryLightGrey: '#E5E5E5',
     white: 'white'
 };
 

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MobileFoodMenu component should render 1`] = `
+.c3 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-top: 1px solid #C2C2C2;
+  bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  right: 0;
+}
+
+.c1 {
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  margin: 0 1rem 0 0;
+  width: 50px;
+}
+
+.c2 {
+  width: 100%;
+}
+
+<div
+  class="c0"
+>
+  <button
+    class="c1"
+    data-testid="filterMenuButton"
+    type="button"
+  >
+    <img
+      alt="filter menu"
+      class="c2"
+      src="filter.svg"
+    />
+  </button>
+  <button
+    class="c3"
+    type="button"
+  >
+    Add Item
+  </button>
+</div>
+`;
