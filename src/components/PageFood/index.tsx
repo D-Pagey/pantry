@@ -8,7 +8,6 @@ import { FoodType, TenantType } from '../../types';
 import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
-import { CategoryFilterMobile } from '../CategoryFilterMobile';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
@@ -110,14 +109,12 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     return (
         <Layout title="Your Food:">
             <S.Wrapper>
-                {isTabletOrLarger ? (
+                {isTabletOrLarger && (
                     <CategoryFilterDesktop
                         categories={getCategoriesAndCounts(fridge)}
                         selected={category}
                         handleCategoryClick={handleCategoryClick}
                     />
-                ) : (
-                    <CategoryFilterMobile selected={category} setSelected={handleCategoryClick} />
                 )}
 
                 <S.FilterWrapper>
