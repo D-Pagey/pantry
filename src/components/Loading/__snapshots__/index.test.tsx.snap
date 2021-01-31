@@ -10,11 +10,17 @@ exports[`Loading component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 80px);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+@media (min-width:765px) {
+  .c0 {
+    height: calc(100vh - 100px);
+  }
 }
 
 <div

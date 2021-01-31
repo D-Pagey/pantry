@@ -12,7 +12,7 @@ exports[`PageHome component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 100px;
+  height: 80px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -70,6 +70,12 @@ exports[`PageHome component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+@media (min-width:765px) {
+  .c0 {
+    height: 100px;
+  }
 }
 
 @media (min-width:765px) {

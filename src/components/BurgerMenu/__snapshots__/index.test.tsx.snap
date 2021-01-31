@@ -20,7 +20,7 @@ exports[`BurgerMenu component should render 1`] = `
   <div>
     <div
       class="bm-burger-button"
-      style="z-index: 1000; position: fixed; width: 36px; height: 30px; right: 36px; top: 36px;"
+      style="z-index: 1000; position: fixed; width: 36px; height: 30px; right: 28px; top: 25px;"
     >
       <button
         id="react-burger-menu-btn"

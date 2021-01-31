@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterButton component should render 1`] = `
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.c1 {
+  background-color: #348841;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px 0 0 10px;
+}
+
+.c2 {
+  border: none;
+  background: #EB5757;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  color: white;
+  padding: 0 0.4rem 0 0.3rem;
+}
+
+<div
+  class="c0"
+>
+  <span
+    class="c1"
+  >
+    Vegetables
+  </span>
+  <button
+    class="c2"
+    type="button"
+  >
+    X
+  </button>
+</div>
+`;

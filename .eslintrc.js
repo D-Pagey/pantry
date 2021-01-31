@@ -24,7 +24,9 @@ module.exports = {
     rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/ban-ts-ignore': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
         'react/prop-types': 'off',
-        '@typescript-eslint/no-non-null-assertion': 'off'
+        'react/jsx-uses-react': 'off',
+        'react/react-in-jsx-scope': 'off'
     }
 };
