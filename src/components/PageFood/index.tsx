@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 
 import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
-import { getExpiringItems, filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
+import { filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { FoodCard } from '../FoodCard';
 import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
-import { sortByName, sortByOldestExpiryDate } from './utils';
+import { sortByName } from './utils';
 import * as S from './styles';
 
 type PageFoodProps = {
@@ -23,9 +23,7 @@ type PageFoodProps = {
 export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
-    const [isExpiring, setIsExpiring] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
-    const [isSortedByDate, setIsSortedByDate] = useState(false);
 
     const { user } = useContext(AuthContext);
     const history = useHistory();
@@ -52,12 +50,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
             filteredFridge = filterFridgeByCategory(filteredFridge, category);
         }
 
-        if (isExpiring) {
-            filteredFridge = getExpiringItems(filteredFridge);
-        }
-
         return filteredFridge;
-    }, [category, fridge, isExpiring]);
+    }, [category, fridge]);
 
     useEffect(() => {
         if (fridge.length > 0 && tenants.length > 0) {
@@ -65,14 +59,10 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
             setSelectedFood(sortedByName);
         }
-    }, [category, isExpiring, filterFood, fridge, tenants]);
+    }, [category, filterFood, fridge, tenants]);
 
     const handleCategoryClick = (selectedCategory: string): void => {
         setCategory(selectedCategory);
-    };
-
-    const handleExpiringClick = (): void => {
-        setIsExpiring(!isExpiring);
     };
 
     const handleFoodDelete = (): void => {
@@ -91,19 +81,6 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
 
-    const handleSortClick = () => {
-        if (selectedFood) {
-            if (isSortedByDate) {
-                setSelectedFood(sortByName(selectedFood));
-                setIsSortedByDate(false);
-            } else {
-                setSelectedFood(sortByOldestExpiryDate(selectedFood));
-
-                setIsSortedByDate(true);
-            }
-        }
-    };
-
     const handleAddClick = () => history.push('/add');
 
     return (
@@ -117,23 +94,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     />
                 )}
 
-                <S.FilterWrapper>
-                    <S.ExpiringButton handleClick={handleExpiringClick} isEnabled={isExpiring} />
-
-                    <S.TopAddButton size="sm" onClick={handleAddClick}>
-                        Add Item
-                    </S.TopAddButton>
-
-                    <S.SortButton onClick={handleSortClick}>
-                        Sort by {isSortedByDate ? 'name' : 'expiry date'}
-                    </S.SortButton>
-                </S.FilterWrapper>
-
                 {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
 
                 {fridge?.length !== 0 && selectedFood?.length === 0 && (
                     <p data-testid={`pageFoodNoData${category}`}>
-                        There is no {isExpiring && 'expiring'} food that falls under the category of {category}
+                        There is no food that falls under the category of {category}
                     </p>
                 )}
 
