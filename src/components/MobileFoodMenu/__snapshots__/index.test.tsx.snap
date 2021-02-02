@@ -16,6 +16,7 @@ exports[`MobileFoodMenu component should render 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  background-color: white;
   border-top: 1px solid #C2C2C2;
   bottom: 0;
   display: -webkit-box;
@@ -30,6 +31,7 @@ exports[`MobileFoodMenu component should render 1`] = `
   padding: 1rem;
   position: fixed;
   right: 0;
+  z-index: 1;
 }
 
 .c1 {
