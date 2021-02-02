@@ -70,7 +70,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     };
 
     return (
-        <Layout title="Your Food:">
+        <Layout>
             <S.Wrapper>
                 {isTabletOrLarger && (
                     <CategoryFilterDesktop

@@ -42,17 +42,23 @@ exports[`PageFood component should render 1`] = `
   width: 100%;
 }
 
-.c4 {
+.c3 {
+  color: initial;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c5 {
   font-size: 25px;
   font-weight: 500;
   margin: 0;
   padding: 0 0 0 14px;
 }
 
-.c3 {
-  cursor: pointer;
-  height: 16px;
-  width: 16px;
+.c4 {
+  position: relative;
+  top: 2px;
+  width: 32px;
 }
 
 .c2 {
@@ -93,17 +99,28 @@ exports[`PageFood component should render 1`] = `
     <div
       class="c2"
     >
-      <img
-        alt="arrow"
-        class="c3"
-        data-testid="headerBackArrow"
-        src="arrow.svg"
-      />
-      <h4
-        class="c4"
+      <a
+        aria-current="page"
+        class="c3 active"
+        href="/"
       >
-        Your Food:
-      </h4>
+        <img
+          alt="icon"
+          class="c4"
+          src="icon.svg"
+        />
+      </a>
+      <a
+        aria-current="page"
+        class="c3 active"
+        href="/"
+      >
+        <h4
+          class="c5"
+        >
+          Pantry
+        </h4>
+      </a>
     </div>
   </div>
 </div>
