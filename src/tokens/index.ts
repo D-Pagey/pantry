@@ -9,7 +9,7 @@ export const EXPIRING_SOON_DAYS = 3;
 
 export const colours = {
     black: 'black',
-    blue: 'rgb(66, 133, 244)',
+    blue: '#3E9BEC',
     brown: 'brown',
     darkGreen10: 'rgba(52, 136, 65, 0.1)',
     darkGreen20: 'rgba(52, 136, 65, 0.2)',

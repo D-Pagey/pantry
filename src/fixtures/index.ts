@@ -11,6 +11,7 @@ export const TenantHeidi: TenantType = {
 };
 
 export const TenantAlexa: TenantType = {
+    email: 'alexa.com',
     houseRole: 'alexa',
     name: 'Alexa',
     photo:

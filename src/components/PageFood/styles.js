@@ -1,22 +1,11 @@
 import styled from 'styled-components';
 
-import { colours, mediaQuery } from '../../tokens';
-import { Button as Btn } from '../Button';
+import { mediaQuery } from '../../tokens';
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 2rem;
-`;
-
-export const AddButton = styled(Btn)`
-    align-self: flex-end;
-    margin: 0 1rem 0 0;
-    border: 2px solid ${colours.darkGreen100};
-
-    @media ${mediaQuery.tablet} {
-        margin: 0;
-    }
 `;
 
 export const FoodCardGrid = styled.div`

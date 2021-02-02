@@ -1,18 +1,17 @@
 import React, { FC, useCallback, useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 
-import { db } from '../../services';
 import { FoodType, TenantType } from '../../types';
+import { deleteItemBatches } from '../../services/firestore';
 import { filterFridgeByCategory, getCategoriesAndCounts } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { FoodCard } from '../FoodCard';
-import { FoodOptions } from '../FoodOptions';
 import { AuthContext } from '../ProviderAuth';
 import { sortByName } from './utils';
+import { MobileFoodMenu } from '../MobileFoodMenu';
 import * as S from './styles';
 
 type PageFoodProps = {
@@ -24,22 +23,11 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const [selectedFood, setSelectedFood] = useState<FoodType[]>();
     const [category, setCategory] = useState('all');
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
-
     const { user } = useContext(AuthContext);
-    const history = useHistory();
+
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
     });
-
-    const deleteFoodItem = (name: string): void => {
-        if (user) {
-            db.collection('households')
-                .doc(user.household)
-                .update({ [`fridge.${name}.batches`]: {} })
-                .then(() => null)
-                .catch(() => toast.error('Error with deleting food'));
-        }
-    };
 
     const filterFood = useCallback(() => {
         const isCategoryAll = category === 'all';
@@ -65,23 +53,21 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
         setCategory(selectedCategory);
     };
 
-    const handleFoodDelete = (): void => {
-        if (editingItem?.name) {
-            deleteFoodItem(editingItem.name);
-            setEditingItem(undefined);
-        }
-    };
-
-    const handleFoodEdit = (): void => {
-        history.push(`/${editingItem?.name}/edit`);
-    };
-
     const handleFoodClick = (item: FoodType) => (): void => {
         if (!editingItem || editingItem.name !== item.name) setEditingItem(item);
         if (editingItem?.name === item.name) setEditingItem(undefined);
     };
 
-    const handleAddClick = () => history.push('/add');
+    const handleFoodDelete = async () => {
+        if (editingItem) {
+            try {
+                await deleteItemBatches(editingItem?.name, user!.household!);
+            } catch (error) {
+                toast.error(`Something went wrong deleting ${editingItem.name}`);
+            }
+            setEditingItem(undefined);
+        }
+    };
 
     return (
         <Layout title="Your Food:">
@@ -120,14 +106,14 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                             return null;
                         })}
                 </S.FoodCardGrid>
-
-                <S.AddButton size="sm" onClick={handleAddClick}>
-                    Add Item
-                </S.AddButton>
             </S.Wrapper>
 
-            {editingItem && (
-                <FoodOptions name={editingItem.name} handleDelete={handleFoodDelete} handleEdit={handleFoodEdit} />
+            {!isTabletOrLarger && (
+                <MobileFoodMenu
+                    handleFoodDelete={handleFoodDelete}
+                    tenants={tenants}
+                    editingItemName={editingItem?.name}
+                />
             )}
         </Layout>
     );

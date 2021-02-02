@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colours } from '../../tokens';
+import { colours, zIndex } from '../../tokens';
 
 export const Wrapper = styled.div`
     align-items: center;
@@ -26,4 +26,34 @@ export const FilterButton = styled.button.attrs(() => ({
 
 export const FilterImage = styled.img`
     width: 100%;
+`;
+
+export const ModalStyles = {
+    overlay: {
+        zIndex: zIndex.default
+    },
+    content: {
+        inset: `90px 0 0`,
+        borderRadius: '10px 10px 0 0',
+        padding: '1rem'
+    }
+};
+
+export const Title = styled.h2`
+    font-weight: normal;
+    margin: 0 0 1rem;
+    text-align: center;
+`;
+
+export const Subtitle = styled.h3`
+    font-weight: normal;
+    margin: 0;
+`;
+
+export const OptionWrapper = styled.div`
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    align-items: center;
+    grid-column-gap: 1rem;
+    margin: 0 0 1rem;
 `;

@@ -44,7 +44,7 @@ exports[`Household component should render 1`] = `
 }
 
 .c8 {
-  color: rgb(66,133,244);
+  color: #3E9BEC;
   font-style: italic;
   grid-column: 2 / 3;
   grid-row: 1 / 2;

@@ -36,8 +36,8 @@ exports[`ModalHousehold component should render 1`] = `
 
 .c3 {
   background-color: white;
-  border: 1px solid rgb(66,133,244);
-  color: rgb(66,133,244);
+  border: 1px solid #3E9BEC;
+  color: #3E9BEC;
   font-size: 1.25rem;
   margin: 0 0 20px;
   width: 200px;
@@ -71,7 +71,7 @@ exports[`ModalHousehold component should render 1`] = `
   </h3>
   <button
     class="c2 c3"
-    color="rgb(66, 133, 244)"
+    color="#3E9BEC"
     type="button"
   >
     Cancel Invite
