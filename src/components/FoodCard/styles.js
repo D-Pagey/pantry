@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
     display: grid;
     grid-column-gap: 1rem;
     grid-template-columns: 1fr 1fr max-content;
+    max-width: 365px;
     padding: 1rem;
     width: 100%;
     z-index: ${zIndex.default};
@@ -19,19 +20,23 @@ export const Wrapper = styled.div`
 
 export const Name = styled.p`
     font-size: 18px;
+    grid-column: 1 / 4;
     margin: 0;
 `;
 
 export const Subtext = styled.p`
+    align-self: end;
     color: ${colours.darkGrey};
     font-size: 14px;
-    margin: 0.5rem 0 1rem;
+    margin: 0;
+    padding: 0 0 0.5rem;
+    grid-column: 1 / 2;
 `;
 
 export const OwnerPicture = styled(ProfilePhoto)`
     align-self: center;
-    grid-row: 1 / 4;
     grid-column: 2 / 3;
+    grid-row: 2 / 4;
     justify-self: ${({ length }) => length === 1 && 'center'};
     position: relative;
     left: ${({ index }) => `calc(${index * 30}px)`};
@@ -41,10 +46,11 @@ export const OwnerPicture = styled(ProfilePhoto)`
 export const CircleWrapper = styled.div`
     align-items: center;
     display: flex;
+    grid-column: 1 / 2;
 `;
 
 export const DonutWrapper = styled.div`
+    display: flex;
     grid-column: 3 / 4;
-    grid-row: 1 / 4;
-    justify-self: end;
+    grid-row: 2 / 4;
 `;

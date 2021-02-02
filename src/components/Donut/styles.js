@@ -2,7 +2,8 @@ import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
     display: flex;
-    width: 60px;
+    height: 50px;
+    width: 50px;
 `;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

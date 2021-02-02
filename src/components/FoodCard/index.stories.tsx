@@ -9,7 +9,7 @@ export const Basic = (args: FoodCardProps) => <FoodCard {...args} />;
 Basic.args = {
     handleClick: () => console.log('fired'),
     margin: '1rem 0 0 1rem',
-    item: Fridge[0],
+    item: { ...Fridge[0], name: 'Evaporated Milk Can (Small)' },
     tenants: [TenantDan, TenantHeidi, TenantJoe]
 };
 

@@ -26,7 +26,7 @@ export const FoodCard: FC<FoodCardProps> = ({ handleClick, isSelected, item, ten
     return (
         <S.Wrapper onClick={handleClick} isSelected={isSelected}>
             <S.Name>{titleCase(item.name)}</S.Name>
-            <S.Subtext>({item.unit})</S.Subtext>
+            <S.Subtext>{item.unit}</S.Subtext>
 
             {sortedTenants.map((owner, index, array) => {
                 return (

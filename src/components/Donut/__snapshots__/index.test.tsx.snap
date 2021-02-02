@@ -6,7 +6,8 @@ exports[`Donut component should render 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 60px;
+  height: 50px;
+  width: 50px;
 }
 
 .c1 {
