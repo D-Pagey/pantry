@@ -6,10 +6,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Span = styled.span`
-    background-color: ${colours.darkGreen100};
+    background-color: ${colours.blue};
     color: ${colours.white};
     padding: 0.5rem;
-    border-radius: 10px 0 0 10px;
+    border-radius: ${({ fullBorderRadius }) => (fullBorderRadius ? '10px' : '10px 0 0 10px')};
 `;
 
 export const Button = styled.button.attrs(() => ({

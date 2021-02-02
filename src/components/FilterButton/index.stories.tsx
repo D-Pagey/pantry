@@ -4,7 +4,12 @@ import { FilterButton, FilterButtonProps } from '.';
 
 export default { title: 'FilterButton', component: FilterButton };
 
-const Template: Story<FilterButtonProps> = (args) => <FilterButton {...args} />;
+const Template: Story<FilterButtonProps> = (args) => (
+    <>
+        <FilterButton {...args} />
+        <FilterButton>Sorted By Date</FilterButton>
+    </>
+);
 
 export const Primary = Template.bind({});
 

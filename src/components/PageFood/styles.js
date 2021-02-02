@@ -5,7 +5,7 @@ import { mediaQuery } from '../../tokens';
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 0 0 2rem;
+    padding: 1rem 1rem 5rem;
 `;
 
 export const FoodCardGrid = styled.div`
@@ -13,7 +13,7 @@ export const FoodCardGrid = styled.div`
     box-sizing: border-box;
     display: grid;
     grid-row-gap: 1rem;
-    padding: 0.5rem;
+    padding: 0;
     margin: 0 0 1rem;
     max-width: 330px;
     width: 100%;
@@ -24,4 +24,8 @@ export const FoodCardGrid = styled.div`
         padding: 1rem 0 0;
         max-width: none;
     }
+`;
+
+export const FilterButtonsWrapper = styled.div`
+    margin: 0 0 1rem;
 `;

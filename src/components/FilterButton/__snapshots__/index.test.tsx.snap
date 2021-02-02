@@ -9,7 +9,7 @@ exports[`FilterButton component should render 1`] = `
 }
 
 .c1 {
-  background-color: #348841;
+  background-color: #3E9BEC;
   color: white;
   padding: 0.5rem;
   border-radius: 10px 0 0 10px;

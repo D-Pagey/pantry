@@ -10,8 +10,9 @@ import { Layout } from '../Layout';
 import { CategoryFilterDesktop } from '../CategoryFilterDesktop';
 import { FoodCard } from '../FoodCard';
 import { AuthContext } from '../ProviderAuth';
-import { sortByName } from './utils';
+import { FilterButton } from '../FilterButton';
 import { MobileFoodMenu } from '../MobileFoodMenu';
+import { sortByOldestExpiryDate } from './utils';
 import * as S from './styles';
 
 type PageFoodProps = {
@@ -43,9 +44,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
     useEffect(() => {
         if (fridge.length > 0 && tenants.length > 0) {
-            const sortedByName = sortByName(filterFood());
+            const sortedByDate = sortByOldestExpiryDate(filterFood());
 
-            setSelectedFood(sortedByName);
+            setSelectedFood(sortedByDate);
         }
     }, [category, filterFood, fridge, tenants]);
 
@@ -72,6 +73,9 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     return (
         <Layout>
             <S.Wrapper>
+                <S.FilterButtonsWrapper>
+                    <FilterButton>Sorted by expiry date</FilterButton>
+                </S.FilterButtonsWrapper>
                 {isTabletOrLarger && (
                     <CategoryFilterDesktop
                         categories={getCategoriesAndCounts(fridge)}
