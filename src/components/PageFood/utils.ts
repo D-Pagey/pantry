@@ -1,4 +1,6 @@
 import { FoodType } from '../../types';
+import { getExpiringItems } from '../../utils';
+import { FilterState } from '../MobileFoodMenu/filterReducer';
 
 export const sortByOldestExpiryDate = (food: FoodType[]): FoodType[] => {
     const filteredOutEmptyBatches = [...food].filter((item) => item.batches.length > 0);
@@ -24,4 +26,22 @@ export const sortByName = (food: FoodType[]): FoodType[] => {
 
         return 0;
     });
+};
+
+// A function that takes some filters and applies them to original fridge
+export const applyMultipleFilters = (food: FoodType[], filters: Partial<FilterState>): FoodType[] => {
+    const onlyFoodWithBatches = food.filter((item) => {
+        return item.batches.length > 0;
+    });
+
+    const sorted =
+        filters.sortBy === 'date' ? sortByOldestExpiryDate(onlyFoodWithBatches) : sortByName(onlyFoodWithBatches);
+
+    if (filters.showOnlyExpiring) {
+        const expiring = getExpiringItems(sorted);
+
+        return expiring;
+    } else {
+        return sorted;
+    }
 };

@@ -29,10 +29,8 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        if (foodState.showOnlyExpiring) {
-            dispatch({ type: 'FILTER_EXPIRING' });
-        }
-    }, [foodState.showOnlyExpiring]);
+        dispatch({ type: 'UPDATE_FRIDGE', fridge });
+    }, [fridge]);
 
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
@@ -46,7 +44,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     const handleFoodDelete = async () => {
         if (editingItem) {
             try {
-                await deleteItemBatches(editingItem?.name, user!.household!);
+                await deleteItemBatches(editingItem.name, user!.household!);
             } catch (error) {
                 toast.error(`Something went wrong deleting ${editingItem.name}`);
             }
@@ -55,15 +53,15 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
     };
 
     const handleApplyFilters = (filterState: FilterState) => {
-        dispatch({ type: 'APPLY_FILTERS', filters: filterState });
+        dispatch({ type: 'APPLY_FILTERS', filters: filterState, fridge });
     };
 
     return (
         <Layout>
             <S.Wrapper>
                 <S.FilterButtonsWrapper>
-                    <FilterButton>Sorted by {foodState.sortBy}</FilterButton>
-                    {foodState.showOnlyExpiring && (
+                    <FilterButton>Sorted by {foodState.filters.sortBy}</FilterButton>
+                    {foodState.filters.showOnlyExpiring && (
                         <FilterButton onClick={() => dispatch({ type: 'REMOVE_EXPIRING_FILTER', fridge })}>
                             Expiring Soon
                         </FilterButton>

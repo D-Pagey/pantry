@@ -1,17 +1,13 @@
 import { FoodType, TenantType } from '../../types';
-import { getExpiringItems } from '../../utils';
 import { FilterState } from '../MobileFoodMenu/filterReducer';
-import { sortByOldestExpiryDate } from './utils';
+import { applyMultipleFilters } from './utils';
 
 export type SortOptions = 'name' | 'date';
 
 type ApplyFiltersAction = {
     type: 'APPLY_FILTERS';
     filters: FilterState;
-};
-
-type FilterExpiringAction = {
-    type: 'FILTER_EXPIRING';
+    fridge: FoodType[];
 };
 
 type RemoveExpiringFilterAction = {
@@ -19,34 +15,36 @@ type RemoveExpiringFilterAction = {
     fridge: FoodType[];
 };
 
-type FoodActions = ApplyFiltersAction | FilterExpiringAction | RemoveExpiringFilterAction;
+type UpdateFridgeAction = {
+    type: 'UPDATE_FRIDGE';
+    fridge: FoodType[];
+};
+
+type FoodActions = ApplyFiltersAction | RemoveExpiringFilterAction | UpdateFridgeAction;
 
 export type FoodState = {
     food: FoodType[];
-    selectedOwners: string[];
-    showOnlyExpiring: boolean;
-    sortBy: SortOptions;
+    filters: FilterState;
 };
 
 export const init = (initialFoodState: FoodState, tenants: TenantType[], fridge: FoodType[]): FoodState => {
-    const onlyFoodWithBatches = fridge.filter((item) => {
-        return item.batches.length > 0;
-    });
-
-    const sortedByDate = sortByOldestExpiryDate(onlyFoodWithBatches);
-
     return {
         ...initialFoodState,
-        selectedOwners: tenants.map((tenant) => tenant.uid),
-        food: sortedByDate
+        filters: {
+            ...initialFoodState.filters,
+            selectedOwners: tenants.map((tenant) => tenant.uid)
+        },
+        food: applyMultipleFilters(fridge, initialFoodState.filters)
     };
 };
 
 export const initialFoodState: FoodState = {
     food: [],
-    selectedOwners: [],
-    showOnlyExpiring: true,
-    sortBy: 'date'
+    filters: {
+        selectedOwners: [],
+        showOnlyExpiring: true,
+        sortBy: 'date'
+    }
 };
 
 export const foodReducer = (state: FoodState, action: FoodActions): FoodState => {
@@ -54,25 +52,28 @@ export const foodReducer = (state: FoodState, action: FoodActions): FoodState =>
         case 'APPLY_FILTERS': {
             return {
                 ...state,
-                ...action.filters
-            };
-        }
-
-        case 'FILTER_EXPIRING': {
-            const filtered = getExpiringItems(state.food);
-            return {
-                ...state,
-                food: filtered
+                filters: action.filters,
+                food: applyMultipleFilters(action.fridge, action.filters)
             };
         }
 
         case 'REMOVE_EXPIRING_FILTER': {
-            const filtered = action.fridge.filter((item) => item.batches.length > 0);
+            const updatedFilters = {
+                ...state.filters,
+                showOnlyExpiring: false
+            };
 
             return {
                 ...state,
-                showOnlyExpiring: false,
-                food: filtered
+                filters: updatedFilters,
+                food: applyMultipleFilters(action.fridge, updatedFilters)
+            };
+        }
+
+        case 'UPDATE_FRIDGE': {
+            return {
+                ...state,
+                food: applyMultipleFilters(action.fridge, state.filters)
             };
         }
 
