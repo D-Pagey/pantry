@@ -1,4 +1,5 @@
 import { FoodType, TenantType } from '../../types';
+import { getExpiringItems } from '../../utils';
 import { FilterState } from '../MobileFoodMenu/filterReducer';
 import { applyMultipleFilters } from './utils';
 
@@ -28,13 +29,18 @@ export type FoodState = {
 };
 
 export const init = (initialFoodState: FoodState, tenants: TenantType[], fridge: FoodType[]): FoodState => {
+    const expiringItems = getExpiringItems(fridge);
+
+    const filters = {
+        ...initialFoodState.filters,
+        showOnlyExpiring: expiringItems.length > 0,
+        selectedOwners: tenants.map((tenant) => tenant.uid)
+    };
+
     return {
         ...initialFoodState,
-        filters: {
-            ...initialFoodState.filters,
-            selectedOwners: tenants.map((tenant) => tenant.uid)
-        },
-        food: applyMultipleFilters(fridge, initialFoodState.filters)
+        filters,
+        food: applyMultipleFilters(fridge, filters)
     };
 };
 
