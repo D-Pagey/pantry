@@ -1,6 +1,7 @@
 import { FoodType, TenantType } from '../../types';
 import { getExpiringItems } from '../../utils';
 import { FilterState } from '../MobileFoodMenu/filterReducer';
+import { sortByOldestExpiryDate } from './utils';
 
 export type SortOptions = 'name' | 'date';
 
@@ -32,10 +33,12 @@ export const init = (initialFoodState: FoodState, tenants: TenantType[], fridge:
         return item.batches.length > 0;
     });
 
+    const sortedByDate = sortByOldestExpiryDate(onlyFoodWithBatches);
+
     return {
         ...initialFoodState,
         selectedOwners: tenants.map((tenant) => tenant.uid),
-        food: onlyFoodWithBatches
+        food: sortedByDate
     };
 };
 
