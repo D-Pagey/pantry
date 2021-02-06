@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button as Btn } from '../Button';
 import { colours, zIndex } from '../../tokens';
 
 export const Wrapper = styled.div`
@@ -59,4 +60,10 @@ export const OptionWrapper = styled.div`
     align-items: center;
     grid-column-gap: 1rem;
     margin: 0 0 1rem;
+`;
+
+export const Button = styled(Btn)`
+    background: ${({ selected }) => (selected ? colours.blue : colours.white)};
+    color: ${({ selected }) => (selected ? colours.white : colours.blue)};
+    border: 1px solid ${colours.blue};
 `;

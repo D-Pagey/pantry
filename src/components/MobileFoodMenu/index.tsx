@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useReducer } from 'react';
 import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { ProfilePhoto } from '../ProfilePhoto';
 import editImage from './edit.svg';
 import deleteImage from './delete.svg';
 import filterImage from './filter.svg';
+import { reducer, initialState, SortOptions } from './reducer';
 import * as S from './styles';
 
 export type MobileFoodMenuProps = {
@@ -18,7 +19,15 @@ export type MobileFoodMenuProps = {
 
 export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handleFoodDelete, tenants }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
+
+    const handleSortByClick = (sortOption: SortOptions) => () => {
+        dispatch({
+            type: 'CHANGE_SORTED_BY',
+            payload: sortOption
+        });
+    };
 
     const handleAddClick = () => history.push('/add');
 
@@ -41,8 +50,12 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
 
                     <S.OptionWrapper>
                         <S.Subtitle>Sort By:</S.Subtitle>
-                        <Button>Name</Button>
-                        <Button secondary>Date</Button>
+                        <S.Button onClick={handleSortByClick('date')} selected={state.sortBy === 'date'}>
+                            Date
+                        </S.Button>
+                        <S.Button onClick={handleSortByClick('name')} selected={state.sortBy === 'name'}>
+                            Name
+                        </S.Button>
                     </S.OptionWrapper>
 
                     <S.OptionWrapper>
