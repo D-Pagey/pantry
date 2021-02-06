@@ -32,7 +32,8 @@ export const FilterImage = styled.img`
 
 export const ModalStyles = {
     overlay: {
-        zIndex: zIndex.default
+        zIndex: zIndex.ultimate,
+        background: '#2b2b2bbd'
     },
     content: {
         inset: `90px 0 0`,

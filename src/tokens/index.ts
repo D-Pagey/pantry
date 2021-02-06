@@ -40,5 +40,6 @@ export const zIndex = {
     levitate: 2,
     rise: 200,
     sky: 400,
-    top: 600
+    top: 600,
+    ultimate: 2000
 };
