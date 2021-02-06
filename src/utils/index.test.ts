@@ -13,8 +13,17 @@ import {
     getColourFromDate,
     getExpiringItems,
     getOwnerFromId,
-    getPercentageFromDate
+    getPercentageFromDate,
+    checkAndFilterInvalidData
 } from '.';
+
+const mockToastError = jest.fn();
+
+jest.mock('react-toastify', () => ({
+    toast: {
+        error: (text: string) => mockToastError(text)
+    }
+}));
 
 describe('getPercentageFromDate function', () => {
     it.each`
@@ -254,5 +263,71 @@ describe('filterByTenantIds function', () => {
 
         const result = filterByTenantIds(fridge, [FreshBatch.ownerId, ExpiringSoonBatch.ownerId]);
         expect(result).toStrictEqual([fridge[0], fridge[1], fridge[2]]);
+    });
+});
+
+describe('checkAndFilterInvalidData function', () => {
+    it('should filter out invalid data', () => {
+        const databaseFridge: any[] = [
+            {
+                name: 'Milk',
+                category: 'Dairy',
+                unit: 'cartons',
+                batches: {
+                    [ExpiredBatch.id]: ExpiredBatch
+                }
+            },
+            {
+                name: 'Item without batches',
+                category: 'Dairy',
+                unit: 'cartons'
+            },
+            {
+                name: 'Item without unit',
+                category: 'Dairy',
+                batches: {
+                    [ExpiredBatch.id]: ExpiredBatch
+                }
+            },
+            {
+                name: 'Broccoli without category',
+                unit: 'cartons',
+                batches: {
+                    [ExpiredBatch.id]: ExpiredBatch
+                }
+            },
+            {
+                category: 'item without name property',
+                unit: 'cartons',
+                batches: {
+                    [ExpiredBatch.id]: ExpiredBatch
+                }
+            }
+        ];
+
+        const result = checkAndFilterInvalidData(databaseFridge);
+
+        expect(result).toStrictEqual([databaseFridge[0]]);
+    });
+
+    it.each`
+        property
+        ${'category'}
+        ${'unit'}
+        ${'batches'}
+    `('should call toast error notification when no $property property', ({ property }) => {
+        const testItem = {
+            name: 'Chocolate',
+            category: 'dairy',
+            unit: 'troughs',
+            batches: {
+                [ExpiredBatch.id]: ExpiredBatch
+            },
+            [property]: undefined
+        };
+
+        checkAndFilterInvalidData([testItem]);
+
+        expect(mockToastError).toHaveBeenCalledWith(`No ${property} for ${testItem.name}, ${testItem.name} omitted`);
     });
 });

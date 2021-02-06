@@ -1,5 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { titleCase } from 'title-case';
+import { toast } from 'react-toastify';
 import { BatchType, DatabaseFoodType, DropdownOptionType, FoodType, TenantType } from '../types';
 import { colours, EXPIRING_SOON_DAYS } from '../tokens';
 
@@ -74,6 +75,45 @@ export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] =
 
         return [...acc, { ...curr, batches: formattedBatches }];
     }, [] as FoodType[]);
+};
+
+/**
+ * A function that filters out any data that is not in the correct shape
+ * Also calls a toast notification on any data that is not valid
+ */
+export const checkAndFilterInvalidData = (fridgeItems: DatabaseFoodType[]): DatabaseFoodType[] => {
+    const filtered = fridgeItems.filter((item) => {
+        const { name, category, batches, unit } = item;
+
+        if (name === undefined) return false;
+        if (category === undefined) {
+            toast.error(`No category for ${name}, ${name} omitted`);
+            return false;
+        }
+
+        if (unit === undefined) {
+            toast.error(`No unit for ${name}, ${name} omitted`);
+            return false;
+        }
+
+        if (batches === undefined) {
+            toast.error(`No batches for ${name}, ${name} omitted`);
+            return false;
+        }
+
+        return true;
+    });
+
+    return filtered;
+};
+
+/**
+ * Filters out invalid data then formats the shape of the valid data
+ */
+export const checkAndFormatFridge = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
+    const filteredData = checkAndFilterInvalidData(fridgeItems);
+
+    return formatExpiryDates(filteredData);
 };
 
 /**

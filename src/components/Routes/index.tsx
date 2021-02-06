@@ -2,7 +2,7 @@ import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { FoodType, TenantType, DatabaseFoodType, MetaDataType } from '../../types';
-import { formatExpiryDates } from '../../utils';
+import { checkAndFormatFridge } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { PageAddFoodForm } from '../PageAddFoodForm';
@@ -32,11 +32,11 @@ export const Routes = (): JSX.Element => {
 
                     if (data) {
                         const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
-                        const formattedDates = formatExpiryDates(fridgeItems);
+                        const cleanData = checkAndFormatFridge(fridgeItems);
                         const firebaseTenants = Object.values(data.tenants) as TenantType[];
 
-                        setFridge(formattedDates);
                         setMetaData(data.meta);
+                        setFridge(cleanData);
                         setTenants(firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa'));
                     }
                 });
