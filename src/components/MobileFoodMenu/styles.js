@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button as Btn } from '../Button';
+import { ProfilePhoto as Photo } from '../ProfilePhoto';
 import { colours, zIndex } from '../../tokens';
 
 export const Wrapper = styled.div`
@@ -66,4 +67,9 @@ export const Button = styled(Btn)`
     background: ${({ selected }) => (selected ? colours.blue : colours.white)};
     color: ${({ selected }) => (selected ? colours.white : colours.blue)};
     border: 1px solid ${colours.blue};
+`;
+
+export const ProfilePhoto = styled(Photo)`
+    border: ${({ selected }) => selected && `3px solid ${colours.darkGreen100}`};
+    filter: ${({ selected }) => (selected ? 'grayscale(0)' : 'grayscale(1)')};
 `;

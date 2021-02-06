@@ -4,11 +4,10 @@ import { useHistory } from 'react-router-dom';
 
 import { TenantType } from '../../types';
 import { Button } from '../Button';
-import { ProfilePhoto } from '../ProfilePhoto';
 import editImage from './edit.svg';
 import deleteImage from './delete.svg';
 import filterImage from './filter.svg';
-import { reducer, initialState, SortOptions } from './reducer';
+import { reducer, initialState, SortOptions, init } from './reducer';
 import * as S from './styles';
 
 export type MobileFoodMenuProps = {
@@ -19,13 +18,27 @@ export type MobileFoodMenuProps = {
 
 export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handleFoodDelete, tenants }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState, (initialState) => init(initialState, tenants));
     const history = useHistory();
 
     const handleSortByClick = (sortOption: SortOptions) => () => {
         dispatch({
             type: 'CHANGE_SORTED_BY',
-            payload: sortOption
+            sortBy: sortOption
+        });
+    };
+
+    const handleShowExpiredClick = (onlyShowExpired: boolean) => () => {
+        dispatch({
+            type: 'CHANGE_SHOW_ONLY_EXPIRED',
+            onlyShowExpired
+        });
+    };
+
+    const handleOwnerToggleClick = (ownerId: string) => () => {
+        dispatch({
+            type: 'TOGGLE_SELECTED_OWNER',
+            ownerId
         });
     };
 
@@ -33,6 +46,15 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
 
     const handleFoodEdit = (): void => {
         history.push(`/${editingItemName}/edit`);
+    };
+
+    const handleCancelClick = () => {
+        dispatch({
+            type: 'RESET',
+            tenants
+        });
+
+        setIsModalOpen(true);
     };
 
     return (
@@ -44,7 +66,13 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
                     <S.OptionWrapper>
                         <S.Subtitle>Owners:</S.Subtitle>
                         {tenants.map(({ uid, email, photo }) => (
-                            <ProfilePhoto key={uid} photo={photo} email={email} />
+                            <S.ProfilePhoto
+                                key={uid}
+                                photo={photo}
+                                email={email}
+                                selected={state.selectedOwners.includes(uid)}
+                                onClick={handleOwnerToggleClick(uid)}
+                            />
                         ))}
                     </S.OptionWrapper>
 
@@ -60,8 +88,12 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
 
                     <S.OptionWrapper>
                         <S.Subtitle>Show:</S.Subtitle>
-                        <Button>Expiring Soon</Button>
-                        <Button>All Items</Button>
+                        <S.Button onClick={handleShowExpiredClick(true)} selected={state.showOnlyExpiring}>
+                            Expiring Soon
+                        </S.Button>
+                        <S.Button onClick={handleShowExpiredClick(false)} selected={!state.showOnlyExpiring}>
+                            All Items
+                        </S.Button>
                     </S.OptionWrapper>
 
                     <S.Subtitle>Categories:</S.Subtitle>
@@ -85,7 +117,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
                     </>
                 )}
 
-                <S.FilterButton onClick={() => setIsModalOpen(true)} data-testid="filterMenuButton">
+                <S.FilterButton onClick={handleCancelClick} data-testid="filterMenuButton">
                     <S.FilterImage src={filterImage} alt="filter menu" />
                 </S.FilterButton>
 
