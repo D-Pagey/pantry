@@ -1,4 +1,4 @@
-import { FC, useState, useReducer } from 'react';
+import { FC, useState, useReducer, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
@@ -15,20 +15,26 @@ export type MobileFoodMenuProps = {
     handleFoodDelete: () => void;
     handleApplyFilters: (filterState: FilterState) => void;
     tenants: TenantType[];
+    foodPageFilters: FilterState;
     editingItemName?: string;
 };
 
 export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
     editingItemName,
+    foodPageFilters,
     handleFoodDelete,
     handleApplyFilters,
     tenants
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [state, dispatch] = useReducer(filterReducer, initialFilterState, (initialFilterState) =>
-        init(initialFilterState, tenants)
+        init(initialFilterState, foodPageFilters)
     );
     const history = useHistory();
+
+    useEffect(() => {
+        dispatch({ type: 'RESET', foodPageFilters });
+    }, [foodPageFilters]);
 
     const handleSortByClick = (sortOption: SortOptions) => () => {
         dispatch({
@@ -60,7 +66,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
     const handleCancelClick = () => {
         dispatch({
             type: 'RESET',
-            tenants
+            foodPageFilters
         });
 
         setIsModalOpen(false);

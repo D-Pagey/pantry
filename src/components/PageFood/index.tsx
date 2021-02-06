@@ -98,6 +98,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
             {!isTabletOrLarger && (
                 <MobileFoodMenu
+                    foodPageFilters={foodState.filters}
                     handleFoodDelete={handleFoodDelete}
                     handleApplyFilters={handleApplyFilters}
                     tenants={tenants}

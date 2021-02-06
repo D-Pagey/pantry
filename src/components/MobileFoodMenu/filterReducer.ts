@@ -1,4 +1,3 @@
-import { TenantType } from '../../types';
 import { SortOptions } from '../PageFood/foodReducer';
 
 type ChangeSortAction = {
@@ -18,7 +17,7 @@ type ToggleSelectedOwnerAction = {
 
 type ResetAction = {
     type: 'RESET';
-    tenants: TenantType[];
+    foodPageFilters: FilterState;
 };
 
 export type FilterState = {
@@ -29,10 +28,10 @@ export type FilterState = {
 
 type FilterActions = ChangeSortAction | ChangeShowExpiredAction | ToggleSelectedOwnerAction | ResetAction;
 
-export const init = (initialFilterState: FilterState, tenants: TenantType[]): FilterState => {
+export const init = (initialFilterState: FilterState, foodPageFilters: FilterState): FilterState => {
     return {
         ...initialFilterState,
-        selectedOwners: tenants.map((tenant) => tenant.uid)
+        ...foodPageFilters
     };
 };
 
@@ -73,7 +72,7 @@ export const filterReducer = (state: FilterState, action: FilterActions): Filter
         }
 
         case 'RESET': {
-            return init(initialFilterState, action.tenants);
+            return init(initialFilterState, action.foodPageFilters);
         }
 
         default:
