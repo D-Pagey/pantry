@@ -3,22 +3,31 @@ import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
 import { TenantType } from '../../types';
+import { SortOptions } from '../PageFood/foodReducer';
 import { Button } from '../Button';
 import editImage from './edit.svg';
 import deleteImage from './delete.svg';
 import filterImage from './filter.svg';
-import { reducer, initialState, SortOptions, init } from './reducer';
+import { filterReducer, initialFilterState, init, FilterState } from './filterReducer';
 import * as S from './styles';
 
 export type MobileFoodMenuProps = {
     handleFoodDelete: () => void;
+    handleApplyFilters: (filterState: FilterState) => void;
     tenants: TenantType[];
     editingItemName?: string;
 };
 
-export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handleFoodDelete, tenants }) => {
+export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
+    editingItemName,
+    handleFoodDelete,
+    handleApplyFilters,
+    tenants
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [state, dispatch] = useReducer(reducer, initialState, (initialState) => init(initialState, tenants));
+    const [state, dispatch] = useReducer(filterReducer, initialFilterState, (initialFilterState) =>
+        init(initialFilterState, tenants)
+    );
     const history = useHistory();
 
     const handleSortByClick = (sortOption: SortOptions) => () => {
@@ -54,7 +63,12 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
             tenants
         });
 
-        setIsModalOpen(true);
+        setIsModalOpen(false);
+    };
+
+    const handleApplyFiltersClick = () => {
+        handleApplyFilters(state);
+        setIsModalOpen(false);
     };
 
     return (
@@ -96,11 +110,10 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
                         </S.Button>
                     </S.OptionWrapper>
 
-                    <S.Subtitle>Categories:</S.Subtitle>
-                    <p>Vegetables</p>
-
-                    <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-                    <Button>Apply Filters</Button>
+                    <Button onClick={handleCancelClick} secondary>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleApplyFiltersClick}>Apply Filters</Button>
                 </div>
             </ReactModal>
 
@@ -117,7 +130,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handl
                     </>
                 )}
 
-                <S.FilterButton onClick={handleCancelClick} data-testid="filterMenuButton">
+                <S.FilterButton onClick={() => setIsModalOpen(true)} data-testid="filterMenuButton">
                     <S.FilterImage src={filterImage} alt="filter menu" />
                 </S.FilterButton>
 

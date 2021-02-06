@@ -28,4 +28,6 @@ export const FoodCardGrid = styled.div`
 
 export const FilterButtonsWrapper = styled.div`
     margin: 0 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
 `;

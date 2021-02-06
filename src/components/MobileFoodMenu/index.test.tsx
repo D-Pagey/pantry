@@ -4,6 +4,7 @@ import { MobileFoodMenu } from '.';
 
 const props = {
     handleFoodDelete: () => null,
+    handleApplyFilters: () => null,
     tenants: [TenantHeidi, TenantDan]
 };
 
