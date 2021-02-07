@@ -85,12 +85,20 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                         ]
                     };
 
-                    await addItem(convertBatchesArray([item])[0], user!.household!);
+                    try {
+                        await addItem(convertBatchesArray([item])[0], user!.household!);
+                    } catch {
+                        toast.error('Something went wrong adding the item');
+                    }
 
                     if (!metaData.units.includes(newUnit)) {
                         const updatedUnits = [...metaData.units, newUnit];
 
-                        await addNewUnit(updatedUnits, user!.household!);
+                        try {
+                            await addNewUnit(updatedUnits, user!.household!);
+                        } catch {
+                            toast.error('something went wrong adding a new unit');
+                        }
                     }
                     actions.setSubmitting(false);
                     actions.resetForm();
