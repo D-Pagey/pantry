@@ -140,7 +140,6 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                                     }
                                                     placeholder="2"
                                                     inputName="foodQuantity"
-                                                    defaultValue="2"
                                                 />
 
                                                 <S.SmallLabel htmlFor="foodUnit">Unit</S.SmallLabel>
