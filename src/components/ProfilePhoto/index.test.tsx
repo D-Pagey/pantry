@@ -22,9 +22,4 @@ describe('ProfilePhoto component', () => {
         expect(container.firstChild).toMatchSnapshot();
         screen.getByText('DP');
     });
-
-    it('should render a photo if url provided', () => {
-        render(<ProfilePhoto {...props} />);
-        screen.getByTestId('photo');
-    });
 });

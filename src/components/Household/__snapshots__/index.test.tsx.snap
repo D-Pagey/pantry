@@ -95,7 +95,6 @@ exports[`Household component should render 1`] = `
     <img
       alt="profile"
       class="c2 c3"
-      data-testid="photo"
       src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
       width="50px"
     />
@@ -132,7 +131,6 @@ exports[`Household component should render 1`] = `
     <img
       alt="profile"
       class="c2 c3"
-      data-testid="photo"
       src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
       width="50px"
     />
@@ -160,7 +158,6 @@ exports[`Household component should render 1`] = `
     <img
       alt="profile"
       class="c2 c3"
-      data-testid="photo"
       src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
       width="50px"
     />

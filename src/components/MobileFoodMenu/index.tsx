@@ -30,6 +30,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
     const [state, dispatch] = useReducer(filterReducer, initialFilterState, (initialFilterState) =>
         init(initialFilterState, foodPageFilters)
     );
+
     const history = useHistory();
 
     useEffect(() => {
@@ -92,6 +93,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
                                 email={email}
                                 selected={state.selectedOwners.includes(uid)}
                                 onClick={handleOwnerToggleClick(uid)}
+                                data-testid={`photo-${uid}`}
                             />
                         ))}
                     </S.OptionWrapper>
@@ -126,11 +128,11 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
             <S.Wrapper>
                 {!!editingItemName && (
                     <>
-                        <S.FilterButton onClick={handleFoodDelete} data-testid="filterMenuButton">
+                        <S.FilterButton onClick={handleFoodDelete} data-testid="mobileFoodMenuDeleteButton">
                             <S.FilterImage src={deleteImage} alt="filter menu" />
                         </S.FilterButton>
 
-                        <S.FilterButton onClick={handleFoodEdit} data-testid="filterMenuButton">
+                        <S.FilterButton onClick={handleFoodEdit} data-testid="mobileFoodMenuEditButton">
                             <S.FilterImage src={editImage} alt="filter menu" />
                         </S.FilterButton>
                     </>

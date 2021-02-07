@@ -74,8 +74,5 @@ export const filterReducer = (state: FilterState, action: FilterActions): Filter
         case 'RESET': {
             return init(initialFilterState, action.foodPageFilters);
         }
-
-        default:
-            return state;
     }
 };

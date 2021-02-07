@@ -12,8 +12,7 @@ type ProfilePhotoTypes = {
 };
 
 export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, photo, width, email, name, ...props }) => {
-    if (photo)
-        return <S.Image onClick={onClick} src={photo} width={width} alt="profile" data-testid="photo" {...props} />;
+    if (photo) return <S.Image onClick={onClick} src={photo} width={width} alt="profile" {...props} />;
 
     return (
         <S.Circle onClick={onClick} width={width} {...props}>
