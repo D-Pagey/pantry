@@ -59,6 +59,7 @@ export interface DatabaseUserType {
 export type UserType = Omit<DatabaseUserType, 'notifications'> & { notifications: NotificationType[] };
 
 export type MetaDataType = {
+    categories: string[];
     quantities: number[];
     units: string[];
 };

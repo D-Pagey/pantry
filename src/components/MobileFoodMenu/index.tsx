@@ -1,7 +1,9 @@
 import { FC, useState, useReducer, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 
 import { TenantType } from '../../types';
+import { formatDropdownOptions } from '../../utils';
 import { SortOptions } from '../PageFood/foodReducer';
 import { Button } from '../Button';
 import editImage from './edit.svg';
@@ -11,18 +13,20 @@ import { filterReducer, initialFilterState, init, FilterState } from './filterRe
 import * as S from './styles';
 
 export type MobileFoodMenuProps = {
-    handleFoodDelete: () => void;
-    handleApplyFilters: (filterState: FilterState) => void;
-    tenants: TenantType[];
-    foodPageFilters: FilterState;
+    categories: string[];
     editingItemName?: string;
+    foodPageFilters: FilterState;
+    handleApplyFilters: (filterState: FilterState) => void;
+    handleFoodDelete: () => void;
+    tenants: TenantType[];
 };
 
 export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
+    categories,
     editingItemName,
     foodPageFilters,
-    handleFoodDelete,
     handleApplyFilters,
+    handleFoodDelete,
     tenants
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -115,6 +119,9 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
                         All Items
                     </S.Button>
                 </S.ButtonWrapper>
+
+                <S.Subtitle>Category:</S.Subtitle>
+                <Select options={formatDropdownOptions(categories)} isSearchable isClearable />
 
                 <S.ButtonWrapper margin="2rem 0 0">
                     <Button onClick={handleCancelClick} secondary>

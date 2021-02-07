@@ -3,7 +3,16 @@ import { titleCase } from 'title-case';
 import userEvent from '@testing-library/user-event';
 
 import { render, waitFor } from '../../test-utils';
-import { Fridge, ExpiredBatch, FreshBatch, UserDan, TenantHeidi, TenantDan, TenantJoe } from '../../fixtures';
+import {
+    Fridge,
+    ExpiredBatch,
+    FreshBatch,
+    UserDan,
+    TenantHeidi,
+    TenantDan,
+    TenantJoe,
+    Categories
+} from '../../fixtures';
 import { PageFood } from '.';
 
 const context = {
@@ -11,11 +20,13 @@ const context = {
 };
 
 const emptyProps = {
+    categories: [],
     fridge: [],
     tenants: []
 };
 
 const props = {
+    categories: Categories,
     fridge: Fridge,
     tenants: [TenantHeidi, TenantJoe, TenantDan]
 };

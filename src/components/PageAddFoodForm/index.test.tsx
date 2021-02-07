@@ -6,7 +6,7 @@ import selectEvent from 'react-select-event';
 
 import { addItem } from '../../services/firestore';
 import { render, screen } from '../../test-utils';
-import { Fridge, UserDan } from '../../fixtures';
+import { Categories, Fridge, UserDan } from '../../fixtures';
 import { PageAddFoodForm } from '.';
 
 const mockHistoryPush = jest.fn();
@@ -37,7 +37,7 @@ const context = {
 
 const props = {
     fridge: Fridge,
-    metaData: { quantities: [1, 2, 3, 4, 5], units: ['servings', 'kilograms', 'grams'] }
+    metaData: { categories: Categories, quantities: [1, 2, 3, 4, 5], units: ['servings', 'kilograms', 'grams'] }
 };
 
 describe('PageAddFoodForm component', () => {

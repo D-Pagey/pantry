@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UserDan, Fridge, TenantHeidi } from '../../fixtures';
+import { UserDan, Fridge, TenantHeidi, Categories } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageFood } from '.';
 
@@ -17,6 +17,6 @@ export const normal = () => (
             user: UserDan
         }}
     >
-        <PageFood fridge={Fridge} tenants={[TenantHeidi]} />
+        <PageFood fridge={Fridge} tenants={[TenantHeidi]} categories={Categories} />
     </AuthContext.Provider>
 );

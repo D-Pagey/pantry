@@ -1,10 +1,10 @@
 import userEvent from '@testing-library/user-event';
 import ReactModal from 'react-modal';
 import { render, screen } from '../../test-utils';
-import { TenantDan, TenantHeidi } from '../../fixtures';
+import { Categories, TenantDan, TenantHeidi } from '../../fixtures';
 import { SortOptions } from '../PageFood/foodReducer';
-import { MobileFoodMenu } from '.';
 import { FilterState } from './filterReducer';
+import { MobileFoodMenu } from '.';
 
 const mockHistoryPush = jest.fn();
 
@@ -17,6 +17,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const props = {
+    categories: Categories,
     handleFoodDelete: () => null,
     handleApplyFilters: () => null,
     tenants: [TenantHeidi, TenantDan],

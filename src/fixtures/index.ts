@@ -150,7 +150,10 @@ export const ReadNotification: NotificationType = {
     uid: 'bbb'
 };
 
+export const Categories = ['vegetables', 'fruit', 'dairy', 'meat', 'fish', 'other'];
+
 export const MetaData: MetaDataType = {
+    categories: Categories,
     quantities: [1, 2, 3, 4, 5, 6],
     units: ['servings', 'units', 'kilograms', 'grams', 'jars']
 };

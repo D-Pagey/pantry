@@ -16,11 +16,12 @@ import { getOwnersButtonText } from './utils';
 import * as S from './styles';
 
 type PageFoodProps = {
+    categories: string[];
     fridge: FoodType[];
     tenants: TenantType[];
 };
 
-export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
+export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => {
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
     const [foodState, dispatch] = useReducer(foodReducer, initialFoodState, (initialFoodState) =>
         init(initialFoodState, tenants, fridge)
@@ -99,6 +100,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
             {!isTabletOrLarger && (
                 <MobileFoodMenu
+                    categories={categories}
                     foodPageFilters={filters}
                     handleFoodDelete={handleFoodDelete}
                     handleApplyFilters={handleApplyFilters}
