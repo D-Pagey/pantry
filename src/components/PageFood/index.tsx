@@ -80,19 +80,21 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     />
                 )} */}
 
-                {food.length === 0 && <p>No food for these filters</p>}
-
-                <S.FoodCardGrid>
-                    {food.map((item: FoodType) => (
-                        <FoodCard
-                            handleClick={handleFoodClick(item)}
-                            isSelected={item.name === editingItem?.name}
-                            item={item}
-                            key={item.name}
-                            tenants={tenants}
-                        />
-                    ))}
-                </S.FoodCardGrid>
+                {food.length === 0 ? (
+                    <p>No food for the above filters, click the X to remove a filter</p>
+                ) : (
+                    <S.FoodCardGrid>
+                        {food.map((item: FoodType) => (
+                            <FoodCard
+                                handleClick={handleFoodClick(item)}
+                                isSelected={item.name === editingItem?.name}
+                                item={item}
+                                key={item.name}
+                                tenants={tenants}
+                            />
+                        ))}
+                    </S.FoodCardGrid>
+                )}
             </S.Wrapper>
 
             {!isTabletOrLarger && (

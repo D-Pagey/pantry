@@ -40,7 +40,7 @@ describe('PageFood component', () => {
 
     it('should render a message when no data for category all', () => {
         const { getByText } = render(<PageFood {...props} fridge={[]} />, context);
-        getByText('No food for these filters');
+        getByText('No food for the above filters, click the X to remove a filter');
     });
 
     it.skip('should render a message when there is no data for a category', async () => {
