@@ -1,5 +1,4 @@
 import { FC, useState, useReducer, useEffect } from 'react';
-import ReactModal from 'react-modal';
 import { useHistory } from 'react-router-dom';
 
 import { TenantType } from '../../types';
@@ -80,50 +79,50 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
 
     return (
         <>
-            <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                <div>
-                    <S.Title>Set Filters</S.Title>
+            <S.ReactModal isOpen={isModalOpen}>
+                <S.Title>Set Filters</S.Title>
 
-                    <S.OptionWrapper>
-                        <S.Subtitle>Owners:</S.Subtitle>
-                        {tenants.map(({ uid, email, photo }) => (
-                            <S.ProfilePhoto
-                                key={uid}
-                                photo={photo}
-                                email={email}
-                                selected={state.selectedOwners.includes(uid)}
-                                onClick={handleOwnerToggleClick(uid)}
-                                data-testid={`photo-${uid}`}
-                            />
-                        ))}
-                    </S.OptionWrapper>
+                <S.Subtitle>Owners:</S.Subtitle>
+                <S.PhotoWrapper>
+                    {tenants.map(({ uid, email, photo }) => (
+                        <S.ProfilePhoto
+                            key={uid}
+                            photo={photo}
+                            email={email}
+                            selected={state.selectedOwners.includes(uid)}
+                            onClick={handleOwnerToggleClick(uid)}
+                            data-testid={`photo-${uid}`}
+                        />
+                    ))}
+                </S.PhotoWrapper>
 
-                    <S.OptionWrapper>
-                        <S.Subtitle>Sort By:</S.Subtitle>
-                        <S.Button onClick={handleSortByClick('date')} selected={state.sortBy === 'date'}>
-                            Date
-                        </S.Button>
-                        <S.Button onClick={handleSortByClick('name')} selected={state.sortBy === 'name'}>
-                            Name
-                        </S.Button>
-                    </S.OptionWrapper>
+                <S.Subtitle>Sort By:</S.Subtitle>
+                <S.ButtonWrapper>
+                    <S.Button onClick={handleSortByClick('date')} selected={state.sortBy === 'date'}>
+                        Date
+                    </S.Button>
+                    <S.Button onClick={handleSortByClick('name')} selected={state.sortBy === 'name'}>
+                        Name
+                    </S.Button>
+                </S.ButtonWrapper>
 
-                    <S.OptionWrapper>
-                        <S.Subtitle>Show:</S.Subtitle>
-                        <S.Button onClick={handleShowExpiredClick(true)} selected={state.showOnlyExpiring}>
-                            Expiring Soon
-                        </S.Button>
-                        <S.Button onClick={handleShowExpiredClick(false)} selected={!state.showOnlyExpiring}>
-                            All Items
-                        </S.Button>
-                    </S.OptionWrapper>
+                <S.Subtitle>Show:</S.Subtitle>
+                <S.ButtonWrapper>
+                    <S.Button onClick={handleShowExpiredClick(true)} selected={state.showOnlyExpiring}>
+                        Expiring Soon
+                    </S.Button>
+                    <S.Button onClick={handleShowExpiredClick(false)} selected={!state.showOnlyExpiring}>
+                        All Items
+                    </S.Button>
+                </S.ButtonWrapper>
 
+                <S.ButtonWrapper margin="2rem 0 0">
                     <Button onClick={handleCancelClick} secondary>
                         Cancel
                     </Button>
                     <Button onClick={handleApplyFiltersClick}>Apply Filters</Button>
-                </div>
-            </ReactModal>
+                </S.ButtonWrapper>
+            </S.ReactModal>
 
             <S.Wrapper>
                 {!!editingItemName && (
