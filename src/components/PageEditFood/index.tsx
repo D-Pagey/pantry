@@ -111,9 +111,14 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         </S.Label>
                         <EditFoodServings item={state.originalItem} tenants={nonPendingTenants} />
 
-                        <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
-                            Save Changes
-                        </S.Button>
+                        <div>
+                            <S.Button onClick={() => history.push('/food')} secondary>
+                                Back
+                            </S.Button>
+                            <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
+                                Save Changes
+                            </S.Button>
+                        </div>
                     </S.Wrapper>
                 </>
             )}

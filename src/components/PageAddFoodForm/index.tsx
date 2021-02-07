@@ -152,7 +152,12 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                             </S.Grid>
                                         </S.InputWrapper>
 
-                                        <Button onClick={handleStepOneNext(values)}>Next</Button>
+                                        <S.ButtonWrapper>
+                                            <Button secondary onClick={() => history.push('/food')}>
+                                                Back
+                                            </Button>
+                                            <Button onClick={handleStepOneNext(values)}>Next</Button>
+                                        </S.ButtonWrapper>
                                     </S.StepWrapper>
                                 )}
 
