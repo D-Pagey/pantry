@@ -12,6 +12,7 @@ import { AuthContext } from '../ProviderAuth';
 import { FilterButton } from '../FilterButton';
 import { MobileFoodMenu } from '../MobileFoodMenu';
 import { foodReducer, initialFoodState, init } from './foodReducer';
+import { getOwnersButtonText } from './utils';
 import * as S from './styles';
 
 type PageFoodProps = {
@@ -20,12 +21,11 @@ type PageFoodProps = {
 };
 
 export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
-    // TODO: Delete this category state, move to reducer
-    const [category] = useState('all');
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
     const [foodState, dispatch] = useReducer(foodReducer, initialFoodState, (initialFoodState) =>
         init(initialFoodState, tenants, fridge)
     );
+    const { food, filters } = foodState;
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -60,10 +60,15 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
         <Layout>
             <S.Wrapper>
                 <S.FilterButtonsWrapper>
-                    <FilterButton>Sorted by {foodState.filters.sortBy}</FilterButton>
-                    {foodState.filters.showOnlyExpiring && (
+                    <FilterButton>Sorted by {filters.sortBy}</FilterButton>
+                    {filters.showOnlyExpiring && (
                         <FilterButton onClick={() => dispatch({ type: 'REMOVE_EXPIRING_FILTER', fridge })}>
                             Expiring Soon
+                        </FilterButton>
+                    )}
+                    {filters.selectedOwners.length > 0 && filters.selectedOwners.length !== tenants.length && (
+                        <FilterButton onClick={() => dispatch({ type: 'REMOVE_SELECTED_OWNERS', fridge, tenants })}>
+                            {getOwnersButtonText(filters.selectedOwners, tenants)}
                         </FilterButton>
                     )}
                 </S.FilterButtonsWrapper>
@@ -75,16 +80,10 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
                     />
                 )} */}
 
-                {fridge?.length === 0 && <p data-testid="pageFoodNoData">You have no food in your fridge.</p>}
-
-                {fridge?.length !== 0 && foodState.food?.length === 0 && (
-                    <p data-testid={`pageFoodNoData${category}`}>
-                        There is no food that falls under the category of {category}
-                    </p>
-                )}
+                {food.length === 0 && <p>No food for these filters</p>}
 
                 <S.FoodCardGrid>
-                    {foodState.food.map((item: FoodType) => (
+                    {food.map((item: FoodType) => (
                         <FoodCard
                             handleClick={handleFoodClick(item)}
                             isSelected={item.name === editingItem?.name}
@@ -98,7 +97,7 @@ export const PageFood: FC<PageFoodProps> = ({ fridge, tenants }) => {
 
             {!isTabletOrLarger && (
                 <MobileFoodMenu
-                    foodPageFilters={foodState.filters}
+                    foodPageFilters={filters}
                     handleFoodDelete={handleFoodDelete}
                     handleApplyFilters={handleApplyFilters}
                     tenants={tenants}

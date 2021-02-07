@@ -1,5 +1,5 @@
-import { FoodType } from '../../types';
-import { getExpiringItems } from '../../utils';
+import { FoodType, TenantType } from '../../types';
+import { filterByTenantIds, getExpiringItems } from '../../utils';
 import { FilterState } from '../MobileFoodMenu/filterReducer';
 
 export const sortByOldestExpiryDate = (food: FoodType[]): FoodType[] => {
@@ -29,7 +29,7 @@ export const sortByName = (food: FoodType[]): FoodType[] => {
 };
 
 // A function that takes some filters and applies them to original fridge
-export const applyMultipleFilters = (food: FoodType[], filters: Partial<FilterState>): FoodType[] => {
+export const applyMultipleFilters = (food: FoodType[], filters: FilterState): FoodType[] => {
     const onlyFoodWithBatches = food.filter((item) => {
         return item.batches.length > 0;
     });
@@ -37,11 +37,26 @@ export const applyMultipleFilters = (food: FoodType[], filters: Partial<FilterSt
     const sorted =
         filters.sortBy === 'date' ? sortByOldestExpiryDate(onlyFoodWithBatches) : sortByName(onlyFoodWithBatches);
 
-    if (filters.showOnlyExpiring) {
-        const expiring = getExpiringItems(sorted);
+    const selectedOwnersFood =
+        filters.selectedOwners.length > 0 ? filterByTenantIds(food, filters.selectedOwners) : sorted;
 
-        return expiring;
-    } else {
-        return sorted;
-    }
+    return filters.showOnlyExpiring ? getExpiringItems(selectedOwnersFood) : selectedOwnersFood;
+};
+
+export const getOwnersButtonText = (selectedOwnersIds: string[], tenants: TenantType[]): string => {
+    const selectedTenants = tenants.filter((tenant) => selectedOwnersIds.includes(tenant.uid));
+    const firstNames = selectedTenants.map((tenant) => tenant.name.split(' ')[0]);
+
+    if (selectedTenants.length === 1) return `${firstNames[0]}'s food`;
+    if (selectedTenants.length === 2) return `${firstNames[0]}'s + ${firstNames[1]}'s`;
+
+    return firstNames.reduce((acc, curr, index, array) => {
+        if (index === 0) return `${curr}'s`;
+
+        if (index === array.length - 1) {
+            return `${acc} + ${curr}'s food`;
+        }
+
+        return `${acc}, ${curr}'s`;
+    }, '');
 };

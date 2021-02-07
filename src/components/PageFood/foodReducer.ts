@@ -16,12 +16,18 @@ type RemoveExpiringFilterAction = {
     fridge: FoodType[];
 };
 
+type RemoveSelectedOwnersAction = {
+    type: 'REMOVE_SELECTED_OWNERS';
+    fridge: FoodType[];
+    tenants: TenantType[];
+};
+
 type UpdateFridgeAction = {
     type: 'UPDATE_FRIDGE';
     fridge: FoodType[];
 };
 
-type FoodActions = ApplyFiltersAction | RemoveExpiringFilterAction | UpdateFridgeAction;
+type FoodActions = ApplyFiltersAction | RemoveExpiringFilterAction | UpdateFridgeAction | RemoveSelectedOwnersAction;
 
 export type FoodState = {
     food: FoodType[];
@@ -67,6 +73,19 @@ export const foodReducer = (state: FoodState, action: FoodActions): FoodState =>
             const updatedFilters = {
                 ...state.filters,
                 showOnlyExpiring: false
+            };
+
+            return {
+                ...state,
+                filters: updatedFilters,
+                food: applyMultipleFilters(action.fridge, updatedFilters)
+            };
+        }
+
+        case 'REMOVE_SELECTED_OWNERS': {
+            const updatedFilters = {
+                ...state.filters,
+                selectedOwners: action.tenants.map((tenant) => tenant.uid)
             };
 
             return {

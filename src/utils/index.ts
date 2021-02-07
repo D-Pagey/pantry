@@ -173,7 +173,7 @@ export const filterByTenantIds = (fridge: FoodType[], selectedTenants: string[])
             // once we have decided to keep the item, we don't need to check again
             if (acc === true) return acc;
 
-            // if any of the batches have a selecte tenant that keep the item
+            // if any of the batches have a selected tenant that keep the item
             if (selectedTenants.includes(curr.ownerId)) {
                 return true;
             }

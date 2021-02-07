@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
-import { TenantDan } from '../../fixtures';
-import { FoodType, BatchType } from '../../types';
-import { sortByName, sortByOldestExpiryDate } from './utils';
+import { TenantAlexa, TenantDan, TenantHeidi, TenantJoe } from '../../fixtures';
+import { FoodType, BatchType, TenantType } from '../../types';
+import { sortByName, sortByOldestExpiryDate, getOwnersButtonText } from './utils';
 
 export const Batch: BatchType = {
     id: '3333333',
@@ -52,5 +52,27 @@ describe('sortByName function', () => {
         const result = sortByName([ItemOne, ItemTwo, ItemThree]);
 
         expect(result).toStrictEqual([ItemTwo, ItemThree, ItemOne]);
+    });
+});
+
+const TenantToni: TenantType = {
+    ...TenantHeidi,
+    name: 'Toni Lyle',
+    uid: 'TenantToniUID'
+};
+
+describe('getOwnersButtonText function', () => {
+    it.each`
+        num    | selectedOwnersIds                                                  | expectedText
+        ${'1'} | ${[TenantDan.uid]}                                                 | ${"Dan's food"}
+        ${'2'} | ${[TenantDan.uid, TenantHeidi.uid]}                                | ${"Dan's + Heidi's"}
+        ${'3'} | ${[TenantDan.uid, TenantHeidi.uid, TenantJoe.uid]}                 | ${"Dan's, Heidi's + Joe's food"}
+        ${'3'} | ${[TenantDan.uid, TenantHeidi.uid, TenantJoe.uid]}                 | ${"Dan's, Heidi's + Joe's food"}
+        ${'4'} | ${[TenantDan.uid, TenantHeidi.uid, TenantJoe.uid, TenantToni.uid]} | ${"Dan's, Heidi's, Joe's + Toni's food"}
+    `('should return correct format for $num selected owners', ({ selectedOwnersIds, expectedText }) => {
+        const tenants = [TenantDan, TenantHeidi, TenantJoe, TenantToni, TenantAlexa];
+
+        const text = getOwnersButtonText(selectedOwnersIds, tenants);
+        expect(text).toBe(expectedText);
     });
 });
