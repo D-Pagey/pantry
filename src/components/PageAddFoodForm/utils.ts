@@ -9,3 +9,11 @@ export const checkExistingCategory = (fridge: FoodType[], name: string): string 
         return acc;
     }, '');
 };
+
+export const checkExistingItem = (fridge: FoodType[], name: string): FoodType | undefined => {
+    return fridge.reduce((acc, curr): FoodType | undefined => {
+        if (curr.name === name) return curr;
+
+        return acc;
+    }, undefined as FoodType | undefined);
+};

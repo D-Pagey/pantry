@@ -14,7 +14,7 @@ import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Button } from '../Button';
 import { AuthContext } from '../ProviderAuth';
-import { checkExistingCategory } from './utils';
+import { checkExistingCategory, checkExistingItem } from './utils';
 import * as S from './styles';
 
 type PageAddFoodFormProps = {
@@ -51,15 +51,11 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
             return toast.info('Please enter a unit for the food item');
         }
 
-        const existingItem = fridge.reduce((acc, curr): FoodType | undefined => {
-            if (curr.name === values.name) return curr;
+        const doesItemExist = checkExistingItem(fridge, values.name);
 
-            return acc;
-        }, undefined as FoodType | undefined);
-
-        if (existingItem) {
+        if (doesItemExist) {
             setStep(3);
-            setExistingItem(existingItem);
+            setExistingItem(doesItemExist);
         } else {
             setStep(2);
         }
@@ -108,6 +104,10 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                         setStep(3);
                     };
 
+                    const handleNameSelect = (name: string) => {
+                        setFieldValue('name', name);
+                    };
+
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     // const onKeyDown = (keyEvent: any): void => {
                     //     if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
@@ -126,7 +126,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
 
                                             <CreatableDropdown
                                                 options={formatFoodDropdownOptions(fridge)}
-                                                setSelected={(name: string) => setFieldValue('name', name)}
+                                                setSelected={handleNameSelect}
                                                 placeholder="e.g. Carrot"
                                                 inputName="foodName"
                                             />
@@ -140,6 +140,7 @@ export const PageAddFoodForm: FC<PageAddFoodFormProps> = ({ fridge, metaData }) 
                                                     }
                                                     placeholder="2"
                                                     inputName="foodQuantity"
+                                                    defaultValue="2"
                                                 />
 
                                                 <S.SmallLabel htmlFor="foodUnit">Unit</S.SmallLabel>
