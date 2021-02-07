@@ -38,7 +38,7 @@ export const applyMultipleFilters = (food: FoodType[], filters: FilterState): Fo
         filters.sortBy === 'date' ? sortByOldestExpiryDate(onlyFoodWithBatches) : sortByName(onlyFoodWithBatches);
 
     const selectedOwnersFood =
-        filters.selectedOwners.length > 0 ? filterByTenantIds(food, filters.selectedOwners) : sorted;
+        filters.selectedOwners.length > 0 ? filterByTenantIds(sorted, filters.selectedOwners) : sorted;
 
     return filters.showOnlyExpiring ? getExpiringItems(selectedOwnersFood) : selectedOwnersFood;
 };
