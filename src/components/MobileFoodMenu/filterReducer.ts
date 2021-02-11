@@ -20,13 +20,24 @@ type ResetAction = {
     foodPageFilters: FilterState;
 };
 
+type ChangeCategoryAction = {
+    type: 'CHANGE_CATEGORY';
+    category: string;
+};
+
 export type FilterState = {
     selectedOwners: string[];
     showOnlyExpiring: boolean;
     sortBy: SortOptions;
+    category: string;
 };
 
-type FilterActions = ChangeSortAction | ChangeShowExpiredAction | ToggleSelectedOwnerAction | ResetAction;
+type FilterActions =
+    | ChangeSortAction
+    | ChangeShowExpiredAction
+    | ToggleSelectedOwnerAction
+    | ResetAction
+    | ChangeCategoryAction;
 
 export const init = (initialFilterState: FilterState, foodPageFilters: FilterState): FilterState => {
     return {
@@ -38,7 +49,8 @@ export const init = (initialFilterState: FilterState, foodPageFilters: FilterSta
 export const initialFilterState: FilterState = {
     selectedOwners: [],
     showOnlyExpiring: false,
-    sortBy: 'date'
+    sortBy: 'date',
+    category: ''
 };
 
 export const filterReducer = (state: FilterState, action: FilterActions): FilterState => {
@@ -73,6 +85,13 @@ export const filterReducer = (state: FilterState, action: FilterActions): Filter
 
         case 'RESET': {
             return init(initialFilterState, action.foodPageFilters);
+        }
+
+        case 'CHANGE_CATEGORY': {
+            return {
+                ...state,
+                category: action.category
+            };
         }
     }
 };

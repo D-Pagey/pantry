@@ -34,8 +34,13 @@ export const applyMultipleFilters = (food: FoodType[], filters: FilterState): Fo
         return item.batches.length > 0;
     });
 
-    const sorted =
-        filters.sortBy === 'date' ? sortByOldestExpiryDate(onlyFoodWithBatches) : sortByName(onlyFoodWithBatches);
+    const filterByCategory = filters.category
+        ? onlyFoodWithBatches.filter((item) => {
+              return item.category === filters.category;
+          })
+        : onlyFoodWithBatches;
+
+    const sorted = filters.sortBy === 'date' ? sortByOldestExpiryDate(filterByCategory) : sortByName(filterByCategory);
 
     const selectedOwnersFood =
         filters.selectedOwners.length > 0 ? filterByTenantIds(sorted, filters.selectedOwners) : sorted;

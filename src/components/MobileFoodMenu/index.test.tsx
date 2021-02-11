@@ -24,7 +24,8 @@ const props = {
     foodPageFilters: {
         selectedOwners: [TenantHeidi.uid, TenantDan.uid],
         showOnlyExpiring: true,
-        sortBy: 'name' as SortOptions
+        sortBy: 'name' as SortOptions,
+        category: ''
     }
 };
 
@@ -71,7 +72,7 @@ describe('MobileFoodMenu component', () => {
         expect(mockHistoryPush).toHaveBeenCalledWith('/add');
     });
 
-    it('should call handleApplyFilters with changed values', () => {
+    it('should call handleApplyFilters with changed values', async () => {
         const handleApplyFilters = jest.fn();
 
         const { container } = render(<MobileFoodMenu {...props} handleApplyFilters={handleApplyFilters} />);
@@ -89,7 +90,8 @@ describe('MobileFoodMenu component', () => {
         const updatedFilters: FilterState = {
             selectedOwners: [props.tenants[0].uid],
             showOnlyExpiring: false,
-            sortBy: 'date'
+            sortBy: 'date',
+            category: ''
         };
 
         expect(handleApplyFilters).toHaveBeenCalledWith(updatedFilters);
