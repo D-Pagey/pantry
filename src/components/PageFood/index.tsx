@@ -79,13 +79,6 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                         </FilterButton>
                     )}
                 </S.FilterButtonsWrapper>
-                {/* {isTabletOrLarger && (
-                    <CategoryFilterDesktop
-                        categories={getCategoriesAndCounts(fridge)}
-                        selected={category}
-                        handleCategoryClick={handleCategoryClick}
-                    />
-                )} */}
 
                 {food.length === 0 ? (
                     <p>No food for the above filters, click the X to remove a filter</p>
