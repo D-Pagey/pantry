@@ -72,6 +72,12 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                             {getOwnersButtonText(filters.selectedOwners, tenants)}
                         </FilterButton>
                     )}
+
+                    {filters.category && (
+                        <FilterButton onClick={() => dispatch({ type: 'REMOVE_CATEGORY', fridge })}>
+                            {filters.category}
+                        </FilterButton>
+                    )}
                 </S.FilterButtonsWrapper>
                 {/* {isTabletOrLarger && (
                     <CategoryFilterDesktop

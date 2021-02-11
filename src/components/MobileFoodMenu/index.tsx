@@ -2,7 +2,7 @@ import { FC, useState, useReducer, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 
-import { TenantType } from '../../types';
+import { DropdownOptionType, TenantType } from '../../types';
 import { formatDropdownOptions } from '../../utils';
 import { SortOptions } from '../PageFood/foodReducer';
 import { Button } from '../Button';
@@ -59,6 +59,15 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
             type: 'TOGGLE_SELECTED_OWNER',
             ownerId
         });
+    };
+
+    const handleCategoryChange = (category: DropdownOptionType | null) => {
+        if (category !== null) {
+            dispatch({
+                type: 'CHANGE_CATEGORY',
+                category: category.value
+            });
+        }
     };
 
     const handleAddClick = () => history.push('/add');
@@ -121,7 +130,12 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
                 </S.ButtonWrapper>
 
                 <S.Subtitle>Category:</S.Subtitle>
-                <Select options={formatDropdownOptions(categories)} isSearchable isClearable />
+                <Select
+                    options={formatDropdownOptions(categories)}
+                    onChange={handleCategoryChange}
+                    isSearchable
+                    isClearable
+                />
 
                 <S.ButtonWrapper margin="2rem 0 0">
                     <Button onClick={handleCancelClick} secondary>

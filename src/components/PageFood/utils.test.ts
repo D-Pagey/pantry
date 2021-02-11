@@ -81,7 +81,8 @@ describe('getOwnersButtonText function', () => {
 const defaultFilters: FilterState = {
     selectedOwners: [],
     showOnlyExpiring: false,
-    sortBy: 'name'
+    sortBy: 'name',
+    category: ''
 };
 
 const ExpiringZebra: FoodType = {
