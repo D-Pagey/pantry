@@ -33,8 +33,8 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
     const [state, dispatch] = useReducer(filterReducer, initialFilterState, (initialFilterState) =>
         init(initialFilterState, foodPageFilters)
     );
-
     const history = useHistory();
+    const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
     useEffect(() => {
         dispatch({ type: 'RESET', foodPageFilters });
@@ -97,7 +97,7 @@ export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
 
                 <S.Subtitle>Owners:</S.Subtitle>
                 <S.PhotoWrapper>
-                    {tenants.map(({ uid, email, photo }) => (
+                    {nonPendingTenants.map(({ uid, email, photo }) => (
                         <S.ProfilePhoto
                             key={uid}
                             photo={photo}
