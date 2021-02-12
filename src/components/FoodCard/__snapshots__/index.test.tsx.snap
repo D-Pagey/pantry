@@ -288,14 +288,14 @@ exports[`FoodCard component should render 1`] = `
           x="50%"
           y="38%"
         >
-          0
+          1
         </text>
         <text
           class="c11 c12"
           x="51%"
           y="67%"
         >
-          seconds
+          day
         </text>
       </svg>
     </div>
