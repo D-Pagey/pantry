@@ -1,6 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 import { colours } from '../../tokens';
 
+const ButtonColours = {
+    red: colours.red,
+    blue: colours.blue
+};
+
 export const Button = styled.button.attrs(({ type }) => ({
     type: type || 'button'
 }))`
@@ -17,8 +22,8 @@ export const Button = styled.button.attrs(({ type }) => ({
 
 export const SecondaryButton = styled(Button)`
     background-color: ${colours.white};
-    border: 1px solid ${colours.darkGreen100};
-    color: ${colours.darkGreen100};
+    border: 1px solid ${({ colour }) => (colour ? ButtonColours[colour] : colours.darkGreen100)};
+    color: ${({ colour }) => (colour ? ButtonColours[colour] : colours.darkGreen100)};
     margin: ${({ margin }) => margin};
 `;
 

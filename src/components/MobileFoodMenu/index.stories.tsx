@@ -8,7 +8,7 @@ const Template: Story<MobileFoodMenuProps> = (args) => <MobileFoodMenu {...args}
 export const Primary = Template.bind({});
 
 Primary.args = {
-    editingItemName: '',
+    showItemMenu: false,
     handleFoodDelete: () => null,
     openModal: () => null
 };

@@ -12,6 +12,7 @@ export type ButtonProps = {
     secondary?: boolean;
     size?: 'sm' | 'm' | 'l';
     type?: string;
+    colour?: 'red' | 'blue';
 };
 
 export const Button: FC<ButtonProps> = ({

@@ -9,22 +9,24 @@ import * as S from './styles';
 
 export type MobileFoodMenuProps = {
     handleFoodDelete: () => void;
+    handleFoodEdit: () => void;
     openModal: () => void;
-    editingItemName?: string;
+    showItemMenu: boolean;
 };
 
-export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({ editingItemName, handleFoodDelete, openModal }) => {
+export const MobileFoodMenu: FC<MobileFoodMenuProps> = ({
+    handleFoodEdit,
+    handleFoodDelete,
+    openModal,
+    showItemMenu
+}) => {
     const history = useHistory();
 
     const handleAddClick = () => history.push('/add');
 
-    const handleFoodEdit = (): void => {
-        history.push(`/${editingItemName}/edit`);
-    };
-
     return (
         <S.Wrapper>
-            {!!editingItemName && (
+            {showItemMenu && (
                 <>
                     <S.FilterButton onClick={handleFoodDelete} data-testid="mobileFoodMenuDeleteButton">
                         <S.FilterImage src={deleteImage} alt="filter menu" />

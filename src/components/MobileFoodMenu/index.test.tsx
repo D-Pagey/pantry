@@ -17,7 +17,9 @@ jest.mock('react-router-dom', () => ({
 
 const props = {
     handleFoodDelete: () => null,
-    openModal: () => null
+    handleFoodEdit: () => null,
+    openModal: () => null,
+    showItemMenu: false
 };
 
 describe('MobileFoodMenu component', () => {
@@ -39,7 +41,7 @@ describe('MobileFoodMenu component', () => {
     it('should call handleFoodDelete if delete button clicked', () => {
         const handleFoodDelete = jest.fn();
 
-        render(<MobileFoodMenu {...props} handleFoodDelete={handleFoodDelete} editingItemName="chicken" />);
+        render(<MobileFoodMenu {...props} handleFoodDelete={handleFoodDelete} showItemMenu />);
 
         userEvent.click(screen.getByTestId('mobileFoodMenuDeleteButton'));
 
@@ -47,13 +49,13 @@ describe('MobileFoodMenu component', () => {
     });
 
     it('should call history push if edit button clicked', () => {
-        const editingItemName = 'chicken';
+        const handleFoodEdit = jest.fn();
 
-        render(<MobileFoodMenu {...props} editingItemName={editingItemName} />);
+        render(<MobileFoodMenu {...props} showItemMenu handleFoodEdit={handleFoodEdit} />);
 
         userEvent.click(screen.getByTestId('mobileFoodMenuEditButton'));
 
-        expect(mockHistoryPush).toHaveBeenCalledWith(`/${editingItemName}/edit`);
+        expect(handleFoodEdit).toHaveBeenCalled();
     });
 
     it('should call history push if add button clicked', () => {

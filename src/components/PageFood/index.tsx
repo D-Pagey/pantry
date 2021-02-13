@@ -1,6 +1,7 @@
 import { FC, useContext, useState, useReducer, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 import { deleteItemBatches } from '../../services/firestore';
 import { DropdownOptionType, FoodType, TenantType } from '../../types';
@@ -30,6 +31,7 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
     );
     const { food, appliedFilters, pendingFilters } = state;
     const { user } = useContext(AuthContext);
+    const history = useHistory();
 
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
@@ -96,6 +98,12 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
             type: 'CHANGE_SHOW_ONLY_EXPIRED',
             onlyShowExpired
         });
+    };
+
+    const handleFoodEdit = (): void => {
+        if (editingItem) {
+            history.push(`/${editingItem.name}/edit`);
+        }
     };
 
     return (
@@ -179,9 +187,21 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                     </S.FilterButtonsWrapper>
 
                     {isTabletOrLarger && (
-                        <Button onClick={() => setIsModalOpen(true)} secondary>
-                            Filters
-                        </Button>
+                        <div>
+                            {editingItem && (
+                                <>
+                                    <Button colour="red" onClick={handleFoodDelete} secondary>
+                                        Delete
+                                    </Button>
+                                    <Button colour="blue" onClick={handleFoodEdit} secondary>
+                                        Edit
+                                    </Button>
+                                </>
+                            )}
+                            <Button onClick={() => setIsModalOpen(true)} secondary>
+                                Filters
+                            </Button>
+                        </div>
                     )}
                 </S.TopButtonsWrapper>
 
@@ -205,7 +225,8 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
             {!isTabletOrLarger && (
                 <MobileFoodMenu
                     handleFoodDelete={handleFoodDelete}
-                    editingItemName={editingItem?.name}
+                    handleFoodEdit={handleFoodEdit}
+                    showItemMenu={!!editingItem?.name}
                     openModal={() => setIsModalOpen(true)}
                 />
             )}
