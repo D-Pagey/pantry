@@ -61,7 +61,7 @@ type ChangeShowExpiredAction = {
     onlyShowExpired: boolean;
 };
 
-type FoodActions =
+export type FoodActions =
     | ApplyFiltersAction
     | RemoveExpiringFilterAction
     | UpdateFridgeAction
@@ -128,6 +128,7 @@ export const foodReducer = (state: FoodState, action: FoodActions): FoodState =>
             return {
                 ...state,
                 appliedFilters: updatedFilters,
+                pendingFilters: updatedFilters,
                 food: applyMultipleFilters(action.fridge, updatedFilters)
             };
         }
@@ -141,6 +142,7 @@ export const foodReducer = (state: FoodState, action: FoodActions): FoodState =>
             return {
                 ...state,
                 appliedFilters: updatedFilters,
+                pendingFilters: updatedFilters,
                 food: applyMultipleFilters(action.fridge, updatedFilters)
             };
         }
@@ -154,6 +156,7 @@ export const foodReducer = (state: FoodState, action: FoodActions): FoodState =>
             return {
                 ...state,
                 appliedFilters: updatedFilters,
+                pendingFilters: updatedFilters,
                 food: applyMultipleFilters(action.fridge, updatedFilters)
             };
         }

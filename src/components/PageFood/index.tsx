@@ -4,16 +4,16 @@ import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 
 import { deleteItemBatches } from '../../services/firestore';
-import { DropdownOptionType, FoodType, TenantType } from '../../types';
-import { formatDropdownOptions } from '../../utils';
+import { FoodType, TenantType } from '../../types';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { FoodCard } from '../FoodCard';
 import { AuthContext } from '../ProviderAuth';
 import { FilterButton } from '../FilterButton';
 import { MobileFoodMenu } from '../MobileFoodMenu';
+import { ModalFoodFilters } from '../ModalFoodFilters';
 import { Button } from '../Button';
-import { foodReducer, initialFoodState, init, SortOptions } from './foodReducer';
+import { foodReducer, initialFoodState, init } from './foodReducer';
 import { getOwnersButtonText } from './utils';
 import * as S from './styles';
 
@@ -32,8 +32,6 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
     const { food, appliedFilters, pendingFilters } = state;
     const { user } = useContext(AuthContext);
     const history = useHistory();
-
-    const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
     useEffect(() => {
         dispatch({ type: 'UPDATE_FRIDGE', fridge });
@@ -59,45 +57,15 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
         }
     };
 
-    const handleOwnerToggleClick = (ownerId: string) => () => {
-        dispatch({
-            type: 'TOGGLE_SELECTED_OWNER',
-            ownerId
-        });
-    };
-
-    const handleCategoryChange = (category: DropdownOptionType | null) => {
-        if (category !== null) {
-            dispatch({
-                type: 'CHANGE_CATEGORY',
-                category: category.value
-            });
-        }
+    const handleApplyFiltersClick = () => {
+        dispatch({ type: 'APPLY_FILTERS', fridge: food });
+        setIsModalOpen(false);
     };
 
     const handleCancelClick = () => {
         dispatch({ type: 'RESET' });
 
         setIsModalOpen(false);
-    };
-
-    const handleApplyFiltersClick = () => {
-        dispatch({ type: 'APPLY_FILTERS', fridge: food });
-        setIsModalOpen(false);
-    };
-
-    const handleSortByClick = (sortOption: SortOptions) => () => {
-        dispatch({
-            type: 'CHANGE_SORTED_BY',
-            sortBy: sortOption
-        });
-    };
-
-    const handleShowExpiredClick = (onlyShowExpired: boolean) => () => {
-        dispatch({
-            type: 'CHANGE_SHOW_ONLY_EXPIRED',
-            onlyShowExpired
-        });
     };
 
     const handleFoodEdit = (): void => {
@@ -109,58 +77,15 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
     return (
         <Layout>
             <S.Wrapper>
-                <S.ReactModal isOpen={isModalOpen}>
-                    <S.Title>Set Filters</S.Title>
-
-                    <S.Subtitle>Owners:</S.Subtitle>
-                    <S.PhotoWrapper>
-                        {nonPendingTenants.map(({ uid, email, photo }) => (
-                            <S.ProfilePhoto
-                                key={uid}
-                                photo={photo}
-                                email={email}
-                                selected={pendingFilters.selectedOwners.includes(uid)}
-                                onClick={handleOwnerToggleClick(uid)}
-                                data-testid={`photo-${uid}`}
-                            />
-                        ))}
-                    </S.PhotoWrapper>
-
-                    <S.Subtitle>Category:</S.Subtitle>
-                    <S.ReactSelect
-                        options={formatDropdownOptions(categories)}
-                        onChange={handleCategoryChange}
-                        isSearchable
-                        isClearable
-                    />
-
-                    <S.Subtitle>Sort By:</S.Subtitle>
-                    <S.ButtonWrapper>
-                        <S.Button onClick={handleSortByClick('date')} selected={pendingFilters.sortBy === 'date'}>
-                            Date
-                        </S.Button>
-                        <S.Button onClick={handleSortByClick('name')} selected={pendingFilters.sortBy === 'name'}>
-                            Name
-                        </S.Button>
-                    </S.ButtonWrapper>
-
-                    <S.Subtitle>Show:</S.Subtitle>
-                    <S.ButtonWrapper>
-                        <S.Button onClick={handleShowExpiredClick(true)} selected={pendingFilters.showOnlyExpiring}>
-                            Expiring Soon
-                        </S.Button>
-                        <S.Button onClick={handleShowExpiredClick(false)} selected={!pendingFilters.showOnlyExpiring}>
-                            All Items
-                        </S.Button>
-                    </S.ButtonWrapper>
-
-                    <S.ButtonWrapper margin="2rem 0 0">
-                        <Button onClick={handleCancelClick} secondary>
-                            Cancel
-                        </Button>
-                        <Button onClick={handleApplyFiltersClick}>Apply Filters</Button>
-                    </S.ButtonWrapper>
-                </S.ReactModal>
+                <ModalFoodFilters
+                    categories={categories}
+                    dispatch={dispatch}
+                    filters={pendingFilters}
+                    handleCancelClick={handleCancelClick}
+                    handleApplyFiltersClick={handleApplyFiltersClick}
+                    isModalOpen={isModalOpen}
+                    tenants={tenants}
+                />
 
                 <S.TopButtonsWrapper>
                     <S.FilterButtonsWrapper>
