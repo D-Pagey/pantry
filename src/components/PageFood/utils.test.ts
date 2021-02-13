@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 import { TenantAlexa, TenantDan, TenantHeidi, TenantJoe } from '../../fixtures';
 import { FoodType, BatchType, TenantType } from '../../types';
-import { FilterState } from '../MobileFoodMenu/filterReducer';
+import { FilterState } from '../PageFood/foodReducer';
 import { applyMultipleFilters, sortByName, sortByOldestExpiryDate, getOwnersButtonText } from './utils';
 
 export const Batch: BatchType = {

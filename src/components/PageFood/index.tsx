@@ -1,17 +1,19 @@
 import { FC, useContext, useState, useReducer, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
 
-import { FoodType, TenantType } from '../../types';
 import { deleteItemBatches } from '../../services/firestore';
-import { FilterState } from '../MobileFoodMenu/filterReducer';
+import { DropdownOptionType, FoodType, TenantType } from '../../types';
+import { formatDropdownOptions } from '../../utils';
 import { mediaQuery } from '../../tokens';
 import { Layout } from '../Layout';
 import { FoodCard } from '../FoodCard';
 import { AuthContext } from '../ProviderAuth';
 import { FilterButton } from '../FilterButton';
 import { MobileFoodMenu } from '../MobileFoodMenu';
-import { foodReducer, initialFoodState, init } from './foodReducer';
+import { Button } from '../Button';
+import { foodReducer, initialFoodState, init, SortOptions } from './foodReducer';
 import { getOwnersButtonText } from './utils';
 import * as S from './styles';
 
@@ -22,12 +24,17 @@ type PageFoodProps = {
 };
 
 export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState<FoodType | undefined>();
-    const [foodState, dispatch] = useReducer(foodReducer, initialFoodState, (initialFoodState) =>
+    const [state, dispatch] = useReducer(foodReducer, initialFoodState, (initialFoodState) =>
         init(initialFoodState, tenants, fridge)
     );
-    const { food, filters } = foodState;
+    const { food, appliedFilters, pendingFilters } = state;
     const { user } = useContext(AuthContext);
+
+    const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
+
+    console.log({ state });
 
     useEffect(() => {
         dispatch({ type: 'UPDATE_FRIDGE', fridge });
@@ -53,29 +60,120 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
         }
     };
 
-    const handleApplyFilters = (filterState: FilterState) => {
-        dispatch({ type: 'APPLY_FILTERS', filters: filterState, fridge });
+    const handleOwnerToggleClick = (ownerId: string) => () => {
+        dispatch({
+            type: 'TOGGLE_SELECTED_OWNER',
+            ownerId
+        });
+    };
+
+    const handleCategoryChange = (category: DropdownOptionType | null) => {
+        if (category !== null) {
+            dispatch({
+                type: 'CHANGE_CATEGORY',
+                category: category.value
+            });
+        }
+    };
+
+    const handleCancelClick = () => {
+        dispatch({ type: 'RESET' });
+
+        setIsModalOpen(false);
+    };
+
+    const handleApplyFiltersClick = () => {
+        dispatch({ type: 'APPLY_FILTERS', fridge: food });
+        setIsModalOpen(false);
+    };
+
+    const handleSortByClick = (sortOption: SortOptions) => () => {
+        dispatch({
+            type: 'CHANGE_SORTED_BY',
+            sortBy: sortOption
+        });
+    };
+
+    const handleShowExpiredClick = (onlyShowExpired: boolean) => () => {
+        dispatch({
+            type: 'CHANGE_SHOW_ONLY_EXPIRED',
+            onlyShowExpired
+        });
     };
 
     return (
         <Layout>
             <S.Wrapper>
+                <S.ReactModal isOpen={isModalOpen}>
+                    <S.Title>Set Filters</S.Title>
+
+                    <S.Subtitle>Owners:</S.Subtitle>
+                    <S.PhotoWrapper>
+                        {nonPendingTenants.map(({ uid, email, photo }) => (
+                            <S.ProfilePhoto
+                                key={uid}
+                                photo={photo}
+                                email={email}
+                                selected={pendingFilters.selectedOwners.includes(uid)}
+                                onClick={handleOwnerToggleClick(uid)}
+                                data-testid={`photo-${uid}`}
+                            />
+                        ))}
+                    </S.PhotoWrapper>
+
+                    <S.Subtitle>Sort By:</S.Subtitle>
+                    <S.ButtonWrapper>
+                        <S.Button onClick={handleSortByClick('date')} selected={pendingFilters.sortBy === 'date'}>
+                            Date
+                        </S.Button>
+                        <S.Button onClick={handleSortByClick('name')} selected={pendingFilters.sortBy === 'name'}>
+                            Name
+                        </S.Button>
+                    </S.ButtonWrapper>
+
+                    <S.Subtitle>Show:</S.Subtitle>
+                    <S.ButtonWrapper>
+                        <S.Button onClick={handleShowExpiredClick(true)} selected={pendingFilters.showOnlyExpiring}>
+                            Expiring Soon
+                        </S.Button>
+                        <S.Button onClick={handleShowExpiredClick(false)} selected={!pendingFilters.showOnlyExpiring}>
+                            All Items
+                        </S.Button>
+                    </S.ButtonWrapper>
+
+                    <S.Subtitle>Category:</S.Subtitle>
+                    <Select
+                        options={formatDropdownOptions(categories)}
+                        onChange={handleCategoryChange}
+                        isSearchable
+                        isClearable
+                    />
+
+                    <S.ButtonWrapper margin="2rem 0 0">
+                        <Button onClick={handleCancelClick} secondary>
+                            Cancel
+                        </Button>
+                        <Button onClick={handleApplyFiltersClick}>Apply Filters</Button>
+                    </S.ButtonWrapper>
+                </S.ReactModal>
+
                 <S.FilterButtonsWrapper>
-                    <FilterButton>Sorted by {filters.sortBy}</FilterButton>
-                    {filters.showOnlyExpiring && (
+                    <FilterButton>Sorted by {appliedFilters.sortBy}</FilterButton>
+                    {appliedFilters.showOnlyExpiring && (
                         <FilterButton onClick={() => dispatch({ type: 'REMOVE_EXPIRING_FILTER', fridge })}>
                             Expiring Soon
                         </FilterButton>
                     )}
-                    {filters.selectedOwners.length > 0 && filters.selectedOwners.length !== tenants.length && (
-                        <FilterButton onClick={() => dispatch({ type: 'REMOVE_SELECTED_OWNERS', fridge, tenants })}>
-                            {getOwnersButtonText(filters.selectedOwners, tenants)}
-                        </FilterButton>
-                    )}
+                    {appliedFilters.selectedOwners.length > 0 &&
+                        appliedFilters.selectedOwners.length !== tenants.length && (
+                            <FilterButton onClick={() => dispatch({ type: 'REMOVE_SELECTED_OWNERS', fridge, tenants })}>
+                                {getOwnersButtonText(appliedFilters.selectedOwners, tenants)}
+                            </FilterButton>
+                        )}
 
-                    {filters.category && (
+                    {appliedFilters.category && (
                         <FilterButton onClick={() => dispatch({ type: 'REMOVE_CATEGORY', fridge })}>
-                            {filters.category}
+                            {appliedFilters.category}
                         </FilterButton>
                     )}
                 </S.FilterButtonsWrapper>
@@ -99,12 +197,9 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
 
             {!isTabletOrLarger && (
                 <MobileFoodMenu
-                    categories={categories}
-                    foodPageFilters={filters}
                     handleFoodDelete={handleFoodDelete}
-                    handleApplyFilters={handleApplyFilters}
-                    tenants={tenants}
                     editingItemName={editingItem?.name}
+                    openModal={() => setIsModalOpen(true)}
                 />
             )}
         </Layout>

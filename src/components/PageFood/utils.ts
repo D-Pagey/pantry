@@ -1,6 +1,6 @@
 import { FoodType, TenantType } from '../../types';
 import { filterByTenantIds, getExpiringItems } from '../../utils';
-import { FilterState } from '../MobileFoodMenu/filterReducer';
+import { FilterState } from './foodReducer';
 
 export const sortByOldestExpiryDate = (food: FoodType[]): FoodType[] => {
     const filteredOutEmptyBatches = [...food].filter((item) => item.batches.length > 0);
