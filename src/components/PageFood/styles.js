@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Select from 'react-select';
 
 import { colours, mediaQuery, zIndex } from '../../tokens';
 import { ReactModalAdapter } from '../ReactModalAdapter';
@@ -40,7 +41,7 @@ export const ReactModal = styled(ReactModalAdapter).attrs({
     modalClassName: 'Modal'
 })`
     & .Overlay {
-        background: #2b2b2bbd;
+        background: #2b2b2be8;
         bottom: 0;
         left: 0;
         position: fixed;
@@ -55,14 +56,28 @@ export const ReactModal = styled(ReactModalAdapter).attrs({
         left: 0;
         outline: none;
         overflow: auto;
-        webkitoverflowscrolling: touch;
         padding: 0.75rem;
         position: fixed;
         right: 0;
+        webkitoverflowscrolling: touch;
     }
     &[class*='--after-open'] {
     }
     &[class*='--before-close'] {
+    }
+
+    @media ${mediaQuery.tablet} {
+        & .Modal {
+            bottom: auto;
+            border-radius: 10px;
+            left: 50%;
+            max-width: 500px;
+            padding: 1rem 1.5rem 2rem;
+            right: auto;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
     }
 `;
 
@@ -104,4 +119,8 @@ export const Button = styled(Btn)`
     color: ${({ selected }) => (selected ? colours.white : colours.blue)};
     border: 1px solid ${colours.blue};
     padding: 1rem 0.5rem;
+`;
+
+export const ReactSelect = styled(Select)`
+    margin: 0 0 1rem;
 `;

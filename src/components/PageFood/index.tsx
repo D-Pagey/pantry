@@ -1,6 +1,5 @@
 import { FC, useContext, useState, useReducer, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import Select from 'react-select';
 import { toast } from 'react-toastify';
 
 import { deleteItemBatches } from '../../services/firestore';
@@ -33,8 +32,6 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
     const { user } = useContext(AuthContext);
 
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
-
-    console.log({ state });
 
     useEffect(() => {
         dispatch({ type: 'UPDATE_FRIDGE', fridge });
@@ -121,6 +118,14 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                         ))}
                     </S.PhotoWrapper>
 
+                    <S.Subtitle>Category:</S.Subtitle>
+                    <S.ReactSelect
+                        options={formatDropdownOptions(categories)}
+                        onChange={handleCategoryChange}
+                        isSearchable
+                        isClearable
+                    />
+
                     <S.Subtitle>Sort By:</S.Subtitle>
                     <S.ButtonWrapper>
                         <S.Button onClick={handleSortByClick('date')} selected={pendingFilters.sortBy === 'date'}>
@@ -140,14 +145,6 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                             All Items
                         </S.Button>
                     </S.ButtonWrapper>
-
-                    <S.Subtitle>Category:</S.Subtitle>
-                    <Select
-                        options={formatDropdownOptions(categories)}
-                        onChange={handleCategoryChange}
-                        isSearchable
-                        isClearable
-                    />
 
                     <S.ButtonWrapper margin="2rem 0 0">
                         <Button onClick={handleCancelClick} secondary>
