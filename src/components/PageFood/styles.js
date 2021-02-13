@@ -30,8 +30,14 @@ export const FoodCardGrid = styled.div`
     }
 `;
 
-export const FilterButtonsWrapper = styled.div`
+export const TopButtonsWrapper = styled.div`
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 1rem;
+`;
+
+export const FilterButtonsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;

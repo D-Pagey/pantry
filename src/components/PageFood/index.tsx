@@ -154,26 +154,36 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                     </S.ButtonWrapper>
                 </S.ReactModal>
 
-                <S.FilterButtonsWrapper>
-                    <FilterButton>Sorted by {appliedFilters.sortBy}</FilterButton>
-                    {appliedFilters.showOnlyExpiring && (
-                        <FilterButton onClick={() => dispatch({ type: 'REMOVE_EXPIRING_FILTER', fridge })}>
-                            Expiring Soon
-                        </FilterButton>
-                    )}
-                    {appliedFilters.selectedOwners.length > 0 &&
-                        appliedFilters.selectedOwners.length !== tenants.length && (
-                            <FilterButton onClick={() => dispatch({ type: 'REMOVE_SELECTED_OWNERS', fridge, tenants })}>
-                                {getOwnersButtonText(appliedFilters.selectedOwners, tenants)}
+                <S.TopButtonsWrapper>
+                    <S.FilterButtonsWrapper>
+                        <FilterButton>Sorted by {appliedFilters.sortBy}</FilterButton>
+                        {appliedFilters.showOnlyExpiring && (
+                            <FilterButton onClick={() => dispatch({ type: 'REMOVE_EXPIRING_FILTER', fridge })}>
+                                Expiring Soon
                             </FilterButton>
                         )}
+                        {appliedFilters.selectedOwners.length > 0 &&
+                            appliedFilters.selectedOwners.length !== tenants.length && (
+                                <FilterButton
+                                    onClick={() => dispatch({ type: 'REMOVE_SELECTED_OWNERS', fridge, tenants })}
+                                >
+                                    {getOwnersButtonText(appliedFilters.selectedOwners, tenants)}
+                                </FilterButton>
+                            )}
 
-                    {appliedFilters.category && (
-                        <FilterButton onClick={() => dispatch({ type: 'REMOVE_CATEGORY', fridge })}>
-                            {appliedFilters.category}
-                        </FilterButton>
+                        {appliedFilters.category && (
+                            <FilterButton onClick={() => dispatch({ type: 'REMOVE_CATEGORY', fridge })}>
+                                {appliedFilters.category}
+                            </FilterButton>
+                        )}
+                    </S.FilterButtonsWrapper>
+
+                    {isTabletOrLarger && (
+                        <Button onClick={() => setIsModalOpen(true)} secondary>
+                            Filters
+                        </Button>
                     )}
-                </S.FilterButtonsWrapper>
+                </S.TopButtonsWrapper>
 
                 {food.length === 0 ? (
                     <p>No food for the above filters, click the X to remove a filter</p>

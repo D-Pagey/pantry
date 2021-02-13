@@ -6,14 +6,14 @@ exports[`FilterButton component should render 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: 0 0.5rem 0 0;
+  margin: 0.5rem 0.5rem 0 0;
 }
 
 .c1 {
   background-color: #348841;
+  border-radius: 10px 0 0 10px;
   color: white;
   padding: 0.5rem;
-  border-radius: 10px 0 0 10px;
 }
 
 .c2 {
@@ -23,6 +23,12 @@ exports[`FilterButton component should render 1`] = `
   cursor: pointer;
   color: white;
   padding: 0 0.4rem 0 0.3rem;
+}
+
+@media (min-width:765px) {
+  .c0 {
+    margin: 0 0.5rem 0 0;
+  }
 }
 
 <div
