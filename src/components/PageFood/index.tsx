@@ -112,7 +112,7 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                     </S.FilterButtonsWrapper>
 
                     {isTabletOrLarger && (
-                        <div>
+                        <S.ModifyButtonsWrapper>
                             {editingItem && (
                                 <>
                                     <Button colour="red" onClick={handleFoodDelete} secondary>
@@ -126,7 +126,7 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                             <Button onClick={() => setIsModalOpen(true)} secondary>
                                 Filters
                             </Button>
-                        </div>
+                        </S.ModifyButtonsWrapper>
                     )}
                 </S.TopButtonsWrapper>
 

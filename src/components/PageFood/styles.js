@@ -37,3 +37,11 @@ export const FilterButtonsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
+
+export const ModifyButtonsWrapper = styled.div`
+    display: flex;
+
+    & button {
+        margin: 0 1rem 0 0;
+    }
+`;
