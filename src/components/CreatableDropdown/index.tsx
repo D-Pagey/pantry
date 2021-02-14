@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from 'react';
 import CreatableSelect from 'react-select/creatable';
-import * as S from './styles';
 
 type CreatableDropdownProps = {
     defaultValue?: string;
@@ -34,16 +33,14 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({
     };
 
     return (
-        <S.Wrapper {...props}>
-            <CreatableSelect
-                defaultValue={getDefaultValue()}
-                inputId={inputName}
-                isClearable
-                name={inputName}
-                onChange={handleChange}
-                options={options}
-                placeholder={placeholder}
-            />
-        </S.Wrapper>
+        <CreatableSelect
+            defaultValue={getDefaultValue()}
+            inputId={inputName}
+            name={inputName}
+            onChange={handleChange}
+            options={options}
+            placeholder={placeholder}
+            {...props}
+        />
     );
 };

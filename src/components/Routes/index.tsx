@@ -14,6 +14,7 @@ import { PageSettings } from '../PageSettings';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
 import { RouteProtected } from '../RouteProtected';
+import { PageAddFood } from '../PageAddFoodTwo';
 
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
@@ -48,11 +49,15 @@ export const Routes = (): JSX.Element => {
         }
     }, [getFridgeData, user]);
 
+    // TODO: move these checks into the routes and handle loading in page components
+    // whilst waiting for fridge / metadata etc to load
     return (
         <Switch>
             <Route exact path="/">
                 {isAuthed ? <Redirect to="food" /> : <PageHome />}
             </Route>
+
+            <Route path="/test">{fridge && metaData && <PageAddFood fridge={fridge} metaData={metaData} />}</Route>
 
             <Route path="/sign-in">
                 <PageSignIn />
