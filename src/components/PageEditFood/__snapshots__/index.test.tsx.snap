@@ -73,10 +73,6 @@ exports[`PageEditFood component should render 1`] = `
 }
 
 @media (min-width:765px) {
-
-}
-
-@media (min-width:765px) {
   .c0 {
     height: 100px;
   }

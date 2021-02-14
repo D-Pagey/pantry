@@ -1,16 +1,15 @@
 import React, { FC, useContext, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import { useMediaQuery } from 'react-responsive';
 
 import deleteIcon from '../../assets/delete.svg';
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
-import { deleteBatch, updateBatch } from '../../services/firestore';
+import { updateBatch } from '../../services/firestore';
 import { mediaQuery } from '../../tokens';
+import { EditItemAction } from '../PageEditFood/itemReducer';
 import { AuthContext } from '../ProviderAuth';
-// import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ModalChangeDate } from '../ModalChangeDate';
 import { ProfilePhoto } from '../ProfilePhoto';
 import * as S from './styles';
@@ -18,11 +17,12 @@ import * as S from './styles';
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
 type EditFoodServingsProps = {
+    dispatch: (action: EditItemAction) => void;
     item: FoodType;
     tenants: TenantType[];
 };
 
-export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) => {
+export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, tenants }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditingDate, setIsEditingDate] = useState<boolean>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
@@ -30,35 +30,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
     });
-
-    const handleDelete = (batch: BatchType) => async () => {
-        const updatedServings = batch.quantity - 1;
-
-        if (updatedServings === 0) {
-            try {
-                await deleteBatch({ name: item.name, batchId: batch.id, userHousehold: user!.household! });
-                toast.success(`Batch deleted for ${name}`);
-            } catch {
-                toast.error('Error with deleting batch');
-            }
-        } else {
-            await updateBatch({
-                userHousehold: user!.household!,
-                name: item.name,
-                batch: { ...batch, quantity: updatedServings }
-            });
-        }
-    };
-
-    // const handleChangeOwnerClick = (tenantId: string) => () => {
-    //     if (tenantId !== selectedBatch?.ownerId) {
-    //         const updatedBatch = selectedBatch && { ...selectedBatch, ownerId: tenantId };
-
-    //         if (updatedBatch) updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
-    //     }
-
-    //     setIsModalOpen(false);
-    // };
 
     const handleDateClick = (batch: BatchType) => () => {
         setIsModalOpen(true);
@@ -80,19 +51,14 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
         setIsModalOpen(false);
     };
 
+    const handleDelete = (batchId: string) => () => {
+        dispatch({ type: 'DECREMENT_BATCH_QUANTITY', batchId });
+    };
+
     return (
         <>
             {selectedBatch && (
                 <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                    {/* {!isEditingDate && (
-                        <ModalChangeOwner
-                            closeModal={handleModalClose}
-                            handleChangeOwnerClick={handleChangeOwnerClick}
-                            ownerId={selectedBatch.ownerId}
-                            tenants={tenants}
-                        />
-                    )} */}
-
                     {isEditingDate && (
                         <ModalChangeDate
                             expires={selectedBatch.expires}
@@ -128,7 +94,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ item, tenants }) =
                                     />
                                 )}
 
-                                <S.DeleteButton type="button" onClick={handleDelete(batch)} data-testid="deleteServing">
+                                <S.DeleteButton
+                                    type="button"
+                                    onClick={handleDelete(batch.id)}
+                                    data-testid="deleteServing"
+                                >
                                     <img src={deleteIcon} alt="delete" />
                                 </S.DeleteButton>
                             </S.Item>

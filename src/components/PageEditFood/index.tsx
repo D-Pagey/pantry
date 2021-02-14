@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useReducer } from 'react';
+import React, { FC, useContext, useReducer } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 import { toast } from 'react-toastify';
@@ -9,8 +9,7 @@ import { addItemDeleteItem, addItem, addNewUnit } from '../../services/firestore
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { EditFoodServings } from '../EditFoodServings';
-import { sortBatches } from '../FoodCard/utils';
-import { initialState, itemReducer } from './itemReducer';
+import { init, initialState, itemReducer } from './itemReducer';
 import * as S from './styles';
 
 type PageEditFoodProps = {
@@ -20,22 +19,14 @@ type PageEditFoodProps = {
 };
 
 export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata }) => {
-    const [state, dispatch] = useReducer(itemReducer, initialState);
     const { user } = useContext(AuthContext);
     const { name } = useParams<{ name: string }>();
+    const [state, dispatch] = useReducer(itemReducer, initialState, (intialItemState) =>
+        init(intialItemState, fridge, name)
+    );
     const history = useHistory();
 
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
-
-    useEffect(() => {
-        const editingItem = fridge.filter((food) => food.name === name)[0];
-
-        if (editingItem) {
-            const sortedBatches = sortBatches(editingItem.batches);
-
-            dispatch({ type: 'INITIALISE', item: { ...editingItem, batches: sortedBatches } });
-        }
-    }, [fridge, name]);
 
     const handleSaveChanges = async () => {
         const { originalItem, editedItem } = state;
@@ -109,7 +100,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         <S.Label column="2/3" row="3/4">
                             Change date or owner:
                         </S.Label>
-                        <EditFoodServings item={state.originalItem} tenants={nonPendingTenants} />
+                        <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
 
                         <div>
                             <S.Button onClick={() => history.push('/food')} secondary>

@@ -2,13 +2,11 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../test-utils';
-import { deleteBatch, updateBatch } from '../../services/firestore';
 import { Fridge, TenantHeidi, TenantJoe, UserDan } from '../../fixtures';
 import { EditFoodServings } from '.';
 
-jest.mock('../../services/firestore');
-
 const props = {
+    dispatch: () => null,
     item: Fridge[0],
     tenants: [TenantHeidi]
 };
@@ -37,42 +35,13 @@ describe('EditFoodServings component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should call deleteBatch when clicking delete button', () => {
-        render(<EditFoodServings {...props} item={item} />, context);
+    it('should call handleDelete when clicking delete button', () => {
+        const dispatch = jest.fn();
+        render(<EditFoodServings {...props} item={item} dispatch={dispatch} />, context);
 
         // click the first batch that has servings > 1
         userEvent.click(screen.getAllByTestId('deleteServing')[0]);
 
-        expect(deleteBatch).toHaveBeenCalledWith({
-            batchId: item.batches[0].id,
-            name: item.name,
-            userHousehold: context.user.household
-        });
-    });
-
-    it('should call updateBatch when clicking delete button', () => {
-        const multipleServings = {
-            ...item,
-            batches: [
-                {
-                    ...item.batches[0],
-                    quantity: 4
-                }
-            ]
-        };
-
-        render(<EditFoodServings {...props} item={multipleServings} />, context);
-
-        // click the first batch that has servings > 1
-        userEvent.click(screen.getAllByTestId('deleteServing')[0]);
-
-        expect(updateBatch).toHaveBeenCalledWith({
-            name: item.name,
-            userHousehold: context.user.household,
-            batch: {
-                ...item.batches[0],
-                quantity: 3
-            }
-        });
+        expect(dispatch).toHaveBeenCalledWith({ batchId: '1111111', type: 'DECREMENT_BATCH_QUANTITY' });
     });
 });

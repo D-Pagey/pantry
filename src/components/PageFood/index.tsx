@@ -126,6 +126,8 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
                             <Button onClick={() => setIsModalOpen(true)} secondary>
                                 Filters
                             </Button>
+
+                            <Button onClick={() => history.push('/add')}>Add Item</Button>
                         </S.ModifyButtonsWrapper>
                     )}
                 </S.TopButtonsWrapper>
