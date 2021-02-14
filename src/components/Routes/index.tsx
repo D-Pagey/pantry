@@ -59,6 +59,7 @@ export const Routes = (): JSX.Element => {
                 <PageSignIn />
             </Route>
 
+            {/* used for magic sign in email link */}
             <Route path="/magic">
                 <PageMagicLanding />
             </Route>
