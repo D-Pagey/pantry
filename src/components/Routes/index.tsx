@@ -13,7 +13,6 @@ import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
-import { PageAlexa } from '../PageAlexa';
 import { RouteProtected } from '../RouteProtected';
 
 export const Routes = (): JSX.Element => {
@@ -62,10 +61,6 @@ export const Routes = (): JSX.Element => {
             {/* used for magic sign in email link */}
             <Route path="/magic">
                 <PageMagicLanding />
-            </Route>
-
-            <Route path="/alexa">
-                <PageAlexa />
             </Route>
 
             <RouteProtected path="/food">
