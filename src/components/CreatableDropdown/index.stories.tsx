@@ -1,11 +1,19 @@
 import React from 'react';
-import { Fridge } from '../../fixtures';
-import { CreatableDropdown } from '.';
+import { Story } from '@storybook/react/types-6-0';
 
-export default { title: 'CreatableDropdown' };
+import { Fridge } from '../../fixtures';
+import { CreatableDropdown, CreatableDropdownProps } from '.';
+
+export default { title: 'CreatableDropdown', component: CreatableDropdown };
 
 const names = Fridge.map((item) => ({ label: item.name, value: item.name }));
 
-export const normal = () => (
-    <CreatableDropdown options={names} setSelected={(e) => console.log({ e })} inputName="dropdown-storybook" />
-);
+const Template: Story<CreatableDropdownProps> = (args) => <CreatableDropdown {...args} />;
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+    options: names,
+    inputName: 'storybook-creatable-dropdown',
+    setSelected: () => null
+};

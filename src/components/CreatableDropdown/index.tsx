@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from 'react';
 import CreatableSelect from 'react-select/creatable';
+import * as S from './styles';
 
-type CreatableDropdownProps = {
-    defaultValue?: string;
+export type CreatableDropdownProps = {
     options: { label: string; value: string }[];
     inputName: string;
-    placeholder?: string;
     setSelected: (value: string) => void;
+    error?: string;
+    defaultValue?: string;
+    placeholder?: string;
 };
 
 export const CreatableDropdown: FC<CreatableDropdownProps> = ({
     defaultValue,
+    error,
     options,
     placeholder,
     setSelected,
@@ -33,14 +36,18 @@ export const CreatableDropdown: FC<CreatableDropdownProps> = ({
     };
 
     return (
-        <CreatableSelect
-            defaultValue={getDefaultValue()}
-            inputId={inputName}
-            name={inputName}
-            onChange={handleChange}
-            options={options}
-            placeholder={placeholder}
-            {...props}
-        />
+        <S.Wrapper>
+            <CreatableSelect
+                defaultValue={getDefaultValue()}
+                inputId={inputName}
+                name={inputName}
+                onChange={handleChange}
+                options={options}
+                placeholder={placeholder}
+                {...props}
+            />
+
+            {error && <S.ErrorText>{error}</S.ErrorText>}
+        </S.Wrapper>
     );
 };

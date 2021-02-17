@@ -93,11 +93,11 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                             inputName="name"
                             placeholder="Enter a name..."
                             options={formatFoodDropdownOptions(fridge)}
-                            setSelected={(option) => setValue('name', option)}
+                            setSelected={(option) => setValue('name', option, { shouldValidate: true })}
+                            error={errors.name && 'A name is required'}
                         />
                     )}
                 />
-                {errors.name && <span>Name is required</span>}
 
                 <label htmlFor="quantity">Quantity</label>
                 <Controller
@@ -107,14 +107,14 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     rules={{ required: true }}
                     render={() => (
                         <CreatableDropdown
-                            inputName="name"
+                            inputName="quantity"
                             defaultValue="2"
                             options={formatDropdownOptions(metaData.quantities)}
                             setSelected={(quantity) => setValue('quantity', quantity)}
+                            error={errors.quantity && 'A quantity is required'}
                         />
                     )}
                 />
-                {errors.quantity && <span>Quantity is required</span>}
 
                 <label htmlFor="unit">Unit</label>
                 <Controller
@@ -128,10 +128,10 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                             defaultValue="servings"
                             options={formatDropdownOptions(metaData.units)}
                             setSelected={(unit) => setValue('unit', unit)}
+                            error={errors.unit && 'A unit is required'}
                         />
                     )}
                 />
-                {errors.unit && <span>Unit is required</span>}
 
                 <label htmlFor="category">Category</label>
                 <Controller
@@ -143,11 +143,11 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         <CreatableDropdown
                             inputName="category"
                             options={formatDropdownOptions(metaData.categories)}
-                            setSelected={(category) => setValue('category', category)}
+                            setSelected={(category) => setValue('category', category, { shouldValidate: true })}
+                            error={errors.category && 'A category is required'}
                         />
                     )}
                 />
-                {errors.category && <span>Category is required</span>}
 
                 <label>What&apos; the expiry date?</label>
                 <Controller
@@ -158,7 +158,6 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         <ReactDatePicker onChange={onChange} onBlur={onBlur} selected={value} />
                     )}
                 />
-                {errors.date && <span>Date is required</span>}
 
                 <input type="submit" />
             </S.Form>
