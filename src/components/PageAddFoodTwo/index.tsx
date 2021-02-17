@@ -1,5 +1,5 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import ReactDatePicker from 'react-datepicker';
 import { FoodType, MetaDataType } from '../../types';
@@ -22,10 +22,24 @@ type Inputs = {
 };
 
 export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
-    const { handleSubmit, errors, setValue, control } = useForm<Inputs>();
+    const [existingItem, setExistingItem] = useState<FoodType>();
+    const { handleSubmit, errors, setValue, control, watch } = useForm<Inputs>();
     const onSubmit = (data: Inputs) => console.log({ data });
+    const watchName = watch('name');
 
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    console.log(watch('unit'));
+
+    useEffect(() => {
+        if (watchName) {
+            console.log({ watchName });
+            const fridgeItem = fridge.filter((item) => item.name === watchName)[0];
+
+            if (fridgeItem) {
+                setValue('unit', fridgeItem.unit);
+            }
+        }
+    }, [watchName]);
+
     return (
         <Layout title="Add Food">
             <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -85,6 +99,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     control={control}
                     name="category"
                     rules={{ required: true }}
+                    defaultValue="vegetables"
                     render={() => (
                         <CreatableDropdown
                             inputName="category"
