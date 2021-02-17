@@ -1,9 +1,15 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import ReactDatePicker from 'react-datepicker';
+import { v4 as uuidv4 } from 'uuid';
+
 import { FoodType, MetaDataType } from '../../types';
-import { formatFoodDropdownOptions, formatDropdownOptions } from '../../utils';
+import { addItem, addNewUnit } from '../../services/firestore';
+import { convertBatchesArray, formatFoodDropdownOptions, formatDropdownOptions } from '../../utils';
+import { AuthContext } from '../ProviderAuth';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Layout } from '../Layout';
 import * as S from './styles';
@@ -17,13 +23,60 @@ type Inputs = {
     category: string;
     date: Date;
     name: string;
-    quantity: number;
+    quantity: string;
     unit: string;
 };
 
 export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
     const { handleSubmit, errors, setValue, control } = useForm<Inputs>();
-    const onSubmit = (data: Inputs) => console.log({ data });
+    const { user } = useContext(AuthContext);
+    const history = useHistory();
+
+    const onSubmit = async ({ name, category, unit, date, quantity }: Inputs) => {
+        const lowercaseName = name.toLowerCase();
+
+        const existingItem = fridge.reduce((acc, curr) => {
+            if (curr.name === lowercaseName) return curr;
+
+            return acc;
+        }, null as FoodType | null);
+
+        const newBatchId = uuidv4();
+
+        const item: FoodType = {
+            name: lowercaseName,
+            category,
+            unit,
+            batches: [
+                ...(existingItem ? existingItem.batches : []),
+                {
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    ownerId: user!.uid!,
+                    expires: date,
+                    quantity: parseInt(quantity, 10),
+                    id: newBatchId
+                }
+            ]
+        };
+
+        try {
+            await addItem(convertBatchesArray([item])[0], user!.household!);
+        } catch {
+            toast.error('Something went wrong adding the item');
+        }
+
+        if (!metaData.units.includes(unit)) {
+            const updatedUnits = [...metaData.units, unit];
+
+            try {
+                await addNewUnit(updatedUnits, user!.household!);
+            } catch {
+                toast.error('something went wrong adding a new unit');
+            }
+        }
+
+        history.push('/food');
+    };
 
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     return (
@@ -84,6 +137,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                 <Controller
                     control={control}
                     name="category"
+                    defaultValue=""
                     rules={{ required: true }}
                     render={() => (
                         <CreatableDropdown
