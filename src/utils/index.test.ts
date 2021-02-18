@@ -4,6 +4,8 @@ import { colours } from '../tokens';
 import { FoodType } from '../types';
 import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import {
+    checkAndFilterInvalidData,
+    checkExistingCategory,
     convertBatchesArray,
     countExpiringFoodItems,
     filterByTenantIds,
@@ -13,8 +15,7 @@ import {
     getColourFromDate,
     getExpiringItems,
     getOwnerFromId,
-    getPercentageFromDate,
-    checkAndFilterInvalidData
+    getPercentageFromDate
 } from '.';
 
 const mockToastError = jest.fn();
@@ -329,5 +330,17 @@ describe('checkAndFilterInvalidData function', () => {
         checkAndFilterInvalidData([testItem]);
 
         expect(mockToastError).toHaveBeenCalledWith(`No ${property} for ${testItem.name}, ${testItem.name} omitted`);
+    });
+});
+
+describe('checkExistingCategory function', () => {
+    it('should return a category when it already exists', () => {
+        const category = checkExistingCategory(Fridge, Fridge[2].name);
+        expect(category).toBe(Fridge[2].category);
+    });
+
+    it('should return an empty string if name does not exist', () => {
+        const category = checkExistingCategory(Fridge, 'check-unique-name');
+        expect(category).toBe('');
     });
 });

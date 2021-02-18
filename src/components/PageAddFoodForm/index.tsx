@@ -7,14 +7,19 @@ import { v4 as uuidv4 } from 'uuid';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { FoodType, MetaDataType } from '../../types';
-import { formatDropdownOptions, formatFoodDropdownOptions, convertBatchesArray } from '../../utils';
+import {
+    formatDropdownOptions,
+    formatFoodDropdownOptions,
+    convertBatchesArray,
+    checkExistingCategory,
+    checkExistingItem
+} from '../../utils';
 import { addItem, addNewUnit } from '../../services/firestore';
 import { Layout } from '../Layout';
 import { ChooseCategory } from '../ChooseCategory';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Button } from '../Button';
 import { AuthContext } from '../ProviderAuth';
-import { checkExistingCategory, checkExistingItem } from './utils';
 import * as S from './styles';
 
 type PageAddFoodFormProps = {
