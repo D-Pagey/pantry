@@ -82,7 +82,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
     return (
         <Layout title="Add Food">
             <S.Form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="name">What is the food called?</label>
+                <S.Label htmlFor="name">What is the food called?</S.Label>
                 <Controller
                     control={control}
                     name="name"
@@ -99,7 +99,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <label htmlFor="quantity">Quantity</label>
+                <S.Label htmlFor="quantity">How many?</S.Label>
                 <Controller
                     control={control}
                     name="quantity"
@@ -116,7 +116,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <label htmlFor="unit">Unit</label>
+                <S.Label htmlFor="unit">What unit?</S.Label>
                 <Controller
                     control={control}
                     name="unit"
@@ -133,7 +133,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <label htmlFor="category">Category</label>
+                <S.Label htmlFor="category">What category for this item?</S.Label>
                 <Controller
                     control={control}
                     name="category"
@@ -149,7 +149,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <label>What&apos; the expiry date?</label>
+                <S.Label>What&apos; the expiry date?</S.Label>
                 <Controller
                     control={control}
                     name="date"
@@ -159,7 +159,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <input type="submit" />
+                <S.Button type="submit">Add item</S.Button>
             </S.Form>
         </Layout>
     );
