@@ -5,7 +5,7 @@ import { FoodType, TenantType, DatabaseFoodType, MetaDataType } from '../../type
 import { checkAndFormatFridge } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
-import { PageAddFoodForm } from '../PageAddFoodForm';
+import { PageAddFood } from '../PageAddFood';
 import { PageFood } from '../PageFood';
 import { PageEditFood } from '../PageEditFood';
 import { PageHome } from '../PageHome';
@@ -14,7 +14,6 @@ import { PageSettings } from '../PageSettings';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
 import { RouteProtected } from '../RouteProtected';
-import { PageAddFood } from '../PageAddFoodTwo';
 
 export const Routes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
@@ -82,7 +81,7 @@ export const Routes = (): JSX.Element => {
 
             {metaData && fridge && (
                 <RouteProtected path="/add">
-                    <PageAddFoodForm fridge={fridge} metaData={metaData} />
+                    <PageAddFood fridge={fridge} metaData={metaData} />
                 </RouteProtected>
             )}
 

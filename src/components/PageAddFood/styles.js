@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button as Btn } from '../Button';
 
 export const Form = styled.form`
-    padding: 1rem 0.5rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
 `;
