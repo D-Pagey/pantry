@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageAddFood component should render 1`] = `
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.06);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 80px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.c1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 1100px;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.c4 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 0 0 14px;
+}
+
+.c3 {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+}
+
+.c2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (min-width:765px) {
+  .c0 {
+    height: 100px;
+  }
+}
+
+@media (min-width:765px) {
+
+}
+
+@media (min-width:1100px) {
+
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  >
+    <div
+      class="c2"
+    >
+      <img
+        alt="arrow"
+        class="c3"
+        data-testid="headerBackArrow"
+        src="arrow.svg"
+      />
+      <h4
+        class="c4"
+      >
+        Add Food
+      </h4>
+    </div>
+  </div>
+</div>
+`;
