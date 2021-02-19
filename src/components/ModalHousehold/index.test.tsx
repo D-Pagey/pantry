@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '../../test-utils';
+import { TenantDan } from '../../fixtures';
 import { ModalHousehold } from '.';
 
 const props = {
@@ -9,11 +10,7 @@ const props = {
     handlePromoteUser: () => null,
     handleRemoveUser: () => null,
     loading: false,
-    showCancelOption: true,
-    showLeaveOption: true,
-    showRemoveOptionts: true,
-    showPromoteOption: true,
-    showRemoveOption: true
+    currentTenant: TenantDan
 };
 
 describe('ModalHousehold component', () => {

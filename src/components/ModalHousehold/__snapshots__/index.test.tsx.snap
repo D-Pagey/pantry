@@ -36,15 +36,6 @@ exports[`ModalHousehold component should render 1`] = `
 
 .c3 {
   background-color: white;
-  border: 1px solid #3E9BEC;
-  color: #3E9BEC;
-  font-size: 1.25rem;
-  margin: 0 0 20px;
-  width: 200px;
-}
-
-.c4 {
-  background-color: white;
   border: 1px solid #348841;
   color: #348841;
   font-size: 1.25rem;
@@ -52,7 +43,7 @@ exports[`ModalHousehold component should render 1`] = `
   width: 200px;
 }
 
-.c5 {
+.c4 {
   background-color: white;
   border: 1px solid #EB5757;
   color: #EB5757;
@@ -71,31 +62,17 @@ exports[`ModalHousehold component should render 1`] = `
   </h3>
   <button
     class="c2 c3"
-    color="#3E9BEC"
-    type="button"
-  >
-    Cancel Invite
-  </button>
-  <button
-    class="c2 c4"
     color="#348841"
     type="button"
   >
     Promote to Owner
   </button>
   <button
-    class="c2 c5"
+    class="c2 c4"
     color="#EB5757"
     type="button"
   >
     Remove User
-  </button>
-  <button
-    class="c2 c5"
-    color="#EB5757"
-    type="button"
-  >
-    Leave household
   </button>
   <button
     class="c2"

@@ -7,7 +7,7 @@ module.exports = {
             jsx: true // Allows for the parsing of JSX
         }
     },
-    plugins: ['jest-dom', 'testing-library'],
+    plugins: ['jest-dom', 'testing-library', 'react-hooks'],
     settings: {
         react: {
             version: 'detect' // Tells eslint-plugin-react to automatically detect the version of React to use
@@ -27,6 +27,8 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         'react/prop-types': 'off',
         'react/jsx-uses-react': 'off',
-        'react/react-in-jsx-scope': 'off'
+        'react/react-in-jsx-scope': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn'
     }
 };

@@ -104,26 +104,13 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     handlePromoteUser={handlePromoteUser}
                     handleRemoveUser={handleRemoveUser}
                     loading={isLoading}
-                    showCancelOption={selectedTenant?.houseRole === 'pending'}
-                    showLeaveOption={selectedTenant?.uid === user.uid}
-                    showPromoteOption={
-                        currentUser.houseRole === 'admin' &&
-                        selectedTenant?.uid !== currentUser.uid &&
-                        selectedTenant?.houseRole !== 'pending' &&
-                        selectedTenant?.houseRole !== 'admin'
-                    }
-                    showRemoveOption={
-                        currentUser.houseRole === 'admin' &&
-                        selectedTenant?.uid !== currentUser.uid &&
-                        selectedTenant?.houseRole !== 'pending' &&
-                        selectedTenant?.houseRole !== 'admin'
-                    }
+                    currentTenant={currentUser}
+                    selectedTenant={selectedTenant}
                 />
             </ReactModal>
 
             <S.List>
                 {getSortedTenants(tenants).map((tenant) => {
-                    // const isAlexa = tenant.houseRole === 'alexa';
                     const isPending = tenant.houseRole === 'pending';
                     const showMenu = () => {
                         const admins = tenants.filter((tenant) => tenant.houseRole === 'admin');
