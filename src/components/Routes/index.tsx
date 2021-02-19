@@ -85,7 +85,9 @@ export const Routes = (): JSX.Element => {
                 </RouteProtected>
             )}
 
-            <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>
+            {user && tenants && (
+                <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>
+            )}
 
             <Route>
                 <PageNotFound />

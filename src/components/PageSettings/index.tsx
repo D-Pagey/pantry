@@ -65,41 +65,39 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
     return (
         <Layout title="Settings">
             <S.Wrapper data-testid="PageSettings">
-                {user && (
-                    <>
-                        <ProfilePhoto email={user.email!} name={user.name} photo={user.photo!} width="100px" />
-                        <S.Name>Welcome {user.name}</S.Name>
+                <ProfilePhoto email={user!.email!} name={user!.name} photo={user!.photo!} width="100px" />
+                <S.Name>Welcome {user!.name}</S.Name>
 
-                        <S.Heading>Notifications</S.Heading>
-                        <S.Text>You have {!notificationConsent && 'not'} allowed push notifications</S.Text>
-                        {!notificationConsent && <Button onClick={handleUserPermission}>Request Permission</Button>}
+                <S.Heading>Notifications</S.Heading>
+                <S.Text>You have {!notificationConsent && 'not'} allowed push notifications</S.Text>
+                {!notificationConsent && <Button onClick={handleUserPermission}>Request Permission</Button>}
 
-                        <S.Heading>Account Settings</S.Heading>
-                        <S.Text>Your email is: {user.email}</S.Text>
+                <S.Heading>Account Settings</S.Heading>
+                <S.Text>Your email is: {user!.email}</S.Text>
 
-                        <S.Heading>Household Settings</S.Heading>
-                        <S.Text>Your household consists of:</S.Text>
+                <S.Heading>Household Settings</S.Heading>
+                <S.Text>Your household consists of:</S.Text>
 
-                        <S.HouseholdWrapper>{user && <Household tenants={tenants} user={user} />}</S.HouseholdWrapper>
+                <S.HouseholdWrapper>
+                    <Household tenants={tenants} user={user!} />
+                </S.HouseholdWrapper>
 
-                        <S.Text>Invite someone to join your household:</S.Text>
+                <S.Text>Invite someone to join your household:</S.Text>
 
-                        <S.Input
-                            disabled={isLoading}
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            onChange={(e: any) => setEmailInvite(e.target.value)}
-                            placeholder="Your friends' email"
-                            value={emailInvite}
-                        />
-                        <S.InviteButton isLoading={isLoading} onClick={handleInviteClick} loadingContent="Inviting">
-                            Invite
-                        </S.InviteButton>
+                <S.Input
+                    disabled={isLoading}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    onChange={(e: any) => setEmailInvite(e.target.value)}
+                    placeholder="Your friends' email"
+                    value={emailInvite}
+                />
+                <S.InviteButton isLoading={isLoading} onClick={handleInviteClick} loadingContent="Inviting">
+                    Invite
+                </S.InviteButton>
 
-                        <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="PageSettingsButton">
-                            Sign Out
-                        </S.SignOutButton>
-                    </>
-                )}
+                <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="PageSettingsButton">
+                    Sign Out
+                </S.SignOutButton>
             </S.Wrapper>
         </Layout>
     );

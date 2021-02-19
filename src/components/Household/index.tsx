@@ -97,16 +97,18 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     return (
         <>
             <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                <ModalHousehold
-                    handleCancelInvite={handleCancelInvite}
-                    handleClose={() => setIsModalOpen(false)}
-                    handleLeaveHousehold={handleLeaveHousehold}
-                    handlePromoteUser={handlePromoteUser}
-                    handleRemoveUser={handleRemoveUser}
-                    loading={isLoading}
-                    currentTenant={currentUser}
-                    selectedTenant={selectedTenant}
-                />
+                {currentUser && (
+                    <ModalHousehold
+                        handleCancelInvite={handleCancelInvite}
+                        handleClose={() => setIsModalOpen(false)}
+                        handleLeaveHousehold={handleLeaveHousehold}
+                        handlePromoteUser={handlePromoteUser}
+                        handleRemoveUser={handleRemoveUser}
+                        loading={isLoading}
+                        currentTenant={currentUser}
+                        selectedTenant={selectedTenant}
+                    />
+                )}
             </ReactModal>
 
             <S.List>
