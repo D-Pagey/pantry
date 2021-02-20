@@ -12,7 +12,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const context = {
-    isAuthed: false,
     fetchUserData: () => null
 };
 
@@ -23,7 +22,7 @@ describe('PageMagicLanding component', () => {
     });
 
     it.skip('should redirect if authed', async () => {
-        render(<PageMagicLanding />, { ...context, isAuthed: true });
+        render(<PageMagicLanding />, { ...context });
         await waitFor(() => expect(mockRedirect).toHaveBeenCalledWith({ to: '/food' }, expect.any(Object)));
     });
 });

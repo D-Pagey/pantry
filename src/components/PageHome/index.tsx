@@ -25,7 +25,7 @@ export const PageHome: FC = () => {
                         money.
                     </S.Text>
 
-                    <Link to="/food">
+                    <Link to="/sign-in">
                         <Button>Get started in 30 seconds</Button>
                     </Link>
                 </S.HeroWrapper>
@@ -60,7 +60,7 @@ export const PageHome: FC = () => {
                     </S.Feature>
                 </S.FeaturesWrapper>
 
-                <S.PositionedLink to="/food">
+                <S.PositionedLink to="/sign-in">
                     <Button>Get started in 30 seconds</Button>
                 </S.PositionedLink>
             </S.Wrapper>

@@ -8,18 +8,14 @@ import { AuthContext } from '../ProviderAuth';
 import { PageAddFood } from '../PageAddFood';
 import { PageFood } from '../PageFood';
 import { PageEditFood } from '../PageEditFood';
-import { PageHome } from '../PageHome';
 import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
-import { PageSignIn } from '../PageSignIn';
-import { PageMagicLanding } from '../PageMagicLanding';
-import { RouteProtected } from '../RouteProtected';
 
-export const Routes = (): JSX.Element => {
-    const [fridge, setFridge] = useState<FoodType[]>();
-    const [tenants, setTenants] = useState<TenantType[]>();
+export const AuthenticatedRoutes = (): JSX.Element => {
+    const [fridge, setFridge] = useState<FoodType[]>([]);
+    const [tenants, setTenants] = useState<TenantType[]>([]);
     const [metaData, setMetaData] = useState<MetaDataType>();
-    const { user, isAuthed } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const getFridgeData = useCallback(() => {
         if (user) {
@@ -48,46 +44,27 @@ export const Routes = (): JSX.Element => {
         }
     }, [getFridgeData, user]);
 
-    // TODO: move these checks into the routes and handle loading in page components
-    // whilst waiting for fridge / metadata etc to load
     return (
         <Switch>
-            <Route exact path="/">
-                {isAuthed ? <Redirect to="food" /> : <PageHome />}
+            <Route exact path={['/', '/sign-in', '/magic']}>
+                <Redirect to="/food" />
             </Route>
 
-            <Route path="/test">{fridge && metaData && <PageAddFood fridge={fridge} metaData={metaData} />}</Route>
-
-            <Route path="/sign-in">
-                <PageSignIn />
+            <Route path="/food">
+                <PageFood fridge={fridge} tenants={tenants} categories={metaData?.categories} />
             </Route>
 
-            {/* used for magic sign in email link */}
-            <Route path="/magic">
-                <PageMagicLanding />
+            <Route path="/:name/edit">
+                <PageEditFood fridge={fridge} tenants={tenants} metadata={metaData} />
             </Route>
 
-            <RouteProtected path="/food">
-                {fridge && tenants && metaData && (
-                    <PageFood fridge={fridge} tenants={tenants} categories={metaData.categories} />
-                )}
-            </RouteProtected>
+            <Route path="/add">
+                <PageAddFood fridge={fridge} metaData={metaData} />
+            </Route>
 
-            <RouteProtected path="/:name/edit">
-                {fridge && tenants && metaData && (
-                    <PageEditFood fridge={fridge} tenants={tenants} metadata={metaData} />
-                )}
-            </RouteProtected>
-
-            {metaData && fridge && (
-                <RouteProtected path="/add">
-                    <PageAddFood fridge={fridge} metaData={metaData} />
-                </RouteProtected>
-            )}
-
-            {user && tenants && (
-                <RouteProtected path="/settings">{tenants && <PageSettings tenants={tenants} />}</RouteProtected>
-            )}
+            <Route path="/settings">
+                <PageSettings tenants={tenants} />
+            </Route>
 
             <Route>
                 <PageNotFound />

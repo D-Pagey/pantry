@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { App } from './components/App';
+import { ProviderAuth } from './components/ProviderAuth';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <ErrorBoundary>
-        <App />
+        <ProviderAuth>
+            <App />
+        </ProviderAuth>
     </ErrorBoundary>,
     document.getElementById('root')
 );

@@ -7,7 +7,7 @@ import { Header } from '../Header';
 import * as S from './styles';
 
 type LayoutProps = {
-    children: ReactNode;
+    children?: ReactNode;
     isLoading?: boolean;
     title?: string;
     hideTitle?: boolean;

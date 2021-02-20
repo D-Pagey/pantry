@@ -26,8 +26,6 @@ export const Notifications: FC<NotificationsProps> = ({ notifications, onClose, 
             .update({
                 [`notifications.${notificationId}`]: firebase.firestore.FieldValue.delete()
             })
-            // TODO: Does this need a toast?
-            // .then(() => toast.info('Notification dismissed'))
             .then(() => null)
             .catch(() => toast.error('Error dismissing notification'));
     };
