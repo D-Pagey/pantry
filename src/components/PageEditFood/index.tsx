@@ -15,7 +15,7 @@ import * as S from './styles';
 type PageEditFoodProps = {
     fridge: FoodType[];
     tenants: TenantType[];
-    metadata: MetaDataType;
+    metadata?: MetaDataType;
 };
 
 export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata }) => {
@@ -52,8 +52,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                 await addItemDeleteItem(convertedMergedItem, originalItem.name, user!.household!);
             }
 
-            if (!metadata.units.includes(editedItem.unit)) {
-                const updatedUnits = [...metadata.units, editedItem.unit];
+            if (!metadata!.units.includes(editedItem.unit)) {
+                const updatedUnits = [...metadata!.units, editedItem.unit];
 
                 await addNewUnit(updatedUnits, user!.household!);
             }
@@ -85,7 +85,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
                         <S.CreatableDropdown
                             defaultValue={state.originalItem.unit}
-                            options={formatDropdownOptions(metadata.units)}
+                            options={formatDropdownOptions(metadata!.units)}
                             setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
                             inputName="editItemUnit"
                         />

@@ -9,9 +9,6 @@ export const normal = (): JSX.Element => (
     <AuthContext.Provider
         value={{
             fetchUserData: () => null,
-            isAuthed: true,
-            isCheckingAuth: false,
-            setUser: () => null,
             signOut: () => null,
             user: UserDan
         }}

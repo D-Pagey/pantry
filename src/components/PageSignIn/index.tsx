@@ -1,8 +1,6 @@
-import React, { FC, useContext, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { FC, useState } from 'react';
 
 import { firebase } from '../../services';
-import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Input } from '../Input';
 import loginImage from './assets/mobile-login.svg';
@@ -12,7 +10,6 @@ export const PageSignIn: FC = () => {
     const [email, setEmail] = useState('');
     const [emailSent, setEmailSent] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { isAuthed } = useContext(AuthContext);
 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -54,10 +51,6 @@ export const PageSignIn: FC = () => {
                 // Some error occurred, you can inspect the code: error.code
             });
     };
-
-    if (isAuthed) {
-        return <Redirect to="/food" />;
-    }
 
     return (
         <Layout title="Sign in" isLoading={isLoading}>

@@ -12,6 +12,23 @@ exports[`BurgerMenu component should render 1`] = `
   color: orange;
 }
 
+.c1 {
+  background-color: rgb(55,58,71);
+  border: none;
+  color: white;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1:hover {
+  color: orange;
+}
+
 <div>
   <div
     class="bm-overlay"
@@ -68,13 +85,25 @@ exports[`BurgerMenu component should render 1`] = `
           Home
         </a>
         <a
-          class="c0 bm-item"
-          href="/sign-in"
-          style="display: block;"
-          tabindex="-1"
+          class="c0"
+          href="/add"
         >
-          Sign In
+          Add Food
         </a>
+        <a
+          class="c0"
+          data-testid="burgerMenuSettingsLink"
+          href="/settings"
+        >
+          Settings
+        </a>
+        <button
+          class="c1"
+          data-testid="burgerMenuSignOut"
+          type="button"
+        >
+          Sign Out
+        </button>
       </nav>
     </div>
     <div>

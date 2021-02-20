@@ -18,9 +18,9 @@ import { getOwnersButtonText } from './utils';
 import * as S from './styles';
 
 type PageFoodProps = {
-    categories: string[];
     fridge: FoodType[];
     tenants: TenantType[];
+    categories?: string[];
 };
 
 export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => {
@@ -73,6 +73,10 @@ export const PageFood: FC<PageFoodProps> = ({ categories, fridge, tenants }) => 
             history.push(`/${editingItem.name}/edit`);
         }
     };
+
+    if (!categories) {
+        return <Layout isLoading />;
+    }
 
     return (
         <Layout>

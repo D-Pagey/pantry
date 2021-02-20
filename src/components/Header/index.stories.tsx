@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { UnreadNotification, UserDan, WelcomeNotification } from '../../fixtures';
@@ -7,14 +7,11 @@ import { Header } from '.';
 
 export default { title: 'Header' };
 
-export const normal = () => (
+export const normal: FC = () => (
     <MemoryRouter>
         <AuthContext.Provider
             value={{
                 fetchUserData: () => null,
-                isAuthed: true,
-                isCheckingAuth: false,
-                setUser: () => null,
                 signOut: () => null,
                 user: { ...UserDan, notifications: [WelcomeNotification, UnreadNotification] }
             }}

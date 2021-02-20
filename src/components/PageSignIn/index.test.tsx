@@ -9,20 +9,14 @@ jest.mock('react-router-dom', () => ({
     Redirect: jest.fn(() => null)
 }));
 
-const context = {
-    isAuthed: false,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setUser: () => null
-};
-
 describe('PageSignIn component', () => {
     it('should render', () => {
-        const { container } = render(<PageSignIn />, context);
+        const { container } = render(<PageSignIn />);
         expect(container.firstChild).toMatchSnapshot();
     });
 
     it.skip('should redirect if authed', () => {
-        render(<PageSignIn />, { ...context, isAuthed: true });
+        render(<PageSignIn />);
         expect(Redirect).toHaveBeenCalledWith({ to: '/food' }, expect.any(Object));
     });
 

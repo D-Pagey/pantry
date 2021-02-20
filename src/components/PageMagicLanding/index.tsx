@@ -13,7 +13,7 @@ export const PageMagicLanding: FC = () => {
     const [isMissingEmail, setIsMissingEmail] = useState(false);
     const [localEmail, setLocalEmail] = useState('');
     const [manualSubmit, setManualSubmit] = useState(false);
-    const { isAuthed, fetchUserData } = useContext(AuthContext);
+    const { user, fetchUserData } = useContext(AuthContext);
 
     useEffect(() => {
         // Confirm the link is a sign-in with email link.
@@ -67,7 +67,7 @@ export const PageMagicLanding: FC = () => {
 
     const handleEmailClick = (): void => setManualSubmit(true);
 
-    if (isAuthed) {
+    if (user) {
         return <Redirect to="/food" />;
     }
 

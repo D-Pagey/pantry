@@ -16,7 +16,7 @@ import * as S from './styles';
 
 type PageAddFoodProps = {
     fridge: FoodType[];
-    metaData: MetaDataType;
+    metaData?: MetaDataType;
 };
 
 type Inputs = {
@@ -65,8 +65,8 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
             toast.error('Something went wrong adding the item');
         }
 
-        if (!metaData.units.includes(unit)) {
-            const updatedUnits = [...metaData.units, unit];
+        if (!metaData!.units.includes(unit)) {
+            const updatedUnits = [...metaData!.units, unit];
 
             try {
                 await addNewUnit(updatedUnits, user!.household!);
@@ -109,7 +109,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         <CreatableDropdown
                             inputName="quantity"
                             defaultValue="2"
-                            options={formatDropdownOptions(metaData.quantities)}
+                            options={formatDropdownOptions(metaData!.quantities)}
                             setSelected={(quantity) => setValue('quantity', quantity)}
                             error={errors.quantity && 'A quantity is required'}
                         />
@@ -126,7 +126,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         <CreatableDropdown
                             inputName="unit"
                             defaultValue="servings"
-                            options={formatDropdownOptions(metaData.units)}
+                            options={formatDropdownOptions(metaData!.units)}
                             setSelected={(unit) => setValue('unit', unit)}
                             error={errors.unit && 'A unit is required'}
                         />
@@ -142,7 +142,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     render={() => (
                         <CreatableDropdown
                             inputName="category"
-                            options={formatDropdownOptions(metaData.categories)}
+                            options={formatDropdownOptions(metaData!.categories)}
                             setSelected={(category) => setValue('category', category, { shouldValidate: true })}
                             error={errors.category && 'A category is required'}
                         />

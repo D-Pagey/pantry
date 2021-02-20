@@ -6,7 +6,7 @@ import * as S from './styles';
 
 export const BurgerMenu: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { isAuthed, signOut } = useContext(AuthContext);
+    const { user, signOut } = useContext(AuthContext);
 
     const handleStateChange = (state: { isOpen: boolean }): void => setIsOpen(state.isOpen);
     const closeMenu = (): void => setIsOpen(false);
@@ -20,7 +20,7 @@ export const BurgerMenu: FC = () => {
             <S.NavLink to="/" onClick={closeMenu}>
                 Home
             </S.NavLink>
-            {isAuthed ? (
+            {user ? (
                 <>
                     <S.NavLink to="/add" onClick={closeMenu}>
                         Add Food
