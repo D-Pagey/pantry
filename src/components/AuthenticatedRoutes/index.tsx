@@ -18,7 +18,7 @@ export const AuthenticatedRoutes = (): JSX.Element => {
     const { user } = useContext(AuthContext);
 
     const getFridgeData = useCallback(() => {
-        if (user) {
+        if (user?.household) {
             db.collection('households')
                 .doc(user.household)
                 // eslint-disable-next-line
@@ -27,16 +27,17 @@ export const AuthenticatedRoutes = (): JSX.Element => {
 
                     if (data) {
                         const fridgeItems: DatabaseFoodType[] = Object.values(data.fridge);
-                        const cleanData = checkAndFormatFridge(fridgeItems);
                         const firebaseTenants = Object.values(data.tenants) as TenantType[];
+                        const tenantsMinusAlexa = firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa');
+                        const cleanData = checkAndFormatFridge(fridgeItems, tenantsMinusAlexa);
 
                         setMetaData(data.meta);
                         setFridge(cleanData);
-                        setTenants(firebaseTenants.filter((tenant) => tenant.houseRole !== 'alexa'));
+                        setTenants(tenantsMinusAlexa);
                     }
                 });
         }
-    }, [user]);
+    }, [user?.household]);
 
     useEffect(() => {
         if (user?.household) {

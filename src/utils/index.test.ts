@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { FoodType } from '../types';
+import { DatabaseFoodType, FoodType } from '../types';
 import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import {
     checkAndFilterInvalidData,
@@ -15,7 +15,8 @@ import {
     getColourFromDate,
     getExpiringItems,
     getOwnerFromId,
-    getPercentageFromDate
+    getPercentageFromDate,
+    removePreviousTenantsItems
 } from '.';
 
 const mockToastError = jest.fn();
@@ -102,10 +103,6 @@ describe('filterFridgeByCategory function', () => {
         const filtered = filterFridgeByCategory(Fridge, 'meat');
         expect(filtered).toStrictEqual([Fridge[2]]);
     });
-});
-
-describe('formatExpiryDates function', () => {
-    it.todo('should convert timestamps to dates');
 });
 
 describe('countExpiringFoodItems function', () => {
@@ -342,5 +339,99 @@ describe('checkExistingCategory function', () => {
     it('should return an empty string if name does not exist', () => {
         const category = checkExistingCategory(Fridge, 'check-unique-name');
         expect(category).toBe('');
+    });
+});
+
+describe('removePreviousTenantsItems function', () => {
+    it('should filter out items when all batches are previous tenant', () => {
+        const items = [
+            {
+                name: 'milk',
+                category: 'dairy',
+                unit: 'bottles',
+                batches: [
+                    {
+                        expires: new Date(),
+                        id: 'aaa',
+                        quantity: 2,
+                        ownerId: 'previousTenantId'
+                    }
+                ]
+            },
+            {
+                name: 'steak',
+                category: 'meat',
+                unit: 'servings',
+                batches: [
+                    {
+                        expires: new Date(),
+                        id: 'bbb',
+                        quantity: 2,
+                        ownerId: TenantDan.uid
+                    }
+                ]
+            }
+        ];
+
+        const filtered = removePreviousTenantsItems(items, [TenantDan]);
+
+        const expected = [
+            {
+                ...items[0],
+                batches: []
+            },
+            items[1]
+        ];
+
+        expect(filtered).toStrictEqual(expected);
+    });
+
+    it('should filter out items when batches are mixed with previous tenant', () => {
+        const items = [
+            {
+                name: 'milk',
+                category: 'dairy',
+                unit: 'bottles',
+                batches: [
+                    {
+                        expires: new Date(),
+                        id: 'aaa',
+                        quantity: 2,
+                        ownerId: 'previousTenantId'
+                    },
+                    {
+                        expires: new Date(),
+                        id: 'aaa',
+                        quantity: 2,
+                        ownerId: TenantDan.uid
+                    }
+                ]
+            },
+            {
+                name: 'steak',
+                category: 'meat',
+                unit: 'servings',
+                batches: [
+                    {
+                        expires: new Date(),
+                        id: 'bbb',
+                        quantity: 2,
+                        ownerId: TenantDan.uid
+                    }
+                ]
+            }
+        ];
+
+        const filtered = removePreviousTenantsItems(items, [TenantDan]);
+
+        const expected = [
+            {
+                ...items[0],
+                batches: [items[0].batches[1]]
+            },
+            items[1]
+        ];
+
+        expect(filtered).toStrictEqual(expected);
     });
 });

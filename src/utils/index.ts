@@ -60,7 +60,7 @@ export const filterFridgeByCategory = (food: FoodType[], category: string): Food
     return food.filter((item) => item.category === category);
 };
 
-export const formatExpiryDates = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
+export const formatExpiryDatesAndBatches = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
     return fridgeItems.reduce((acc, curr): FoodType[] => {
         const batchesArray = curr.batches ? Object.values(curr.batches) : [];
 
@@ -107,13 +107,28 @@ export const checkAndFilterInvalidData = (fridgeItems: DatabaseFoodType[]): Data
     return filtered;
 };
 
+export const removePreviousTenantsItems = (items: FoodType[], currentTenants: TenantType[]): FoodType[] => {
+    const currentTenantsIds = currentTenants.map((tenant) => tenant.uid);
+
+    return items.map((item) => {
+        return {
+            ...item,
+            batches: item.batches.filter((batch) => {
+                if (currentTenantsIds.includes(batch.ownerId)) return true;
+
+                return false;
+            })
+        };
+    });
+};
+
 /**
  * Filters out invalid data then formats the shape of the valid data
  */
-export const checkAndFormatFridge = (fridgeItems: DatabaseFoodType[]): FoodType[] => {
-    const filteredData = checkAndFilterInvalidData(fridgeItems);
-
-    return formatExpiryDates(filteredData);
+export const checkAndFormatFridge = (fridgeItems: DatabaseFoodType[], tenants: TenantType[]): FoodType[] => {
+    const cleanData = checkAndFilterInvalidData(fridgeItems);
+    const formattedData = formatExpiryDatesAndBatches(cleanData);
+    return removePreviousTenantsItems(formattedData, tenants);
 };
 
 /**
