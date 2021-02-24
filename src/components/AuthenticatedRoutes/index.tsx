@@ -5,6 +5,7 @@ import { FoodType, TenantType, DatabaseFoodType, MetaDataType } from '../../type
 import { checkAndFormatFridge } from '../../utils';
 import { db } from '../../services';
 import { AuthContext } from '../ProviderAuth';
+import { Layout } from '../Layout';
 import { PageAddFood } from '../PageAddFood';
 import { PageFood } from '../PageFood';
 import { PageEditFood } from '../PageEditFood';
@@ -12,8 +13,8 @@ import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
 
 export const AuthenticatedRoutes = (): JSX.Element => {
-    const [fridge, setFridge] = useState<FoodType[]>([]);
-    const [tenants, setTenants] = useState<TenantType[]>([]);
+    const [fridge, setFridge] = useState<FoodType[]>();
+    const [tenants, setTenants] = useState<TenantType[]>();
     const [metaData, setMetaData] = useState<MetaDataType>();
     const { user } = useContext(AuthContext);
 
@@ -45,6 +46,10 @@ export const AuthenticatedRoutes = (): JSX.Element => {
         }
     }, [getFridgeData, user]);
 
+    if (fridge === undefined || tenants === undefined || metaData === undefined) {
+        return <Layout isLoading />;
+    }
+
     return (
         <Switch>
             <Route exact path={['/', '/sign-in', '/magic']}>
@@ -52,7 +57,7 @@ export const AuthenticatedRoutes = (): JSX.Element => {
             </Route>
 
             <Route path="/food">
-                <PageFood fridge={fridge} tenants={tenants} categories={metaData?.categories} />
+                <PageFood fridge={fridge} tenants={tenants} categories={metaData.categories} />
             </Route>
 
             <Route path="/:name/edit">
