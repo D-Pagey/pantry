@@ -4,13 +4,12 @@ import { CreatableDropdown as Dropdown } from '../CreatableDropdown';
 import { Button as Btn } from '../Button';
 
 export const Wrapper = styled.div`
-    border: 1px solid red;
-    padding: 0.5rem;
+    padding: 1.5rem 1rem;
 `;
 
 export const Title = styled.h1`
     font-weight: normal;
-    margin: 0;
+    margin: 0 0 1rem;
 `;
 
 export const Grid = styled.div`
@@ -38,6 +37,8 @@ export const CreatableDropdown = styled(Dropdown)`
 `;
 
 export const Button = styled(Btn)`
+    margin: ${({ secondary }) => secondary && '0 1rem 0 0'};
+
     @media ${mediaQuery.tablet} {
         grid-column: 2 / 3;
         grid-row: 1 / 2;
@@ -54,4 +55,9 @@ export const Label = styled.label`
         grid-column: ${({ column }) => column};
         grid-row: ${({ row }) => row};
     }
+`;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
 `;

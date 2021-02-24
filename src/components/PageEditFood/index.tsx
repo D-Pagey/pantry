@@ -15,7 +15,7 @@ import * as S from './styles';
 type PageEditFoodProps = {
     fridge: FoodType[];
     tenants: TenantType[];
-    metadata?: MetaDataType;
+    metadata: MetaDataType;
 };
 
 export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata }) => {
@@ -52,8 +52,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                 await addItemDeleteItem(convertedMergedItem, originalItem.name, user!.household!);
             }
 
-            if (!metadata!.units.includes(editedItem.unit)) {
-                const updatedUnits = [...metadata!.units, editedItem.unit];
+            if (!metadata.units.includes(editedItem.unit)) {
+                const updatedUnits = [...metadata.units, editedItem.unit];
 
                 await addNewUnit(updatedUnits, user!.household!);
             }
@@ -85,31 +85,32 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
                         <S.CreatableDropdown
                             defaultValue={state.originalItem.unit}
-                            options={formatDropdownOptions(metadata!.units)}
+                            options={formatDropdownOptions(metadata.units)}
                             setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
                             inputName="editItemUnit"
                         />
 
                         <S.Label column="1/2">Change category:</S.Label>
-                        {/* <S.ChooseCategory
-                            handleClick={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
-                            selected={state.editedItem.category}
-                            hideTitle
-                        /> */}
+                        <S.CreatableDropdown
+                            defaultValue={state.originalItem.category}
+                            options={formatDropdownOptions(metadata.categories)}
+                            setSelected={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
+                            inputName="editItemCategory"
+                        />
 
                         <S.Label column="2/3" row="3/4">
                             Change date or owner:
                         </S.Label>
                         <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
 
-                        <div>
+                        <S.ButtonWrapper>
                             <S.Button onClick={() => history.push('/food')} secondary>
                                 Back
                             </S.Button>
                             <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
                                 Save Changes
                             </S.Button>
-                        </div>
+                        </S.ButtonWrapper>
                     </S.Grid>
                 </S.Wrapper>
             )}
