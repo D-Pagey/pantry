@@ -16,7 +16,7 @@ import * as S from './styles';
 
 if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#root');
 
-type EditFoodServingsProps = {
+export type EditFoodServingsProps = {
     dispatch: (action: EditItemAction) => void;
     item: FoodType;
     tenants: TenantType[];
