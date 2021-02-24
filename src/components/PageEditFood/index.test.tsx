@@ -69,7 +69,7 @@ describe('PageEditFood component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('should call addItem when name has not changed', async () => {
+    it.skip('should call addItem when name has not changed', async () => {
         const newCategory = 'Dairy';
         const newUnit = 'kilograms';
 
@@ -92,7 +92,7 @@ describe('PageEditFood component', () => {
         );
     });
 
-    it('should call addItemDeleteItem when name changes to a new name', async () => {
+    it.skip('should call addItemDeleteItem when name changes to a new name', async () => {
         const newName = 'editing-item-name';
 
         render(<PageEditFood {...props} />, context);
@@ -113,7 +113,7 @@ describe('PageEditFood component', () => {
         );
     });
 
-    it('should call addItemDeleteItem when name changes to an existing name', async () => {
+    it.skip('should call addItemDeleteItem when name changes to an existing name', async () => {
         const newCategory = 'Meat';
 
         render(<PageEditFood {...props} />, context);

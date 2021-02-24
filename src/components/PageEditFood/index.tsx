@@ -68,12 +68,12 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
     return (
         <Layout isLoading={state.loading} hideTitle>
             {state.originalItem.name && (
-                <>
+                <S.Wrapper>
                     <S.Title>
                         Edit your <S.Span>{titleCase(state.originalItem.name)}</S.Span>:
                     </S.Title>
 
-                    <S.Wrapper>
+                    <S.Grid>
                         <S.Label htmlFor="editItemName">Change item name:</S.Label>
                         <S.CreatableDropdown
                             defaultValue={state.originalItem.name}
@@ -91,11 +91,11 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         />
 
                         <S.Label column="1/2">Change category:</S.Label>
-                        <S.ChooseCategory
+                        {/* <S.ChooseCategory
                             handleClick={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
                             selected={state.editedItem.category}
                             hideTitle
-                        />
+                        /> */}
 
                         <S.Label column="2/3" row="3/4">
                             Change date or owner:
@@ -110,8 +110,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                                 Save Changes
                             </S.Button>
                         </div>
-                    </S.Wrapper>
-                </>
+                    </S.Grid>
+                </S.Wrapper>
             )}
         </Layout>
     );

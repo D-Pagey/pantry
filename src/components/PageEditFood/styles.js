@@ -2,19 +2,23 @@ import styled from 'styled-components';
 import { colours, mediaQuery } from '../../tokens';
 import { CreatableDropdown as Dropdown } from '../CreatableDropdown';
 import { Button as Btn } from '../Button';
-import { ChooseCategory as Choose } from '../ChooseCategory';
+
+export const Wrapper = styled.div`
+    border: 1px solid red;
+    padding: 0.5rem;
+`;
 
 export const Title = styled.h1`
     font-weight: normal;
-    margin: 2rem 1rem 1rem;
+    margin: 0;
 `;
 
-export const Wrapper = styled.div`
+export const Grid = styled.div`
     display: grid;
     grid-row-gap: 1rem;
     margin: 0 auto;
     max-width: 500px;
-    padding: 1rem;
+    padding: 0;
 
     @media ${mediaQuery.tablet} {
         grid-column-gap: 4rem;
@@ -39,13 +43,6 @@ export const Button = styled(Btn)`
         grid-row: 1 / 2;
         max-width: 200px;
         justify-self: end;
-    }
-`;
-
-export const ChooseCategory = styled(Choose)`
-    @media ${mediaQuery.tablet} {
-        grid-column: 1 / 2;
-        margin: 0;
     }
 `;
 
