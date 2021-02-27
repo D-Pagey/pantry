@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 
 import { getColourFromDate, getPercentageFromDate } from '../../utils';

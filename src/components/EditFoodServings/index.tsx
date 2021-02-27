@@ -1,5 +1,5 @@
-import React, { FC, useContext, useState } from 'react';
-import { formatDistanceToNowStrict } from 'date-fns';
+import { FC, useContext, useState, Fragment } from 'react';
+import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 import ReactModal from 'react-modal';
 import { useMediaQuery } from 'react-responsive';
 
@@ -30,6 +30,16 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
     const isTabletOrLarger = useMediaQuery({
         query: mediaQuery.tablet
     });
+
+    const getDate = (date: Date) => {
+        const difference = differenceInDays(date, Date.now());
+        const isLessThanOneDay = difference === 0;
+        const quantity = isLessThanOneDay ? 1 : parseInt(formatDistanceToNowStrict(date).split(' ')[0], 10);
+        const unitOfTime = formatDistanceToNowStrict(date).split(' ')[1];
+        const unit = isLessThanOneDay ? 'day' : unitOfTime;
+
+        return `${quantity} ${unit}`;
+    };
 
     const handleDateClick = (batch: BatchType) => () => {
         setIsModalOpen(true);
@@ -69,21 +79,22 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                 </ReactModal>
             )}
 
-            <S.List>
+            <S.Grid>
+                <S.ServingsTitles>Expires in</S.ServingsTitles>
+                <S.ServingsTitles>Owner</S.ServingsTitles>
+                <S.ServingsTitles>Action</S.ServingsTitles>
                 {item.batches.map((batch) => {
                     return [...Array(batch.quantity)].map((e, i) => {
                         const currentOwner = getOwnerFromId(batch.ownerId, tenants);
                         return (
                             // eslint-disable-next-line react/no-array-index-key
-                            <S.Item key={`${batch.id}-${i}`}>
+                            <Fragment key={`${batch.id}-${i}`}>
                                 <S.DateButton
                                     secondary
                                     onClick={handleDateClick(batch)}
                                     borderColour={getColourFromDate(batch.expires)}
                                 >
-                                    <S.Text colour={getColourFromDate(batch.expires)}>
-                                        Expires in {formatDistanceToNowStrict(batch.expires)}
-                                    </S.Text>
+                                    <S.Text colour={getColourFromDate(batch.expires)}>{getDate(batch.expires)}</S.Text>
                                 </S.DateButton>
 
                                 {isTabletOrLarger && currentOwner.email && (
@@ -101,11 +112,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                                 >
                                     <img src={deleteIcon} alt="delete" />
                                 </S.DeleteButton>
-                            </S.Item>
+                            </Fragment>
                         );
                     });
                 })}
-            </S.List>
+            </S.Grid>
         </>
     );
 };

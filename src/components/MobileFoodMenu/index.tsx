@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import editImage from '../../assets/edit.svg';
+import deleteImage from '../../assets/delete.svg';
+import filterImage from '../../assets/filter.svg';
 import { Button } from '../Button';
-import editImage from './edit.svg';
-import deleteImage from './delete.svg';
-import filterImage from './filter.svg';
 import * as S from './styles';
 
 export type MobileFoodMenuProps = {

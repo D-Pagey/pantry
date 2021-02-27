@@ -18,42 +18,26 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c0 {
-  justify-self: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 17rem;
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
 }
 
 .c1 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 1rem 0;
+  font-size: 1.25rem;
 }
 
 .c5 {
   color: #EB5757;
-  margin: 0 0 0 1rem;
 }
 
 .c8 {
   color: #FCBA3B;
-  margin: 0 0 0 1rem;
 }
 
 .c10 {
   color: #348841;
-  margin: 0 0 0 1rem;
 }
 
 .c6 {
@@ -62,7 +46,7 @@ exports[`EditFoodServings component should render 1`] = `
   -ms-flex-align: center;
   align-items: center;
   background: none;
-  border: 1px solid darkgrey;
+  border: none;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -72,8 +56,7 @@ exports[`EditFoodServings component should render 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 1rem;
-  border-radius: 50%;
+  padding: 0;
 }
 
 .c4 {
@@ -88,190 +71,163 @@ exports[`EditFoodServings component should render 1`] = `
   border: 1px solid #348841;
 }
 
-@media (min-width:765px) {
-  .c0 {
-    justify-self: auto;
-    width: 21rem;
-  }
-}
-
-<ul
+<div
   class="c0"
 >
-  <li
+  <span
     class="c1"
   >
-    <button
-      class="c2 c3 c4"
-      type="button"
-    >
-      <span
-        class="c5"
-      >
-        Expires in 
-        0 seconds
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
+    Expires in
+  </span>
+  <span
     class="c1"
   >
-    <button
-      class="c2 c3 c7"
-      type="button"
-    >
-      <span
-        class="c8"
-      >
-        Expires in 
-        2 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
+    Owner
+  </span>
+  <span
     class="c1"
   >
-    <button
-      class="c2 c3 c7"
-      type="button"
-    >
-      <span
-        class="c8"
-      >
-        Expires in 
-        2 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
-    class="c1"
+    Action
+  </span>
+  <button
+    class="c2 c3 c4"
+    type="button"
   >
-    <button
-      class="c2 c3 c9"
-      type="button"
+    <span
+      class="c5"
     >
-      <span
-        class="c10"
-      >
-        Expires in 
-        5 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
-    class="c1"
+      1 day
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
   >
-    <button
-      class="c2 c3 c9"
-      type="button"
-    >
-      <span
-        class="c10"
-      >
-        Expires in 
-        5 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
-    class="c1"
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c7"
+    type="button"
   >
-    <button
-      class="c2 c3 c9"
-      type="button"
+    <span
+      class="c8"
     >
-      <span
-        class="c10"
-      >
-        Expires in 
-        5 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
-    >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-  <li
-    class="c1"
+      2 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
   >
-    <button
-      class="c2 c3 c9"
-      type="button"
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c7"
+    type="button"
+  >
+    <span
+      class="c8"
     >
-      <span
-        class="c10"
-      >
-        Expires in 
-        5 days
-      </span>
-    </button>
-    <button
-      class="c6"
-      data-testid="deleteServing"
-      type="button"
+      2 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c9"
+    type="button"
+  >
+    <span
+      class="c10"
     >
-      <img
-        alt="delete"
-        src="delete.svg"
-      />
-    </button>
-  </li>
-</ul>
+      5 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c9"
+    type="button"
+  >
+    <span
+      class="c10"
+    >
+      5 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c9"
+    type="button"
+  >
+    <span
+      class="c10"
+    >
+      5 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c9"
+    type="button"
+  >
+    <span
+      class="c10"
+    >
+      5 days
+    </span>
+  </button>
+  <button
+    class="c6"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+</div>
 `;

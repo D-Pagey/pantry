@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { titleCase } from 'title-case';
 
 import { FoodType, TenantType } from '../../types';

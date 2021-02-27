@@ -1,31 +1,5 @@
 import styled from 'styled-components';
-import { mediaQuery } from '../../tokens';
 import { Button } from '../Button';
-
-export const List = styled.ul`
-    justify-self: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 17rem;
-
-    @media ${mediaQuery.tablet} {
-        justify-self: auto;
-        width: 21rem;
-    }
-`;
-
-export const Item = styled.li`
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
-`;
-
-export const Text = styled.span`
-    color: ${({ colour }) => colour};
-    margin: 0 0 0 1rem;
-`;
 
 export const ModalStyles = {
     content: {
@@ -38,17 +12,31 @@ export const ModalStyles = {
     }
 };
 
+export const Grid = styled.div`
+    display: grid;
+    grid-row-gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+`;
+
+export const ServingsTitles = styled.span`
+    font-size: 1.25rem;
+`;
+
+export const Text = styled.span`
+    color: ${({ colour }) => colour};
+`;
+
 export const DeleteButton = styled.button.attrs({
     type: 'button'
 })`
     align-items: center;
     background: none;
-    border: 1px solid darkgrey;
+    border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
-    padding: 1rem;
-    border-radius: 50%;
+    padding: 0;
 `;
 
 export const DateButton = styled(Button)`

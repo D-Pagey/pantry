@@ -4,7 +4,7 @@ import { FoodCard, FoodCardProps } from '.';
 
 export default { title: 'FoodCard', component: FoodCard };
 
-export const Basic = (args: FoodCardProps) => <FoodCard {...args} />;
+export const Basic = (args: FoodCardProps): JSX.Element => <FoodCard {...args} />;
 
 Basic.args = {
     handleClick: () => console.log('fired'),

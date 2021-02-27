@@ -1,9 +1,8 @@
-import React from 'react';
 import { colours } from '.';
 
 export default { title: 'Colours' };
 
-export const all = () => (
+export const all = (): JSX.Element => (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gridGap: '1rem' }}>
         {Object.entries(colours).map(([name, color]) => (
             <div key={name}>

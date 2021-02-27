@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { UnreadNotification, UserDan, WelcomeNotification, RejectedNotification } from '../../fixtures';
 import { Notifications } from '.';
 
@@ -11,7 +9,7 @@ const props = {
 
 export default { title: 'Notifications' };
 
-export const normal = () => (
+export const normal = (): JSX.Element => (
     <div style={{ width: 50, position: 'relative', right: '-210px' }}>
         <Notifications {...props} />
     </div>

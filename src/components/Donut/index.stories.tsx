@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { addDays } from 'date-fns';
 
 import { Donut } from '.';
@@ -9,7 +9,7 @@ const props = {
 
 export default { title: 'Donut' };
 
-export const variety = () => (
+export const variety: FC = () => (
     <div style={{ display: 'flex' }}>
         <Donut {...props} date={addDays(new Date(), -1)} />
         <Donut {...props} date={new Date()} />
