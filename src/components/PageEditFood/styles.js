@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colours, mediaQuery } from '../../tokens';
+import { colours } from '../../tokens';
 import { CreatableDropdown as Dropdown } from '../CreatableDropdown';
 import { Button as Btn } from '../Button';
 
@@ -9,22 +9,18 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
     font-weight: normal;
-    margin: 0 0 1rem;
+    margin: 0 0 1.5rem;
 `;
 
-export const Grid = styled.div`
-    display: grid;
-    grid-row-gap: 1rem;
-    margin: 0 auto;
-    max-width: 500px;
-    padding: 0;
+export const Subtitle = styled.h2`
+    font-weight: 400;
+    margin: 1rem 0 1.25rem;
+    text-decoration: underline;
+    text-decoration-color: ${colours.darkGreen60};
+`;
 
-    @media ${mediaQuery.tablet} {
-        grid-column-gap: 4rem;
-        grid-template-columns: 1fr 1fr;
-        margin: 0 auto;
-        max-width: 750px;
-    }
+export const ItalicText = styled.p`
+    font-style: italic;
 `;
 
 export const Span = styled.span`
@@ -32,32 +28,20 @@ export const Span = styled.span`
 `;
 
 export const CreatableDropdown = styled(Dropdown)`
-    margin: 0;
-    max-width: 330px;
-`;
-
-export const Button = styled(Btn)`
-    margin: ${({ secondary }) => secondary && '0 1rem 0 0'};
-
-    @media ${mediaQuery.tablet} {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
-        max-width: 200px;
-        justify-self: end;
-    }
+    margin: 0 0 1rem;
 `;
 
 export const Label = styled.label`
-    align-self: end;
-    margin: 0;
-
-    @media ${mediaQuery.tablet} {
-        grid-column: ${({ column }) => column};
-        grid-row: ${({ row }) => row};
-    }
+    display: block;
+    margin: 0 0 0.5rem;
 `;
 
 export const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
+    margin: 2rem 0 1rem;
+`;
+
+export const Button = styled(Btn)`
+    margin: ${({ secondary }) => secondary && '0 1rem 0 0'};
 `;

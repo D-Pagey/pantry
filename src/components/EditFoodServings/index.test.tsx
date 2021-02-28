@@ -1,14 +1,13 @@
-import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../test-utils';
-import { Fridge, TenantHeidi, TenantJoe, UserDan } from '../../fixtures';
+import { Fridge, TenantDan, TenantHeidi, TenantJoe, UserDan } from '../../fixtures';
 import { EditFoodServings } from '.';
 
 const props = {
     dispatch: () => null,
     item: Fridge[0],
-    tenants: [TenantHeidi]
+    tenants: [TenantHeidi, TenantJoe, TenantDan]
 };
 
 const context = {

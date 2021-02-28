@@ -1,13 +1,11 @@
 import { FC, useContext, useState, Fragment } from 'react';
 import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 import ReactModal from 'react-modal';
-import { useMediaQuery } from 'react-responsive';
 
 import deleteIcon from '../../assets/delete.svg';
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
 import { updateBatch } from '../../services/firestore';
-import { mediaQuery } from '../../tokens';
 import { EditItemAction } from '../PageEditFood/itemReducer';
 import { AuthContext } from '../ProviderAuth';
 import { ModalChangeDate } from '../ModalChangeDate';
@@ -27,9 +25,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
     const [isEditingDate, setIsEditingDate] = useState<boolean>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
     const { user } = useContext(AuthContext);
-    const isTabletOrLarger = useMediaQuery({
-        query: mediaQuery.tablet
-    });
 
     const getDate = (date: Date) => {
         const difference = differenceInDays(date, Date.now());
@@ -82,10 +77,13 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
             <S.Grid>
                 <S.ServingsTitles>Expires in</S.ServingsTitles>
                 <S.ServingsTitles>Owner</S.ServingsTitles>
-                <S.ServingsTitles>Action</S.ServingsTitles>
+                <S.ServingsTitles>Delete</S.ServingsTitles>
                 {item.batches.map((batch) => {
                     return [...Array(batch.quantity)].map((e, i) => {
                         const currentOwner = getOwnerFromId(batch.ownerId, tenants);
+
+                        console.log({ ownerId: batch.ownerId, tenants });
+
                         return (
                             // eslint-disable-next-line react/no-array-index-key
                             <Fragment key={`${batch.id}-${i}`}>
@@ -97,7 +95,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                                     <S.Text colour={getColourFromDate(batch.expires)}>{getDate(batch.expires)}</S.Text>
                                 </S.DateButton>
 
-                                {isTabletOrLarger && currentOwner.email && (
+                                {currentOwner.email && (
                                     <ProfilePhoto
                                         email={currentOwner.email}
                                         name={currentOwner.name}

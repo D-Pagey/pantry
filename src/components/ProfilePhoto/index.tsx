@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { getInitials } from './utils';
 import * as S from './styles';

@@ -3,7 +3,7 @@ import selectEvent from 'react-select-event';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen, waitFor } from '../../test-utils';
-import { Fridge, MetaData, TenantHeidi, UserDan } from '../../fixtures';
+import { Fridge, MetaData, TenantDan, TenantHeidi, TenantJoe, UserDan } from '../../fixtures';
 import { PageEditFood } from '.';
 
 const mockAddItemDeleteItem = jest.fn();
@@ -33,8 +33,8 @@ jest.mock('react-toastify', () => ({
 }));
 
 const props = {
-    fridge: Fridge,
-    tenants: [TenantHeidi],
+    fridge: Fridge.filter((item) => item.batches.length > 0),
+    tenants: [TenantHeidi, TenantDan, { ...TenantJoe, houseRole: 'tenant' as const }],
     metadata: MetaData
 };
 

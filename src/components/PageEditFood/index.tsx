@@ -26,6 +26,8 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
     );
     const history = useHistory();
 
+    console.log({ fridge, tenants });
+
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
     const handleSaveChanges = async () => {
@@ -73,45 +75,44 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                         Edit your <S.Span>{titleCase(state.originalItem.name)}</S.Span>:
                     </S.Title>
 
-                    <S.Grid>
-                        <S.Label htmlFor="editItemName">Change item name:</S.Label>
-                        <S.CreatableDropdown
-                            defaultValue={state.originalItem.name}
-                            options={formatFoodDropdownOptions(fridge)}
-                            setSelected={(name: string) => dispatch({ type: 'CHANGE_NAME', name })}
-                            inputName="editItemName"
-                        />
+                    <S.Label htmlFor="editItemName">Change item name:</S.Label>
+                    <S.CreatableDropdown
+                        defaultValue={state.originalItem.name}
+                        options={formatFoodDropdownOptions(fridge)}
+                        setSelected={(name: string) => dispatch({ type: 'CHANGE_NAME', name })}
+                        inputName="editItemName"
+                    />
 
-                        <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
-                        <S.CreatableDropdown
-                            defaultValue={state.originalItem.unit}
-                            options={formatDropdownOptions(metadata.units)}
-                            setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
-                            inputName="editItemUnit"
-                        />
+                    <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
+                    <S.CreatableDropdown
+                        defaultValue={state.originalItem.unit}
+                        options={formatDropdownOptions(metadata.units)}
+                        setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
+                        inputName="editItemUnit"
+                    />
 
-                        <S.Label column="1/2">Change category:</S.Label>
-                        <S.CreatableDropdown
-                            defaultValue={state.originalItem.category}
-                            options={formatDropdownOptions(metadata.categories)}
-                            setSelected={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
-                            inputName="editItemCategory"
-                        />
+                    <S.Label>Change category:</S.Label>
+                    <S.CreatableDropdown
+                        defaultValue={state.originalItem.category}
+                        options={formatDropdownOptions(metadata.categories)}
+                        setSelected={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
+                        inputName="editItemCategory"
+                    />
 
-                        <S.Label column="2/3" row="3/4">
-                            Change date or owner:
-                        </S.Label>
-                        <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
+                    <S.Subtitle>Edit servings:</S.Subtitle>
+                    <S.ItalicText>
+                        You can click the date, owner picture or delete button to change that serving.
+                    </S.ItalicText>
+                    <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
 
-                        <S.ButtonWrapper>
-                            <S.Button onClick={() => history.push('/food')} secondary>
-                                Back
-                            </S.Button>
-                            <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
-                                Save Changes
-                            </S.Button>
-                        </S.ButtonWrapper>
-                    </S.Grid>
+                    <S.ButtonWrapper>
+                        <S.Button onClick={() => history.push('/food')} secondary>
+                            Cancel
+                        </S.Button>
+                        <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
+                            Save Changes
+                        </S.Button>
+                    </S.ButtonWrapper>
                 </S.Wrapper>
             )}
         </Layout>
