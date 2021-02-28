@@ -82,8 +82,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                     return [...Array(batch.quantity)].map((e, i) => {
                         const currentOwner = getOwnerFromId(batch.ownerId, tenants);
 
-                        console.log({ ownerId: batch.ownerId, tenants });
-
                         return (
                             // eslint-disable-next-line react/no-array-index-key
                             <Fragment key={`${batch.id}-${i}`}>

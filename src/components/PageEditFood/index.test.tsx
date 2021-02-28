@@ -145,7 +145,7 @@ describe('PageEditFood component', () => {
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.select(screen.getByLabelText('Change item unit:'), 'kilograms');
-        userEvent.click(screen.getByText('Save Changes'));
+        userEvent.click(screen.getAllByText('Save Changes')[0]);
 
         screen.getByTestId('loading');
 
@@ -158,7 +158,7 @@ describe('PageEditFood component', () => {
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.create(screen.getByLabelText('Change item unit:'), newUnit);
-        userEvent.click(screen.getByText('Save Changes'));
+        userEvent.click(screen.getAllByText('Save Changes')[0]);
 
         await waitFor(() =>
             expect(mockAddNewUnit).toHaveBeenCalledWith([...props.metadata.units, newUnit], UserDan.household)

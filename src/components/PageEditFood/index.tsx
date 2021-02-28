@@ -1,8 +1,10 @@
-import React, { FC, useContext, useReducer } from 'react';
+import { FC, useContext, useReducer } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 import { toast } from 'react-toastify';
+import { useMediaQuery } from 'react-responsive';
 
+import { mediaQuery } from '../../tokens';
 import { convertBatchesArray, formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
 import { FoodType, MetaDataType, TenantType } from '../../types';
 import { addItemDeleteItem, addItem, addNewUnit } from '../../services/firestore';
@@ -25,8 +27,9 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
         init(intialItemState, fridge, name)
     );
     const history = useHistory();
-
-    console.log({ fridge, tenants });
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
+    });
 
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
 
@@ -70,40 +73,57 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
     return (
         <Layout isLoading={state.loading} hideTitle>
             {state.originalItem.name && (
-                <S.Wrapper>
+                <S.Grid>
                     <S.Title>
                         Edit your <S.Span>{titleCase(state.originalItem.name)}</S.Span>:
                     </S.Title>
 
-                    <S.Label htmlFor="editItemName">Change item name:</S.Label>
-                    <S.CreatableDropdown
-                        defaultValue={state.originalItem.name}
-                        options={formatFoodDropdownOptions(fridge)}
-                        setSelected={(name: string) => dispatch({ type: 'CHANGE_NAME', name })}
-                        inputName="editItemName"
-                    />
+                    <S.DataWrapper>
+                        {isTabletOrLarger && <S.Subtitle>Info:</S.Subtitle>}
 
-                    <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
-                    <S.CreatableDropdown
-                        defaultValue={state.originalItem.unit}
-                        options={formatDropdownOptions(metadata.units)}
-                        setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
-                        inputName="editItemUnit"
-                    />
+                        <S.Label htmlFor="editItemName">Change item name:</S.Label>
+                        <S.CreatableDropdown
+                            defaultValue={state.originalItem.name}
+                            options={formatFoodDropdownOptions(fridge)}
+                            setSelected={(name: string) => dispatch({ type: 'CHANGE_NAME', name })}
+                            inputName="editItemName"
+                        />
 
-                    <S.Label>Change category:</S.Label>
-                    <S.CreatableDropdown
-                        defaultValue={state.originalItem.category}
-                        options={formatDropdownOptions(metadata.categories)}
-                        setSelected={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
-                        inputName="editItemCategory"
-                    />
+                        <S.Label htmlFor="editItemUnit">Change item unit:</S.Label>
+                        <S.CreatableDropdown
+                            defaultValue={state.originalItem.unit}
+                            options={formatDropdownOptions(metadata.units)}
+                            setSelected={(unit: string) => dispatch({ type: 'CHANGE_UNIT', unit })}
+                            inputName="editItemUnit"
+                        />
 
-                    <S.Subtitle>Edit servings:</S.Subtitle>
-                    <S.ItalicText>
-                        You can click the date, owner picture or delete button to change that serving.
-                    </S.ItalicText>
-                    <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
+                        <S.Label>Change category:</S.Label>
+                        <S.CreatableDropdown
+                            defaultValue={state.originalItem.category}
+                            options={formatDropdownOptions(metadata.categories)}
+                            setSelected={(category: string) => dispatch({ type: 'CHANGE_CATEGORY', category })}
+                            inputName="editItemCategory"
+                        />
+                    </S.DataWrapper>
+
+                    {!isTabletOrLarger && (
+                        <S.ButtonWrapper>
+                            <S.Button onClick={() => history.push('/food')} secondary>
+                                Cancel
+                            </S.Button>
+                            <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
+                                Save Changes
+                            </S.Button>
+                        </S.ButtonWrapper>
+                    )}
+
+                    <S.ServingsWrapper>
+                        <S.Subtitle>Servings:</S.Subtitle>
+                        <S.ItalicText>
+                            You can click the date, owner picture or delete button to change that serving.
+                        </S.ItalicText>
+                        <EditFoodServings item={state.editedItem} tenants={nonPendingTenants} dispatch={dispatch} />
+                    </S.ServingsWrapper>
 
                     <S.ButtonWrapper>
                         <S.Button onClick={() => history.push('/food')} secondary>
@@ -113,7 +133,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                             Save Changes
                         </S.Button>
                     </S.ButtonWrapper>
-                </S.Wrapper>
+                </S.Grid>
             )}
         </Layout>
     );
