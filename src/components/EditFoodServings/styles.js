@@ -1,16 +1,52 @@
 import styled from 'styled-components';
+import { mediaQuery, zIndex } from '../../tokens';
+import { ReactModalAdapter } from '../ReactModalAdapter';
 import { Button } from '../Button';
 
-export const ModalStyles = {
-    content: {
-        bottom: 'auto',
-        left: '50%',
-        marginRight: '-50%',
-        right: 'auto',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
+export const ReactModal = styled(ReactModalAdapter).attrs({
+    overlayClassName: 'Overlay',
+    modalClassName: 'Modal'
+})`
+    & .Overlay {
+        background: #2b2b2be8;
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: ${zIndex.ultimate};
     }
-};
+    & .Modal {
+        border-radius: 10px 10px 0 0;
+        background: white;
+        bottom: 0;
+        left: 0;
+        outline: none;
+        overflow: auto;
+        padding: 0.75rem;
+        position: fixed;
+        right: 0;
+        webkitoverflowscrolling: touch;
+    }
+    &[class*='--after-open'] {
+    }
+    &[class*='--before-close'] {
+    }
+
+    @media ${mediaQuery.tablet} {
+        & .Modal {
+            bottom: auto;
+            border-radius: 10px;
+            left: 50%;
+            max-width: 300px;
+            padding: 1rem 1.5rem 2rem;
+            right: auto;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+`;
 
 export const Grid = styled.div`
     align-self: center;

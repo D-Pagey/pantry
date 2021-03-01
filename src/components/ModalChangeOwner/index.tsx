@@ -1,18 +1,26 @@
 import { FC } from 'react';
 import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
-import { TenantType } from '../../types';
+import { BatchType, TenantType } from '../../types';
 import { getColourFromDate } from '../../utils';
 import * as S from './styles';
 
 export type ModalChangeOwnerProps = {
-    currentOwner: TenantType;
-    expiryDate: Date;
+    handleModalClose: () => void;
     itemName: string;
+    selectedBatch: BatchType;
     tenants: TenantType[];
     unit: string;
 };
 
-export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({ currentOwner, expiryDate, itemName, tenants, unit }) => {
+export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
+    handleModalClose,
+    itemName,
+    selectedBatch,
+    tenants,
+    unit
+}) => {
+    const currentOwner = tenants.filter((tenant) => tenant.uid === selectedBatch.ownerId)[0];
+
     const getDate = (date: Date) => {
         const difference = differenceInDays(date, Date.now());
         const isLessThanOneDay = difference === 0;
@@ -29,7 +37,7 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({ currentOwner, expi
             <S.Text>
                 This <S.Green>{unit}</S.Green> of <S.Green>{itemName}</S.Green> is{' '}
                 <S.BoldGreen>{currentOwner.name}&apos;s</S.BoldGreen> and is expiring in{' '}
-                <S.Date color={getColourFromDate(expiryDate)}>{getDate(expiryDate)}</S.Date>.
+                <S.Date color={getColourFromDate(selectedBatch.expires)}>{getDate(selectedBatch.expires)}</S.Date>.
             </S.Text>
 
             <S.Subtitle>Click a photo to change the owner</S.Subtitle>
@@ -41,7 +49,9 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({ currentOwner, expi
                 }, [] as JSX.Element[])}
             </S.TenantsWrapper>
 
-            <S.Button secondary>Back</S.Button>
+            <S.Button secondary onClick={handleModalClose}>
+                Back
+            </S.Button>
         </S.Wrapper>
     );
 };

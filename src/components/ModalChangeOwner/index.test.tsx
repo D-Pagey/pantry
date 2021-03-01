@@ -1,13 +1,13 @@
 import { render } from '../../test-utils';
+import { ExpiredBatch, TenantDan, TenantHeidi, TenantJoe } from '../../fixtures';
 import { ModalChangeOwner } from '.';
-import { TenantDan, TenantHeidi, TenantJoe } from '../../fixtures';
 
 const props = {
-    currentOwner: TenantDan,
-    expiryDate: new Date(),
+    handleModalClose: () => null,
     itemName: 'steak',
-    tenants: [TenantDan, TenantJoe, TenantHeidi],
-    unit: 'servings'
+    selectedBatch: ExpiredBatch,
+    tenants: [TenantDan, TenantHeidi, TenantJoe],
+    unit: 'serving'
 };
 
 describe('ModalChangeOwner component', () => {

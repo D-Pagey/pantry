@@ -19,6 +19,7 @@ exports[`EditFoodServings component should render 1`] = `
 
 .c6 {
   border-radius: 50%;
+  cursor: pointer;
   height: auto;
   min-height: 50px;
   width: 60px;

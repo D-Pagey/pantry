@@ -9,6 +9,7 @@ import { updateBatch } from '../../services/firestore';
 import { EditItemAction } from '../PageEditFood/itemReducer';
 import { AuthContext } from '../ProviderAuth';
 import { ModalChangeDate } from '../ModalChangeDate';
+import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ProfilePhoto } from '../ProfilePhoto';
 import * as S from './styles';
 
@@ -22,7 +23,7 @@ export type EditFoodServingsProps = {
 
 export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, tenants }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEditingDate, setIsEditingDate] = useState<boolean>();
+    const [editMode, setEditMode] = useState<'date' | 'owner'>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
     const { user } = useContext(AuthContext);
 
@@ -36,15 +37,15 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
         return `${quantity} ${unit}`;
     };
 
-    const handleDateClick = (batch: BatchType) => () => {
+    const handleEditServingClick = (batch: BatchType, editMode: 'owner' | 'date') => () => {
         setIsModalOpen(true);
         setSelectedBatch(batch);
-        setIsEditingDate(true);
+        setEditMode(editMode);
     };
 
     const handleModalClose = () => {
         setIsModalOpen(false);
-        setIsEditingDate(undefined);
+        setEditMode(undefined);
     };
 
     // change this to be in reducer
@@ -65,15 +66,25 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
     return (
         <>
             {selectedBatch && (
-                <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                    {isEditingDate && (
+                <S.ReactModal isOpen={isModalOpen}>
+                    {editMode === 'date' && (
                         <ModalChangeDate
                             expires={selectedBatch.expires}
                             handleDateChange={handleDateChange}
                             handleModalClose={handleModalClose}
                         />
                     )}
-                </ReactModal>
+
+                    {editMode === 'owner' && (
+                        <ModalChangeOwner
+                            itemName={item.name}
+                            unit={item.unit}
+                            tenants={tenants}
+                            selectedBatch={selectedBatch}
+                            handleModalClose={handleModalClose}
+                        />
+                    )}
+                </S.ReactModal>
             )}
 
             <S.Grid>
@@ -89,7 +100,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                             <Fragment key={`${batch.id}-${i}`}>
                                 <S.DateButton
                                     secondary
-                                    onClick={handleDateClick(batch)}
+                                    onClick={handleEditServingClick(batch, 'date')}
                                     borderColour={getColourFromDate(batch.expires)}
                                 >
                                     <S.Text colour={getColourFromDate(batch.expires)}>{getDate(batch.expires)}</S.Text>
@@ -100,6 +111,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                                         email={currentOwner.email}
                                         name={currentOwner.name}
                                         photo={currentOwner.photo}
+                                        onClick={handleEditServingClick(batch, 'owner')}
                                     />
                                 )}
 
