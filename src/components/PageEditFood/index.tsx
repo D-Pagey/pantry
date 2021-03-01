@@ -109,7 +109,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                     {!isTabletOrLarger && (
                         <S.ButtonWrapper>
                             <S.Button onClick={() => history.push('/food')} secondary>
-                                Cancel
+                                Back
                             </S.Button>
                             <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
                                 Save Changes
@@ -127,7 +127,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
 
                     <S.ButtonWrapper>
                         <S.Button onClick={() => history.push('/food')} secondary>
-                            Cancel
+                            Back
                         </S.Button>
                         <S.Button onClick={handleSaveChanges} disabled={!state.hasItemChanged}>
                             Save Changes
