@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import * as S from './styles';
 
-type ModalChangeDateTypes = {
+export type ModalChangeDateTypes = {
     expires: Date;
     handleDateChange: (date: Date) => void;
     handleModalClose: () => void;

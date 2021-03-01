@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalChangeOwner component should render 1`] = `
+.c10 {
+  background-color: #348841;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  min-width: 68px;
+}
+
+.c11 {
+  background-color: white;
+  border: 1px solid #348841;
+  color: #348841;
+}
+
+.c8 {
+  border-radius: 50%;
+  height: auto;
+  min-height: 50px;
+  width: 60px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+
+.c2 {
+  font-size: 1.25rem;
+  margin: 0;
+  text-align: center;
+}
+
+.c6 {
+  font-style: italic;
+  font-weight: normal;
+  margin: 2rem 0 1rem;
+  text-align: center;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c9 {
+  cursor: pointer;
+  margin: 0 1rem 0 0;
+}
+
+.c12 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  margin: 1.5rem 0 0;
+}
+
+.c3 {
+  color: #348841;
+}
+
+.c4 {
+  font-weight: 500;
+}
+
+.c5 {
+  color: #EB5757;
+}
+
+<div
+  class="c0"
+  data-testid="modalChangeOwner"
+>
+  <h2
+    class="c1"
+  >
+    Change Owner
+  </h2>
+  <p
+    class="c2"
+  >
+    This 
+    <span
+      class="c3"
+    >
+      servings
+    </span>
+     of 
+    <span
+      class="c3"
+    >
+      steak
+    </span>
+     is
+     
+    <span
+      class="c3 c4"
+    >
+      Dan Page
+      's
+    </span>
+     and is expiring in
+     
+    <span
+      class="c5"
+      color="#EB5757"
+    >
+      1 day
+    </span>
+    .
+  </p>
+  <h3
+    class="c6"
+  >
+    Click a photo to change the owner
+  </h3>
+  <div
+    class="c7"
+  >
+    <img
+      alt="profile"
+      class="c8 c9"
+      src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+    />
+    <img
+      alt="profile"
+      class="c8 c9"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </div>
+  <button
+    class="c10 c11 c12"
+    type="button"
+  >
+    Back
+  </button>
+</div>
+`;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '../../test-utils';
 import { TenantDan } from '../../fixtures';
 import { ModalHousehold } from '.';
