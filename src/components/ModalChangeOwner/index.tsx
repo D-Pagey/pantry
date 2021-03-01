@@ -6,6 +6,7 @@ import * as S from './styles';
 
 export type ModalChangeOwnerProps = {
     handleModalClose: () => void;
+    handleOwnerChange: (ownerId: string, batchId: string) => void;
     itemName: string;
     selectedBatch: BatchType;
     tenants: TenantType[];
@@ -14,12 +15,17 @@ export type ModalChangeOwnerProps = {
 
 export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
     handleModalClose,
+    handleOwnerChange,
     itemName,
     selectedBatch,
     tenants,
     unit
 }) => {
     const currentOwner = tenants.filter((tenant) => tenant.uid === selectedBatch.ownerId)[0];
+
+    const handleOwnerClick = (ownerId: string, batchId: string) => () => {
+        handleOwnerChange(ownerId, batchId);
+    };
 
     const getDate = (date: Date) => {
         const difference = differenceInDays(date, Date.now());
@@ -45,7 +51,15 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
                 {tenants.reduce((acc, curr) => {
                     if (curr.uid === currentOwner.uid) return acc;
 
-                    return [...acc, <S.TenantPhoto key={curr.uid} photo={curr.photo} email={curr.email} />];
+                    return [
+                        ...acc,
+                        <S.TenantPhoto
+                            key={curr.uid}
+                            photo={curr.photo}
+                            email={curr.email}
+                            onClick={handleOwnerClick(curr.uid, selectedBatch.id)}
+                        />
+                    ];
                 }, [] as JSX.Element[])}
             </S.TenantsWrapper>
 

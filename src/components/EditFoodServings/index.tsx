@@ -63,6 +63,11 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
         dispatch({ type: 'DECREMENT_BATCH_QUANTITY', batchId });
     };
 
+    const handleOwnerClick = (ownerId: string, batchId: string) => {
+        dispatch({ type: 'CHANGE_BATCH_OWNER', newOwnerId: ownerId, batchId });
+        setIsModalOpen(false);
+    };
+
     return (
         <>
             {selectedBatch && (
@@ -82,6 +87,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                             tenants={tenants}
                             selectedBatch={selectedBatch}
                             handleModalClose={handleModalClose}
+                            handleOwnerChange={handleOwnerClick}
                         />
                     )}
                 </S.ReactModal>

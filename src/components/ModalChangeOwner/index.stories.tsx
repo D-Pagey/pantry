@@ -14,6 +14,7 @@ export const Primary = Template.bind({});
 
 Primary.args = {
     handleModalClose: () => null,
+    handleOwnerChange: () => null,
     itemName: 'steak',
     selectedBatch: ExpiredBatch,
     tenants: [TenantDan, TenantHeidi, TenantJoe],

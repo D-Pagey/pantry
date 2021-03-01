@@ -28,13 +28,20 @@ type DecrementBatchQuantityAction = {
     batchId: string;
 };
 
+type ChangeBatchOwnerAction = {
+    type: 'CHANGE_BATCH_OWNER';
+    batchId: string;
+    newOwnerId: string;
+};
+
 export type EditItemAction =
     | LoadingAction
     | InitialiseAction
     | ChangeUnitAction
     | ChangeCategoryAction
     | ChangeNameAction
-    | DecrementBatchQuantityAction;
+    | DecrementBatchQuantityAction
+    | ChangeBatchOwnerAction;
 
 type EditState = {
     loading: boolean;
@@ -113,6 +120,25 @@ export const itemReducer = (state: EditState, action: EditItemAction): EditState
                 editedItem: {
                     ...state.editedItem,
                     name: action.name.toLowerCase()
+                }
+            };
+        }
+
+        case 'CHANGE_BATCH_OWNER': {
+            const updatedBatches = state.editedItem.batches.reduce((acc, curr) => {
+                if (curr.id === action.batchId) {
+                    return [...acc, { ...curr, ownerId: action.newOwnerId }];
+                }
+
+                return [...acc, curr];
+            }, [] as BatchType[]);
+
+            return {
+                ...state,
+                hasItemChanged: true,
+                editedItem: {
+                    ...state.editedItem,
+                    batches: updatedBatches
                 }
             };
         }

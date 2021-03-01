@@ -4,6 +4,7 @@ import { ModalChangeOwner } from '.';
 
 const props = {
     handleModalClose: () => null,
+    handleOwnerChange: () => null,
     itemName: 'steak',
     selectedBatch: ExpiredBatch,
     tenants: [TenantDan, TenantHeidi, TenantJoe],
