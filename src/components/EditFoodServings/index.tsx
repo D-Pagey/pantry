@@ -1,13 +1,11 @@
-import { FC, useContext, useState, Fragment } from 'react';
+import { FC, useState, Fragment } from 'react';
 import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 import ReactModal from 'react-modal';
 
 import deleteIcon from '../../assets/delete.svg';
 import { BatchType, FoodType, TenantType } from '../../types';
 import { getColourFromDate, getOwnerFromId } from '../../utils';
-import { updateBatch } from '../../services/firestore';
 import { EditItemAction } from '../PageEditFood/itemReducer';
-import { AuthContext } from '../ProviderAuth';
 import { ModalChangeDate } from '../ModalChangeDate';
 import { ModalChangeOwner } from '../ModalChangeOwner';
 import { ProfilePhoto } from '../ProfilePhoto';
@@ -25,7 +23,6 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editMode, setEditMode] = useState<'date' | 'owner'>();
     const [selectedBatch, setSelectedBatch] = useState<BatchType>();
-    const { user } = useContext(AuthContext);
 
     const getDate = (date: Date) => {
         const difference = differenceInDays(date, Date.now());
@@ -48,14 +45,10 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
         setEditMode(undefined);
     };
 
-    // change this to be in reducer
-    // but need to reflect in UI immediately pre-save
-    const handleDateChange = (date: Date) => {
+    const handleDateChange = (newDate: Date) => {
         if (selectedBatch) {
-            const updatedBatch = { ...selectedBatch, expires: date };
-            updateBatch({ name: item.name, batch: updatedBatch, userHousehold: user!.household! });
+            dispatch({ type: 'CHANGE_BATCH_DATE', newDate, batchId: selectedBatch.id });
         }
-
         setIsModalOpen(false);
     };
 
@@ -98,7 +91,7 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
                 <S.ServingsTitles>Owner</S.ServingsTitles>
                 <S.ServingsTitles>Delete</S.ServingsTitles>
                 {item.batches.map((batch) => {
-                    return [...Array(batch.quantity)].map((e, i) => {
+                    return [...Array(batch.quantity)].map((_, i) => {
                         const currentOwner = getOwnerFromId(batch.ownerId, tenants);
 
                         return (

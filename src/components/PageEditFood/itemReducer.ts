@@ -34,6 +34,12 @@ type ChangeBatchOwnerAction = {
     newOwnerId: string;
 };
 
+type ChangeBatchDateAction = {
+    type: 'CHANGE_BATCH_DATE';
+    batchId: string;
+    newDate: Date;
+};
+
 export type EditItemAction =
     | LoadingAction
     | InitialiseAction
@@ -41,7 +47,8 @@ export type EditItemAction =
     | ChangeCategoryAction
     | ChangeNameAction
     | DecrementBatchQuantityAction
-    | ChangeBatchOwnerAction;
+    | ChangeBatchOwnerAction
+    | ChangeBatchDateAction;
 
 type EditState = {
     loading: boolean;
@@ -128,6 +135,25 @@ export const itemReducer = (state: EditState, action: EditItemAction): EditState
             const updatedBatches = state.editedItem.batches.reduce((acc, curr) => {
                 if (curr.id === action.batchId) {
                     return [...acc, { ...curr, ownerId: action.newOwnerId }];
+                }
+
+                return [...acc, curr];
+            }, [] as BatchType[]);
+
+            return {
+                ...state,
+                hasItemChanged: true,
+                editedItem: {
+                    ...state.editedItem,
+                    batches: updatedBatches
+                }
+            };
+        }
+
+        case 'CHANGE_BATCH_DATE': {
+            const updatedBatches = state.editedItem.batches.reduce((acc, curr) => {
+                if (curr.id === action.batchId) {
+                    return [...acc, { ...curr, expires: action.newDate }];
                 }
 
                 return [...acc, curr];

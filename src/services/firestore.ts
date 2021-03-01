@@ -1,23 +1,5 @@
-import { BatchType, DatabaseFoodType } from '../types';
-import { db, firebase } from '.';
-
-type UpdateBatchProps = {
-    name: string;
-    batch: BatchType;
-    userHousehold: string;
-};
-
-/**
- * This function updates a specific batch within an existing item
- */
-export const updateBatch = ({ name, batch, userHousehold }: UpdateBatchProps): Promise<void> => {
-    return db
-        .collection('households')
-        .doc(userHousehold)
-        .update({
-            [`fridge.${name}.batches.${batch.id}`]: batch
-        });
-};
+import { DatabaseFoodType } from '../types';
+import { db } from '.';
 
 /**
  * This function deletes all batches for an item
@@ -72,22 +54,4 @@ export const addItemDeleteItem = async (
 
     // delete old item
     return deleteItemBatches(nameToBeDeleted, household);
-};
-
-type DeleteBatchProps = {
-    name: string;
-    batchId: string;
-    userHousehold: string;
-};
-
-/**
- * This function deletes a specific batchId from firestore
- */
-export const deleteBatch = ({ name, batchId, userHousehold }: DeleteBatchProps): Promise<void> => {
-    return db
-        .collection('households')
-        .doc(userHousehold)
-        .update({
-            [`fridge.${name}.batches.${batchId}`]: firebase.firestore.FieldValue.delete()
-        });
 };
