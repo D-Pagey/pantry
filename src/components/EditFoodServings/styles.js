@@ -13,6 +13,7 @@ export const ModalStyles = {
 };
 
 export const Grid = styled.div`
+    align-self: center;
     display: grid;
     grid-row-gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;

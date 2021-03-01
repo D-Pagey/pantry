@@ -47,6 +47,8 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
         setIsEditingDate(undefined);
     };
 
+    // change this to be in reducer
+    // but need to reflect in UI immediately pre-save
     const handleDateChange = (date: Date) => {
         if (selectedBatch) {
             const updatedBatch = { ...selectedBatch, expires: date };
