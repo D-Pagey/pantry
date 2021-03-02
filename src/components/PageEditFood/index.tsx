@@ -97,7 +97,7 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
                             inputName="editItemUnit"
                         />
 
-                        <S.Label>Change category:</S.Label>
+                        <S.Label htmlFor="editItemCategory">Change category:</S.Label>
                         <S.CreatableDropdown
                             defaultValue={state.originalItem.category}
                             options={formatDropdownOptions(metadata.categories)}

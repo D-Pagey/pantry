@@ -69,15 +69,15 @@ describe('PageEditFood component', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
-    it.skip('should call addItem when name has not changed', async () => {
-        const newCategory = 'Dairy';
+    it('should call addItem when name has not changed', async () => {
+        const newCategory = 'dairy';
         const newUnit = 'kilograms';
 
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.select(screen.getByLabelText('Change item unit:'), newUnit);
-        userEvent.click(screen.getByText(newCategory));
-        userEvent.click(screen.getByText('Save Changes'));
+        await selectEvent.select(screen.getByLabelText('Change category:'), newCategory);
+        userEvent.click(screen.getAllByText('Save Changes')[0]);
 
         screen.getByTestId('loading');
 
@@ -92,14 +92,14 @@ describe('PageEditFood component', () => {
         );
     });
 
-    it.skip('should call addItemDeleteItem when name changes to a new name', async () => {
+    it('should call addItemDeleteItem when name changes to a new name', async () => {
         const newName = 'editing-item-name';
 
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.create(screen.getByLabelText('Change item name:'), newName);
 
-        userEvent.click(screen.getByText('Save Changes'));
+        userEvent.click(screen.getAllByText('Save Changes')[0]);
 
         expect(mockAddItemDeleteItem).toHaveBeenCalledWith(
             {
@@ -113,15 +113,15 @@ describe('PageEditFood component', () => {
         );
     });
 
-    it.skip('should call addItemDeleteItem when name changes to an existing name', async () => {
-        const newCategory = 'Meat';
+    it('should call addItemDeleteItem when name changes to an existing name', async () => {
+        const newCategory = 'meat';
 
         render(<PageEditFood {...props} />, context);
 
         await selectEvent.select(screen.getByLabelText('Change item name:'), 'Steak (7 servings)');
-        userEvent.click(screen.getByText(newCategory));
+        await selectEvent.select(screen.getByLabelText('Change category:'), newCategory);
 
-        userEvent.click(screen.getByText('Save Changes'));
+        userEvent.click(screen.getAllByText('Save Changes')[0]);
 
         screen.getByTestId('loading');
 
