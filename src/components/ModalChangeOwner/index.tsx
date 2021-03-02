@@ -57,6 +57,7 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
                                 photo={tenant.photo}
                                 email={tenant.email}
                                 onClick={handleOwnerClick(tenant.uid, selectedBatch.id)}
+                                data-testid={tenant.uid}
                             />
                         ))}
                     </S.TenantsWrapper>

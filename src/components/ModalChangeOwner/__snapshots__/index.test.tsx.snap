@@ -142,11 +142,13 @@ exports[`ModalChangeOwner component should render 1`] = `
     <img
       alt="profile"
       class="c8 c9"
+      data-testid="abcde"
       src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
     />
     <img
       alt="profile"
       class="c8 c9"
+      data-testid="zxwy"
       src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
     />
   </div>
