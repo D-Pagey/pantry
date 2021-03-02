@@ -16,14 +16,15 @@ export const Title = styled.h2`
 
 export const Text = styled.p`
     font-size: 1.25rem;
-    margin: 0;
+    font-style: ${({ italic }) => italic && 'italic'};
+    margin: 0 0 1rem;
     text-align: center;
 `;
 
 export const Subtitle = styled.h3`
     font-style: italic;
     font-weight: normal;
-    margin: 2rem 0 1rem;
+    margin: 1rem 0;
     text-align: center;
 `;
 

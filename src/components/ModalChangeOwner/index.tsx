@@ -22,6 +22,7 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
     unit
 }) => {
     const currentOwner = tenants.filter((tenant) => tenant.uid === selectedBatch.ownerId)[0];
+    const unselectedTenants = tenants.filter((tenant) => tenant.uid !== currentOwner.uid);
 
     const handleOwnerClick = (ownerId: string, batchId: string) => () => {
         handleOwnerChange(ownerId, batchId);
@@ -46,22 +47,25 @@ export const ModalChangeOwner: FC<ModalChangeOwnerProps> = ({
                 <S.Date color={getColourFromDate(selectedBatch.expires)}>{getDate(selectedBatch.expires)}</S.Date>.
             </S.Text>
 
-            <S.Subtitle>Click a photo to change the owner</S.Subtitle>
-            <S.TenantsWrapper>
-                {tenants.reduce((acc, curr) => {
-                    if (curr.uid === currentOwner.uid) return acc;
-
-                    return [
-                        ...acc,
-                        <S.TenantPhoto
-                            key={curr.uid}
-                            photo={curr.photo}
-                            email={curr.email}
-                            onClick={handleOwnerClick(curr.uid, selectedBatch.id)}
-                        />
-                    ];
-                }, [] as JSX.Element[])}
-            </S.TenantsWrapper>
+            {unselectedTenants.length > 0 ? (
+                <>
+                    <S.Subtitle>Click a photo to change the owner</S.Subtitle>
+                    <S.TenantsWrapper>
+                        {unselectedTenants.map((tenant) => (
+                            <S.TenantPhoto
+                                key={tenant.uid}
+                                photo={tenant.photo}
+                                email={tenant.email}
+                                onClick={handleOwnerClick(tenant.uid, selectedBatch.id)}
+                            />
+                        ))}
+                    </S.TenantsWrapper>
+                </>
+            ) : (
+                <S.Text italic>
+                    There is no one else in your household to change to. You can invite friends via the Settings page.
+                </S.Text>
+            )}
 
             <S.Button secondary onClick={handleModalClose}>
                 Back
