@@ -63,6 +63,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                 toast.error('Something went wrong leaving, try again.');
             }
         }
+
+        setIsLoading(false);
     };
 
     const handleRemoveUser = async () => {
@@ -77,6 +79,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
         } catch (error) {
             toast.error('Something went wrong removing user, try again.');
         }
+        setIsLoading(false);
     };
 
     const handlePromoteUser = async () => {
@@ -91,6 +94,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
         } catch (error) {
             toast.error('Something went wrong promoting user, try again.');
         }
+        setIsLoading(false);
     };
 
     const handleMenuClick = (id: string) => () => {
