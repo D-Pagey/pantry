@@ -184,7 +184,7 @@ exports[`FoodCard component should render 1`] = `
       <circle
         cx="4"
         cy="4"
-        fill="#FCBA3B"
+        fill="#EB5757"
         r="4"
       />
     </svg>
@@ -199,7 +199,7 @@ exports[`FoodCard component should render 1`] = `
       <circle
         cx="4"
         cy="4"
-        fill="#FCBA3B"
+        fill="#EB5757"
         r="4"
       />
     </svg>

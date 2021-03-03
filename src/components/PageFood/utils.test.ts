@@ -105,7 +105,7 @@ const FreshApple: FoodType = {
     unit: 'units',
     batches: [
         {
-            expires: addDays(new Date(), 5),
+            expires: addDays(new Date(), 7),
             quantity: 3,
             id: 'asdadsadsda',
             ownerId: TenantHeidi.uid
@@ -119,7 +119,7 @@ const AverageCarrot: FoodType = {
     unit: 'units',
     batches: [
         {
-            expires: addDays(new Date(), 4),
+            expires: addDays(new Date(), 5),
             quantity: 5,
             id: 'asdadsadsda',
             ownerId: TenantJoe.uid
@@ -204,7 +204,7 @@ describe('applyMultipleFilters function', () => {
         expect(notFiltered.length).toBe(food.length);
     });
 
-    it('should filter by expiring if passed showOnlyExpiring', () => {
+    it('should return only expiring items if passed showOnlyExpiring', () => {
         const filters: FilterState = {
             ...defaultFilters,
             showOnlyExpiring: true,

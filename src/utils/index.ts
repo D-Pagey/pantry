@@ -20,8 +20,8 @@ export const getPercentageFromDate = (date: Date): number => {
 export const getColourFromDate = (date: Date): string => {
     const difference = differenceInDays(date, new Date());
 
-    if (difference >= 4) return colours.darkGreen100;
-    if (difference >= 2) return colours.orange;
+    if (difference >= 5) return colours.darkGreen100;
+    if (difference >= 3) return colours.orange;
     if (difference >= 0) return colours.red;
 
     return colours.grey;

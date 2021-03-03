@@ -52,9 +52,9 @@ describe('getColourFromDate function', () => {
         ${new Date()}              | ${colours.red}
         ${addDays(new Date(), 1)}  | ${colours.red}
         ${addDays(new Date(), 2)}  | ${colours.red}
-        ${addDays(new Date(), 3)}  | ${colours.orange}
+        ${addDays(new Date(), 3)}  | ${colours.red}
         ${addDays(new Date(), 4)}  | ${colours.orange}
-        ${addDays(new Date(), 5)}  | ${colours.darkGreen100}
+        ${addDays(new Date(), 5)}  | ${colours.orange}
         ${addDays(new Date(), 6)}  | ${colours.darkGreen100}
     `('return $colour for $date', ({ colour, date }) => {
         const result = getColourFromDate(date);

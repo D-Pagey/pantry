@@ -44,10 +44,6 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c9 {
-  color: #FCBA3B;
-}
-
-.c11 {
   color: #348841;
 }
 
@@ -75,10 +71,6 @@ exports[`EditFoodServings component should render 1`] = `
 }
 
 .c8 {
-  border: 1px solid #FCBA3B;
-}
-
-.c10 {
   border: 1px solid #348841;
 }
 
@@ -126,11 +118,36 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c8"
+    class="c2 c3 c4"
     type="button"
   >
     <span
-      class="c9"
+      class="c5"
+    >
+      2 days
+    </span>
+  </button>
+  <img
+    alt="profile"
+    class="c6"
+    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+  />
+  <button
+    class="c7"
+    data-testid="deleteServing"
+    type="button"
+  >
+    <img
+      alt="delete"
+      src="delete.svg"
+    />
+  </button>
+  <button
+    class="c2 c3 c4"
+    type="button"
+  >
+    <span
+      class="c5"
     >
       2 days
     </span>
@@ -157,7 +174,7 @@ exports[`EditFoodServings component should render 1`] = `
     <span
       class="c9"
     >
-      2 days
+      5 days
     </span>
   </button>
   <img
@@ -176,11 +193,11 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c8"
     type="button"
   >
     <span
-      class="c11"
+      class="c9"
     >
       5 days
     </span>
@@ -201,11 +218,11 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c8"
     type="button"
   >
     <span
-      class="c11"
+      class="c9"
     >
       5 days
     </span>
@@ -226,36 +243,11 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c8"
     type="button"
   >
     <span
-      class="c11"
-    >
-      5 days
-    </span>
-  </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
-  <button
-    class="c7"
-    data-testid="deleteServing"
-    type="button"
-  >
-    <img
-      alt="delete"
-      src="delete.svg"
-    />
-  </button>
-  <button
-    class="c2 c3 c10"
-    type="button"
-  >
-    <span
-      class="c11"
+      class="c9"
     >
       5 days
     </span>

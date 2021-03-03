@@ -5,7 +5,7 @@ export const PAGE_WIDTH = '1100px';
 export const CATEGORY_CARD_HEIGHT = '115px';
 export const CATEGORY_CARD_WIDTH = '144px';
 
-export const EXPIRING_SOON_DAYS = 3;
+export const EXPIRING_SOON_DAYS = 4;
 
 export const colours = {
     black: 'black',
