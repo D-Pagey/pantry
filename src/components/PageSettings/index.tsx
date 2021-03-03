@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { TenantType } from '../../types';

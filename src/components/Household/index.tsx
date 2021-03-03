@@ -24,7 +24,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState<TenantType>();
-    const currentUser = tenants.filter((tenant) => tenant.uid === user.uid)[0];
+    const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
 
     const handleLeaveHousehold = async () => {
         const noPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
@@ -47,17 +47,21 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
 
     const handleCancelInvite = async () => {
         setIsLoading(true);
-        try {
-            await cancelInvite({
-                inviteeId: selectedTenant?.uid,
-                householdId: user.household,
-                inviterName: currentUser.name
-            });
 
-            toast.info('Invite cancelled');
-            setIsModalOpen(false);
-        } catch (error) {
-            toast.error('Something went wrong leaving, try again.');
+        if (selectedTenant) {
+            try {
+                await cancelInvite({
+                    inviteeId: selectedTenant?.uid,
+                    householdId: user.household,
+                    // @ts-ignore
+                    inviteNotificationId: selectedTenant.inviteNotificationId
+                });
+
+                toast.info('Invite cancelled');
+                setIsModalOpen(false);
+            } catch (error) {
+                toast.error('Something went wrong leaving, try again.');
+            }
         }
     };
 
@@ -97,7 +101,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     return (
         <>
             <ReactModal isOpen={isModalOpen} style={S.ModalStyles}>
-                {currentUser && (
+                {currentTenant && (
                     <ModalHousehold
                         handleCancelInvite={handleCancelInvite}
                         handleClose={() => setIsModalOpen(false)}
@@ -105,7 +109,7 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                         handlePromoteUser={handlePromoteUser}
                         handleRemoveUser={handleRemoveUser}
                         loading={isLoading}
-                        currentTenant={currentUser}
+                        currentTenant={currentTenant}
                         selectedTenant={selectedTenant}
                     />
                 )}
@@ -123,8 +127,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                         }, [] as string[]);
 
                         if (otherAdmins.includes(tenant.uid)) return false;
-                        if (currentUser.houseRole === 'admin') return true;
-                        if (currentUser.uid === tenant.uid) return true;
+                        if (currentTenant.houseRole === 'admin') return true;
+                        if (currentTenant.uid === tenant.uid) return true;
 
                         return false;
                     };
