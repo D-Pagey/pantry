@@ -1,3 +1,4 @@
+import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
 export const Form = styled.form`
@@ -18,4 +19,10 @@ export const ButtonWrapper = styled.div`
     button:first-child {
         margin: 0 1rem 0 0;
     }
+`;
+
+export const DatePicker = styled(ReactDatePicker)`
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    padding: 0.5rem;
 `;

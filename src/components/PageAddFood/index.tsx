@@ -3,7 +3,6 @@ import { FC, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import ReactDatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FoodType, MetaDataType } from '../../types';
@@ -156,7 +155,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     name="date"
                     defaultValue={new Date()}
                     render={({ onChange, onBlur, value }) => (
-                        <ReactDatePicker onChange={onChange} onBlur={onBlur} selected={value} />
+                        <S.DatePicker onChange={onChange} onBlur={onBlur} selected={value} />
                     )}
                 />
 
