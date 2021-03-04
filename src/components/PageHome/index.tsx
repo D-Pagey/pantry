@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Layout } from '../Layout';
@@ -14,7 +14,7 @@ export const PageHome: FC = () => {
         <Layout hideTitle>
             <S.Wrapper data-testid="pageHome">
                 <S.HeroWrapper>
-                    <S.Title>Play With Your Food</S.Title>
+                    <S.Title>Stop wasting food</S.Title>
 
                     <S.Screenshot src={ScreenshotImage} alt="screenshot of food page" />
 

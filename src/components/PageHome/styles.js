@@ -30,7 +30,6 @@ export const Title = styled.h1`
     font-weight: 500;
     margin: 0;
     text-align: center;
-    width: 230px;
 
     @media ${mediaQuery.tablet} {
         align-self: end;
