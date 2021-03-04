@@ -26,7 +26,10 @@ export const EditFoodServings: FC<EditFoodServingsProps> = ({ dispatch, item, te
 
     const getDate = (date: Date) => {
         const difference = differenceInDays(date, Date.now());
-        const isLessThanOneDay = difference === 0;
+
+        if (difference < 0) return 'Expired';
+
+        const isLessThanOneDay = difference < 1;
         const quantity = isLessThanOneDay ? 1 : parseInt(formatDistanceToNowStrict(date).split(' ')[0], 10);
         const unitOfTime = formatDistanceToNowStrict(date).split(' ')[1];
         const unit = isLessThanOneDay ? 'day' : unitOfTime;
