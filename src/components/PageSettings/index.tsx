@@ -29,16 +29,18 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
     }, []);
 
     const handleInviteClick = async () => {
-        if (tenants.map((tenant) => tenant.email).includes(emailInvite)) {
+        const trimmedEmail = emailInvite.trim();
+
+        if (tenants.map((tenant) => tenant.email).includes(trimmedEmail)) {
             toast.error('That user is already in your household');
         } else {
             setIsLoading(true);
 
             try {
-                const { data } = await inviteToHousehold({ email: emailInvite, householdId: user?.household });
+                const { data } = await inviteToHousehold({ email: trimmedEmail, householdId: user?.household });
 
                 if (data.userExists && data.hasNotified) {
-                    toast.success(`An invite was sent to ${emailInvite}`);
+                    toast.success(`An invite was sent to ${trimmedEmail}`);
                 } else {
                     toast.error(data.result);
                 }
