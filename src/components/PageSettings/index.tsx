@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { TenantType } from '../../types';
@@ -21,6 +22,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
     const [emailInvite, setEmailInvite] = useState('');
     const [notificationConsent, setNotificationConsent] = useState(false);
     const { signOut, user } = useContext(AuthContext);
+    const history = useHistory();
 
     useEffect(() => {
         if (Notification.permission === 'granted') {
@@ -96,6 +98,10 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
                 <S.InviteButton isLoading={isLoading} onClick={handleInviteClick} loadingContent="Inviting">
                     Invite
                 </S.InviteButton>
+
+                <Button secondary onClick={() => history.push('/food')}>
+                    Back
+                </Button>
 
                 <S.SignOutButton destructive onClick={(): void => signOut()} data-testid="PageSettingsButton">
                     Sign Out

@@ -12,6 +12,7 @@ import { convertBatchesArray, formatFoodDropdownOptions, formatDropdownOptions }
 import { AuthContext } from '../ProviderAuth';
 import { CreatableDropdown } from '../CreatableDropdown';
 import { Layout } from '../Layout';
+import { Button } from '../Button';
 import * as S from './styles';
 
 type PageAddFoodProps = {
@@ -159,7 +160,12 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     )}
                 />
 
-                <S.Button type="submit">Add item</S.Button>
+                <S.ButtonWrapper>
+                    <Button secondary onClick={() => history.push('/food')}>
+                        Back
+                    </Button>
+                    <Button type="submit">Add item</Button>
+                </S.ButtonWrapper>
             </S.Form>
         </Layout>
     );

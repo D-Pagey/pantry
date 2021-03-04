@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button as Btn } from '../Button';
 
 export const Form = styled.form`
     padding: 1rem;
@@ -11,7 +10,12 @@ export const Label = styled.label`
     margin: 1rem 0 0.5rem;
 `;
 
-export const Button = styled(Btn)`
-    align-self: flex-end;
-    margin: 2rem 0 0;
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0;
+
+    button:first-child {
+        margin: 0 1rem 0 0;
+    }
 `;
