@@ -24,7 +24,11 @@ export const colours = {
     red: '#EB5757',
     silver: '#C2C2C2',
     veryLightGrey: '#E5E5E5',
-    white: 'white'
+    white: 'white',
+    fresh: '#3BCB51',
+    average: '#3E9BEC',
+    soon: '#813488',
+    expired: '#EB5757'
 };
 
 export const mediaQuery = {

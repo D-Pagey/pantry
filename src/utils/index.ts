@@ -20,14 +20,13 @@ export const getPercentageFromDate = (date: Date): number => {
 export const getColourFromDate = (date: Date): string => {
     const difference = differenceInDays(date, new Date());
 
-    if (difference >= 5) return colours.darkGreen100;
-    if (difference >= 3) return colours.orange;
-    if (difference >= 0) return colours.red;
+    if (difference >= 5) return colours.fresh;
+    if (difference >= 3) return colours.average;
+    if (difference > 0) return colours.soon;
 
-    return colours.grey;
+    return colours.expired;
 };
 
-// TODO: Change to units
 export const formatFoodDropdownOptions = (fridge: FoodType[]): DropdownOptionType[] => {
     return fridge.map((food) => {
         const total = food.batches.reduce((acc, curr) => acc + curr.quantity, 0);

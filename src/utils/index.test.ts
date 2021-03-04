@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 
 import { colours } from '../tokens';
-import { DatabaseFoodType, FoodType } from '../types';
+import { FoodType } from '../types';
 import { FreshBatch, Fridge, ExpiringSoonBatch, ExpiredBatch, TenantHeidi, TenantDan, TenantJoe } from '../fixtures';
 import {
     checkAndFilterInvalidData,
@@ -48,14 +48,14 @@ describe('getPercentageFromDate function', () => {
 describe('getColourFromDate function', () => {
     it.each`
         date                       | colour
-        ${addDays(new Date(), -1)} | ${colours.grey}
-        ${new Date()}              | ${colours.red}
-        ${addDays(new Date(), 1)}  | ${colours.red}
-        ${addDays(new Date(), 2)}  | ${colours.red}
-        ${addDays(new Date(), 3)}  | ${colours.red}
-        ${addDays(new Date(), 4)}  | ${colours.orange}
-        ${addDays(new Date(), 5)}  | ${colours.orange}
-        ${addDays(new Date(), 6)}  | ${colours.darkGreen100}
+        ${addDays(new Date(), -1)} | ${colours.expired}
+        ${new Date()}              | ${colours.expired}
+        ${addDays(new Date(), 1)}  | ${colours.expired}
+        ${addDays(new Date(), 2)}  | ${colours.soon}
+        ${addDays(new Date(), 3)}  | ${colours.soon}
+        ${addDays(new Date(), 4)}  | ${colours.average}
+        ${addDays(new Date(), 5)}  | ${colours.average}
+        ${addDays(new Date(), 6)}  | ${colours.fresh}
     `('return $colour for $date', ({ colour, date }) => {
         const result = getColourFromDate(date);
 
