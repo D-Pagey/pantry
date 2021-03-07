@@ -1,28 +1,64 @@
 import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
+import { mediaQuery } from '../../tokens';
+import { CreatableDropdown } from '../CreatableDropdown';
 
 export const Form = styled.form`
-    padding: 1rem;
     display: flex;
+    padding: 1rem;
     flex-direction: column;
+
+    @media ${mediaQuery.tablet} {
+        display: grid;
+        grid-column-gap: 2rem;
+        grid-row-gap: 1.5rem;
+        grid-template-columns: 1fr 1fr;
+        max-width: 750px;
+        margin: 0 auto;
+        padding: 0;
+    }
 `;
 
 export const Label = styled.label`
-    margin: 1rem 0 0.5rem;
+    margin: 1rem 0 0;
+
+    &:first-child {
+        margin: 0;
+    }
+
+    @media ${mediaQuery.tablet} {
+        grid-column: ${({ column }) => column};
+        margin: 0;
+    }
 `;
 
 export const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 
     button:first-child {
         margin: 0 1rem 0 0;
     }
 `;
 
+export const DatePickerWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 0;
+
+    @media ${mediaQuery.tablet} {
+        margin: 0;
+    }
+`;
+
 export const DatePicker = styled(ReactDatePicker)`
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 5px;
+    margin: 0.5rem 0 0;
     padding: 0.5rem;
+`;
+
+export const Dropdown = styled(CreatableDropdown)`
+    margin: 0.5rem 0 0;
 `;

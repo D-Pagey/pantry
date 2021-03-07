@@ -9,7 +9,6 @@ import { FoodType, MetaDataType } from '../../types';
 import { addItem, addNewUnit } from '../../services/firestore';
 import { convertBatchesArray, formatFoodDropdownOptions, formatDropdownOptions } from '../../utils';
 import { AuthContext } from '../ProviderAuth';
-import { CreatableDropdown } from '../CreatableDropdown';
 import { Layout } from '../Layout';
 import { Button } from '../Button';
 import * as S from './styles';
@@ -82,82 +81,94 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
     return (
         <Layout title="Add Food">
             <S.Form onSubmit={handleSubmit(onSubmit)}>
-                <S.Label htmlFor="name">What is the food called?</S.Label>
-                <Controller
-                    control={control}
-                    name="name"
-                    defaultValue=""
-                    rules={{ required: true }}
-                    render={() => (
-                        <CreatableDropdown
-                            inputName="name"
-                            placeholder="Enter a name..."
-                            options={formatFoodDropdownOptions(fridge)}
-                            setSelected={(option) => setValue('name', option, { shouldValidate: true })}
-                            error={errors.name && 'A name is required'}
-                        />
-                    )}
-                />
+                <S.Label htmlFor="name" column="1">
+                    What is the food called?
+                    <Controller
+                        control={control}
+                        name="name"
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="name"
+                                placeholder="Enter a name..."
+                                options={formatFoodDropdownOptions(fridge)}
+                                setSelected={(option: string) => setValue('name', option, { shouldValidate: true })}
+                                error={errors.name && 'A name is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
 
-                <S.Label htmlFor="quantity">How many?</S.Label>
-                <Controller
-                    control={control}
-                    name="quantity"
-                    defaultValue="2"
-                    rules={{ required: true }}
-                    render={() => (
-                        <CreatableDropdown
-                            inputName="quantity"
-                            defaultValue="2"
-                            options={formatDropdownOptions(metaData!.quantities)}
-                            setSelected={(quantity) => setValue('quantity', quantity)}
-                            error={errors.quantity && 'A quantity is required'}
-                        />
-                    )}
-                />
+                <S.Label htmlFor="quantity" column="2">
+                    How many?
+                    <Controller
+                        control={control}
+                        name="quantity"
+                        defaultValue="2"
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="quantity"
+                                defaultValue="2"
+                                options={formatDropdownOptions(metaData!.quantities)}
+                                setSelected={(quantity: string) => setValue('quantity', quantity)}
+                                error={errors.quantity && 'A quantity is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
 
-                <S.Label htmlFor="unit">What unit?</S.Label>
-                <Controller
-                    control={control}
-                    name="unit"
-                    defaultValue="servings"
-                    rules={{ required: true }}
-                    render={() => (
-                        <CreatableDropdown
-                            inputName="unit"
-                            defaultValue="servings"
-                            options={formatDropdownOptions(metaData!.units)}
-                            setSelected={(unit) => setValue('unit', unit)}
-                            error={errors.unit && 'A unit is required'}
-                        />
-                    )}
-                />
+                <S.Label htmlFor="unit">
+                    What unit?
+                    <Controller
+                        control={control}
+                        name="unit"
+                        defaultValue="servings"
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="unit"
+                                defaultValue="servings"
+                                options={formatDropdownOptions(metaData!.units)}
+                                setSelected={(unit: string) => setValue('unit', unit)}
+                                error={errors.unit && 'A unit is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
 
-                <S.Label htmlFor="category">What category for this item?</S.Label>
-                <Controller
-                    control={control}
-                    name="category"
-                    defaultValue=""
-                    rules={{ required: true }}
-                    render={() => (
-                        <CreatableDropdown
-                            inputName="category"
-                            options={formatDropdownOptions(metaData!.categories)}
-                            setSelected={(category) => setValue('category', category, { shouldValidate: true })}
-                            error={errors.category && 'A category is required'}
-                        />
-                    )}
-                />
+                <S.Label htmlFor="category">
+                    What category for this item?
+                    <Controller
+                        control={control}
+                        name="category"
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="category"
+                                options={formatDropdownOptions(metaData!.categories)}
+                                setSelected={(category: string) =>
+                                    setValue('category', category, { shouldValidate: true })
+                                }
+                                error={errors.category && 'A category is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
 
-                <S.Label>What&apos; the expiry date?</S.Label>
-                <Controller
-                    control={control}
-                    name="date"
-                    defaultValue={new Date()}
-                    render={({ onChange, onBlur, value }) => (
-                        <S.DatePicker onChange={onChange} onBlur={onBlur} selected={value} />
-                    )}
-                />
+                <S.DatePickerWrapper>
+                    What&apos; the expiry date?
+                    <Controller
+                        control={control}
+                        name="date"
+                        defaultValue={new Date()}
+                        render={({ onChange, onBlur, value }) => (
+                            <S.DatePicker onChange={onChange} onBlur={onBlur} selected={value} />
+                        )}
+                    />
+                </S.DatePickerWrapper>
 
                 <S.ButtonWrapper>
                     <Button secondary onClick={() => history.push('/food')}>
