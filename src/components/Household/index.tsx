@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import ReactModal from 'react-modal';
 import { toast } from 'react-toastify';
+import { useMediaQuery } from 'react-responsive';
 
+import { mediaQuery } from '../../tokens';
 import threeDots from '../../assets/three-dots.svg';
 import { firebase } from '../../services';
 import { TenantType, UserType } from '../../types';
@@ -24,7 +26,17 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTenant, setSelectedTenant] = useState<TenantType>();
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
+    });
+
     const currentTenant = tenants.filter((tenant) => tenant.uid === user.uid)[0];
+
+    const getTrimmedVersion = (property: string) => {
+        if (isTabletOrLarger) return property;
+
+        return <S.TextWithEllipsis>{property.slice(0, 10)}</S.TextWithEllipsis>;
+    };
 
     const handleLeaveHousehold = async () => {
         const noPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
@@ -140,8 +152,10 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     return (
                         <S.Item key={tenant.uid}>
                             <S.ProfilePhoto email={tenant.email} name={tenant.name} photo={tenant.photo} width="50px" />
-                            <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name.slice(0, 10)}</S.Name>
-                            <S.Email>{tenant.email.slice(0, 10)}</S.Email>
+                            <S.Name isPending={isPending}>
+                                {isPending ? 'Pending' : getTrimmedVersion(tenant.name)}
+                            </S.Name>
+                            <S.Email>{getTrimmedVersion(tenant.email)}</S.Email>
                             <Emoji houseRole={tenant.houseRole} />
 
                             {showMenu() && (

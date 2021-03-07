@@ -52,6 +52,7 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
         <Layout title="Settings">
             <S.Wrapper data-testid="PageSettings">
                 <S.PersonalWrapper>
+                    <S.PersonalSubtitle>Personal:</S.PersonalSubtitle>
                     <S.Name>{user!.name}</S.Name>
                     <S.Email>
                         <S.Bold>Email:</S.Bold>

@@ -74,3 +74,9 @@ export const ModalStyles = {
         transform: 'translate(-50%, -50%)'
     }
 };
+
+export const TextWithEllipsis = styled.span`
+    &:after {
+        content: '...';
+    }
+`;
