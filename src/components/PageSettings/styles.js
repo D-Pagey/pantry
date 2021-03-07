@@ -1,22 +1,39 @@
 import styled from 'styled-components';
 import { Input as RawInput } from '../Input';
 import { Button as RawButton } from '../Button';
+import { ProfilePhoto } from '../ProfilePhoto';
 
 export const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
-    padding: 1.5rem;
-    max-width: 400px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 `;
 
-export const Name = styled.h3`
+export const PersonalWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-gap: 1rem;
+`;
+
+export const Photo = styled(ProfilePhoto)`
     align-self: center;
-    font-size: 1.25rem;
+    grid-column: 2;
+    grid-row: 1;
+`;
+
+export const Name = styled.p`
     margin: 0;
-    text-align: center;
+    align-self: center;
+`;
+
+export const Email = styled.p`
+    margin: 0;
+    grid-column: 1 / 3;
+`;
+
+export const Bold = styled.span`
+    font-weight: bold;
+    margin: 0 0.5rem 0 0;
 `;
 
 export const Heading = styled.h4`
@@ -26,24 +43,33 @@ export const Heading = styled.h4`
 `;
 
 export const Text = styled.p`
-    grid-column: 1 / 3;
-    margin: 0;
+    margin: 2rem 0 1rem;
 `;
 
 export const HouseholdWrapper = styled.div`
-    grid-column: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 0;
 `;
 
 export const Input = styled(RawInput)`
-    grid-column: 1 / 3;
+    margin: 0 0 1rem;
 `;
 
 export const InviteButton = styled(RawButton)`
-    grid-column: 2 / 3;
+    align-self: flex-end;
+`;
+
+export const Subtitle = styled.h2`
+    font-weight: normal;
+`;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin: 2.5rem 0 0 0;
 `;
 
 export const SignOutButton = styled(RawButton)`
-    grid-column: 1 / 3;
-    justify-self: center;
-    margin: 2rem 0 0;
+    margin: 0 0 0 1rem;
 `;

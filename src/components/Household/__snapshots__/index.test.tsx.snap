@@ -106,7 +106,7 @@ exports[`Household component should render 1`] = `
     <span
       class="c5"
     >
-      dan@test.com
+      dan@test.c
     </span>
     <span
       aria-label="avocado"
@@ -142,7 +142,7 @@ exports[`Household component should render 1`] = `
     <span
       class="c5"
     >
-      heidi@gmail.com
+      heidi@gmai
     </span>
     <span
       aria-label="avocado"
@@ -169,7 +169,7 @@ exports[`Household component should render 1`] = `
     <span
       class="c5"
     >
-      joe@test.com
+      joe@test.c
     </span>
     <span
       aria-label="potato"

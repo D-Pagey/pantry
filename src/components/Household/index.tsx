@@ -140,8 +140,8 @@ export const Household: FC<HouseholdProps> = ({ tenants, user }) => {
                     return (
                         <S.Item key={tenant.uid}>
                             <S.ProfilePhoto email={tenant.email} name={tenant.name} photo={tenant.photo} width="50px" />
-                            <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name}</S.Name>
-                            <S.Email>{tenant.email}</S.Email>
+                            <S.Name isPending={isPending}>{isPending ? 'Pending' : tenant.name.slice(0, 10)}</S.Name>
+                            <S.Email>{tenant.email.slice(0, 10)}</S.Email>
                             <Emoji houseRole={tenant.houseRole} />
 
                             {showMenu() && (
