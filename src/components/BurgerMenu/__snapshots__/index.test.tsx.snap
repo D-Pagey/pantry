@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BurgerMenu component should render 1`] = `
+.c1 {
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0 0 1rem;
+}
+
 .c0 {
   color: white;
   -webkit-text-decoration: none;
@@ -12,7 +19,7 @@ exports[`BurgerMenu component should render 1`] = `
   color: orange;
 }
 
-.c1 {
+.c2 {
   background-color: rgb(55,58,71);
   border: none;
   color: white;
@@ -25,7 +32,7 @@ exports[`BurgerMenu component should render 1`] = `
   text-decoration: none;
 }
 
-.c1:hover {
+.c2:hover {
   color: orange;
 }
 
@@ -97,8 +104,15 @@ exports[`BurgerMenu component should render 1`] = `
         >
           Settings
         </a>
-        <button
+        <span
           class="c1"
+          data-feedback-fish="true"
+          data-feedback-fish-userid="dan@test.com"
+        >
+          Send feedback
+        </span>
+        <button
+          class="c2"
           data-testid="burgerMenuSignOut"
           type="button"
         >

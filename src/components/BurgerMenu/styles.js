@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
+export const Item = styled.span`
+    color: white;
+    text-decoration: none;
+    padding: 0 0 1rem;
+`;
+
 export const NavLink = styled(Link)`
     color: white;
     text-decoration: none;

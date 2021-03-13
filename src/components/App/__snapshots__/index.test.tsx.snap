@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component should render 1`] = `
+.c1 {
+  color: white;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0 0 1rem;
+}
+
 .c0 {
   color: white;
   -webkit-text-decoration: none;
@@ -115,11 +122,15 @@ exports[`App component should render 1`] = `
         >
           Home
         </a>
+        <span
+          class="c1"
+          data-feedback-fish="true"
+        >
+          Send feedback
+        </span>
         <a
-          class="c0 bm-item"
+          class="c0"
           href="/sign-in"
-          style="display: block;"
-          tabindex="-1"
         >
           Sign In
         </a>

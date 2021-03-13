@@ -8,6 +8,7 @@
         "yarn": ">=1.15.2"
     },
     "dependencies": {
+        "@feedback-fish/react": "1.2.1",
         "@storybook/addons": "6.1.21",
         "@storybook/react": "6.1.21",
         "@testing-library/dom": "7.30.0",

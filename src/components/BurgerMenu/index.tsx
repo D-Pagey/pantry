@@ -1,5 +1,6 @@
-import React, { FC, useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
+import { FeedbackFish } from '@feedback-fish/react';
 
 import { AuthContext } from '../ProviderAuth';
 import * as S from './styles';
@@ -28,14 +29,24 @@ export const BurgerMenu: FC = () => {
                     <S.NavLink to="/settings" onClick={closeMenu} data-testid="burgerMenuSettingsLink">
                         Settings
                     </S.NavLink>
+
+                    <FeedbackFish projectId="ebf44b54be5b15" userId={user.email}>
+                        <S.Item>Send feedback</S.Item>
+                    </FeedbackFish>
+
                     <S.Button onClick={menuSignOut} data-testid="burgerMenuSignOut">
                         Sign Out
                     </S.Button>
                 </>
             ) : (
-                <S.NavLink to="/sign-in" onClick={closeMenu}>
-                    Sign In
-                </S.NavLink>
+                <>
+                    <FeedbackFish projectId="ebf44b54be5b15">
+                        <S.Item>Send feedback</S.Item>
+                    </FeedbackFish>
+                    <S.NavLink to="/sign-in" onClick={closeMenu}>
+                        Sign In
+                    </S.NavLink>
+                </>
             )}
         </Menu>
     );

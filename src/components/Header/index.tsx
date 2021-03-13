@@ -1,6 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { FeedbackFish } from '@feedback-fish/react';
 
 import { UserType } from '../../types';
 import { mediaQuery } from '../../tokens';
@@ -99,6 +100,12 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
                         </S.NavItem>
 
                         <S.NavItem>
+                            <FeedbackFish projectId="ebf44b54be5b15">
+                                <span style={{ cursor: 'pointer' }}>Send feedback</span>
+                            </FeedbackFish>
+                        </S.NavItem>
+
+                        <S.NavItem>
                             <S.Link to="/settings">Settings</S.Link>
                         </S.NavItem>
                     </S.NavList>
@@ -106,6 +113,12 @@ export const Header: FC<HeaderTypes> = ({ page }) => {
 
                 {!user && isTabletOrLarger && (
                     <S.NavList>
+                        <S.NavItem>
+                            <FeedbackFish projectId="ebf44b54be5b15">
+                                <span style={{ cursor: 'pointer' }}>Send feedback</span>
+                            </FeedbackFish>
+                        </S.NavItem>
+
                         <S.NavItem>
                             <S.Link to="/sign-in">Sign In / Sign Up</S.Link>
                         </S.NavItem>
