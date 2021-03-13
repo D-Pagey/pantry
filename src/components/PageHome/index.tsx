@@ -18,7 +18,7 @@ export const PageHome: FC = () => {
 
                     <S.Screenshot src={ScreenshotImage} alt="screenshot of food page" />
 
-                    <S.Text>Stop wasting food and get creative with what you have.</S.Text>
+                    <S.Text>Get creative with what you have before it expires.</S.Text>
 
                     <S.Text>
                         Pantry gives you the heads up when food is about to expire, reducing your waste and saving you
