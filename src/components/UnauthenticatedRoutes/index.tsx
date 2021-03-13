@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { PageHome } from '../PageHome';
 import { PageSignIn } from '../PageSignIn';
 import { PageMagicLanding } from '../PageMagicLanding';
-import { PageFeedback } from '../PageFeedback';
 
 export const UnauthenticatedRoutes: FC = () => {
     return (
@@ -19,10 +18,6 @@ export const UnauthenticatedRoutes: FC = () => {
             {/* used for magic sign in email link */}
             <Route path="/magic">
                 <PageMagicLanding />
-            </Route>
-
-            <Route path="/feedback">
-                <PageFeedback />
             </Route>
 
             <Route>
