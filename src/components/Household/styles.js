@@ -16,7 +16,7 @@ export const Item = styled.li`
     border-bottom: 1px solid #9b9b9b;
     display: grid;
     grid-column-gap: 1rem;
-    grid-template-columns: max-content 0.8fr 0.2fr minmax(22px, max-content);
+    grid-template-columns: max-content 1fr 0.2fr minmax(22px, max-content);
     padding: 1rem;
 
     &:last-child {
