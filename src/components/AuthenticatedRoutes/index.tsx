@@ -11,6 +11,7 @@ import { PageFood } from '../PageFood';
 import { PageEditFood } from '../PageEditFood';
 import { PageNotFound } from '../PageNotFound';
 import { PageSettings } from '../PageSettings';
+import { PageFeedback } from '../PageFeedback';
 
 export const AuthenticatedRoutes = (): JSX.Element => {
     const [fridge, setFridge] = useState<FoodType[]>();
@@ -70,6 +71,10 @@ export const AuthenticatedRoutes = (): JSX.Element => {
 
             <Route path="/settings">
                 <PageSettings tenants={tenants} />
+            </Route>
+
+            <Route path="/feedback">
+                <PageFeedback />
             </Route>
 
             <Route>

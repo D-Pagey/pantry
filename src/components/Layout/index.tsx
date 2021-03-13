@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { mediaQuery } from '../../tokens';

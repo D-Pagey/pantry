@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserDan, TenantHeidi } from '../../fixtures';
 import { AuthContext } from '../ProviderAuth';
 import { PageSettings } from '.';
