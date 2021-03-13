@@ -1,4 +1,4 @@
-import { FC, useContext, useReducer } from 'react';
+import { FC, useContext, useReducer, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { titleCase } from 'title-case';
 import { toast } from 'react-toastify';
@@ -7,6 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import { mediaQuery } from '../../tokens';
 import { convertBatchesArray, formatDropdownOptions, formatFoodDropdownOptions } from '../../utils';
 import { FoodType, MetaDataType, TenantType } from '../../types';
+import { analytics } from '../../services';
 import { addItemDeleteItem, addItem, addNewUnit } from '../../services/firestore';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
@@ -32,6 +33,10 @@ export const PageEditFood: FC<PageEditFoodProps> = ({ fridge, tenants, metadata 
     });
 
     const nonPendingTenants = tenants.filter((tenant) => tenant.houseRole !== 'pending');
+
+    useEffect(() => {
+        analytics.logEvent('editing_item');
+    }, []);
 
     const handleSaveChanges = async () => {
         const { originalItem, editedItem } = state;

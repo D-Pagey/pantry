@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 
-import { firebase } from '../../services';
+import { analytics, firebase } from '../../services';
 import { Layout } from '../Layout';
 import { Input } from '../Input';
 import loginImage from './assets/mobile-login.svg';
@@ -19,12 +19,8 @@ export const PageSignIn: FC = () => {
         firebase
             .auth()
             .signInWithPopup(googleProvider)
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            .then((result) => null)
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            .catch((error) => {
-                setIsLoading(false);
-            });
+            .then(() => analytics.logEvent('login'))
+            .catch(() => setIsLoading(false));
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

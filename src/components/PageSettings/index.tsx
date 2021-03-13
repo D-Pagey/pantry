@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { TenantType } from '../../types';
-import { firebase } from '../../services';
+import { analytics, firebase } from '../../services';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
 import { Household } from '../Household';
@@ -46,6 +46,8 @@ export const PageSettings: FC<PageSettingsProps> = ({ tenants }) => {
 
             setIsLoading(false);
         }
+
+        analytics.logEvent('invited_friend');
     };
 
     return (

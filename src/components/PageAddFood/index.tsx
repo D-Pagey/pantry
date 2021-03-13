@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FoodType, MetaDataType } from '../../types';
 import { addItem, addNewUnit } from '../../services/firestore';
+import { analytics } from '../../services';
 import { convertBatchesArray, formatFoodDropdownOptions, formatDropdownOptions } from '../../utils';
 import { AuthContext } from '../ProviderAuth';
 import { Layout } from '../Layout';
@@ -74,6 +75,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
             }
         }
 
+        analytics.logEvent('added_item');
         history.push('/food');
     };
 
