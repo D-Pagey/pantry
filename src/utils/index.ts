@@ -28,7 +28,14 @@ export const getColourFromDate = (date: Date): string => {
 };
 
 export const formatFoodDropdownOptions = (fridge: FoodType[]): DropdownOptionType[] => {
-    return fridge.map((food) => {
+    const sorted = [...fridge].sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+
+        return 0;
+    });
+
+    return sorted.map((food) => {
         const total = food.batches.reduce((acc, curr) => acc + curr.quantity, 0);
 
         return { label: `${titleCase(food.name)} (${total} ${food.unit})`, value: food.name };
@@ -37,7 +44,14 @@ export const formatFoodDropdownOptions = (fridge: FoodType[]): DropdownOptionTyp
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatDropdownOptions = (array: any[]): DropdownOptionType[] => {
-    return array.map((item: string | number) => ({
+    const sorted = [...array].sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+
+        return 0;
+    });
+
+    return sorted.map((item: string | number) => ({
         label: item.toString(),
         value: item.toString()
     }));

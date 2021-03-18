@@ -67,11 +67,11 @@ describe('formatFoodDropdownOptions function', () => {
     it('should return an array of objects of labels and values', () => {
         const options = formatFoodDropdownOptions(Fridge);
         expect(options).toStrictEqual([
-            { label: 'Really Long Food Name for Carrot (7 servings)', value: 'really long food name for carrot' },
             { label: 'Broccoli (7 servings)', value: 'broccoli' },
-            { label: 'Steak (7 servings)', value: 'steak' },
+            { label: 'Chocolate (0 servings)', value: 'chocolate' },
             { label: 'Milk (7 carton)', value: 'milk' },
-            { label: 'Chocolate (0 servings)', value: 'chocolate' }
+            { label: 'Really Long Food Name for Carrot (7 servings)', value: 'really long food name for carrot' },
+            { label: 'Steak (7 servings)', value: 'steak' }
         ]);
     });
 });
