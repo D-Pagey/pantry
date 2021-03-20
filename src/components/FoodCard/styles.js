@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { colours, zIndex } from '../../tokens';
 import { ProfilePhoto } from '../ProfilePhoto';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.button`
+    background: none;
     box-shadow: ${({ isSelected }) => isSelected && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
     border: 1px solid ${colours.darkGreen20};
     border-radius: 10px;
@@ -22,6 +23,7 @@ export const Name = styled.p`
     font-size: 18px;
     grid-column: 1 / 4;
     margin: 0;
+    text-align: left;
 `;
 
 export const Subtext = styled.p`
@@ -31,6 +33,7 @@ export const Subtext = styled.p`
     margin: 0;
     padding: 0 0 0.5rem;
     grid-column: 1 / 2;
+    text-align: left;
 `;
 
 export const OwnerPicture = styled(ProfilePhoto)`
