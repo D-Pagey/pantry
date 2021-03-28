@@ -167,7 +167,12 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         name="date"
                         defaultValue={new Date()}
                         render={({ onChange, onBlur, value }) => (
-                            <S.DatePicker onChange={onChange} onBlur={onBlur} selected={value} />
+                            <S.DatePicker
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                selected={value}
+                                dateFormat="do MMMM yyyy"
+                            />
                         )}
                     />
                 </S.DatePickerWrapper>
