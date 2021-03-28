@@ -1,6 +1,6 @@
 import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
-import { mediaQuery } from '../../tokens';
+import { colours, mediaQuery } from '../../tokens';
 import { CreatableDropdown } from '../CreatableDropdown';
 
 export const Form = styled.form`
@@ -19,6 +19,17 @@ export const Form = styled.form`
     }
 `;
 
+export const Subtitle = styled.h2`
+    font-weight: 400;
+    margin: 1rem 0 0;
+    text-decoration: underline;
+    text-decoration-color: ${colours.darkGreen60};
+
+    @media ${mediaQuery.tablet} {
+        margin: 0;
+    }
+`;
+
 export const Label = styled.label`
     margin: 1rem 0 0;
 
@@ -28,6 +39,7 @@ export const Label = styled.label`
 
     @media ${mediaQuery.tablet} {
         grid-column: ${({ column }) => column};
+        grid-row: ${({ row }) => row};
         margin: 0;
     }
 `;
@@ -36,6 +48,10 @@ export const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     margin: 1.5rem 0;
+
+    @media ${mediaQuery.tablet} {
+        grid-column: 2;
+    }
 
     button:first-child {
         margin: 0 1rem 0 0;
@@ -49,6 +65,8 @@ export const DatePickerWrapper = styled.div`
 
     @media ${mediaQuery.tablet} {
         margin: 0;
+        grid-column: 1;
+        grid-row: 4;
     }
 `;
 

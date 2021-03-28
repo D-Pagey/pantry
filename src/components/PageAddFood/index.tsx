@@ -4,7 +4,9 @@ import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
+import { useMediaQuery } from 'react-responsive';
 
+import { mediaQuery } from '../../tokens';
 import { FoodType, MetaDataType } from '../../types';
 import { addItem, addNewUnit } from '../../services/firestore';
 import { analytics } from '../../services';
@@ -31,6 +33,9 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
     const { handleSubmit, errors, setValue, control } = useForm<Inputs>();
     const { user } = useContext(AuthContext);
     const history = useHistory();
+    const isTabletOrLarger = useMediaQuery({
+        query: mediaQuery.tablet
+    });
 
     const onSubmit = async ({ name, category, unit, date, quantity }: Inputs) => {
         const lowercaseName = name.toLowerCase();
@@ -83,7 +88,9 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
     return (
         <Layout title="Add Food">
             <S.Form onSubmit={handleSubmit(onSubmit)}>
-                <S.Label htmlFor="name" column="1">
+                {isTabletOrLarger && <S.Subtitle>Required:</S.Subtitle>}
+
+                <S.Label htmlFor="name" column="1" row="2">
                     What is the food called?
                     <Controller
                         control={control}
@@ -102,7 +109,7 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                     />
                 </S.Label>
 
-                <S.Label htmlFor="quantity" column="2">
+                <S.Label htmlFor="quantity" column="1" row="3">
                     How many?
                     <Controller
                         control={control}
@@ -116,45 +123,6 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                                 options={formatDropdownOptions(metaData!.quantities)}
                                 setSelected={(quantity: string) => setValue('quantity', quantity)}
                                 error={errors.quantity && 'A quantity is required'}
-                            />
-                        )}
-                    />
-                </S.Label>
-
-                <S.Label htmlFor="unit">
-                    What unit?
-                    <Controller
-                        control={control}
-                        name="unit"
-                        defaultValue="servings"
-                        rules={{ required: true }}
-                        render={() => (
-                            <S.Dropdown
-                                inputName="unit"
-                                defaultValue="servings"
-                                options={formatDropdownOptions(metaData!.units)}
-                                setSelected={(unit: string) => setValue('unit', unit)}
-                                error={errors.unit && 'A unit is required'}
-                            />
-                        )}
-                    />
-                </S.Label>
-
-                <S.Label htmlFor="category">
-                    What category for this item?
-                    <Controller
-                        control={control}
-                        name="category"
-                        defaultValue=""
-                        rules={{ required: true }}
-                        render={() => (
-                            <S.Dropdown
-                                inputName="category"
-                                options={formatDropdownOptions(metaData!.categories)}
-                                setSelected={(category: string) =>
-                                    setValue('category', category, { shouldValidate: true })
-                                }
-                                error={errors.category && 'A category is required'}
                             />
                         )}
                     />
@@ -176,6 +144,48 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         )}
                     />
                 </S.DatePickerWrapper>
+
+                <S.Subtitle>Optional:</S.Subtitle>
+
+                <S.Label htmlFor="category" column="2" row="2">
+                    What category for this item?
+                    <Controller
+                        control={control}
+                        name="category"
+                        defaultValue="other"
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="category"
+                                defaultValue="other"
+                                options={formatDropdownOptions(metaData!.categories)}
+                                setSelected={(category: string) =>
+                                    setValue('category', category, { shouldValidate: true })
+                                }
+                                error={errors.category && 'A category is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
+
+                <S.Label htmlFor="unit" column="2">
+                    What unit?
+                    <Controller
+                        control={control}
+                        name="unit"
+                        defaultValue="servings"
+                        rules={{ required: true }}
+                        render={() => (
+                            <S.Dropdown
+                                inputName="unit"
+                                defaultValue="servings"
+                                options={formatDropdownOptions(metaData!.units)}
+                                setSelected={(unit: string) => setValue('unit', unit)}
+                                error={errors.unit && 'A unit is required'}
+                            />
+                        )}
+                    />
+                </S.Label>
 
                 <S.ButtonWrapper>
                     <Button secondary onClick={() => history.push('/food')}>
