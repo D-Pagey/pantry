@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModalChangeOwner component should render 1`] = `
-.c10 {
+.c11 {
   background-color: #348841;
   border: 0;
   border-radius: 5px;
@@ -11,7 +11,7 @@ exports[`ModalChangeOwner component should render 1`] = `
   min-width: 68px;
 }
 
-.c11 {
+.c12 {
   background-color: white;
   border: 1px solid #348841;
   color: #348841;
@@ -19,7 +19,15 @@ exports[`ModalChangeOwner component should render 1`] = `
 
 .c8 {
   border-radius: 50%;
-  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c10 {
+  border-radius: 50%;
   height: auto;
   min-height: 50px;
   width: 60px;
@@ -70,7 +78,7 @@ exports[`ModalChangeOwner component should render 1`] = `
   margin: 0 1rem 0 0;
 }
 
-.c12 {
+.c13 {
   -webkit-align-self: flex-end;
   -ms-flex-item-align: end;
   align-self: flex-end;
@@ -139,21 +147,31 @@ exports[`ModalChangeOwner component should render 1`] = `
   <div
     class="c7"
   >
-    <img
-      alt="profile"
+    <button
       class="c8 c9"
       data-testid="abcde"
-      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-    />
-    <img
-      alt="profile"
+      type="button"
+    >
+      <img
+        alt="profile"
+        class="c10"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      />
+    </button>
+    <button
       class="c8 c9"
       data-testid="zxwy"
-      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-    />
+      type="button"
+    >
+      <img
+        alt="profile"
+        class="c10"
+        src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+      />
+    </button>
   </div>
   <button
-    class="c10 c11 c12"
+    class="c11 c12 c13"
     type="button"
   >
     Back

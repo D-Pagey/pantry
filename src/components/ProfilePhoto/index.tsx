@@ -11,12 +11,24 @@ type ProfilePhotoTypes = {
     onClick?: () => void;
 };
 
-export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, photo, width, email, name, ...props }) => {
-    if (photo) return <S.Image onClick={onClick} src={photo} width={width} alt="profile" {...props} />;
+const ProfilePhotoCore: FC<ProfilePhotoTypes> = ({ name, email, photo, width, ...props }) => {
+    if (photo) return <S.Image src={photo} width={width} alt="profile" {...props} />;
 
     return (
-        <S.Circle onClick={onClick} width={width} {...props}>
+        <S.Circle width={width} {...props}>
             <S.Initials>{getInitials({ name, email })}</S.Initials>
         </S.Circle>
     );
+};
+
+export const ProfilePhoto: FC<ProfilePhotoTypes> = ({ onClick, photo, width, email, name, ...props }) => {
+    if (onClick) {
+        return (
+            <S.Button onClick={onClick} type="button" {...props}>
+                <ProfilePhotoCore photo={photo} width={width} email={email} name={name} />
+            </S.Button>
+        );
+    }
+
+    return <ProfilePhotoCore photo={photo} width={width} email={email} name={name} {...props} />;
 };

@@ -19,7 +19,15 @@ exports[`EditFoodServings component should render 1`] = `
 
 .c6 {
   border-radius: 50%;
-  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.c7 {
+  border-radius: 50%;
   height: auto;
   min-height: 50px;
   width: 60px;
@@ -43,15 +51,15 @@ exports[`EditFoodServings component should render 1`] = `
   color: #EB5757;
 }
 
-.c9 {
+.c10 {
   color: #813488;
 }
 
-.c11 {
+.c12 {
   color: #3BCB51;
 }
 
-.c7 {
+.c8 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -74,11 +82,11 @@ exports[`EditFoodServings component should render 1`] = `
   border: 1px solid #EB5757;
 }
 
-.c8 {
+.c9 {
   border: 1px solid #813488;
 }
 
-.c10 {
+.c11 {
   border: 1px solid #3BCB51;
 }
 
@@ -110,13 +118,18 @@ exports[`EditFoodServings component should render 1`] = `
       1 day
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh5.googleusercontent.com/-2Kb4LT8qzLs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnT8gAa__5KWDwf4PR1ro78WH3YRg/photo.jpg"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -126,22 +139,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c8"
+    class="c2 c3 c9"
     type="button"
   >
     <span
-      class="c9"
+      class="c10"
     >
       2 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -151,22 +169,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c8"
+    class="c2 c3 c9"
     type="button"
   >
     <span
-      class="c9"
+      class="c10"
     >
       2 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -176,22 +199,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c11"
     type="button"
   >
     <span
-      class="c11"
+      class="c12"
     >
       5 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -201,22 +229,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c11"
     type="button"
   >
     <span
-      class="c11"
+      class="c12"
     >
       5 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -226,22 +259,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c11"
     type="button"
   >
     <span
-      class="c11"
+      class="c12"
     >
       5 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
@@ -251,22 +289,27 @@ exports[`EditFoodServings component should render 1`] = `
     />
   </button>
   <button
-    class="c2 c3 c10"
+    class="c2 c3 c11"
     type="button"
   >
     <span
-      class="c11"
+      class="c12"
     >
       5 days
     </span>
   </button>
-  <img
-    alt="profile"
-    class="c6"
-    src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
-  />
   <button
-    class="c7"
+    class="c6"
+    type="button"
+  >
+    <img
+      alt="profile"
+      class="c7"
+      src="https://lh3.googleusercontent.com/a-/AOh14Gi6ZcKd1ClkJqBEEP114ZJ07XWJfQLKJKL6apgFgQ"
+    />
+  </button>
+  <button
+    class="c8"
     data-testid="deleteServing"
     type="button"
   >
