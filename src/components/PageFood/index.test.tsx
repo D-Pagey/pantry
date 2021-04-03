@@ -84,7 +84,7 @@ describe('PageFood component', () => {
                 return await findByText(titleCase(item.name));
             }
 
-            return await waitFor(() => expect(queryByText(titleCase(item.name))).toBe(null));
+            return await waitFor(() => expect(queryByText(titleCase(item.name))).not.toBeInTheDocument());
         });
     });
 
@@ -109,7 +109,7 @@ describe('PageFood component', () => {
         userEvent.click(getByText('Expiring soon'));
 
         findByText(titleCase(ExpiringFridge[0].name));
-        await waitFor(() => expect(queryByText(titleCase(ExpiringFridge[1].name))).toBe(null));
+        await waitFor(() => expect(queryByText(titleCase(ExpiringFridge[1].name))).not.toBeInTheDocument());
     });
 
     it.skip('should show all items if click expiring toggle on then off again', async () => {
@@ -133,7 +133,7 @@ describe('PageFood component', () => {
         userEvent.click(getByText('Expiring soon'));
 
         findByText(titleCase(ExpiringFridge[0].name));
-        expect(queryByText(titleCase(ExpiringFridge[1].name))).toBe(null);
+        expect(queryByText(titleCase(ExpiringFridge[1].name))).not.toBeInTheDocument();
 
         userEvent.click(getByText('Expiring soon x'));
 
@@ -175,7 +175,7 @@ describe('PageFood component', () => {
                 return getByText(titleCase(item.name));
             }
 
-            return expect(queryByText(titleCase(item.name))).toBe(null);
+            return expect(queryByText(titleCase(item.name))).not.toBeInTheDocument();
         });
 
         // filter down to expiring items
@@ -183,8 +183,8 @@ describe('PageFood component', () => {
 
         // check there are expiring vegetables
         getByText('Carrot');
-        expect(queryByText('Broccoli')).toBe(null);
-        expect(queryByText('Steak')).toBe(null);
+        expect(queryByText('Broccoli')).not.toBeInTheDocument();
+        expect(queryByText('Steak')).not.toBeInTheDocument();
     });
 
     it.skip('should handle expiring on then off when filtered down', () => {
@@ -220,7 +220,7 @@ describe('PageFood component', () => {
                 return getByText(titleCase(item.name));
             }
 
-            return expect(queryByText(titleCase(item.name))).toBe(null);
+            return expect(queryByText(titleCase(item.name))).not.toBeInTheDocument();
         });
 
         // toggle on expiring item
@@ -229,9 +229,9 @@ describe('PageFood component', () => {
         // expect an expiring item to be there
         getByText('Carrot');
         // expect a non-expiring vegetable to render
-        expect(queryByText('Broccoli')).toBe(null);
+        expect(queryByText('Broccoli')).not.toBeInTheDocument();
         // expect a non-vegetable to render
-        expect(queryByText('Steak')).toBe(null);
+        expect(queryByText('Steak')).not.toBeInTheDocument();
 
         // toggle off expiring, show all fridge options
         userEvent.click(getByText('Expiring soon x'));
@@ -278,7 +278,7 @@ describe('PageFood component', () => {
 
         const { queryByText, getByText } = render(<PageFood {...props} {...overrideProps} />, context);
 
-        expect(queryByText(titleCase(overrideProps.fridge[0].name))).toBe(null);
+        expect(queryByText(titleCase(overrideProps.fridge[0].name))).not.toBeInTheDocument();
         getByText(titleCase(overrideProps.fridge[1].name));
     });
 
@@ -301,7 +301,7 @@ describe('PageFood component', () => {
 
         userEvent.click(getByText(titleCase(itemName)));
 
-        expect(queryByText('foodOptions')).toBe(null);
+        expect(queryByText('foodOptions')).not.toBeInTheDocument();
     });
 
     it.skip('should handle delete', () => {
