@@ -30,7 +30,13 @@ type Inputs = {
 };
 
 export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
-    const { handleSubmit, errors, setValue, control } = useForm<Inputs>();
+    const {
+        handleSubmit,
+        setValue,
+        control,
+
+        formState: { errors }
+    } = useForm<Inputs>();
     const { user } = useContext(AuthContext);
     const history = useHistory();
     const isTabletOrLarger = useMediaQuery({
@@ -134,11 +140,12 @@ export const PageAddFood: FC<PageAddFoodProps> = ({ fridge, metaData }) => {
                         control={control}
                         name="date"
                         defaultValue={new Date()}
-                        render={({ onChange, onBlur, value }) => (
+                        render={({ field }) => (
                             <S.DatePicker
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                selected={value}
+                                {...field}
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                                selected={field.value}
                                 dateFormat="do MMMM yyyy"
                             />
                         )}
