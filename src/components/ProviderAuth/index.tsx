@@ -25,7 +25,7 @@ export const ProviderAuth: FC<ProviderAuthProps> = ({ children }) => {
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
     console.log('ProviderAuth');
-    
+
     const fetchUserData = useCallback((uid: string) => {
         firebase
             .firestore()
