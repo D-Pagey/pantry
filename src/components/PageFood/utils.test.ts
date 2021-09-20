@@ -71,7 +71,8 @@ describe('getOwnersButtonText function', () => {
         ${'3'} | ${[TenantDan.uid, TenantHeidi.uid, TenantJoe.uid]}                 | ${"Dan's, Heidi's + Joe's food"}
         ${'4'} | ${[TenantDan.uid, TenantHeidi.uid, TenantJoe.uid, TenantToni.uid]} | ${"Dan's, Heidi's, Joe's + Toni's food"}
     `('should return correct format for $num selected owners', ({ selectedOwnersIds, expectedText }) => {
-        const tenants = [TenantDan, TenantHeidi, TenantJoe, TenantToni, TenantAlexa];
+        const Joe = { ...TenantJoe, houseRole: 'tenant' as const };
+        const tenants = [TenantDan, TenantHeidi, Joe, TenantToni, TenantAlexa];
 
         const text = getOwnersButtonText(selectedOwnersIds, tenants);
         expect(text).toBe(expectedText);
