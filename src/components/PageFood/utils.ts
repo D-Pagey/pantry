@@ -49,7 +49,9 @@ export const applyMultipleFilters = (food: FoodType[], filters: FilterState): Fo
 };
 
 export const getOwnersButtonText = (selectedOwnersIds: string[], tenants: TenantType[]): string => {
-    const selectedTenants = tenants.filter((tenant) => selectedOwnersIds.includes(tenant.uid));
+    const selectedTenants = tenants.filter(
+        (tenant) => selectedOwnersIds.includes(tenant.uid) && tenant.houseRole !== 'pending'
+    );
     const firstNames = selectedTenants.map((tenant) => tenant.name.split(' ')[0]);
 
     if (selectedTenants.length === 1) return `${firstNames[0]}'s food`;
